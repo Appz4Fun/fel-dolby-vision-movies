@@ -40,11 +40,13 @@ TITLE_BINDING_SUFFIX_RE = re.compile(
     re.IGNORECASE,
 )
 SUFFIX_TITLE_BINDING_RE = re.compile(
-    r"\b(?:confirmed\s+for|for|on|from)\s+"
+    r"\b(?:confirmed\s+for|for|on)\s+"
     r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})(?=[.!?,;:]|$)",
     re.IGNORECASE,
 )
-SUFFIX_METADATA_RE = re.compile(r"\s+(?:with|including)\s+.+$", re.IGNORECASE)
+SUFFIX_METADATA_RE = re.compile(
+    r"\s+(?:with|including|via|by|from)\s+.+$", re.IGNORECASE
+)
 AMBIGUOUS_PROSE_TITLE_RE = re.compile(
     r"^(?:(?:this|that|a|an|the)\s+)?(?:[A-Za-z0-9.+'-]+\s+){0,4}"
     r"(?:spreadsheet|list|post|thread|forum|page|source|site|table|note|comment)\s+"

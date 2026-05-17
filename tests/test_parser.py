@@ -194,6 +194,21 @@ def test_accepts_suffix_binding_to_same_title_before_audio_metadata():
     assert [release.movie_title for release in releases] == ["It"]
 
 
+def test_accepts_suffix_binding_to_same_title_before_proof_metadata():
+    for evidence in (
+        "Profile 7 FEL confirmed for Alien via MediaInfo.",
+        "Profile 7 FEL confirmed for Alien by disc scan.",
+    ):
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>Evidence</th></tr>
+          <tr><td>Alien</td><td>{evidence}</td></tr>
+        </table>
+        """
+        releases = parse_fel_releases(html, "https://example.test/thread")
+        assert [release.movie_title for release in releases] == ["Alien"]
+
+
 def test_rejects_suffix_binding_to_longer_title_before_audio_metadata():
     html = """
     <table>
@@ -213,6 +228,21 @@ def test_accepts_proof_metadata_without_title_binding():
     """
     releases = parse_fel_releases(html, "https://example.test/thread")
     assert [release.movie_title for release in releases] == ["Alien"]
+
+
+def test_accepts_from_proof_metadata_without_title_binding():
+    for evidence in (
+        "Profile 7 FEL from disc scan.",
+        "Profile 7 FEL from MediaInfo.",
+    ):
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>Evidence</th></tr>
+          <tr><td>Alien</td><td>{evidence}</td></tr>
+        </table>
+        """
+        releases = parse_fel_releases(html, "https://example.test/thread")
+        assert [release.movie_title for release in releases] == ["Alien"]
 
 
 def test_rejects_unrecognized_header_suffix_binding_to_longer_title():
