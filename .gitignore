@@ -1,5 +1,6 @@
 .env
 .cache/
 .DS_Store
+__pycache__/
 .superpowers/
 .worktrees/
