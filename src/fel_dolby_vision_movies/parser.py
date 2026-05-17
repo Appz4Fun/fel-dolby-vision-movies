@@ -22,6 +22,11 @@ TITLE_SPECIFIC_HEADER_RE = re.compile(
     r"\b(?:note|notes|evidence|comment|comments|source|proof)\b",
     re.IGNORECASE,
 )
+TITLE_BINDING_RE = re.compile(
+    r"^[A-Z][A-Za-z0-9:'&.,!?\- ]{1,80}?\s+"
+    r"(?:is|has|features|includes|confirmed as|confirmed to be)\b",
+    re.IGNORECASE,
+)
 PROSE_TITLE_PREFIX_RE = re.compile(
     r"^(?:the\s+)?(?:disc|release|blu-?ray|uhd|4k|movie|film)\s+(?:for|of)\s+",
     re.IGNORECASE,
@@ -39,6 +44,8 @@ def parse_fel_releases(html: str, source_url: str) -> list[FelRelease]:
     soup = BeautifulSoup(html, "html.parser")
     releases: list[FelRelease] = []
     releases.extend(_parse_tables(soup, source_url))
+    for table in soup.find_all("table"):
+        table.decompose()
     releases.extend(_parse_sentences(soup.get_text("\n", strip=True), source_url))
     return _dedupe_releases(releases)
 
@@ -102,14 +109,20 @@ def _has_table_evidence_for_title(
             continue
         header = headers[index] if index < len(headers) else ""
         if RELEASE_STATUS_HEADER_RE.search(header):
-            return True
+            return _cell_supports_row_title(cell, title)
         if TITLE_SPECIFIC_HEADER_RE.search(header):
             return _cell_mentions_title(cell, title)
         if not headers:
-            return True
+            return _cell_supports_row_title(cell, title)
         if _cell_mentions_title(cell, title):
             return True
     return False
+
+
+def _cell_supports_row_title(cell: str, title: str) -> bool:
+    if _cell_mentions_title(cell, title):
+        return True
+    return not TITLE_BINDING_RE.search(normalize_title(cell))
 
 
 def _cell_mentions_title(cell: str, title: str) -> bool:

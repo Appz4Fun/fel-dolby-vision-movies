@@ -24,6 +24,27 @@ def test_rejects_table_row_when_fel_mentions_different_title():
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
+def test_rejects_status_cell_when_fel_names_different_title():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>The Matrix</td><td>Alien is Profile 7 FEL.</td></tr>
+    </table>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_status_cell_when_fel_names_same_title():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>The Matrix</td><td>The Matrix is Profile 7 FEL.</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["The Matrix"]
+
+
 def test_rejects_generic_fel_chatter_without_title_binding():
     html = """
     <p>I love FEL when discs include it.</p>
