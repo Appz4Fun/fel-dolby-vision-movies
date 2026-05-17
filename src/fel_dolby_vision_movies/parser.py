@@ -9,10 +9,28 @@ from .models import FelEvidence, FelRelease
 from .normalize import normalize_audio, normalize_title
 
 
+PROFILE_7_PATTERN = r"(?:profile[\s-]*7|p7)"
+FEL_TOKEN_PATTERN = r"(?<![A-Za-z0-9])fel(?![A-Za-z0-9])"
+MEL_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])mel(?![A-Za-z0-9])", re.IGNORECASE)
+PROFILE_7_RE = re.compile(rf"\b{PROFILE_7_PATTERN}\b", re.IGNORECASE)
+FEL_RE = re.compile(FEL_TOKEN_PATTERN, re.IGNORECASE)
+RELEASE_STATUS_HEADER_RE = re.compile(
+    r"\b(?:dv|dolby|vision|profile|hdr|fel|video|format|status|disc|layer)\b",
+    re.IGNORECASE,
+)
+TITLE_SPECIFIC_HEADER_RE = re.compile(
+    r"\b(?:note|notes|evidence|comment|comments|source|proof)\b",
+    re.IGNORECASE,
+)
+PROSE_TITLE_PREFIX_RE = re.compile(
+    r"^(?:the\s+)?(?:disc|release|blu-?ray|uhd|4k|movie|film)\s+(?:for|of)\s+",
+    re.IGNORECASE,
+)
 TITLE_SENTENCE_RE = re.compile(
     r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{1,80}?)(?:\s+\((?P<year>\d{4})\))?"
     r"\s+(?:is|has|features|includes|confirmed as|confirmed to be).{0,120}?"
-    r"(?:profile\s*7.{0,40}?fel|fel.{0,40}?profile\s*7|dolby vision.{0,40}?fel)",
+    rf"(?:{PROFILE_7_PATTERN}.{{0,40}}?{FEL_TOKEN_PATTERN}|"
+    rf"{FEL_TOKEN_PATTERN}.{{0,40}}?{PROFILE_7_PATTERN})",
     re.IGNORECASE,
 )
 
@@ -27,17 +45,25 @@ def parse_fel_releases(html: str, source_url: str) -> list[FelRelease]:
 
 def _parse_tables(soup: BeautifulSoup, source_url: str) -> list[FelRelease]:
     releases: list[FelRelease] = []
-    for row in soup.find_all("tr"):
-        cells = [cell.get_text(" ", strip=True) for cell in row.find_all(["td", "th"])]
-        if len(cells) < 2:
-            continue
-        row_text = " ".join(cells)
-        if not _has_direct_fel(row_text):
-            continue
-        title = normalize_title(cells[0])
-        if not _looks_like_title(title):
-            continue
-        releases.append(_build_release(title, row_text, source_url, "table-row"))
+    for table in soup.find_all("table"):
+        headers: list[str] = []
+        for row in table.find_all("tr"):
+            cells = [
+                cell.get_text(" ", strip=True) for cell in row.find_all(["td", "th"])
+            ]
+            if len(cells) < 2:
+                continue
+            if row.find("th") and not row.find("td"):
+                headers = cells
+                continue
+            title = normalize_title(cells[0])
+            if not _looks_like_title(title):
+                continue
+            if not _has_table_evidence_for_title(title, cells, headers):
+                continue
+            releases.append(
+                _build_release(title, " ".join(cells), source_url, "table-row")
+            )
     return releases
 
 
@@ -49,7 +75,7 @@ def _parse_sentences(text: str, source_url: str) -> list[FelRelease]:
         match = TITLE_SENTENCE_RE.search(sentence)
         if not match:
             continue
-        title = normalize_title(match.group("title"))
+        title = _clean_sentence_title(match.group("title"))
         if not _looks_like_title(title):
             continue
         release = _build_release(title, sentence, source_url, "sentence")
@@ -61,13 +87,38 @@ def _parse_sentences(text: str, source_url: str) -> list[FelRelease]:
 
 def _has_direct_fel(text: str) -> bool:
     lowered = text.lower()
-    if "mel" in lowered:
+    if MEL_TOKEN_RE.search(text):
         return False
     if re.search(r"\b(?:not|no|without|does not|do not)\b.{0,40}\bfel\b", lowered):
         return False
-    return "fel" in lowered and (
-        "profile 7" in lowered or "p7" in lowered or "dolby vision" in lowered
-    )
+    return bool(FEL_RE.search(text) and PROFILE_7_RE.search(text))
+
+
+def _has_table_evidence_for_title(
+    title: str, cells: list[str], headers: list[str]
+) -> bool:
+    for index, cell in enumerate(cells[1:], start=1):
+        if not _has_direct_fel(cell):
+            continue
+        header = headers[index] if index < len(headers) else ""
+        if RELEASE_STATUS_HEADER_RE.search(header):
+            return True
+        if TITLE_SPECIFIC_HEADER_RE.search(header):
+            return _cell_mentions_title(cell, title)
+        if not headers:
+            return True
+        if _cell_mentions_title(cell, title):
+            return True
+    return False
+
+
+def _cell_mentions_title(cell: str, title: str) -> bool:
+    return normalize_title(title).lower() in normalize_title(cell).lower()
+
+
+def _clean_sentence_title(value: str) -> str:
+    title = normalize_title(value)
+    return PROSE_TITLE_PREFIX_RE.sub("", title).strip(" :,-")
 
 
 def _looks_like_title(value: str) -> bool:
@@ -101,10 +152,15 @@ def _build_release(
 
 
 def _dedupe_releases(releases: list[FelRelease]) -> list[FelRelease]:
-    seen: set[tuple[str, str]] = set()
+    seen: set[tuple[str, str, str, str]] = set()
     unique: list[FelRelease] = []
     for release in releases:
-        key = (release.movie_title.lower(), release.source_url)
+        key = (
+            release.movie_title.lower(),
+            release.source_url,
+            release.fel_evidence.evidence_type,
+            release.fel_evidence.quote,
+        )
         if key in seen:
             continue
         seen.add(key)
