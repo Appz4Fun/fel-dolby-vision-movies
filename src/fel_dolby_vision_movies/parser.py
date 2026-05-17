@@ -14,6 +14,11 @@ FEL_TOKEN_PATTERN = r"(?<![A-Za-z0-9])fel(?![A-Za-z0-9])"
 MEL_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])mel(?![A-Za-z0-9])", re.IGNORECASE)
 PROFILE_7_RE = re.compile(rf"\b{PROFILE_7_PATTERN}\b", re.IGNORECASE)
 FEL_RE = re.compile(FEL_TOKEN_PATTERN, re.IGNORECASE)
+FEL_TRAILING_DENIAL_RE = re.compile(
+    rf"{FEL_TOKEN_PATTERN}\s*(?::|=|-|\bis\b)?\s*\b(?:no|none|false)\b",
+    re.IGNORECASE,
+)
+GENERIC_STATUS_PREFIXES = {"dolby vision", "dv", "hdr", "hdr10", "uhd"}
 RELEASE_STATUS_HEADER_RE = re.compile(
     r"\b(?:dv|dolby|vision|profile|hdr|fel|video|format|status|disc|layer)\b",
     re.IGNORECASE,
@@ -25,6 +30,11 @@ TITLE_SPECIFIC_HEADER_RE = re.compile(
 TITLE_BINDING_RE = re.compile(
     r"^[A-Z][A-Za-z0-9:'&.,!?\- ]{1,80}?\s+"
     r"(?:is|has|features|includes|confirmed as|confirmed to be)\b",
+    re.IGNORECASE,
+)
+AMBIGUOUS_PROSE_TITLE_RE = re.compile(
+    r"^(?:the\s+)?(?:spreadsheet|list|post|thread|forum|page|source|site|table|"
+    r"note|comment)\s+(?:says|lists|shows|mentions|reports)\s+",
     re.IGNORECASE,
 )
 PROSE_TITLE_PREFIX_RE = re.compile(
@@ -94,11 +104,22 @@ def _parse_sentences(text: str, source_url: str) -> list[FelRelease]:
 
 def _has_direct_fel(text: str) -> bool:
     lowered = text.lower()
-    if MEL_TOKEN_RE.search(text):
+    if _has_unnegated_mel(text):
         return False
     if re.search(r"\b(?:not|no|without|does not|do not)\b.{0,40}\bfel\b", lowered):
         return False
+    if FEL_TRAILING_DENIAL_RE.search(text):
+        return False
     return bool(FEL_RE.search(text) and PROFILE_7_RE.search(text))
+
+
+def _has_unnegated_mel(text: str) -> bool:
+    for match in MEL_TOKEN_RE.finditer(text):
+        before_mel = text[max(0, match.start() - 8) : match.start()].lower()
+        if re.search(r"\bnot\s+$", before_mel):
+            continue
+        return True
+    return False
 
 
 def _has_table_evidence_for_title(
@@ -120,17 +141,44 @@ def _has_table_evidence_for_title(
 
 
 def _cell_supports_row_title(cell: str, title: str) -> bool:
-    if _cell_mentions_title(cell, title):
-        return True
-    return not TITLE_BINDING_RE.search(normalize_title(cell))
+    leading_title = _leading_title_before_evidence(cell)
+    if leading_title:
+        return _cell_mentions_title(leading_title, title)
+    if TITLE_BINDING_RE.search(normalize_title(cell)):
+        return _cell_mentions_title(cell, title)
+    return True
 
 
 def _cell_mentions_title(cell: str, title: str) -> bool:
-    return normalize_title(title).lower() in normalize_title(cell).lower()
+    normalized_title = normalize_title(title)
+    if not normalized_title:
+        return False
+    pattern = re.compile(
+        rf"(?<![A-Za-z0-9]){re.escape(normalized_title)}(?![A-Za-z0-9])",
+        re.IGNORECASE,
+    )
+    return bool(pattern.search(normalize_title(cell)))
+
+
+def _leading_title_before_evidence(cell: str) -> str:
+    normalized = normalize_title(cell)
+    profile_7_match = PROFILE_7_RE.search(normalized)
+    fel_match = FEL_RE.search(normalized)
+    evidence_starts = [
+        match.start() for match in (profile_7_match, fel_match) if match
+    ]
+    if not evidence_starts:
+        return ""
+    prefix = normalized[: min(evidence_starts)].strip(" :-")
+    if prefix.lower() in GENERIC_STATUS_PREFIXES:
+        return ""
+    return prefix
 
 
 def _clean_sentence_title(value: str) -> str:
     title = normalize_title(value)
+    if AMBIGUOUS_PROSE_TITLE_RE.match(title):
+        return ""
     return PROSE_TITLE_PREFIX_RE.sub("", title).strip(" :,-")
 
 
