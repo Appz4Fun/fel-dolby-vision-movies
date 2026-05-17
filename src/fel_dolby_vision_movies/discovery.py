@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 from bs4 import BeautifulSoup
 import httpx
 
 
 BRAVE_ENDPOINT = "https://api.search.brave.com/res/v1/web/search"
-DISCOVERY_TERMS = ("blu-ray", "uhd", "dolby vision", "profile 7", "fel", "forum")
+DISCOVERY_TERMS = ("blu-ray", "uhd", "dolby vision", "profile 7", "fel", "remux")
 BLOCKED_HINTS = ("hardware", "hdmi", "splitter", "tv-led", "player")
 
 
@@ -17,7 +17,9 @@ def extract_candidate_links(html: str, base_url: str) -> list[str]:
     for anchor in soup.find_all("a", href=True):
         label = anchor.get_text(" ", strip=True).lower()
         href = urljoin(base_url, anchor["href"])
-        haystack = f"{label} {href.lower()}"
+        parsed = urlparse(href)
+        url_terms = f"{parsed.path} {parsed.params} {parsed.query} {parsed.fragment}".lower()
+        haystack = f"{label} {url_terms}"
         if any(blocked in haystack for blocked in BLOCKED_HINTS):
             continue
         if any(term in haystack for term in DISCOVERY_TERMS):
@@ -37,4 +39,5 @@ def brave_search(query: str, api_key: str | None) -> list[str]:
     response.raise_for_status()
     payload = response.json()
     results = payload.get("web", {}).get("results", [])
-    return [result["url"] for result in results if result.get("url")]
+    urls = [result["url"] for result in results if result.get("url")]
+    return list(dict.fromkeys(urls))
