@@ -31,6 +31,32 @@ def test_fetcher_reads_fresh_cache_without_second_request(tmp_path: Path):
 
 
 @respx.mock
+def test_fetcher_separates_authenticated_and_unauthenticated_cache(tmp_path: Path):
+    url = "https://example.test/thread"
+    route = respx.get(url).mock(
+        side_effect=[
+            httpx.Response(200, text="public"),
+            httpx.Response(200, text="private"),
+        ]
+    )
+
+    public_fetcher = Fetcher(cache_dir=tmp_path)
+    private_fetcher = Fetcher(cache_dir=tmp_path, cookie_header="session=secret")
+
+    assert public_fetcher.fetch(url).text == "public"
+    assert private_fetcher.fetch(url).text == "private"
+    assert route.call_count == 2
+
+
+def test_fetcher_close_closes_underlying_client(tmp_path: Path):
+    fetcher = Fetcher(cache_dir=tmp_path)
+
+    fetcher.close()
+
+    assert fetcher.client.is_closed
+
+
+@respx.mock
 def test_fetcher_retries_transient_500(tmp_path: Path):
     route = respx.get("https://example.test/thread").mock(
         side_effect=[
