@@ -288,6 +288,22 @@ def test_accepts_separator_proof_metadata_without_title_binding():
     assert [release.movie_title for release in releases] == ["Alien"]
 
 
+def test_accepts_separator_proof_source_metadata_without_title_binding():
+    for evidence in (
+        "Profile 7 FEL - MediaInfo.",
+        "Profile 7 FEL - MediaInfo confirms FEL.",
+        "Profile 7 FEL: MediaInfo.",
+    ):
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>Evidence</th></tr>
+          <tr><td>Alien</td><td>{evidence}</td></tr>
+        </table>
+        """
+        releases = parse_fel_releases(html, "https://example.test/thread")
+        assert [release.movie_title for release in releases] == ["Alien"]
+
+
 def test_rejects_unrecognized_header_suffix_binding_to_longer_title():
     html = """
     <table>
