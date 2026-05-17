@@ -140,12 +140,19 @@ def _has_table_evidence_for_title(
         if RELEASE_STATUS_HEADER_RE.search(header):
             return _cell_supports_row_title(cell, title)
         if TITLE_SPECIFIC_HEADER_RE.search(header):
-            return _cell_mentions_title(cell, title)
+            return _title_specific_cell_supports_row_title(cell, title)
         if not headers:
             return _cell_supports_row_title(cell, title)
         if _cell_mentions_title(cell, title):
             return True
     return False
+
+
+def _title_specific_cell_supports_row_title(cell: str, title: str) -> bool:
+    leading_title = _leading_title_before_evidence(cell)
+    if leading_title:
+        return _normalized_title_prefix(leading_title) == _normalized_value(title)
+    return _cell_mentions_title(cell, title)
 
 
 def _cell_supports_row_title(cell: str, title: str) -> bool:
