@@ -85,8 +85,22 @@ class Fetcher:
                     continue
         raise RuntimeError(f"failed to fetch {url}") from last_error
 
+    def close(self) -> None:
+        self.client.close()
+
+    def __enter__(self) -> Fetcher:
+        return self
+
+    def __exit__(self, exc_type: object, exc_value: object, traceback: object) -> None:
+        self.close()
+
     def _cache_path(self, url: str) -> Path:
-        digest = hashlib.sha256(url.encode("utf-8")).hexdigest()
+        auth_namespace = "public"
+        if self.cookie_header:
+            auth_digest = hashlib.sha256(self.cookie_header.encode("utf-8")).hexdigest()
+            auth_namespace = f"auth:{auth_digest}"
+        cache_key = f"{auth_namespace}\0{url}"
+        digest = hashlib.sha256(cache_key.encode("utf-8")).hexdigest()
         return self.cache_dir / f"{digest}.html"
 
     def _read_fresh_cache(self, cache_path: Path) -> str | None:
