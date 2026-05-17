@@ -92,6 +92,38 @@ def test_accepts_status_cell_when_same_title_prefix_uses_separator():
     assert [release.movie_title for release in releases] == ["The Matrix"]
 
 
+def test_rejects_status_cell_when_row_title_is_prefix_of_longer_title():
+    examples = (
+        ("It", "It Follows: Profile 7 FEL"),
+        ("Alien", "Alien 3: Profile 7 FEL"),
+        ("The Matrix", "The Matrix Reloaded: Profile 7 FEL"),
+    )
+    for row_title, evidence in examples:
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>DV</th></tr>
+          <tr><td>{row_title}</td><td>{evidence}</td></tr>
+        </table>
+        """
+        assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_non_title_status_prefixes_before_fel_evidence():
+    for evidence in (
+        "Confirmed Profile 7 FEL",
+        "Yes - Profile 7 FEL",
+        "MediaInfo confirms Profile 7 FEL",
+    ):
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>DV</th></tr>
+          <tr><td>The Matrix</td><td>{evidence}</td></tr>
+        </table>
+        """
+        releases = parse_fel_releases(html, "https://example.test/thread")
+        assert [release.movie_title for release in releases] == ["The Matrix"]
+
+
 def test_rejects_generic_fel_chatter_without_title_binding():
     html = """
     <p>I love FEL when discs include it.</p>
