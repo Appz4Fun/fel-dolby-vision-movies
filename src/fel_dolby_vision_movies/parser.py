@@ -44,10 +44,14 @@ SUFFIX_TITLE_BINDING_RE = re.compile(
     r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})(?=[.!?,;:]|$)",
     re.IGNORECASE,
 )
+SUFFIX_METADATA_RE = re.compile(r"\s+(?:with|including)\s+.+$", re.IGNORECASE)
 AMBIGUOUS_PROSE_TITLE_RE = re.compile(
     r"^(?:(?:this|that|a|an|the)\s+)?(?:spreadsheet|list|post|thread|forum|"
     r"page|source|site|table|note|comment)\s+"
-    r"(?:says|lists|shows|mentions|reports)\s+",
+    r"(?:says|lists|shows|mentions|reports)\s+"
+    r"|^according\s+to\s+(?:the\s+)?(?:spreadsheet|list|post|thread|forum|"
+    r"page|source|site|table|note|comment),\s+"
+    r"|^(?:list|table|source|spreadsheet)\s+entry:\s+",
     re.IGNORECASE,
 )
 PROSE_TITLE_PREFIX_RE = re.compile(
@@ -211,7 +215,8 @@ def _suffix_title_after_evidence(cell: str) -> str:
     match = SUFFIX_TITLE_BINDING_RE.search(normalized, suffix_start)
     if not match:
         return ""
-    return match.group("title").strip(" :-.,!?;")
+    title = SUFFIX_METADATA_RE.sub("", match.group("title"))
+    return title.strip(" :-.,!?;")
 
 
 def _normalized_value(value: str) -> str:

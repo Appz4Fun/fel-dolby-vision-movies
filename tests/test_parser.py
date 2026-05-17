@@ -183,6 +183,27 @@ def test_accepts_title_specific_suffix_binding_to_same_title():
     assert [release.movie_title for release in releases] == ["It"]
 
 
+def test_accepts_suffix_binding_to_same_title_before_audio_metadata():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Evidence</th></tr>
+      <tr><td>It</td><td>Profile 7 FEL confirmed for It with TrueHD.</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["It"]
+
+
+def test_rejects_suffix_binding_to_longer_title_before_audio_metadata():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Evidence</th></tr>
+      <tr><td>It</td><td>Profile 7 FEL confirmed for It Follows with TrueHD.</td></tr>
+    </table>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
 def test_rejects_unrecognized_header_suffix_binding_to_longer_title():
     html = """
     <table>
@@ -274,6 +295,19 @@ def test_rejects_sentence_with_demonstrative_source_prose_prefix():
         "<p>This spreadsheet says Alien is confirmed as Dolby Vision "
         "Profile 7 FEL.</p>"
     )
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_sentence_with_attributed_source_prefix():
+    html = (
+        "<p>According to the spreadsheet, Alien is confirmed as Dolby Vision "
+        "Profile 7 FEL.</p>"
+    )
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_sentence_with_list_entry_prefix():
+    html = "<p>List entry: Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
