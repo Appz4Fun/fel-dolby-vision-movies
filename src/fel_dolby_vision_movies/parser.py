@@ -40,8 +40,11 @@ TITLE_BINDING_SUFFIX_RE = re.compile(
     re.IGNORECASE,
 )
 SUFFIX_TITLE_BINDING_RE = re.compile(
-    r"\b(?:confirmed\s+for|for|on)\s+"
-    r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})(?=[.!?,;:]|$)",
+    r"\b(?:confirmed\s+for|for|on|in|applies\s+to)\s+"
+    r"[\"']?(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})(?=[\"']?[.!?,;:]|$)"
+    r"|\bconfirmed\s*:\s*"
+    r"[\"']?(?P<confirmed_title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})"
+    r"(?=[\"']?[.!?,;:]|$)",
     re.IGNORECASE,
 )
 SEPARATOR_TITLE_BINDING_RE = re.compile(
@@ -234,8 +237,9 @@ def _suffix_title_after_evidence(cell: str) -> str:
     match = SUFFIX_TITLE_BINDING_RE.search(normalized, suffix_start)
     if not match:
         return ""
-    title = SUFFIX_METADATA_RE.sub("", match.group("title"))
-    return title.strip(" :-.,!?;")
+    title = match.group("title") or match.group("confirmed_title") or ""
+    title = SUFFIX_METADATA_RE.sub("", title)
+    return title.strip(" :-().,!?;\"'")
 
 
 def _separator_title_after_evidence(cell: str) -> str:
