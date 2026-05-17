@@ -44,6 +44,10 @@ SUFFIX_TITLE_BINDING_RE = re.compile(
     r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})(?=[.!?,;:]|$)",
     re.IGNORECASE,
 )
+SEPARATOR_TITLE_BINDING_RE = re.compile(
+    r"^\s*(?:[-:]|\()\s*"
+    r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})(?=[).!?,;:]|$)"
+)
 SUFFIX_METADATA_RE = re.compile(
     r"\s+(?:with|including|via|by|from)\s+.+$", re.IGNORECASE
 )
@@ -166,6 +170,9 @@ def _title_specific_cell_supports_row_title(cell: str, title: str) -> bool:
     suffix_title = _suffix_title_after_evidence(cell)
     if suffix_title:
         return _normalized_value(suffix_title) == _normalized_value(title)
+    separator_title = _separator_title_after_evidence(cell)
+    if separator_title:
+        return _normalized_value(separator_title) == _normalized_value(title)
     if TITLE_BINDING_RE.search(normalize_title(cell)):
         return _cell_mentions_title(cell, title)
     if _cell_mentions_title(cell, title):
@@ -180,6 +187,9 @@ def _cell_supports_row_title(cell: str, title: str) -> bool:
     suffix_title = _suffix_title_after_evidence(cell)
     if suffix_title:
         return _normalized_value(suffix_title) == _normalized_value(title)
+    separator_title = _separator_title_after_evidence(cell)
+    if separator_title:
+        return _normalized_value(separator_title) == _normalized_value(title)
     if TITLE_BINDING_RE.search(normalize_title(cell)):
         return _cell_mentions_title(cell, title)
     return True
@@ -223,6 +233,20 @@ def _suffix_title_after_evidence(cell: str) -> str:
         return ""
     title = SUFFIX_METADATA_RE.sub("", match.group("title"))
     return title.strip(" :-.,!?;")
+
+
+def _separator_title_after_evidence(cell: str) -> str:
+    normalized = normalize_title(cell)
+    profile_7_match = PROFILE_7_RE.search(normalized)
+    fel_match = FEL_RE.search(normalized)
+    if not profile_7_match or not fel_match:
+        return ""
+    suffix = normalized[max(profile_7_match.end(), fel_match.end()) :]
+    match = SEPARATOR_TITLE_BINDING_RE.search(suffix)
+    if not match:
+        return ""
+    title = SUFFIX_METADATA_RE.sub("", match.group("title"))
+    return title.strip(" :-().,!?;")
 
 
 def _normalized_value(value: str) -> str:
