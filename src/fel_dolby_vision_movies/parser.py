@@ -15,7 +15,15 @@ MEL_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])mel(?![A-Za-z0-9])", re.IGNORECASE)
 PROFILE_7_RE = re.compile(rf"\b{PROFILE_7_PATTERN}\b", re.IGNORECASE)
 FEL_RE = re.compile(FEL_TOKEN_PATTERN, re.IGNORECASE)
 FEL_TRAILING_DENIAL_RE = re.compile(
-    rf"{FEL_TOKEN_PATTERN}\s*(?::|=|-|\bis\b)?\s*\b(?:no|none|false)\b",
+    rf"{FEL_TOKEN_PATTERN}\s*(?::|=|-|\bis\b|\?)?\s*\b(?:no|none|false)\b",
+    re.IGNORECASE,
+)
+TITLE_HEADER_RE = re.compile(r"\b(?:title|movie|film)\b", re.IGNORECASE)
+NON_TITLE_HEADER_RE = re.compile(
+    r"\b(?:group|release\s*group|team|encoder|uploader|audio|sound|"
+    r"language|region|country|studio|label|year|date|notes?|evidence|"
+    r"source|proof|dv|dolby|vision|profile|hdr|video|format|status|disc|"
+    r"layer)\b",
     re.IGNORECASE,
 )
 GENERIC_STATUS_PREFIX_RE = re.compile(
@@ -32,7 +40,7 @@ TITLE_SPECIFIC_HEADER_RE = re.compile(
 )
 TITLE_BINDING_RE = re.compile(
     r"^[A-Z][A-Za-z0-9:'&.,!?\- ]{1,80}?\s+"
-    r"(?:is|has|features|includes|confirmed as|confirmed to be)\b",
+    r"(?:is|are|has|features|includes|confirmed as|confirmed to be)\b",
     re.IGNORECASE,
 )
 TITLE_BINDING_SUFFIX_RE = re.compile(
@@ -62,10 +70,12 @@ SUFFIX_METADATA_RE = re.compile(
 AMBIGUOUS_PROSE_TITLE_RE = re.compile(
     r"^(?:(?:this|that|a|an|the)\s+)?(?:[A-Za-z0-9.+'-]+\s+){0,4}"
     r"(?:spreadsheet|list|post|thread|forum|page|source|site|table|note|comment|"
-    r"review)\s+(?:says|lists|shows|mentions|reports):?\s+"
+    r"review)\s+(?:says|lists|shows|mentions|reports)[:,]?\s+"
     r"|^according\s+to\s+(?:the\s+)?(?:spreadsheet|list|post|thread|forum|"
     r"page|source|site|table|note|comment|review),\s+"
     r"|^(?:list|table|source|spreadsheet)\s+entry:\s+"
+    r"|^in\s+(?:the\s+)?(?:spreadsheet|list|post|thread|forum|page|source|"
+    r"site|table|note|comment|review),\s+"
     r"|^for\s+.+,\s+",
     re.IGNORECASE,
 )
@@ -75,7 +85,7 @@ PROSE_TITLE_PREFIX_RE = re.compile(
 )
 TITLE_SENTENCE_RE = re.compile(
     r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{1,80}?)(?:\s+\((?P<year>\d{4})\))?"
-    r"\s+(?:is|has|features|includes|confirmed as|confirmed to be).{0,120}?"
+    r"\s+(?:is|are|has|features|includes|confirmed as|confirmed to be).{0,120}?"
     rf"(?:{PROFILE_7_PATTERN}.{{0,40}}?{FEL_TOKEN_PATTERN}|"
     rf"{FEL_TOKEN_PATTERN}.{{0,40}}?{PROFILE_7_PATTERN})",
     re.IGNORECASE,
@@ -105,10 +115,11 @@ def _parse_tables(soup: BeautifulSoup, source_url: str) -> list[FelRelease]:
             if row.find("th") and not row.find("td"):
                 headers = cells
                 continue
-            title = normalize_title(cells[0])
+            title_index = _title_cell_index(headers, cells)
+            title = normalize_title(cells[title_index])
             if not _looks_like_title(title):
                 continue
-            if not _has_table_evidence_for_title(title, cells, headers):
+            if not _has_table_evidence_for_title(title, cells, headers, title_index):
                 continue
             releases.append(
                 _build_release(title, " ".join(cells), source_url, "table-row")
@@ -147,17 +158,19 @@ def _has_direct_fel(text: str) -> bool:
 
 def _has_unnegated_mel(text: str) -> bool:
     for match in MEL_TOKEN_RE.finditer(text):
-        before_mel = text[max(0, match.start() - 8) : match.start()].lower()
-        if re.search(r"\bnot\s+$", before_mel):
+        before_mel = text[max(0, match.start() - 28) : match.start()].lower()
+        if re.search(r"\bnot\b(?:\s+\w+){0,3}\s+$", before_mel):
             continue
         return True
     return False
 
 
 def _has_table_evidence_for_title(
-    title: str, cells: list[str], headers: list[str]
+    title: str, cells: list[str], headers: list[str], title_index: int
 ) -> bool:
-    for index, cell in enumerate(cells[1:], start=1):
+    for index, cell in enumerate(cells):
+        if index == title_index:
+            continue
         if not _has_direct_fel(cell):
             continue
         header = headers[index] if index < len(headers) else ""
@@ -170,6 +183,16 @@ def _has_table_evidence_for_title(
         if _title_specific_cell_supports_row_title(cell, title):
             return True
     return False
+
+
+def _title_cell_index(headers: list[str], cells: list[str]) -> int:
+    for index, header in enumerate(headers[: len(cells)]):
+        if TITLE_HEADER_RE.search(header):
+            return index
+    for index, header in enumerate(headers[: len(cells)]):
+        if not NON_TITLE_HEADER_RE.search(header):
+            return index
+    return 0
 
 
 def _title_specific_cell_supports_row_title(cell: str, title: str) -> bool:
@@ -280,6 +303,8 @@ def _clean_sentence_title(value: str) -> str:
 def _looks_like_title(value: str) -> bool:
     lowered = value.lower()
     if not value or len(value) > 100:
+        return False
+    if re.search(r"\b(?:and|or)\b", lowered):
         return False
     if any(
         word in lowered

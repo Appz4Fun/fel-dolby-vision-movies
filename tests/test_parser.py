@@ -14,6 +14,17 @@ def test_parses_table_row_with_direct_fel_correlation():
     assert releases[0].english_audio == "Yes"
 
 
+def test_parses_table_when_title_column_is_not_first():
+    html = """
+    <table>
+      <tr><th>Group</th><th>Title</th><th>DV</th></tr>
+      <tr><td>HDT</td><td>Alien</td><td>Profile 7 FEL</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
 def test_rejects_table_row_when_fel_mentions_different_title():
     html = """
     <table>
@@ -480,11 +491,29 @@ def test_rejects_sentence_with_source_prose_colon_prefix():
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
+def test_rejects_sentence_with_source_prose_comma_prefix():
+    html = "<p>The post says, Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_sentence_with_in_source_prefix():
+    html = (
+        "<p>In the spreadsheet, Alien is confirmed as Dolby Vision "
+        "Profile 7 FEL.</p>"
+    )
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
 def test_rejects_sentence_with_contextual_for_prefix():
     html = (
         "<p>For The Matrix, Alien is confirmed as Dolby Vision "
         "Profile 7 FEL.</p>"
     )
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_coordinated_multi_title_sentence():
+    html = "<p>Alien and The Matrix are confirmed as Dolby Vision Profile 7 FEL.</p>"
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
@@ -504,11 +533,30 @@ def test_accepts_fel_when_not_mel_clarifies_layer_type():
     assert [release.movie_title for release in releases] == ["Alien"]
 
 
+def test_accepts_fel_when_not_dolby_vision_mel_clarifies_layer_type():
+    html = (
+        "<p>Alien is confirmed as Dolby Vision Profile 7 FEL and definitely "
+        "not Dolby Vision MEL.</p>"
+    )
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
 def test_rejects_fel_with_trailing_denial():
     html = """
     <table>
       <tr><th>Title</th><th>DV</th></tr>
       <tr><td>Alien</td><td>Profile 7 FEL: No.</td></tr>
+    </table>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_fel_question_with_trailing_denial():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alien</td><td>Profile 7 FEL? No.</td></tr>
     </table>
     """
     assert parse_fel_releases(html, "https://example.test/thread") == []
