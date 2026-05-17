@@ -133,6 +133,14 @@ def test_rejects_sentence_with_ambiguous_prose_prefix():
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
+def test_rejects_sentence_with_demonstrative_source_prose_prefix():
+    html = (
+        "<p>This spreadsheet says Alien is confirmed as Dolby Vision "
+        "Profile 7 FEL.</p>"
+    )
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
 def test_rejects_profile_7_without_fel():
     html = "<p>Movie A has Dolby Vision Profile 7 but this post does not identify FEL.</p>"
     assert parse_fel_releases(html, "https://example.test/thread") == []
