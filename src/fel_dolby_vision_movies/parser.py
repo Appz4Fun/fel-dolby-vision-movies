@@ -41,15 +41,17 @@ TITLE_BINDING_SUFFIX_RE = re.compile(
 )
 SUFFIX_TITLE_BINDING_RE = re.compile(
     r"\b(?:confirmed\s+for|for|on|in|applies\s+to)\s+"
-    r"[\"']?(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})(?=[\"']?[.!?,;:]|$)"
+    r"[\"']?(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})[\"']?"
+    r"(?:\s+\(\d{4}\))?(?=[.!?,;:]|$)"
     r"|\bconfirmed\s*:\s*"
     r"[\"']?(?P<confirmed_title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})"
-    r"(?=[\"']?[.!?,;:]|$)",
+    r"[\"']?(?:\s+\(\d{4}\))?(?=[.!?,;:]|$)",
     re.IGNORECASE,
 )
 SEPARATOR_TITLE_BINDING_RE = re.compile(
     r"^\s*(?:[-:]|\()\s*"
-    r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})(?=[).!?,;:]|$)"
+    r"[\"']?(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})[\"']?"
+    r"(?:\s+\(\d{4}\))?(?=[).!?,;:]|$)"
 )
 PROOF_METADATA_PREFIX_RE = re.compile(
     r"^(?:mediainfo|bdinfo|disc\s+scan|source|scan|proof)\b", re.IGNORECASE
@@ -59,11 +61,12 @@ SUFFIX_METADATA_RE = re.compile(
 )
 AMBIGUOUS_PROSE_TITLE_RE = re.compile(
     r"^(?:(?:this|that|a|an|the)\s+)?(?:[A-Za-z0-9.+'-]+\s+){0,4}"
-    r"(?:spreadsheet|list|post|thread|forum|page|source|site|table|note|comment)\s+"
-    r"(?:says|lists|shows|mentions|reports)\s+"
+    r"(?:spreadsheet|list|post|thread|forum|page|source|site|table|note|comment|"
+    r"review)\s+(?:says|lists|shows|mentions|reports):?\s+"
     r"|^according\s+to\s+(?:the\s+)?(?:spreadsheet|list|post|thread|forum|"
-    r"page|source|site|table|note|comment),\s+"
-    r"|^(?:list|table|source|spreadsheet)\s+entry:\s+",
+    r"page|source|site|table|note|comment|review),\s+"
+    r"|^(?:list|table|source|spreadsheet)\s+entry:\s+"
+    r"|^for\s+.+,\s+",
     re.IGNORECASE,
 )
 PROSE_TITLE_PREFIX_RE = re.compile(

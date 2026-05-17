@@ -248,8 +248,11 @@ def test_accepts_from_proof_metadata_without_title_binding():
 def test_rejects_separator_suffix_binding_to_longer_title():
     examples = (
         ("It", "Profile 7 FEL - It Follows."),
+        ("It", "Profile 7 FEL - It Follows (2014)."),
         ("It", "Profile 7 FEL (It Follows)."),
+        ("It", "Profile 7 FEL (It Follows (2014))."),
         ("Alien", "Profile 7 FEL: Alien 3."),
+        ("Alien", "Profile 7 FEL: Alien 3 (1992)."),
     )
     for row_title, evidence in examples:
         html = f"""
@@ -264,8 +267,13 @@ def test_rejects_separator_suffix_binding_to_longer_title():
 def test_rejects_after_evidence_binding_to_longer_title():
     examples = (
         ("It", "Profile 7 FEL in It Follows."),
+        ("It", "Profile 7 FEL confirmed for It Follows (2014)."),
+        ("It", 'Profile 7 FEL confirmed for "It Follows" (2014).'),
+        ("Alien", "Profile 7 FEL in Alien 3 (1992)."),
         ("It", "Profile 7 FEL confirmed: It Follows."),
+        ("Alien", "Profile 7 FEL confirmed: Alien 3 (1992)."),
         ("Alien", "Profile 7 FEL applies to Alien 3."),
+        ("Alien", "Profile 7 FEL applies to Alien 3 (1992)."),
     )
     for row_title, evidence in examples:
         html = f"""
@@ -457,6 +465,24 @@ def test_rejects_sentence_with_list_entry_prefix():
 def test_rejects_sentence_with_qualified_source_prose_prefix():
     html = (
         "<p>The Blu-ray.com post says Alien is confirmed as Dolby Vision "
+        "Profile 7 FEL.</p>"
+    )
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_sentence_with_review_source_prose_prefix():
+    html = "<p>The review says Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_sentence_with_source_prose_colon_prefix():
+    html = "<p>The post says: Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_sentence_with_contextual_for_prefix():
+    html = (
+        "<p>For The Matrix, Alien is confirmed as Dolby Vision "
         "Profile 7 FEL.</p>"
     )
     assert parse_fel_releases(html, "https://example.test/thread") == []
