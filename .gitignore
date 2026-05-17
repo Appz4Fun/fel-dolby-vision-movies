@@ -6,3 +6,7 @@ dist/
 __pycache__/
 .superpowers/
 .worktrees/
+docs/superpowers/
+.pytest_cache/
+.ruff_cache/
+CONTEXT.md
