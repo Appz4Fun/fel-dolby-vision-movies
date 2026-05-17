@@ -143,7 +143,7 @@ def _has_table_evidence_for_title(
             return _title_specific_cell_supports_row_title(cell, title)
         if not headers:
             return _cell_supports_row_title(cell, title)
-        if _cell_mentions_title(cell, title):
+        if _title_specific_cell_supports_row_title(cell, title):
             return True
     return False
 
