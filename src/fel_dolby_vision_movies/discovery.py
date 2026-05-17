@@ -82,7 +82,9 @@ def extract_candidate_links(html: str, base_url: str) -> list[str]:
         label = anchor.get_text(" ", strip=True).lower()
         href = urljoin(base_url, anchor["href"])
         parsed = urlparse(href)
-        url_terms = f"{parsed.path} {parsed.params} {parsed.query} {parsed.fragment}".lower()
+        url_terms = (
+            f"{parsed.path} {parsed.params} {parsed.query} {parsed.fragment}".lower()
+        )
         haystack = f"{label} {url_terms}"
         if any(blocked in haystack for blocked in BLOCKED_HINTS):
             continue
@@ -216,11 +218,9 @@ def _filter_candidate_search_results(results: Iterable[SearchResult]) -> list[st
 def _is_candidate_source(parsed, metadata: str) -> bool:
     if any(parsed.netloc.lower().endswith(host) for host in BLOCKED_HOSTS):
         return False
-    haystack = (
-        f"{parsed.netloc} {parsed.path} {parsed.query} {metadata}"
-        .replace("-", " ")
-        .lower()
-    )
+    haystack = f"{parsed.netloc} {parsed.path} {parsed.query} {metadata}".replace(
+        "-", " "
+    ).lower()
     if any(blocked in haystack for blocked in BLOCKED_HINTS):
         return False
 

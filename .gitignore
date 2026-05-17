@@ -1,6 +1,8 @@
 .env
 .cache/
+.coverage
 .DS_Store
+dist/
 __pycache__/
 .superpowers/
 .worktrees/

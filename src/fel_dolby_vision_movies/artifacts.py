@@ -97,4 +97,4 @@ def _render_links(releases: list[FelRelease]) -> str:
     urls = list(dict.fromkeys(release.source_url for release in releases))
     lines = ["# Source Links", ""]
     lines.extend(f"- {url}" for url in urls)
-    return "\n".join(lines) + "\n"
+    return "\n".join(lines).rstrip() + "\n"

@@ -70,6 +70,12 @@ def test_links_contains_only_unique_source_urls(tmp_path: Path):
     assert links.count("https://example.test/A") == 1
 
 
+def test_links_for_empty_release_set_has_no_extra_blank_line(tmp_path: Path):
+    write_artifacts([], output_dir=tmp_path)
+
+    assert (tmp_path / "links.md").read_text(encoding="utf-8") == "# Source Links\n"
+
+
 def test_readme_omits_release_group_metadata(tmp_path: Path):
     item = release("A", "2020")
     item.additional_characteristics = {
