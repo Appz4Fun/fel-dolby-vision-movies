@@ -21,6 +21,9 @@ BLOCKED_HINTS = (
     "player",
     "rapidgator",
     "splitter",
+    "player support",
+    "playback",
+    "plex",
     "torrent",
     "tv-led",
     "usenet",
@@ -29,12 +32,18 @@ BLOCKED_HINTS = (
 )
 SOURCE_HOST_HINTS = (
     "blu-ray.com",
+    "caps-a-holic.com",
+    "criterionforum.org",
+    "discourse.coreelec.org",
     "forum",
     "github.com",
+    "google.com",
     "list",
+    "makemkv.com",
     "reddit.com",
     "wiki",
 )
+BLOCKED_HOSTS = ("simkl.com", "trakt.tv")
 SOURCE_SEARCH_QUERIES = (
     '"Dolby Vision" "Profile 7" FEL "Blu-ray"',
     '"Profile 7 FEL" "UHD Blu-ray" list',
@@ -53,6 +62,13 @@ class SourceDiscoveryResult:
     rejected_url_count: int
     candidate_urls: list[str]
     errors: list[str]
+
+
+@dataclass(frozen=True)
+class SearchResult:
+    url: str
+    title: str = ""
+    description: str = ""
 
 
 def build_source_search_queries() -> list[str]:
@@ -76,6 +92,10 @@ def extract_candidate_links(html: str, base_url: str) -> list[str]:
 
 
 def brave_search(query: str, api_key: str | None) -> list[str]:
+    return [result.url for result in brave_search_results(query, api_key)]
+
+
+def brave_search_results(query: str, api_key: str | None) -> list[SearchResult]:
     if not api_key:
         return []
     response = httpx.get(
@@ -87,8 +107,19 @@ def brave_search(query: str, api_key: str | None) -> list[str]:
     response.raise_for_status()
     payload = response.json()
     results = payload.get("web", {}).get("results", [])
-    urls = [result["url"] for result in results if result.get("url")]
-    return list(dict.fromkeys(urls))
+    deduped: dict[str, SearchResult] = {}
+    for result in results:
+        if not result.get("url"):
+            continue
+        normalized = _normalize_url(result["url"])
+        if not normalized or normalized in deduped:
+            continue
+        deduped[normalized] = SearchResult(
+            url=normalized,
+            title=result.get("title", ""),
+            description=result.get("description", ""),
+        )
+    return list(deduped.values())
 
 
 def filter_candidate_source_urls(urls: Iterable[str]) -> list[str]:
@@ -107,7 +138,7 @@ def filter_candidate_source_urls(urls: Iterable[str]) -> list[str]:
 def discover_source_candidates(
     api_key: str | None,
     *,
-    search: Callable[[str, str], list[str]] | None = None,
+    search: Callable[[str, str], list[str] | list[SearchResult]] | None = None,
     queries: Iterable[str] | None = None,
 ) -> SourceDiscoveryResult:
     query_list = list(queries) if queries is not None else build_source_search_queries()
@@ -121,28 +152,31 @@ def discover_source_candidates(
             errors=[],
         )
 
-    search_func = search or brave_search
-    raw_urls: list[str] = []
+    search_func = search or brave_search_results
+    raw_results: list[SearchResult] = []
     errors: list[str] = []
     for query in query_list:
         try:
-            raw_urls.extend(search_func(query, api_key))
+            raw_results.extend(_coerce_search_results(search_func(query, api_key)))
         except httpx.HTTPError as exc:
             errors.append(f"{type(exc).__name__}: {exc}")
 
-    normalized_raw = list(
-        dict.fromkeys(
-            normalized
-            for url in raw_urls
-            if (normalized := _normalize_url(url)) is not None
-        )
-    )
-    candidate_urls = filter_candidate_source_urls(normalized_raw)
+    deduped_results: dict[str, SearchResult] = {}
+    for result in raw_results:
+        normalized = _normalize_url(result.url)
+        if normalized and normalized not in deduped_results:
+            deduped_results[normalized] = SearchResult(
+                url=normalized,
+                title=result.title,
+                description=result.description,
+            )
+
+    candidate_urls = _filter_candidate_search_results(deduped_results.values())
     return SourceDiscoveryResult(
         brave_available=True,
         queries=query_list,
-        raw_url_count=len(normalized_raw),
-        rejected_url_count=len(normalized_raw) - len(candidate_urls),
+        raw_url_count=len(deduped_results),
+        rejected_url_count=len(deduped_results) - len(candidate_urls),
         candidate_urls=candidate_urls,
         errors=errors,
     )
@@ -166,7 +200,27 @@ def _normalize_url(url: str) -> str | None:
 
 def _is_candidate_source_url(url: str) -> bool:
     parsed = urlparse(url)
-    haystack = f"{parsed.netloc} {parsed.path} {parsed.query}".replace("-", " ").lower()
+    return _is_candidate_source(parsed, "")
+
+
+def _filter_candidate_search_results(results: Iterable[SearchResult]) -> list[str]:
+    candidates: list[str] = []
+    for result in results:
+        parsed = urlparse(result.url)
+        metadata = f"{result.title} {result.description}"
+        if _is_candidate_source(parsed, metadata):
+            candidates.append(result.url)
+    return candidates
+
+
+def _is_candidate_source(parsed, metadata: str) -> bool:
+    if any(parsed.netloc.lower().endswith(host) for host in BLOCKED_HOSTS):
+        return False
+    haystack = (
+        f"{parsed.netloc} {parsed.path} {parsed.query} {metadata}"
+        .replace("-", " ")
+        .lower()
+    )
     if any(blocked in haystack for blocked in BLOCKED_HINTS):
         return False
 
@@ -179,3 +233,15 @@ def _is_candidate_source_url(url: str) -> bool:
         "blu ray" in haystack or "uhd" in haystack or "remux" in haystack
     )
     return has_source_shape and (has_profile_fel or has_dolby_blu_ray)
+
+
+def _coerce_search_results(
+    values: list[str] | list[SearchResult],
+) -> list[SearchResult]:
+    results: list[SearchResult] = []
+    for value in values:
+        if isinstance(value, SearchResult):
+            results.append(value)
+        else:
+            results.append(SearchResult(url=value))
+    return results
