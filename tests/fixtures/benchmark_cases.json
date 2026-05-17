@@ -1,0 +1,24 @@
+[
+  {
+    "name": "table row direct FEL",
+    "source_url": "https://example.test/forum/table-direct",
+    "html": "<table><tr><th>Title</th><th>DV</th><th>Audio</th></tr><tr><td>The Matrix</td><td>Profile 7 FEL</td><td>English TrueHD Atmos</td></tr></table>",
+    "expected_titles": [
+      "The Matrix"
+    ]
+  },
+  {
+    "name": "reject different title evidence",
+    "source_url": "https://example.test/forum/different-title",
+    "html": "<table><tr><th>Title</th><th>DV</th></tr><tr><td>Alien</td><td>The Matrix is Profile 7 FEL.</td></tr></table>",
+    "expected_titles": []
+  },
+  {
+    "name": "sentence direct FEL",
+    "source_url": "https://example.test/forum/sentence",
+    "html": "<p>Blade Runner 2049 is confirmed to be Profile 7 FEL.</p>",
+    "expected_titles": [
+      "Blade Runner 2049"
+    ]
+  }
+]

@@ -4,6 +4,7 @@ from html import escape
 import json
 from pathlib import Path
 
+from .artifacts import RELEASE_GROUP_KEYS
 from .models import UNKNOWN, FelRelease
 
 
@@ -12,15 +13,38 @@ def build_dashboard(
 ) -> None:
     dist = Path(output_dir)
     dist.mkdir(parents=True, exist_ok=True)
+    sorted_releases = sorted(releases, key=_sort_key)
     payload = json.dumps(
-        [release.to_dict() for release in releases],
+        [_to_public_dict(release) for release in sorted_releases],
         indent=2,
         ensure_ascii=False,
     )
-    cards = "\n".join(_render_card(release) for release in releases)
+    cards = "\n".join(_render_card(release) for release in sorted_releases)
 
     (dist / "releases.json").write_text(payload + "\n", encoding="utf-8")
     (dist / "index.html").write_text(_render_html(cards, payload), encoding="utf-8")
+
+
+def _sort_key(release: FelRelease) -> tuple[int, str]:
+    if release.release_date == UNKNOWN:
+        return (1, "")
+    return (0, _invert_date_text(release.release_date))
+
+
+def _invert_date_text(value: str) -> str:
+    return "".join(chr(255 - ord(character)) for character in value)
+
+
+def _to_public_dict(release: FelRelease) -> dict[str, object]:
+    data = release.to_dict()
+    additional = data.get("additional_characteristics", {})
+    if isinstance(additional, dict):
+        data["additional_characteristics"] = {
+            key: value
+            for key, value in additional.items()
+            if key.lower().replace("-", "_") not in RELEASE_GROUP_KEYS
+        }
+    return data
 
 
 def _render_card(release: FelRelease) -> str:

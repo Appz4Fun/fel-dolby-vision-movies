@@ -9,7 +9,9 @@ from urllib.parse import urlparse
 import httpx
 
 
-USER_AGENT = "fel-dolby-vision-movies/0.1 (+https://github.com/Appz4Fun/fel-dolby-vision-movies)"
+USER_AGENT = (
+    "fel-dolby-vision-movies/0.1 (+https://github.com/Appz4Fun/fel-dolby-vision-movies)"
+)
 
 
 @dataclass(frozen=True)
@@ -17,6 +19,7 @@ class FetchResult:
     url: str
     text: str
     from_cache: bool
+    error: str | None = None
 
 
 class DomainRateLimiter:
@@ -55,7 +58,7 @@ class Fetcher:
             headers={"User-Agent": USER_AGENT},
         )
 
-    def fetch(self, url: str) -> FetchResult:
+    def fetch(self, url: str, *, raise_on_error: bool = True) -> FetchResult:
         cache_path = self._cache_path(url)
         cached = self._read_fresh_cache(cache_path)
         if cached is not None:
@@ -83,7 +86,12 @@ class Fetcher:
                 if attempt < 2:
                     time.sleep(self.retry_sleep_seconds * (attempt + 1))
                     continue
-        raise RuntimeError(f"failed to fetch {url}") from last_error
+        message = f"failed to fetch {url}"
+        if last_error is not None:
+            message = f"{message}: {last_error}"
+        if raise_on_error:
+            raise RuntimeError(f"failed to fetch {url}") from last_error
+        return FetchResult(url=url, text="", from_cache=False, error=message)
 
     def close(self) -> None:
         self.client.close()

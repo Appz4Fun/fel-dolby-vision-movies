@@ -7,6 +7,20 @@ from typing import Any
 from .models import UNKNOWN, FelRelease
 
 
+RELEASE_GROUP_KEYS = frozenset({"group", "release_group", "release group"})
+
+
+def publish_outputs(
+    releases: list[FelRelease], output_dir: Path | str = "."
+) -> list[FelRelease]:
+    from .dashboard import build_dashboard
+
+    root = Path(output_dir)
+    sorted_releases = write_artifacts(releases, output_dir=root)
+    build_dashboard(sorted_releases, output_dir=root / "dist")
+    return sorted_releases
+
+
 def write_artifacts(
     releases: list[FelRelease], output_dir: Path | str = "."
 ) -> list[FelRelease]:
@@ -69,9 +83,14 @@ def _render_readme(releases: list[FelRelease]) -> str:
 
 
 def _render_additional(additional: dict[str, Any]) -> str:
-    if not additional:
+    visible_items = [
+        (key, value)
+        for key, value in additional.items()
+        if key.lower().replace("-", "_") not in RELEASE_GROUP_KEYS
+    ]
+    if not visible_items:
         return UNKNOWN
-    return ", ".join(f"{key}: {value}" for key, value in additional.items())
+    return ", ".join(f"{key}: {value}" for key, value in visible_items)
 
 
 def _render_links(releases: list[FelRelease]) -> str:
