@@ -45,6 +45,53 @@ def test_accepts_status_cell_when_fel_names_same_title():
     assert [release.movie_title for release in releases] == ["The Matrix"]
 
 
+def test_rejects_short_title_match_inside_unrelated_word():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Notes</th></tr>
+      <tr><td>It</td><td>This title is Profile 7 FEL.</td></tr>
+    </table>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_short_title_when_mentioned_as_phrase():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Notes</th></tr>
+      <tr><td>It</td><td>It is Profile 7 FEL.</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["It"]
+
+
+def test_rejects_status_cell_when_different_title_prefix_uses_separator():
+    for evidence in (
+        "Alien - Profile 7 FEL",
+        "Alien: Profile 7 FEL",
+        "Alien Profile 7 FEL",
+    ):
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>DV</th></tr>
+          <tr><td>The Matrix</td><td>{evidence}</td></tr>
+        </table>
+        """
+        assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_status_cell_when_same_title_prefix_uses_separator():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>The Matrix</td><td>The Matrix: Profile 7 FEL</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["The Matrix"]
+
+
 def test_rejects_generic_fel_chatter_without_title_binding():
     html = """
     <p>I love FEL when discs include it.</p>
@@ -78,6 +125,14 @@ def test_strips_known_prose_prefix_from_sentence_title():
     assert [release.movie_title for release in releases] == ["Alien"]
 
 
+def test_rejects_sentence_with_ambiguous_prose_prefix():
+    html = (
+        "<p>The spreadsheet says Alien is confirmed as Dolby Vision "
+        "Profile 7 FEL.</p>"
+    )
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
 def test_rejects_profile_7_without_fel():
     html = "<p>Movie A has Dolby Vision Profile 7 but this post does not identify FEL.</p>"
     assert parse_fel_releases(html, "https://example.test/thread") == []
@@ -85,6 +140,22 @@ def test_rejects_profile_7_without_fel():
 
 def test_rejects_mel_even_when_fel_appears_elsewhere():
     html = "<p>Movie A is Profile 7 MEL. Another user asked about FEL-capable players.</p>"
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_fel_when_not_mel_clarifies_layer_type():
+    html = "<p>Alien is confirmed as Dolby Vision Profile 7 FEL, not MEL.</p>"
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
+def test_rejects_fel_with_trailing_denial():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alien</td><td>Profile 7 FEL: No.</td></tr>
+    </table>
+    """
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
