@@ -2,6 +2,20 @@ from pathlib import Path
 import json
 
 from fel_dolby_vision_movies import main
+from fel_dolby_vision_movies.models import FelEvidence, FelRelease
+
+
+def release(
+    title: str, source_url: str = "https://forum.example.test/thread"
+) -> FelRelease:
+    return FelRelease(
+        movie_title=title,
+        fel_evidence=FelEvidence(
+            source_url=source_url,
+            quote=f"{title} is confirmed Profile 7 FEL",
+            evidence_type="fixture",
+        ),
+    )
 
 
 def test_search_for_sources_without_api_key_exits_zero_and_leaves_sources_unchanged(
@@ -199,6 +213,146 @@ def test_scrape_for_titles_continues_after_fetch_errors(
     assert "errors=1" in output
 
 
+def test_scrape_for_titles_dedupes_parser_results_before_writing(
+    tmp_path: Path, monkeypatch, capsys
+):
+    sources_path = tmp_path / "forums.txt"
+    output_dir = tmp_path / "out"
+    cache_dir = tmp_path / "cache"
+    sources_path.write_text(
+        "\n".join(
+            [
+                "https://forum.example.test/thread-a",
+                "https://forum.example.test/thread-b",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    duplicated_release = release("Duplicate")
+    unique_release = release("Unique", "https://forum.example.test/thread-b")
+    published_releases = []
+
+    class FakeFetchResult:
+        def __init__(self, url: str):
+            self.url = url
+            self.text = f"<html>{url}</html>"
+            self.from_cache = False
+
+    class FakeFetcher:
+        def __init__(self, cache_dir: Path, cookie_header: str | None):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return None
+
+        def fetch(self, url: str):
+            return FakeFetchResult(url)
+
+    def fake_parse_fel_releases(html: str, source_url: str):
+        if source_url.endswith("thread-a"):
+            return [duplicated_release]
+        return [duplicated_release, unique_release]
+
+    def fake_publish_outputs(releases, output_dir: Path):
+        published_releases.extend(releases)
+        return releases
+
+    monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
+    monkeypatch.setattr(main.fel_parser, "parse_fel_releases", fake_parse_fel_releases)
+    monkeypatch.setattr(main.artifacts, "publish_outputs", fake_publish_outputs)
+
+    exit_code = main.main(
+        [
+            "scrape-for-titles",
+            "--sources",
+            str(sources_path),
+            "--output-dir",
+            str(output_dir),
+            "--cache-dir",
+            str(cache_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert published_releases == [duplicated_release, unique_release]
+    output = capsys.readouterr().out
+    assert "releases=2" in output
+
+
+def test_scrape_for_titles_fails_when_sources_file_is_missing(
+    tmp_path: Path, monkeypatch, capsys
+):
+    sources_path = tmp_path / "missing-forums.txt"
+    output_dir = tmp_path / "out"
+
+    def fail_publish_outputs(releases, output_dir: Path):
+        raise AssertionError("should not write artifacts without sources")
+
+    monkeypatch.setattr(main.artifacts, "publish_outputs", fail_publish_outputs)
+
+    exit_code = main.main(
+        [
+            "scrape-for-titles",
+            "--sources",
+            str(sources_path),
+            "--output-dir",
+            str(output_dir),
+        ]
+    )
+
+    assert exit_code == 1
+    output = capsys.readouterr().out
+    assert "sources file not found" in output
+    assert str(sources_path) in output
+
+
+def test_scrape_for_titles_fails_when_all_fetches_fail(
+    tmp_path: Path, monkeypatch, capsys
+):
+    sources_path = tmp_path / "forums.txt"
+    output_dir = tmp_path / "out"
+    sources_path.write_text("https://forum.example.test/thread\n", encoding="utf-8")
+
+    class FakeFetcher:
+        def __init__(self, cache_dir: Path, cookie_header: str | None):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return None
+
+        def fetch(self, url: str):
+            raise RuntimeError("network unavailable")
+
+    def fail_publish_outputs(releases, output_dir: Path):
+        raise AssertionError("should not write artifacts when every fetch fails")
+
+    monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
+    monkeypatch.setattr(main.artifacts, "publish_outputs", fail_publish_outputs)
+
+    exit_code = main.main(
+        [
+            "scrape-for-titles",
+            "--sources",
+            str(sources_path),
+            "--output-dir",
+            str(output_dir),
+        ]
+    )
+
+    assert exit_code == 1
+    output = capsys.readouterr().out
+    assert "fetched=0" in output
+    assert "errors=1" in output
+    assert "no releases found" in output
+
+
 def test_run_searches_for_sources_before_scraping(tmp_path: Path, monkeypatch):
     sources_path = tmp_path / "forums.txt"
     output_dir = tmp_path / "out"
@@ -233,3 +387,135 @@ def test_run_searches_for_sources_before_scraping(tmp_path: Path, monkeypatch):
         ("search", sources_path),
         ("scrape", sources_path, output_dir, cache_dir),
     ]
+
+
+def test_run_scrapes_existing_sources_after_discovery_failure(
+    tmp_path: Path, monkeypatch, capsys
+):
+    sources_path = tmp_path / "forums.txt"
+    output_dir = tmp_path / "out"
+    cache_dir = tmp_path / "cache"
+    sources_path.write_text("https://forum.example.test/thread\n", encoding="utf-8")
+    calls = []
+
+    def fake_search_for_sources(source_path: Path):
+        calls.append(("search", source_path))
+        return 1
+
+    def fake_scrape_for_titles(source_path: Path, output_dir: Path, cache_dir: Path):
+        calls.append(("scrape", source_path, output_dir, cache_dir))
+        return 0
+
+    monkeypatch.setattr(main, "_search_for_sources", fake_search_for_sources)
+    monkeypatch.setattr(main, "_scrape_for_titles", fake_scrape_for_titles)
+
+    exit_code = main.main(
+        [
+            "run",
+            "--sources",
+            str(sources_path),
+            "--output-dir",
+            str(output_dir),
+            "--cache-dir",
+            str(cache_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert calls == [
+        ("search", sources_path),
+        ("scrape", sources_path, output_dir, cache_dir),
+    ]
+    output = capsys.readouterr().out
+    assert "source discovery failed; scraping existing sources" in output
+
+
+def test_run_returns_scrape_exit_code_after_discovery_failure(
+    tmp_path: Path, monkeypatch
+):
+    sources_path = tmp_path / "forums.txt"
+    output_dir = tmp_path / "out"
+    cache_dir = tmp_path / "cache"
+    sources_path.write_text("https://forum.example.test/thread\n", encoding="utf-8")
+
+    monkeypatch.setattr(main, "_search_for_sources", lambda source_path: 1)
+    monkeypatch.setattr(
+        main,
+        "_scrape_for_titles",
+        lambda source_path, output_dir, cache_dir: 3,
+    )
+
+    exit_code = main.main(
+        [
+            "run",
+            "--sources",
+            str(sources_path),
+            "--output-dir",
+            str(output_dir),
+            "--cache-dir",
+            str(cache_dir),
+        ]
+    )
+
+    assert exit_code == 3
+
+
+def test_run_without_brave_key_uses_existing_sources_and_does_not_print_secret(
+    tmp_path: Path, monkeypatch, capsys
+):
+    sources_path = tmp_path / "forums.txt"
+    output_dir = tmp_path / "out"
+    cache_dir = tmp_path / "cache"
+    sources_path.write_text("https://forum.example.test/thread\n", encoding="utf-8")
+    monkeypatch.delenv("BRAVE_SEARCH_API_KEY", raising=False)
+    calls = []
+
+    class FakeFetcher:
+        def __init__(self, cache_dir: Path, cookie_header: str | None):
+            calls.append(("init", cache_dir, cookie_header))
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return None
+
+        def fetch(self, url: str):
+            calls.append(("fetch", url))
+            return type(
+                "FetchResult",
+                (),
+                {
+                    "url": url,
+                    "text": "Existing Source is confirmed Profile 7 FEL.",
+                    "from_cache": False,
+                },
+            )()
+
+    monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
+    monkeypatch.setattr(
+        main.fel_parser,
+        "parse_fel_releases",
+        lambda html, source_url: [release("Existing Source", source_url)],
+    )
+
+    exit_code = main.main(
+        [
+            "run",
+            "--sources",
+            str(sources_path),
+            "--output-dir",
+            str(output_dir),
+            "--cache-dir",
+            str(cache_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert calls == [
+        ("init", cache_dir, None),
+        ("fetch", "https://forum.example.test/thread"),
+    ]
+    output = capsys.readouterr().out
+    assert "Brave unavailable" in output
+    assert "BRAVE_SEARCH_API_KEY" in output

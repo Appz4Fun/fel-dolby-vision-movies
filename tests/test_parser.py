@@ -14,6 +14,52 @@ def test_parses_table_row_with_direct_fel_correlation():
     assert releases[0].english_audio == "Yes"
 
 
+def test_parses_only_verified_fel_release_from_multi_title_forum_table():
+    html = """
+    <article class="post">
+      <p>Latest UHD confirmations copied from the forum thread.</p>
+      <table>
+        <tr><th>Movie</th><th>Video</th><th>Audio</th></tr>
+        <tr>
+          <td>Alien</td>
+          <td>Dolby Vision Profile 7 FEL confirmed by disc scan.</td>
+          <td>English Dolby TrueHD 7.1 Atmos</td>
+        </tr>
+        <tr>
+          <td>The Matrix</td>
+          <td>Dolby Vision Profile 7 REMUX, enhancement layer not identified.</td>
+          <td>English DTS-HD MA 5.1</td>
+        </tr>
+      </table>
+    </article>
+    """
+    releases = parse_fel_releases(html, "https://example.test/forum/post-1")
+    assert [release.movie_title for release in releases] == ["Alien"]
+    assert releases[0].audio_formats == ["TrueHD Atmos"]
+    assert releases[0].english_audio == "Yes"
+
+
+def test_parses_recoverable_malformed_forum_table_without_promoting_generic_dv():
+    html = """
+    <div class="postbody"><blockquote>
+      <table class="bbcode">
+        <tr><th>Title</th><th>DV proof</th><th>Sound</th></tr>
+        <tr>
+          <td>Blade Runner</td>
+          <td>Profile 7 FEL confirmed via MediaInfo</td>
+          <td>DTS:X</td>
+        </tr>
+        <tr><td>Heat</td><td>Dolby Vision REMUX</td><td>TrueHD</td></tr>
+      </table
+      <p>Footer text from a truncated forum scrape.
+    </div>
+    """
+    releases = parse_fel_releases(html, "https://example.test/forum/broken")
+    assert [release.movie_title for release in releases] == ["Blade Runner"]
+    assert releases[0].audio_formats == ["DTS:X"]
+    assert releases[0].fel_evidence.evidence_type == "table-row"
+
+
 def test_parses_table_when_title_column_is_not_first():
     html = """
     <table>
@@ -420,7 +466,9 @@ def test_rejects_generic_fel_chatter_without_title_binding():
 
 
 def test_parses_direct_sentence_with_title_and_profile_7_fel():
-    html = "<p>Alien (1979) is confirmed as Dolby Vision Profile 7 FEL with DTS-HD MA.</p>"
+    html = (
+        "<p>Alien (1979) is confirmed as Dolby Vision Profile 7 FEL with DTS-HD MA.</p>"
+    )
     releases = parse_fel_releases(html, "https://example.test/thread")
     assert releases[0].movie_title == "Alien"
     assert releases[0].release_date == "1979"
@@ -439,23 +487,23 @@ def test_rejects_sentence_with_generic_dolby_vision_fel_without_profile_7():
 
 
 def test_strips_known_prose_prefix_from_sentence_title():
-    html = "<p>The disc for Alien (1979) is confirmed as Dolby Vision Profile 7 FEL.</p>"
+    html = (
+        "<p>The disc for Alien (1979) is confirmed as Dolby Vision Profile 7 FEL.</p>"
+    )
     releases = parse_fel_releases(html, "https://example.test/thread")
     assert [release.movie_title for release in releases] == ["Alien"]
 
 
 def test_rejects_sentence_with_ambiguous_prose_prefix():
     html = (
-        "<p>The spreadsheet says Alien is confirmed as Dolby Vision "
-        "Profile 7 FEL.</p>"
+        "<p>The spreadsheet says Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
     )
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
 def test_rejects_sentence_with_demonstrative_source_prose_prefix():
     html = (
-        "<p>This spreadsheet says Alien is confirmed as Dolby Vision "
-        "Profile 7 FEL.</p>"
+        "<p>This spreadsheet says Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
     )
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
@@ -498,17 +546,13 @@ def test_rejects_sentence_with_source_prose_comma_prefix():
 
 def test_rejects_sentence_with_in_source_prefix():
     html = (
-        "<p>In the spreadsheet, Alien is confirmed as Dolby Vision "
-        "Profile 7 FEL.</p>"
+        "<p>In the spreadsheet, Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
     )
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
 def test_rejects_sentence_with_contextual_for_prefix():
-    html = (
-        "<p>For The Matrix, Alien is confirmed as Dolby Vision "
-        "Profile 7 FEL.</p>"
-    )
+    html = "<p>For The Matrix, Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
@@ -517,13 +561,49 @@ def test_rejects_coordinated_multi_title_sentence():
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
+def test_rejects_ambiguous_title_list_even_with_shared_fel_evidence():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Evidence</th></tr>
+      <tr>
+        <td>Alien and Aliens</td>
+        <td>Both entries are listed as Dolby Vision Profile 7 FEL.</td>
+      </tr>
+    </table>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_parser_output_normalizes_multiple_audio_formats_from_fel_evidence():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Evidence</th></tr>
+      <tr>
+        <td>Pacific Rim</td>
+        <td>
+          Pacific Rim: Profile 7 FEL confirmed by BDInfo with
+          English E-AC3 Atmos and DTS-HD Master Audio tracks.
+        </td>
+      </tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["Pacific Rim"]
+    assert releases[0].audio_formats == ["DD+ Atmos", "DTS-HD MA"]
+    assert releases[0].english_audio == "Yes"
+
+
 def test_rejects_profile_7_without_fel():
-    html = "<p>Movie A has Dolby Vision Profile 7 but this post does not identify FEL.</p>"
+    html = (
+        "<p>Movie A has Dolby Vision Profile 7 but this post does not identify FEL.</p>"
+    )
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
 def test_rejects_mel_even_when_fel_appears_elsewhere():
-    html = "<p>Movie A is Profile 7 MEL. Another user asked about FEL-capable players.</p>"
+    html = (
+        "<p>Movie A is Profile 7 MEL. Another user asked about FEL-capable players.</p>"
+    )
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 

@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from fel_dolby_vision_movies.artifacts import write_artifacts
+from fel_dolby_vision_movies.artifacts import publish_outputs, write_artifacts
 from fel_dolby_vision_movies.models import FelEvidence, FelRelease
 
 
@@ -18,6 +18,23 @@ def release(title: str, date: str) -> FelRelease:
             evidence_type="fixture",
         ),
     )
+
+
+def test_publish_outputs_writes_artifacts_and_dashboard_from_releases(tmp_path: Path):
+    sorted_releases = publish_outputs(
+        [
+            release("Older", "2020"),
+            release("Newer", "2026-05-01"),
+        ],
+        output_dir=tmp_path,
+    )
+
+    assert [item.movie_title for item in sorted_releases] == ["Newer", "Older"]
+    assert (tmp_path / "README.md").exists()
+    assert (tmp_path / "links.md").exists()
+    assert (tmp_path / "data/releases.json").exists()
+    assert (tmp_path / "dist/index.html").exists()
+    assert (tmp_path / "dist/releases.json").exists()
 
 
 def test_write_artifacts_sorts_known_dates_newest_first_unknown_last(
@@ -39,7 +56,10 @@ def test_write_artifacts_sorts_known_dates_newest_first_unknown_last(
         "Unknown Date",
     ]
     readme = (tmp_path / "README.md").read_text(encoding="utf-8")
-    assert "| Newer | Yes | 2026-05-01 | Unknown | TrueHD Atmos | Yes | Unknown |" in readme
+    assert (
+        "| Newer | Yes | 2026-05-01 | Unknown | TrueHD Atmos | Yes | Unknown |"
+        in readme
+    )
     assert "Newer is Profile 7 FEL" not in readme
 
 
@@ -48,3 +68,18 @@ def test_links_contains_only_unique_source_urls(tmp_path: Path):
 
     links = (tmp_path / "links.md").read_text(encoding="utf-8")
     assert links.count("https://example.test/A") == 1
+
+
+def test_readme_omits_release_group_metadata(tmp_path: Path):
+    item = release("A", "2020")
+    item.additional_characteristics = {
+        "release_group": "GROUP",
+        "disc_count": 2,
+    }
+
+    write_artifacts([item], output_dir=tmp_path)
+
+    readme = (tmp_path / "README.md").read_text(encoding="utf-8")
+    assert "disc_count: 2" in readme
+    assert "release_group" not in readme
+    assert "GROUP" not in readme

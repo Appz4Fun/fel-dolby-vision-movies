@@ -5,8 +5,9 @@ import os
 from pathlib import Path
 from typing import Sequence
 
-from fel_dolby_vision_movies import artifacts, dashboard, discovery, fetcher
+from fel_dolby_vision_movies import artifacts, discovery, fetcher
 from fel_dolby_vision_movies import parser as fel_parser
+from fel_dolby_vision_movies.models import FelRelease
 from fel_dolby_vision_movies import sources
 
 
@@ -20,7 +21,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "run":
         search_exit_code = _search_for_sources(args.sources)
         if search_exit_code != 0:
-            return search_exit_code
+            existing_urls = sources.read_source_urls(args.sources)
+            if not existing_urls:
+                print(
+                    "source discovery failed and no usable sources file is available; "
+                    f"sources={args.sources}"
+                )
+                return search_exit_code
+            print(
+                "source discovery failed; scraping existing sources; "
+                f"sources={len(existing_urls)}"
+            )
         return _scrape_for_titles(args.sources, args.output_dir, args.cache_dir)
     parser.error(f"unknown command: {args.command}")
     return 2
@@ -96,8 +107,16 @@ def _search_for_sources(source_path: Path) -> int:
 
 
 def _scrape_for_titles(source_path: Path, output_dir: Path, cache_dir: Path) -> int:
+    if not source_path.exists():
+        print(f"scrape failed; sources file not found: {source_path}")
+        return 1
+
     source_urls = sources.read_source_urls(source_path)
-    releases = []
+    if not source_urls:
+        print(f"scrape failed; no sources found in {source_path}")
+        return 1
+
+    releases: list[FelRelease] = []
     errors: list[tuple[str, str]] = []
     fetched_count = 0
 
@@ -114,8 +133,19 @@ def _scrape_for_titles(source_path: Path, output_dir: Path, cache_dir: Path) -> 
             fetched_count += 1
             releases.extend(fel_parser.parse_fel_releases(result.text, result.url))
 
-    sorted_releases = artifacts.write_artifacts(releases, output_dir=output_dir)
-    dashboard.build_dashboard(sorted_releases, output_dir=output_dir / "dist")
+    unique_releases = _dedupe_releases(releases)
+    if not unique_releases:
+        print(
+            f"scrape failed; "
+            f"sources={len(source_urls)} "
+            f"fetched={fetched_count} "
+            f"releases=0 "
+            f"errors={len(errors)} "
+            f"reason=no releases found"
+        )
+        return 1
+
+    sorted_releases = artifacts.publish_outputs(unique_releases, output_dir=output_dir)
 
     print(
         f"scrape complete; "
@@ -126,6 +156,23 @@ def _scrape_for_titles(source_path: Path, output_dir: Path, cache_dir: Path) -> 
         f"output_dir={output_dir}"
     )
     return 0
+
+
+def _dedupe_releases(releases: list[FelRelease]) -> list[FelRelease]:
+    seen: set[tuple[str, str, str, str]] = set()
+    unique: list[FelRelease] = []
+    for release in releases:
+        key = (
+            release.movie_title.lower(),
+            release.source_url,
+            release.fel_evidence.evidence_type,
+            release.fel_evidence.quote,
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(release)
+    return unique
 
 
 if __name__ == "__main__":

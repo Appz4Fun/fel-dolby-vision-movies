@@ -67,3 +67,20 @@ def test_fetcher_retries_transient_500(tmp_path: Path):
     fetcher = Fetcher(cache_dir=tmp_path, retry_sleep_seconds=0)
     assert fetcher.fetch("https://example.test/thread").text == "good"
     assert route.call_count == 2
+
+
+@respx.mock
+def test_fetcher_can_record_failed_fetch_without_raising(tmp_path: Path):
+    route = respx.get("https://example.test/thread").mock(
+        return_value=httpx.Response(503, text="temporarily unavailable")
+    )
+    fetcher = Fetcher(cache_dir=tmp_path, retry_sleep_seconds=0)
+
+    result = fetcher.fetch("https://example.test/thread", raise_on_error=False)
+
+    assert result.url == "https://example.test/thread"
+    assert result.text == ""
+    assert result.from_cache is False
+    assert result.error is not None
+    assert "503" in result.error
+    assert route.call_count == 3
