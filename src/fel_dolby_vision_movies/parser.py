@@ -46,8 +46,8 @@ SUFFIX_TITLE_BINDING_RE = re.compile(
 )
 SUFFIX_METADATA_RE = re.compile(r"\s+(?:with|including)\s+.+$", re.IGNORECASE)
 AMBIGUOUS_PROSE_TITLE_RE = re.compile(
-    r"^(?:(?:this|that|a|an|the)\s+)?(?:spreadsheet|list|post|thread|forum|"
-    r"page|source|site|table|note|comment)\s+"
+    r"^(?:(?:this|that|a|an|the)\s+)?(?:[A-Za-z0-9.+'-]+\s+){0,4}"
+    r"(?:spreadsheet|list|post|thread|forum|page|source|site|table|note|comment)\s+"
     r"(?:says|lists|shows|mentions|reports)\s+"
     r"|^according\s+to\s+(?:the\s+)?(?:spreadsheet|list|post|thread|forum|"
     r"page|source|site|table|note|comment),\s+"
@@ -164,7 +164,11 @@ def _title_specific_cell_supports_row_title(cell: str, title: str) -> bool:
     suffix_title = _suffix_title_after_evidence(cell)
     if suffix_title:
         return _normalized_value(suffix_title) == _normalized_value(title)
-    return _cell_mentions_title(cell, title)
+    if TITLE_BINDING_RE.search(normalize_title(cell)):
+        return _cell_mentions_title(cell, title)
+    if _cell_mentions_title(cell, title):
+        return True
+    return True
 
 
 def _cell_supports_row_title(cell: str, title: str) -> bool:
