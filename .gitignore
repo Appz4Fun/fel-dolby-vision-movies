@@ -1,4 +1,5 @@
 .env
 .cache/
+.DS_Store
 .superpowers/
 .worktrees/
