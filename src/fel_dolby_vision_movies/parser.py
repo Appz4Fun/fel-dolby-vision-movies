@@ -33,8 +33,9 @@ TITLE_BINDING_RE = re.compile(
     re.IGNORECASE,
 )
 AMBIGUOUS_PROSE_TITLE_RE = re.compile(
-    r"^(?:the\s+)?(?:spreadsheet|list|post|thread|forum|page|source|site|table|"
-    r"note|comment)\s+(?:says|lists|shows|mentions|reports)\s+",
+    r"^(?:(?:this|that|a|an|the)\s+)?(?:spreadsheet|list|post|thread|forum|"
+    r"page|source|site|table|note|comment)\s+"
+    r"(?:says|lists|shows|mentions|reports)\s+",
     re.IGNORECASE,
 )
 PROSE_TITLE_PREFIX_RE = re.compile(
