@@ -204,6 +204,17 @@ def test_rejects_suffix_binding_to_longer_title_before_audio_metadata():
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
+def test_accepts_proof_metadata_without_title_binding():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Evidence</th></tr>
+      <tr><td>Alien</td><td>Profile 7 FEL confirmed by disc scan.</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
 def test_rejects_unrecognized_header_suffix_binding_to_longer_title():
     html = """
     <table>
@@ -308,6 +319,14 @@ def test_rejects_sentence_with_attributed_source_prefix():
 
 def test_rejects_sentence_with_list_entry_prefix():
     html = "<p>List entry: Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_sentence_with_qualified_source_prose_prefix():
+    html = (
+        "<p>The Blu-ray.com post says Alien is confirmed as Dolby Vision "
+        "Profile 7 FEL.</p>"
+    )
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
