@@ -35,7 +35,7 @@ updating the symlink.
 ## Project Requirements
 
 - Bootstrap this as a Python project with focused modules under `src/`.
-- Maintain `forms.txt` as the source registry and allow automatic source
+- Maintain `forums.txt` as the source registry and allow automatic source
   discovery to update it.
 - Use optional Brave Search discovery when `BRAVE_SEARCH_API_KEY` is available.
 - Normalize audio formats into stable values such as `TrueHD Atmos`,
