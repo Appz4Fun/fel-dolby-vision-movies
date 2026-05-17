@@ -245,6 +245,49 @@ def test_accepts_from_proof_metadata_without_title_binding():
         assert [release.movie_title for release in releases] == ["Alien"]
 
 
+def test_rejects_separator_suffix_binding_to_longer_title():
+    examples = (
+        ("It", "Profile 7 FEL - It Follows."),
+        ("It", "Profile 7 FEL (It Follows)."),
+        ("Alien", "Profile 7 FEL: Alien 3."),
+    )
+    for row_title, evidence in examples:
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>Evidence</th></tr>
+          <tr><td>{row_title}</td><td>{evidence}</td></tr>
+        </table>
+        """
+        assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_separator_suffix_binding_to_same_title():
+    examples = (
+        ("It", "Profile 7 FEL - It."),
+        ("Alien", "Profile 7 FEL: Alien."),
+    )
+    for row_title, evidence in examples:
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>Evidence</th></tr>
+          <tr><td>{row_title}</td><td>{evidence}</td></tr>
+        </table>
+        """
+        releases = parse_fel_releases(html, "https://example.test/thread")
+        assert [release.movie_title for release in releases] == [row_title]
+
+
+def test_accepts_separator_proof_metadata_without_title_binding():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Evidence</th></tr>
+      <tr><td>Alien</td><td>Profile 7 FEL - confirmed by disc scan.</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
 def test_rejects_unrecognized_header_suffix_binding_to_longer_title():
     html = """
     <table>
