@@ -135,6 +135,33 @@ def test_accepts_title_specific_cell_when_same_short_title_is_explicit():
     assert [release.movie_title for release in releases] == ["It"]
 
 
+def test_rejects_unrecognized_header_when_row_title_is_prefix_of_longer_title():
+    examples = (
+        ("It", "Details", "It Follows: Profile 7 FEL"),
+        ("Alien", "Info", "Alien 3: Profile 7 FEL"),
+        ("The Matrix", "Release", "The Matrix Reloaded: Profile 7 FEL"),
+    )
+    for row_title, header, evidence in examples:
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>{header}</th></tr>
+          <tr><td>{row_title}</td><td>{evidence}</td></tr>
+        </table>
+        """
+        assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_unrecognized_header_when_same_title_is_explicit():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Details</th></tr>
+      <tr><td>The Matrix</td><td>The Matrix: Profile 7 FEL</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["The Matrix"]
+
+
 def test_accepts_non_title_status_prefixes_before_fel_evidence():
     for evidence in (
         "Confirmed Profile 7 FEL",
