@@ -18,7 +18,10 @@ FEL_TRAILING_DENIAL_RE = re.compile(
     rf"{FEL_TOKEN_PATTERN}\s*(?::|=|-|\bis\b)?\s*\b(?:no|none|false)\b",
     re.IGNORECASE,
 )
-GENERIC_STATUS_PREFIXES = {"dolby vision", "dv", "hdr", "hdr10", "uhd"}
+GENERIC_STATUS_PREFIX_RE = re.compile(
+    r"^(?:confirmed|yes|mediainfo\s+confirms|dolby vision|dv|hdr|hdr10|uhd)$",
+    re.IGNORECASE,
+)
 RELEASE_STATUS_HEADER_RE = re.compile(
     r"\b(?:dv|dolby|vision|profile|hdr|fel|video|format|status|disc|layer)\b",
     re.IGNORECASE,
@@ -30,6 +33,10 @@ TITLE_SPECIFIC_HEADER_RE = re.compile(
 TITLE_BINDING_RE = re.compile(
     r"^[A-Z][A-Za-z0-9:'&.,!?\- ]{1,80}?\s+"
     r"(?:is|has|features|includes|confirmed as|confirmed to be)\b",
+    re.IGNORECASE,
+)
+TITLE_BINDING_SUFFIX_RE = re.compile(
+    r"\s+(?:is|has|features|includes|confirmed as|confirmed to be)$",
     re.IGNORECASE,
 )
 AMBIGUOUS_PROSE_TITLE_RE = re.compile(
@@ -144,7 +151,7 @@ def _has_table_evidence_for_title(
 def _cell_supports_row_title(cell: str, title: str) -> bool:
     leading_title = _leading_title_before_evidence(cell)
     if leading_title:
-        return _cell_mentions_title(leading_title, title)
+        return _normalized_title_prefix(leading_title) == _normalized_value(title)
     if TITLE_BINDING_RE.search(normalize_title(cell)):
         return _cell_mentions_title(cell, title)
     return True
@@ -171,9 +178,18 @@ def _leading_title_before_evidence(cell: str) -> str:
     if not evidence_starts:
         return ""
     prefix = normalized[: min(evidence_starts)].strip(" :-")
-    if prefix.lower() in GENERIC_STATUS_PREFIXES:
+    if GENERIC_STATUS_PREFIX_RE.fullmatch(prefix):
         return ""
     return prefix
+
+
+def _normalized_value(value: str) -> str:
+    return normalize_title(value).casefold()
+
+
+def _normalized_title_prefix(value: str) -> str:
+    prefix = TITLE_BINDING_SUFFIX_RE.sub("", normalize_title(value))
+    return _normalized_value(prefix)
 
 
 def _clean_sentence_title(value: str) -> str:
