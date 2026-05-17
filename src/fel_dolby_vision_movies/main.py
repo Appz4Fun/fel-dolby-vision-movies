@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
 import os
 from pathlib import Path
 from typing import Sequence
@@ -11,13 +13,18 @@ from fel_dolby_vision_movies.models import FelRelease
 from fel_dolby_vision_movies import sources
 
 
+DEFAULT_SCRAPE_WORKERS = 6
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _build_parser()
     args = parser.parse_args(argv)
     if args.command == "search-for-sources":
         return _search_for_sources(args.sources)
     if args.command == "scrape-for-titles":
-        return _scrape_for_titles(args.sources, args.output_dir, args.cache_dir)
+        return _scrape_for_titles(
+            args.sources, args.output_dir, args.cache_dir, args.workers
+        )
     if args.command == "run":
         search_exit_code = _search_for_sources(args.sources)
         if search_exit_code != 0:
@@ -32,7 +39,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "source discovery failed; scraping existing sources; "
                 f"sources={len(existing_urls)}"
             )
-        return _scrape_for_titles(args.sources, args.output_dir, args.cache_dir)
+        return _scrape_for_titles(
+            args.sources, args.output_dir, args.cache_dir, args.workers
+        )
     parser.error(f"unknown command: {args.command}")
     return 2
 
@@ -74,7 +83,20 @@ def _build_parser() -> argparse.ArgumentParser:
             default=Path(".cache/html"),
             help=argparse.SUPPRESS,
         )
+        scrape.add_argument(
+            "--workers",
+            type=_positive_int,
+            default=DEFAULT_SCRAPE_WORKERS,
+            help=argparse.SUPPRESS,
+        )
     return parser
+
+
+def _positive_int(value: str) -> int:
+    parsed = int(value)
+    if parsed < 1:
+        raise argparse.ArgumentTypeError("must be >= 1")
+    return parsed
 
 
 def _search_for_sources(source_path: Path) -> int:
@@ -106,7 +128,9 @@ def _search_for_sources(source_path: Path) -> int:
     return 0
 
 
-def _scrape_for_titles(source_path: Path, output_dir: Path, cache_dir: Path) -> int:
+def _scrape_for_titles(
+    source_path: Path, output_dir: Path, cache_dir: Path, workers: int
+) -> int:
     if not source_path.exists():
         print(f"scrape failed; sources file not found: {source_path}")
         return 1
@@ -124,27 +148,18 @@ def _scrape_for_titles(source_path: Path, output_dir: Path, cache_dir: Path) -> 
         cache_dir=cache_dir,
         cookie_header=os.environ.get("FORUM_COOKIE_HEADER"),
     ) as html_fetcher:
-        for url in source_urls:
-            try:
-                result = html_fetcher.fetch(url)
-            except Exception as exc:  # pragma: no cover - exact network errors vary
-                errors.append((url, exc.__class__.__name__))
-                continue
-            fetched_count += 1
-            releases.extend(fel_parser.parse_fel_releases(result.text, result.url))
+        worker_count = min(workers, len(source_urls))
+        with ThreadPoolExecutor(max_workers=worker_count) as executor:
+            for scrape_result in executor.map(
+                lambda url: _scrape_source(url, html_fetcher), source_urls
+            ):
+                if scrape_result.error:
+                    errors.append((scrape_result.url, scrape_result.error))
+                    continue
+                fetched_count += 1
+                releases.extend(scrape_result.releases)
 
     unique_releases = _dedupe_releases(releases)
-    if not unique_releases:
-        print(
-            f"scrape failed; "
-            f"sources={len(source_urls)} "
-            f"fetched={fetched_count} "
-            f"releases=0 "
-            f"errors={len(errors)} "
-            f"reason=no releases found"
-        )
-        return 1
-
     sorted_releases = artifacts.publish_outputs(unique_releases, output_dir=output_dir)
 
     print(
@@ -173,6 +188,22 @@ def _dedupe_releases(releases: list[FelRelease]) -> list[FelRelease]:
         seen.add(key)
         unique.append(release)
     return unique
+
+
+@dataclass(frozen=True)
+class _SourceScrapeResult:
+    url: str
+    releases: list[FelRelease]
+    error: str = ""
+
+
+def _scrape_source(url: str, html_fetcher: fetcher.Fetcher) -> _SourceScrapeResult:
+    try:
+        result = html_fetcher.fetch(url)
+        releases = fel_parser.parse_fel_releases(result.text, result.url)
+    except Exception as exc:  # pragma: no cover - exact network/parser errors vary
+        return _SourceScrapeResult(url=url, releases=[], error=exc.__class__.__name__)
+    return _SourceScrapeResult(url=result.url, releases=releases)
 
 
 if __name__ == "__main__":

@@ -1,9 +1,10 @@
 from pathlib import Path
+import threading
 
 import httpx
 import respx
 
-from fel_dolby_vision_movies.fetcher import Fetcher
+from fel_dolby_vision_movies.fetcher import DomainRateLimiter, Fetcher
 
 
 @respx.mock
@@ -84,3 +85,48 @@ def test_fetcher_can_record_failed_fetch_without_raising(tmp_path: Path):
     assert result.error is not None
     assert "503" in result.error
     assert route.call_count == 3
+
+
+def test_domain_rate_limiter_serializes_same_domain_waits(monkeypatch):
+    sleeps = []
+    limiter = DomainRateLimiter(delay_seconds=1.0)
+    second_get_started = threading.Event()
+
+    class RacingLastSeen(dict):
+        def __init__(self) -> None:
+            super().__init__()
+            self.get_count = 0
+
+        def get(self, key, default=None):
+            self.get_count += 1
+            if self.get_count == 1:
+                second_get_started.wait(timeout=0.05)
+            else:
+                second_get_started.set()
+            return super().get(key, default)
+
+    limiter._last_seen = RacingLastSeen()
+
+    monkeypatch.setattr(
+        "fel_dolby_vision_movies.fetcher.time.monotonic",
+        lambda: 0.0,
+    )
+    monkeypatch.setattr(
+        "fel_dolby_vision_movies.fetcher.time.sleep",
+        lambda seconds: sleeps.append(seconds),
+    )
+
+    barrier = threading.Barrier(2)
+
+    def wait_once():
+        barrier.wait()
+        limiter.wait("https://example.test/thread")
+
+    first = threading.Thread(target=wait_once)
+    second = threading.Thread(target=wait_once)
+    first.start()
+    second.start()
+    first.join()
+    second.join()
+
+    assert sleeps == [1.0]

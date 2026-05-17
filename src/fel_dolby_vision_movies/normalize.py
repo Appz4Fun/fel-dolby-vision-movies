@@ -50,4 +50,21 @@ def normalize_audio(raw_string: str) -> list[str]:
     ):
         add("DD+")
 
-    return matches or [cleaned]
+    if matches:
+        return matches
+    if _looks_like_audio_label(cleaned):
+        return [cleaned]
+    return []
+
+
+def _looks_like_audio_label(value: str) -> bool:
+    if len(value) > 80 or re.search(r"\d{3,}", value):
+        return False
+    lowered = value.lower()
+    return bool(
+        re.search(
+            r"\b(?:aac|ac-?3|audio|channel|dts|dolby|dual\s+mono|english|"
+            r"flac|japanese|lpcm|mono|pcm|stereo|surround)\b",
+            lowered,
+        )
+    )

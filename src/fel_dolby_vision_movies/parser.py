@@ -83,6 +83,18 @@ PROSE_TITLE_PREFIX_RE = re.compile(
     r"^(?:the\s+)?(?:disc|release|blu-?ray|uhd|4k|movie|film)\s+(?:for|of)\s+",
     re.IGNORECASE,
 )
+COLLECTION_COUNT_TITLE_RE = re.compile(
+    r"^(?:here|there)\s+(?:are|is)\s+\d+\s+"
+    r"(?:verified|confirmed|listed|known)?\s*"
+    r"(?:p7|profile\s*7|dolby\s+vision|fel|uhd|blu-?ray|films?|movies?)\b",
+    re.IGNORECASE,
+)
+FORUM_TIMESTAMP_RE = re.compile(
+    r"\b(?:mon|tue|wed|thu|fri|sat|sun)\s+"
+    r"(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s+"
+    r"\d{1,2},\s+\d{4}\s+\d{1,2}:\d{2}\s+(?:am|pm)\b",
+    re.IGNORECASE,
+)
 TITLE_SENTENCE_RE = re.compile(
     r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{1,80}?)(?:\s+\((?P<year>\d{4})\))?"
     r"\s+(?:is|are|has|features|includes|confirmed as|confirmed to be).{0,120}?"
@@ -242,9 +254,7 @@ def _leading_title_before_evidence(cell: str) -> str:
     normalized = normalize_title(cell)
     profile_7_match = PROFILE_7_RE.search(normalized)
     fel_match = FEL_RE.search(normalized)
-    evidence_starts = [
-        match.start() for match in (profile_7_match, fel_match) if match
-    ]
+    evidence_starts = [match.start() for match in (profile_7_match, fel_match) if match]
     if not evidence_starts:
         return ""
     prefix = normalized[: min(evidence_starts)].strip(" :-")
@@ -297,12 +307,18 @@ def _clean_sentence_title(value: str) -> str:
     title = normalize_title(value)
     if AMBIGUOUS_PROSE_TITLE_RE.match(title):
         return ""
+    if COLLECTION_COUNT_TITLE_RE.match(title):
+        return ""
     return PROSE_TITLE_PREFIX_RE.sub("", title).strip(" :,-")
 
 
 def _looks_like_title(value: str) -> bool:
     lowered = value.lower()
     if not value or len(value) > 100:
+        return False
+    if lowered in {"here", "there", "this", "these", "those"}:
+        return False
+    if FORUM_TIMESTAMP_RE.search(value):
         return False
     if re.search(r"\b(?:and|or)\b", lowered):
         return False

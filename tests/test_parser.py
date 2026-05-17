@@ -501,6 +501,24 @@ def test_rejects_sentence_with_ambiguous_prose_prefix():
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
+def test_rejects_collection_count_sentence_as_title():
+    html = """
+    <p>Here are 456 verified P7 FEL dolby vision films in my collection.</p>
+    <p>215 Knowing (2009)</p>
+    <p>216 Krampus (2015)</p>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_forum_timestamp_as_title():
+    html = """
+    <p>Post by WEZZEBE » Mon Jan 29, 2024 4:36 pm</p>
+    <p>Is there anything that can play Dolby Vision Profile 7 FEL from mkv-files
+    with high quality Audio as well?</p>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
 def test_rejects_sentence_with_demonstrative_source_prose_prefix():
     html = (
         "<p>This spreadsheet says Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"

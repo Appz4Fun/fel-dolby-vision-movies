@@ -1,6 +1,8 @@
 from pathlib import Path
 import json
 
+import pytest
+
 from fel_dolby_vision_movies import main
 from fel_dolby_vision_movies.models import FelEvidence, FelRelease
 
@@ -283,6 +285,162 @@ def test_scrape_for_titles_dedupes_parser_results_before_writing(
     assert "releases=2" in output
 
 
+def test_scrape_for_titles_uses_configured_worker_count(
+    tmp_path: Path, monkeypatch, capsys
+):
+    sources_path = tmp_path / "forums.txt"
+    output_dir = tmp_path / "out"
+    cache_dir = tmp_path / "cache"
+    urls = [f"https://forum{i}.example.test/thread" for i in range(5)]
+    sources_path.write_text("\n".join(urls) + "\n", encoding="utf-8")
+    executor_workers = []
+
+    class ImmediateExecutor:
+        def __init__(self, max_workers: int):
+            executor_workers.append(max_workers)
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return None
+
+        def map(self, func, iterable):
+            for item in iterable:
+                yield func(item)
+
+    class FakeFetchResult:
+        def __init__(self, url: str):
+            self.url = url
+            self.text = f"{url} is confirmed to be Profile 7 FEL."
+            self.from_cache = False
+
+    class FakeFetcher:
+        def __init__(self, cache_dir: Path, cookie_header: str | None):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return None
+
+        def fetch(self, url: str):
+            return FakeFetchResult(url)
+
+    monkeypatch.setattr(main, "ThreadPoolExecutor", ImmediateExecutor, raising=False)
+    monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
+    monkeypatch.setattr(
+        main.fel_parser,
+        "parse_fel_releases",
+        lambda html, source_url: [release(source_url.rsplit("/", 1)[-1], source_url)],
+    )
+
+    exit_code = main.main(
+        [
+            "scrape-for-titles",
+            "--sources",
+            str(sources_path),
+            "--output-dir",
+            str(output_dir),
+            "--cache-dir",
+            str(cache_dir),
+            "--workers",
+            "3",
+        ]
+    )
+
+    assert exit_code == 0
+    assert executor_workers == [3]
+    output = capsys.readouterr().out
+    assert "sources=5" in output
+    assert "releases=5" in output
+
+
+def test_scrape_for_titles_caps_default_workers_to_source_count(
+    tmp_path: Path, monkeypatch
+):
+    sources_path = tmp_path / "forums.txt"
+    output_dir = tmp_path / "out"
+    cache_dir = tmp_path / "cache"
+    sources_path.write_text("https://forum.example.test/thread\n", encoding="utf-8")
+    executor_workers = []
+
+    class ImmediateExecutor:
+        def __init__(self, max_workers: int):
+            executor_workers.append(max_workers)
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return None
+
+        def map(self, func, iterable):
+            for item in iterable:
+                yield func(item)
+
+    class FakeFetchResult:
+        url = "https://forum.example.test/thread"
+        text = "Alpha is confirmed to be Profile 7 FEL."
+        from_cache = False
+
+    class FakeFetcher:
+        def __init__(self, cache_dir: Path, cookie_header: str | None):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return None
+
+        def fetch(self, url: str):
+            return FakeFetchResult()
+
+    monkeypatch.setattr(main, "ThreadPoolExecutor", ImmediateExecutor, raising=False)
+    monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
+    monkeypatch.setattr(
+        main.fel_parser,
+        "parse_fel_releases",
+        lambda html, source_url: [release("Alpha", source_url)],
+    )
+
+    assert (
+        main.main(
+            [
+                "scrape-for-titles",
+                "--sources",
+                str(sources_path),
+                "--output-dir",
+                str(output_dir),
+                "--cache-dir",
+                str(cache_dir),
+            ]
+        )
+        == 0
+    )
+    assert executor_workers == [1]
+
+
+def test_scrape_for_titles_rejects_invalid_worker_count(tmp_path: Path):
+    sources_path = tmp_path / "forums.txt"
+    sources_path.write_text("https://forum.example.test/thread\n", encoding="utf-8")
+
+    with pytest.raises(SystemExit) as error:
+        main.main(
+            [
+                "scrape-for-titles",
+                "--sources",
+                str(sources_path),
+                "--workers",
+                "0",
+            ]
+        )
+
+    assert error.value.code == 2
+
+
 def test_scrape_for_titles_fails_when_sources_file_is_missing(
     tmp_path: Path, monkeypatch, capsys
 ):
@@ -310,12 +468,13 @@ def test_scrape_for_titles_fails_when_sources_file_is_missing(
     assert str(sources_path) in output
 
 
-def test_scrape_for_titles_fails_when_all_fetches_fail(
+def test_scrape_for_titles_publishes_empty_outputs_when_no_releases_found(
     tmp_path: Path, monkeypatch, capsys
 ):
     sources_path = tmp_path / "forums.txt"
     output_dir = tmp_path / "out"
     sources_path.write_text("https://forum.example.test/thread\n", encoding="utf-8")
+    published_releases = []
 
     class FakeFetcher:
         def __init__(self, cache_dir: Path, cookie_header: str | None):
@@ -330,11 +489,12 @@ def test_scrape_for_titles_fails_when_all_fetches_fail(
         def fetch(self, url: str):
             raise RuntimeError("network unavailable")
 
-    def fail_publish_outputs(releases, output_dir: Path):
-        raise AssertionError("should not write artifacts when every fetch fails")
+    def fake_publish_outputs(releases, output_dir: Path):
+        published_releases.extend(releases)
+        return releases
 
     monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
-    monkeypatch.setattr(main.artifacts, "publish_outputs", fail_publish_outputs)
+    monkeypatch.setattr(main.artifacts, "publish_outputs", fake_publish_outputs)
 
     exit_code = main.main(
         [
@@ -346,11 +506,12 @@ def test_scrape_for_titles_fails_when_all_fetches_fail(
         ]
     )
 
-    assert exit_code == 1
+    assert exit_code == 0
+    assert published_releases == []
     output = capsys.readouterr().out
     assert "fetched=0" in output
     assert "errors=1" in output
-    assert "no releases found" in output
+    assert "releases=0" in output
 
 
 def test_run_searches_for_sources_before_scraping(tmp_path: Path, monkeypatch):
@@ -363,8 +524,10 @@ def test_run_searches_for_sources_before_scraping(tmp_path: Path, monkeypatch):
         calls.append(("search", source_path))
         return 0
 
-    def fake_scrape_for_titles(source_path: Path, output_dir: Path, cache_dir: Path):
-        calls.append(("scrape", source_path, output_dir, cache_dir))
+    def fake_scrape_for_titles(
+        source_path: Path, output_dir: Path, cache_dir: Path, workers: int
+    ):
+        calls.append(("scrape", source_path, output_dir, cache_dir, workers))
         return 0
 
     monkeypatch.setattr(main, "_search_for_sources", fake_search_for_sources)
@@ -379,13 +542,15 @@ def test_run_searches_for_sources_before_scraping(tmp_path: Path, monkeypatch):
             str(output_dir),
             "--cache-dir",
             str(cache_dir),
+            "--workers",
+            "6",
         ]
     )
 
     assert exit_code == 0
     assert calls == [
         ("search", sources_path),
-        ("scrape", sources_path, output_dir, cache_dir),
+        ("scrape", sources_path, output_dir, cache_dir, 6),
     ]
 
 
@@ -402,8 +567,10 @@ def test_run_scrapes_existing_sources_after_discovery_failure(
         calls.append(("search", source_path))
         return 1
 
-    def fake_scrape_for_titles(source_path: Path, output_dir: Path, cache_dir: Path):
-        calls.append(("scrape", source_path, output_dir, cache_dir))
+    def fake_scrape_for_titles(
+        source_path: Path, output_dir: Path, cache_dir: Path, workers: int
+    ):
+        calls.append(("scrape", source_path, output_dir, cache_dir, workers))
         return 0
 
     monkeypatch.setattr(main, "_search_for_sources", fake_search_for_sources)
@@ -424,7 +591,7 @@ def test_run_scrapes_existing_sources_after_discovery_failure(
     assert exit_code == 0
     assert calls == [
         ("search", sources_path),
-        ("scrape", sources_path, output_dir, cache_dir),
+        ("scrape", sources_path, output_dir, cache_dir, main.DEFAULT_SCRAPE_WORKERS),
     ]
     output = capsys.readouterr().out
     assert "source discovery failed; scraping existing sources" in output
@@ -442,7 +609,7 @@ def test_run_returns_scrape_exit_code_after_discovery_failure(
     monkeypatch.setattr(
         main,
         "_scrape_for_titles",
-        lambda source_path, output_dir, cache_dir: 3,
+        lambda source_path, output_dir, cache_dir, workers: 3,
     )
 
     exit_code = main.main(

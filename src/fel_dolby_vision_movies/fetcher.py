@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 import hashlib
+import threading
 import time
 from urllib.parse import urlparse
 
@@ -26,16 +27,18 @@ class DomainRateLimiter:
     def __init__(self, delay_seconds: float = 1.0) -> None:
         self.delay_seconds = delay_seconds
         self._last_seen: dict[str, float] = {}
+        self._lock = threading.Lock()
 
     def wait(self, url: str) -> None:
         domain = urlparse(url).netloc
-        now = time.monotonic()
-        last_seen = self._last_seen.get(domain)
-        if last_seen is not None:
-            sleep_for = self.delay_seconds - (now - last_seen)
-            if sleep_for > 0:
-                time.sleep(sleep_for)
-        self._last_seen[domain] = time.monotonic()
+        with self._lock:
+            now = time.monotonic()
+            last_seen = self._last_seen.get(domain)
+            if last_seen is not None:
+                sleep_for = self.delay_seconds - (now - last_seen)
+                if sleep_for > 0:
+                    time.sleep(sleep_for)
+            self._last_seen[domain] = time.monotonic()
 
 
 class Fetcher:

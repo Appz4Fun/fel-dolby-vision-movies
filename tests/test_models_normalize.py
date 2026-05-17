@@ -21,6 +21,15 @@ def test_unknown_audio_returns_cleaned_value():
     assert normalize_audio("PCM 2.0 Mono") == ["PCM 2.0 Mono"]
 
 
+def test_generic_forum_prose_does_not_become_audio_format():
+    assert (
+        normalize_audio(
+            "Here are 456 verified P7 FEL dolby vision films in my collection."
+        )
+        == []
+    )
+
+
 def test_title_normalization_collapses_spacing():
     assert normalize_title("  The   Matrix\tReloaded  ") == "The Matrix Reloaded"
 
