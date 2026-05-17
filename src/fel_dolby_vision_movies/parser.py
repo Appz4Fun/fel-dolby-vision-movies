@@ -48,6 +48,9 @@ SEPARATOR_TITLE_BINDING_RE = re.compile(
     r"^\s*(?:[-:]|\()\s*"
     r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})(?=[).!?,;:]|$)"
 )
+PROOF_METADATA_PREFIX_RE = re.compile(
+    r"^(?:mediainfo|bdinfo|disc\s+scan|source|scan|proof)\b", re.IGNORECASE
+)
 SUFFIX_METADATA_RE = re.compile(
     r"\s+(?:with|including|via|by|from)\s+.+$", re.IGNORECASE
 )
@@ -246,6 +249,8 @@ def _separator_title_after_evidence(cell: str) -> str:
     if not match:
         return ""
     title = SUFFIX_METADATA_RE.sub("", match.group("title"))
+    if PROOF_METADATA_PREFIX_RE.search(title.strip()):
+        return ""
     return title.strip(" :-().,!?;")
 
 
