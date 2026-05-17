@@ -84,6 +84,49 @@ def test_brave_search_dedupes_result_urls_preserving_order():
     ]
 
 
+@respx.mock
+def test_brave_search_uses_title_and_description_for_candidate_filtering():
+    respx.get("https://api.search.brave.com/res/v1/web/search").mock(
+        return_value=httpx.Response(
+            200,
+            json={
+                "web": {
+                    "results": [
+                        {
+                            "url": "https://forum.blu-ray.com/showthread.php?t=360730",
+                            "title": "Hunt 4K Blu-ray BDInfo",
+                            "description": "Dolby Vision Profile 7 FEL from BDInfo",
+                        },
+                        {
+                            "url": "https://example.test/downloads/123",
+                            "title": "Dolby Vision Profile 7 FEL remux download",
+                            "description": "torrent link",
+                        },
+                        {
+                            "url": "https://trakt.tv/users/example/lists/dolby-vision-profile-7-fel",
+                            "title": "Dolby Vision Profile 7 FEL list",
+                            "description": "Cloudflare-gated title list",
+                        },
+                        {
+                            "url": "https://www.reddit.com/r/PleX/comments/example",
+                            "title": "Dolby Vision Profile 7 FEL playback in Plex",
+                            "description": "player support thread",
+                        },
+                    ]
+                }
+            },
+        )
+    )
+
+    result = discover_source_candidates(api_key="test", queries=["query"])
+
+    assert result.candidate_urls == [
+        "https://forum.blu-ray.com/showthread.php?t=360730"
+    ]
+    assert result.raw_url_count == 4
+    assert result.rejected_url_count == 3
+
+
 def test_filter_candidate_source_urls_dedupes_normalizes_and_rejects_blocked_urls():
     assert filter_candidate_source_urls(
         [
