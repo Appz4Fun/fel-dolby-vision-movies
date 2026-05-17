@@ -14,6 +14,16 @@ def test_parses_table_row_with_direct_fel_correlation():
     assert releases[0].english_audio == "Yes"
 
 
+def test_rejects_table_row_when_fel_mentions_different_title():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th><th>Notes</th></tr>
+      <tr><td>The Matrix</td><td>Profile 7</td><td>Other title is FEL.</td></tr>
+    </table>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
 def test_rejects_generic_fel_chatter_without_title_binding():
     html = """
     <p>I love FEL when discs include it.</p>
@@ -30,6 +40,23 @@ def test_parses_direct_sentence_with_title_and_profile_7_fel():
     assert releases[0].audio_formats == ["DTS-HD MA"]
 
 
+def test_accepts_title_containing_mel_token_as_part_of_word():
+    html = "<p>Amelie is confirmed as Dolby Vision Profile 7 FEL with TrueHD.</p>"
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["Amelie"]
+
+
+def test_rejects_sentence_with_generic_dolby_vision_fel_without_profile_7():
+    html = "<p>Movie A is confirmed as Dolby Vision FEL with TrueHD.</p>"
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_strips_known_prose_prefix_from_sentence_title():
+    html = "<p>The disc for Alien (1979) is confirmed as Dolby Vision Profile 7 FEL.</p>"
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
 def test_rejects_profile_7_without_fel():
     html = "<p>Movie A has Dolby Vision Profile 7 but this post does not identify FEL.</p>"
     assert parse_fel_releases(html, "https://example.test/thread") == []
@@ -38,3 +65,19 @@ def test_rejects_profile_7_without_fel():
 def test_rejects_mel_even_when_fel_appears_elsewhere():
     html = "<p>Movie A is Profile 7 MEL. Another user asked about FEL-capable players.</p>"
     assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_preserves_distinct_same_title_evidence_on_one_source_page():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alien</td><td>Profile 7 FEL confirmed by disc scan.</td></tr>
+      <tr><td>Alien</td><td>Profile 7 FEL confirmed by MediaInfo.</td></tr>
+      <tr><td>Alien</td><td>Profile 7 FEL confirmed by disc scan.</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.fel_evidence.quote for release in releases] == [
+        "Alien Profile 7 FEL confirmed by disc scan.",
+        "Alien Profile 7 FEL confirmed by MediaInfo.",
+    ]
