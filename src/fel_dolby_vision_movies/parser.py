@@ -39,6 +39,11 @@ TITLE_BINDING_SUFFIX_RE = re.compile(
     r"\s+(?:is|has|features|includes|confirmed as|confirmed to be)$",
     re.IGNORECASE,
 )
+SUFFIX_TITLE_BINDING_RE = re.compile(
+    r"\b(?:confirmed\s+for|for|on|from)\s+"
+    r"(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})(?=[.!?,;:]|$)",
+    re.IGNORECASE,
+)
 AMBIGUOUS_PROSE_TITLE_RE = re.compile(
     r"^(?:(?:this|that|a|an|the)\s+)?(?:spreadsheet|list|post|thread|forum|"
     r"page|source|site|table|note|comment)\s+"
@@ -152,6 +157,9 @@ def _title_specific_cell_supports_row_title(cell: str, title: str) -> bool:
     leading_title = _leading_title_before_evidence(cell)
     if leading_title:
         return _normalized_title_prefix(leading_title) == _normalized_value(title)
+    suffix_title = _suffix_title_after_evidence(cell)
+    if suffix_title:
+        return _normalized_value(suffix_title) == _normalized_value(title)
     return _cell_mentions_title(cell, title)
 
 
@@ -159,6 +167,9 @@ def _cell_supports_row_title(cell: str, title: str) -> bool:
     leading_title = _leading_title_before_evidence(cell)
     if leading_title:
         return _normalized_title_prefix(leading_title) == _normalized_value(title)
+    suffix_title = _suffix_title_after_evidence(cell)
+    if suffix_title:
+        return _normalized_value(suffix_title) == _normalized_value(title)
     if TITLE_BINDING_RE.search(normalize_title(cell)):
         return _cell_mentions_title(cell, title)
     return True
@@ -188,6 +199,19 @@ def _leading_title_before_evidence(cell: str) -> str:
     if GENERIC_STATUS_PREFIX_RE.fullmatch(prefix):
         return ""
     return prefix
+
+
+def _suffix_title_after_evidence(cell: str) -> str:
+    normalized = normalize_title(cell)
+    profile_7_match = PROFILE_7_RE.search(normalized)
+    fel_match = FEL_RE.search(normalized)
+    if not profile_7_match or not fel_match:
+        return ""
+    suffix_start = max(profile_7_match.end(), fel_match.end())
+    match = SUFFIX_TITLE_BINDING_RE.search(normalized, suffix_start)
+    if not match:
+        return ""
+    return match.group("title").strip(" :-.,!?;")
 
 
 def _normalized_value(value: str) -> str:
