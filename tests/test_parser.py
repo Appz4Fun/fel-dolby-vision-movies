@@ -162,6 +162,56 @@ def test_accepts_unrecognized_header_when_same_title_is_explicit():
     assert [release.movie_title for release in releases] == ["The Matrix"]
 
 
+def test_rejects_title_specific_suffix_binding_to_longer_title():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Evidence</th></tr>
+      <tr><td>It</td><td>Profile 7 FEL confirmed for It Follows.</td></tr>
+    </table>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_title_specific_suffix_binding_to_same_title():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Evidence</th></tr>
+      <tr><td>It</td><td>Profile 7 FEL confirmed for It.</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["It"]
+
+
+def test_rejects_unrecognized_header_suffix_binding_to_longer_title():
+    html = """
+    <table>
+      <tr><th>Title</th><th>Details</th></tr>
+      <tr><td>Alien</td><td>Profile 7 FEL confirmed for Alien 3.</td></tr>
+    </table>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_status_cell_suffix_binding_to_longer_title():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>The Matrix</td><td>Profile 7 FEL confirmed for The Matrix Reloaded.</td></tr>
+    </table>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_headerless_cell_suffix_binding_to_longer_title():
+    html = """
+    <table>
+      <tr><td>The Matrix</td><td>Profile 7 FEL confirmed for The Matrix Reloaded.</td></tr>
+    </table>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
 def test_accepts_non_title_status_prefixes_before_fel_evidence():
     for evidence in (
         "Confirmed Profile 7 FEL",
