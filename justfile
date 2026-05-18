@@ -17,10 +17,15 @@ scrape-for-titles:
 run:
     @test -f src/main.py || { echo "run is not implemented yet"; exit 1; }
     uv run --with-requirements requirements.txt python -m main run --sources forums.txt
+    uv run --with-requirements requirements.txt python -m main clean-fel --input FEL.txt --output FEL.txt
 
 compare-found *args:
     @test -f src/main.py || { echo "compare-found is not implemented yet"; exit 1; }
     uv run --with-requirements requirements.txt python -m main compare-found --sources forums.txt {{args}}
+
+clean-fel *args:
+    @test -f src/main.py || { echo "clean-fel is not implemented yet"; exit 1; }
+    uv run --with-requirements requirements.txt python -m main clean-fel {{args}}
 
 test:
     @if test -d tests; then \

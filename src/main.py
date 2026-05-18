@@ -10,6 +10,7 @@ from typing import Sequence
 import artifacts
 import compare
 import discovery
+import fel_cleanup
 import fetcher
 import google_sheets
 import parser as fel_parser
@@ -49,6 +50,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"output_dir={args.output_dir}"
         )
         return 0
+    if args.command == "clean-fel":
+        return _clean_fel(args.input, args.output, args.report, args.cache, args.env)
     if args.command == "run":
         search_exit_code = _search_for_sources(args.sources)
         if search_exit_code != 0:
@@ -152,6 +155,17 @@ def _build_parser() -> argparse.ArgumentParser:
         default=None,
         help="maximum number of source pages to send to the AI API",
     )
+    clean_fel = subparsers.add_parser(
+        "clean-fel",
+        help="canonicalize and merge FEL.txt rows with TMDB movie metadata",
+    )
+    clean_fel.add_argument("--input", type=Path, default=Path("FEL.txt"))
+    clean_fel.add_argument("--output", type=Path, default=Path("FEL.txt"))
+    clean_fel.add_argument(
+        "--report", type=Path, default=fel_cleanup.DEFAULT_REPORT_PATH
+    )
+    clean_fel.add_argument("--cache", type=Path, default=fel_cleanup.DEFAULT_CACHE_PATH)
+    clean_fel.add_argument("--env", type=Path, default=Path(".env"))
     return parser
 
 
@@ -258,6 +272,31 @@ def _dedupe_releases(releases: list[FelRelease]) -> list[FelRelease]:
         seen.add(key)
         unique.append(release)
     return unique
+
+
+def _clean_fel(
+    input_path: Path,
+    output_path: Path,
+    report_path: Path,
+    cache_path: Path,
+    env_path: Path,
+) -> int:
+    api_key = fel_cleanup.load_tmdb_api_key(env_path)
+    with fel_cleanup.TmdbResolver(api_key=api_key, cache_path=cache_path) as resolver:
+        summary = fel_cleanup.clean_fel_file(
+            input_path, output_path, report_path, resolver
+        )
+    print(
+        "FEL cleanup complete; "
+        f"input_rows={summary.input_rows} "
+        f"output_rows={summary.output_rows} "
+        f"dropped={summary.dropped_rows} "
+        f"resolved={summary.resolved_rows} "
+        f"unresolved={summary.unresolved_rows} "
+        f"merged={summary.merged_rows} "
+        f"report={report_path}"
+    )
+    return 0
 
 
 @dataclass(frozen=True)
