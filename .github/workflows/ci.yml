@@ -36,12 +36,12 @@ jobs:
       - name: Test
         run: >
           uv run --with-requirements requirements-dev.txt
-          pytest --cov=src/fel_dolby_vision_movies --cov-report=term-missing
+          pytest --cov=src --cov-report=term-missing
 
       - name: Benchmark
         run: |
-          if [ -f src/fel_dolby_vision_movies/benchmark.py ] && [ -f tests/fixtures/benchmark_cases.json ]; then
-            uv run --with-requirements requirements-dev.txt python -m fel_dolby_vision_movies.benchmark tests/fixtures/benchmark_cases.json
+          if [ -f src/benchmark.py ] && [ -f tests/fixtures/benchmark_cases.json ]; then
+            uv run --with-requirements requirements-dev.txt python -m benchmark tests/fixtures/benchmark_cases.json
           else
             echo "benchmark is not implemented yet"
           fi

@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-from fel_dolby_vision_movies.dashboard import build_dashboard
-from fel_dolby_vision_movies.models import FelEvidence, FelRelease
+from dashboard import build_dashboard
+from models import FelEvidence, FelRelease
 
 
 def release(title: str, date: str, group: str = "GROUP") -> FelRelease:

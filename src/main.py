@@ -7,13 +7,18 @@ import os
 from pathlib import Path
 from typing import Sequence
 
-from fel_dolby_vision_movies import artifacts, discovery, fetcher
-from fel_dolby_vision_movies import parser as fel_parser
-from fel_dolby_vision_movies.models import FelRelease
-from fel_dolby_vision_movies import sources
+import artifacts
+import compare
+import discovery
+import fetcher
+import google_sheets
+import parser as fel_parser
+from models import FelRelease
+import sources
 
 
 DEFAULT_SCRAPE_WORKERS = 6
+DEFAULT_GOOGLE_SHEETS_PATH = Path("google_sheets.txt")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -25,6 +30,25 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _scrape_for_titles(
             args.sources, args.output_dir, args.cache_dir, args.workers
         )
+    if args.command == "compare-found":
+        summary = compare.compare_found(
+            args.sources,
+            args.output_dir,
+            args.cache_dir,
+            args.workers,
+            args.use_ai,
+            args.ai_limit,
+        )
+        print(
+            "compare complete; "
+            f"AI_found={summary['AI_found']} "
+            f"PY_found={summary['PY_found']} "
+            f"overlap={summary['overlap']} "
+            f"AI_only={summary['AI_only']} "
+            f"PY_only={summary['PY_only']} "
+            f"output_dir={args.output_dir}"
+        )
+        return 0
     if args.command == "run":
         search_exit_code = _search_for_sources(args.sources)
         if search_exit_code != 0:
@@ -89,6 +113,45 @@ def _build_parser() -> argparse.ArgumentParser:
             default=DEFAULT_SCRAPE_WORKERS,
             help=argparse.SUPPRESS,
         )
+    compare_found = subparsers.add_parser(
+        "compare-found",
+        help="compare AI-assisted extraction with the deterministic parser",
+    )
+    compare_found.add_argument(
+        "--sources",
+        type=Path,
+        default=Path("forums.txt"),
+        help="path to the source registry",
+    )
+    compare_found.add_argument(
+        "--output-dir",
+        type=Path,
+        default=Path("."),
+        help="directory for comparison artifacts",
+    )
+    compare_found.add_argument(
+        "--cache-dir",
+        type=Path,
+        default=Path(".cache/html"),
+        help="directory for fetched source cache",
+    )
+    compare_found.add_argument(
+        "--workers",
+        type=_positive_int,
+        default=DEFAULT_SCRAPE_WORKERS,
+        help="deterministic scraper worker count",
+    )
+    compare_found.add_argument(
+        "--use-ai",
+        action="store_true",
+        help="call the configured OpenAI-compatible API for AI extraction",
+    )
+    compare_found.add_argument(
+        "--ai-limit",
+        type=_positive_int,
+        default=None,
+        help="maximum number of source pages to send to the AI API",
+    )
     return parser
 
 
@@ -135,8 +198,13 @@ def _scrape_for_titles(
         print(f"scrape failed; sources file not found: {source_path}")
         return 1
 
-    source_urls = sources.read_source_urls(source_path)
-    if not source_urls:
+    forum_urls = sources.read_source_urls(source_path)
+    google_sheet_urls = sources.read_source_urls(_google_sheets_path_for(source_path))
+    source_jobs = [
+        *[_SourceJob(url=url, source_type="forum") for url in forum_urls],
+        *[_SourceJob(url=url, source_type="google-sheet") for url in google_sheet_urls],
+    ]
+    if not source_jobs:
         print(f"scrape failed; no sources found in {source_path}")
         return 1
 
@@ -148,10 +216,10 @@ def _scrape_for_titles(
         cache_dir=cache_dir,
         cookie_header=os.environ.get("FORUM_COOKIE_HEADER"),
     ) as html_fetcher:
-        worker_count = min(workers, len(source_urls))
+        worker_count = min(workers, len(source_jobs))
         with ThreadPoolExecutor(max_workers=worker_count) as executor:
             for scrape_result in executor.map(
-                lambda url: _scrape_source(url, html_fetcher), source_urls
+                lambda job: _scrape_source(job, html_fetcher), source_jobs
             ):
                 if scrape_result.error:
                     errors.append((scrape_result.url, scrape_result.error))
@@ -164,7 +232,9 @@ def _scrape_for_titles(
 
     print(
         f"scrape complete; "
-        f"sources={len(source_urls)} "
+        f"sources={len(source_jobs)} "
+        f"forums={len(forum_urls)} "
+        f"google_sheets={len(google_sheet_urls)} "
         f"fetched={fetched_count} "
         f"releases={len(sorted_releases)} "
         f"errors={len(errors)} "
@@ -191,19 +261,43 @@ def _dedupe_releases(releases: list[FelRelease]) -> list[FelRelease]:
 
 
 @dataclass(frozen=True)
+class _SourceJob:
+    url: str
+    source_type: str
+
+
+@dataclass(frozen=True)
 class _SourceScrapeResult:
     url: str
     releases: list[FelRelease]
     error: str = ""
 
 
-def _scrape_source(url: str, html_fetcher: fetcher.Fetcher) -> _SourceScrapeResult:
+def _scrape_source(
+    source_job: _SourceJob, html_fetcher: fetcher.Fetcher
+) -> _SourceScrapeResult:
     try:
-        result = html_fetcher.fetch(url)
-        releases = fel_parser.parse_fel_releases(result.text, result.url)
+        fetch_url = source_job.url
+        if source_job.source_type == "google-sheet":
+            fetch_url = google_sheets.google_sheet_csv_url(source_job.url)
+        result = html_fetcher.fetch(fetch_url)
+        if source_job.source_type == "google-sheet":
+            releases = google_sheets.parse_google_sheet_releases(
+                result.text, source_job.url
+            )
+        else:
+            releases = fel_parser.parse_fel_releases(result.text, result.url)
     except Exception as exc:  # pragma: no cover - exact network/parser errors vary
-        return _SourceScrapeResult(url=url, releases=[], error=exc.__class__.__name__)
-    return _SourceScrapeResult(url=result.url, releases=releases)
+        return _SourceScrapeResult(
+            url=source_job.url, releases=[], error=exc.__class__.__name__
+        )
+    return _SourceScrapeResult(url=source_job.url, releases=releases)
+
+
+def _google_sheets_path_for(source_path: Path) -> Path:
+    if source_path == Path("forums.txt"):
+        return DEFAULT_GOOGLE_SHEETS_PATH
+    return source_path.with_name("google_sheets.txt")
 
 
 if __name__ == "__main__":

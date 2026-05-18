@@ -37,12 +37,12 @@ jobs:
       - name: Run tests before scraping
         run: >
           uv run --with-requirements requirements-dev.txt
-          pytest --cov=src/fel_dolby_vision_movies --cov-report=term-missing
+          pytest --cov=src --cov-report=term-missing
 
       - name: Run scraper
         env:
           BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
-        run: uv run --with-requirements requirements.txt python -m fel_dolby_vision_movies.main run --sources forums.txt
+        run: uv run --with-requirements requirements.txt python -m main run --sources forums.txt
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

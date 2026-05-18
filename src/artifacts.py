@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .models import UNKNOWN, FelRelease
+from models import UNKNOWN, FelRelease
 
 
 RELEASE_GROUP_KEYS = frozenset({"group", "release_group", "release group"})
@@ -13,7 +13,7 @@ RELEASE_GROUP_KEYS = frozenset({"group", "release_group", "release group"})
 def publish_outputs(
     releases: list[FelRelease], output_dir: Path | str = "."
 ) -> list[FelRelease]:
-    from .dashboard import build_dashboard
+    from dashboard import build_dashboard
 
     root = Path(output_dir)
     sorted_releases = write_artifacts(releases, output_dir=root)

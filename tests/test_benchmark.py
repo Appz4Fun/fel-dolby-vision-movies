@@ -4,7 +4,7 @@ import json
 import subprocess
 import sys
 
-from fel_dolby_vision_movies.benchmark import (
+from benchmark import (
     BenchmarkCase,
     BenchmarkMismatch,
     evaluate_cases,
@@ -99,7 +99,7 @@ def test_cli_exits_nonzero_and_summarizes_mismatches(tmp_path):
         [
             sys.executable,
             "-m",
-            "fel_dolby_vision_movies.benchmark",
+            "benchmark",
             str(fixture),
         ],
         check=False,

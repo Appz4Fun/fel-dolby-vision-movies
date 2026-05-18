@@ -1,5 +1,5 @@
-from fel_dolby_vision_movies.models import FelEvidence, FelRelease
-from fel_dolby_vision_movies.normalize import normalize_audio, normalize_title
+from models import FelEvidence, FelRelease
+from normalize import normalize_audio, normalize_title
 
 
 def test_normalize_audio_known_aliases():

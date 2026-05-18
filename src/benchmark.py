@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 from typing import Sequence
 
-from .parser import parse_fel_releases
+from parser import parse_fel_releases
 
 
 @dataclass(frozen=True)
@@ -68,7 +68,7 @@ def evaluate_cases(cases: Sequence[BenchmarkCase]) -> BenchmarkResult:
 def main(argv: Sequence[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
     if len(args) != 1:
-        print("Usage: python -m fel_dolby_vision_movies.benchmark CASES_JSON")
+        print("Usage: python -m benchmark CASES_JSON")
         return 2
 
     result = evaluate_cases(load_cases(args[0]))

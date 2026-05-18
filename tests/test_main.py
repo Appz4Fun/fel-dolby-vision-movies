@@ -3,8 +3,8 @@ import json
 
 import pytest
 
-from fel_dolby_vision_movies import main
-from fel_dolby_vision_movies.models import FelEvidence, FelRelease
+import main
+from models import FelEvidence, FelRelease
 
 
 def release(
@@ -153,6 +153,138 @@ def test_scrape_for_titles_fetches_sources_and_writes_artifacts(
     assert "releases=2" in output
     assert "errors=0" in output
     assert "session=secret" not in output
+
+
+def test_scrape_for_titles_includes_default_google_sheets_file(
+    tmp_path: Path, monkeypatch, capsys
+):
+    sources_path = tmp_path / "forums.txt"
+    google_sheets_path = tmp_path / "google_sheets.txt"
+    output_dir = tmp_path / "out"
+    cache_dir = tmp_path / "cache"
+    forum_url = "https://forum.example.test/thread"
+    sheet_url = (
+        "https://docs.google.com/spreadsheets/d/test-sheet-id/"
+        "edit?gid=828864432#gid=828864432"
+    )
+    sources_path.write_text(f"{forum_url}\n", encoding="utf-8")
+    google_sheets_path.write_text(f"{sheet_url}\n", encoding="utf-8")
+    fetches = []
+
+    class FakeFetchResult:
+        def __init__(self, url: str, text: str):
+            self.url = url
+            self.text = text
+            self.from_cache = False
+
+    class FakeFetcher:
+        def __init__(self, cache_dir: Path, cookie_header: str | None):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return None
+
+        def fetch(self, url: str):
+            fetches.append(url)
+            if url == forum_url:
+                return FakeFetchResult(
+                    url,
+                    "Forum Movie is confirmed to be Profile 7 FEL.",
+                )
+            assert url == (
+                "https://docs.google.com/spreadsheets/d/test-sheet-id/"
+                "gviz/tq?tqx=out:csv&gid=828864432"
+            )
+            return FakeFetchResult(
+                url,
+                "Movie Name,DV Source\nSheet.Movie.2020,BD FEL\n",
+            )
+
+    monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
+
+    exit_code = main.main(
+        [
+            "scrape-for-titles",
+            "--sources",
+            str(sources_path),
+            "--output-dir",
+            str(output_dir),
+            "--cache-dir",
+            str(cache_dir),
+        ]
+    )
+
+    assert exit_code == 0
+    assert fetches == [
+        forum_url,
+        "https://docs.google.com/spreadsheets/d/test-sheet-id/"
+        "gviz/tq?tqx=out:csv&gid=828864432",
+    ]
+    data = json.loads((output_dir / "data/releases.json").read_text(encoding="utf-8"))
+    assert [release["movie_title"] for release in data] == [
+        "Sheet Movie",
+        "Forum Movie",
+    ]
+    output = capsys.readouterr().out
+    assert "sources=2" in output
+    assert "google_sheets=1" in output
+    assert "releases=2" in output
+
+
+def test_compare_found_uses_ai_flag_without_printing_secret(
+    tmp_path: Path, monkeypatch, capsys
+):
+    sources_path = tmp_path / "forums.txt"
+    output_dir = tmp_path / "out"
+    cache_dir = tmp_path / "cache"
+    sources_path.write_text("https://forum.example.test/thread\n", encoding="utf-8")
+    calls = []
+
+    def fake_compare_found(
+        source_path: Path,
+        output_dir: Path,
+        cache_dir: Path,
+        workers: int,
+        use_ai: bool,
+        ai_limit: int | None,
+    ):
+        calls.append((source_path, output_dir, cache_dir, workers, use_ai, ai_limit))
+        return {
+            "AI_found": 1,
+            "PY_found": 1,
+            "overlap": 1,
+            "AI_only": 0,
+            "PY_only": 0,
+        }
+
+    monkeypatch.setenv("OPENAI_API_KEY", "secret-token")
+    monkeypatch.setattr(main.compare, "compare_found", fake_compare_found)
+
+    exit_code = main.main(
+        [
+            "compare-found",
+            "--sources",
+            str(sources_path),
+            "--output-dir",
+            str(output_dir),
+            "--cache-dir",
+            str(cache_dir),
+            "--workers",
+            "2",
+            "--use-ai",
+            "--ai-limit",
+            "3",
+        ]
+    )
+
+    assert exit_code == 0
+    assert calls == [(sources_path, output_dir, cache_dir, 2, True, 3)]
+    output = capsys.readouterr().out
+    assert "compare complete" in output
+    assert "secret-token" not in output
 
 
 def test_scrape_for_titles_continues_after_fetch_errors(

@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-from fel_dolby_vision_movies.artifacts import publish_outputs, write_artifacts
-from fel_dolby_vision_movies.models import FelEvidence, FelRelease
+from artifacts import publish_outputs, write_artifacts
+from models import FelEvidence, FelRelease
 
 
 def release(title: str, date: str) -> FelRelease:

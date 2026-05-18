@@ -4,8 +4,8 @@ from html import escape
 import json
 from pathlib import Path
 
-from .artifacts import RELEASE_GROUP_KEYS
-from .models import UNKNOWN, FelRelease
+from artifacts import RELEASE_GROUP_KEYS
+from models import UNKNOWN, FelRelease
 
 
 def build_dashboard(

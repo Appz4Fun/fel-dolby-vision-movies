@@ -4,7 +4,7 @@ import threading
 import httpx
 import respx
 
-from fel_dolby_vision_movies.fetcher import DomainRateLimiter, Fetcher
+from fetcher import DomainRateLimiter, Fetcher
 
 
 @respx.mock
@@ -108,11 +108,11 @@ def test_domain_rate_limiter_serializes_same_domain_waits(monkeypatch):
     limiter._last_seen = RacingLastSeen()
 
     monkeypatch.setattr(
-        "fel_dolby_vision_movies.fetcher.time.monotonic",
+        "fetcher.time.monotonic",
         lambda: 0.0,
     )
     monkeypatch.setattr(
-        "fel_dolby_vision_movies.fetcher.time.sleep",
+        "fetcher.time.sleep",
         lambda seconds: sleeps.append(seconds),
     )
 

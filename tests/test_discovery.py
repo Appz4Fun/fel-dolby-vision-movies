@@ -1,7 +1,7 @@
 import httpx
 import respx
 
-from fel_dolby_vision_movies.discovery import (
+from discovery import (
     brave_search,
     build_source_search_queries,
     discover_source_candidates,

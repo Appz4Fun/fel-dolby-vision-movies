@@ -5,8 +5,8 @@ import re
 
 from bs4 import BeautifulSoup
 
-from .models import FelEvidence, FelRelease
-from .normalize import normalize_audio, normalize_title
+from models import FelEvidence, FelRelease
+from normalize import normalize_audio, normalize_title
 
 
 PROFILE_7_PATTERN = r"(?:profile[\s-]*7|p7)"
@@ -102,16 +102,47 @@ TITLE_SENTENCE_RE = re.compile(
     rf"{FEL_TOKEN_PATTERN}.{{0,40}}?{PROFILE_7_PATTERN})",
     re.IGNORECASE,
 )
+LIST_ITEM_TITLE_RE = re.compile(
+    r"^\s*(?P<title>.+?)\s+\((?P<year>\d{4})\)(?P<details>.*)$",
+    re.IGNORECASE,
+)
+LIST_ITEM_FEL_BITRATE_RE = re.compile(
+    rf"{FEL_TOKEN_PATTERN}\s*-\s*(?P<bitrate>\d+(?:\.\d+)?)\s*Mb/s",
+    re.IGNORECASE,
+)
 
 
 def parse_fel_releases(html: str, source_url: str) -> list[FelRelease]:
     soup = BeautifulSoup(html, "html.parser")
     releases: list[FelRelease] = []
+    releases.extend(_parse_list_items(soup, source_url))
     releases.extend(_parse_tables(soup, source_url))
     for table in soup.find_all("table"):
         table.decompose()
     releases.extend(_parse_sentences(soup.get_text("\n", strip=True), source_url))
     return _dedupe_releases(releases)
+
+
+def _parse_list_items(soup: BeautifulSoup, source_url: str) -> list[FelRelease]:
+    releases: list[FelRelease] = []
+    for item in soup.find_all("li"):
+        text = normalize_title(item.get_text(" ", strip=True))
+        title_match = LIST_ITEM_TITLE_RE.search(text)
+        if not title_match:
+            continue
+        evidence_match = LIST_ITEM_FEL_BITRATE_RE.search(title_match.group("details"))
+        if not evidence_match:
+            continue
+        title = normalize_title(title_match.group("title"))
+        if not _looks_like_list_item_title(title):
+            continue
+        release = _build_release(title, text, source_url, "list-item")
+        release.release_date = title_match.group("year")
+        release.additional_characteristics["enhancement_bitrate_mbps"] = (
+            evidence_match.group("bitrate")
+        )
+        releases.append(release)
+    return releases
 
 
 def _parse_tables(soup: BeautifulSoup, source_url: str) -> list[FelRelease]:
@@ -327,7 +358,23 @@ def _looks_like_title(value: str) -> bool:
         for word in ("hardware", "player", "splitter", "profile", "dolby vision")
     ):
         return False
-    return any(character.isalpha() for character in value)
+    return any(character.isalnum() for character in value)
+
+
+def _looks_like_list_item_title(value: str) -> bool:
+    lowered = value.lower()
+    if not value or len(value) > 100:
+        return False
+    if lowered in {"here", "there", "this", "these", "those"}:
+        return False
+    if FORUM_TIMESTAMP_RE.search(value):
+        return False
+    if any(
+        word in lowered
+        for word in ("hardware", "player", "splitter", "profile", "dolby vision")
+    ):
+        return False
+    return any(character.isalnum() for character in value)
 
 
 def _build_release(

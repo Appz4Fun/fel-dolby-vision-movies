@@ -1,4 +1,4 @@
-from fel_dolby_vision_movies.parser import parse_fel_releases
+from parser import parse_fel_releases
 
 
 def test_parses_table_row_with_direct_fel_correlation():
@@ -461,6 +461,89 @@ def test_rejects_generic_fel_chatter_without_title_binding():
     html = """
     <p>I love FEL when discs include it.</p>
     <ul><li>The Matrix</li><li>Alien</li><li>Blade Runner</li></ul>
+    """
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_parses_forum_list_item_with_fel_bitrate_evidence():
+    html = """
+    <ul>
+      <li>
+        10 Cloverfield Lane (2016)
+        <b><a href="https://example.test/post">FEL</a></b>
+        <b><font size="1">- 5.86 Mb/s</font></b>
+      </li>
+    </ul>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["10 Cloverfield Lane"]
+    assert releases[0].release_date == "2016"
+    assert releases[0].fel_evidence.evidence_type == "list-item"
+    assert releases[0].additional_characteristics == {
+        "enhancement_bitrate_mbps": "5.86"
+    }
+
+
+def test_parses_forum_list_item_when_fel_is_alternate_to_mel_release():
+    html = """
+    <ul>
+      <li>
+        Robin Hood (2018) <b>MEL</b>
+        <b><font size="1">- 0.07 Mb/s Lionsgate</font></b>
+        (<b>FEL</b> <b><font size="1">- 12.02 Mb/s Studio Canal</font></b>)
+      </li>
+    </ul>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["Robin Hood"]
+    assert releases[0].release_date == "2018"
+    assert releases[0].additional_characteristics == {
+        "enhancement_bitrate_mbps": "12.02"
+    }
+
+
+def test_parses_forum_list_item_title_containing_and_or():
+    html = """
+    <ul>
+      <li>Hell or High Water (2016) <b>FEL</b> <b>- 7.72 Mb/s</b></li>
+      <li>
+        Valerian and the City of a Thousand Planets (2017)
+        <b>FEL</b> <b>- 8.26 Mb/s</b>
+      </li>
+    </ul>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == [
+        "Hell or High Water",
+        "Valerian and the City of a Thousand Planets",
+    ]
+
+
+def test_parses_forum_list_item_numeric_title():
+    html = """
+    <ul>
+      <li>1917 (2019) <b>FEL</b> <b>- 7.27 Mb/s</b></li>
+    </ul>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["1917"]
+    assert releases[0].release_date == "2019"
+    assert releases[0].additional_characteristics == {
+        "enhancement_bitrate_mbps": "7.27"
+    }
+
+
+def test_rejects_forum_list_item_without_title_year_bitrate_correlation():
+    html = """
+    <ul>
+      <li>I love FEL when discs include it.</li>
+      <li>Forrest Gump's FEL is discussed with 7.44 Mb/s.</li>
+      <li>Alien (1979) FEL</li>
+    </ul>
     """
     assert parse_fel_releases(html, "https://example.test/thread") == []
 

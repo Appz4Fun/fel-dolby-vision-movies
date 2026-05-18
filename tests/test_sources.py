@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from fel_dolby_vision_movies.sources import (
+from sources import (
     merge_confirmed_sources,
     read_source_urls,
     write_source_urls,
