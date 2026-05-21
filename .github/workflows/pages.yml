@@ -6,7 +6,7 @@ on:
     - cron: "23 10 * * *"
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -42,7 +42,20 @@ jobs:
       - name: Run scraper
         env:
           BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: uv run --with-requirements requirements.txt python -m main run --sources forums.txt
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/releases.json data/posters README.md links.md
+          if git diff --cached --quiet; then
+            echo "no data changes to commit"
+          else
+            git commit -m "chore: refresh FEL releases data [skip ci]"
+            git push
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v6
