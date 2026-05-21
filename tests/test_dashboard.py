@@ -1,5 +1,4 @@
 import json
-import shutil
 from pathlib import Path
 
 from dashboard import build_dashboard
