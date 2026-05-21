@@ -2,6 +2,7 @@ from pathlib import Path
 
 import httpx
 
+import enrich
 from enrich import StaticTmdbResolver, enrich_releases, release_url_for
 from models import FelEvidence, FelRelease
 
@@ -71,3 +72,45 @@ def test_enrich_releases_sets_ids_poster_and_release_url(tmp_path: Path):
     assert summary.resolved == 1
     assert summary.unresolved == 1
     assert summary.posters_downloaded == 1
+
+
+def test_enrich_releases_tolerates_poster_download_failure(tmp_path, monkeypatch):
+    monkeypatch.setattr(enrich.time, "sleep", lambda *_: None)
+
+    resolver = StaticTmdbResolver(
+        {
+            ("Fight Club", "1999"): {
+                "tmdb_id": "550",
+                "title": "Fight Club",
+                "year": "1999",
+                "imdb_id": "tt0137523",
+            }
+        }
+    )
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/movie/550":
+            return httpx.Response(
+                200,
+                json={
+                    "poster_path": "/p.jpg",
+                    "release_date": "1999-10-15",
+                    "production_companies": [{"name": "Fox"}],
+                },
+            )
+        return httpx.Response(502)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    releases = [make("Fight Club", "1999")]
+    summary = enrich_releases(
+        releases, resolver, client=client, api_key="x", poster_dir=tmp_path
+    )
+    client.close()
+
+    assert summary.resolved == 1
+    assert summary.failed == 1
+    assert summary.posters_downloaded == 0
+    assert releases[0].tmdb_id == "550"
+    assert releases[0].studio == "Fox"
+    assert releases[0].release_date == "1999-10-15"
+    assert releases[0].poster_path == ""

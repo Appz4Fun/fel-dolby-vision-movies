@@ -293,7 +293,8 @@ def _enrich_if_possible(releases: list[FelRelease]) -> None:
         "enrichment complete; "
         f"resolved={summary.resolved} "
         f"unresolved={summary.unresolved} "
-        f"posters_downloaded={summary.posters_downloaded}"
+        f"posters_downloaded={summary.posters_downloaded} "
+        f"failed={summary.failed}"
     )
 
 
