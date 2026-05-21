@@ -915,3 +915,35 @@ def test_enrich_if_possible_skips_when_no_tmdb_key(
     real_enrich_if_possible([])
 
     assert "TMDB enrichment skipped" in capsys.readouterr().out
+
+
+def test_run_migration_merges_files_and_writes_report(tmp_path, monkeypatch):
+    import csv as _csv
+    import json as _json
+
+    (tmp_path / "FEL.txt").write_text("Drop,2025,https://reddit.test/list\n", "utf-8")
+    (tmp_path / "raw_fel.txt").write_text(
+        "Apocalypse Now (1979) FEL - 7.58 Mb/s\n", "utf-8"
+    )
+
+    def fake_enrich(releases):
+        for release in releases:
+            release.tmdb_id = "999"
+
+    monkeypatch.setattr(main, "_enrich_if_possible", fake_enrich)
+
+    exit_code = main.run_migration(
+        fel_path=tmp_path / "FEL.txt",
+        raw_fel_path=tmp_path / "raw_fel.txt",
+        output_dir=tmp_path,
+        report_path=tmp_path / "data" / "migration_report.csv",
+    )
+
+    assert exit_code == 0
+    data = _json.loads((tmp_path / "data/releases.json").read_text("utf-8"))
+    titles = sorted(item["movie_title"] for item in data)
+    assert titles == ["Apocalypse Now", "Drop"]
+
+    rows = list(_csv.DictReader((tmp_path / "data/migration_report.csv").open()))
+    assert {row["input_title"] for row in rows} == {"Drop", "Apocalypse Now"}
+    assert all(row["tmdb_id"] == "999" for row in rows)

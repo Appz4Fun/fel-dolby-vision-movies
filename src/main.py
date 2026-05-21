@@ -10,14 +10,16 @@ from urllib.parse import urlparse
 
 import artifacts
 import compare
+import csv
 import discovery
 import enrich
 import fel_cleanup
+import fel_ingest
 import fetcher
 import google_sheets
 import parser as fel_parser
 from merge import canonical_key, dedupe_releases
-from models import FelRelease
+from models import FelEvidence, FelRelease
 import reddit_source
 import sources
 
@@ -73,6 +75,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _scrape_for_titles(
             args.sources, args.output_dir, args.cache_dir, args.workers
         )
+    if args.command == "migrate":
+        return run_migration(args.fel, args.raw_fel, args.output_dir, args.report)
     parser.error(f"unknown command: {args.command}")
     return 2
 
@@ -170,6 +174,16 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     clean_fel.add_argument("--cache", type=Path, default=fel_cleanup.DEFAULT_CACHE_PATH)
     clean_fel.add_argument("--env", type=Path, default=Path(".env"))
+    migrate = subparsers.add_parser(
+        "migrate",
+        help="one-time merge of FEL.txt + raw_fel.txt into releases.json",
+    )
+    migrate.add_argument("--fel", type=Path, default=Path("FEL.txt"))
+    migrate.add_argument("--raw-fel", type=Path, default=Path("raw_fel.txt"))
+    migrate.add_argument("--output-dir", type=Path, default=Path("."))
+    migrate.add_argument(
+        "--report", type=Path, default=Path("data/migration_report.csv")
+    )
     return parser
 
 
@@ -306,6 +320,73 @@ def _clean_fel(
         f"report={report_path}"
     )
     return 0
+
+
+def run_migration(
+    fel_path: Path,
+    raw_fel_path: Path,
+    output_dir: Path,
+    report_path: Path,
+) -> int:
+    ingested: list[FelRelease] = []
+    if fel_path.exists():
+        ingested.extend(fel_ingest.parse_fel_txt(fel_path.read_text(encoding="utf-8")))
+    if raw_fel_path.exists():
+        ingested.extend(
+            fel_ingest.parse_raw_fel_txt(raw_fel_path.read_text(encoding="utf-8"))
+        )
+    input_titles = [(r.movie_title, r.release_date) for r in ingested]
+
+    unique = dedupe_releases(ingested, canonical_key)
+    _enrich_if_possible(unique)
+    sorted_releases = artifacts.publish_outputs(unique, output_dir=output_dir)
+
+    by_key = {canonical_key(r): r for r in sorted_releases}
+    _write_migration_report(report_path, input_titles, by_key)
+
+    matched = sum(
+        1
+        for title, year in input_titles
+        if canonical_key(_title_probe(title, year)) in by_key
+    )
+    print(
+        "migration complete; "
+        f"input_titles={len(input_titles)} "
+        f"matched={matched} "
+        f"unmatched={len(input_titles) - matched} "
+        f"releases={len(sorted_releases)} "
+        f"report={report_path}"
+    )
+    return 0
+
+
+def _title_probe(title: str, year: str) -> FelRelease:
+    return FelRelease(
+        movie_title=title,
+        release_date=year,
+        fel_evidence=FelEvidence(source_url="", quote="", evidence_type="probe"),
+    )
+
+
+def _write_migration_report(
+    report_path: Path,
+    input_titles: list[tuple[str, str]],
+    by_key: dict[tuple[str, str], FelRelease],
+) -> None:
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    with report_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["input_title", "input_year", "matched", "tmdb_id"])
+        for title, year in input_titles:
+            release = by_key.get(canonical_key(_title_probe(title, year)))
+            writer.writerow(
+                [
+                    title,
+                    year,
+                    "yes" if release is not None else "no",
+                    release.tmdb_id if release is not None else "",
+                ]
+            )
 
 
 @dataclass(frozen=True)
