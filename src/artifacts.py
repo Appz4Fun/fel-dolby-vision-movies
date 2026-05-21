@@ -18,7 +18,11 @@ def publish_outputs(
 
     root = Path(output_dir)
     sorted_releases = write_artifacts(releases, output_dir=root)
-    build_dashboard(sorted_releases, output_dir=root / "dist")
+    build_dashboard(
+        sorted_releases,
+        output_dir=root / "dist",
+        poster_src=root / "data" / "posters",
+    )
     return sorted_releases
 
 

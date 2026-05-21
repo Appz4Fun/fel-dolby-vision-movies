@@ -3,13 +3,16 @@ from __future__ import annotations
 from html import escape
 import json
 from pathlib import Path
+import shutil
 
 from artifacts import RELEASE_GROUP_KEYS
 from models import UNKNOWN, FelRelease
 
 
 def build_dashboard(
-    releases: list[FelRelease], output_dir: Path | str = "dist"
+    releases: list[FelRelease],
+    output_dir: Path | str = "dist",
+    poster_src: Path | str = "data/posters",
 ) -> None:
     dist = Path(output_dir)
     dist.mkdir(parents=True, exist_ok=True)
@@ -23,6 +26,10 @@ def build_dashboard(
 
     (dist / "releases.json").write_text(payload + "\n", encoding="utf-8")
     (dist / "index.html").write_text(_render_html(cards, payload), encoding="utf-8")
+
+    poster_source = Path(poster_src)
+    if poster_source.is_dir():
+        shutil.copytree(poster_source, dist / "posters", dirs_exist_ok=True)
 
 
 def _sort_key(release: FelRelease) -> tuple[int, str]:
@@ -61,8 +68,24 @@ def _render_card(release: FelRelease) -> str:
             " ".join(audio_formats),
         ]
     ).lower()
+    if release.poster_path:
+        poster_file = Path(release.poster_path).name
+        poster = (
+            f'<img class="poster" src="posters/{escape(poster_file, quote=True)}" '
+            f'alt="{escape(release.movie_title, quote=True)}" loading="lazy">'
+        )
+    else:
+        poster = (
+            f'<div class="poster-placeholder">{escape(release.movie_title)}</div>'
+        )
+    tmdb_link = ""
+    if release.release_url:
+        tmdb_link = (
+            f'<a href="{escape(release.release_url, quote=True)}" '
+            f'rel="noreferrer">TMDB</a>'
+        )
     return f"""<article data-card data-search="{escape(search_text, quote=True)}">
-  <div class="poster-placeholder">{escape(release.movie_title)}</div>
+  {poster}
   <div class="body">
     <h2>{escape(release.movie_title)}</h2>
     <div class="meta">{escape(release.release_date)} - {escape(release.studio)}</div>
@@ -71,7 +94,10 @@ def _render_card(release: FelRelease) -> str:
       <span class="badge">English: {escape(release.english_audio)}</span>
       <span class="badge">FEL</span>
     </div>
-    <a href="{escape(release.source_url, quote=True)}" rel="noreferrer">Source</a>
+    <div class="links">
+      <a href="{escape(release.source_url, quote=True)}" rel="noreferrer">Source</a>
+      {tmdb_link}
+    </div>
   </div>
 </article>"""
 
@@ -141,6 +167,13 @@ def _render_html(cards: str, payload: str) -> str:
       text-align: center;
       padding: 16px;
     }}
+    img.poster {{
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      display: block;
+    }}
+    .links {{ display: flex; gap: 12px; }}
     .body {{ padding: 14px; display: grid; gap: 10px; }}
     h2 {{ margin: 0; font-size: 18px; letter-spacing: 0; }}
     .meta {{ color: var(--muted); font-size: 14px; }}
