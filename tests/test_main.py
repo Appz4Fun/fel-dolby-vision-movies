@@ -524,7 +524,7 @@ def test_scrape_for_titles_uses_configured_worker_count(
     monkeypatch.setattr(
         main.fel_parser,
         "parse_fel_releases",
-        lambda html, source_url: [release(source_url.rsplit("/", 1)[-1], source_url)],
+        lambda html, source_url: [release(source_url.split("/")[2], source_url)],
     )
 
     exit_code = main.main(

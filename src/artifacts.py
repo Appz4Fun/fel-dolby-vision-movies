@@ -4,7 +4,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from models import UNKNOWN, FelRelease
+from merge import canonical_key, dedupe_releases
+from models import UNKNOWN, FelRelease, release_from_dict
 
 
 RELEASE_GROUP_KEYS = frozenset({"group", "release_group", "release group"})
@@ -25,11 +26,21 @@ def write_artifacts(
     releases: list[FelRelease], output_dir: Path | str = "."
 ) -> list[FelRelease]:
     root = Path(output_dir)
-    sorted_releases = sorted(releases, key=_sort_key)
-
     data_dir = root / "data"
+    releases_path = data_dir / "releases.json"
+
+    existing: list[FelRelease] = []
+    if releases_path.exists():
+        existing = [
+            release_from_dict(item)
+            for item in json.loads(releases_path.read_text(encoding="utf-8"))
+        ]
+
+    merged = dedupe_releases([*existing, *releases], canonical_key)
+    sorted_releases = sorted(merged, key=_sort_key)
+
     data_dir.mkdir(parents=True, exist_ok=True)
-    (data_dir / "releases.json").write_text(
+    releases_path.write_text(
         json.dumps(
             [release.to_dict() for release in sorted_releases],
             indent=2,
@@ -59,15 +70,23 @@ def _render_readme(releases: list[FelRelease]) -> str:
         "",
         "Confirmed Dolby Vision Profile 7 FEL physical media releases.",
         "",
-        "| Movie | FEL | Release Date | Studio | Audio | English Audio | Additional | Source |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Movie | Poster | FEL | Release Date | Studio | Audio | "
+        "English Audio | Additional | Source | TMDB |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for release in releases:
+        poster = (
+            f"![{release.movie_title}]({release.poster_path})"
+            if release.poster_path
+            else ""
+        )
+        tmdb = f"[TMDB]({release.release_url})" if release.release_url else ""
         lines.append(
             "| "
             + " | ".join(
                 [
                     release.movie_title,
+                    poster,
                     "Yes",
                     release.release_date,
                     release.studio,
@@ -75,6 +94,7 @@ def _render_readme(releases: list[FelRelease]) -> str:
                     release.english_audio,
                     _render_additional(release.additional_characteristics),
                     f"[source]({release.source_url})",
+                    tmdb,
                 ]
             )
             + " |"
@@ -87,6 +107,7 @@ def _render_additional(additional: dict[str, Any]) -> str:
         (key, value)
         for key, value in additional.items()
         if key.lower().replace("-", "_") not in RELEASE_GROUP_KEYS
+        and key != "source_urls"
     ]
     if not visible_items:
         return UNKNOWN
