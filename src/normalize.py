@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html
 import re
 
 
@@ -74,7 +75,7 @@ _FEL_TITLE_PREFIXES = ("L.E. ", "EDIT: ", "EDIT ", "--", "-")
 
 
 def normalize_fel_title(value: str) -> str:
-    title = value.strip()
+    title = html.unescape(value).strip()
     changed = True
     while changed:
         changed = False

@@ -82,3 +82,9 @@ def test_normalize_fel_title_strips_prefixes_and_aka():
     assert normalize_fel_title("Nightbreed AKA Cabal") == "Nightbreed"
     assert normalize_fel_title("  Drop  ") == "Drop"
     assert normalize_fel_title(",- ") == ""
+
+
+def test_normalize_fel_title_decodes_html_entities():
+    assert normalize_fel_title("Fast &amp; Furious") == "Fast & Furious"
+    assert normalize_fel_title("Hansel &amp; Gretel") == "Hansel & Gretel"
+    assert normalize_fel_title("It&#39;s Alive") == "It's Alive"
