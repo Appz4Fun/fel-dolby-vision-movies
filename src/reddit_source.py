@@ -18,9 +18,7 @@ from normalize import normalize_fel_title
 
 
 # A clean list line: the whole line is "<title> [YYYY]" or "<title> (YYYY)".
-_LIST_LINE_RE = re.compile(
-    r"^(?P<title>.+?)\s*[\[(](?P<year>(?:19|20)\d{2})[\])]\s*$"
-)
+_LIST_LINE_RE = re.compile(r"^(?P<title>.+?)\s*[\[(](?P<year>(?:19|20)\d{2})[\])]\s*$")
 # Comment lead-ins that precede a title in discussion replies, e.g.
 # "You forgot Sicario [2015]" -> the title is "Sicario".
 _COMMENT_PREFIX_RE = re.compile(
@@ -40,9 +38,7 @@ class _RedditUserTextParser(HTMLParser):
         self.div_depth = 0
         self.usertext_depth = 0
 
-    def handle_starttag(
-        self, tag: str, attrs: list[tuple[str, str | None]]
-    ) -> None:
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         if tag == "br":
             if self.in_usertext:
                 self.text.append("\n")

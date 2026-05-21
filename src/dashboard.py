@@ -75,9 +75,7 @@ def _render_card(release: FelRelease) -> str:
             f'alt="{escape(release.movie_title, quote=True)}" loading="lazy">'
         )
     else:
-        poster = (
-            f'<div class="poster-placeholder">{escape(release.movie_title)}</div>'
-        )
+        poster = f'<div class="poster-placeholder">{escape(release.movie_title)}</div>'
     tmdb_link = ""
     if release.release_url:
         tmdb_link = (

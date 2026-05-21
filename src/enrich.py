@@ -95,7 +95,9 @@ def enrich_releases(
     poster_dir = Path(poster_dir)
     resolved = unresolved = downloaded = 0
     for release in releases:
-        movie = resolver.resolve(release.movie_title, _release_year(release.release_date))
+        movie = resolver.resolve(
+            release.movie_title, _release_year(release.release_date)
+        )
         if movie is None:
             unresolved += 1
             continue

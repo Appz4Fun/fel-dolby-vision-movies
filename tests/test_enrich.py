@@ -41,10 +41,14 @@ def _handler(request: httpx.Request) -> httpx.Response:
 
 def test_enrich_releases_sets_ids_poster_and_release_url(tmp_path: Path):
     resolver = StaticTmdbResolver(
-        {("Fight Club", "1999"): {
-            "tmdb_id": "550", "title": "Fight Club",
-            "year": "1999", "imdb_id": "tt0137523",
-        }}
+        {
+            ("Fight Club", "1999"): {
+                "tmdb_id": "550",
+                "title": "Fight Club",
+                "year": "1999",
+                "imdb_id": "tt0137523",
+            }
+        }
     )
     releases = [make("Fight Club", "1999"), make("Unknown Movie", "2099")]
     client = httpx.Client(transport=httpx.MockTransport(_handler))
