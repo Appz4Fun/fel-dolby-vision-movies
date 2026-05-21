@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html
 import re
 
 
@@ -68,3 +69,20 @@ def _looks_like_audio_label(value: str) -> bool:
             lowered,
         )
     )
+
+
+_FEL_TITLE_PREFIXES = ("L.E. ", "EDIT: ", "EDIT ", "--", "-")
+
+
+def normalize_fel_title(value: str) -> str:
+    title = html.unescape(value).strip()
+    changed = True
+    while changed:
+        changed = False
+        for prefix in _FEL_TITLE_PREFIXES:
+            if title.startswith(prefix):
+                title = title[len(prefix) :].strip()
+                changed = True
+    if " AKA " in title:
+        title = title.split(" AKA ", 1)[0].strip()
+    return normalize_title(title).strip(",- ").strip()

@@ -56,11 +56,31 @@ def test_write_artifacts_sorts_known_dates_newest_first_unknown_last(
         "Unknown Date",
     ]
     readme = (tmp_path / "README.md").read_text(encoding="utf-8")
-    assert (
-        "| Newer | Yes | 2026-05-01 | Unknown | TrueHD Atmos | Yes | Unknown |"
-        in readme
-    )
+    assert "| Newer |" in readme
+    assert "[source](https://example.test/Newer)" in readme
     assert "Newer is Profile 7 FEL" not in readme
+
+
+def test_write_artifacts_merges_into_existing_releases_json(tmp_path: Path):
+    write_artifacts([release("First", "2020")], output_dir=tmp_path)
+    write_artifacts([release("Second", "2021")], output_dir=tmp_path)
+
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    titles = sorted(item["movie_title"] for item in data)
+    assert titles == ["First", "Second"]
+
+
+def test_write_artifacts_renders_poster_and_tmdb_columns(tmp_path: Path):
+    item = release("Enriched", "2024")
+    item.tmdb_id = "111"
+    item.poster_path = "data/posters/111.jpg"
+    item.release_url = "https://www.themoviedb.org/movie/111"
+
+    write_artifacts([item], output_dir=tmp_path)
+
+    readme = (tmp_path / "README.md").read_text(encoding="utf-8")
+    assert "![Enriched](data/posters/111.jpg)" in readme
+    assert "[TMDB](https://www.themoviedb.org/movie/111)" in readme
 
 
 def test_links_contains_only_unique_source_urls(tmp_path: Path):
@@ -74,6 +94,19 @@ def test_links_for_empty_release_set_has_no_extra_blank_line(tmp_path: Path):
     write_artifacts([], output_dir=tmp_path)
 
     assert (tmp_path / "links.md").read_text(encoding="utf-8") == "# Source Links\n"
+
+
+def test_links_includes_extra_provenance_source_urls(tmp_path: Path):
+    item = release("Provenanced", "2024")
+    item.additional_characteristics = {
+        "source_urls": ["https://example.test/Provenanced", "https://extra.test/x"]
+    }
+
+    write_artifacts([item], output_dir=tmp_path)
+
+    links = (tmp_path / "links.md").read_text(encoding="utf-8")
+    assert "https://example.test/Provenanced" in links
+    assert "https://extra.test/x" in links
 
 
 def test_readme_omits_release_group_metadata(tmp_path: Path):

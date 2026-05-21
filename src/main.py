@@ -6,15 +6,20 @@ from dataclasses import dataclass
 import os
 from pathlib import Path
 from typing import Sequence
+from urllib.parse import urlparse
 
 import artifacts
 import compare
+import csv
 import discovery
-import fel_cleanup
+import enrich
+import fel_ingest
 import fetcher
 import google_sheets
 import parser as fel_parser
+from merge import canonical_key, dedupe_releases
 from models import FelRelease
+import reddit_source
 import sources
 
 
@@ -50,8 +55,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"output_dir={args.output_dir}"
         )
         return 0
-    if args.command == "clean-fel":
-        return _clean_fel(args.input, args.output, args.report, args.cache, args.env)
     if args.command == "run":
         search_exit_code = _search_for_sources(args.sources)
         if search_exit_code != 0:
@@ -69,6 +72,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _scrape_for_titles(
             args.sources, args.output_dir, args.cache_dir, args.workers
         )
+    if args.command == "migrate":
+        return run_migration(args.fel, args.raw_fel, args.output_dir, args.report)
     parser.error(f"unknown command: {args.command}")
     return 2
 
@@ -155,17 +160,16 @@ def _build_parser() -> argparse.ArgumentParser:
         default=None,
         help="maximum number of source pages to send to the AI API",
     )
-    clean_fel = subparsers.add_parser(
-        "clean-fel",
-        help="canonicalize and merge FEL.txt rows with TMDB movie metadata",
+    migrate = subparsers.add_parser(
+        "migrate",
+        help="one-time merge of FEL.txt + raw_fel.txt into releases.json",
     )
-    clean_fel.add_argument("--input", type=Path, default=Path("FEL.txt"))
-    clean_fel.add_argument("--output", type=Path, default=Path("FEL.txt"))
-    clean_fel.add_argument(
-        "--report", type=Path, default=fel_cleanup.DEFAULT_REPORT_PATH
+    migrate.add_argument("--fel", type=Path, default=Path("FEL.txt"))
+    migrate.add_argument("--raw-fel", type=Path, default=Path("raw_fel.txt"))
+    migrate.add_argument("--output-dir", type=Path, default=Path("."))
+    migrate.add_argument(
+        "--report", type=Path, default=Path("data/migration_report.csv")
     )
-    clean_fel.add_argument("--cache", type=Path, default=fel_cleanup.DEFAULT_CACHE_PATH)
-    clean_fel.add_argument("--env", type=Path, default=Path(".env"))
     return parser
 
 
@@ -241,7 +245,8 @@ def _scrape_for_titles(
                 fetched_count += 1
                 releases.extend(scrape_result.releases)
 
-    unique_releases = _dedupe_releases(releases)
+    unique_releases = dedupe_releases(releases, canonical_key)
+    _enrich_if_possible(unique_releases)
     sorted_releases = artifacts.publish_outputs(unique_releases, output_dir=output_dir)
 
     print(
@@ -257,46 +262,88 @@ def _scrape_for_titles(
     return 0
 
 
-def _dedupe_releases(releases: list[FelRelease]) -> list[FelRelease]:
-    seen: set[tuple[str, str, str, str]] = set()
-    unique: list[FelRelease] = []
-    for release in releases:
-        key = (
-            release.movie_title.lower(),
-            release.source_url,
-            release.fel_evidence.evidence_type,
-            release.fel_evidence.quote,
-        )
-        if key in seen:
-            continue
-        seen.add(key)
-        unique.append(release)
-    return unique
+def _enrich_if_possible(releases: list[FelRelease]) -> None:
+    try:
+        api_key = enrich.load_tmdb_api_key()
+    except RuntimeError:
+        print("TMDB enrichment skipped; TMDB_API_KEY is not configured")
+        return
+    import httpx
 
-
-def _clean_fel(
-    input_path: Path,
-    output_path: Path,
-    report_path: Path,
-    cache_path: Path,
-    env_path: Path,
-) -> int:
-    api_key = fel_cleanup.load_tmdb_api_key(env_path)
-    with fel_cleanup.TmdbResolver(api_key=api_key, cache_path=cache_path) as resolver:
-        summary = fel_cleanup.clean_fel_file(
-            input_path, output_path, report_path, resolver
-        )
+    with enrich.TmdbResolver(api_key=api_key) as resolver:
+        with httpx.Client(timeout=httpx.Timeout(20.0)) as client:
+            summary = enrich.enrich_releases(
+                releases, resolver, client=client, api_key=api_key
+            )
     print(
-        "FEL cleanup complete; "
-        f"input_rows={summary.input_rows} "
-        f"output_rows={summary.output_rows} "
-        f"dropped={summary.dropped_rows} "
-        f"resolved={summary.resolved_rows} "
-        f"unresolved={summary.unresolved_rows} "
-        f"merged={summary.merged_rows} "
+        "enrichment complete; "
+        f"resolved={summary.resolved} "
+        f"unresolved={summary.unresolved} "
+        f"posters_downloaded={summary.posters_downloaded} "
+        f"failed={summary.failed}"
+    )
+
+
+def run_migration(
+    fel_path: Path,
+    raw_fel_path: Path,
+    output_dir: Path,
+    report_path: Path,
+) -> int:
+    fel_text = fel_path.read_text(encoding="utf-8") if fel_path.exists() else ""
+    raw_fel_text = (
+        raw_fel_path.read_text(encoding="utf-8") if raw_fel_path.exists() else ""
+    )
+    fel_txt_rows = sum(1 for line in fel_text.splitlines() if line.strip())
+    fel_releases = fel_ingest.parse_fel_txt(fel_text)
+    raw_fel_releases = fel_ingest.parse_raw_fel_txt(raw_fel_text)
+    ingested = [*fel_releases, *raw_fel_releases]
+
+    unique = dedupe_releases(ingested, canonical_key)
+    _enrich_if_possible(unique)
+    sorted_releases = artifacts.publish_outputs(unique, output_dir=output_dir)
+
+    by_key = {canonical_key(release): release for release in sorted_releases}
+    resolved = _write_migration_report(report_path, ingested, by_key)
+
+    print(
+        "migration complete; "
+        f"fel_txt_rows={fel_txt_rows} "
+        f"fel_ingested={len(fel_releases)} "
+        f"fel_dropped={fel_txt_rows - len(fel_releases)} "
+        f"raw_fel_ingested={len(raw_fel_releases)} "
+        f"tmdb_resolved={resolved} "
+        f"tmdb_unresolved={len(ingested) - resolved} "
+        f"releases={len(sorted_releases)} "
         f"report={report_path}"
     )
     return 0
+
+
+def _write_migration_report(
+    report_path: Path,
+    ingested: list[FelRelease],
+    by_key: dict[tuple[str, str], FelRelease],
+) -> int:
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    resolved = 0
+    with report_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["input_title", "input_year", "tmdb_resolved", "tmdb_id"])
+        for release in ingested:
+            final = by_key.get(canonical_key(release))
+            tmdb_id = final.tmdb_id if final is not None else ""
+            if tmdb_id:
+                resolved += 1
+            writer.writerow(
+                [
+                    release.movie_title,
+                    release.release_date,
+                    "yes" if tmdb_id else "no",
+                    tmdb_id,
+                ]
+            )
+    return resolved
 
 
 @dataclass(frozen=True)
@@ -325,7 +372,10 @@ def _scrape_source(
                 result.text, source_job.url
             )
         else:
-            releases = fel_parser.parse_fel_releases(result.text, result.url)
+            if "reddit.com" in urlparse(source_job.url).netloc:
+                releases = reddit_source.parse_reddit_releases(result.text, result.url)
+            else:
+                releases = fel_parser.parse_fel_releases(result.text, result.url)
     except Exception as exc:  # pragma: no cover - exact network/parser errors vary
         return _SourceScrapeResult(
             url=source_job.url, releases=[], error=exc.__class__.__name__

@@ -1,5 +1,5 @@
-from models import FelEvidence, FelRelease
-from normalize import normalize_audio, normalize_title
+from models import FelEvidence, FelRelease, release_from_dict
+from normalize import normalize_audio, normalize_fel_title, normalize_title
 
 
 def test_normalize_audio_known_aliases():
@@ -45,3 +45,46 @@ def test_fel_release_publish_gate_and_unknowns():
     assert release.release_date == "Unknown"
     assert release.studio == "Unknown"
     assert release.english_audio == "Unknown"
+
+
+def test_felrelease_round_trips_new_enrichment_fields():
+    original = FelRelease(
+        movie_title="Nosferatu",
+        release_date="2024",
+        fel_evidence=FelEvidence(
+            source_url="https://example.test/nosferatu",
+            quote="Nosferatu (2024) FEL",
+            evidence_type="fel-list",
+        ),
+        tmdb_id="426063",
+        imdb_id="tt5040012",
+        poster_path="data/posters/426063.jpg",
+        release_url="https://www.themoviedb.org/movie/426063",
+    )
+
+    data = original.to_dict()
+    assert data["tmdb_id"] == "426063"
+    assert data["imdb_id"] == "tt5040012"
+    assert data["poster_path"] == "data/posters/426063.jpg"
+    assert data["release_url"] == "https://www.themoviedb.org/movie/426063"
+
+    restored = release_from_dict(data)
+    assert restored.tmdb_id == "426063"
+    assert restored.release_url == original.release_url
+    assert restored.source_url == "https://example.test/nosferatu"
+    assert restored.fel_evidence.evidence_type == "fel-list"
+
+
+def test_normalize_fel_title_strips_prefixes_and_aka():
+    assert normalize_fel_title("L.E. The Northman") == "The Northman"
+    assert normalize_fel_title("EDIT: Dune") == "Dune"
+    assert normalize_fel_title("-- Sicario") == "Sicario"
+    assert normalize_fel_title("Nightbreed AKA Cabal") == "Nightbreed"
+    assert normalize_fel_title("  Drop  ") == "Drop"
+    assert normalize_fel_title(",- ") == ""
+
+
+def test_normalize_fel_title_decodes_html_entities():
+    assert normalize_fel_title("Fast &amp; Furious") == "Fast & Furious"
+    assert normalize_fel_title("Hansel &amp; Gretel") == "Hansel & Gretel"
+    assert normalize_fel_title("It&#39;s Alive") == "It's Alive"

@@ -287,65 +287,6 @@ def test_compare_found_uses_ai_flag_without_printing_secret(
     assert "secret-token" not in output
 
 
-def test_clean_fel_command_uses_tmdb_cleaner_without_printing_secret(
-    tmp_path: Path, monkeypatch, capsys
-):
-    fel_path = tmp_path / "FEL.txt"
-    report_path = tmp_path / "report.csv"
-    cache_path = tmp_path / "cache.json"
-    env_path = tmp_path / ".env"
-    fel_path.write_text("Wall E,2008,https://example.test/a\n", encoding="utf-8")
-    env_path.write_text("TMDB_API_KEY=secret-tmdb-key\n", encoding="utf-8")
-    calls = []
-
-    class FakeResolver:
-        def __init__(self, api_key, cache_path):
-            calls.append(("init", api_key, cache_path))
-
-        def __enter__(self):
-            return self
-
-        def __exit__(self, exc_type, exc_value, traceback):
-            return None
-
-    def fake_clean_fel_file(input_path, output_path, report_path_arg, resolver):
-        calls.append(("clean", input_path, output_path, report_path_arg, resolver))
-        return main.fel_cleanup.CleanupSummary(
-            input_rows=1,
-            output_rows=1,
-            dropped_rows=0,
-            resolved_rows=1,
-            unresolved_rows=0,
-            merged_rows=0,
-        )
-
-    monkeypatch.setattr(main.fel_cleanup, "TmdbResolver", FakeResolver)
-    monkeypatch.setattr(main.fel_cleanup, "clean_fel_file", fake_clean_fel_file)
-
-    exit_code = main.main(
-        [
-            "clean-fel",
-            "--input",
-            str(fel_path),
-            "--output",
-            str(fel_path),
-            "--report",
-            str(report_path),
-            "--cache",
-            str(cache_path),
-            "--env",
-            str(env_path),
-        ]
-    )
-
-    assert exit_code == 0
-    assert calls[0] == ("init", "secret-tmdb-key", cache_path)
-    assert calls[1][0:4] == ("clean", fel_path, fel_path, report_path)
-    output = capsys.readouterr().out
-    assert "FEL cleanup complete" in output
-    assert "secret-tmdb-key" not in output
-
-
 def test_scrape_for_titles_continues_after_fetch_errors(
     tmp_path: Path, monkeypatch, capsys
 ):
@@ -524,7 +465,7 @@ def test_scrape_for_titles_uses_configured_worker_count(
     monkeypatch.setattr(
         main.fel_parser,
         "parse_fel_releases",
-        lambda html, source_url: [release(source_url.rsplit("/", 1)[-1], source_url)],
+        lambda html, source_url: [release(source_url.split("/")[2], source_url)],
     )
 
     exit_code = main.main(
@@ -818,6 +759,32 @@ def test_run_returns_scrape_exit_code_after_discovery_failure(
     assert exit_code == 3
 
 
+def test_reddit_url_routes_to_reddit_parser(monkeypatch):
+    captured = {}
+
+    def fake_reddit(html, url):
+        captured["html"] = html
+        captured["url"] = url
+        return []
+
+    monkeypatch.setattr(main.reddit_source, "parse_reddit_releases", fake_reddit)
+
+    class FakeFetcher:
+        def fetch(self, url):
+            from fetcher import FetchResult
+
+            return FetchResult(url=url, text="<reddit html>", from_cache=False)
+
+    job = main._SourceJob(
+        url="https://www.reddit.com/r/CoreELEC/comments/x/list/",
+        source_type="forum",
+    )
+    result = main._scrape_source(job, FakeFetcher())
+
+    assert result.error == ""
+    assert captured["html"] == "<reddit html>"
+
+
 def test_run_without_brave_key_uses_existing_sources_and_does_not_print_secret(
     tmp_path: Path, monkeypatch, capsys
 ):
@@ -877,3 +844,99 @@ def test_run_without_brave_key_uses_existing_sources_and_does_not_print_secret(
     output = capsys.readouterr().out
     assert "Brave unavailable" in output
     assert "BRAVE_SEARCH_API_KEY" in output
+
+
+def test_enrich_if_possible_skips_when_no_tmdb_key(
+    real_enrich_if_possible, monkeypatch, capsys
+):
+    def _no_key(*args, **kwargs):
+        raise RuntimeError("missing key")
+
+    monkeypatch.setattr(main.enrich, "load_tmdb_api_key", _no_key)
+    real_enrich_if_possible([])
+
+    assert "TMDB enrichment skipped" in capsys.readouterr().out
+
+
+def test_run_migration_merges_files_and_writes_report(tmp_path, monkeypatch):
+    import csv as _csv
+    import json as _json
+
+    (tmp_path / "FEL.txt").write_text("Drop,2025,https://reddit.test/list\n", "utf-8")
+    (tmp_path / "raw_fel.txt").write_text(
+        "Apocalypse Now (1979) FEL - 7.58 Mb/s\n", "utf-8"
+    )
+
+    def fake_enrich(releases):
+        for release in releases:
+            release.tmdb_id = "999"
+
+    monkeypatch.setattr(main, "_enrich_if_possible", fake_enrich)
+
+    exit_code = main.run_migration(
+        fel_path=tmp_path / "FEL.txt",
+        raw_fel_path=tmp_path / "raw_fel.txt",
+        output_dir=tmp_path,
+        report_path=tmp_path / "data" / "migration_report.csv",
+    )
+
+    assert exit_code == 0
+    data = _json.loads((tmp_path / "data/releases.json").read_text("utf-8"))
+    titles = sorted(item["movie_title"] for item in data)
+    assert titles == ["Apocalypse Now", "Drop"]
+
+    rows = list(_csv.DictReader((tmp_path / "data/migration_report.csv").open()))
+    assert {row["input_title"] for row in rows} == {"Drop", "Apocalypse Now"}
+    assert all(row["tmdb_id"] == "999" for row in rows)
+
+
+def test_run_migration_report_marks_unresolved_titles(tmp_path, monkeypatch):
+    import csv as _csv
+
+    (tmp_path / "FEL.txt").write_text(
+        "Resolved Movie,2020,\nUnresolved Movie,2021,\n", "utf-8"
+    )
+    (tmp_path / "raw_fel.txt").write_text("", "utf-8")
+
+    def fake_enrich(releases):
+        for release in releases:
+            if release.movie_title == "Resolved Movie":
+                release.tmdb_id = "123"
+
+    monkeypatch.setattr(main, "_enrich_if_possible", fake_enrich)
+
+    main.run_migration(
+        fel_path=tmp_path / "FEL.txt",
+        raw_fel_path=tmp_path / "raw_fel.txt",
+        output_dir=tmp_path,
+        report_path=tmp_path / "data" / "migration_report.csv",
+    )
+
+    rows = {
+        row["input_title"]: row
+        for row in _csv.DictReader((tmp_path / "data/migration_report.csv").open())
+    }
+    assert rows["Resolved Movie"]["tmdb_resolved"] == "yes"
+    assert rows["Resolved Movie"]["tmdb_id"] == "123"
+    assert rows["Unresolved Movie"]["tmdb_resolved"] == "no"
+    assert rows["Unresolved Movie"]["tmdb_id"] == ""
+
+
+def test_run_migration_reports_dropped_fel_rows(tmp_path, monkeypatch, capsys):
+    (tmp_path / "FEL.txt").write_text(
+        "Good Movie,2020,\nJunk row with no year,,\n", "utf-8"
+    )
+    (tmp_path / "raw_fel.txt").write_text("", "utf-8")
+    monkeypatch.setattr(main, "_enrich_if_possible", lambda releases: None)
+
+    main.run_migration(
+        fel_path=tmp_path / "FEL.txt",
+        raw_fel_path=tmp_path / "raw_fel.txt",
+        output_dir=tmp_path,
+        report_path=tmp_path / "data" / "migration_report.csv",
+    )
+
+    out = capsys.readouterr().out
+    assert "fel_txt_rows=2" in out
+    assert "fel_ingested=1" in out
+    assert "fel_dropped=1" in out
