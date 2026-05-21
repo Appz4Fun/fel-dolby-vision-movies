@@ -158,7 +158,7 @@ def load_tmdb_api_key(env_path: Path = Path(".env")) -> str:
         file_value if file_value is not None else os.environ.get("TMDB_API_KEY", "")
     ).strip()
     if not api_key:
-        raise RuntimeError("TMDB_API_KEY is required to clean FEL.txt")
+        raise RuntimeError("TMDB_API_KEY is required to resolve TMDB metadata")
     return api_key
 
 
