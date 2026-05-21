@@ -96,6 +96,19 @@ def test_links_for_empty_release_set_has_no_extra_blank_line(tmp_path: Path):
     assert (tmp_path / "links.md").read_text(encoding="utf-8") == "# Source Links\n"
 
 
+def test_links_includes_extra_provenance_source_urls(tmp_path: Path):
+    item = release("Provenanced", "2024")
+    item.additional_characteristics = {
+        "source_urls": ["https://example.test/Provenanced", "https://extra.test/x"]
+    }
+
+    write_artifacts([item], output_dir=tmp_path)
+
+    links = (tmp_path / "links.md").read_text(encoding="utf-8")
+    assert "https://example.test/Provenanced" in links
+    assert "https://extra.test/x" in links
+
+
 def test_readme_omits_release_group_metadata(tmp_path: Path):
     item = release("A", "2020")
     item.additional_characteristics = {

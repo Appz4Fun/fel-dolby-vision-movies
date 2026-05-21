@@ -119,7 +119,15 @@ def _render_additional(additional: dict[str, Any]) -> str:
 
 
 def _render_links(releases: list[FelRelease]) -> str:
-    urls = list(dict.fromkeys(release.source_url for release in releases))
+    seen: list[str] = []
+    for release in releases:
+        candidates = [
+            release.source_url,
+            *release.additional_characteristics.get("source_urls", []),
+        ]
+        for url in candidates:
+            if url and url not in seen:
+                seen.append(url)
     lines = ["# Source Links", ""]
-    lines.extend(f"- {url}" for url in urls)
+    lines.extend(f"- {url}" for url in seen)
     return "\n".join(lines).rstrip() + "\n"

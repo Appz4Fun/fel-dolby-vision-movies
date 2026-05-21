@@ -17,7 +17,6 @@ scrape-for-titles:
 run:
     @test -f src/main.py || { echo "run is not implemented yet"; exit 1; }
     uv run --with-requirements requirements.txt python -m main run --sources forums.txt
-    uv run --with-requirements requirements.txt python -m main clean-fel --input FEL.txt --output FEL.txt
 
 compare-found *args:
     @test -f src/main.py || { echo "compare-found is not implemented yet"; exit 1; }
