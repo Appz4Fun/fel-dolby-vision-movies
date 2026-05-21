@@ -8,7 +8,10 @@ from models import UNKNOWN, FelEvidence, FelRelease
 
 
 _YEAR_RE = re.compile(r"(?:19|20)\d{2}")
-_SPECIFIC_EVIDENCE = ("google-sheet-row", "forum-post", "reddit-list")
+_FULL_DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
+# Evidence types that are mere list memberships with synthesized quotes.
+# Any other evidence type (a real scraped quote) is preferred over these.
+_WEAK_EVIDENCE = ("fel-list", "fel-bitrate-list")
 
 
 def canonical_title_key(value: str) -> str:
@@ -42,9 +45,9 @@ def _prefer_known(left: str, right: str) -> str:
 
 
 def _prefer_date(left: str, right: str) -> str:
-    if "-" in left:
+    if _FULL_DATE_RE.fullmatch(left):
         return left
-    if "-" in right:
+    if _FULL_DATE_RE.fullmatch(right):
         return right
     return _prefer_known(left, right)
 
@@ -56,12 +59,23 @@ def _prefer_title(left: str, right: str) -> str:
 
 
 def _prefer_evidence(left: FelEvidence, right: FelEvidence) -> FelEvidence:
-    if right.evidence_type in _SPECIFIC_EVIDENCE and left.evidence_type not in _SPECIFIC_EVIDENCE:
+    left_weak = left.evidence_type in _WEAK_EVIDENCE
+    right_weak = right.evidence_type in _WEAK_EVIDENCE
+    if left_weak and not right_weak:
         return right
     return left
 
 
+def _prefer_recent(left: str, right: str) -> str:
+    candidates = [value for value in (left, right) if value and value != UNKNOWN]
+    return max(candidates) if candidates else UNKNOWN
+
+
 def merge_releases(base: FelRelease, other: FelRelease) -> FelRelease:
+    # dedupe_releases folds left: merge(merge(a, b), c). The _prefer_* rules are
+    # deterministic but order-sensitive for ties (equal-length titles, two full
+    # dates, two strong evidence types) — first-seen wins. Callers must feed
+    # releases in a deterministic order.
     additional = dict(base.additional_characteristics)
     for key, value in other.additional_characteristics.items():
         if key == "source_urls":
@@ -78,7 +92,7 @@ def merge_releases(base: FelRelease, other: FelRelease) -> FelRelease:
         english_audio=_prefer_known(base.english_audio, other.english_audio),
         additional_characteristics=additional,
         source_label=_prefer_known(base.source_label, other.source_label),
-        collected_at=max(base.collected_at, other.collected_at),
+        collected_at=_prefer_recent(base.collected_at, other.collected_at),
         fel_confirmed=base.fel_confirmed or other.fel_confirmed,
         tmdb_id=base.tmdb_id or other.tmdb_id,
         imdb_id=base.imdb_id or other.imdb_id,
