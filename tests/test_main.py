@@ -947,3 +947,55 @@ def test_run_migration_merges_files_and_writes_report(tmp_path, monkeypatch):
     rows = list(_csv.DictReader((tmp_path / "data/migration_report.csv").open()))
     assert {row["input_title"] for row in rows} == {"Drop", "Apocalypse Now"}
     assert all(row["tmdb_id"] == "999" for row in rows)
+
+
+def test_run_migration_report_marks_unresolved_titles(tmp_path, monkeypatch):
+    import csv as _csv
+
+    (tmp_path / "FEL.txt").write_text(
+        "Resolved Movie,2020,\nUnresolved Movie,2021,\n", "utf-8"
+    )
+    (tmp_path / "raw_fel.txt").write_text("", "utf-8")
+
+    def fake_enrich(releases):
+        for release in releases:
+            if release.movie_title == "Resolved Movie":
+                release.tmdb_id = "123"
+
+    monkeypatch.setattr(main, "_enrich_if_possible", fake_enrich)
+
+    main.run_migration(
+        fel_path=tmp_path / "FEL.txt",
+        raw_fel_path=tmp_path / "raw_fel.txt",
+        output_dir=tmp_path,
+        report_path=tmp_path / "data" / "migration_report.csv",
+    )
+
+    rows = {
+        row["input_title"]: row
+        for row in _csv.DictReader((tmp_path / "data/migration_report.csv").open())
+    }
+    assert rows["Resolved Movie"]["tmdb_resolved"] == "yes"
+    assert rows["Resolved Movie"]["tmdb_id"] == "123"
+    assert rows["Unresolved Movie"]["tmdb_resolved"] == "no"
+    assert rows["Unresolved Movie"]["tmdb_id"] == ""
+
+
+def test_run_migration_reports_dropped_fel_rows(tmp_path, monkeypatch, capsys):
+    (tmp_path / "FEL.txt").write_text(
+        "Good Movie,2020,\nJunk row with no year,,\n", "utf-8"
+    )
+    (tmp_path / "raw_fel.txt").write_text("", "utf-8")
+    monkeypatch.setattr(main, "_enrich_if_possible", lambda releases: None)
+
+    main.run_migration(
+        fel_path=tmp_path / "FEL.txt",
+        raw_fel_path=tmp_path / "raw_fel.txt",
+        output_dir=tmp_path,
+        report_path=tmp_path / "data" / "migration_report.csv",
+    )
+
+    out = capsys.readouterr().out
+    assert "fel_txt_rows=2" in out
+    assert "fel_ingested=1" in out
+    assert "fel_dropped=1" in out

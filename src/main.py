@@ -19,7 +19,7 @@ import fetcher
 import google_sheets
 import parser as fel_parser
 from merge import canonical_key, dedupe_releases
-from models import FelEvidence, FelRelease
+from models import FelRelease
 import reddit_source
 import sources
 
@@ -328,65 +328,60 @@ def run_migration(
     output_dir: Path,
     report_path: Path,
 ) -> int:
-    ingested: list[FelRelease] = []
-    if fel_path.exists():
-        ingested.extend(fel_ingest.parse_fel_txt(fel_path.read_text(encoding="utf-8")))
-    if raw_fel_path.exists():
-        ingested.extend(
-            fel_ingest.parse_raw_fel_txt(raw_fel_path.read_text(encoding="utf-8"))
-        )
-    input_titles = [(r.movie_title, r.release_date) for r in ingested]
+    fel_text = fel_path.read_text(encoding="utf-8") if fel_path.exists() else ""
+    raw_fel_text = (
+        raw_fel_path.read_text(encoding="utf-8") if raw_fel_path.exists() else ""
+    )
+    fel_txt_rows = sum(1 for line in fel_text.splitlines() if line.strip())
+    fel_releases = fel_ingest.parse_fel_txt(fel_text)
+    raw_fel_releases = fel_ingest.parse_raw_fel_txt(raw_fel_text)
+    ingested = [*fel_releases, *raw_fel_releases]
 
     unique = dedupe_releases(ingested, canonical_key)
     _enrich_if_possible(unique)
     sorted_releases = artifacts.publish_outputs(unique, output_dir=output_dir)
 
-    by_key = {canonical_key(r): r for r in sorted_releases}
-    _write_migration_report(report_path, input_titles, by_key)
+    by_key = {canonical_key(release): release for release in sorted_releases}
+    resolved = _write_migration_report(report_path, ingested, by_key)
 
-    matched = sum(
-        1
-        for title, year in input_titles
-        if canonical_key(_title_probe(title, year)) in by_key
-    )
     print(
         "migration complete; "
-        f"input_titles={len(input_titles)} "
-        f"matched={matched} "
-        f"unmatched={len(input_titles) - matched} "
+        f"fel_txt_rows={fel_txt_rows} "
+        f"fel_ingested={len(fel_releases)} "
+        f"fel_dropped={fel_txt_rows - len(fel_releases)} "
+        f"raw_fel_ingested={len(raw_fel_releases)} "
+        f"tmdb_resolved={resolved} "
+        f"tmdb_unresolved={len(ingested) - resolved} "
         f"releases={len(sorted_releases)} "
         f"report={report_path}"
     )
     return 0
 
 
-def _title_probe(title: str, year: str) -> FelRelease:
-    return FelRelease(
-        movie_title=title,
-        release_date=year,
-        fel_evidence=FelEvidence(source_url="", quote="", evidence_type="probe"),
-    )
-
-
 def _write_migration_report(
     report_path: Path,
-    input_titles: list[tuple[str, str]],
+    ingested: list[FelRelease],
     by_key: dict[tuple[str, str], FelRelease],
-) -> None:
+) -> int:
     report_path.parent.mkdir(parents=True, exist_ok=True)
+    resolved = 0
     with report_path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle, lineterminator="\n")
-        writer.writerow(["input_title", "input_year", "matched", "tmdb_id"])
-        for title, year in input_titles:
-            release = by_key.get(canonical_key(_title_probe(title, year)))
+        writer.writerow(["input_title", "input_year", "tmdb_resolved", "tmdb_id"])
+        for release in ingested:
+            final = by_key.get(canonical_key(release))
+            tmdb_id = final.tmdb_id if final is not None else ""
+            if tmdb_id:
+                resolved += 1
             writer.writerow(
                 [
-                    title,
-                    year,
-                    "yes" if release is not None else "no",
-                    release.tmdb_id if release is not None else "",
+                    release.movie_title,
+                    release.release_date,
+                    "yes" if tmdb_id else "no",
+                    tmdb_id,
                 ]
             )
+    return resolved
 
 
 @dataclass(frozen=True)
