@@ -6,15 +6,19 @@ from dataclasses import dataclass
 import os
 from pathlib import Path
 from typing import Sequence
+from urllib.parse import urlparse
 
 import artifacts
 import compare
 import discovery
+import enrich
 import fel_cleanup
 import fetcher
 import google_sheets
 import parser as fel_parser
+from merge import canonical_key, dedupe_releases
 from models import FelRelease
+import reddit_source
 import sources
 
 
@@ -241,7 +245,8 @@ def _scrape_for_titles(
                 fetched_count += 1
                 releases.extend(scrape_result.releases)
 
-    unique_releases = _dedupe_releases(releases)
+    unique_releases = dedupe_releases(releases, canonical_key)
+    _enrich_if_possible(unique_releases)
     sorted_releases = artifacts.publish_outputs(unique_releases, output_dir=output_dir)
 
     print(
@@ -257,21 +262,25 @@ def _scrape_for_titles(
     return 0
 
 
-def _dedupe_releases(releases: list[FelRelease]) -> list[FelRelease]:
-    seen: set[tuple[str, str, str, str]] = set()
-    unique: list[FelRelease] = []
-    for release in releases:
-        key = (
-            release.movie_title.lower(),
-            release.source_url,
-            release.fel_evidence.evidence_type,
-            release.fel_evidence.quote,
-        )
-        if key in seen:
-            continue
-        seen.add(key)
-        unique.append(release)
-    return unique
+def _enrich_if_possible(releases: list[FelRelease]) -> None:
+    try:
+        api_key = enrich.load_tmdb_api_key()
+    except RuntimeError:
+        print("TMDB enrichment skipped; TMDB_API_KEY is not configured")
+        return
+    import httpx
+
+    with enrich.TmdbResolver(api_key=api_key) as resolver:
+        with httpx.Client(timeout=httpx.Timeout(20.0)) as client:
+            summary = enrich.enrich_releases(
+                releases, resolver, client=client, api_key=api_key
+            )
+    print(
+        "enrichment complete; "
+        f"resolved={summary.resolved} "
+        f"unresolved={summary.unresolved} "
+        f"posters_downloaded={summary.posters_downloaded}"
+    )
 
 
 def _clean_fel(
@@ -325,7 +334,10 @@ def _scrape_source(
                 result.text, source_job.url
             )
         else:
-            releases = fel_parser.parse_fel_releases(result.text, result.url)
+            if "reddit.com" in urlparse(source_job.url).netloc:
+                releases = reddit_source.parse_reddit_releases(result.text, result.url)
+            else:
+                releases = fel_parser.parse_fel_releases(result.text, result.url)
     except Exception as exc:  # pragma: no cover - exact network/parser errors vary
         return _SourceScrapeResult(
             url=source_job.url, releases=[], error=exc.__class__.__name__

@@ -123,6 +123,7 @@ def test_scrape_for_titles_fetches_sources_and_writes_artifacts(
             return FakeFetchResult(url, html_by_url[url])
 
     monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
+    monkeypatch.setattr(main, "_enrich_if_possible", lambda releases: None)
 
     exit_code = main.main(
         [
@@ -457,6 +458,7 @@ def test_scrape_for_titles_dedupes_parser_results_before_writing(
     monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
     monkeypatch.setattr(main.fel_parser, "parse_fel_releases", fake_parse_fel_releases)
     monkeypatch.setattr(main.artifacts, "publish_outputs", fake_publish_outputs)
+    monkeypatch.setattr(main, "_enrich_if_possible", lambda releases: None)
 
     exit_code = main.main(
         [
@@ -816,6 +818,32 @@ def test_run_returns_scrape_exit_code_after_discovery_failure(
     )
 
     assert exit_code == 3
+
+
+def test_reddit_url_routes_to_reddit_parser(monkeypatch):
+    captured = {}
+
+    def fake_reddit(html, url):
+        captured["html"] = html
+        captured["url"] = url
+        return []
+
+    monkeypatch.setattr(main.reddit_source, "parse_reddit_releases", fake_reddit)
+
+    class FakeFetcher:
+        def fetch(self, url):
+            from fetcher import FetchResult
+
+            return FetchResult(url=url, text="<reddit html>", from_cache=False)
+
+    job = main._SourceJob(
+        url="https://www.reddit.com/r/CoreELEC/comments/x/list/",
+        source_type="forum",
+    )
+    result = main._scrape_source(job, FakeFetcher())
+
+    assert result.error == ""
+    assert captured["html"] == "<reddit html>"
 
 
 def test_run_without_brave_key_uses_existing_sources_and_does_not_print_secret(
