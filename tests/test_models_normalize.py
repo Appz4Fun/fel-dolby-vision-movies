@@ -1,5 +1,5 @@
 from models import FelEvidence, FelRelease, release_from_dict
-from normalize import normalize_audio, normalize_title
+from normalize import normalize_audio, normalize_fel_title, normalize_title
 
 
 def test_normalize_audio_known_aliases():
@@ -73,3 +73,12 @@ def test_felrelease_round_trips_new_enrichment_fields():
     assert restored.release_url == original.release_url
     assert restored.source_url == "https://example.test/nosferatu"
     assert restored.fel_evidence.evidence_type == "fel-list"
+
+
+def test_normalize_fel_title_strips_prefixes_and_aka():
+    assert normalize_fel_title("L.E. The Northman") == "The Northman"
+    assert normalize_fel_title("EDIT: Dune") == "Dune"
+    assert normalize_fel_title("-- Sicario") == "Sicario"
+    assert normalize_fel_title("Nightbreed AKA Cabal") == "Nightbreed"
+    assert normalize_fel_title("  Drop  ") == "Drop"
+    assert normalize_fel_title(",- ") == ""
