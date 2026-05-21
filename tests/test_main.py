@@ -123,7 +123,6 @@ def test_scrape_for_titles_fetches_sources_and_writes_artifacts(
             return FakeFetchResult(url, html_by_url[url])
 
     monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
-    monkeypatch.setattr(main, "_enrich_if_possible", lambda releases: None)
 
     exit_code = main.main(
         [
@@ -458,7 +457,6 @@ def test_scrape_for_titles_dedupes_parser_results_before_writing(
     monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
     monkeypatch.setattr(main.fel_parser, "parse_fel_releases", fake_parse_fel_releases)
     monkeypatch.setattr(main.artifacts, "publish_outputs", fake_publish_outputs)
-    monkeypatch.setattr(main, "_enrich_if_possible", lambda releases: None)
 
     exit_code = main.main(
         [
@@ -905,3 +903,15 @@ def test_run_without_brave_key_uses_existing_sources_and_does_not_print_secret(
     output = capsys.readouterr().out
     assert "Brave unavailable" in output
     assert "BRAVE_SEARCH_API_KEY" in output
+
+
+def test_enrich_if_possible_skips_when_no_tmdb_key(
+    real_enrich_if_possible, monkeypatch, capsys
+):
+    def _no_key(*args, **kwargs):
+        raise RuntimeError("missing key")
+
+    monkeypatch.setattr(main.enrich, "load_tmdb_api_key", _no_key)
+    real_enrich_if_possible([])
+
+    assert "TMDB enrichment skipped" in capsys.readouterr().out
