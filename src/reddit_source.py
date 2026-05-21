@@ -8,9 +8,15 @@ from models import FelEvidence, FelRelease
 from normalize import normalize_fel_title
 
 
-_MOVIE_YEAR_RE = re.compile(r"\s*[\[(](?P<year>(?:19|20)\d{2})[\])]\s*$")
-_MOVIE_TITLE_RE = re.compile(
-    r"(?:^|\W)(?P<title>(?:[A-Z][a-z]*(?:\s+[A-Z][a-z]*)*|\b[A-Z]\w*(?:\s+[A-Z]\w*)*))$"
+# A clean list line: the whole line is "<title> [YYYY]" or "<title> (YYYY)".
+_LIST_LINE_RE = re.compile(
+    r"^(?P<title>.+?)\s*[\[(](?P<year>(?:19|20)\d{2})[\])]\s*$"
+)
+# Comment lead-ins that precede a title in discussion replies, e.g.
+# "You forgot Sicario [2015]" -> the title is "Sicario".
+_COMMENT_PREFIX_RE = re.compile(
+    r"^(?:you forgot one:?|you forgot|you missed|don'?t forget|missing:?|also:?|add(?:ed)?:?)\s+",
+    re.IGNORECASE,
 )
 
 
@@ -34,12 +40,13 @@ class _RedditUserTextParser(HTMLParser):
                 self.usertext_depth = self.div_depth
 
     def handle_endtag(self, tag: str) -> None:
-        if tag != "div":
-            return
-        if self.in_usertext and self.div_depth == self.usertext_depth:
-            self.in_usertext = False
+        if tag == "p" and self.in_usertext:
             self.text.append("\n")
-        self.div_depth -= 1
+        elif tag == "div":
+            if self.in_usertext and self.div_depth == self.usertext_depth:
+                self.in_usertext = False
+                self.text.append("\n")
+            self.div_depth -= 1
 
     def handle_data(self, data: str) -> None:
         if self.in_usertext:
@@ -56,17 +63,12 @@ def parse_reddit_releases(html: str, url: str) -> list[FelRelease]:
         line = raw_line.strip()
         if not line or "MEL" in line:
             continue
-        # Extract year from line
-        year_match = _MOVIE_YEAR_RE.search(line)
-        if not year_match:
+        candidate = _COMMENT_PREFIX_RE.sub("", line)
+        match = _LIST_LINE_RE.match(candidate)
+        if not match:
             continue
-        year = year_match.group("year")
-        # Extract title (last capitalized phrase before year)
-        before_year = _MOVIE_YEAR_RE.sub("", line)
-        title_match = _MOVIE_TITLE_RE.search(before_year)
-        if not title_match:
-            continue
-        title = normalize_fel_title(title_match.group("title"))
+        title = normalize_fel_title(match.group("title"))
+        year = match.group("year")
         if not title:
             continue
         key = (title.casefold(), year)

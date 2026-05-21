@@ -41,3 +41,13 @@ def test_parse_reddit_releases_dedupes_repeated_titles():
     )
     releases = parse_reddit_releases(html, "https://reddit.test/fel")
     assert [r.movie_title for r in releases] == ["Dune"]
+
+
+def test_parse_reddit_releases_keeps_numeric_titles():
+    html = (
+        '<div class="usertext-body"><div class="md">'
+        "<p>1917 [2019]</p><p>10 Cloverfield Lane [2016]</p>"
+        "</div></div>"
+    )
+    releases = parse_reddit_releases(html, "https://reddit.test/fel")
+    assert [r.movie_title for r in releases] == ["1917", "10 Cloverfield Lane"]
