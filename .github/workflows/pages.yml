@@ -46,6 +46,7 @@ jobs:
         run: uv run --with-requirements requirements.txt python -m main run --sources forums.txt
 
       - name: Commit refreshed data
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -54,7 +55,8 @@ jobs:
             echo "no data changes to commit"
           else
             git commit -m "chore: refresh FEL releases data [skip ci]"
-            git push
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
           fi
 
       - name: Configure Pages
