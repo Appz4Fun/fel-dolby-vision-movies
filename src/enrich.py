@@ -7,7 +7,7 @@ import time
 
 import httpx
 
-from fel_cleanup import (  # relocated into this module in a later task
+from tmdb import (
     MovieResolver,
     StaticTmdbResolver,
     TmdbResolver,

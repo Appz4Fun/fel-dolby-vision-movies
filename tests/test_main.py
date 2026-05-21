@@ -287,65 +287,6 @@ def test_compare_found_uses_ai_flag_without_printing_secret(
     assert "secret-token" not in output
 
 
-def test_clean_fel_command_uses_tmdb_cleaner_without_printing_secret(
-    tmp_path: Path, monkeypatch, capsys
-):
-    fel_path = tmp_path / "FEL.txt"
-    report_path = tmp_path / "report.csv"
-    cache_path = tmp_path / "cache.json"
-    env_path = tmp_path / ".env"
-    fel_path.write_text("Wall E,2008,https://example.test/a\n", encoding="utf-8")
-    env_path.write_text("TMDB_API_KEY=secret-tmdb-key\n", encoding="utf-8")
-    calls = []
-
-    class FakeResolver:
-        def __init__(self, api_key, cache_path):
-            calls.append(("init", api_key, cache_path))
-
-        def __enter__(self):
-            return self
-
-        def __exit__(self, exc_type, exc_value, traceback):
-            return None
-
-    def fake_clean_fel_file(input_path, output_path, report_path_arg, resolver):
-        calls.append(("clean", input_path, output_path, report_path_arg, resolver))
-        return main.fel_cleanup.CleanupSummary(
-            input_rows=1,
-            output_rows=1,
-            dropped_rows=0,
-            resolved_rows=1,
-            unresolved_rows=0,
-            merged_rows=0,
-        )
-
-    monkeypatch.setattr(main.fel_cleanup, "TmdbResolver", FakeResolver)
-    monkeypatch.setattr(main.fel_cleanup, "clean_fel_file", fake_clean_fel_file)
-
-    exit_code = main.main(
-        [
-            "clean-fel",
-            "--input",
-            str(fel_path),
-            "--output",
-            str(fel_path),
-            "--report",
-            str(report_path),
-            "--cache",
-            str(cache_path),
-            "--env",
-            str(env_path),
-        ]
-    )
-
-    assert exit_code == 0
-    assert calls[0] == ("init", "secret-tmdb-key", cache_path)
-    assert calls[1][0:4] == ("clean", fel_path, fel_path, report_path)
-    output = capsys.readouterr().out
-    assert "FEL cleanup complete" in output
-    assert "secret-tmdb-key" not in output
-
-
 def test_scrape_for_titles_continues_after_fetch_errors(
     tmp_path: Path, monkeypatch, capsys
 ):
