@@ -51,3 +51,30 @@ def test_parse_reddit_releases_keeps_numeric_titles():
     )
     releases = parse_reddit_releases(html, "https://reddit.test/fel")
     assert [r.movie_title for r in releases] == ["1917", "10 Cloverfield Lane"]
+
+
+def test_parse_reddit_releases_filters_mel_but_keeps_mel_substring_titles():
+    html = (
+        '<div class="usertext-body"><div class="md">'
+        "<p>This disc is MEL only [2010]</p>"
+        "<p>Melancholia [2011]</p>"
+        "<p>Dune [2021]<br>Heat [1995]</p>"
+        "</div></div>"
+    )
+    releases = parse_reddit_releases(html, "https://reddit.test/fel")
+    titles = [r.movie_title for r in releases]
+    assert "Melancholia" in titles
+    assert "Dune" in titles
+    assert "Heat" in titles
+    assert not any("MEL only" in t for t in titles)
+
+
+def test_parse_reddit_releases_strips_varied_comment_prefixes():
+    html = (
+        '<div class="usertext-body"><div class="md">'
+        "<p>Missing: Tenet [2020]</p>"
+        "<p>Also Arrival [2016]</p>"
+        "</div></div>"
+    )
+    releases = parse_reddit_releases(html, "https://reddit.test/fel")
+    assert [r.movie_title for r in releases] == ["Tenet", "Arrival"]

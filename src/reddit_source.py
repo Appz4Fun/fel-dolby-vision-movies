@@ -1,3 +1,12 @@
+"""Parse Reddit P7-FEL list pages into FelRelease objects.
+
+Only clean, whole-line entries are extracted: a line must be a title
+followed by a bracketed year ("Title [2024]" or "Title (2024)"),
+optionally preceded by a comment lead-in such as "You forgot ". Titles
+embedded mid-sentence in prose are intentionally not extracted, to avoid
+false positives.
+"""
+
 from __future__ import annotations
 
 from datetime import datetime, timezone
@@ -18,6 +27,9 @@ _COMMENT_PREFIX_RE = re.compile(
     r"^(?:you forgot one:?|you forgot|you missed|don'?t forget|missing:?|also:?|add(?:ed)?:?)\s+",
     re.IGNORECASE,
 )
+# MEL (Minimal Enhancement Layer) lines are not FEL; skip them. Matched as a
+# whole uppercase word so titles like "Melancholia" are not affected.
+_MEL_RE = re.compile(r"\bMEL\b")
 
 
 class _RedditUserTextParser(HTMLParser):
@@ -31,6 +43,10 @@ class _RedditUserTextParser(HTMLParser):
     def handle_starttag(
         self, tag: str, attrs: list[tuple[str, str | None]]
     ) -> None:
+        if tag == "br":
+            if self.in_usertext:
+                self.text.append("\n")
+            return
         if tag != "div":
             return
         self.div_depth += 1
@@ -54,6 +70,11 @@ class _RedditUserTextParser(HTMLParser):
 
 
 def parse_reddit_releases(html: str, url: str) -> list[FelRelease]:
+    """Extract FelRelease objects from a Reddit P7-FEL list page.
+
+    Only clean whole-line "Title [Year]" entries (optionally with a
+    leading comment phrase) are extracted; see the module docstring.
+    """
     parser = _RedditUserTextParser()
     parser.feed(html)
     collected_at = datetime.now(timezone.utc).isoformat()
@@ -61,7 +82,7 @@ def parse_reddit_releases(html: str, url: str) -> list[FelRelease]:
     releases: list[FelRelease] = []
     for raw_line in "".join(parser.text).splitlines():
         line = raw_line.strip()
-        if not line or "MEL" in line:
+        if not line or _MEL_RE.search(line):
             continue
         candidate = _COMMENT_PREFIX_RE.sub("", line)
         match = _LIST_LINE_RE.match(candidate)
