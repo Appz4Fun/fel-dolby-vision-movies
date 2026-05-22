@@ -1438,7 +1438,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "28 Years Later",
@@ -1615,7 +1615,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Lilo & Stitch",
@@ -1785,7 +1785,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Amateur",
@@ -2045,7 +2045,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Companion",
@@ -2179,7 +2179,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "A Complete Unknown",
@@ -3649,7 +3649,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Back to Black",
@@ -4450,7 +4450,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Coup de Chance",
@@ -5074,7 +5074,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Three Musketeers: D'Artagnan",
@@ -5163,7 +5163,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Shin Kamen Rider",
@@ -6386,7 +6386,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Marcel the Shell with Shoes On",
@@ -6529,7 +6529,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Crimes of the Future",
@@ -6756,7 +6756,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Fantastic Beasts: The Secrets of Dumbledore",
@@ -7043,28 +7043,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Burning Sea",
-    "fel_confirmed": true,
-    "release_date": "2021",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Burning Sea 2021 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Bad.Boys.II.2003 | iTunes | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
-  },
-  {
     "movie_title": "American Underdog",
     "fel_confirmed": true,
     "release_date": "2021-12-25",
@@ -7230,6 +7208,28 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Burning Sea",
+    "fel_confirmed": true,
+    "release_date": "2021-10-29",
+    "studio": "Fantefilm",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "623511",
+    "imdb_id": "tt12753120",
+    "poster_path": "data/posters/623511.jpg",
+    "release_url": "https://www.themoviedb.org/movie/623511",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Burning Sea 2021 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Bad.Boys.II.2003 | iTunes | L1",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
+  },
+  {
     "movie_title": "The Burning Sea",
     "fel_confirmed": true,
     "release_date": "2021-10-29",
@@ -7316,7 +7316,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The French Dispatch of the Liberty, Kansas Evening Sun",
@@ -7596,7 +7596,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Escape from Mogadishu",
@@ -7922,19 +7922,19 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "520763",
     "imdb_id": "tt8332922",
     "poster_path": "data/posters/520763.jpg",
     "release_url": "https://www.themoviedb.org/movie/520763",
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "A Quiet Place Part II (2021) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "A.Quiet.Place.Part.II.2020 | BD FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | 28.Years.Later.2025 | (+23) | itunes | plot | cmv4.0 bloc can be restored to the P7 RPU (workflow 2-3) | Furious.7.2015 | not sure | iTunes | HDR COMP | L1 | nits looks fine but HDR COMP different. and MDL mismatch",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "F9",
@@ -8446,7 +8446,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Nobody",
@@ -8521,7 +8521,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Boss Level",
@@ -8780,7 +8780,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Love and Monsters",
@@ -8814,7 +8814,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Violet Evergarden: The Movie",
@@ -8874,7 +8874,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Bill & Ted Face the Music",
@@ -8983,7 +8983,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Peninsula",
@@ -9045,7 +9045,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Invisible Man",
@@ -9080,7 +9080,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Sonic the Hedgehog",
@@ -9115,7 +9115,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Dolittle",
@@ -9149,7 +9149,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Game of Thrones: The Complete Eighth Season",
@@ -9177,7 +9177,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "FEL - 6.95 Mbps",
@@ -9292,7 +9292,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Ip Man 4: The Finale",
@@ -9385,7 +9385,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Ford v Ferrari",
@@ -9442,7 +9442,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Terminator: Dark Fate",
@@ -9476,7 +9476,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Lighthouse",
@@ -9559,7 +9559,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Rambo: Last Blood",
@@ -9595,7 +9595,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Ad Astra",
@@ -9733,7 +9733,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Scary Stories to Tell in the Dark",
@@ -9766,7 +9766,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Fast & Furious Presents: Hobbs & Shaw",
@@ -9799,7 +9799,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Ne Zha",
@@ -9881,7 +9881,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Crawl",
@@ -9944,7 +9944,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Anna",
@@ -9977,7 +9977,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Child's Play",
@@ -10071,7 +10071,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Secret Life of Pets 2",
@@ -10104,7 +10104,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Rocketman",
@@ -10138,7 +10138,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "John Wick: Chapter 3 - Parabellum",
@@ -10172,7 +10172,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Brightburn",
@@ -10244,7 +10244,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Pet Sematary",
@@ -10268,7 +10268,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Us",
@@ -10301,7 +10301,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Cold Pursuit",
@@ -10333,7 +10333,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Wandering Earth",
@@ -10466,7 +10466,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Spider-Man: Into the Spider-Verse",
@@ -10525,7 +10525,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Bumblebee",
@@ -10561,7 +10561,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Fantastic Beasts: The Crimes of Grindelwald",
@@ -10607,7 +10607,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Grinch",
@@ -10678,7 +10678,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Overlord",
@@ -10712,7 +10712,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Hunter Killer",
@@ -10746,7 +10746,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "First Man",
@@ -10781,7 +10781,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Hell Fest",
@@ -10813,7 +10813,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "A Simple Favor",
@@ -10845,7 +10845,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Kin",
@@ -10878,7 +10878,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Crazy Rich Asians",
@@ -10937,7 +10937,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Spy Who Dumped Me",
@@ -10969,7 +10969,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Mission: Impossible - Fallout",
@@ -11009,7 +11009,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Mamma Mia! Here We Go Again",
@@ -11041,7 +11041,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Skyscraper",
@@ -11073,7 +11073,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Sicario 2 (Sicario: Day of the Soldado)",
@@ -11097,7 +11097,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Uncle Drew",
@@ -11129,7 +11129,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Sicario: Day of the Soldado",
@@ -11203,7 +11203,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Jurassic World: Fallen Kingdom",
@@ -11239,7 +11239,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Upgrade",
@@ -11324,7 +11324,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "A Quiet Place",
@@ -11361,7 +11361,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Isle of Dogs",
@@ -11427,7 +11427,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "A Wrinkle in Time",
@@ -11473,7 +11473,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Annihilation",
@@ -11513,7 +11513,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Black Panther",
@@ -11565,7 +11565,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Early Man",
@@ -11599,7 +11599,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Den of Thieves",
@@ -11629,28 +11629,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Daddys Home.2",
-    "fel_confirmed": true,
-    "release_date": "2017",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Daddys.Home.2.2017 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Better Man 2024 | (+126 T277 B277) | itunes | HDR COMP | nits",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
   },
   {
     "movie_title": "Downsizing",
@@ -11684,7 +11662,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Jumanji: Welcome to the Jungle",
@@ -11778,7 +11756,29 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
+  },
+  {
+    "movie_title": "Daddys Home.2",
+    "fel_confirmed": true,
+    "release_date": "2017-11-09",
+    "studio": "Red Granite Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "419680",
+    "imdb_id": "tt5657846",
+    "poster_path": "data/posters/419680.jpg",
+    "release_url": "https://www.themoviedb.org/movie/419680",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Daddys.Home.2.2017 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Better Man 2024 | (+126 T277 B277) | itunes | HDR COMP | nits",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Daddy's Home 2",
@@ -11809,7 +11809,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Paddington 2",
@@ -11844,7 +11844,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Jigsaw",
@@ -11882,7 +11882,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Cult of Chucky",
@@ -11955,7 +11955,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Only the Brave",
@@ -12028,7 +12028,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Hitman's Bodyguard",
@@ -12060,7 +12060,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Earth: One Amazing Day",
@@ -12092,7 +12092,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Wind River",
@@ -12121,7 +12121,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Atomic Blonde",
@@ -12161,7 +12161,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Valerian and the City of a Thousand Planets",
@@ -12198,7 +12198,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "American Assassin",
@@ -12236,7 +12236,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Spider-Man: Homecoming",
@@ -12303,7 +12303,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Transformers: The Last Knight",
@@ -12343,7 +12343,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Despicable Me 3",
@@ -12379,7 +12379,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Wonder Woman",
@@ -12477,7 +12477,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Power Rangers",
@@ -12539,7 +12539,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Life",
@@ -12638,19 +12638,19 @@
         "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
       ]
     },
-    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "324552",
     "imdb_id": "tt4425200",
     "poster_path": "data/posters/324552.jpg",
     "release_url": "https://www.themoviedb.org/movie/324552",
     "fel_evidence": {
-      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-      "quote": "John Wick: Chapter 2 (2017) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "John.Wick.Chapter.2 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Fantastic.Beasts.The.Secrets.of.Dumbledore.2022 | (+24) | MAX | plot | cmv4.0 bloc can be restored to the P7 RPU (workflow 2-3)",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Rings",
@@ -12785,7 +12785,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Office Christmas Party",
@@ -12814,7 +12814,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Arrival",
@@ -12947,7 +12947,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Stranger",
@@ -13093,7 +13093,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Jason Bourne",
@@ -13358,7 +13358,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Allegiant",
@@ -13389,7 +13389,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "London Has Fallen",
@@ -13424,7 +13424,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Risen",
@@ -13565,7 +13565,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "13 Hours: The Secret Soldiers of Benghazi",
@@ -13599,51 +13599,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
-  },
-  {
-    "movie_title": "Daddys Home",
-    "fel_confirmed": true,
-    "release_date": "2015",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Daddys.Home.2015 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Big Fish 2003 | FraMeSToR | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
-  },
-  {
-    "movie_title": "Point Break",
-    "fel_confirmed": true,
-    "release_date": "2015",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Point Break 2015 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Justice League Warworld 2023 | (+16 T0/B0) | iTunes | HDR COMP | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The VVitch",
@@ -13673,6 +13629,28 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Daddys Home",
+    "fel_confirmed": true,
+    "release_date": "2015-12-25",
+    "studio": "Paramount Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "274167",
+    "imdb_id": "tt1528854",
+    "poster_path": "data/posters/274167.jpg",
+    "release_url": "https://www.themoviedb.org/movie/274167",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Daddys.Home.2015 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Big Fish 2003 | FraMeSToR | L1",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Daddy's Home",
@@ -13705,7 +13683,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Ip Man 3",
@@ -13735,6 +13713,28 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Point Break",
+    "fel_confirmed": true,
+    "release_date": "2015-12-03",
+    "studio": "Studio Babelsberg",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "257088",
+    "imdb_id": "tt2058673",
+    "poster_path": "data/posters/257088.jpg",
+    "release_url": "https://www.themoviedb.org/movie/257088",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Point Break 2015 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Justice League Warworld 2023 | (+16 T0/B0) | iTunes | HDR COMP | L1",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Krampus",
@@ -13830,7 +13830,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Spotlight",
@@ -13879,7 +13879,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Man from U.N.C.L.E.",
@@ -13971,7 +13971,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Southpaw",
@@ -14087,7 +14087,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Witch",
@@ -14119,7 +14119,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Our Little Sister",
@@ -14288,7 +14288,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Cinderella",
@@ -14321,50 +14321,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Divergente",
-    "fel_confirmed": true,
-    "release_date": "2014",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Divergente 2014 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Bob.Marley.One.Love.2024 | (-24) | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
-  },
-  {
-    "movie_title": "Expendables.3",
-    "fel_confirmed": true,
-    "release_date": "2014",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Expendables.3.2014 FRA BD | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Central.Intelligence.2016 | FraMeSToR | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
   },
   {
     "movie_title": "Captain America WS",
@@ -14449,7 +14405,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Ouija",
@@ -14566,7 +14522,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Fury",
@@ -14618,6 +14574,28 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Expendables.3",
+    "fel_confirmed": true,
+    "release_date": "2014-08-07",
+    "studio": "Davis Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "138103",
+    "imdb_id": "tt2333784",
+    "poster_path": "data/posters/138103.jpg",
+    "release_url": "https://www.themoviedb.org/movie/138103",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Expendables.3.2014 FRA BD | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Central.Intelligence.2016 | FraMeSToR | L1",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
+  },
+  {
     "movie_title": "Teenage Mutant Ninja Turtles",
     "fel_confirmed": true,
     "release_date": "2014-08-07",
@@ -14649,7 +14627,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Expendables 3",
@@ -14771,7 +14749,29 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
+  },
+  {
+    "movie_title": "Divergente",
+    "fel_confirmed": true,
+    "release_date": "2014-03-14",
+    "studio": "Summit Entertainment",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "157350",
+    "imdb_id": "tt1840309",
+    "poster_path": "data/posters/157350.jpg",
+    "release_url": "https://www.themoviedb.org/movie/157350",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Divergente 2014 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Bob.Marley.One.Love.2024 | (-24) | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Divergent",
@@ -14861,7 +14861,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Wolf of Wall Street",
@@ -14917,7 +14917,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Hunger Games: Catching Fire",
@@ -14946,7 +14946,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Ender's Game",
@@ -15029,7 +15029,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Blue Is the Warmest Color",
@@ -15266,7 +15266,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Despicable Me 2",
@@ -15303,7 +15303,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "World War Z",
@@ -15387,7 +15387,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Iron Man 3",
@@ -15433,7 +15433,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Olympus Has Fallen",
@@ -15467,7 +15467,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Place Beyond the Pines",
@@ -15531,7 +15531,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Hansel and Gretel Witch Hunters",
@@ -15565,7 +15565,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Mama",
@@ -15627,7 +15627,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Les Misérables",
@@ -15796,7 +15796,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Expendables 2",
@@ -16016,7 +16016,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Hunger Games",
@@ -16077,7 +16077,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Game of Thrones: The Complete First Season",
@@ -16105,7 +16105,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Harry Potter DH Part.2.",
@@ -16189,7 +16189,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Twilight Saga: Breaking Dawn - Part 1",
@@ -16772,7 +16772,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Super 8",
@@ -16861,7 +16861,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Source Code",
@@ -16898,7 +16898,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Rango",
@@ -17118,7 +17118,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Devil",
@@ -17326,7 +17326,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Twilight Saga: Eclipse",
@@ -17442,7 +17442,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Crazies",
@@ -17504,7 +17504,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Wolfman",
@@ -17558,11 +17558,11 @@
     "release_url": "https://www.themoviedb.org/movie/19901",
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Daybreakers (2010) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "quote": "Daybreakers (2009) FEL - 8.09 Mb/s",
+      "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Daybreakers",
@@ -18172,7 +18172,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Fantastic Mr. Fox",
@@ -18281,7 +18281,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Transformers: Revenge of the Fallen",
@@ -18314,7 +18314,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Drag Me to Hell",
@@ -18400,7 +18400,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Watchmen",
@@ -18434,7 +18434,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Coraline",
@@ -18498,7 +18498,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Yip Man",
@@ -18559,7 +18559,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Transporter 3",
@@ -18591,7 +18591,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Twilight",
@@ -18623,7 +18623,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Hurt Locker",
@@ -18657,7 +18657,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Eden Lake",
@@ -18911,7 +18911,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Kung Fu Panda",
@@ -19042,7 +19042,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Forbidden Kingdom",
@@ -19170,7 +19170,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Cloverfield",
@@ -19209,7 +19209,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Harry Potter OP",
@@ -19282,7 +19282,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Mist",
@@ -19482,7 +19482,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Transformers",
@@ -19540,7 +19540,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "1408",
@@ -19592,7 +19592,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Hellboy Animated: Iron Shoes",
@@ -19782,7 +19782,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Saw III",
@@ -19891,7 +19891,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "World Trade Center",
@@ -20081,29 +20081,29 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Aeon Flux",
     "fel_confirmed": true,
-    "release_date": "2005",
-    "studio": "Unknown",
+    "release_date": "2005-11-30",
+    "studio": "Paramount Pictures",
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {},
     "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
+    "tmdb_id": "8202",
+    "imdb_id": "tt0402022",
+    "poster_path": "data/posters/8202.jpg",
+    "release_url": "https://www.themoviedb.org/movie/8202",
     "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
       "quote": "Aeon.Flux.2005 | BD FEL | HDR COMP | sample | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | A Bugs Life 1998 | (-8 t263/b263) | itunes | HDR COMP | nits | Ghost.in.the.Shell.2017 (-3 0/0/0/0) | probably ok | iTunes | HDR COMP | L1 | MDL mismatch",
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-18T00:58:28+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Æon Flux",
@@ -20276,7 +20276,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Pride & Prejudice",
@@ -20326,7 +20326,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Red Eye",
@@ -20356,7 +20356,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Hustle & Flow",
@@ -20468,7 +20468,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Land of the Dead",
@@ -20554,7 +20554,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Madagascar",
@@ -20581,7 +20581,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Kingdom of Heaven",
@@ -20961,7 +20961,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Saw",
@@ -20992,7 +20992,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Sky Captain and the World of Tomorrow",
@@ -21113,7 +21113,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Throw Down",
@@ -21299,7 +21299,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Shaun of the Dead",
@@ -21471,28 +21471,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "The Italian Job",
-    "fel_confirmed": true,
-    "release_date": "2003",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "The.Italian.Job.2003 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Salt.2010 | (+10 T277/B276) | iTunes | HDR COMP | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
   },
   {
     "movie_title": "Pirates of the Caribbean CBP",
@@ -21700,7 +21678,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Bad Boys II",
@@ -21723,6 +21701,28 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "The Italian Job",
+    "fel_confirmed": true,
+    "release_date": "2003-05-30",
+    "studio": "De Line Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "9654",
+    "imdb_id": "tt0317740",
+    "poster_path": "data/posters/9654.jpg",
+    "release_url": "https://www.themoviedb.org/movie/9654",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "The.Italian.Job.2003 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Salt.2010 | (+10 T277/B276) | iTunes | HDR COMP | L1",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Core",
@@ -21752,7 +21752,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Hunted",
@@ -21782,28 +21782,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Van wilder",
-    "fel_confirmed": true,
-    "release_date": "2002",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Van wilder 2002 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Spider-Man.Into.the.Spider-Verse.2018 | (+24 T276/B276) | iTunes | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
   },
   {
     "movie_title": "Catch Me If You Can",
@@ -22281,7 +22259,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Star Wars: Episode II - Attack of the Clones",
@@ -22425,6 +22403,28 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Van wilder",
+    "fel_confirmed": true,
+    "release_date": "2002-03-29",
+    "studio": "Tapestry Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "11452",
+    "imdb_id": "tt0283111",
+    "poster_path": "data/posters/11452.jpg",
+    "release_url": "https://www.themoviedb.org/movie/11452",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Van wilder 2002 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Spider-Man.Into.the.Spider-Verse.2018 | (+24 T276/B276) | iTunes | L1",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
+  },
+  {
     "movie_title": "National Lampoon's Van Wilder",
     "fel_confirmed": true,
     "release_date": "2002-03-29",
@@ -22455,7 +22455,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Resident Evil",
@@ -22498,7 +22498,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "We Were Soldiers",
@@ -22759,7 +22759,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Score",
@@ -22821,7 +22821,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Mulholland Drive",
@@ -22942,7 +22942,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Brotherhood of the Wolf",
@@ -22971,7 +22971,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Donnie Darko",
@@ -23146,7 +23146,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Meet The Parents",
@@ -23173,7 +23173,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Crimson Rivers",
@@ -23409,7 +23409,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Road Trip",
@@ -23478,7 +23478,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "U-571",
@@ -23545,7 +23545,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Rules of Engagement",
@@ -23594,7 +23594,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "You Can Count on Me",
@@ -23865,7 +23865,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Double Jeopardy",
@@ -24054,7 +24054,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The General's Daughter",
@@ -24113,7 +24113,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Gamera 3: Revenge of Iris",
@@ -24169,7 +24169,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Faculty",
@@ -24228,7 +24228,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Rushmore",
@@ -24619,7 +24619,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Pi",
@@ -24709,7 +24709,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Truman Show",
@@ -24739,7 +24739,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Black Cat, White Cat",
@@ -24830,7 +24830,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Species II",
@@ -25199,7 +25199,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Face/Off",
@@ -25277,7 +25277,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Breakdown",
@@ -25315,7 +25315,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Anaconda",
@@ -25506,7 +25506,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Daylight",
@@ -25565,19 +25565,19 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "199",
     "imdb_id": "tt0117731",
     "poster_path": "data/posters/199.jpg",
     "release_url": "https://www.themoviedb.org/movie/199",
     "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
-      "quote": "Star Trek: First Contact (1996) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Star.Trek.First.Contact | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Moana 2016 | (+39 T276/B276) | DSNP | HDR COMP | nits",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Space Jam",
@@ -25921,7 +25921,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Primal Fear",
@@ -25951,7 +25951,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Fargo",
@@ -26204,7 +26204,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Leaving Las Vegas",
@@ -26551,7 +26551,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Casper",
@@ -26621,7 +26621,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Village of the Damned",
@@ -26931,7 +26931,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Timecop",
@@ -26991,7 +26991,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Pulp Fiction",
@@ -27116,7 +27116,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "True Lies",
@@ -27215,7 +27215,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Beverly Hills Cop III",
@@ -27237,7 +27237,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Three Colors: Red",
@@ -27355,28 +27355,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Schindlers List",
-    "fel_confirmed": true,
-    "release_date": "1993",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Schindlers.List.1993 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Magic.Mike.2012 | (-59 T276B276) | itunes | HDR COMP | nits | any color diff is apple stupid static reshaping metadata",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
-  },
-  {
     "movie_title": "Tombstone",
     "fel_confirmed": true,
     "release_date": "1993-12-25",
@@ -27459,6 +27437,28 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Schindlers List",
+    "fel_confirmed": true,
+    "release_date": "1993-12-15",
+    "studio": "Amblin Entertainment",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "424",
+    "imdb_id": "tt0108052",
+    "poster_path": "data/posters/424.jpg",
+    "release_url": "https://www.themoviedb.org/movie/424",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Schindlers.List.1993 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Magic.Mike.2012 | (-59 T276B276) | itunes | HDR COMP | nits | any color diff is apple stupid static reshaping metadata",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
+  },
+  {
     "movie_title": "Schindler's List",
     "fel_confirmed": true,
     "release_date": "1993-12-15",
@@ -27494,7 +27494,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Wayne's World 2",
@@ -27573,7 +27573,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Cronos",
@@ -27777,7 +27777,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Jurassic Park",
@@ -27813,7 +27813,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Cliffhanger",
@@ -27850,7 +27850,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Menace II Society",
@@ -28091,28 +28091,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Waynes world",
-    "fel_confirmed": true,
-    "release_date": "1992",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Waynes world 1992 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Star.Trek.The.Motion.Picture.1979.DC | 0 | PMTP | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
-  },
-  {
     "movie_title": "Malcom X",
     "fel_confirmed": true,
     "release_date": "1992",
@@ -28325,7 +28303,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Death Becomes Her",
@@ -28386,7 +28364,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Patriot Games",
@@ -28420,7 +28398,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Far and Away",
@@ -28539,6 +28517,28 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Waynes world",
+    "fel_confirmed": true,
+    "release_date": "1992-02-14",
+    "studio": "Paramount Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "8872",
+    "imdb_id": "tt0105793",
+    "poster_path": "data/posters/8872.jpg",
+    "release_url": "https://www.themoviedb.org/movie/8872",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Waynes world 1992 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Star.Trek.The.Motion.Picture.1979.DC | 0 | PMTP | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Wayne's World",
@@ -28686,7 +28686,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Addams Family",
@@ -29132,7 +29132,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Silence of the Lambs",
@@ -29337,7 +29337,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Jacob's Ladder",
@@ -29723,7 +29723,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "RoboCop 2",
@@ -29808,7 +29808,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Total Recall",
@@ -29848,7 +29848,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Back to the Future Part III",
@@ -29891,7 +29891,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Tales from the Darkside: The Movie",
@@ -30004,7 +30004,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Nightbreed",
@@ -30272,7 +30272,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "For All Mankind",
@@ -30453,7 +30453,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "UHF",
@@ -30600,7 +30600,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Indiana Jones and the Last Crusade",
@@ -30695,7 +30695,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Kickboxer",
@@ -31015,7 +31015,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Halloween 4: The Return of Michael Myers",
@@ -31245,7 +31245,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Red Heat",
@@ -31277,7 +31277,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Great Outdoors",
@@ -31441,28 +31441,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Evil Dead II (Dead by Dawn",
-    "fel_confirmed": true,
-    "release_date": "1987",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Evil Dead II (Dead by Dawn) (1987) | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Catwoman.Hunted.2022 | nits",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
   },
   {
     "movie_title": "Chau tin dik tung wa",
@@ -31646,7 +31624,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Running Man",
@@ -31674,7 +31652,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Prince of Darkness",
@@ -31707,7 +31685,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Last Emperor",
@@ -31771,7 +31749,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Fatal Attraction",
@@ -32526,6 +32504,28 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Evil Dead II (Dead by Dawn",
+    "fel_confirmed": true,
+    "release_date": "1987-03-13",
+    "studio": "Rosebud Releasing Corporation",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "765",
+    "imdb_id": "tt0092991",
+    "poster_path": "data/posters/765.jpg",
+    "release_url": "https://www.themoviedb.org/movie/765",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Evil Dead II (Dead by Dawn) (1987) | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Catwoman.Hunted.2022 | nits",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
+  },
+  {
     "movie_title": "Evil Dead 2",
     "fel_confirmed": true,
     "release_date": "1987-03-13",
@@ -32547,7 +32547,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Evil Dead II",
@@ -32762,7 +32762,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Blue Velvet",
@@ -33033,7 +33033,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Jo Jo Dancer, Your Life Is Calling",
@@ -33242,7 +33242,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Clue",
@@ -33564,7 +33564,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Pale Rider",
@@ -34306,7 +34306,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Night of the Comet",
@@ -34528,7 +34528,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Karate Kid",
@@ -34617,7 +34617,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Streets of Fire",
@@ -34796,7 +34796,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Terms of Endearment",
@@ -35115,7 +35115,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Flashdance",
@@ -35145,7 +35145,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "10 to Midnight",
@@ -35398,7 +35398,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Gandhi",
@@ -35600,7 +35600,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Forbidden World",
@@ -35708,7 +35708,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Vigili e vigilesse",
@@ -35773,7 +35773,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Swamp Thing",
@@ -35832,28 +35832,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Evil Dead",
-    "fel_confirmed": true,
-    "release_date": "1981",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Evil Dead (1981) | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Catch.Me.If.You.Can.2002 | 0 | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
   },
   {
     "movie_title": "Venom",
@@ -35932,6 +35910,28 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Evil Dead",
+    "fel_confirmed": true,
+    "release_date": "1981-10-15",
+    "studio": "Renaissance Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "Unknown",
+    "tmdb_id": "764",
+    "imdb_id": "tt0083907",
+    "poster_path": "data/posters/764.jpg",
+    "release_url": "https://www.themoviedb.org/movie/764",
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Evil Dead (1981) | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Catch.Me.If.You.Can.2002 | 0 | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
+  },
+  {
     "movie_title": "The Evil Dead",
     "fel_confirmed": true,
     "release_date": "1981-10-15",
@@ -35976,7 +35976,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Galaxy of Terror",
@@ -36095,7 +36095,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Blow Out",
@@ -36244,7 +36244,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Raiders of the Lost Ark",
@@ -36337,7 +36337,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Burning",
@@ -36395,7 +36395,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Lion of the Desert",
@@ -36649,7 +36649,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Beast to Die",
@@ -36841,7 +36841,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Night of the Juggler",
@@ -36957,7 +36957,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Final Countdown",
@@ -37051,7 +37051,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "G.I. Samurai",
@@ -37129,7 +37129,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Zombie Flesh Eaters",
@@ -37322,7 +37322,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Mad Max",
@@ -37369,7 +37369,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Love on the Run",
@@ -37426,7 +37426,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Halloween",
@@ -37487,7 +37487,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Wiz",
@@ -37670,7 +37670,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Last Waltz",
@@ -38219,7 +38219,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Rocky Horror Picture Show",
@@ -38305,7 +38305,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Night Moves",
@@ -38781,7 +38781,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "The Last Detail",
@@ -39234,7 +39234,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Last Picture Show",
@@ -39450,7 +39450,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Der Hauptmann",
@@ -39956,7 +39956,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Oliver!",
@@ -40079,7 +40079,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Long men ke zhen",
@@ -40228,7 +40228,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Train",
@@ -40653,7 +40653,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Magnificent Seven",
@@ -41709,7 +41709,7 @@
       "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.165946+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Scarlet Street",
@@ -41958,7 +41958,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-18T00:58:28+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "John Wick Chapter.2",
@@ -42024,7 +42024,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-18T00:58:28+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Rango.2011.",
@@ -42046,7 +42046,7 @@
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-18T00:58:28+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Star Trek First Contact",
