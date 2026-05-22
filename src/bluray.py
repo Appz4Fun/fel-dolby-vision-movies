@@ -1,6 +1,13 @@
 from __future__ import annotations
 
+from dataclasses import dataclass, field
+from datetime import datetime
+import html
 import re
+
+import httpx
+
+from enrich import _get_with_retry
 
 _FREQ_RE = re.compile(r"\s*\([^)]*\)")
 _ABBREVIATIONS = (
@@ -75,3 +82,56 @@ def normalize_bluray_audio(tracks: list[tuple[str, str]]) -> list[str]:
             if fmt not in result:
                 result.append(fmt)
     return result
+
+
+_AUDIO_BLOCK_RE = re.compile(r'<div id="longaudio"[^>]*>(.*?)</div>', re.S)
+_HDR_RE = re.compile(r"HDR:\s*([^<]+)")
+_RELEASE_DATE_RE = re.compile(r"Release Date ([A-Z][a-z]+ \d{1,2}, \d{4})")
+_TAG_RE = re.compile(r"<[^>]+>")
+
+
+@dataclass(frozen=True)
+class BlurayDetails:
+    url: str
+    bluray_release_date: str = ""
+    audio_formats: list[str] = field(default_factory=list)
+    audio_languages: list[str] = field(default_factory=list)
+    hdr_formats: list[str] = field(default_factory=list)
+
+
+def _parse_release_date(text: str) -> str:
+    try:
+        return datetime.strptime(text, "%B %d, %Y").strftime("%Y-%m-%d")
+    except ValueError:
+        return ""
+
+
+def fetch_bluray_details(client: httpx.Client, url: str) -> BlurayDetails:
+    html_text = _get_with_retry(client, url).text
+
+    hdr_match = _HDR_RE.search(html_text)
+    hdr_formats = parse_hdr(hdr_match.group(1)) if hdr_match else []
+
+    tracks: list[tuple[str, str]] = []
+    block = _AUDIO_BLOCK_RE.search(html_text)
+    if block:
+        for line in re.split(r"<br\s*/?>", block.group(1)):
+            text = html.unescape(_TAG_RE.sub("", line)).replace("\xa0", " ").strip()
+            if ":" not in text:
+                continue
+            language, fmt = text.split(":", 1)
+            language, fmt = language.strip(), fmt.strip()
+            if not fmt.startswith(KNOWN_CODECS):
+                continue
+            tracks.append((language, fmt))
+
+    date_match = _RELEASE_DATE_RE.search(html_text)
+    return BlurayDetails(
+        url=url,
+        bluray_release_date=(
+            _parse_release_date(date_match.group(1)) if date_match else ""
+        ),
+        audio_formats=normalize_bluray_audio(tracks),
+        audio_languages=list(dict.fromkeys(lang for lang, _ in tracks)),
+        hdr_formats=hdr_formats,
+    )

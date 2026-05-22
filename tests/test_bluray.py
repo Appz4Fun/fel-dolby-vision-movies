@@ -1,4 +1,23 @@
-from bluray import normalize_bluray_audio, parse_hdr
+import httpx
+
+from bluray import (
+    BlurayDetails,
+    fetch_bluray_details,
+    normalize_bluray_audio,
+    parse_hdr,
+)
+
+
+_DISC_HTML = """
+<span class="subheading">Video</span><br> Codec: HEVC<br>
+ HDR: Dolby Vision, HDR10<br>Aspect ratio: 2.39:1<br>
+ <span class="subheading">Audio</span><br>
+ <div id="longaudio" style="display: none"> English: Dolby Atmos<br>
+English: Dolby TrueHD 7.1 (48kHz, 24-bit)<br>French: Dolby Digital 5.1 (640 kbps)<br>
+&nbsp;(<a href="#">less</a>) </div>
+ <span class="subheading">Subtitles</span><br>
+<a title="Movie 4K Blu-ray Release Date April 21, 2026" href="x">d</a>
+"""
 
 
 def test_parse_hdr_keeps_known_formats_in_order():
@@ -41,3 +60,21 @@ def test_normalize_audio_dedupes_across_languages():
         ("Spanish", "Dolby Digital 5.1"),
     ]
     assert normalize_bluray_audio(tracks) == ["DD 5.1"]
+
+
+def test_fetch_bluray_details_parses_disc_page():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, text=_DISC_HTML)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    details = fetch_bluray_details(
+        client, "https://www.blu-ray.com/movies/Movie-4K-Blu-ray/1/"
+    )
+    client.close()
+
+    assert isinstance(details, BlurayDetails)
+    assert details.hdr_formats == ["Dolby Vision", "HDR10"]
+    assert details.audio_formats == ["Dolby TrueHD/Atmos 7.1", "DD 5.1"]
+    assert details.audio_languages == ["English", "French"]
+    assert details.bluray_release_date == "2026-04-21"
+    assert details.url.endswith("/1/")
