@@ -9,9 +9,15 @@ from models import UNKNOWN, FelEvidence, FelRelease
 
 _YEAR_RE = re.compile(r"(?:19|20)\d{2}")
 _FULL_DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
-# Evidence types that are mere list memberships with synthesized quotes.
-# Any other evidence type (a real scraped quote) is preferred over these.
-_WEAK_EVIDENCE = ("fel-list", "fel-bitrate-list")
+# List-membership evidence types (synthesized quotes). Any *-list type --
+# fel-list, fel-bitrate-list, reddit-list, github-list, discourse-list,
+# letterboxd-list, google-sheet-list -- is considered weak so a real scraped
+# quote always wins over list membership.
+_WEAK_EVIDENCE_SUFFIX = "-list"
+
+
+def _is_weak_evidence(evidence_type: str) -> bool:
+    return evidence_type.endswith(_WEAK_EVIDENCE_SUFFIX)
 
 
 def canonical_title_key(value: str) -> str:
@@ -59,8 +65,8 @@ def _prefer_title(left: str, right: str) -> str:
 
 
 def _prefer_evidence(left: FelEvidence, right: FelEvidence) -> FelEvidence:
-    left_weak = left.evidence_type in _WEAK_EVIDENCE
-    right_weak = right.evidence_type in _WEAK_EVIDENCE
+    left_weak = _is_weak_evidence(left.evidence_type)
+    right_weak = _is_weak_evidence(right.evidence_type)
     if left_weak and not right_weak:
         return right
     return left
