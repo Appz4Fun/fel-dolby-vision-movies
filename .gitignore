@@ -2,7 +2,7 @@
 .cache/
 .venv/
 uv.lock
-.coverage
+.coverage*
 .DS_Store
 dist/
 __pycache__/

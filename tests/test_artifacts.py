@@ -20,7 +20,7 @@ def release(title: str, date: str) -> FelRelease:
     )
 
 
-def test_publish_outputs_writes_artifacts_and_dashboard_from_releases(tmp_path: Path):
+def test_publish_outputs_writes_data_and_dashboard_from_releases(tmp_path: Path):
     sorted_releases = publish_outputs(
         [
             release("Older", "2020"),
@@ -30,8 +30,6 @@ def test_publish_outputs_writes_artifacts_and_dashboard_from_releases(tmp_path: 
     )
 
     assert [item.movie_title for item in sorted_releases] == ["Newer", "Older"]
-    assert (tmp_path / "README.md").exists()
-    assert (tmp_path / "links.md").exists()
     assert (tmp_path / "data/releases.json").exists()
     assert (tmp_path / "dist/index.html").exists()
     assert (tmp_path / "dist/releases.json").exists()
@@ -55,10 +53,6 @@ def test_write_artifacts_sorts_known_dates_newest_first_unknown_last(
         "Older",
         "Unknown Date",
     ]
-    readme = (tmp_path / "README.md").read_text(encoding="utf-8")
-    assert "| 2026-05-01 | Newer |" in readme
-    assert "[src](https://example.test/Newer)" in readme
-    assert "Newer is Profile 7 FEL" not in readme
 
 
 def test_write_artifacts_merges_into_existing_releases_json(tmp_path: Path):
@@ -93,19 +87,6 @@ def test_write_artifacts_replaces_stale_rows_from_refreshed_sources(tmp_path: Pa
     assert titles == ["Preserved", "Rango"]
 
 
-def test_write_artifacts_renders_poster_and_tmdb_columns(tmp_path: Path):
-    item = release("Enriched", "2024")
-    item.tmdb_id = "111"
-    item.poster_path = "data/posters/111.jpg"
-    item.release_url = "https://www.themoviedb.org/movie/111"
-
-    write_artifacts([item], output_dir=tmp_path)
-
-    readme = (tmp_path / "README.md").read_text(encoding="utf-8")
-    assert "![Enriched](data/posters/111.jpg)" in readme
-    assert "[TMDB](https://www.themoviedb.org/movie/111)" in readme
-
-
 def test_write_artifacts_dedupes_by_tmdb_id(tmp_path: Path):
     first = release("Spelling One", "2021")
     first.tmdb_id = "777"
@@ -118,70 +99,20 @@ def test_write_artifacts_dedupes_by_tmdb_id(tmp_path: Path):
     assert sum(1 for item in data if item["tmdb_id"] == "777") == 1
 
 
-def test_readme_has_hdr_and_bluray_columns(tmp_path: Path):
+def test_write_artifacts_preserves_enriched_fields(tmp_path: Path):
     item = release("Enriched", "2024")
+    item.tmdb_id = "111"
+    item.poster_path = "data/posters/111.jpg"
+    item.release_url = "https://www.themoviedb.org/movie/111"
     item.hdr_formats = ["Dolby Vision", "HDR10"]
     item.bluray_url = "https://www.blu-ray.com/movies/Enriched-4K-Blu-ray/9/"
 
     write_artifacts([item], output_dir=tmp_path)
 
-    readme = (tmp_path / "README.md").read_text(encoding="utf-8")
-    assert "Dolby Vision, HDR10" in readme
-    assert "[BR](https://www.blu-ray.com/movies/Enriched-4K-Blu-ray/9/)" in readme
-
-
-def test_readme_omits_fel_column_and_uses_split_link_columns(tmp_path: Path):
-    item = release("Enriched", "2024")
-    item.release_url = "https://www.themoviedb.org/movie/111"
-    item.bluray_url = "https://www.blu-ray.com/movies/Enriched-4K-Blu-ray/9/"
-
-    write_artifacts([item], output_dir=tmp_path)
-
-    readme = (tmp_path / "README.md").read_text(encoding="utf-8")
-    header = readme.splitlines()[4]
-    assert header.startswith("| Release Date | Movie |")
-    assert "FEL" not in header
-    assert "Src Link" in header
-    assert "BR Link" in header
-    assert "TMDB" in header
-
-
-def test_links_contains_only_unique_source_urls(tmp_path: Path):
-    write_artifacts([release("A", "2020"), release("A", "2020")], output_dir=tmp_path)
-
-    links = (tmp_path / "links.md").read_text(encoding="utf-8")
-    assert links.count("https://example.test/A") == 1
-
-
-def test_links_for_empty_release_set_has_no_extra_blank_line(tmp_path: Path):
-    write_artifacts([], output_dir=tmp_path)
-
-    assert (tmp_path / "links.md").read_text(encoding="utf-8") == "# Source Links\n"
-
-
-def test_links_includes_extra_provenance_source_urls(tmp_path: Path):
-    item = release("Provenanced", "2024")
-    item.additional_characteristics = {
-        "source_urls": ["https://example.test/Provenanced", "https://extra.test/x"]
-    }
-
-    write_artifacts([item], output_dir=tmp_path)
-
-    links = (tmp_path / "links.md").read_text(encoding="utf-8")
-    assert "https://example.test/Provenanced" in links
-    assert "https://extra.test/x" in links
-
-
-def test_readme_omits_release_group_metadata(tmp_path: Path):
-    item = release("A", "2020")
-    item.additional_characteristics = {
-        "release_group": "GROUP",
-        "disc_count": 2,
-    }
-
-    write_artifacts([item], output_dir=tmp_path)
-
-    readme = (tmp_path / "README.md").read_text(encoding="utf-8")
-    assert "disc_count: 2" in readme
-    assert "release_group" not in readme
-    assert "GROUP" not in readme
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    assert len(data) == 1
+    entry = data[0]
+    assert entry["tmdb_id"] == "111"
+    assert entry["poster_path"] == "data/posters/111.jpg"
+    assert entry["hdr_formats"] == ["Dolby Vision", "HDR10"]
+    assert entry["bluray_url"].endswith("/9/")

@@ -26,7 +26,7 @@ import sources
 
 
 DEFAULT_SCRAPE_WORKERS = 6
-DEFAULT_GOOGLE_SHEETS_PATH = Path("google_sheets.txt")
+DEFAULT_GOOGLE_SHEETS_PATH = Path("data/google_sheets.txt")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -100,7 +100,7 @@ def _build_parser() -> argparse.ArgumentParser:
     search.add_argument(
         "--sources",
         type=Path,
-        default=Path("forums.txt"),
+        default=Path("data/forums.txt"),
         help="path to the source registry",
     )
     for command in ("scrape-for-titles", "run"):
@@ -108,7 +108,7 @@ def _build_parser() -> argparse.ArgumentParser:
         scrape.add_argument(
             "--sources",
             type=Path,
-            default=Path("forums.txt"),
+            default=Path("data/forums.txt"),
             help=argparse.SUPPRESS,
         )
         scrape.add_argument(
@@ -141,7 +141,7 @@ def _build_parser() -> argparse.ArgumentParser:
     compare_found.add_argument(
         "--sources",
         type=Path,
-        default=Path("forums.txt"),
+        default=Path("data/forums.txt"),
         help="path to the source registry",
     )
     compare_found.add_argument(
@@ -187,7 +187,9 @@ def _build_parser() -> argparse.ArgumentParser:
         "ai-scrape",
         help="AI-assisted source discovery and FEL extraction via codex",
     )
-    ai_scrape_parser.add_argument("--sources", type=Path, default=Path("forums.txt"))
+    ai_scrape_parser.add_argument(
+        "--sources", type=Path, default=Path("data/forums.txt")
+    )
     ai_scrape_parser.add_argument("--output-dir", type=Path, default=Path("."))
     ai_scrape_parser.add_argument("--cache-dir", type=Path, default=Path(".cache/html"))
     return parser
@@ -427,7 +429,7 @@ def _scrape_source(
 
 
 def _google_sheets_path_for(source_path: Path) -> Path:
-    if source_path == Path("forums.txt"):
+    if source_path == Path("data/forums.txt"):
         return DEFAULT_GOOGLE_SHEETS_PATH
     return source_path.with_name("google_sheets.txt")
 
