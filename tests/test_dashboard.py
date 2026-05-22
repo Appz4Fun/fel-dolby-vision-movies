@@ -146,8 +146,12 @@ def test_dashboard_escapes_release_text_and_split_link_labels(tmp_path: Path):
     assert "<script>alert" not in html
     assert "Alien &lt;script&gt;alert(&quot;x&quot;)&lt;/script&gt;" in html
     assert "\\u003cunsafe>" in html
+    assert 'href="https://source.test/?q=<unsafe>"' not in html
+    assert (
+        '<a href="https://source.test/?q=&lt;unsafe&gt;" rel="noreferrer">Src</a>'
+    ) in html
     assert '["BR Link"' in html
     assert '["Src Link"' in html
     assert '["TMDB"' in html
-    assert 'rel="noreferrer">BR</a>' in html
-    assert 'rel="noreferrer">Src</a>' in html
+    assert '<a href="https://blu-ray.test/Alien" rel="noreferrer">BR</a>' in html
+    assert '<a href="https://tmdb.test/movie/1" rel="noreferrer">TMDB</a>' in html
