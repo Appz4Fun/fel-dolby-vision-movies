@@ -120,10 +120,8 @@ def ai_scrape_releases(
     return ai_extract_releases(ai_client, pages)
 
 
-def _google_sheets_path_for(source_path: Path) -> Path:
-    if source_path == Path("data/forums.txt"):
-        return Path("data/google_sheets.txt")
-    return source_path.with_name("google_sheets.txt")
+def _always_fel_path_for(source_path: Path) -> Path:
+    return source_path.with_name("sources_always_fel.txt")
 
 
 def _load_existing_releases(output_dir: Path) -> list[FelRelease]:
@@ -151,9 +149,9 @@ def run_ai_scrape(source_path: Path, output_dir: Path, cache_dir: Path) -> int:
         print("ai-scrape skipped; OPENAI_API_KEY / CODEX_API_KEY is not configured")
         return 0
 
-    forum_urls = sources.read_source_urls(source_path)
-    sheet_urls = sources.read_source_urls(_google_sheets_path_for(source_path))
-    existing_urls = list(dict.fromkeys([*forum_urls, *sheet_urls]))
+    needs_evidence_urls = sources.read_source_urls(source_path)
+    always_fel_urls = sources.read_source_urls(_always_fel_path_for(source_path))
+    existing_urls = list(dict.fromkeys([*needs_evidence_urls, *always_fel_urls]))
 
     with AIClient(settings) as ai_client:
         discovered = ai_discover_sources(ai_client, existing_urls)

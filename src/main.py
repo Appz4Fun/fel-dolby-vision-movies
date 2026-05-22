@@ -18,6 +18,7 @@ import enrich
 import fel_ingest
 import fetcher
 import google_sheets
+import list_sources
 import parser as fel_parser
 from merge import canonical_key, dedupe_releases
 from models import FelRelease, release_from_dict
@@ -26,7 +27,6 @@ import sources
 
 
 DEFAULT_SCRAPE_WORKERS = 6
-DEFAULT_GOOGLE_SHEETS_PATH = Path("data/google_sheets.txt")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -100,7 +100,7 @@ def _build_parser() -> argparse.ArgumentParser:
     search.add_argument(
         "--sources",
         type=Path,
-        default=Path("data/forums.txt"),
+        default=Path("data/sources_needs_evidence.txt"),
         help="path to the source registry",
     )
     for command in ("scrape-for-titles", "run"):
@@ -108,7 +108,7 @@ def _build_parser() -> argparse.ArgumentParser:
         scrape.add_argument(
             "--sources",
             type=Path,
-            default=Path("data/forums.txt"),
+            default=Path("data/sources_needs_evidence.txt"),
             help=argparse.SUPPRESS,
         )
         scrape.add_argument(
@@ -141,7 +141,7 @@ def _build_parser() -> argparse.ArgumentParser:
     compare_found.add_argument(
         "--sources",
         type=Path,
-        default=Path("data/forums.txt"),
+        default=Path("data/sources_needs_evidence.txt"),
         help="path to the source registry",
     )
     compare_found.add_argument(
@@ -188,7 +188,7 @@ def _build_parser() -> argparse.ArgumentParser:
         help="AI-assisted source discovery and FEL extraction via codex",
     )
     ai_scrape_parser.add_argument(
-        "--sources", type=Path, default=Path("data/forums.txt")
+        "--sources", type=Path, default=Path("data/sources_needs_evidence.txt")
     )
     ai_scrape_parser.add_argument("--output-dir", type=Path, default=Path("."))
     ai_scrape_parser.add_argument("--cache-dir", type=Path, default=Path(".cache/html"))
@@ -242,11 +242,14 @@ def _scrape_for_titles(
         print(f"scrape failed; sources file not found: {source_path}")
         return 1
 
-    forum_urls = sources.read_source_urls(source_path)
-    google_sheet_urls = sources.read_source_urls(_google_sheets_path_for(source_path))
+    needs_evidence_urls = sources.read_source_urls(source_path)
+    always_fel_urls = sources.read_source_urls(_always_fel_path_for(source_path))
     source_jobs = [
-        *[_SourceJob(url=url, source_type="forum") for url in forum_urls],
-        *[_SourceJob(url=url, source_type="google-sheet") for url in google_sheet_urls],
+        *[
+            _SourceJob(url=url, strictness="needs-evidence")
+            for url in needs_evidence_urls
+        ],
+        *[_SourceJob(url=url, strictness="always-fel") for url in always_fel_urls],
     ]
     if not source_jobs:
         print(f"scrape failed; no sources found in {source_path}")
@@ -288,8 +291,8 @@ def _scrape_for_titles(
     print(
         f"scrape complete; "
         f"sources={len(source_jobs)} "
-        f"forums={len(forum_urls)} "
-        f"google_sheets={len(google_sheet_urls)} "
+        f"always_fel={len(always_fel_urls)} "
+        f"needs_evidence={len(needs_evidence_urls)} "
         f"fetched={fetched_count} "
         f"releases={len(sorted_releases)} "
         f"errors={len(errors)} "
@@ -394,7 +397,7 @@ def _write_migration_report(
 @dataclass(frozen=True)
 class _SourceJob:
     url: str
-    source_type: str
+    strictness: str
 
 
 @dataclass(frozen=True)
@@ -407,31 +410,62 @@ class _SourceScrapeResult:
 def _scrape_source(
     source_job: _SourceJob, html_fetcher: fetcher.Fetcher
 ) -> _SourceScrapeResult:
+    """Fetch and parse one source. Parser is chosen by domain, strictness by file.
+
+    always-fel sources yield every listed title; needs-evidence sources only
+    yield titles backed by a direct FEL marker on the page.
+    """
+    url = source_job.url
+    always_fel = source_job.strictness == "always-fel"
+    domain = urlparse(url).netloc
     try:
-        fetch_url = source_job.url
-        if source_job.source_type == "google-sheet":
-            fetch_url = google_sheets.google_sheet_csv_url(source_job.url)
-        result = html_fetcher.fetch(fetch_url)
-        if source_job.source_type == "google-sheet":
-            releases = google_sheets.parse_google_sheet_releases(
-                result.text, source_job.url
-            )
-        else:
-            if "reddit.com" in urlparse(source_job.url).netloc:
-                releases = reddit_source.parse_reddit_releases(result.text, result.url)
+        if "docs.google.com" in domain:
+            text = html_fetcher.fetch(google_sheets.google_sheet_csv_url(url)).text
+            if always_fel:
+                releases = google_sheets.parse_always_fel_sheet(text, url)
             else:
-                releases = fel_parser.parse_fel_releases(result.text, result.url)
+                releases = google_sheets.parse_google_sheet_releases(text, url)
+        elif "reddit.com" in domain:
+            releases = reddit_source.parse_reddit_releases(
+                html_fetcher.fetch(url).text, url
+            )
+        elif "github.com" in domain:
+            readme = html_fetcher.fetch(_github_readme_url(url)).text
+            releases = list_sources.parse_github_md_list(readme, url)
+        elif "web.archive.org" in domain:
+            releases = list_sources.parse_discourse_list(
+                html_fetcher.fetch(url).text, url
+            )
+        elif "letterboxd.com" in domain:
+            releases = _scrape_letterboxd(url, html_fetcher)
+        else:
+            releases = fel_parser.parse_fel_releases(html_fetcher.fetch(url).text, url)
     except Exception as exc:  # pragma: no cover - exact network/parser errors vary
-        return _SourceScrapeResult(
-            url=source_job.url, releases=[], error=exc.__class__.__name__
-        )
-    return _SourceScrapeResult(url=source_job.url, releases=releases)
+        return _SourceScrapeResult(url=url, releases=[], error=exc.__class__.__name__)
+    return _SourceScrapeResult(url=url, releases=releases)
 
 
-def _google_sheets_path_for(source_path: Path) -> Path:
-    if source_path == Path("data/forums.txt"):
-        return DEFAULT_GOOGLE_SHEETS_PATH
-    return source_path.with_name("google_sheets.txt")
+def _github_readme_url(url: str) -> str:
+    parts = [part for part in urlparse(url).path.split("/") if part]
+    if len(parts) >= 2:
+        return f"https://raw.githubusercontent.com/{parts[0]}/{parts[1]}/HEAD/README.md"
+    return url
+
+
+def _scrape_letterboxd(url: str, html_fetcher: fetcher.Fetcher) -> list[FelRelease]:
+    first_page = html_fetcher.fetch(url).text
+    releases = list_sources.parse_letterboxd_list(first_page, url)
+    for page in range(2, list_sources.letterboxd_page_count(first_page) + 1):
+        page_html = html_fetcher.fetch(
+            f"{url.rstrip('/')}/page/{page}/", raise_on_error=False
+        ).text
+        if page_html:
+            releases.extend(list_sources.parse_letterboxd_list(page_html, url))
+    return releases
+
+
+def _always_fel_path_for(source_path: Path) -> Path:
+    return source_path.with_name("sources_always_fel.txt")
 
 
 if __name__ == "__main__":

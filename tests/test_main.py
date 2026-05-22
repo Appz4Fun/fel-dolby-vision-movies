@@ -153,11 +153,10 @@ def test_scrape_for_titles_fetches_sources_and_writes_artifacts(
     assert "session=secret" not in output
 
 
-def test_scrape_for_titles_includes_default_google_sheets_file(
+def test_scrape_for_titles_routes_google_sheet_urls(
     tmp_path: Path, monkeypatch, capsys
 ):
-    sources_path = tmp_path / "forums.txt"
-    google_sheets_path = tmp_path / "google_sheets.txt"
+    sources_path = tmp_path / "sources_needs_evidence.txt"
     output_dir = tmp_path / "out"
     cache_dir = tmp_path / "cache"
     forum_url = "https://forum.example.test/thread"
@@ -165,8 +164,7 @@ def test_scrape_for_titles_includes_default_google_sheets_file(
         "https://docs.google.com/spreadsheets/d/test-sheet-id/"
         "edit?gid=828864432#gid=828864432"
     )
-    sources_path.write_text(f"{forum_url}\n", encoding="utf-8")
-    google_sheets_path.write_text(f"{sheet_url}\n", encoding="utf-8")
+    sources_path.write_text(f"{forum_url}\n{sheet_url}\n", encoding="utf-8")
     fetches = []
 
     class FakeFetchResult:
@@ -228,7 +226,8 @@ def test_scrape_for_titles_includes_default_google_sheets_file(
     ]
     output = capsys.readouterr().out
     assert "sources=2" in output
-    assert "google_sheets=1" in output
+    assert "needs_evidence=2" in output
+    assert "always_fel=0" in output
     assert "releases=2" in output
 
 
@@ -859,7 +858,7 @@ def test_reddit_url_routes_to_reddit_parser(monkeypatch):
 
     job = main._SourceJob(
         url="https://www.reddit.com/r/CoreELEC/comments/x/list/",
-        source_type="forum",
+        strictness="needs-evidence",
     )
     result = main._scrape_source(job, FakeFetcher())
 

@@ -66,6 +66,47 @@ def parse_google_sheet_releases(csv_text: str, source_url: str) -> list[FelRelea
     return releases
 
 
+def parse_always_fel_sheet(csv_text: str, source_url: str) -> list[FelRelease]:
+    """Parse a curated FEL sheet where every listed film is Profile 7 FEL.
+
+    Unlike parse_google_sheet_releases this needs no DV/FEL column -- the
+    sheet itself is the evidence -- so every titled row becomes a release.
+    """
+    rows = list(csv.reader(csv_text.splitlines()))
+    releases: list[FelRelease] = []
+    title_index: int | None = None
+    for row in rows:
+        if title_index is None:
+            normalized = [_normalize_header(cell) for cell in row]
+            title_index = _first_header_index(normalized, TITLE_HEADERS)
+            continue
+        if title_index >= len(row):
+            continue
+        raw_title = normalize_title(row[title_index])
+        if not raw_title:
+            continue
+        title, year = _split_title_year(raw_title)
+        if not title or COLLECTION_TITLE_RE.search(title):
+            continue
+        quote = " | ".join(
+            normalize_title(cell) for cell in row if normalize_title(cell)
+        )
+        releases.append(
+            FelRelease(
+                movie_title=title,
+                release_date=year,
+                fel_evidence=FelEvidence(
+                    source_url=source_url,
+                    quote=quote[:500],
+                    evidence_type="google-sheet-list",
+                ),
+                source_label="google-sheet",
+                collected_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            )
+        )
+    return releases
+
+
 def _gid_from_url(parsed_url) -> str:
     query_gid = parse_qs(parsed_url.query).get("gid")
     if query_gid and query_gid[0]:

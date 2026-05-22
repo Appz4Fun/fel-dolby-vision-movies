@@ -1,0 +1,43 @@
+# Discussion threads and unvetted sources.
+# A movie counts as FEL only when the page carries a direct FEL marker near
+# the title (a Profile 7 FEL quote, a BDInfo/MediaInfo dump, etc.).
+# Auto-discovered links are appended here.
+https://forum.blu-ray.com/showthread.php?t=276448
+https://forum.blu-ray.com/forumdisplay.php?f=203
+https://forum.blu-ray.com/showthread.php?t=327042
+https://forum.blu-ray.com/showthread.php?t=360730
+https://forum.blu-ray.com/showthread.php?page=7&t=360081
+https://forum.blu-ray.com/showpost.php?p=23223067
+https://forum.blu-ray.com/showthread.php?p=22886667
+https://forum.blu-ray.com/showthread.php?p=23456724
+https://forum.blu-ray.com/showthread.php?p=23318439
+https://forum.blu-ray.com/showpost.php?p=23851523&postcount=169
+https://forum.blu-ray.com/showthread.php?p=23541031
+https://forum.blu-ray.com/showthread.php?page=4&t=372842
+https://forum.blu-ray.com/showthread.php?page=9&t=365211
+https://forum.blu-ray.com/showthread.php?p=20658059
+https://forum.blu-ray.com/showthread.php?p=22543294
+https://forum.blu-ray.com/showthread.php?t=385031
+https://forum.blu-ray.com/showthread.php?t=373287
+https://forum.blu-ray.com/showthread.php?t=294596
+https://caps-a-holic.com/c.php?c=5741&d1=15005&d2=15002
+https://caps-a-holic.com/c.php?c=5640&d1=14678&d2=14677
+https://caps-a-holic.com/c.php?c=6018&d1=15832&d2=15864
+https://caps-a-holic.com/c.php?c=6165&d1=16781&d2=17055
+https://www.blu-ray.com/movies/Rabid-4K-Blu-ray/397990/
+https://forum.makemkv.com/forum/viewtopic.php?t=18602
+https://forum.makemkv.com/forum/viewtopic.php?start=3150&style=4&t=18602
+https://forum.makemkv.com/forum/viewtopic.php?f=12&t=18602
+https://forum.makemkv.com/forum/viewtopic.php?t=33122
+https://forum.makemkv.com/forum/viewtopic.php?t=21937
+https://criterionforum.org/forum/viewtopic.php?t=18217
+https://criterionforum.org/forum/viewtopic.php?start=1050&t=18217
+https://criterionforum.org/forum/viewtopic.php?t=18074
+https://www.dvdtalk.com/reviews/review/74361
+https://forum.kodi.tv/showthread.php?tid=371521
+https://www.avsforum.com/threads/dolby-vision-profile-7-fel-with-full-lossless-audio-truehd-atmos-and-dts-x.3339774
+https://www.avsforum.com/threads/dolby-vision-uhd-blu-ray-movies.2945968/
+https://www.avsforum.com/threads/dolby-vision-uhd-blu-ray-movies.2945964/
+https://www.avforums.com/threads/dolby-vision-uhd-blu-ray-movies-list.2157216/
+https://old.reddit.com/r/AndroidTV/comments/18kmowh/dolby_vision_profile_7_full_enhancement_layer_fel
+https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432

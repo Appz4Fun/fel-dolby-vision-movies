@@ -8,19 +8,19 @@ default:
 
 search-for-sources:
     @test -f src/main.py || { echo "search-for-sources is not implemented yet"; exit 1; }
-    uv run --with-requirements requirements.txt python -m main search-for-sources --sources data/forums.txt
+    uv run --with-requirements requirements.txt python -m main search-for-sources --sources data/sources_needs_evidence.txt
 
 scrape-for-titles:
     @test -f src/main.py || { echo "scrape-for-titles is not implemented yet"; exit 1; }
-    uv run --with-requirements requirements.txt python -m main scrape-for-titles --sources data/forums.txt
+    uv run --with-requirements requirements.txt python -m main scrape-for-titles --sources data/sources_needs_evidence.txt
 
 run:
     @test -f src/main.py || { echo "run is not implemented yet"; exit 1; }
-    uv run --with-requirements requirements.txt python -m main run --sources data/forums.txt
+    uv run --with-requirements requirements.txt python -m main run --sources data/sources_needs_evidence.txt
 
 compare-found *args:
     @test -f src/main.py || { echo "compare-found is not implemented yet"; exit 1; }
-    uv run --with-requirements requirements.txt python -m main compare-found --sources data/forums.txt {{args}}
+    uv run --with-requirements requirements.txt python -m main compare-found --sources data/sources_needs_evidence.txt {{args}}
 
 migrate:
     @test -f src/main.py || { echo "migrate is not implemented yet"; exit 1; }

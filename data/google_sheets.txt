@@ -1,5 +1,0 @@
-# Google Sheets FEL sources.
-# Add public Google Sheets URLs here. The scraper reads the gid from each URL,
-# exports that tab as CSV, and detects rows where the title column has a movie
-# and the DV/source column contains FEL.
-https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432
