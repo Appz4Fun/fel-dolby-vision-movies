@@ -1,31 +1,5 @@
 [
   {
-    "movie_title": "Good Luck, Have Fun, Don't Die",
-    "fel_confirmed": true,
-    "release_date": "2026-02-13",
-    "studio": "Constantin Film",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1119449",
-    "imdb_id": "tt1341338",
-    "poster_path": "data/posters/1119449.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1119449",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Good Luck, Have Fun, Don't Die (2026) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Send Help",
     "fel_confirmed": true,
     "release_date": "2026-01-22",
@@ -66,81 +40,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Send Help (2026) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Mercy",
-    "fel_confirmed": true,
-    "release_date": "2026-01-20",
-    "studio": "Atlas Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1236153",
-    "imdb_id": "tt31050594",
-    "poster_path": "data/posters/1236153.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1236153",
-    "bluray_url": "https://www.blu-ray.com/movies/Mercy-4K-Blu-ray/405111/",
-    "bluray_release_date": "2026-04-07",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "French (Canada)",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Mercy (2026) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "28 Years Later: The Bone Temple",
-    "fel_confirmed": true,
-    "release_date": "2026-01-14",
-    "studio": "Columbia Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1272837",
-    "imdb_id": "tt32141377",
-    "poster_path": "data/posters/1272837.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1272837",
-    "bluray_url": "https://www.blu-ray.com/movies/28-Years-Later-The-Bone-Temple-4K-Blu-ray/404741/",
-    "bluray_release_date": "2026-04-21",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "28 Years Later: The Bone Temple (2026) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -256,32 +155,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "The Housemaid (2025) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Five Nights at Freddy's 2",
-    "fel_confirmed": true,
-    "release_date": "2025-12-03",
-    "studio": "Blumhouse Productions",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1228246",
-    "imdb_id": "tt30274401",
-    "poster_path": "data/posters/1228246.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1228246",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Five Nights at Freddy's 2 (2025) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -407,32 +280,6 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
       "quote": "Wicked: For Good (2025) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Now You See Me: Now You Don't",
-    "fel_confirmed": true,
-    "release_date": "2025-11-12",
-    "studio": "Lionsgate",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "425274",
-    "imdb_id": "tt4712810",
-    "poster_path": "data/posters/425274.jpg",
-    "release_url": "https://www.themoviedb.org/movie/425274",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Now You See Me: Now You Don't (2025) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -1015,42 +862,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Caught Stealing",
-    "fel_confirmed": true,
-    "release_date": "2025-08-26",
-    "studio": "Protozoa Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1245993",
-    "imdb_id": "tt1493274",
-    "poster_path": "data/posters/1245993.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1245993",
-    "bluray_url": "https://www.blu-ray.com/movies/Caught-Stealing-4K-Blu-ray/395744/",
-    "bluray_release_date": "2025-11-11",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Thai"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Caught Stealing (2025) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Highest 2 Lowest",
     "fel_confirmed": true,
     "release_date": "2025-08-14",
@@ -1374,43 +1185,6 @@
     "collected_at": "2026-05-22T12:37:17+00:00"
   },
   {
-    "movie_title": "28 Years Later",
-    "fel_confirmed": true,
-    "release_date": "2025-06-18",
-    "studio": "Columbia Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1100988",
-    "imdb_id": "tt10548174",
-    "poster_path": "data/posters/1100988.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1100988",
-    "bluray_url": "https://www.blu-ray.com/movies/28-Years-Later-4K-Blu-ray/377563/",
-    "bluray_release_date": "2025-09-23",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French (Canada)",
-      "Spanish",
-      "Thai"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "28 Years Later (2025) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Elio",
     "fel_confirmed": true,
     "release_date": "2025-06-18",
@@ -1619,44 +1393,6 @@
     "collected_at": "2026-05-22T12:37:17+00:00"
   },
   {
-    "movie_title": "Lilo & Stitch",
-    "fel_confirmed": true,
-    "release_date": "2025-05-17",
-    "studio": "Walt Disney Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD+ 7.1",
-      "DD 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "552524",
-    "imdb_id": "tt11655566",
-    "poster_path": "data/posters/552524.jpg",
-    "release_url": "https://www.themoviedb.org/movie/552524",
-    "bluray_url": "https://www.blu-ray.com/movies/Lilo-and-Stitch-4K-Blu-ray/392930/",
-    "bluray_release_date": "2025-08-26",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish",
-      "Japanese"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Lilo & Stitch (2025) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Mission: Impossible - The Final Reckoning",
     "fel_confirmed": true,
     "release_date": "2025-05-17",
@@ -1694,44 +1430,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Mission: Impossible - The Final Reckoning (2025) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Final Destination Bloodlines",
-    "fel_confirmed": true,
-    "release_date": "2025-05-14",
-    "studio": "New Line Cinema",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "574475",
-    "imdb_id": "tt9619824",
-    "poster_path": "data/posters/574475.jpg",
-    "release_url": "https://www.themoviedb.org/movie/574475",
-    "bluray_url": "https://www.blu-ray.com/movies/Final-Destination-Bloodlines-4K-Blu-ray/381249/",
-    "bluray_release_date": "2025-07-22",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish",
-      "Czech",
-      "Polish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Final Destination Bloodlines (2025) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -2065,42 +1763,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Novocaine (2025) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Mickey 17",
-    "fel_confirmed": true,
-    "release_date": "2025-02-28",
-    "studio": "Plan B Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "696506",
-    "imdb_id": "tt12299608",
-    "poster_path": "data/posters/696506.jpg",
-    "release_url": "https://www.themoviedb.org/movie/696506",
-    "bluray_url": "https://www.blu-ray.com/movies/Mickey-17-4K-Blu-ray/383608/",
-    "bluray_release_date": "2025-05-13",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Mickey 17 (2025) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -2524,43 +2186,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Kraven the Hunter",
-    "fel_confirmed": true,
-    "release_date": "2024-12-11",
-    "studio": "Columbia Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "539972",
-    "imdb_id": "tt8790086",
-    "poster_path": "data/posters/539972.jpg",
-    "release_url": "https://www.themoviedb.org/movie/539972",
-    "bluray_url": "https://www.blu-ray.com/movies/Kraven-the-Hunter-4K-Blu-ray/377877/",
-    "bluray_release_date": "2025-03-04",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French (Canada)",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Kraven the Hunter (2024) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "The Prosecutor",
     "fel_confirmed": true,
     "release_date": "2024-12-08",
@@ -2841,42 +2466,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Red One",
-    "fel_confirmed": true,
-    "release_date": "2024-10-31",
-    "studio": "Seven Bucks Productions",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "845781",
-    "imdb_id": "tt14948432",
-    "poster_path": "data/posters/845781.jpg",
-    "release_url": "https://www.themoviedb.org/movie/845781",
-    "bluray_url": "https://www.blu-ray.com/movies/Red-One-4K-Blu-ray/375871/",
-    "bluray_release_date": "2025-03-04",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Red One (2024) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Smile 2",
     "fel_confirmed": true,
     "release_date": "2024-10-16",
@@ -3043,32 +2632,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Joker: Folie à Deux (2024) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "The Killer's Game",
-    "fel_confirmed": true,
-    "release_date": "2024-09-12",
-    "studio": "Dogbone Entertainment",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "507241",
-    "imdb_id": "tt0327785",
-    "poster_path": "data/posters/507241.jpg",
-    "release_url": "https://www.themoviedb.org/movie/507241",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "The Killer's Game (2024) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -3918,78 +3481,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Godzilla x Kong: The New Empire",
-    "fel_confirmed": true,
-    "release_date": "2024-03-27",
-    "studio": "Legendary Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "823464",
-    "imdb_id": "tt14539740",
-    "poster_path": "data/posters/823464.jpg",
-    "release_url": "https://www.themoviedb.org/movie/823464",
-    "bluray_url": "https://www.blu-ray.com/movies/Godzilla-x-Kong-The-New-Empire-4K-Blu-ray/350428/",
-    "bluray_release_date": "2024-06-11",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Godzilla x Kong: The New Empire (2024) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Ghostbusters: Frozen Empire",
-    "fel_confirmed": true,
-    "release_date": "2024-03-20",
-    "studio": "Ghost Corps",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "967847",
-    "imdb_id": "tt21235248",
-    "poster_path": "data/posters/967847.jpg",
-    "release_url": "https://www.themoviedb.org/movie/967847",
-    "bluray_url": "https://www.blu-ray.com/movies/Ghostbusters-Frozen-Empire-4K-Blu-ray/349055/",
-    "bluray_release_date": "2024-06-25",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French (Canada)",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Ghostbusters: Frozen Empire (2024) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Love Lies Bleeding",
     "fel_confirmed": true,
     "release_date": "2024-03-07",
@@ -4148,77 +3639,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
-  },
-  {
-    "movie_title": "Exhuma",
-    "fel_confirmed": true,
-    "release_date": "2024-02-22",
-    "studio": "Showbox",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "838209",
-    "imdb_id": "tt27802490",
-    "poster_path": "data/posters/838209.jpg",
-    "release_url": "https://www.themoviedb.org/movie/838209",
-    "bluray_url": "https://www.blu-ray.com/movies/Exhuma-4K-Blu-ray/361194/",
-    "bluray_release_date": "2024-10-08",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "Korean",
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Exhuma (2024) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Madame Web",
-    "fel_confirmed": true,
-    "release_date": "2024-02-14",
-    "studio": "Columbia Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "634492",
-    "imdb_id": "tt11057302",
-    "poster_path": "data/posters/634492.jpg",
-    "release_url": "https://www.themoviedb.org/movie/634492",
-    "bluray_url": "https://www.blu-ray.com/movies/Madame-Web-4K-Blu-ray/355430/",
-    "bluray_release_date": "2024-04-30",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Madame Web (2024) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Longma jingshen",
@@ -4380,32 +3800,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "The Three Musketeers: Milady (2023) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Mr. Monk's Last Case: A Monk Movie",
-    "fel_confirmed": true,
-    "release_date": "2023-12-08",
-    "studio": "UCP",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1100795",
-    "imdb_id": "tt27145269",
-    "poster_path": "data/posters/1100795.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1100795",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Mr. Monk's Last Case: A Monk Movie (2023) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -5135,32 +4529,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "God Is a Bullet",
-    "fel_confirmed": true,
-    "release_date": "2023-06-22",
-    "studio": "Patriot Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "808396",
-    "imdb_id": "tt14270702",
-    "poster_path": "data/posters/808396.jpg",
-    "release_url": "https://www.themoviedb.org/movie/808396",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "God Is a Bullet (2023) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Transformers: Rise of the Beasts",
     "fel_confirmed": true,
     "release_date": "2023-06-06",
@@ -5231,42 +4599,6 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=373287",
       "quote": "Past Lives (2023) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Spider-Man: Across the Spider-Verse",
-    "fel_confirmed": true,
-    "release_date": "2023-05-31",
-    "studio": "Columbia Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "569094",
-    "imdb_id": "tt9362722",
-    "poster_path": "data/posters/569094.jpg",
-    "release_url": "https://www.themoviedb.org/movie/569094",
-    "bluray_url": "https://www.blu-ray.com/movies/Spider-Man-Across-the-Spider-Verse-4K-Blu-ray/339262/",
-    "bluray_release_date": "2023-09-05",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French (Canada)",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Spider-Man: Across the Spider-Verse (2023) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -5348,36 +4680,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
-  },
-  {
-    "movie_title": "Renfield",
-    "fel_confirmed": true,
-    "release_date": "2023-04-07",
-    "studio": "Skybound Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "649609",
-    "imdb_id": "tt11358390",
-    "poster_path": "data/posters/649609.jpg",
-    "release_url": "https://www.themoviedb.org/movie/649609",
-    "bluray_url": "https://www.blu-ray.com/movies/Renfield-4K-Blu-ray/380717/",
-    "bluray_release_date": "2025-11-11",
-    "hdr_formats": [],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Renfield (2023) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Ride On",
@@ -6377,32 +5679,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Don't Worry Darling",
-    "fel_confirmed": true,
-    "release_date": "2022-09-21",
-    "studio": "Vertigo Entertainment",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "619730",
-    "imdb_id": "tt10731256",
-    "poster_path": "data/posters/619730.jpg",
-    "release_url": "https://www.themoviedb.org/movie/619730",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Don't Worry Darling (2022) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Pearl",
     "fel_confirmed": true,
     "release_date": "2022-09-16",
@@ -7028,40 +6304,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Shin Ultraman (2022) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Corrective Measures",
-    "fel_confirmed": true,
-    "release_date": "2022-04-29",
-    "studio": "The Exchange",
-    "audio_formats": [
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "872177",
-    "imdb_id": "tt15391770",
-    "poster_path": "data/posters/872177.jpg",
-    "release_url": "https://www.themoviedb.org/movie/872177",
-    "bluray_url": "https://www.blu-ray.com/movies/Corrective-Measures-4K-Blu-ray/342590/",
-    "bluray_release_date": "2023-10-26",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "German",
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Corrective Measures (2022) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -7901,32 +7143,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Ron's Gone Wrong",
-    "fel_confirmed": true,
-    "release_date": "2021-10-14",
-    "studio": "Locksmith Animation",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "482321",
-    "imdb_id": "tt7504818",
-    "poster_path": "data/posters/482321.jpg",
-    "release_url": "https://www.themoviedb.org/movie/482321",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Ron's Gone Wrong (2021) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "No Time to Die",
     "fel_confirmed": true,
     "release_date": "2021-09-29",
@@ -8100,32 +7316,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Don't Breathe 2",
-    "fel_confirmed": true,
-    "release_date": "2021-08-12",
-    "studio": "Ghost House Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "482373",
-    "imdb_id": "tt6246322",
-    "poster_path": "data/posters/482373.jpg",
-    "release_url": "https://www.themoviedb.org/movie/482373",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Don't Breathe 2 (2021) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "The Green Knight",
     "fel_confirmed": true,
     "release_date": "2021-07-29",
@@ -8192,32 +7382,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Escape from Mogadishu (2021) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Snake Eyes: G.I. Joe Origins",
-    "fel_confirmed": true,
-    "release_date": "2021-07-22",
-    "studio": "Paramount Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "568620",
-    "imdb_id": "tt8404256",
-    "poster_path": "data/posters/568620.jpg",
-    "release_url": "https://www.themoviedb.org/movie/568620",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Snake Eyes: G.I. Joe Origins (2021) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -8585,32 +7749,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Incident 437",
-    "fel_confirmed": true,
-    "release_date": "2021-04-10",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "931985",
-    "imdb_id": "tt14512864",
-    "poster_path": "data/posters/931985.jpg",
-    "release_url": "https://www.themoviedb.org/movie/931985",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Incident 437 (2021) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Barb and Star Go to Vista Del Mar",
     "fel_confirmed": true,
     "release_date": "2021-03-29",
@@ -8800,32 +7938,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "A Writer's Odyssey (2021) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Willy's Wonderland",
-    "fel_confirmed": true,
-    "release_date": "2021-02-12",
-    "studio": "Saturn Films",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "643586",
-    "imdb_id": "tt8114980",
-    "poster_path": "data/posters/643586.jpg",
-    "release_url": "https://www.themoviedb.org/movie/643586",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Willy's Wonderland (2021) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -9036,66 +8148,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
-  },
-  {
-    "movie_title": "Bill & Ted Face the Music",
-    "fel_confirmed": true,
-    "release_date": "2020-08-27",
-    "studio": "Endeavor Content",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "501979",
-    "imdb_id": "tt1086064",
-    "poster_path": "data/posters/501979.jpg",
-    "release_url": "https://www.themoviedb.org/movie/501979",
-    "bluray_url": "https://www.blu-ray.com/movies/Bill-and-Ted-Face-the-Music-4K-Blu-ray/362973/",
-    "bluray_release_date": "2024-08-06",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Bill & Ted Face the Music (2020) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "2011",
-    "fel_confirmed": true,
-    "release_date": "2020-08-20",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "730339",
-    "imdb_id": "tt12942974",
-    "poster_path": "data/posters/730339.jpg",
-    "release_url": "https://www.themoviedb.org/movie/730339",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "2011 (2020) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Unhinged",
@@ -10825,43 +9877,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Fantastic Beasts: The Crimes of Grindelwald",
-    "fel_confirmed": true,
-    "release_date": "2018-11-14",
-    "studio": "Warner Bros. Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "338952",
-    "imdb_id": "tt4123430",
-    "poster_path": "data/posters/338952.jpg",
-    "release_url": "https://www.themoviedb.org/movie/338952",
-    "bluray_url": "https://www.blu-ray.com/movies/Fantastic-Beasts-The-Crimes-of-Grindelwald-4K-Blu-ray/220236/",
-    "bluray_release_date": "2019-03-12",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French (Canada)",
-      "Portuguese",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Fantastic Beasts: The Crimes of Grindelwald (2018) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "The Grinch",
     "fel_confirmed": true,
     "release_date": "2018-11-08",
@@ -12389,40 +11404,6 @@
     "collected_at": "2026-05-22T12:36:04+00:00"
   },
   {
-    "movie_title": "Cult of Chucky",
-    "fel_confirmed": true,
-    "release_date": "2017-10-12",
-    "studio": "Universal 1440 Entertainment",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "393345",
-    "imdb_id": "tt3280262",
-    "poster_path": "data/posters/393345.jpg",
-    "release_url": "https://www.themoviedb.org/movie/393345",
-    "bluray_url": "https://www.blu-ray.com/movies/Cult-of-Chucky-4K-Blu-ray/337408/",
-    "bluray_release_date": "2023-08-29",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Cult of Chucky (2017) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Hans Zimmer: Live in Prague",
     "fel_confirmed": true,
     "release_date": "2017-10-01",
@@ -13099,32 +12080,6 @@
     "collected_at": "2026-05-22T12:36:04+00:00"
   },
   {
-    "movie_title": "Life",
-    "fel_confirmed": true,
-    "release_date": "2017-03-22",
-    "studio": "Columbia Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "395992",
-    "imdb_id": "tt5442430",
-    "poster_path": "data/posters/395992.jpg",
-    "release_url": "https://www.themoviedb.org/movie/395992",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Life (2017) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "The Lost City of Z",
     "fel_confirmed": true,
     "release_date": "2017-03-15",
@@ -13512,32 +12467,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "The Wailing (2016) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "The Angry Birds Movie",
-    "fel_confirmed": true,
-    "release_date": "2016-05-11",
-    "studio": "Columbia Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "153518",
-    "imdb_id": "tt1985949",
-    "poster_path": "data/posters/153518.jpg",
-    "release_url": "https://www.themoviedb.org/movie/153518",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "The Angry Birds Movie (2016) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -14127,32 +13056,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Spotlight (2015) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "The Man from U.N.C.L.E.",
-    "fel_confirmed": true,
-    "release_date": "2015-08-13",
-    "studio": "Wigram Productions",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "203801",
-    "imdb_id": "tt1638355",
-    "poster_path": "data/posters/203801.jpg",
-    "release_url": "https://www.themoviedb.org/movie/203801",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "The Man from U.N.C.L.E. (2015) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -14919,48 +13822,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Captain Phillips",
-    "fel_confirmed": true,
-    "release_date": "2013-10-10",
-    "studio": "Columbia Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "109424",
-    "imdb_id": "tt1535109",
-    "poster_path": "data/posters/109424.jpg",
-    "release_url": "https://www.themoviedb.org/movie/109424",
-    "bluray_url": "https://www.blu-ray.com/movies/Captain-Phillips-4K-Blu-ray/360441/",
-    "bluray_release_date": "2024-07-16",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "French (Canada)",
-      "German",
-      "Italian",
-      "Spanish",
-      "Thai",
-      "Turkish"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Captain Phillips (2013) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Escape Plan",
     "fel_confirmed": true,
     "release_date": "2013-10-09",
@@ -15034,40 +13895,6 @@
     "fel_evidence": {
       "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
       "quote": "Blue Is the Warmest Color (2013) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Curse of Chucky",
-    "fel_confirmed": true,
-    "release_date": "2013-10-08",
-    "studio": "Universal 1440 Entertainment",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "167032",
-    "imdb_id": "tt2230358",
-    "poster_path": "data/posters/167032.jpg",
-    "release_url": "https://www.themoviedb.org/movie/167032",
-    "bluray_url": "https://www.blu-ray.com/movies/Curse-of-Chucky-4K-Blu-ray/337409/",
-    "bluray_release_date": "2023-08-29",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Curse of Chucky (2013) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -15149,32 +13976,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Rush (2013) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "You're Next",
-    "fel_confirmed": true,
-    "release_date": "2013-08-22",
-    "studio": "Snoot Entertainment",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "83899",
-    "imdb_id": "tt1853739",
-    "poster_path": "data/posters/83899.jpg",
-    "release_url": "https://www.themoviedb.org/movie/83899",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "You're Next (2013) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -15688,32 +14489,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
-  },
-  {
-    "movie_title": "Les Misérables",
-    "fel_confirmed": true,
-    "release_date": "2012-12-18",
-    "studio": "Universal Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "82695",
-    "imdb_id": "tt1707386",
-    "poster_path": "data/posters/82695.jpg",
-    "release_url": "https://www.themoviedb.org/movie/82695",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Les Misérables (2012) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "The Twilight Saga: Breaking Dawn - Part 2",
@@ -17217,40 +15992,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:37:17+00:00"
-  },
-  {
-    "movie_title": "The Crazies",
-    "fel_confirmed": true,
-    "release_date": "2010-02-26",
-    "studio": "Penn Station Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "29427",
-    "imdb_id": "tt0455407",
-    "poster_path": "data/posters/29427.jpg",
-    "release_url": "https://www.themoviedb.org/movie/29427",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Crazies-4K-Blu-ray/386339/",
-    "bluray_release_date": "2025-05-13",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "The Crazies (2010) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Shutter Island",
@@ -18982,32 +17723,6 @@
     "collected_at": "2026-05-22T12:36:04+00:00"
   },
   {
-    "movie_title": "Ocean's Thirteen",
-    "fel_confirmed": true,
-    "release_date": "2007-06-05",
-    "studio": "Warner Bros. Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "298",
-    "imdb_id": "tt0496806",
-    "poster_path": "data/posters/298.jpg",
-    "release_url": "https://www.themoviedb.org/movie/298",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Ocean's Thirteen (2007) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Shooter",
     "fel_confirmed": true,
     "release_date": "2007-03-22",
@@ -19202,32 +17917,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Pan's Labyrinth",
-    "fel_confirmed": true,
-    "release_date": "2006-10-11",
-    "studio": "Estudios Picasso",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1417",
-    "imdb_id": "tt0457430",
-    "poster_path": "data/posters/1417.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1417",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Pan's Labyrinth (2006) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Paprika",
     "fel_confirmed": true,
     "release_date": "2006-10-01",
@@ -19397,32 +18086,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Home Movies 300-1",
-    "fel_confirmed": true,
-    "release_date": "2006-06-13",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "719963",
-    "imdb_id": "",
-    "poster_path": "data/posters/719963.jpg",
-    "release_url": "https://www.themoviedb.org/movie/719963",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Home Movies 300-1 (2006) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Film Bug I",
     "fel_confirmed": true,
     "release_date": "2006-06-07",
@@ -19448,46 +18111,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Film Bug I (2006) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "The Da Vinci Code",
-    "fel_confirmed": true,
-    "release_date": "2006-05-17",
-    "studio": "Imagine Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "591",
-    "imdb_id": "tt0382625",
-    "poster_path": "data/posters/591.jpg",
-    "release_url": "https://www.themoviedb.org/movie/591",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Da-Vinci-Code-4K-Blu-ray/406417/",
-    "bluray_release_date": "2026-05-19",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "German",
-      "Italian",
-      "Spanish",
-      "Thai"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "The Da Vinci Code (2006) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -19795,41 +18418,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Pride & Prejudice",
-    "fel_confirmed": true,
-    "release_date": "2005-09-16",
-    "studio": "StudioCanal",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "4348",
-    "imdb_id": "tt0414387",
-    "poster_path": "data/posters/4348.jpg",
-    "release_url": "https://www.themoviedb.org/movie/4348",
-    "bluray_url": "https://www.blu-ray.com/movies/Pride-and-Prejudice-4K-Blu-ray/398080/",
-    "bluray_release_date": "2025-11-25",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Pride & Prejudice (2005) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "The 40 Year Old Virgin",
     "fel_confirmed": true,
     "release_date": "2005-08-11",
@@ -19950,32 +18538,6 @@
     "fel_evidence": {
       "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
       "quote": "Hustle & Flow (2005) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "The Devil's Rejects",
-    "fel_confirmed": true,
-    "release_date": "2005-07-22",
-    "studio": "Cinerenta",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1696",
-    "imdb_id": "tt0395584",
-    "poster_path": "data/posters/1696.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1696",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "The Devil's Rejects (2005) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -20354,47 +18916,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Constantine",
-    "fel_confirmed": true,
-    "release_date": "2005-02-08",
-    "studio": "Village Roadshow Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1",
-      "DD 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "561",
-    "imdb_id": "tt0360486",
-    "poster_path": "data/posters/561.jpg",
-    "release_url": "https://www.themoviedb.org/movie/561",
-    "bluray_url": "https://www.blu-ray.com/movies/Constantine-4K-Blu-ray/376770/",
-    "bluray_release_date": "2025-02-18",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French (Canada)",
-      "French",
-      "German",
-      "Italian",
-      "Spanish",
-      "Japanese"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Constantine (2005) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Meet the Fockers",
     "fel_confirmed": true,
     "release_date": "2004-12-22",
@@ -20542,40 +19063,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "The SpongeBob SquarePants Movie (2004) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Seed of Chucky",
-    "fel_confirmed": true,
-    "release_date": "2004-11-12",
-    "studio": "David Kirschner Productions",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "11249",
-    "imdb_id": "tt0387575",
-    "poster_path": "data/posters/11249.jpg",
-    "release_url": "https://www.themoviedb.org/movie/11249",
-    "bluray_url": "https://www.blu-ray.com/movies/Seed-of-Chucky-4K-Blu-ray/337412/",
-    "bluray_release_date": "2023-08-29",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Seed of Chucky (2004) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -20996,32 +19483,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Kill Bill: Vol. 2",
-    "fel_confirmed": true,
-    "release_date": "2004-04-16",
-    "studio": "Super Cool ManChu",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "393",
-    "imdb_id": "tt0378194",
-    "poster_path": "data/posters/393.jpg",
-    "release_url": "https://www.themoviedb.org/movie/393",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Kill Bill: Vol. 2 (2004) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "The Punisher",
     "fel_confirmed": true,
     "release_date": "2004-04-15",
@@ -21273,32 +19734,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Master and Commander: The Far Side of the World (2003) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Kill Bill: Vol. 1",
-    "fel_confirmed": true,
-    "release_date": "2003-10-10",
-    "studio": "Miramax",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "24",
-    "imdb_id": "tt0266697",
-    "poster_path": "data/posters/24.jpg",
-    "release_url": "https://www.themoviedb.org/movie/24",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Kill Bill: Vol. 1 (2003) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -22005,44 +20440,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Lilo & Stitch",
-    "fel_confirmed": true,
-    "release_date": "2002-06-21",
-    "studio": "Walt Disney Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "11544",
-    "imdb_id": "tt0275847",
-    "poster_path": "data/posters/11544.jpg",
-    "release_url": "https://www.themoviedb.org/movie/11544",
-    "bluray_url": "https://www.blu-ray.com/movies/Lilo-and-Stitch-4K-Blu-ray/385554/",
-    "bluray_release_date": "2025-05-06",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French (Canada)",
-      "Spanish",
-      "Japanese"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Lilo & Stitch (2002) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Minority Report",
     "fel_confirmed": true,
     "release_date": "2002-06-20",
@@ -22397,32 +20794,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Asterix & Obelix: Mission Cleopatra",
-    "fel_confirmed": true,
-    "release_date": "2002-01-30",
-    "studio": "Pathé",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "2899",
-    "imdb_id": "tt0250223",
-    "poster_path": "data/posters/2899.jpg",
-    "release_url": "https://www.themoviedb.org/movie/2899",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Asterix & Obelix: Mission Cleopatra (2002) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "A Beautiful Mind",
     "fel_confirmed": true,
     "release_date": "2001-12-14",
@@ -22501,32 +20872,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Vanilla Sky (2001) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Harry Potter and the Philosopher's Stone",
-    "fel_confirmed": true,
-    "release_date": "2001-11-16",
-    "studio": "Warner Bros. Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "671",
-    "imdb_id": "tt0241527",
-    "poster_path": "data/posters/671.jpg",
-    "release_url": "https://www.themoviedb.org/movie/671",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Harry Potter SS (2001) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -22853,39 +21198,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Enemy at the Gates",
-    "fel_confirmed": true,
-    "release_date": "2001-02-28",
-    "studio": "Paramount Pictures",
-    "audio_formats": [
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "853",
-    "imdb_id": "tt0215750",
-    "poster_path": "data/posters/853.jpg",
-    "release_url": "https://www.themoviedb.org/movie/853",
-    "bluray_url": "https://www.blu-ray.com/movies/Enemy-at-the-Gates-4K-Blu-ray/405521/",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Enemy at the Gates (2001) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Hannibal",
     "fel_confirmed": true,
     "release_date": "2001-02-08",
@@ -23064,32 +21376,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "How the Grinch Stole Christmas (2000) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Charlie's Angels",
-    "fel_confirmed": true,
-    "release_date": "2000-11-02",
-    "studio": "Columbia Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "4327",
-    "imdb_id": "tt0160127",
-    "poster_path": "data/posters/4327.jpg",
-    "release_url": "https://www.themoviedb.org/movie/4327",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Charlie's Angels (2000) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -23371,32 +21657,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "But I'm a Cheerleader",
-    "fel_confirmed": true,
-    "release_date": "2000-07-07",
-    "studio": "Ignite Entertainment",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "20770",
-    "imdb_id": "tt0179116",
-    "poster_path": "data/posters/20770.jpg",
-    "release_url": "https://www.themoviedb.org/movie/20770",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "But I'm a Cheerleader (2000) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Amores Perros",
     "fel_confirmed": true,
     "release_date": "2000-06-16",
@@ -23654,40 +21914,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
-  },
-  {
-    "movie_title": "Rules of Engagement",
-    "fel_confirmed": true,
-    "release_date": "2000-04-07",
-    "studio": "Paramount Pictures",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "10479",
-    "imdb_id": "tt0160797",
-    "poster_path": "data/posters/10479.jpg",
-    "release_url": "https://www.themoviedb.org/movie/10479",
-    "bluray_url": "https://www.blu-ray.com/movies/Rules-of-Engagement-4K-Blu-ray/362838/",
-    "bluray_release_date": "2024-11-05",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Rules of Engagement (2000) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Erin Brockovich",
@@ -24352,32 +22578,6 @@
     "collected_at": "2026-05-22T12:37:17+00:00"
   },
   {
-    "movie_title": "The General's Daughter",
-    "fel_confirmed": true,
-    "release_date": "1999-06-18",
-    "studio": "MFP Munich Film Partners GmbH & Company I. Produktions KG",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "2275",
-    "imdb_id": "tt0144214",
-    "poster_path": "data/posters/2275.jpg",
-    "release_url": "https://www.themoviedb.org/movie/2275",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "The General's Daughter (1999) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Election",
     "fel_confirmed": true,
     "release_date": "1999-04-23",
@@ -24652,32 +22852,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "A Bug's Life",
-    "fel_confirmed": true,
-    "release_date": "1998-11-25",
-    "studio": "Pixar",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "9487",
-    "imdb_id": "tt0120623",
-    "poster_path": "data/posters/9487.jpg",
-    "release_url": "https://www.themoviedb.org/movie/9487",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "A Bug's Life (1998) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Babe: Pig in the City",
     "fel_confirmed": true,
     "release_date": "1998-11-25",
@@ -24795,40 +22969,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Vampires (1998) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Bride of Chucky",
-    "fel_confirmed": true,
-    "release_date": "1998-10-15",
-    "studio": "Universal Pictures",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "11932",
-    "imdb_id": "tt0144120",
-    "poster_path": "data/posters/11932.jpg",
-    "release_url": "https://www.themoviedb.org/movie/11932",
-    "bluray_url": "https://www.blu-ray.com/movies/Bride-of-Chucky-4K-Blu-ray/337413/",
-    "bluray_release_date": "2023-08-29",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Bride of Chucky (1998) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -25042,32 +23182,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
-  },
-  {
-    "movie_title": "Pi",
-    "fel_confirmed": true,
-    "release_date": "1998-07-10",
-    "studio": "Harvest Filmworks",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "473",
-    "imdb_id": "tt0138704",
-    "poster_path": "data/posters/473.jpg",
-    "release_url": "https://www.themoviedb.org/movie/473",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Pi (1998) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Small Soldiers",
@@ -25654,32 +23768,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "The Devil's Advocate",
-    "fel_confirmed": true,
-    "release_date": "1997-10-17",
-    "studio": "Monarchy Enterprises B.V.",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1813",
-    "imdb_id": "tt0118971",
-    "poster_path": "data/posters/1813.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1813",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "The Devil's Advocate (1997) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "The Peacemaker",
     "fel_confirmed": true,
     "release_date": "1997-09-26",
@@ -25713,40 +23801,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "The Peacemaker (1997) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "In & Out",
-    "fel_confirmed": true,
-    "release_date": "1997-09-10",
-    "studio": "Paramount Pictures",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "10806",
-    "imdb_id": "tt0119360",
-    "poster_path": "data/posters/10806.jpg",
-    "release_url": "https://www.themoviedb.org/movie/10806",
-    "bluray_url": "https://www.blu-ray.com/movies/In-and-Out-4K-Blu-ray/353502/",
-    "bluray_release_date": "2024-07-30",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "In & Out (1997) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -25966,74 +24020,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
-  },
-  {
-    "movie_title": "Anaconda",
-    "fel_confirmed": true,
-    "release_date": "1997-04-11",
-    "studio": "St. Tropez Films",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DD 2.0",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "9360",
-    "imdb_id": "tt0118615",
-    "poster_path": "data/posters/9360.jpg",
-    "release_url": "https://www.themoviedb.org/movie/9360",
-    "bluray_url": "https://www.blu-ray.com/movies/Anaconda-4K-Blu-ray/397707/",
-    "bluray_release_date": "2025-12-09",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "French (Canada)",
-      "German",
-      "Italian",
-      "Spanish",
-      "Thai"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Anaconda (1997) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Dante's Peak",
-    "fel_confirmed": true,
-    "release_date": "1997-02-07",
-    "studio": "Pacific Western",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "9619",
-    "imdb_id": "tt0118928",
-    "poster_path": "data/posters/9619.jpg",
-    "release_url": "https://www.themoviedb.org/movie/9619",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Dante's Peak (1997) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Lost Highway",
@@ -26924,40 +24910,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T04:52:57+00:00"
-  },
-  {
-    "movie_title": "Cutthroat Island",
-    "fel_confirmed": true,
-    "release_date": "1995-12-22",
-    "studio": "Carolco Pictures",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "LPCM 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1408",
-    "imdb_id": "tt0112760",
-    "poster_path": "data/posters/1408.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1408",
-    "bluray_url": "https://www.blu-ray.com/movies/Cutthroat-Island-4K-Blu-ray/354942/",
-    "bluray_release_date": "2024-04-02",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Cutthroat Island (1995) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Things to Do in Denver When You're Dead",
@@ -28625,32 +26577,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Wayne's World 2",
-    "fel_confirmed": true,
-    "release_date": "1993-12-10",
-    "studio": "Paramount Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "8873",
-    "imdb_id": "tt0108525",
-    "poster_path": "data/posters/8873.jpg",
-    "release_url": "https://www.themoviedb.org/movie/8873",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Wayne's World 2 (1993) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Little Buddha",
     "fel_confirmed": true,
     "release_date": "1993-12-01",
@@ -28935,40 +26861,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Needful Things (1993) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Coneheads",
-    "fel_confirmed": true,
-    "release_date": "1993-07-23",
-    "studio": "Paramount Pictures",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "9612",
-    "imdb_id": "tt0106598",
-    "poster_path": "data/posters/9612.jpg",
-    "release_url": "https://www.themoviedb.org/movie/9612",
-    "bluray_url": "https://www.blu-ray.com/movies/Coneheads-4K-Blu-ray/377432/",
-    "bluray_release_date": "2025-08-19",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Coneheads (1993) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -30263,32 +28155,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Freddy's Dead: The Final Nightmare",
-    "fel_confirmed": true,
-    "release_date": "1991-09-05",
-    "studio": "New Line Cinema",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "11284",
-    "imdb_id": "tt0101917",
-    "poster_path": "data/posters/11284.jpg",
-    "release_url": "https://www.themoviedb.org/movie/11284",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Freddy's Dead: The Final Nightmare (1991) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Dead Again",
     "fel_confirmed": true,
     "release_date": "1991-08-23",
@@ -30979,32 +28845,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:37:17+00:00"
-  },
-  {
-    "movie_title": "Jacob's Ladder",
-    "fel_confirmed": true,
-    "release_date": "1990-11-02",
-    "studio": "Carolco Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "2291",
-    "imdb_id": "tt0099871",
-    "poster_path": "data/posters/2291.jpg",
-    "release_url": "https://www.themoviedb.org/movie/2291",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Jacob's Ladder (1990) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Graveyard Shift",
@@ -34226,39 +32066,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Ghoulies II",
-    "fel_confirmed": true,
-    "release_date": "1987-07-31",
-    "studio": "Taryn Productions Inc.",
-    "audio_formats": [
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "28605",
-    "imdb_id": "tt0093091",
-    "poster_path": "data/posters/28605.jpg",
-    "release_url": "https://www.themoviedb.org/movie/28605",
-    "bluray_url": "https://www.blu-ray.com/movies/Ghoulies-II-4K-Blu-ray/358731/",
-    "bluray_release_date": "2024-07-09",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Ghoulies II (1987) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "RoboCop",
     "fel_confirmed": true,
     "release_date": "1987-07-17",
@@ -35231,32 +33038,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "April Fool's Day",
-    "fel_confirmed": true,
-    "release_date": "1986-03-27",
-    "studio": "YCTM",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "24913",
-    "imdb_id": "tt0090655",
-    "poster_path": "data/posters/24913.jpg",
-    "release_url": "https://www.themoviedb.org/movie/24913",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "April Fool's Day (1986) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Highlander",
     "fel_confirmed": true,
     "release_date": "1986-03-07",
@@ -35539,32 +33320,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "To Live and Die in L.A.",
-    "fel_confirmed": true,
-    "release_date": "1985-11-01",
-    "studio": "SLM Production Group",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "9846",
-    "imdb_id": "tt0090180",
-    "poster_path": "data/posters/9846.jpg",
-    "release_url": "https://www.themoviedb.org/movie/9846",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "To Live and Die in L.A. (1985) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Remo Williams: The Adventure Begins",
     "fel_confirmed": true,
     "release_date": "1985-10-11",
@@ -35760,32 +33515,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Kiss of the Spider Woman (1985) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Pee-wee's Big Adventure",
-    "fel_confirmed": true,
-    "release_date": "1985-07-26",
-    "studio": "Aspen Film Society",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "5683",
-    "imdb_id": "tt0089791",
-    "poster_path": "data/posters/5683.jpg",
-    "release_url": "https://www.themoviedb.org/movie/5683",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Pee-wee's Big Adventure (1985) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -36068,45 +33797,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "The Breakfast Club",
-    "fel_confirmed": true,
-    "release_date": "1985-02-15",
-    "studio": "Universal Pictures",
-    "audio_formats": [
-      "LPCM Mono",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "2108",
-    "imdb_id": "tt0088847",
-    "poster_path": "data/posters/2108.jpg",
-    "release_url": "https://www.themoviedb.org/movie/2108",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Breakfast-Club-4K-Blu-ray/394738/",
-    "bluray_release_date": "2025-11-04",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "L E The Breakfast Club (1985) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Blood Simple",
     "fel_confirmed": true,
     "release_date": "1985-01-18",
@@ -36146,39 +33836,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
-  },
-  {
-    "movie_title": "Ghoulies",
-    "fel_confirmed": true,
-    "release_date": "1985-01-18",
-    "studio": "Empire Pictures",
-    "audio_formats": [
-      "DTS-HD MA 2.0 Mono"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "18498",
-    "imdb_id": "tt0089200",
-    "poster_path": "data/posters/18498.jpg",
-    "release_url": "https://www.themoviedb.org/movie/18498",
-    "bluray_url": "https://www.blu-ray.com/movies/Ghoulies-4K-Blu-ray/339195/",
-    "bluray_release_date": "2023-09-12",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Ghoulies (1985) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Beverly Hills Cop",
@@ -37129,58 +34786,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Risky Business (1983) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "National Lampoon's Vacation",
-    "fel_confirmed": true,
-    "release_date": "1983-07-29",
-    "studio": "Warner Bros. Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "11153",
-    "imdb_id": "tt0085995",
-    "poster_path": "data/posters/11153.jpg",
-    "release_url": "https://www.themoviedb.org/movie/11153",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "National Lampoon's Vacation (1983) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Jaws 3-D",
-    "fel_confirmed": true,
-    "release_date": "1983-07-22",
-    "studio": "MCA  Theatricals",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "17692",
-    "imdb_id": "tt0085750",
-    "poster_path": "data/posters/17692.jpg",
-    "release_url": "https://www.themoviedb.org/movie/17692",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Jaws 3-D (1983) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -39313,39 +36918,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Motel Hell",
-    "fel_confirmed": true,
-    "release_date": "1980-08-14",
-    "studio": "Camp Hill",
-    "audio_formats": [
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "30924",
-    "imdb_id": "tt0081184",
-    "poster_path": "data/posters/30924.jpg",
-    "release_url": "https://www.themoviedb.org/movie/30924",
-    "bluray_url": "https://www.blu-ray.com/movies/Motel-Hell-4K-Blu-ray/376620/",
-    "bluray_release_date": "2026-05-12",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Motel Hell (1980) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Xanadu",
     "fel_confirmed": true,
     "release_date": "1980-08-08",
@@ -39513,44 +37085,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Night of the Juggler",
-    "fel_confirmed": true,
-    "release_date": "1980-06-06",
-    "studio": "GCC Productions",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "44686",
-    "imdb_id": "tt0081230",
-    "poster_path": "data/posters/44686.jpg",
-    "release_url": "https://www.themoviedb.org/movie/44686",
-    "bluray_url": "https://www.blu-ray.com/movies/Night-of-the-Juggler-4K-Blu-ray/102177/",
-    "bluray_release_date": "2025-09-16",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "L E Night of the Juggler (1980) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Friday the 13th",
     "fel_confirmed": true,
     "release_date": "1980-05-09",
@@ -39587,32 +37121,6 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=327042&page=22",
       "quote": "Friday the 13th (1980) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Coal Miner's Daughter",
-    "fel_confirmed": true,
-    "release_date": "1980-03-07",
-    "studio": "Universal Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "16769",
-    "imdb_id": "tt0080549",
-    "poster_path": "data/posters/16769.jpg",
-    "release_url": "https://www.themoviedb.org/movie/16769",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Coal Miner's Daughter (1980) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -40156,39 +37664,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
-  },
-  {
-    "movie_title": "Love on the Run",
-    "fel_confirmed": true,
-    "release_date": "1979-01-24",
-    "studio": "Les Films du Carrosse",
-    "audio_formats": [
-      "LPCM Mono"
-    ],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "259",
-    "imdb_id": "tt0078771",
-    "poster_path": "data/posters/259.jpg",
-    "release_url": "https://www.themoviedb.org/movie/259",
-    "bluray_url": "https://www.blu-ray.com/movies/Love-on-the-Run-4K-Blu-ray/386355/",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Love on the Run (1979) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "The Deer Hunter",
@@ -44185,32 +41660,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Donovan's Reef",
-    "fel_confirmed": true,
-    "release_date": "1963-06-12",
-    "studio": "Paramount Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "15875",
-    "imdb_id": "tt0057007",
-    "poster_path": "data/posters/15875.jpg",
-    "release_url": "https://www.themoviedb.org/movie/15875",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Donovan's Reef (1963) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "The Nutty Professor",
     "fel_confirmed": true,
     "release_date": "1963-06-04",
@@ -44542,37 +41991,6 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=174",
       "quote": "The Magnificent Seven (1960) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "The Apartment",
-    "fel_confirmed": true,
-    "release_date": "1960-06-21",
-    "studio": "The Mirisch Company",
-    "audio_formats": [
-      "DTS-HD MA 2.0 Mono",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "284",
-    "imdb_id": "tt0053604",
-    "poster_path": "data/posters/284.jpg",
-    "release_url": "https://www.themoviedb.org/movie/284",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Apartment-4K-Blu-ray/304948/",
-    "bluray_release_date": "2022-03-08",
-    "hdr_formats": [],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "The Apartment (1960) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -45388,39 +42806,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Abbott and Costello Meet Dr. Jekyll and Mr. Hyde",
-    "fel_confirmed": true,
-    "release_date": "1953-08-01",
-    "studio": "Universal Pictures",
-    "audio_formats": [
-      "DTS-HD MA 2.0 Mono"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "3023",
-    "imdb_id": "tt0045469",
-    "poster_path": "data/posters/3023.jpg",
-    "release_url": "https://www.themoviedb.org/movie/3023",
-    "bluray_url": "https://www.blu-ray.com/movies/Abbott-and-Costello-Meet-Dr-Jekyll-and-Mr-Hyde-4K-Blu-ray/382818/",
-    "bluray_release_date": "2025-11-25",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Abbott and Costello Meet Dr. Jekyll and Mr. Hyde (1953) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Stalag 17",
     "fel_confirmed": true,
     "release_date": "1953-05-29",
@@ -45575,50 +42960,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "High Noon (1952) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Alice in Wonderland",
-    "fel_confirmed": true,
-    "release_date": "1951-08-09",
-    "studio": "Walt Disney Productions",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DD 2.0 Mono",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://www.blu-ray.com/movies/Rabid-4K-Blu-ray/397990/"
-      ]
-    },
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "12092",
-    "imdb_id": "tt0043274",
-    "poster_path": "data/posters/12092.jpg",
-    "release_url": "https://www.themoviedb.org/movie/12092",
-    "bluray_url": "https://www.blu-ray.com/movies/Alice-in-Wonderland-4K-Blu-ray/409895/",
-    "bluray_release_date": "2026-05-05",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish",
-      "Japanese"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "L E Alice in Wonderland (1951) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -46090,31 +43431,5 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "The single biggest reason this device",
-    "fel_confirmed": true,
-    "release_date": "Unknown",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://www.avsforum.com/threads/dolby-vision-profile-7-fel-with-full-lossless-audio-truehd-atmos-and-dts-x.3339774",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://www.avsforum.com/threads/dolby-vision-profile-7-fel-with-full-lossless-audio-truehd-atmos-and-dts-x.3339774",
-      "quote": "Why Experts Love It: The Dolby Vision FEL Advantage:\nThe single biggest reason this device is revered is its rare ability to correctly process TV-led Dolby Vision Profile 7, including the Full Enhancement Layer (FEL).",
-      "evidence_type": "sentence",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T02:12:54+00:00"
   }
 ]
