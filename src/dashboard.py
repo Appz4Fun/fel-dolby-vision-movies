@@ -188,7 +188,19 @@ def _render_html(cards: str, payload: str, total: int) -> str:
     }}
     th {{ cursor: pointer; user-select: none; white-space: nowrap; }}
     th:hover {{ color: var(--accent); }}
-    table img {{ width: 46px; height: 69px; object-fit: cover; display: block; }}
+    table img.poster-thumb {{ width: 46px; height: 69px; object-fit: cover; display: block; }}
+    .poster-thumb-placeholder {{
+      width: 46px;
+      height: 69px;
+      display: grid;
+      place-items: center;
+      background: #222a30;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      padding: 4px;
+    }}
     td a {{ white-space: nowrap; }}
     article {{
       border: 1px solid var(--line);
@@ -287,10 +299,22 @@ def _render_html(cards: str, payload: str, total: int) -> str:
         ? `<a href="${{escapeHtml(url)}}" rel="noreferrer">${{label}}</a>`
         : "";
     }}
+    function posterThumb(row) {{
+      if (!row.poster_path) {{
+        return `<div class="poster-thumb-placeholder">${{escapeHtml(row.movie_title || "No poster")}}</div>`;
+      }}
+      const posterFile = String(row.poster_path).split(/[\\\\/]/).pop();
+      return `<img class="poster-thumb" src="posters/${{escapeHtml(posterFile)}}"
+        alt="${{escapeHtml(row.movie_title || "")}}" loading="lazy">`;
+    }}
+    function dateSort(value) {{
+      return value && value !== "Unknown" ? value : "";
+    }}
     const columns = [
-      ["Release Date", r => escapeHtml(r.release_date || ""), "priority-1"],
-      ["Blu-ray Date", r => escapeHtml(r.bluray_release_date || ""), "priority-2"],
+      ["Poster", r => posterThumb(r), "priority-1", r => r.movie_title || ""],
       ["Movie", r => escapeHtml(r.movie_title || ""), "priority-1"],
+      ["Release Date", r => escapeHtml(r.release_date || ""), "priority-1", r => dateSort(r.release_date)],
+      ["Blu-ray Date", r => escapeHtml(r.bluray_release_date || ""), "priority-2", r => dateSort(r.bluray_release_date)],
       ["Studio", r => escapeHtml(r.studio || ""), "priority-4"],
       ["Audio", r => escapeHtml((r.audio_formats || []).join(", ")), "priority-3"],
       ["Language", r => escapeHtml((r.audio_languages || []).join(", ")), "priority-5"],
@@ -299,8 +323,8 @@ def _render_html(cards: str, payload: str, total: int) -> str:
       ["Src Link", r => link(r.source_url, "Src"), "priority-2"],
       ["TMDB", r => link(r.release_url, "TMDB"), "priority-2"],
     ];
-    let sortCol = 0;
-    let sortAsc = true;
+    let sortCol = 2;
+    let sortAsc = false;
 
     function filteredRows() {{
       const query = filter.value.trim().toLowerCase();
@@ -312,11 +336,12 @@ def _render_html(cards: str, payload: str, total: int) -> str:
 
     function renderTable() {{
       const rows = filteredRows().slice().sort((a, b) => {{
-        const va = columns[sortCol][1](a)
+        const sortValue = columns[sortCol][3] || columns[sortCol][1];
+        const va = sortValue(a)
           .toString()
           .replace(/<[^>]*>/g, "")
           .toLowerCase();
-        const vb = columns[sortCol][1](b)
+        const vb = sortValue(b)
           .toString()
           .replace(/<[^>]*>/g, "")
           .toLowerCase();

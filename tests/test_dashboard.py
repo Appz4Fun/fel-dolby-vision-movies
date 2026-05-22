@@ -116,9 +116,16 @@ def test_dashboard_defaults_to_responsive_list_without_year_or_fel_columns(
     html = (tmp_path / "dist" / "index.html").read_text(encoding="utf-8")
     assert 'id="view-list" class="active"' in html
     assert 'id="view-cards" class="active"' not in html
+    assert '["Poster"' in html
+    assert "posterThumb(r)" in html
     assert '["Release Date"' in html
     assert '["Blu-ray Date"' in html
-    assert html.index('["Release Date"') < html.index('["Movie"')
+    assert (
+        html.index('["Poster"')
+        < html.index('["Movie"')
+        < html.index('["Release Date"')
+        < html.index('["Blu-ray Date"')
+    )
     assert '["Year"' not in html
     assert '["FEL"' not in html
     assert '["BR Link"' in html
