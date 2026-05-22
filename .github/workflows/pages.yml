@@ -47,7 +47,9 @@ jobs:
         env:
           BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-        run: uv run --with-requirements requirements.txt python -m main run --sources data/forums.txt
+        run: >
+          uv run --with-requirements requirements.txt
+          python -m main run --sources data/sources_needs_evidence.txt
 
       - name: Run AI discovery and scraping
         env:
@@ -55,14 +57,14 @@ jobs:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: >
           uv run --with-requirements requirements.txt
-          python -m main ai-scrape --sources data/forums.txt
+          python -m main ai-scrape --sources data/sources_needs_evidence.txt
 
       - name: Commit refreshed data
         if: github.ref == 'refs/heads/main'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/releases.json data/posters data/forums.txt
+          git add data/releases.json data/posters data/sources_needs_evidence.txt
           if git diff --cached --quiet; then
             echo "no data changes to commit"
           else

@@ -249,8 +249,7 @@ def _source_urls_for_ai(source_path: Path, cache_dir: Path) -> list[str]:
     if expanded_urls:
         return expanded_urls
     urls = sources.read_source_urls(source_path)
-    google_sheets_path = _google_sheets_path_for(source_path)
-    urls.extend(sources.read_source_urls(google_sheets_path))
+    urls.extend(sources.read_source_urls(_always_fel_path_for(source_path)))
     return list(dict.fromkeys(urls))
 
 
@@ -613,7 +612,5 @@ def _response_text(response_json: dict[str, Any]) -> str:
     return "".join(chunks)
 
 
-def _google_sheets_path_for(source_path: Path) -> Path:
-    if source_path == Path("data/forums.txt"):
-        return Path("data/google_sheets.txt")
-    return source_path.with_name("google_sheets.txt")
+def _always_fel_path_for(source_path: Path) -> Path:
+    return source_path.with_name("sources_always_fel.txt")
