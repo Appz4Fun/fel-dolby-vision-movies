@@ -31,6 +31,10 @@ class FelRelease:
     imdb_id: str = ""
     poster_path: str = ""
     release_url: str = ""
+    bluray_url: str = ""
+    bluray_release_date: str = ""
+    hdr_formats: list[str] = field(default_factory=list)
+    audio_languages: list[str] = field(default_factory=list)
 
     @property
     def source_url(self) -> str:
@@ -51,6 +55,10 @@ class FelRelease:
             "imdb_id": self.imdb_id,
             "poster_path": self.poster_path,
             "release_url": self.release_url,
+            "bluray_url": self.bluray_url,
+            "bluray_release_date": self.bluray_release_date,
+            "hdr_formats": self.hdr_formats,
+            "audio_languages": self.audio_languages,
             "fel_evidence": {
                 "source_url": self.fel_evidence.source_url,
                 "quote": self.fel_evidence.quote,
@@ -83,4 +91,8 @@ def release_from_dict(data: dict[str, Any]) -> FelRelease:
         imdb_id=data.get("imdb_id", ""),
         poster_path=data.get("poster_path", ""),
         release_url=data.get("release_url", ""),
+        bluray_url=data.get("bluray_url", ""),
+        bluray_release_date=data.get("bluray_release_date", ""),
+        hdr_formats=list(data.get("hdr_formats", [])),
+        audio_languages=list(data.get("audio_languages", [])),
     )

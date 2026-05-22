@@ -88,3 +88,28 @@ def test_normalize_fel_title_decodes_html_entities():
     assert normalize_fel_title("Fast &amp; Furious") == "Fast & Furious"
     assert normalize_fel_title("Hansel &amp; Gretel") == "Hansel & Gretel"
     assert normalize_fel_title("It&#39;s Alive") == "It's Alive"
+
+
+def test_felrelease_round_trips_bluray_fields():
+    original = FelRelease(
+        movie_title="Nosferatu",
+        release_date="2024-12-25",
+        fel_evidence=FelEvidence(
+            source_url="https://example.test/n", quote="q", evidence_type="fel-list"
+        ),
+        bluray_url="https://www.blu-ray.com/movies/Nosferatu-4K-Blu-ray/400000/",
+        bluray_release_date="2025-02-18",
+        hdr_formats=["Dolby Vision", "HDR10"],
+        audio_languages=["English", "French"],
+    )
+    data = original.to_dict()
+    assert data["bluray_url"].endswith("/400000/")
+    assert data["bluray_release_date"] == "2025-02-18"
+    assert data["hdr_formats"] == ["Dolby Vision", "HDR10"]
+    assert data["audio_languages"] == ["English", "French"]
+
+    restored = release_from_dict(data)
+    assert restored.hdr_formats == ["Dolby Vision", "HDR10"]
+    assert restored.audio_languages == ["English", "French"]
+    assert restored.bluray_url == original.bluray_url
+    assert restored.bluray_release_date == "2025-02-18"
