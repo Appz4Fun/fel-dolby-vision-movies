@@ -5,6 +5,7 @@ from bluray import (
     fetch_bluray_details,
     normalize_bluray_audio,
     parse_hdr,
+    search_bluray,
 )
 
 
@@ -17,6 +18,12 @@ English: Dolby TrueHD 7.1 (48kHz, 24-bit)<br>French: Dolby Digital 5.1 (640 kbps
 &nbsp;(<a href="#">less</a>) </div>
  <span class="subheading">Subtitles</span><br>
 <a title="Movie 4K Blu-ray Release Date April 21, 2026" href="x">d</a>
+"""
+
+_SEARCH_HTML = """
+<a class="hoverlink" href="https://www.blu-ray.com/movies/The-Northman-Blu-ray/300/" title="The Northman (2022)">x</a>
+<a class="hoverlink" href="https://www.blu-ray.com/movies/The-Northman-4K-Blu-ray/301/" title="The Northman 4K (2022)">x</a>
+<a class="hoverlink" href="https://www.blu-ray.com/movies/Unrelated-Film-4K-Blu-ray/999/" title="Unrelated Film 4K (2010)">x</a>
 """
 
 
@@ -78,3 +85,18 @@ def test_fetch_bluray_details_parses_disc_page():
     assert details.audio_languages == ["English", "French"]
     assert details.bluray_release_date == "2026-04-21"
     assert details.url.endswith("/1/")
+
+
+def test_search_bluray_returns_high_confidence_4k_match():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, text=_SEARCH_HTML)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    url = search_bluray(client, "The Northman", "2022")
+    miss = search_bluray(client, "Some Movie Not Listed", "2019")
+    wrong_year = search_bluray(client, "The Northman", "1999")
+    client.close()
+
+    assert url == "https://www.blu-ray.com/movies/The-Northman-4K-Blu-ray/301/"
+    assert miss is None
+    assert wrong_year is None
