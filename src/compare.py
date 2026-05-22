@@ -105,6 +105,23 @@ class AIClient:
         response.raise_for_status()
         return _candidates_from_ai_response_text(response.text, source_url)
 
+    def complete(self, system_prompt: str, user_prompt: str) -> str:
+        """Send a single prompt to the model and return its text output."""
+        payload = {
+            "model": self.settings.model,
+            "reasoning": {"effort": self.settings.reasoning_effort},
+            "input": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+        }
+        response = self.client.post(
+            f"{self.settings.base_url.rstrip('/')}/responses",
+            json=payload,
+        )
+        response.raise_for_status()
+        return _extract_response_text(response.text)
+
     def close(self) -> None:
         self.client.close()
 
@@ -485,6 +502,20 @@ def _candidates_from_ai_response_text(
     except json.JSONDecodeError:
         return _candidates_from_payload_text(response_text, source_url)
     return _candidates_from_ai_response(response_json, source_url)
+
+
+def _extract_response_text(response_text: str) -> str:
+    """Return the model's text output from a raw /responses HTTP body."""
+    response_text = response_text.strip()
+    if not response_text:
+        return ""
+    if response_text.startswith("event:") or "\nevent:" in response_text:
+        return _response_text_from_sse(response_text)
+    try:
+        response_json = json.loads(response_text)
+    except json.JSONDecodeError:
+        return response_text
+    return _response_text(response_json)
 
 
 def _candidates_from_payload_text(text: str, source_url: str) -> list[FoundCandidate]:

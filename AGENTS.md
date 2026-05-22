@@ -54,7 +54,11 @@ updating the symlink.
 - Target near-complete coverage for deterministic parser and normalization
   logic.
 - The benchmark suite should compare parser outcomes against curated expected
-  labels, with AI-assisted extraction used only as an offline/reference aid.
+  labels.
+- AI-assisted extraction (codex, via `ai-scrape`) now runs as part of the daily
+  GitHub Actions pipeline alongside the deterministic Python scrape; it
+  discovers sources and extracts FEL releases tagged `ai-extracted`. Tests must
+  still pass without any AI/LLM secret (the test suite mocks the AI client).
 - Before claiming completion, report the commands run and any validation gaps.
 
 ## Git And CI

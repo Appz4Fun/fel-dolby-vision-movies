@@ -45,12 +45,20 @@ jobs:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: uv run --with-requirements requirements.txt python -m main run --sources forums.txt
 
+      - name: Run AI discovery and scraping
+        env:
+          OPENAI_API_KEY: ${{ secrets.CODEX_API_KEY }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: >
+          uv run --with-requirements requirements.txt
+          python -m main ai-scrape --sources forums.txt
+
       - name: Commit refreshed data
         if: github.ref == 'refs/heads/main'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/releases.json data/posters README.md links.md
+          git add data/releases.json data/posters README.md links.md forums.txt
           if git diff --cached --quiet; then
             echo "no data changes to commit"
           else
