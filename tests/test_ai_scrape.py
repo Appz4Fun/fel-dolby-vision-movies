@@ -2,11 +2,13 @@ import json
 
 from ai_scrape import (
     _candidate_to_release,
+    _load_existing_releases,
     _parse_url_list,
     ai_discover_sources,
     ai_extract_releases,
 )
 from compare import FoundCandidate
+from models import FelEvidence, FelRelease
 
 
 class FakeAIClient:
@@ -69,3 +71,30 @@ def test_ai_extract_releases_converts_nonblank_candidates():
     releases = ai_extract_releases(client, [("https://src.test", "<html>")])
     assert [r.movie_title for r in releases] == ["Drop"]
     assert releases[0].fel_evidence.evidence_type == "ai-extracted"
+
+
+def test_load_existing_releases_round_trips(tmp_path):
+    release = FelRelease(
+        movie_title="Dune",
+        release_date="2021",
+        fel_evidence=FelEvidence(
+            source_url="https://src.test",
+            quote="Dune FEL",
+            evidence_type="forum-post",
+        ),
+        source_label="forums",
+        collected_at="2026-05-21T00:00:00+00:00",
+    )
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    (data_dir / "releases.json").write_text(
+        json.dumps([release.to_dict()]), encoding="utf-8"
+    )
+
+    loaded = _load_existing_releases(tmp_path)
+
+    assert [r.movie_title for r in loaded] == ["Dune"]
+
+
+def test_load_existing_releases_missing_file_returns_empty(tmp_path):
+    assert _load_existing_releases(tmp_path) == []
