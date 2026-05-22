@@ -657,9 +657,13 @@ def test_run_searches_for_sources_before_scraping(tmp_path: Path, monkeypatch):
         return 0
 
     def fake_scrape_for_titles(
-        source_path: Path, output_dir: Path, cache_dir: Path, workers: int
+        source_path: Path,
+        output_dir: Path,
+        cache_dir: Path,
+        workers: int,
+        re_enrich: bool,
     ):
-        calls.append(("scrape", source_path, output_dir, cache_dir, workers))
+        calls.append(("scrape", source_path, output_dir, cache_dir, workers, re_enrich))
         return 0
 
     monkeypatch.setattr(main, "_search_for_sources", fake_search_for_sources)
@@ -682,8 +686,21 @@ def test_run_searches_for_sources_before_scraping(tmp_path: Path, monkeypatch):
     assert exit_code == 0
     assert calls == [
         ("search", sources_path),
-        ("scrape", sources_path, output_dir, cache_dir, 6),
+        ("scrape", sources_path, output_dir, cache_dir, 6, False),
     ]
+
+
+def test_run_reenrich_flag_parsed(monkeypatch, tmp_path):
+    captured = {}
+
+    def fake_scrape(source_path, output_dir, cache_dir, workers, re_enrich):
+        captured["re_enrich"] = re_enrich
+        return 0
+
+    monkeypatch.setattr(main, "_scrape_for_titles", fake_scrape)
+    monkeypatch.setattr(main, "_search_for_sources", lambda *a, **k: 0)
+    main.main(["run", "--sources", str(tmp_path / "forums.txt"), "--re-enrich"])
+    assert captured["re_enrich"] is True
 
 
 def test_run_scrapes_existing_sources_after_discovery_failure(
@@ -700,9 +717,13 @@ def test_run_scrapes_existing_sources_after_discovery_failure(
         return 1
 
     def fake_scrape_for_titles(
-        source_path: Path, output_dir: Path, cache_dir: Path, workers: int
+        source_path: Path,
+        output_dir: Path,
+        cache_dir: Path,
+        workers: int,
+        re_enrich: bool,
     ):
-        calls.append(("scrape", source_path, output_dir, cache_dir, workers))
+        calls.append(("scrape", source_path, output_dir, cache_dir, workers, re_enrich))
         return 0
 
     monkeypatch.setattr(main, "_search_for_sources", fake_search_for_sources)
@@ -723,7 +744,14 @@ def test_run_scrapes_existing_sources_after_discovery_failure(
     assert exit_code == 0
     assert calls == [
         ("search", sources_path),
-        ("scrape", sources_path, output_dir, cache_dir, main.DEFAULT_SCRAPE_WORKERS),
+        (
+            "scrape",
+            sources_path,
+            output_dir,
+            cache_dir,
+            main.DEFAULT_SCRAPE_WORKERS,
+            False,
+        ),
     ]
     output = capsys.readouterr().out
     assert "source discovery failed; scraping existing sources" in output
@@ -741,7 +769,7 @@ def test_run_returns_scrape_exit_code_after_discovery_failure(
     monkeypatch.setattr(
         main,
         "_scrape_for_titles",
-        lambda source_path, output_dir, cache_dir, workers: 3,
+        lambda source_path, output_dir, cache_dir, workers, re_enrich: 3,
     )
 
     exit_code = main.main(
@@ -757,6 +785,62 @@ def test_run_returns_scrape_exit_code_after_discovery_failure(
     )
 
     assert exit_code == 3
+
+
+def test_scrape_for_titles_reenrich_includes_existing_releases(
+    tmp_path: Path, monkeypatch
+):
+    sources_path = tmp_path / "forums.txt"
+    output_dir = tmp_path / "out"
+    cache_dir = tmp_path / "cache"
+    sources_path.write_text("https://forum.example.test/thread\n", encoding="utf-8")
+    (output_dir / "data").mkdir(parents=True)
+    existing = release("Existing Movie")
+    (output_dir / "data/releases.json").write_text(
+        json.dumps([existing.to_dict()]), encoding="utf-8"
+    )
+    published_releases = []
+
+    class FakeFetchResult:
+        url = "https://forum.example.test/thread"
+        text = "New Movie is confirmed Profile 7 FEL."
+        from_cache = False
+
+    class FakeFetcher:
+        def __init__(self, cache_dir: Path, cookie_header: str | None):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_value, traceback):
+            return None
+
+        def fetch(self, url: str):
+            return FakeFetchResult()
+
+    monkeypatch.setattr(main.fetcher, "Fetcher", FakeFetcher)
+    monkeypatch.setattr(
+        main.fel_parser,
+        "parse_fel_releases",
+        lambda html, source_url: [release("New Movie", source_url)],
+    )
+
+    def fake_publish_outputs(releases, output_dir: Path):
+        published_releases.extend(releases)
+        return releases
+
+    monkeypatch.setattr(main.artifacts, "publish_outputs", fake_publish_outputs)
+
+    exit_code = main._scrape_for_titles(
+        sources_path, output_dir, cache_dir, workers=1, re_enrich=True
+    )
+
+    assert exit_code == 0
+    assert [item.movie_title for item in published_releases] == [
+        "Existing Movie",
+        "New Movie",
+    ]
 
 
 def test_reddit_url_routes_to_reddit_parser(monkeypatch):

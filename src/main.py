@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
+import csv
 from dataclasses import dataclass
+import json
 import os
 from pathlib import Path
 from typing import Sequence
@@ -10,7 +12,6 @@ from urllib.parse import urlparse
 
 import artifacts
 import compare
-import csv
 import discovery
 import enrich
 import fel_ingest
@@ -18,7 +19,7 @@ import fetcher
 import google_sheets
 import parser as fel_parser
 from merge import canonical_key, dedupe_releases
-from models import FelRelease
+from models import FelRelease, release_from_dict
 import reddit_source
 import sources
 
@@ -34,7 +35,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _search_for_sources(args.sources)
     if args.command == "scrape-for-titles":
         return _scrape_for_titles(
-            args.sources, args.output_dir, args.cache_dir, args.workers
+            args.sources, args.output_dir, args.cache_dir, args.workers, False
         )
     if args.command == "compare-found":
         summary = compare.compare_found(
@@ -70,7 +71,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 f"sources={len(existing_urls)}"
             )
         return _scrape_for_titles(
-            args.sources, args.output_dir, args.cache_dir, args.workers
+            args.sources,
+            args.output_dir,
+            args.cache_dir,
+            args.workers,
+            args.re_enrich,
         )
     if args.command == "migrate":
         return run_migration(args.fel, args.raw_fel, args.output_dir, args.report)
@@ -121,6 +126,11 @@ def _build_parser() -> argparse.ArgumentParser:
             default=DEFAULT_SCRAPE_WORKERS,
             help=argparse.SUPPRESS,
         )
+    subparsers.choices["run"].add_argument(
+        "--re-enrich",
+        action="store_true",
+        help="re-run TMDB + blu-ray enrichment over all existing releases",
+    )
     compare_found = subparsers.add_parser(
         "compare-found",
         help="compare AI-assisted extraction with the deterministic parser",
@@ -210,7 +220,11 @@ def _search_for_sources(source_path: Path) -> int:
 
 
 def _scrape_for_titles(
-    source_path: Path, output_dir: Path, cache_dir: Path, workers: int
+    source_path: Path,
+    output_dir: Path,
+    cache_dir: Path,
+    workers: int,
+    re_enrich: bool = False,
 ) -> int:
     if not source_path.exists():
         print(f"scrape failed; sources file not found: {source_path}")
@@ -246,6 +260,16 @@ def _scrape_for_titles(
                 releases.extend(scrape_result.releases)
 
     unique_releases = dedupe_releases(releases, canonical_key)
+    if re_enrich:
+        releases_path = Path(output_dir) / "data" / "releases.json"
+        if releases_path.exists():
+            existing = [
+                release_from_dict(item)
+                for item in json.loads(releases_path.read_text(encoding="utf-8"))
+            ]
+            unique_releases = dedupe_releases(
+                [*existing, *unique_releases], canonical_key
+            )
     _enrich_if_possible(unique_releases)
     sorted_releases = artifacts.publish_outputs(unique_releases, output_dir=output_dir)
 
@@ -270,17 +294,26 @@ def _enrich_if_possible(releases: list[FelRelease]) -> None:
         return
     import httpx
 
+    import bluray
+
     with enrich.TmdbResolver(api_key=api_key) as resolver:
-        with httpx.Client(timeout=httpx.Timeout(20.0)) as client:
-            summary = enrich.enrich_releases(
-                releases, resolver, client=client, api_key=api_key
-            )
+        with bluray.BlurayResolver() as bluray_resolver:
+            with httpx.Client(timeout=httpx.Timeout(20.0)) as client:
+                summary = enrich.enrich_releases(
+                    releases,
+                    resolver,
+                    client=client,
+                    api_key=api_key,
+                    bluray_resolver=bluray_resolver,
+                )
     print(
         "enrichment complete; "
         f"resolved={summary.resolved} "
         f"unresolved={summary.unresolved} "
         f"posters_downloaded={summary.posters_downloaded} "
-        f"failed={summary.failed}"
+        f"failed={summary.failed} "
+        f"bluray_matched={summary.bluray_matched} "
+        f"bluray_failed={summary.bluray_failed}"
     )
 
 
