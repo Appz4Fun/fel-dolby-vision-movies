@@ -24,6 +24,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
+      - name: Update queued main checkout
+        if: github.ref == 'refs/heads/main'
+        run: git pull --ff-only origin "$GITHUB_REF_NAME"
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
