@@ -173,7 +173,16 @@ def enrich_releases(
                 bluray_matched += 1
                 release.bluray_url = details.url
                 release.bluray_release_date = details.bluray_release_date
-                release.hdr_formats = list(details.hdr_formats)
+                # FEL-confirmed releases are Dolby Vision Profile 7 discs by
+                # definition. blu-ray.com sometimes lists only the base HDR10
+                # layer; preserve "Dolby Vision" when fel_confirmed is true so
+                # the bluray scrape can't silently downgrade validated FEL data.
+                hdr = list(details.hdr_formats)
+                if release.fel_confirmed and not any(
+                    h.lower() == "dolby vision" for h in hdr
+                ):
+                    hdr = ["Dolby Vision"] + hdr
+                release.hdr_formats = hdr
                 release.audio_formats = list(details.audio_formats)
                 release.audio_languages = list(details.audio_languages)
                 if "English" in details.audio_languages:
