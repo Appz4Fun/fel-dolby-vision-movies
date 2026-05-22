@@ -24,7 +24,9 @@ def build_dashboard(
         indent=2,
         ensure_ascii=False,
     )
-    cards = "\n".join(_render_card(release) for release in sorted_releases)
+    cards = "\n".join(
+        _render_card(release, index) for index, release in enumerate(sorted_releases)
+    )
 
     (dist / "releases.json").write_text(payload + "\n", encoding="utf-8")
     (dist / "index.html").write_text(
@@ -58,7 +60,30 @@ def _to_public_dict(release: FelRelease) -> dict[str, object]:
     return data
 
 
-def _render_card(release: FelRelease) -> str:
+def _evidence_urls(release: FelRelease) -> list[str]:
+    """Distinct http(s) source URLs for a release, primary (source_url) first.
+
+    Non-URL provenance strings (e.g. "FEL.txt (curated Profile 7 FEL list)")
+    are excluded so they never render as broken links.
+    """
+    urls: list[str] = []
+    seen: set[str] = set()
+    additional = release.additional_characteristics or {}
+    extra = additional.get("source_urls") or []
+    if not isinstance(extra, list):
+        extra = []
+    for url in [release.source_url, *extra]:
+        if (
+            isinstance(url, str)
+            and url.startswith(("http://", "https://"))
+            and url not in seen
+        ):
+            seen.add(url)
+            urls.append(url)
+    return urls
+
+
+def _render_card(release: FelRelease, index: int) -> str:
     audio_formats = release.audio_formats or [UNKNOWN]
     audio_badges = "".join(
         f'<span class="badge">{escape(audio)}</span>' for audio in audio_formats
@@ -94,7 +119,26 @@ def _render_card(release: FelRelease) -> str:
             f'<a href="{escape(release.bluray_url, quote=True)}" '
             f'rel="noreferrer">BR</a>'
         )
-    return f"""<article data-card data-search="{escape(search_text, quote=True)}">
+    evidence_urls = _evidence_urls(release)
+    if len(evidence_urls) > 1:
+        src_control = (
+            '<button type="button" class="src-toggle" data-evidence>Src '
+            f'<span class="src-count">({len(evidence_urls)})</span></button>'
+        )
+    elif evidence_urls:
+        src_control = (
+            f'<a href="{escape(evidence_urls[0], quote=True)}" rel="noreferrer">Src</a>'
+        )
+    else:
+        label = release.source_label
+        if not label or label == UNKNOWN:
+            label = "list only"
+        src_control = (
+            '<button type="button" class="src-toggle" data-evidence>'
+            f"{escape(label)}</button>"
+        )
+    return f"""<article data-card data-idx="{index}" \
+data-search="{escape(search_text, quote=True)}">
   {poster}
   <div class="body">
     <h2>{escape(release.movie_title)}</h2>
@@ -104,7 +148,7 @@ def _render_card(release: FelRelease) -> str:
       <span class="badge">English: {escape(release.english_audio)}</span>
     </div>
     <div class="links">
-      <a href="{escape(release.source_url, quote=True)}" rel="noreferrer">Src</a>
+      {src_control}
       {tmdb_link}
       {bluray_link}
     </div>
@@ -139,7 +183,7 @@ def _render_html(cards: str, payload: str, total: int) -> str:
         BlinkMacSystemFont, "Segoe UI", sans-serif;
     }}
     main {{
-      width: min(1180px, calc(100% - 32px));
+      width: calc(100% - 32px);
       margin: 0 auto;
       padding: 32px 0;
     }}
@@ -172,7 +216,7 @@ def _render_html(cards: str, payload: str, total: int) -> str:
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 16px;
     }}
-    #list {{ display: block; overflow-x: auto; }}
+    #list {{ display: block; }}
     table {{
       width: 100%;
       min-width: 780px;
@@ -239,6 +283,71 @@ def _render_html(cards: str, payload: str, total: int) -> str:
       font-size: 12px;
       white-space: nowrap;
     }}
+    .src-toggle {{
+      background: none;
+      border: 0;
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+      padding: 0;
+      white-space: nowrap;
+    }}
+    .src-toggle::after {{ content: " ▸"; font-size: 10px; }}
+    .src-toggle.open::after {{ content: " ▾"; }}
+    .src-count {{ color: var(--muted); }}
+    .evidence-row td.evidence-cell {{ background: #0c0e10; padding: 6px 10px; }}
+    .evidence-box {{
+      margin: 6px 0;
+      border: 1px solid var(--line);
+      background: #0c0e10;
+      border-radius: 8px;
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      max-width: 760px;
+    }}
+    .evidence-box h3 {{
+      margin: 0;
+      font-size: 11px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }}
+    .evidence-quote {{
+      color: var(--muted);
+      font-size: 13px;
+      font-style: italic;
+      border-left: 2px solid var(--accent);
+      padding-left: 10px;
+    }}
+    .evidence-note {{ color: var(--muted); font-size: 13px; }}
+    .evidence-note strong {{ color: var(--text); font-weight: 600; }}
+    .evidence-list {{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 7px;
+      max-height: 260px;
+      overflow-y: auto;
+    }}
+    .evidence-item {{
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      font-size: 13px;
+    }}
+    .evidence-item a {{ overflow-wrap: anywhere; }}
+    .evidence-tag {{
+      border: 1px solid rgba(77, 211, 201, .45);
+      background: rgba(77, 211, 201, .14);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 1px 7px;
+      font-size: 10px;
+      white-space: nowrap;
+      flex: none;
+    }}
     a {{ color: var(--accent); }}
     @media (max-width: 980px) {{
       .priority-5 {{ display: none; }}
@@ -299,6 +408,88 @@ def _render_html(cards: str, payload: str, total: int) -> str:
         ? `<a href="${{escapeHtml(url)}}" rel="noreferrer">${{label}}</a>`
         : "";
     }}
+    function evidenceUrls(row) {{
+      const out = [];
+      const seen = new Set();
+      const extra = (row.additional_characteristics
+        && row.additional_characteristics.source_urls) || [];
+      for (const url of [row.source_url, ...extra]) {{
+        const isUrl = typeof url === "string"
+          && (url.startsWith("http://") || url.startsWith("https://"));
+        if (isUrl && !seen.has(url)) {{
+          seen.add(url);
+          out.push(url);
+        }}
+      }}
+      return out;
+    }}
+    function sourceLabel(url) {{
+      try {{
+        const u = new URL(url);
+        const host = u.hostname.replace(/^www\\./, "");
+        const t = u.searchParams.get("t");
+        const p = u.searchParams.get("p");
+        const page = u.searchParams.get("page");
+        if (host.indexOf("blu-ray.com") !== -1 && (t || p)) {{
+          let label = "blu-ray.com forum";
+          if (t) label += " · thread " + t;
+          if (page) label += " · p." + page;
+          if (p && !t) label += " · post " + p;
+          return label;
+        }}
+        if (host.indexOf("reddit.com") !== -1) {{
+          const parts = u.pathname.split("/").filter(Boolean);
+          return "reddit · " + parts.slice(0, 2).join("/");
+        }}
+        if (host.indexOf("web.archive.org") !== -1) return "web.archive.org snapshot";
+        if (host.indexOf("docs.google.com") !== -1) return "Google Sheet";
+        const seg = u.pathname.split("/").filter(Boolean).pop();
+        return seg ? host + " · " + decodeURIComponent(seg) : host;
+      }} catch (error) {{
+        return url;
+      }}
+    }}
+    function renderEvidenceBox(row) {{
+      const urls = evidenceUrls(row);
+      const quote = row.fel_evidence && row.fel_evidence.quote;
+      let body;
+      if (urls.length) {{
+        const items = urls.map((url, index) =>
+          `<li class="evidence-item">` +
+          `<span class="evidence-tag"` +
+          `${{index === 0 ? "" : ' style="visibility:hidden"'}}>primary</span>` +
+          `<a href="${{escapeHtml(url)}}" target="_blank" rel="noreferrer">` +
+          `${{escapeHtml(sourceLabel(url))}}</a>` +
+          `</li>`).join("");
+        body = `<ul class="evidence-list">${{items}}</ul>`;
+      }} else {{
+        const raw = row.source_url;
+        const provenance = (typeof raw === "string" && !raw.startsWith("http"))
+          ? raw
+          : ((row.source_label && row.source_label !== "Unknown")
+            ? row.source_label : "a curated list");
+        body = `<div class="evidence-note">Listed in ` +
+          `<strong>${{escapeHtml(provenance)}}</strong> — ` +
+          `no direct source link.</div>`;
+      }}
+      return `<div class="evidence-box">` +
+        `<h3>Source evidence${{urls.length ? " (" + urls.length + ")" : ""}}</h3>` +
+        (quote ? `<div class="evidence-quote">${{escapeHtml(quote)}}</div>` : "") +
+        body +
+        `</div>`;
+    }}
+    function srcControl(row) {{
+      const urls = evidenceUrls(row);
+      if (urls.length > 1) {{
+        return `<button type="button" class="src-toggle" data-evidence>Src ` +
+          `<span class="src-count">(${{urls.length}})</span></button>`;
+      }}
+      if (urls.length === 1) return link(urls[0], "Src");
+      const label = row.source_label && row.source_label !== "Unknown"
+        ? row.source_label : "list only";
+      return `<button type="button" class="src-toggle" data-evidence>` +
+        `${{escapeHtml(label)}}</button>`;
+    }}
     function posterThumb(row) {{
       if (!row.poster_path) {{
         return `<div class="poster-thumb-placeholder">${{escapeHtml(row.movie_title || "No poster")}}</div>`;
@@ -320,11 +511,12 @@ def _render_html(cards: str, payload: str, total: int) -> str:
       ["Language", r => escapeHtml((r.audio_languages || []).join(", ")), "priority-5"],
       ["HDR", r => escapeHtml((r.hdr_formats || []).join(", ")), "priority-4"],
       ["BR Link", r => link(r.bluray_url, "BR"), "priority-1"],
-      ["Src Link", r => link(r.source_url, "Src"), "priority-2"],
+      ["Src Link", r => srcControl(r), "priority-2"],
       ["TMDB", r => link(r.release_url, "TMDB"), "priority-2"],
     ];
     let sortCol = 2;
     let sortAsc = false;
+    let currentRows = [];
 
     function filteredRows() {{
       const query = filter.value.trim().toLowerCase();
@@ -350,7 +542,8 @@ def _render_html(cards: str, payload: str, total: int) -> str:
       const head = "<tr>" + columns.map((column, i) =>
         `<th class="${{column[2]}}" data-col="${{i}}">${{column[0]}}${{i === sortCol
           ? (sortAsc ? " ▲" : " ▼") : ""}}</th>`).join("") + "</tr>";
-      const body = rows.map(row => "<tr>" +
+      currentRows = rows;
+      const body = rows.map((row, index) => `<tr data-idx="${{index}}">` +
         columns.map(column => `<td class="${{column[2]}}">${{column[1](row)}}</td>`)
           .join("") +
         "</tr>").join("");
@@ -365,6 +558,21 @@ def _render_html(cards: str, payload: str, total: int) -> str:
         }}
         renderTable();
       }}));
+      listView.querySelectorAll(".src-toggle[data-evidence]").forEach(button =>
+        button.addEventListener("click", () => {{
+          const tr = button.closest("tr");
+          const next = tr.nextElementSibling;
+          if (next && next.classList.contains("evidence-row")) {{
+            next.remove();
+            button.classList.remove("open");
+            return;
+          }}
+          const row = currentRows[Number(tr.dataset.idx)];
+          tr.insertAdjacentHTML("afterend",
+            `<tr class="evidence-row"><td class="evidence-cell" ` +
+            `colspan="${{columns.length}}">` + renderEvidenceBox(row) + `</td></tr>`);
+          button.classList.add("open");
+        }}));
     }}
     function sortTable() {{ renderTable(); }}
 
@@ -389,6 +597,21 @@ def _render_html(cards: str, payload: str, total: int) -> str:
       btnList.classList.add("active");
       btnCards.classList.remove("active");
       renderTable();
+    }});
+    cardsView.addEventListener("click", event => {{
+      const button = event.target.closest(".src-toggle[data-evidence]");
+      if (!button) return;
+      const article = button.closest("[data-card]");
+      const existing = article.querySelector(".evidence-box");
+      if (existing) {{
+        existing.remove();
+        button.classList.remove("open");
+        return;
+      }}
+      const row = data[Number(article.dataset.idx)];
+      article.querySelector(".body")
+        .insertAdjacentHTML("beforeend", renderEvidenceBox(row));
+      button.classList.add("open");
     }});
     renderTable();
   </script>
