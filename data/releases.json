@@ -357,7 +357,6 @@
     "bluray_url": "https://www.blu-ray.com/movies/Perfect-Days-4K-Blu-ray/359328/",
     "bluray_release_date": "2024-07-16",
     "hdr_formats": [
-      "Dolby Vision",
       "HDR10"
     ],
     "audio_languages": [
@@ -3648,7 +3647,6 @@
     "bluray_url": "https://www.blu-ray.com/movies/Parasite-4K-Blu-ray/265925/",
     "bluray_release_date": "2020-06-02",
     "hdr_formats": [
-      "Dolby Vision",
       "HDR10+"
     ],
     "audio_languages": [
@@ -8315,9 +8313,12 @@
     "imdb_id": "tt1340094",
     "poster_path": "data/posters/957452.jpg",
     "release_url": "https://www.themoviedb.org/movie/957452",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Crow-4K-Blu-ray/369148/",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Crow-4K-Blu-ray/357509/",
     "bluray_release_date": "2024-11-05",
-    "hdr_formats": [],
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
     "audio_languages": [
       "English",
       "Spanish"
@@ -19293,7 +19294,6 @@
     "bluray_url": "https://www.blu-ray.com/movies/Ferrari-4K-Blu-ray/352764/",
     "bluray_release_date": "",
     "hdr_formats": [
-      "Dolby Vision",
       "HDR10"
     ],
     "audio_languages": [],
@@ -26774,7 +26774,6 @@
     "bluray_url": "https://www.blu-ray.com/movies/Beating-Hearts-4K-Blu-ray/375041/",
     "bluray_release_date": "2025-02-19",
     "hdr_formats": [
-      "Dolby Vision",
       "HDR10"
     ],
     "audio_languages": [
@@ -37918,32 +37917,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Avatar: Extended Collector",
-    "fel_confirmed": true,
-    "release_date": "2009",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
-    "source_label": "codex-ai",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
-      "quote": "Source column lists BD FEL VS BL.",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T04:52:57+00:00"
   },
   {
     "movie_title": "Avatar: Extended Collector's Edition",
