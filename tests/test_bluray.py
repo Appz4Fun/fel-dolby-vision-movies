@@ -1,7 +1,11 @@
+from pathlib import Path
+
 import httpx
 
 from bluray import (
     BlurayDetails,
+    BlurayResolver,
+    StaticBlurayResolver,
     fetch_bluray_details,
     normalize_bluray_audio,
     parse_hdr,
@@ -100,3 +104,34 @@ def test_search_bluray_returns_high_confidence_4k_match():
     assert url == "https://www.blu-ray.com/movies/The-Northman-4K-Blu-ray/301/"
     assert miss is None
     assert wrong_year is None
+
+
+def test_static_bluray_resolver_returns_details():
+    details = BlurayDetails(url="u", hdr_formats=["Dolby Vision"])
+    resolver = StaticBlurayResolver({("The Northman", "2022"): details})
+    assert resolver.resolve("The Northman", "2022") is details
+    assert resolver.resolve("Missing", "2000") is None
+
+
+def test_bluray_resolver_caches_lookups(tmp_path: Path):
+    calls = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(request.url.path)
+        if "/search/" in request.url.path:
+            return httpx.Response(200, text=_SEARCH_HTML)
+        return httpx.Response(200, text=_DISC_HTML)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    cache = tmp_path / "bluray.json"
+    with BlurayResolver(client=client, cache_path=cache) as resolver:
+        first = resolver.resolve("The Northman", "2022")
+        assert first is not None
+        assert first.hdr_formats == ["Dolby Vision", "HDR10"]
+    calls_after_first = len(calls)
+    # A fresh resolver reading the same cache makes no new requests.
+    with BlurayResolver(client=client, cache_path=cache) as resolver:
+        cached = resolver.resolve("The Northman", "2022")
+        assert cached is not None
+        assert cached.audio_formats == first.audio_formats
+    assert len(calls) == calls_after_first

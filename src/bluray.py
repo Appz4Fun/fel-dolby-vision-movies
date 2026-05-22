@@ -3,7 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
 import html
+import json
+from pathlib import Path
 import re
+import time
+from typing import Protocol
 import urllib.parse
 
 import httpx
@@ -100,6 +104,7 @@ _RESULT_ANCHOR_RE = re.compile(
     re.S,
 )
 _YEAR_IN_TITLE_RE = re.compile(r"\((\d{4})\)")
+DEFAULT_BLURAY_CACHE = Path(".cache/bluray.json")
 
 
 @dataclass(frozen=True)
@@ -166,3 +171,100 @@ def search_bluray(client: httpx.Client, title: str, year: str) -> str | None:
                 continue
         return href
     return None
+
+
+class BlurayMatcher(Protocol):
+    def resolve(self, title: str, year: str) -> BlurayDetails | None: ...
+
+
+class StaticBlurayResolver:
+    def __init__(self, records: dict[tuple[str, str], BlurayDetails]) -> None:
+        self.records = records
+
+    def resolve(self, title: str, year: str) -> BlurayDetails | None:
+        return self.records.get((title, year))
+
+
+def _details_to_record(details: BlurayDetails | None) -> dict[str, object] | None:
+    if details is None:
+        return None
+    return {
+        "url": details.url,
+        "bluray_release_date": details.bluray_release_date,
+        "audio_formats": details.audio_formats,
+        "audio_languages": details.audio_languages,
+        "hdr_formats": details.hdr_formats,
+    }
+
+
+def _details_from_record(record: dict[str, object] | None) -> BlurayDetails | None:
+    if record is None:
+        return None
+    return BlurayDetails(
+        url=str(record.get("url") or ""),
+        bluray_release_date=str(record.get("bluray_release_date") or ""),
+        audio_formats=list(record.get("audio_formats") or []),
+        audio_languages=list(record.get("audio_languages") or []),
+        hdr_formats=list(record.get("hdr_formats") or []),
+    )
+
+
+class BlurayResolver:
+    def __init__(
+        self,
+        client: httpx.Client | None = None,
+        cache_path: Path = DEFAULT_BLURAY_CACHE,
+        delay_seconds: float = 0.025,
+    ) -> None:
+        self.client = client or httpx.Client(
+            timeout=httpx.Timeout(20.0),
+            headers={"User-Agent": "fel-dolby-vision-movies/1.0 (+github)"},
+        )
+        self._owns_client = client is None
+        self.cache_path = cache_path
+        self.delay_seconds = delay_seconds
+        self.cache: dict[str, dict[str, object] | None] = self._read_cache()
+
+    def resolve(self, title: str, year: str) -> BlurayDetails | None:
+        key = f"{title}\0{year}"
+        if key in self.cache:
+            return _details_from_record(self.cache[key])
+        details: BlurayDetails | None = None
+        url = search_bluray(self.client, title, year)
+        if url is not None:
+            details = fetch_bluray_details(self.client, url)
+        self.cache[key] = _details_to_record(details)
+        self._write_cache()
+        time.sleep(self.delay_seconds)
+        return details
+
+    def _read_cache(self) -> dict[str, dict[str, object] | None]:
+        if not self.cache_path.exists():
+            return {}
+        try:
+            data = json.loads(self.cache_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return {}
+        if not isinstance(data, dict):
+            return {}
+        return {
+            str(key): value if isinstance(value, dict) else None
+            for key, value in data.items()
+        }
+
+    def _write_cache(self) -> None:
+        self.cache_path.parent.mkdir(parents=True, exist_ok=True)
+        self.cache_path.write_text(
+            json.dumps(self.cache, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+
+    def close(self) -> None:
+        if self._owns_client:
+            self.client.close()
+
+    def __enter__(self) -> BlurayResolver:
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        self.close()
