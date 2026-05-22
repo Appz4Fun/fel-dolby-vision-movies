@@ -144,8 +144,6 @@ def test_scrape_for_titles_fetches_sources_and_writes_artifacts(
     ]
     data = json.loads((output_dir / "data/releases.json").read_text(encoding="utf-8"))
     assert [release["movie_title"] for release in data] == ["Beta", "Alpha"]
-    assert (output_dir / "README.md").exists()
-    assert (output_dir / "links.md").exists()
     assert (output_dir / "dist/index.html").exists()
     output = capsys.readouterr().out
     assert "sources=2" in output

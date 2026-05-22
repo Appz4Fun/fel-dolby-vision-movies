@@ -121,8 +121,8 @@ def ai_scrape_releases(
 
 
 def _google_sheets_path_for(source_path: Path) -> Path:
-    if source_path == Path("forums.txt"):
-        return Path("google_sheets.txt")
+    if source_path == Path("data/forums.txt"):
+        return Path("data/google_sheets.txt")
     return source_path.with_name("google_sheets.txt")
 
 

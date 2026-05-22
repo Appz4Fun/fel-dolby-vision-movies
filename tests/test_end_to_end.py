@@ -69,10 +69,7 @@ def test_full_pipeline_ingest_merge_enrich_publish(tmp_path: Path):
     assert entry["hdr_formats"] == ["Dolby Vision", "HDR10"]
     assert entry["bluray_url"].endswith("/1/")
 
-    readme = (tmp_path / "README.md").read_text(encoding="utf-8")
-    assert "Nosferatu" in readme
-    assert "Dolby Vision, HDR10" in readme
-
     index = (tmp_path / "dist/index.html").read_text(encoding="utf-8")
+    assert "Nosferatu" in index
     assert "1 confirmed Profile 7 FEL releases" in index
     assert 'id="view-list"' in index

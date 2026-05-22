@@ -5,8 +5,10 @@ import json
 from pathlib import Path
 import shutil
 
-from artifacts import RELEASE_GROUP_KEYS
 from models import UNKNOWN, FelRelease
+
+
+RELEASE_GROUP_KEYS = frozenset({"group", "release_group", "release group"})
 
 
 def build_dashboard(
