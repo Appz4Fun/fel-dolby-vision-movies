@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import re
 from typing import Any
 
 from merge import canonical_key, dedupe_releases, tmdb_key
@@ -9,6 +10,11 @@ from models import UNKNOWN, FelRelease, release_from_dict
 
 
 RELEASE_GROUP_KEYS = frozenset({"group", "release_group", "release group"})
+STALE_SHEET_COLLECTION_RE = re.compile(
+    r"\b(?:collection|trilogy|duology|quadrilogy|tetralogy|saga|box\s*set|boxset)$",
+    re.IGNORECASE,
+)
+STALE_DOTTED_YEAR_TITLE_RE = re.compile(r"[._-](?:19|20)\d{2}[.\s_-]*$")
 
 
 def publish_outputs(
@@ -40,6 +46,10 @@ def write_artifacts(
             for item in json.loads(releases_path.read_text(encoding="utf-8"))
         ]
 
+    existing = [
+        release for release in existing if not _is_stale_google_sheet_release(release)
+    ]
+
     merged = dedupe_releases([*existing, *releases], canonical_key)
     merged = dedupe_releases(merged, tmdb_key)
     sorted_releases = sorted(merged, key=_sort_key)
@@ -59,6 +69,16 @@ def write_artifacts(
     return sorted_releases
 
 
+def _is_stale_google_sheet_release(release: FelRelease) -> bool:
+    if release.fel_evidence.evidence_type != "google-sheet-row":
+        return False
+    if STALE_SHEET_COLLECTION_RE.search(release.movie_title):
+        return True
+    return release.release_date == UNKNOWN and bool(
+        STALE_DOTTED_YEAR_TITLE_RE.search(release.movie_title)
+    )
+
+
 def _sort_key(release: FelRelease) -> tuple[int, str]:
     if release.release_date == UNKNOWN:
         return (1, "")
@@ -75,9 +95,9 @@ def _render_readme(releases: list[FelRelease]) -> str:
         "",
         "Confirmed Dolby Vision Profile 7 FEL physical media releases.",
         "",
-        "| Movie | Poster | FEL | Release Date | Studio | Audio | "
-        "English Audio | HDR | Additional | Source | TMDB | Blu-ray |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Release Date | Movie | Poster | Studio | Audio | English Audio | HDR | "
+        "Additional | BR Link | Src Link | TMDB |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for release in releases:
         poster = (
@@ -86,22 +106,22 @@ def _render_readme(releases: list[FelRelease]) -> str:
             else ""
         )
         tmdb = f"[TMDB]({release.release_url})" if release.release_url else ""
+        bluray = f"[BR]({release.bluray_url})" if release.bluray_url else ""
         lines.append(
             "| "
             + " | ".join(
                 [
+                    release.release_date,
                     release.movie_title,
                     poster,
-                    "Yes",
-                    release.release_date,
                     release.studio,
                     ", ".join(release.audio_formats) or UNKNOWN,
                     release.english_audio,
                     ", ".join(release.hdr_formats) or UNKNOWN,
                     _render_additional(release.additional_characteristics),
-                    f"[source]({release.source_url})",
+                    bluray,
+                    f"[src]({release.source_url})",
                     tmdb,
-                    (f"[blu-ray]({release.bluray_url})" if release.bluray_url else ""),
                 ]
             )
             + " |"

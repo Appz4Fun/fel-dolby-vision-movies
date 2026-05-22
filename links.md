@@ -436,3 +436,4 @@
 - https://www.dvdtalk.com/reviews/review/74361
 - https://caps-a-holic.com/c.php?c=5640&d1=14678&d2=14677
 - https://caps-a-holic.com/c.php?c=6165&d1=16781&d2=17055
+- https://www.avsforum.com/threads/dolby-vision-profile-7-fel-with-full-lossless-audio-truehd-atmos-and-dts-x.3339774

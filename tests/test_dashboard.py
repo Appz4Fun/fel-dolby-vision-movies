@@ -102,3 +102,26 @@ def test_dashboard_has_total_count_and_sortable_list(tmp_path: Path):
     assert 'id="view-cards"' in html
     assert 'id="view-list"' in html
     assert "<table" in html and "sortTable" in html
+
+
+def test_dashboard_defaults_to_responsive_list_without_year_or_fel_columns(
+    tmp_path: Path,
+):
+    build_dashboard(
+        [_enriched_release()],
+        output_dir=tmp_path / "dist",
+        poster_src=tmp_path / "data" / "posters",
+    )
+
+    html = (tmp_path / "dist" / "index.html").read_text(encoding="utf-8")
+    assert 'id="view-list" class="active"' in html
+    assert 'id="view-cards" class="active"' not in html
+    assert '["Release Date"' in html
+    assert '["Blu-ray Date"' in html
+    assert html.index('["Release Date"') < html.index('["Movie"')
+    assert '["Year"' not in html
+    assert '["FEL"' not in html
+    assert '["BR Link"' in html
+    assert '["Src Link"' in html
+    assert '["TMDB"' in html
+    assert "@media (max-width:" in html

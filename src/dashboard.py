@@ -90,7 +90,7 @@ def _render_card(release: FelRelease) -> str:
     if release.bluray_url:
         bluray_link = (
             f'<a href="{escape(release.bluray_url, quote=True)}" '
-            f'rel="noreferrer">Blu-ray</a>'
+            f'rel="noreferrer">BR</a>'
         )
     return f"""<article data-card data-search="{escape(search_text, quote=True)}">
   {poster}
@@ -100,10 +100,9 @@ def _render_card(release: FelRelease) -> str:
     <div class="badges">
       {audio_badges}
       <span class="badge">English: {escape(release.english_audio)}</span>
-      <span class="badge">FEL</span>
     </div>
     <div class="links">
-      <a href="{escape(release.source_url, quote=True)}" rel="noreferrer">Source</a>
+      <a href="{escape(release.source_url, quote=True)}" rel="noreferrer">Src</a>
       {tmdb_link}
       {bluray_link}
     </div>
@@ -167,21 +166,28 @@ def _render_html(cards: str, payload: str, total: int) -> str:
     }}
     .views button.active {{ border-color: var(--accent); color: var(--accent); }}
     #cards {{
-      display: grid;
+      display: none;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 16px;
     }}
-    #list {{ display: none; overflow-x: auto; }}
-    table {{ width: 100%; border-collapse: collapse; font-size: 14px; }}
+    #list {{ display: block; overflow-x: auto; }}
+    table {{
+      width: 100%;
+      min-width: 780px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }}
     th, td {{
       text-align: left;
       padding: 8px 10px;
       border-bottom: 1px solid var(--line);
       vertical-align: top;
+      overflow-wrap: anywhere;
     }}
     th {{ cursor: pointer; user-select: none; white-space: nowrap; }}
     th:hover {{ color: var(--accent); }}
     table img {{ width: 46px; height: 69px; object-fit: cover; display: block; }}
+    td a {{ white-space: nowrap; }}
     article {{
       border: 1px solid var(--line);
       background: var(--panel);
@@ -220,6 +226,27 @@ def _render_html(cards: str, payload: str, total: int) -> str:
       white-space: nowrap;
     }}
     a {{ color: var(--accent); }}
+    @media (max-width: 980px) {{
+      .priority-5 {{ display: none; }}
+      table {{ min-width: 680px; }}
+    }}
+    @media (max-width: 820px) {{
+      main {{ width: min(100% - 24px, 1180px); padding-top: 24px; }}
+      .priority-4 {{ display: none; }}
+      table {{ min-width: 580px; font-size: 13px; }}
+      th, td {{ padding: 7px 8px; }}
+    }}
+    @media (max-width: 660px) {{
+      h1 {{ font-size: 28px; }}
+      .views button {{ flex: 1; }}
+      .priority-3 {{ display: none; }}
+      table {{ min-width: 0; }}
+    }}
+    @media (max-width: 520px) {{
+      main {{ width: min(100% - 20px, 1180px); }}
+      .priority-2 {{ display: none; }}
+      th, td {{ padding: 7px 6px; }}
+    }}
   </style>
 </head>
 <body>
@@ -230,8 +257,8 @@ def _render_html(cards: str, payload: str, total: int) -> str:
       <label>Filter <input id="filter" type="search" placeholder="Title, studio, audio"></label>
     </header>
     <div class="views">
-      <button id="view-cards" class="active">Cards</button>
-      <button id="view-list">List</button>
+      <button id="view-list" class="active">List</button>
+      <button id="view-cards">Cards</button>
     </div>
     <div id="list"></div>
     <section id="cards">{cards}</section>
@@ -245,28 +272,32 @@ def _render_html(cards: str, payload: str, total: int) -> str:
     const btnCards = document.getElementById("view-cards");
     const btnList = document.getElementById("view-list");
 
+    function escapeHtml(value) {{
+      return String(value == null ? "" : value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }}
+    function link(url, label) {{
+      return url
+        ? `<a href="${{escapeHtml(url)}}" rel="noreferrer">${{label}}</a>`
+        : "";
+    }}
     const columns = [
-      ["", r => r.poster_path
-        ? `<img src="posters/${{r.poster_path.split("/").pop()}}" alt="">` : ""],
-      ["Movie", r => r.movie_title],
-      ["Year", r => (r.release_date || "").slice(0, 4)],
-      ["Studio", r => r.studio || ""],
-      ["Audio", r => (r.audio_formats || []).join(", ")],
-      ["Language", r => (r.audio_languages || []).join(", ")],
-      ["HDR", r => (r.hdr_formats || []).join(", ")],
-      ["FEL", r => {{
-        const bitrate = (r.additional_characteristics || {{}}).enhancement_bitrate_mbps;
-        return bitrate == null ? "" : bitrate;
-      }}],
-      ["Release Date", r => r.release_date || ""],
-      ["Blu-ray Date", r => r.bluray_release_date || ""],
-      ["Links", r => [
-        r.source_url && `<a href="${{r.source_url}}" rel="noreferrer">src</a>`,
-        r.release_url && `<a href="${{r.release_url}}" rel="noreferrer">TMDB</a>`,
-        r.bluray_url && `<a href="${{r.bluray_url}}" rel="noreferrer">blu-ray</a>`,
-      ].filter(Boolean).join(" · ")],
+      ["Release Date", r => escapeHtml(r.release_date || ""), "priority-1"],
+      ["Blu-ray Date", r => escapeHtml(r.bluray_release_date || ""), "priority-2"],
+      ["Movie", r => escapeHtml(r.movie_title || ""), "priority-1"],
+      ["Studio", r => escapeHtml(r.studio || ""), "priority-4"],
+      ["Audio", r => escapeHtml((r.audio_formats || []).join(", ")), "priority-3"],
+      ["Language", r => escapeHtml((r.audio_languages || []).join(", ")), "priority-5"],
+      ["HDR", r => escapeHtml((r.hdr_formats || []).join(", ")), "priority-4"],
+      ["BR Link", r => link(r.bluray_url, "BR"), "priority-1"],
+      ["Src Link", r => link(r.source_url, "Src"), "priority-2"],
+      ["TMDB", r => link(r.release_url, "TMDB"), "priority-2"],
     ];
-    let sortCol = 1;
+    let sortCol = 0;
     let sortAsc = true;
 
     function filteredRows() {{
@@ -279,15 +310,22 @@ def _render_html(cards: str, payload: str, total: int) -> str:
 
     function renderTable() {{
       const rows = filteredRows().slice().sort((a, b) => {{
-        const va = columns[sortCol][1](a).toString().toLowerCase();
-        const vb = columns[sortCol][1](b).toString().toLowerCase();
+        const va = columns[sortCol][1](a)
+          .toString()
+          .replace(/<[^>]*>/g, "")
+          .toLowerCase();
+        const vb = columns[sortCol][1](b)
+          .toString()
+          .replace(/<[^>]*>/g, "")
+          .toLowerCase();
         return (va < vb ? -1 : va > vb ? 1 : 0) * (sortAsc ? 1 : -1);
       }});
       const head = "<tr>" + columns.map((column, i) =>
-        `<th data-col="${{i}}">${{column[0]}}${{i === sortCol
+        `<th class="${{column[2]}}" data-col="${{i}}">${{column[0]}}${{i === sortCol
           ? (sortAsc ? " ▲" : " ▼") : ""}}</th>`).join("") + "</tr>";
       const body = rows.map(row => "<tr>" +
-        columns.map(column => `<td>${{column[1](row)}}</td>`).join("") +
+        columns.map(column => `<td class="${{column[2]}}">${{column[1](row)}}</td>`)
+          .join("") +
         "</tr>").join("");
       listView.innerHTML = `<table><thead>${{head}}</thead><tbody>${{body}}</tbody></table>`;
       listView.querySelectorAll("th").forEach(th => th.addEventListener("click", () => {{
@@ -313,7 +351,7 @@ def _render_html(cards: str, payload: str, total: int) -> str:
       }}
     }});
     btnCards.addEventListener("click", () => {{
-      cardsView.style.display = "";
+      cardsView.style.display = "grid";
       listView.style.display = "none";
       btnCards.classList.add("active");
       btnList.classList.remove("active");
@@ -325,6 +363,7 @@ def _render_html(cards: str, payload: str, total: int) -> str:
       btnCards.classList.remove("active");
       renderTable();
     }});
+    renderTable();
   </script>
 </body>
 </html>

@@ -86,6 +86,21 @@ M3GAN 2.0 2025,BD FEL
     ]
 
 
+def test_parse_google_sheet_releases_rejects_collections_and_trailing_year_dots():
+    csv_text = """Movie Name,DV Source,Notes
+Godfather Trilogy,BD-FEL,Collection row is not one specific release
+Rango.2011.,BD FEL,Specific disc row
+Nobody.2.2025.,BD FEL,Specific disc row
+"""
+
+    releases = parse_google_sheet_releases(csv_text, "https://docs.example.test/sheet")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Rango", "2011"),
+        ("Nobody 2", "2025"),
+    ]
+
+
 def test_parse_google_sheet_releases_requires_fel_token_in_source_column():
     csv_text = """Movie Name,DV Source,Notes
 Ambiguous Movie,Profile 7,No FEL token

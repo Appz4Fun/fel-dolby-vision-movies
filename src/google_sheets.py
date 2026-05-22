@@ -13,8 +13,12 @@ TITLE_HEADERS = {"movie name", "title", "movie", "film"}
 FEL_HEADERS = {"dv source", "dv", "dolby vision", "layer", "source"}
 FEL_SOURCE_RE = re.compile(r"(?<![A-Za-z0-9])fel(?![A-Za-z0-9])", re.IGNORECASE)
 YEAR_RE = re.compile(
-    r"^(?P<title>.+?)[\s.(_-]+(?P<year>(?:19|20)\d{2})\)?"
-    r"(?=$|[\s._-]+(?:NEW|US|UK|FRA|ITA|EUR|BD)\b)",
+    r"^(?P<title>.+?)[\s.(_-]+(?P<year>(?:19|20)\d{2})\)?[.\s_-]*"
+    r"(?=$|(?:NEW|US|UK|FRA|ITA|EUR|BD)\b)",
+    re.IGNORECASE,
+)
+COLLECTION_TITLE_RE = re.compile(
+    r"\b(?:collection|trilogy|duology|quadrilogy|tetralogy|saga|box\s*set|boxset)$",
     re.IGNORECASE,
 )
 
@@ -54,6 +58,8 @@ def parse_google_sheet_releases(csv_text: str, source_url: str) -> list[FelRelea
             continue
         title, year = _split_title_year(raw_title)
         if not title:
+            continue
+        if COLLECTION_TITLE_RE.search(title):
             continue
         releases.append(_build_sheet_release(title, year, row, source_url))
 
@@ -104,7 +110,7 @@ def _split_title_year(value: str) -> tuple[str, str]:
 
 
 def _clean_sheet_title(value: str) -> str:
-    title = re.sub(r"(?<!\d)\.(?!\d)", " ", value)
+    title = re.sub(r"(?<!\d)\.|\.(?!\d)", " ", value)
     return normalize_title(title).strip(" -_()")
 
 

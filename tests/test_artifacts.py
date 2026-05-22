@@ -56,8 +56,8 @@ def test_write_artifacts_sorts_known_dates_newest_first_unknown_last(
         "Unknown Date",
     ]
     readme = (tmp_path / "README.md").read_text(encoding="utf-8")
-    assert "| Newer |" in readme
-    assert "[source](https://example.test/Newer)" in readme
+    assert "| 2026-05-01 | Newer |" in readme
+    assert "[src](https://example.test/Newer)" in readme
     assert "Newer is Profile 7 FEL" not in readme
 
 
@@ -68,6 +68,29 @@ def test_write_artifacts_merges_into_existing_releases_json(tmp_path: Path):
     data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
     titles = sorted(item["movie_title"] for item in data)
     assert titles == ["First", "Second"]
+
+
+def test_write_artifacts_replaces_stale_rows_from_refreshed_sources(tmp_path: Path):
+    stale = release("Rango.2011.", "Unknown")
+    stale.fel_evidence = FelEvidence(
+        source_url="https://docs.example.test/sheet",
+        quote="Rango.2011. BD FEL",
+        evidence_type="google-sheet-row",
+    )
+    preserved = release("Preserved", "2020")
+    fresh = release("Rango", "2011")
+    fresh.fel_evidence = FelEvidence(
+        source_url="https://docs.example.test/sheet",
+        quote="Rango.2011. BD FEL",
+        evidence_type="google-sheet-row",
+    )
+
+    write_artifacts([stale, preserved], output_dir=tmp_path)
+    write_artifacts([fresh], output_dir=tmp_path)
+
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    titles = sorted(item["movie_title"] for item in data)
+    assert titles == ["Preserved", "Rango"]
 
 
 def test_write_artifacts_renders_poster_and_tmdb_columns(tmp_path: Path):
@@ -104,7 +127,23 @@ def test_readme_has_hdr_and_bluray_columns(tmp_path: Path):
 
     readme = (tmp_path / "README.md").read_text(encoding="utf-8")
     assert "Dolby Vision, HDR10" in readme
-    assert "[blu-ray](https://www.blu-ray.com/movies/Enriched-4K-Blu-ray/9/)" in readme
+    assert "[BR](https://www.blu-ray.com/movies/Enriched-4K-Blu-ray/9/)" in readme
+
+
+def test_readme_omits_fel_column_and_uses_split_link_columns(tmp_path: Path):
+    item = release("Enriched", "2024")
+    item.release_url = "https://www.themoviedb.org/movie/111"
+    item.bluray_url = "https://www.blu-ray.com/movies/Enriched-4K-Blu-ray/9/"
+
+    write_artifacts([item], output_dir=tmp_path)
+
+    readme = (tmp_path / "README.md").read_text(encoding="utf-8")
+    header = readme.splitlines()[4]
+    assert header.startswith("| Release Date | Movie |")
+    assert "FEL" not in header
+    assert "Src Link" in header
+    assert "BR Link" in header
+    assert "TMDB" in header
 
 
 def test_links_contains_only_unique_source_urls(tmp_path: Path):
