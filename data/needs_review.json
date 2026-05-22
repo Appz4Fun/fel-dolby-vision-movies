@@ -4966,40 +4966,6 @@
     "removal_comment": "Every forum.blu-ray.com source URL was fetched and checked; none of those pages affirmatively states this title is Dolby Vision Profile 7 FEL, and no other (non-forum) FEL evidence remains. Needs manual review."
   },
   {
-    "movie_title": "Fantastic Mr. Fox",
-    "fel_confirmed": true,
-    "release_date": "2009-10-14",
-    "studio": "Regency Enterprises",
-    "audio_formats": [
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=354888&page=31",
-    "source_label": "FEL.txt",
-    "tmdb_id": "10315",
-    "imdb_id": "tt0432283",
-    "poster_path": "data/posters/10315.jpg",
-    "release_url": "https://www.themoviedb.org/movie/10315",
-    "bluray_url": "https://www.blu-ray.com/movies/Fantastic-Mr-Fox-4K-Blu-ray/389063/",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=354888&page=31",
-      "quote": "Fantastic Mr. Fox (2009) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Every forum.blu-ray.com source URL was fetched and checked; none of those pages affirmatively states this title is Dolby Vision Profile 7 FEL, and no other (non-forum) FEL evidence remains. Needs manual review."
-  },
-  {
     "movie_title": "Doomsday",
     "fel_confirmed": true,
     "release_date": "2008-03-14",
@@ -5109,40 +5075,6 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=327042&page=27",
       "quote": "Nobody's Fool (1994) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Every forum.blu-ray.com source URL was fetched and checked; none of those pages affirmatively states this title is Dolby Vision Profile 7 FEL, and no other (non-forum) FEL evidence remains. Needs manual review."
-  },
-  {
-    "movie_title": "Thelma & Louise",
-    "fel_confirmed": true,
-    "release_date": "1991-05-24",
-    "studio": "Scott Free Productions",
-    "audio_formats": [
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=327042&page=26",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1541",
-    "imdb_id": "tt0103074",
-    "poster_path": "data/posters/1541.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1541",
-    "bluray_url": "https://www.blu-ray.com/movies/Thelma-and-Louise-4K-Blu-ray/332956/",
-    "bluray_release_date": "2023-05-30",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=327042&page=26",
-      "quote": "Thelma & Louise (1991) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -7840,46 +7772,6 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Motel Hell (1980) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Removed from releases.json first pass: evidence_type=fel-list and the only primary evidence source is local FEL.txt, with no HTTP source to validate.",
-    "removed_at": "2026-05-22T16:56:50+00:00"
-  },
-  {
-    "movie_title": "Night of the Juggler",
-    "fel_confirmed": true,
-    "release_date": "1980-06-06",
-    "studio": "GCC Productions",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "44686",
-    "imdb_id": "tt0081230",
-    "poster_path": "data/posters/44686.jpg",
-    "release_url": "https://www.themoviedb.org/movie/44686",
-    "bluray_url": "https://www.blu-ray.com/movies/Night-of-the-Juggler-4K-Blu-ray/102177/",
-    "bluray_release_date": "2025-09-16",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "L E Night of the Juggler (1980) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },

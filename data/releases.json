@@ -1,5 +1,42 @@
 [
   {
+    "movie_title": "Fantastic Mr. Fox",
+    "fel_confirmed": true,
+    "release_date": "2009-10-14",
+    "studio": "Regency Enterprises",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://www.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://www.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "10315",
+    "imdb_id": "tt0432283",
+    "poster_path": "data/posters/10315.jpg",
+    "release_url": "https://www.themoviedb.org/movie/10315",
+    "bluray_url": "https://www.blu-ray.com/movies/Fantastic-Mr-Fox-4K-Blu-ray/389063/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://www.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "List of Dolby Vision P7-FEL Films includes Fantastic Mr. Fox [2009].",
+      "evidence_type": "reddit-list",
+      "location": "P7-FEL list"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
     "movie_title": "K2",
     "fel_confirmed": true,
     "release_date": "1991-10-10",
@@ -81,6 +118,43 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:37:17+00:00"
+  },
+  {
+    "movie_title": "Thelma & Louise",
+    "fel_confirmed": true,
+    "release_date": "1991-05-24",
+    "studio": "Scott Free Productions",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "1541",
+    "imdb_id": "tt0103074",
+    "poster_path": "data/posters/1541.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1541",
+    "bluray_url": "https://www.blu-ray.com/movies/Thelma-and-Louise-4K-Blu-ray/332956/",
+    "bluray_release_date": "2023-05-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "A list of Dolby Vision Profile 7 FEL Movies includes Thelma & Louise [1991].",
+      "evidence_type": "github-list",
+      "location": "P7-FEL list"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Silver Bullet",
@@ -295,6 +369,45 @@
       "evidence_type": "reddit-list"
     },
     "collected_at": "2026-05-22T23:06:02+00:00"
+  },
+  {
+    "movie_title": "Night of the Juggler",
+    "fel_confirmed": true,
+    "release_date": "1980-06-06",
+    "studio": "GCC Productions",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://www.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://www.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "44686",
+    "imdb_id": "tt0081230",
+    "poster_path": "data/posters/44686.jpg",
+    "release_url": "https://www.themoviedb.org/movie/44686",
+    "bluray_url": "https://www.blu-ray.com/movies/Night-of-the-Juggler-4K-Blu-ray/102177/",
+    "bluray_release_date": "2025-09-16",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://www.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "List of Dolby Vision P7-FEL Films includes Night of the Juggler (1980).",
+      "evidence_type": "reddit-list",
+      "location": "P7-FEL list"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Decision at Sundown",
