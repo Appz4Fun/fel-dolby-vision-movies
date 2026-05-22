@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import re
 import time
+from typing import TYPE_CHECKING
 
 import httpx
 
@@ -14,6 +15,9 @@ from tmdb import (
     load_tmdb_api_key,
 )
 from models import UNKNOWN, FelRelease
+
+if TYPE_CHECKING:
+    from bluray import BlurayMatcher
 
 
 __all__ = [
@@ -45,6 +49,8 @@ class EnrichmentSummary:
     unresolved: int
     posters_downloaded: int
     failed: int
+    bluray_matched: int = 0
+    bluray_failed: int = 0
 
 
 def release_url_for(tmdb_id: str, imdb_id: str) -> str:
@@ -113,40 +119,71 @@ def enrich_releases(
     client: httpx.Client,
     api_key: str,
     poster_dir: Path | str = DEFAULT_POSTER_DIR,
+    bluray_resolver: BlurayMatcher | None = None,
 ) -> EnrichmentSummary:
     poster_dir = Path(poster_dir)
-    resolved = unresolved = downloaded = failed = 0
+    resolved = unresolved = downloaded = failed = bluray_matched = bluray_failed = 0
     for release in releases:
+        movie = None
+        resolve_failed = False
         try:
             movie = resolver.resolve(
                 release.movie_title, _release_year(release.release_date)
             )
         except httpx.HTTPError as exc:
+            resolve_failed = True
             unresolved += 1
             print(f"enrich: resolve failed for {release.movie_title!r}: {exc}")
-            continue
-        if movie is None:
+        if movie is None and not resolve_failed:
             unresolved += 1
-            continue
-        resolved += 1
-        release.tmdb_id = movie.tmdb_id
-        release.imdb_id = movie.imdb_id
-        release.release_url = release_url_for(movie.tmdb_id, movie.imdb_id)
-        try:
-            details = fetch_tmdb_details(client, api_key, movie.tmdb_id)
-            if details["studio"] and release.studio in ("", UNKNOWN):
-                release.studio = details["studio"]
-            if details["release_date"] and "-" not in release.release_date:
-                release.release_date = details["release_date"]
-            if details["poster_path"]:
-                dest = poster_dir / f"{movie.tmdb_id}.jpg"
-                if download_poster(client, details["poster_path"], dest):
-                    downloaded += 1
-                release.poster_path = str(dest)
-        except httpx.HTTPError as exc:
-            failed += 1
-            print(
-                f"enrich: TMDB detail/poster failed for "
-                f"{release.movie_title!r} (tmdb {movie.tmdb_id}): {exc}"
-            )
-    return EnrichmentSummary(len(releases), resolved, unresolved, downloaded, failed)
+        else:
+            resolved += 1
+            release.tmdb_id = movie.tmdb_id
+            release.imdb_id = movie.imdb_id
+            release.release_url = release_url_for(movie.tmdb_id, movie.imdb_id)
+            try:
+                details = fetch_tmdb_details(client, api_key, movie.tmdb_id)
+                if details["studio"] and release.studio in ("", UNKNOWN):
+                    release.studio = details["studio"]
+                if details["release_date"] and "-" not in release.release_date:
+                    release.release_date = details["release_date"]
+                if details["poster_path"]:
+                    dest = poster_dir / f"{movie.tmdb_id}.jpg"
+                    if download_poster(client, details["poster_path"], dest):
+                        downloaded += 1
+                    release.poster_path = str(dest)
+            except httpx.HTTPError as exc:
+                failed += 1
+                print(
+                    f"enrich: TMDB detail/poster failed for "
+                    f"{release.movie_title!r} (tmdb {movie.tmdb_id}): {exc}"
+                )
+        if bluray_resolver is not None:
+            try:
+                details = bluray_resolver.resolve(
+                    release.movie_title, _release_year(release.release_date)
+                )
+            except httpx.HTTPError as exc:
+                bluray_failed += 1
+                print(
+                    f"enrich: blu-ray lookup failed for {release.movie_title!r}: {exc}"
+                )
+                details = None
+            if details is not None:
+                bluray_matched += 1
+                release.bluray_url = details.url
+                release.bluray_release_date = details.bluray_release_date
+                release.hdr_formats = list(details.hdr_formats)
+                release.audio_formats = list(details.audio_formats)
+                release.audio_languages = list(details.audio_languages)
+                if "English" in details.audio_languages:
+                    release.english_audio = "Yes"
+    return EnrichmentSummary(
+        len(releases),
+        resolved,
+        unresolved,
+        downloaded,
+        failed,
+        bluray_matched,
+        bluray_failed,
+    )

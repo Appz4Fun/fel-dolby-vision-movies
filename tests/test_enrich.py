@@ -3,6 +3,7 @@ from pathlib import Path
 import httpx
 
 import enrich
+from bluray import BlurayDetails, StaticBlurayResolver
 from enrich import StaticTmdbResolver, enrich_releases, release_url_for
 from models import FelEvidence, FelRelease
 
@@ -114,3 +115,95 @@ def test_enrich_releases_tolerates_poster_download_failure(tmp_path, monkeypatch
     assert releases[0].studio == "Fox"
     assert releases[0].release_date == "1999-10-15"
     assert releases[0].poster_path == ""
+
+
+def test_enrich_releases_applies_bluray_details(tmp_path):
+    resolver = StaticTmdbResolver(
+        {
+            ("Fight Club", "1999"): {
+                "tmdb_id": "550",
+                "title": "Fight Club",
+                "year": "1999",
+                "imdb_id": "tt0137523",
+            }
+        }
+    )
+    bluray = StaticBlurayResolver(
+        {
+            ("Fight Club", "1999"): BlurayDetails(
+                url="https://www.blu-ray.com/movies/Fight-Club-4K-Blu-ray/1/",
+                bluray_release_date="2025-09-16",
+                audio_formats=["Dolby TrueHD/Atmos 7.1", "DD 5.1"],
+                audio_languages=["English", "French"],
+                hdr_formats=["Dolby Vision", "HDR10"],
+            )
+        }
+    )
+
+    def handler(request):
+        if request.url.path == "/3/movie/550":
+            return httpx.Response(
+                200,
+                json={
+                    "poster_path": "/p.jpg",
+                    "release_date": "1999-10-15",
+                    "production_companies": [{"name": "Fox"}],
+                },
+            )
+        return httpx.Response(200, content=b"jpeg")
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    releases = [make("Fight Club", "1999")]
+    summary = enrich_releases(
+        releases,
+        resolver,
+        client=client,
+        api_key="x",
+        poster_dir=tmp_path,
+        bluray_resolver=bluray,
+    )
+    client.close()
+
+    release = releases[0]
+    assert release.bluray_url.endswith("/1/")
+    assert release.bluray_release_date == "2025-09-16"
+    assert release.hdr_formats == ["Dolby Vision", "HDR10"]
+    assert release.audio_formats == ["Dolby TrueHD/Atmos 7.1", "DD 5.1"]
+    assert release.audio_languages == ["English", "French"]
+    assert release.english_audio == "Yes"
+    assert summary.bluray_matched == 1
+    assert summary.bluray_failed == 0
+
+
+def test_enrich_releases_counts_bluray_failures(tmp_path):
+    class FailingBlurayResolver:
+        def resolve(self, title: str, year: str):
+            raise httpx.ConnectError("blu-ray unavailable")
+
+    resolver = StaticTmdbResolver(
+        {
+            ("Fight Club", "1999"): {
+                "tmdb_id": "550",
+                "title": "Fight Club",
+                "year": "1999",
+                "imdb_id": "tt0137523",
+            }
+        }
+    )
+    client = httpx.Client(transport=httpx.MockTransport(_handler))
+    releases = [make("Fight Club", "1999")]
+
+    summary = enrich_releases(
+        releases,
+        resolver,
+        client=client,
+        api_key="x",
+        poster_dir=tmp_path,
+        bluray_resolver=FailingBlurayResolver(),
+    )
+    client.close()
+
+    assert summary.resolved == 1
+    assert summary.bluray_matched == 0
+    assert summary.bluray_failed == 1
+    assert releases[0].bluray_url == ""
