@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Sequence
 from urllib.parse import urlparse
 
+import ai_scrape
 import artifacts
 import compare
 import discovery
@@ -79,6 +80,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     if args.command == "migrate":
         return run_migration(args.fel, args.raw_fel, args.output_dir, args.report)
+    if args.command == "ai-scrape":
+        return ai_scrape.run_ai_scrape(args.sources, args.output_dir, args.cache_dir)
     parser.error(f"unknown command: {args.command}")
     return 2
 
@@ -180,6 +183,13 @@ def _build_parser() -> argparse.ArgumentParser:
     migrate.add_argument(
         "--report", type=Path, default=Path("data/migration_report.csv")
     )
+    ai_scrape_parser = subparsers.add_parser(
+        "ai-scrape",
+        help="AI-assisted source discovery and FEL extraction via codex",
+    )
+    ai_scrape_parser.add_argument("--sources", type=Path, default=Path("forums.txt"))
+    ai_scrape_parser.add_argument("--output-dir", type=Path, default=Path("."))
+    ai_scrape_parser.add_argument("--cache-dir", type=Path, default=Path(".cache/html"))
     return parser
 
 
