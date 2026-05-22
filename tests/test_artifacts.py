@@ -87,6 +87,37 @@ def test_write_artifacts_replaces_stale_rows_from_refreshed_sources(tmp_path: Pa
     assert titles == ["Preserved", "Rango"]
 
 
+def test_write_artifacts_filters_stale_google_sheet_shapes_only(tmp_path: Path):
+    stale_collection = release("Godfather Trilogy", "Unknown")
+    stale_collection.fel_evidence = FelEvidence(
+        source_url="https://docs.example.test/sheet",
+        quote="Godfather Trilogy BD FEL",
+        evidence_type="google-sheet-row",
+    )
+    stale_dotted = release("Rango.2011.", "2011")
+    stale_dotted.fel_evidence = FelEvidence(
+        source_url="https://docs.example.test/sheet",
+        quote="Rango.2011. BD FEL",
+        evidence_type="google-sheet-row",
+    )
+    forum_collection = release("Godfather Trilogy", "1972")
+    forum_collection.fel_evidence = FelEvidence(
+        source_url="https://forum.example.test/post",
+        quote="Godfather Trilogy confirmed by post",
+        evidence_type="forum-post",
+    )
+
+    write_artifacts(
+        [stale_collection, stale_dotted, forum_collection],
+        output_dir=tmp_path,
+    )
+
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    assert [(item["movie_title"], item["release_date"]) for item in data] == [
+        ("Godfather Trilogy", "1972")
+    ]
+
+
 def test_write_artifacts_dedupes_by_tmdb_id(tmp_path: Path):
     first = release("Spelling One", "2021")
     first.tmdb_id = "777"

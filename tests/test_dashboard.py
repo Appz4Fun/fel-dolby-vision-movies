@@ -125,3 +125,29 @@ def test_dashboard_defaults_to_responsive_list_without_year_or_fel_columns(
     assert '["Src Link"' in html
     assert '["TMDB"' in html
     assert "@media (max-width:" in html
+
+
+def test_dashboard_escapes_release_text_and_split_link_labels(tmp_path: Path):
+    item = FelRelease(
+        movie_title='Alien <script>alert("x")</script>',
+        release_date="1979",
+        fel_evidence=FelEvidence(
+            source_url="https://source.test/?q=<unsafe>",
+            quote="Alien FEL",
+            evidence_type="fixture",
+        ),
+        bluray_url="https://blu-ray.test/Alien",
+        release_url="https://tmdb.test/movie/1",
+    )
+
+    build_dashboard([item], output_dir=tmp_path / "dist")
+
+    html = (tmp_path / "dist/index.html").read_text(encoding="utf-8")
+    assert "<script>alert" not in html
+    assert "Alien &lt;script&gt;alert(&quot;x&quot;)&lt;/script&gt;" in html
+    assert "\\u003cunsafe>" in html
+    assert '["BR Link"' in html
+    assert '["Src Link"' in html
+    assert '["TMDB"' in html
+    assert 'rel="noreferrer">BR</a>' in html
+    assert 'rel="noreferrer">Src</a>' in html

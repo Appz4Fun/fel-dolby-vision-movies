@@ -47,6 +47,9 @@ def write_artifacts(
     existing = [
         release for release in existing if not _is_stale_google_sheet_release(release)
     ]
+    releases = [
+        release for release in releases if not _is_stale_google_sheet_release(release)
+    ]
 
     merged = dedupe_releases([*existing, *releases], canonical_key)
     merged = dedupe_releases(merged, tmdb_key)
@@ -70,9 +73,7 @@ def _is_stale_google_sheet_release(release: FelRelease) -> bool:
         return False
     if STALE_SHEET_COLLECTION_RE.search(release.movie_title):
         return True
-    return release.release_date == UNKNOWN and bool(
-        STALE_DOTTED_YEAR_TITLE_RE.search(release.movie_title)
-    )
+    return bool(STALE_DOTTED_YEAR_TITLE_RE.search(release.movie_title))
 
 
 def _sort_key(release: FelRelease) -> tuple[int, str]:
