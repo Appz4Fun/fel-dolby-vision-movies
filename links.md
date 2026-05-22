@@ -1,12 +1,9 @@
 # Source Links
 
+- FEL.txt (curated Profile 7 FEL list)
 - https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/
 - https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/
-- FEL.txt (curated Profile 7 FEL list)
 - https://www.blu-ray.com/movies/Rabid-4K-Blu-ray/397990/
-- https://old.reddit.com/r/CoreELEC/comments/1jacyav/dolby_vision_profile_7_fel_trakt_list_for_coreelec/
-- https://github.com/iammarxg/FEL
-- https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523
 - https://forum.blu-ray.com/forumdisplay.php?f=203
 - https://forum.blu-ray.com/showthread.php?p=20658059
 - https://forum.blu-ray.com/showthread.php?p=22543294
@@ -421,6 +418,8 @@
 - https://forum.blu-ray.com/showpost.php?p=23851523&postcount=169
 - https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/
 - https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432
+- https://github.com/iammarxg/FEL
+- https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523
 - https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing
 - https://forum.kodi.tv/showthread.php?tid=371521
 - https://forum.kodi.tv/showthread.php?tid=371521&page=1

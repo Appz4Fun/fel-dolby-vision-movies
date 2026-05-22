@@ -1,32 +1,5 @@
 [
   {
-    "movie_title": "Last edit: 05/13/",
-    "fel_confirmed": true,
-    "release_date": "2026",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Last edit: 05/13/ (2026) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Good Luck, Have Fun, Don't Die",
     "fel_confirmed": true,
     "release_date": "2026-02-13",
@@ -115,59 +88,6 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "28 Years Later: The Bone Temple (2026) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "LIST UPDATED: March 17th",
-    "fel_confirmed": true,
-    "release_date": "2025",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jacyav/dolby_vision_profile_7_fel_trakt_list_for_coreelec/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jacyav/dolby_vision_profile_7_fel_trakt_list_for_coreelec/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jacyav/dolby_vision_profile_7_fel_trakt_list_for_coreelec/",
-      "quote": "LIST UPDATED: March 17th (2025) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Refreshed: 2/24/",
-    "fel_confirmed": true,
-    "release_date": "2025",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Refreshed: 2/24/ (2025) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -1262,19 +1182,19 @@
         "https://www.blu-ray.com/movies/Rabid-4K-Blu-ray/397990/"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=151",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "1007734",
     "imdb_id": "tt28996126",
     "poster_path": "data/posters/1007734.jpg",
     "release_url": "https://www.themoviedb.org/movie/1007734",
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=151",
-      "quote": "Nobody 2 (2025) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Nobody.2.2025. | BD FEL | HDR COMP | sample | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Indiana.Jones.and.the.Kingdom.of.the.Crystal.Skull.2008 | 0 | PMTP | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Naked Gun",
@@ -7208,28 +7128,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Burning Sea",
-    "fel_confirmed": true,
-    "release_date": "2021-10-29",
-    "studio": "Fantefilm",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "623511",
-    "imdb_id": "tt12753120",
-    "poster_path": "data/posters/623511.jpg",
-    "release_url": "https://www.themoviedb.org/movie/623511",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Burning Sea 2021 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Bad.Boys.II.2003 | iTunes | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
     "movie_title": "The Burning Sea",
     "fel_confirmed": true,
     "release_date": "2021-10-29",
@@ -7245,19 +7143,19 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "623511",
     "imdb_id": "tt12753120",
     "poster_path": "data/posters/623511.jpg",
     "release_url": "https://www.themoviedb.org/movie/623511",
     "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
-      "quote": "The Burning Sea (2021) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Burning Sea 2021 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Bad.Boys.II.2003 | iTunes | L1",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Power of the Dog",
@@ -8602,132 +8500,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "A Quiet Place Part II",
-    "fel_confirmed": true,
-    "release_date": "2020",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "A.Quiet.Place.Part.II.2020 | BD FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | 28.Years.Later.2025 | (+23) | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3) | Furious.7.2015 | not sure | iTunes | HDR COMP | L1 | nits looks fine but HDR COMP different. and MDL mismatch",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
-  },
-  {
-    "movie_title": "Sun Sep 27",
-    "fel_confirmed": true,
-    "release_date": "2020",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.makemkv.com/forum/viewtopic.php?start=3150&style=4&t=18602"
-      ]
-    },
-    "source_url": "https://forum.makemkv.com/forum/viewtopic.php?start=3150&style=4&t=18602",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://forum.makemkv.com/forum/viewtopic.php?start=3150&style=4&t=18602",
-      "quote": "Sun Sep 27 (2020) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Tue Sep 29",
-    "fel_confirmed": true,
-    "release_date": "2020",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.makemkv.com/forum/viewtopic.php?start=3150&style=4&t=18602"
-      ]
-    },
-    "source_url": "https://forum.makemkv.com/forum/viewtopic.php?start=3150&style=4&t=18602",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://forum.makemkv.com/forum/viewtopic.php?start=3150&style=4&t=18602",
-      "quote": "Tue Sep 29 (2020) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Wed Sep 30",
-    "fel_confirmed": true,
-    "release_date": "2020",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.makemkv.com/forum/viewtopic.php?start=3150&style=4&t=18602"
-      ]
-    },
-    "source_url": "https://forum.makemkv.com/forum/viewtopic.php?start=3150&style=4&t=18602",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://forum.makemkv.com/forum/viewtopic.php?start=3150&style=4&t=18602",
-      "quote": "Wed Sep 30 (2020) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "typo, its",
-    "fel_confirmed": true,
-    "release_date": "2020",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-      "quote": "typo, its (2020) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Monster Hunter",
     "fel_confirmed": true,
     "release_date": "2020-12-03",
@@ -9150,116 +8922,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
-    "movie_title": "Game of Thrones: The Complete Eighth Season",
-    "fel_confirmed": true,
-    "release_date": "2019",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "4.08",
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Game of Thrones: The Complete Eighth Season (2019) FEL - 4.08 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
-    "movie_title": "FEL - 6.95 Mbps",
-    "fel_confirmed": true,
-    "release_date": "2019",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=135"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=135",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=135",
-      "quote": "FEL - 6.95 Mbps (2019) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Hellboy III: Rise of the Blood Queen",
-    "fel_confirmed": true,
-    "release_date": "2019",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Hellboy III: Rise of the Blood Queen (2019) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Yuyeolui eumagaelbeom",
-    "fel_confirmed": true,
-    "release_date": "2019",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Yuyeolui eumagaelbeom (2019) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "1917",
@@ -9695,6 +9357,33 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=153",
       "quote": "Uncut Gems (2019) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Tune in for Love",
+    "fel_confirmed": true,
+    "release_date": "2019-08-28",
+    "studio": "Jung Ji-woo Film",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "570503",
+    "imdb_id": "tt10763618",
+    "poster_path": "data/posters/570503.jpg",
+    "release_url": "https://www.themoviedb.org/movie/570503",
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Yuyeolui eumagaelbeom (2019) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -10390,52 +10079,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Paddington 2",
-    "fel_confirmed": true,
-    "release_date": "2018",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "8.13"
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Paddington 2 (2018) FEL - 8.13 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:27+00:00"
-  },
-  {
-    "movie_title": "FEL 12.031 Mbps Higher Power",
-    "fel_confirmed": true,
-    "release_date": "2018",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "FEL 12.031 Mbps Higher Power (2018) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Mary Queen of Scots",
     "fel_confirmed": true,
     "release_date": "2018-12-07",
@@ -10586,14 +10229,24 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Dr. Seuss' The Grinch",
+    "movie_title": "The Grinch",
     "fel_confirmed": true,
     "release_date": "2018-11-08",
     "studio": "Illumination",
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {
-      "enhancement_bitrate_mbps": "7.57"
+      "enhancement_bitrate_mbps": "7.57",
+      "source_urls": [
+        "https://forum.blu-ray.com/showthread.php?t=276448",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=115",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=135",
+        "https://github.com/iammarxg/FEL",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+      ]
     },
     "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
     "source_label": "raw_fel.txt",
@@ -10608,39 +10261,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
-    "movie_title": "The Grinch",
-    "fel_confirmed": true,
-    "release_date": "2018-11-08",
-    "studio": "Illumination",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=115",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=135",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "360920",
-    "imdb_id": "tt2709692",
-    "poster_path": "data/posters/360920.jpg",
-    "release_url": "https://www.themoviedb.org/movie/360920",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "The Grinch (2018) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Robin Hood",
@@ -11083,7 +10703,17 @@
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {
-      "enhancement_bitrate_mbps": "11.54"
+      "enhancement_bitrate_mbps": "11.54",
+      "source_urls": [
+        "https://forum.blu-ray.com/showthread.php?t=276448",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=135",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=143",
+        "https://github.com/iammarxg/FEL",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+      ]
     },
     "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
     "source_label": "raw_fel.txt",
@@ -11130,39 +10760,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
-    "movie_title": "Sicario: Day of the Soldado",
-    "fel_confirmed": true,
-    "release_date": "2018-06-27",
-    "studio": "Thunder Road",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=135",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=143",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "400535",
-    "imdb_id": "tt5052474",
-    "poster_path": "data/posters/400535.jpg",
-    "release_url": "https://www.themoviedb.org/movie/400535",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Sicario: Day of the Soldado (2018) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Hereditary",
@@ -11759,23 +11356,36 @@
     "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
-    "movie_title": "Daddys Home.2",
+    "movie_title": "Paddington 2",
     "fel_confirmed": true,
     "release_date": "2017-11-09",
-    "studio": "Red Granite Pictures",
+    "studio": "StudioCanal",
     "audio_formats": [],
     "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "419680",
-    "imdb_id": "tt5657846",
-    "poster_path": "data/posters/419680.jpg",
-    "release_url": "https://www.themoviedb.org/movie/419680",
+    "additional_characteristics": {
+      "enhancement_bitrate_mbps": "8.13",
+      "source_urls": [
+        "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
+        "https://forum.blu-ray.com/showthread.php?t=276448",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=115",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=91",
+        "https://github.com/iammarxg/FEL",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+      ]
+    },
+    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+    "source_label": "FEL.txt",
+    "tmdb_id": "346648",
+    "imdb_id": "tt4468740",
+    "poster_path": "data/posters/346648.jpg",
+    "release_url": "https://www.themoviedb.org/movie/346648",
     "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Daddys.Home.2.2017 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Better Man 2024 | (+126 T277 B277) | itunes | HDR COMP | nits",
-      "evidence_type": "google-sheet-row",
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+      "quote": "Paddington 2 (2018) FEL - 8.13 Mb/s",
+      "evidence_type": "list-item",
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:59:20+00:00"
@@ -11797,50 +11407,15 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "419680",
     "imdb_id": "tt5657846",
     "poster_path": "data/posters/419680.jpg",
     "release_url": "https://www.themoviedb.org/movie/419680",
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Daddy's Home 2 (2017) FEL - 6.05 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
-    "movie_title": "Paddington 2",
-    "fel_confirmed": true,
-    "release_date": "2017-11-09",
-    "studio": "StudioCanal",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=115",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=91",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ],
-      "enhancement_bitrate_mbps": 8.13
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "346648",
-    "imdb_id": "tt4468740",
-    "poster_path": "data/posters/346648.jpg",
-    "release_url": "https://www.themoviedb.org/movie/346648",
-    "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Paddington 2 (2017) | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | John.Wick.Chapter.4.2023 | (-7) | PMTP | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
+      "quote": "Daddys.Home.2.2017 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Better Man 2024 | (+126 T277 B277) | itunes | HDR COMP | nits",
       "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
@@ -11941,7 +11516,15 @@
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {
-      "enhancement_bitrate_mbps": "10.04"
+      "enhancement_bitrate_mbps": "10.04",
+      "source_urls": [
+        "https://forum.blu-ray.com/showthread.php?t=276448",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
+        "https://github.com/iammarxg/FEL",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+      ]
     },
     "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
     "source_label": "raw_fel.txt",
@@ -11956,37 +11539,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
-    "movie_title": "Only the Brave",
-    "fel_confirmed": true,
-    "release_date": "2017-09-22",
-    "studio": "di Bonaventura Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "395991",
-    "imdb_id": "tt3829920",
-    "poster_path": "data/posters/395991.jpg",
-    "release_url": "https://www.themoviedb.org/movie/395991",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Only the Brave (2017) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "mother!",
@@ -13427,6 +12979,35 @@
     "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
+    "movie_title": "The Witch",
+    "fel_confirmed": true,
+    "release_date": "2016-02-19",
+    "studio": "Very Special Projects",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "310131",
+    "imdb_id": "tt4263482",
+    "poster_path": "data/posters/310131.jpg",
+    "release_url": "https://www.themoviedb.org/movie/310131",
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "The VVitch (2015) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
     "movie_title": "Risen",
     "fel_confirmed": true,
     "release_date": "2016-02-18",
@@ -13602,57 +13183,6 @@
     "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
-    "movie_title": "The VVitch",
-    "fel_confirmed": true,
-    "release_date": "2015",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "The VVitch (2015) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Daddys Home",
-    "fel_confirmed": true,
-    "release_date": "2015-12-25",
-    "studio": "Paramount Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "274167",
-    "imdb_id": "tt1528854",
-    "poster_path": "data/posters/274167.jpg",
-    "release_url": "https://www.themoviedb.org/movie/274167",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Daddys.Home.2015 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Big Fish 2003 | FraMeSToR | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
     "movie_title": "Daddy's Home",
     "fel_confirmed": true,
     "release_date": "2015-12-25",
@@ -13671,19 +13201,19 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "274167",
     "imdb_id": "tt1528854",
     "poster_path": "data/posters/274167.jpg",
     "release_url": "https://www.themoviedb.org/movie/274167",
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Daddy's Home (2015) FEL - 7.34 Mb/s",
-      "evidence_type": "list-item",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Daddys.Home.2015 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Big Fish 2003 | FraMeSToR | L1",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T23:58:40+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Ip Man 3",
@@ -14323,28 +13853,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Captain America WS",
-    "fel_confirmed": true,
-    "release_date": "2014",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Captain America WS (2014) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Paddington",
     "fel_confirmed": true,
     "release_date": "2014-11-24",
@@ -14574,15 +14082,22 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Expendables.3",
+    "movie_title": "The Expendables 3",
     "fel_confirmed": true,
     "release_date": "2014-08-07",
     "studio": "Davis Films",
     "audio_formats": [],
     "english_audio": "Unknown",
-    "additional_characteristics": {},
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+      ]
+    },
     "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
+    "source_label": "FEL.txt",
     "tmdb_id": "138103",
     "imdb_id": "tt2333784",
     "poster_path": "data/posters/138103.jpg",
@@ -14628,35 +14143,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
-    "movie_title": "The Expendables 3",
-    "fel_confirmed": true,
-    "release_date": "2014-08-07",
-    "studio": "Davis Films",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "FEL.txt",
-    "tmdb_id": "138103",
-    "imdb_id": "tt2333784",
-    "poster_path": "data/posters/138103.jpg",
-    "release_url": "https://www.themoviedb.org/movie/138103",
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "The Expendables 3 (2014) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Guardians of the Galaxy",
@@ -14752,29 +14238,29 @@
     "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
-    "movie_title": "Divergente",
+    "movie_title": "Captain America: The Winter Soldier",
     "fel_confirmed": true,
-    "release_date": "2014-03-14",
-    "studio": "Summit Entertainment",
+    "release_date": "2014-03-20",
+    "studio": "Marvel Studios",
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "157350",
-    "imdb_id": "tt1840309",
-    "poster_path": "data/posters/157350.jpg",
-    "release_url": "https://www.themoviedb.org/movie/157350",
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "source_label": "FEL.txt",
+    "tmdb_id": "100402",
+    "imdb_id": "tt1843866",
+    "poster_path": "data/posters/100402.jpg",
+    "release_url": "https://www.themoviedb.org/movie/100402",
     "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Divergente 2014 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Bob.Marley.One.Love.2024 | (-24) | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Captain America WS (2014) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T23:59:20+00:00"
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Divergent",
+    "movie_title": "Divergente",
     "fel_confirmed": true,
     "release_date": "2014-03-14",
     "studio": "Summit Entertainment",
@@ -14790,19 +14276,19 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "157350",
     "imdb_id": "tt1840309",
     "poster_path": "data/posters/157350.jpg",
     "release_url": "https://www.themoviedb.org/movie/157350",
     "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
-      "quote": "Divergent (2014) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Divergente 2014 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Bob.Marley.One.Love.2024 | (-24) | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "The Grand Budapest Hotel",
@@ -16080,78 +15566,6 @@
     "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
-    "movie_title": "Game of Thrones: The Complete First Season",
-    "fel_confirmed": true,
-    "release_date": "2011",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "3.48",
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Game of Thrones: The Complete First Season (2011) FEL - 3.48 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
-    "movie_title": "Harry Potter DH Part.2.",
-    "fel_confirmed": true,
-    "release_date": "2011",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Harry Potter DH Part.2. (2011) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Sherlock Holmes.2.GOS",
-    "fel_confirmed": true,
-    "release_date": "2011",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Sherlock Holmes.2.GOS (2011) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Mission: Impossible - Ghost Protocol",
     "fel_confirmed": true,
     "release_date": "2011-12-07",
@@ -16190,6 +15604,28 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:59:20+00:00"
+  },
+  {
+    "movie_title": "Sherlock Holmes: A Game of Shadows",
+    "fel_confirmed": true,
+    "release_date": "2011-11-22",
+    "studio": "Village Roadshow Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "source_label": "FEL.txt",
+    "tmdb_id": "58574",
+    "imdb_id": "tt1515091",
+    "poster_path": "data/posters/58574.jpg",
+    "release_url": "https://www.themoviedb.org/movie/58574",
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Sherlock Holmes.2.GOS (2011) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "The Twilight Saga: Breaking Dawn - Part 1",
@@ -16742,6 +16178,28 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Harry Potter and the Deathly Hallows: Part 2",
+    "fel_confirmed": true,
+    "release_date": "2011-07-12",
+    "studio": "Warner Bros. Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "source_label": "FEL.txt",
+    "tmdb_id": "12445",
+    "imdb_id": "tt1201607",
+    "poster_path": "data/posters/12445.jpg",
+    "release_url": "https://www.themoviedb.org/movie/12445",
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Harry Potter DH Part.2. (2011) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
     "movie_title": "Transformers: Dark of the Moon",
     "fel_confirmed": true,
     "release_date": "2011-06-28",
@@ -16915,19 +16373,19 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://github.com/iammarxg/FEL",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "44896",
     "imdb_id": "tt1192628",
     "poster_path": "data/posters/44896.jpg",
     "release_url": "https://www.themoviedb.org/movie/44896",
     "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Rango (2011) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Rango.2011. | BD FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Kong Skull Island 2017 | (+24 T280/B280) | L1",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Paul",
@@ -17013,28 +16471,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Harry Potter DH Part.1.",
-    "fel_confirmed": true,
-    "release_date": "2010",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Harry Potter DH Part.1. (2010) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "TRON: Legacy",
     "fel_confirmed": true,
     "release_date": "2010-12-14",
@@ -17058,6 +16494,28 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=354888&page=18",
       "quote": "TRON: Legacy (2010) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Harry Potter and the Deathly Hallows: Part 1",
+    "fel_confirmed": true,
+    "release_date": "2010-11-17",
+    "studio": "Warner Bros. Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "source_label": "FEL.txt",
+    "tmdb_id": "12444",
+    "imdb_id": "tt0926084",
+    "poster_path": "data/posters/12444.jpg",
+    "release_url": "https://www.themoviedb.org/movie/12444",
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Harry Potter DH Part.1. (2010) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -17563,52 +17021,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
-    "movie_title": "Daybreakers",
-    "fel_confirmed": true,
-    "release_date": "2009",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "8.09"
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Daybreakers (2009) FEL - 8.09 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:27+00:00"
-  },
-  {
-    "movie_title": "Harry Potter HBP",
-    "fel_confirmed": true,
-    "release_date": "2009",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Harry Potter HBP (2009) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Sherlock Holmes",
@@ -18284,6 +17696,28 @@
     "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
+    "movie_title": "Harry Potter and the Half-Blood Prince",
+    "fel_confirmed": true,
+    "release_date": "2009-07-15",
+    "studio": "Warner Bros. Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "source_label": "FEL.txt",
+    "tmdb_id": "767",
+    "imdb_id": "tt0417741",
+    "poster_path": "data/posters/767.jpg",
+    "release_url": "https://www.themoviedb.org/movie/767",
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Harry Potter HBP (2009) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
     "movie_title": "Transformers: Revenge of the Fallen",
     "fel_confirmed": true,
     "release_date": "2009-06-19",
@@ -18501,10 +17935,10 @@
     "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
-    "movie_title": "Yip Man",
+    "movie_title": "Ip Man",
     "fel_confirmed": true,
-    "release_date": "2008",
-    "studio": "Unknown",
+    "release_date": "2008-12-12",
+    "studio": "Mandarin Films",
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {
@@ -18517,10 +17951,10 @@
     },
     "source_url": "https://github.com/iammarxg/FEL",
     "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
+    "tmdb_id": "14756",
+    "imdb_id": "tt1220719",
+    "poster_path": "data/posters/14756.jpg",
+    "release_url": "https://www.themoviedb.org/movie/14756",
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Yip Man (2008) listed as Profile 7 FEL",
@@ -19212,50 +18646,6 @@
     "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
-    "movie_title": "Harry Potter OP",
-    "fel_confirmed": true,
-    "release_date": "2007",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Harry Potter OP (2007) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Transofmers",
-    "fel_confirmed": true,
-    "release_date": "2007",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Transofmers (2007) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Sweeney Todd: The Demon Barber of Fleet Street",
     "fel_confirmed": true,
     "release_date": "2007-12-21",
@@ -19485,6 +18875,28 @@
     "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
+    "movie_title": "Harry Potter and the Order of the Phoenix",
+    "fel_confirmed": true,
+    "release_date": "2007-07-08",
+    "studio": "Warner Bros. Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "source_label": "FEL.txt",
+    "tmdb_id": "675",
+    "imdb_id": "tt0373889",
+    "poster_path": "data/posters/675.jpg",
+    "release_url": "https://www.themoviedb.org/movie/675",
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Harry Potter OP (2007) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
     "movie_title": "Transformers",
     "fel_confirmed": true,
     "release_date": "2007-06-27",
@@ -19571,14 +18983,23 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Hellboy Animated",
+    "movie_title": "Hellboy Animated: Iron Shoes",
     "fel_confirmed": true,
     "release_date": "2007-06-12",
     "studio": "Starz",
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {
-      "enhancement_bitrate_mbps": "12.33"
+      "enhancement_bitrate_mbps": "12.33",
+      "source_urls": [
+        "https://forum.blu-ray.com/showthread.php?t=276448",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=135",
+        "https://github.com/iammarxg/FEL",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+      ]
     },
     "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
     "source_label": "raw_fel.txt",
@@ -19593,38 +19014,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
-    "movie_title": "Hellboy Animated: Iron Shoes",
-    "fel_confirmed": true,
-    "release_date": "2007-06-12",
-    "studio": "Starz",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=135",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "154207",
-    "imdb_id": "tt1047474",
-    "poster_path": "data/posters/154207.jpg",
-    "release_url": "https://www.themoviedb.org/movie/154207",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Hellboy Animated: Iron Shoes (2007) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Ocean's Thirteen",
@@ -20090,9 +19479,14 @@
     "studio": "Paramount Pictures",
     "audio_formats": [],
     "english_audio": "Unknown",
-    "additional_characteristics": {},
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
     "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
+    "source_label": "FEL.txt",
     "tmdb_id": "8202",
     "imdb_id": "tt0402022",
     "poster_path": "data/posters/8202.jpg",
@@ -20104,33 +19498,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
-    "movie_title": "Æon Flux",
-    "fel_confirmed": true,
-    "release_date": "2005-11-30",
-    "studio": "Paramount Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "8202",
-    "imdb_id": "tt0402022",
-    "poster_path": "data/posters/8202.jpg",
-    "release_url": "https://www.themoviedb.org/movie/8202",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Æon Flux (2005) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "Jarhead",
@@ -20698,54 +20065,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Harry Potter POA",
-    "fel_confirmed": true,
-    "release_date": "2004",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Harry Potter POA (2004) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "MakeMKV shows Collateral",
-    "fel_confirmed": true,
-    "release_date": "2004",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-      "quote": "MakeMKV shows Collateral (2004) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Meet the Fockers",
     "fel_confirmed": true,
     "release_date": "2004-12-22",
@@ -21083,8 +20402,8 @@
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {
-      "enhancement_bitrate_mbps": "4.34",
       "source_urls": [
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
         "https://caps-a-holic.com/c.php?c=5741&d1=15005&d2=15002",
         "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
         "https://forum.blu-ray.com/showthread.php?t=276448",
@@ -21097,9 +20416,9 @@
         "https://forum.blu-ray.com/showthread.php?t=327042&page=62",
         "https://github.com/iammarxg/FEL",
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
+      ],
+      "enhancement_bitrate_mbps": "4.34"
     },
     "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
     "source_label": "FEL.txt",
@@ -21189,6 +20508,28 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Spider-Man 2 (2004) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Harry Potter and the Prisoner of Azkaban",
+    "fel_confirmed": true,
+    "release_date": "2004-05-31",
+    "studio": "Warner Bros. Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "source_label": "FEL.txt",
+    "tmdb_id": "673",
+    "imdb_id": "tt0304141",
+    "poster_path": "data/posters/673.jpg",
+    "release_url": "https://www.themoviedb.org/movie/673",
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Harry Potter POA (2004) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -21473,28 +20814,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Pirates of the Caribbean CBP",
-    "fel_confirmed": true,
-    "release_date": "2003",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Pirates of the Caribbean CBP (2003) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Big Fish",
     "fel_confirmed": true,
     "release_date": "2003-12-10",
@@ -21697,6 +21016,28 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Bad Boys II (2003) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Pirates of the Caribbean: The Curse of the Black Pearl",
+    "fel_confirmed": true,
+    "release_date": "2003-07-09",
+    "studio": "Walt Disney Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "source_label": "FEL.txt",
+    "tmdb_id": "22",
+    "imdb_id": "tt0325980",
+    "poster_path": "data/posters/22.jpg",
+    "release_url": "https://www.themoviedb.org/movie/22",
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Pirates of the Caribbean CBP (2003) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -22403,28 +21744,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Van wilder",
-    "fel_confirmed": true,
-    "release_date": "2002-03-29",
-    "studio": "Tapestry Films",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "11452",
-    "imdb_id": "tt0283111",
-    "poster_path": "data/posters/11452.jpg",
-    "release_url": "https://www.themoviedb.org/movie/11452",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Van wilder 2002 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Spider-Man.Into.the.Spider-Verse.2018 | (+24 T276/B276) | iTunes | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
     "movie_title": "National Lampoon's Van Wilder",
     "fel_confirmed": true,
     "release_date": "2002-03-29",
@@ -22443,19 +21762,19 @@
         "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "11452",
     "imdb_id": "tt0283111",
     "poster_path": "data/posters/11452.jpg",
     "release_url": "https://www.themoviedb.org/movie/11452",
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "National Lampoon's Van Wilder (2002) FEL - 7.47 Mb/s",
-      "evidence_type": "list-item",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Van wilder 2002 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Spider-Man.Into.the.Spider-Verse.2018 | (+24 T276/B276) | iTunes | L1",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T23:58:40+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Resident Evil",
@@ -22550,28 +21869,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Harry Potter SS",
-    "fel_confirmed": true,
-    "release_date": "2001",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Harry Potter SS (2001) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "A Beautiful Mind",
     "fel_confirmed": true,
     "release_date": "2001-12-14",
@@ -22622,6 +21919,28 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Vanilla Sky (2001) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Harry Potter and the Philosopher's Stone",
+    "fel_confirmed": true,
+    "release_date": "2001-11-16",
+    "studio": "Warner Bros. Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "source_label": "FEL.txt",
+    "tmdb_id": "671",
+    "imdb_id": "tt0241527",
+    "poster_path": "data/posters/671.jpg",
+    "release_url": "https://www.themoviedb.org/movie/671",
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Harry Potter SS (2001) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -25424,33 +24743,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Things to Do in Denver",
-    "fel_confirmed": true,
-    "release_date": "1996",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Things to Do in Denver (1996) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Scream",
     "fel_confirmed": true,
     "release_date": "1996-12-20",
@@ -26097,28 +25389,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "FEL 7.13 Mbps La Haine",
-    "fel_confirmed": true,
-    "release_date": "1995",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "FEL 7.13 Mbps La Haine (1995) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Cutthroat Island",
     "fel_confirmed": true,
     "release_date": "1995-12-22",
@@ -26147,16 +25417,21 @@
     "studio": "Miramax",
     "audio_formats": [],
     "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
     "source_label": "FEL.txt",
     "tmdb_id": "400",
     "imdb_id": "tt0114660",
     "poster_path": "data/posters/400.jpg",
     "release_url": "https://www.themoviedb.org/movie/400",
     "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Things to Do in Denver When You're Dead (1995) listed as Profile 7 FEL",
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Things to Do in Denver (1996) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -27437,28 +26712,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Schindlers List",
-    "fel_confirmed": true,
-    "release_date": "1993-12-15",
-    "studio": "Amblin Entertainment",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "424",
-    "imdb_id": "tt0108052",
-    "poster_path": "data/posters/424.jpg",
-    "release_url": "https://www.themoviedb.org/movie/424",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Schindlers.List.1993 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Magic.Mike.2012 | (-59 T276B276) | itunes | HDR COMP | nits | any color diff is apple stupid static reshaping metadata",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
     "movie_title": "Schindler's List",
     "fel_confirmed": true,
     "release_date": "1993-12-15",
@@ -27482,19 +26735,19 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "424",
     "imdb_id": "tt0108052",
     "poster_path": "data/posters/424.jpg",
     "release_url": "https://www.themoviedb.org/movie/424",
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Schindler's List (1993) FEL - 6.09 Mb/s",
-      "evidence_type": "list-item",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Schindlers.List.1993 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Magic.Mike.2012 | (-59 T276B276) | itunes | HDR COMP | nits | any color diff is apple stupid static reshaping metadata",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T23:58:40+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Wayne's World 2",
@@ -28091,33 +27344,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Malcom X",
-    "fel_confirmed": true,
-    "release_date": "1992",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=354888&page=8",
-        "https://forum.blu-ray.com/showthread.php?t=354888&page=9"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=354888&page=8",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=354888&page=8",
-      "quote": "Malcom X (1992) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Maniac Cop 3: Badge of Silence",
     "fel_confirmed": true,
     "release_date": "1992-12-10",
@@ -28187,6 +27413,8 @@
     "english_audio": "Unknown",
     "additional_characteristics": {
       "source_urls": [
+        "https://forum.blu-ray.com/showthread.php?t=354888&page=8",
+        "https://forum.blu-ray.com/showthread.php?t=354888&page=9",
         "https://forum.blu-ray.com/showthread.php?p=20658059",
         "https://forum.blu-ray.com/showthread.php?t=327042&page=46",
         "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
@@ -28198,15 +27426,15 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/showthread.php?p=20658059",
+    "source_url": "https://forum.blu-ray.com/showthread.php?t=354888&page=8",
     "source_label": "FEL.txt",
     "tmdb_id": "1883",
     "imdb_id": "tt0104797",
     "poster_path": "data/posters/1883.jpg",
     "release_url": "https://www.themoviedb.org/movie/1883",
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?p=20658059",
-      "quote": "Malcolm X (1992) listed as Profile 7 FEL",
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=354888&page=8",
+      "quote": "Malcom X (1992) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -28519,28 +27747,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Waynes world",
-    "fel_confirmed": true,
-    "release_date": "1992-02-14",
-    "studio": "Paramount Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "8872",
-    "imdb_id": "tt0105793",
-    "poster_path": "data/posters/8872.jpg",
-    "release_url": "https://www.themoviedb.org/movie/8872",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Waynes world 1992 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Star.Trek.The.Motion.Picture.1979.DC | 0 | PMTP | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
     "movie_title": "Wayne's World",
     "fel_confirmed": true,
     "release_date": "1992-02-14",
@@ -28553,19 +27759,19 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://github.com/iammarxg/FEL",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "8872",
     "imdb_id": "tt0105793",
     "poster_path": "data/posters/8872.jpg",
     "release_url": "https://www.themoviedb.org/movie/8872",
     "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Wayne's World (1992) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Waynes world 1992 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Star.Trek.The.Motion.Picture.1979.DC | 0 | PMTP | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Juice",
@@ -28593,33 +27799,6 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=161",
       "quote": "Juice (1992) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Jian yu feng yun II: Tao fan",
-    "fel_confirmed": true,
-    "release_date": "1991",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Jian yu feng yun II: Tao fan (1991) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -28960,6 +28139,33 @@
     "fel_evidence": {
       "source_url": "https://discourse.coreelec.org/t/firecube-and-dolby-vision-profile-7/54019",
       "quote": "Point Break (1991) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Prison on Fire II",
+    "fel_confirmed": true,
+    "release_date": "1991-06-22",
+    "studio": "Golden Princess Film Productions",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "56251",
+    "imdb_id": "tt0103044",
+    "poster_path": "data/posters/56251.jpg",
+    "release_url": "https://www.themoviedb.org/movie/56251",
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Jian yu feng yun II: Tao fan (1991) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -30150,28 +29356,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Bill and ted excellent adventures",
-    "fel_confirmed": true,
-    "release_date": "1989",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Bill and ted excellent adventures (1989) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Born on the Fourth of July",
     "fel_confirmed": true,
     "release_date": "1989-12-20",
@@ -30803,6 +29987,28 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Leviathan (1989) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Bill & Ted's Excellent Adventure",
+    "fel_confirmed": true,
+    "release_date": "1989-02-17",
+    "studio": "DEG",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1648",
+    "imdb_id": "tt0096928",
+    "poster_path": "data/posters/1648.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1648",
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Bill and ted excellent adventures (1989) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -31443,113 +30649,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Chau tin dik tung wa",
-    "fel_confirmed": true,
-    "release_date": "1987",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Chau tin dik tung wa (1987) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Chou tin dik tong wah",
-    "fel_confirmed": true,
-    "release_date": "1987",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Chou tin dik tong wah (1987) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Gaam yuk fung wan",
-    "fel_confirmed": true,
-    "release_date": "1987",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Gaam yuk fung wan (1987) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "The Last Emperor Criterion Collection",
-    "fel_confirmed": true,
-    "release_date": "1987",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-      "quote": "The Last Emperor Criterion Collection (1987) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "A Better Tomorrow II",
     "fel_confirmed": true,
     "release_date": "1987-12-17",
@@ -31627,6 +30726,33 @@
     "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
+    "movie_title": "Prison on Fire",
+    "fel_confirmed": true,
+    "release_date": "1987-11-13",
+    "studio": "Cinema City Company Limited",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "53653",
+    "imdb_id": "tt0093304",
+    "poster_path": "data/posters/53653.jpg",
+    "release_url": "https://www.themoviedb.org/movie/53653",
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Gaam yuk fung wan (1987) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
     "movie_title": "The Running Man",
     "fel_confirmed": true,
     "release_date": "1987-11-13",
@@ -31696,21 +30822,21 @@
     "english_audio": "Unknown",
     "additional_characteristics": {
       "source_urls": [
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
         "https://github.com/iammarxg/FEL",
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
       ]
     },
-    "source_url": "https://github.com/iammarxg/FEL",
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
     "source_label": "FEL.txt",
     "tmdb_id": "746",
     "imdb_id": "tt0093389",
     "poster_path": "data/posters/746.jpg",
     "release_url": "https://www.themoviedb.org/movie/746",
     "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "The Last Emperor (1987) listed as Profile 7 FEL",
+      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+      "quote": "The Last Emperor Criterion Collection (1987) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -31956,16 +31082,21 @@
     "studio": "D & B Films",
     "audio_formats": [],
     "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
     "source_label": "FEL.txt",
     "tmdb_id": "64015",
     "imdb_id": "tt0093426",
     "poster_path": "data/posters/64015.jpg",
     "release_url": "https://www.themoviedb.org/movie/64015",
     "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "An Autumn's Tale (1987) listed as Profile 7 FEL",
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Chau tin dik tung wa (1987) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -32510,53 +31641,8 @@
     "studio": "Rosebud Releasing Corporation",
     "audio_formats": [],
     "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "765",
-    "imdb_id": "tt0092991",
-    "poster_path": "data/posters/765.jpg",
-    "release_url": "https://www.themoviedb.org/movie/765",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Evil Dead II (Dead by Dawn) (1987) | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Catwoman.Hunted.2022 | nits",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
-    "movie_title": "Evil Dead 2",
-    "fel_confirmed": true,
-    "release_date": "1987-03-13",
-    "studio": "Rosebud Releasing Corporation",
-    "audio_formats": [],
-    "english_audio": "Unknown",
     "additional_characteristics": {
-      "enhancement_bitrate_mbps": "13.87"
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "raw_fel.txt",
-    "tmdb_id": "765",
-    "imdb_id": "tt0092991",
-    "poster_path": "data/posters/765.jpg",
-    "release_url": "https://www.themoviedb.org/movie/765",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Evil Dead 2 (1987) FEL - 13.87 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
-    "movie_title": "Evil Dead II",
-    "fel_confirmed": true,
-    "release_date": "1987-03-13",
-    "studio": "Rosebud Releasing Corporation",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
+      "enhancement_bitrate_mbps": "13.87",
       "source_urls": [
         "https://forum.blu-ray.com/showthread.php?t=276448",
         "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
@@ -32578,15 +31664,42 @@
         "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "raw_fel.txt",
     "tmdb_id": "765",
     "imdb_id": "tt0092991",
     "poster_path": "data/posters/765.jpg",
     "release_url": "https://www.themoviedb.org/movie/765",
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Evil Dead II (1987) listed as Profile 7 FEL",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Evil Dead II (Dead by Dawn) (1987) | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Catwoman.Hunted.2022 | nits",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T23:59:20+00:00"
+  },
+  {
+    "movie_title": "Hibiscus Town",
+    "fel_confirmed": true,
+    "release_date": "1987-03-05",
+    "studio": "Shanghai Film Studio",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "122973",
+    "imdb_id": "tt0087301",
+    "poster_path": "data/posters/122973.jpg",
+    "release_url": "https://www.themoviedb.org/movie/122973",
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Fu Rong Zhen (1986) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -32614,87 +31727,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "The Stepfather (1987) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Fu Rong Zhen",
-    "fel_confirmed": true,
-    "release_date": "1986",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Fu Rong Zhen (1986) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Kyabarê",
-    "fel_confirmed": true,
-    "release_date": "1986",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Kyabarê (1986) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Ying hung boon sik",
-    "fel_confirmed": true,
-    "release_date": "1986",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Ying hung boon sik (1986) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -32874,6 +31906,33 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
       "quote": "The Transformers: The Movie (1986) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "A Better Tomorrow",
+    "fel_confirmed": true,
+    "release_date": "1986-08-02",
+    "studio": "Cinema City",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "11471",
+    "imdb_id": "tt0092263",
+    "poster_path": "data/posters/11471.jpg",
+    "release_url": "https://www.themoviedb.org/movie/11471",
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Ying hung boon sik (1986) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -33063,6 +32122,33 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Cabaret",
+    "fel_confirmed": true,
+    "release_date": "1986-04-26",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "357299",
+    "imdb_id": "tt0368629",
+    "poster_path": "data/posters/357299.jpg",
+    "release_url": "https://www.themoviedb.org/movie/357299",
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Kyabarê (1986) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
     "movie_title": "Salvador",
     "fel_confirmed": true,
     "release_date": "1986-04-23",
@@ -33190,28 +32276,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "The Delta Force (1986) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "L E The Breakfast Club",
-    "fel_confirmed": true,
-    "release_date": "1985",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "L E The Breakfast Club (1985) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -34180,15 +33244,15 @@
         "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
       ]
     },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
     "source_label": "FEL.txt",
     "tmdb_id": "2108",
     "imdb_id": "tt0088847",
     "poster_path": "data/posters/2108.jpg",
     "release_url": "https://www.themoviedb.org/movie/2108",
     "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "The Breakfast Club (1985) listed as Profile 7 FEL",
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "L E The Breakfast Club (1985) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -34241,32 +33305,6 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Ghoulies (1985) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Talking heads - stop making sense from",
-    "fel_confirmed": true,
-    "release_date": "1984",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-      "quote": "Talking heads - stop making sense from (1984) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -34344,19 +33382,19 @@
     "english_audio": "Unknown",
     "additional_characteristics": {
       "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/"
       ]
     },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
     "source_label": "FEL.txt",
     "tmdb_id": "24128",
     "imdb_id": "tt0088178",
     "poster_path": "data/posters/24128.jpg",
     "release_url": "https://www.themoviedb.org/movie/24128",
     "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Stop Making Sense (1984) listed as Profile 7 FEL",
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Talking heads - stop making sense from (1984) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -35687,14 +34725,23 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Vigilante",
+    "movie_title": "Vigili e vigilesse",
     "fel_confirmed": true,
     "release_date": "1982-03-18",
     "studio": "New Kim Cinematografica S.r.l.",
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {
-      "enhancement_bitrate_mbps": "6.73"
+      "enhancement_bitrate_mbps": "6.73",
+      "source_urls": [
+        "https://forum.blu-ray.com/showthread.php?t=276448",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=143",
+        "https://github.com/iammarxg/FEL",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+      ]
     },
     "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
     "source_label": "raw_fel.txt",
@@ -35709,38 +34756,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
-    "movie_title": "Vigili e vigilesse",
-    "fel_confirmed": true,
-    "release_date": "1982-03-18",
-    "studio": "New Kim Cinematografica S.r.l.",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=143",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "306529",
-    "imdb_id": "tt0216361",
-    "poster_path": "data/posters/306529.jpg",
-    "release_url": "https://www.themoviedb.org/movie/306529",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Vigili e vigilesse (1982) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "The New York Ripper",
@@ -35910,28 +34925,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Evil Dead",
-    "fel_confirmed": true,
-    "release_date": "1981-10-15",
-    "studio": "Renaissance Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "764",
-    "imdb_id": "tt0083907",
-    "poster_path": "data/posters/764.jpg",
-    "release_url": "https://www.themoviedb.org/movie/764",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Evil Dead (1981) | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Catch.Me.If.You.Can.2002 | 0 | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
     "movie_title": "The Evil Dead",
     "fel_confirmed": true,
     "release_date": "1981-10-15",
@@ -35964,19 +34957,19 @@
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "764",
     "imdb_id": "tt0083907",
     "poster_path": "data/posters/764.jpg",
     "release_url": "https://www.themoviedb.org/movie/764",
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "The Evil Dead (1981) FEL - 7.49 Mb/s",
-      "evidence_type": "list-item",
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Evil Dead (1981) | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Catch.Me.If.You.Can.2002 | 0 | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
+      "evidence_type": "google-sheet-row",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T23:58:40+00:00"
+    "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
     "movie_title": "Galaxy of Terror",
@@ -36567,28 +35560,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "L E Night of the Juggler",
-    "fel_confirmed": true,
-    "release_date": "1980",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "L E Night of the Juggler (1980) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Altered States",
     "fel_confirmed": true,
     "release_date": "1980-12-25",
@@ -36855,15 +35826,15 @@
         "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
       ]
     },
-    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
     "source_label": "FEL.txt",
     "tmdb_id": "44686",
     "imdb_id": "tt0081230",
     "poster_path": "data/posters/44686.jpg",
     "release_url": "https://www.themoviedb.org/movie/44686",
     "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-      "quote": "Night of the Juggler (1980) listed as Profile 7 FEL",
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "L E Night of the Juggler (1980) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -36992,33 +35963,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Yomigaeru kinrô",
-    "fel_confirmed": true,
-    "release_date": "1979",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Yomigaeru kinrô (1979) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Star Trek: The Motion Picture",
     "fel_confirmed": true,
     "release_date": "1979-12-07",
@@ -37108,30 +36052,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Zombie",
-    "fel_confirmed": true,
-    "release_date": "1979-08-25",
-    "studio": "Variety Film Production",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "6.76"
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "raw_fel.txt",
-    "tmdb_id": "7219",
-    "imdb_id": "tt0080057",
-    "poster_path": "data/posters/7219.jpg",
-    "release_url": "https://www.themoviedb.org/movie/7219",
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Zombie (1979) FEL - 6.76 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:58:40+00:00"
-  },
-  {
     "movie_title": "Zombie Flesh Eaters",
     "fel_confirmed": true,
     "release_date": "1979-08-25",
@@ -37139,6 +36059,7 @@
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {
+      "enhancement_bitrate_mbps": "6.76",
       "source_urls": [
         "https://forum.blu-ray.com/showthread.php?t=276448",
         "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
@@ -37154,18 +36075,18 @@
       ]
     },
     "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
+    "source_label": "raw_fel.txt",
     "tmdb_id": "7219",
     "imdb_id": "tt0080057",
     "poster_path": "data/posters/7219.jpg",
     "release_url": "https://www.themoviedb.org/movie/7219",
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Zombie Flesh Eaters (1979) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "quote": "Zombie (1979) FEL - 6.76 Mb/s",
+      "evidence_type": "list-item",
       "location": "Unknown"
     },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+    "collected_at": "2026-05-21T23:58:40+00:00"
   },
   {
     "movie_title": "Caligula",
@@ -37189,6 +36110,33 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Caligula (1979) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "The Resurrection of the Golden Wolf",
+    "fel_confirmed": true,
+    "release_date": "1979-08-04",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "43963",
+    "imdb_id": "tt0080159",
+    "poster_path": "data/posters/43963.jpg",
+    "release_url": "https://www.themoviedb.org/movie/43963",
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Yomigaeru kinrô (1979) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -38724,32 +37672,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Pat Garrett and Billy the Kid 50th Anniversary Cut",
-    "fel_confirmed": true,
-    "release_date": "1973",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-      "quote": "Pat Garrett and Billy the Kid 50th Anniversary Cut (1973) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Serpico",
     "fel_confirmed": true,
     "release_date": "1973-12-18",
@@ -38931,16 +37853,20 @@
     "studio": "Metro-Goldwyn-Mayer",
     "audio_formats": [],
     "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+      ]
+    },
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
     "source_label": "FEL.txt",
     "tmdb_id": "11577",
     "imdb_id": "tt0070518",
     "poster_path": "data/posters/11577.jpg",
     "release_url": "https://www.themoviedb.org/movie/11577",
     "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "Pat Garrett & Billy the Kid (1973) listed as Profile 7 FEL",
+      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+      "quote": "Pat Garrett and Billy the Kid 50th Anniversary Cut (1973) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -40082,10 +39008,10 @@
     "collected_at": "2026-05-21T23:59:20+00:00"
   },
   {
-    "movie_title": "Long men ke zhen",
+    "movie_title": "Dragon Inn",
     "fel_confirmed": true,
-    "release_date": "1967",
-    "studio": "Unknown",
+    "release_date": "1967-11-23",
+    "studio": "Union Film Company",
     "audio_formats": [],
     "english_audio": "Unknown",
     "additional_characteristics": {
@@ -40097,10 +39023,10 @@
     },
     "source_url": "https://github.com/iammarxg/FEL",
     "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
+    "tmdb_id": "104237",
+    "imdb_id": "tt0060635",
+    "poster_path": "data/posters/104237.jpg",
+    "release_url": "https://www.themoviedb.org/movie/104237",
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Long men ke zhen (1967) listed as Profile 7 FEL",
@@ -41488,28 +40414,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "L E Alice in Wonderland",
-    "fel_confirmed": true,
-    "release_date": "1951",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "L E Alice in Wonderland (1951) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Alice in Wonderland",
     "fel_confirmed": true,
     "release_date": "1951-08-09",
@@ -41526,15 +40430,15 @@
         "https://www.blu-ray.com/movies/Rabid-4K-Blu-ray/397990/"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+    "source_url": "FEL.txt (curated Profile 7 FEL list)",
     "source_label": "FEL.txt",
     "tmdb_id": "12092",
     "imdb_id": "tt0043274",
     "poster_path": "data/posters/12092.jpg",
     "release_url": "https://www.themoviedb.org/movie/12092",
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "Alice in Wonderland (1951) listed as Profile 7 FEL",
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "L E Alice in Wonderland (1951) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -41915,159 +40819,5 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Atomic Blonde",
-    "fel_confirmed": true,
-    "release_date": "Unknown",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Atomic Blonde | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Aeon.Flux.2005 | 0 | pmtp | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3) | Oppenheimer 2023 (-24 + L5 edits) | probably ok | MA | HDR COMP | nits | L5 edits https://justpaste.it/bo994 / imax vs non imax: https://slow.pics/c/jO9OpiH3",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
-  },
-  {
-    "movie_title": "Godfather Trilogy",
-    "fel_confirmed": true,
-    "release_date": "Unknown",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Godfather Trilogy | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Da vinci Code 2006 | (-24 T277/B276) | iTunes | HDR COMP | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
-    "movie_title": "John Wick Chapter.2",
-    "fel_confirmed": true,
-    "release_date": "Unknown",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "John.Wick.Chapter.2 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Fantastic.Beasts.The.Secrets.of.Dumbledore.2022 | (+24) | MAX | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
-  },
-  {
-    "movie_title": "Mission Impossible Ghost protocol",
-    "fel_confirmed": true,
-    "release_date": "Unknown",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Mission Impossible Ghost protocol | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Harry.Potter.POA.2004 | (+121 T280/B280) | iTunes | HDR COMP | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
-  },
-  {
-    "movie_title": "Nobody.2.2025.",
-    "fel_confirmed": true,
-    "release_date": "Unknown",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Nobody.2.2025. | BD FEL | HDR COMP | sample | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Indiana.Jones.and.the.Kingdom.of.the.Crystal.Skull.2008 | 0 | PMTP | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
-    "movie_title": "Rango.2011.",
-    "fel_confirmed": true,
-    "release_date": "Unknown",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Rango.2011. | BD FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Kong Skull Island 2017 | (+24 T280/B280) | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T23:59:20+00:00"
-  },
-  {
-    "movie_title": "Star Trek First Contact",
-    "fel_confirmed": true,
-    "release_date": "Unknown",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "Unknown",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Star.Trek.First.Contact | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Moana 2016 | (+39 T276/B276) | DSNP | HDR COMP | nits",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-18T00:58:28+00:00"
   }
 ]
