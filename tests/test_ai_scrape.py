@@ -1,11 +1,14 @@
 import json
 
+import httpx
+
 from ai_scrape import (
     _candidate_to_release,
     _load_existing_releases,
     _parse_url_list,
     ai_discover_sources,
     ai_extract_releases,
+    ai_scrape_releases,
 )
 from compare import FoundCandidate
 from models import FelEvidence, FelRelease
@@ -30,6 +33,12 @@ def test_parse_url_list_handles_plain_and_fenced_json():
     ]
     assert _parse_url_list('```json\n["https://c.test"]\n```') == ["https://c.test"]
     assert _parse_url_list("not json at all") == []
+
+
+def test_parse_url_list_accepts_dict_payload_and_rejects_non_lists():
+    assert _parse_url_list('{"urls": ["https://a.test"]}') == ["https://a.test"]
+    assert _parse_url_list('{"items": ["https://b.test"]}') == ["https://b.test"]
+    assert _parse_url_list('{"urls": "https://not-a-list.test"}') == []
 
 
 def test_candidate_to_release_marks_ai_extracted():
@@ -62,6 +71,14 @@ def test_ai_discover_sources_keeps_new_well_formed_urls():
     assert result == ["https://forum.blu-ray.com/showthread.php?t=999"]
 
 
+def test_ai_discover_sources_returns_empty_on_ai_http_error():
+    class FailingAIClient(FakeAIClient):
+        def complete(self, system_prompt: str, user_prompt: str) -> str:
+            raise httpx.HTTPError("boom")
+
+    assert ai_discover_sources(FailingAIClient(), []) == []
+
+
 def test_ai_extract_releases_converts_nonblank_candidates():
     candidates = [
         FoundCandidate("Drop", "2025", "https://src.test", "Drop FEL", "ai"),
@@ -71,6 +88,76 @@ def test_ai_extract_releases_converts_nonblank_candidates():
     releases = ai_extract_releases(client, [("https://src.test", "<html>")])
     assert [r.movie_title for r in releases] == ["Drop"]
     assert releases[0].fel_evidence.evidence_type == "ai-extracted"
+
+
+def test_ai_extract_releases_skips_sources_that_raise_http_errors():
+    class FailingAIClient(FakeAIClient):
+        def extract_candidates(self, source_url: str, text: str):
+            raise httpx.HTTPError("boom")
+
+    assert (
+        ai_extract_releases(FailingAIClient(), [("https://src.test", "<html>")]) == []
+    )
+
+
+def test_ai_scrape_releases_uses_google_sheet_csv_urls_and_skips_fetch_errors(
+    monkeypatch,
+    tmp_path,
+):
+    import ai_scrape as ai_scrape_mod
+
+    fetched_urls: list[str] = []
+
+    class FakeFetchResult:
+        def __init__(self, text: str = "", error: str = "") -> None:
+            self.text = text
+            self.error = error
+
+    class FakeFetcher:
+        def __init__(self, *args, **kwargs) -> None:
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+        def fetch(self, url: str, raise_on_error: bool = False):
+            fetched_urls.append(url)
+            if "bad.test" in url:
+                return FakeFetchResult(error="failed")
+            return FakeFetchResult(text="<html>Alien FEL</html>")
+
+    monkeypatch.setattr(ai_scrape_mod.fetcher, "Fetcher", FakeFetcher)
+    monkeypatch.setattr(
+        ai_scrape_mod,
+        "ai_extract_releases",
+        lambda client, pages: [
+            FelRelease(
+                movie_title=source_url,
+                fel_evidence=FelEvidence(
+                    source_url=source_url,
+                    quote=text,
+                    evidence_type="ai-extracted",
+                ),
+            )
+            for source_url, text in pages
+        ],
+    )
+
+    sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
+    releases = ai_scrape_releases(
+        [sheet_url, "https://bad.test/thread"],
+        tmp_path / ".cache",
+        FakeAIClient(),
+    )
+
+    assert fetched_urls == [
+        "https://docs.google.com/spreadsheets/d/sheet-id/gviz/tq?tqx=out:csv&gid=99",
+        "https://bad.test/thread",
+    ]
+    assert [release.movie_title for release in releases] == [sheet_url]
 
 
 def test_load_existing_releases_round_trips(tmp_path):

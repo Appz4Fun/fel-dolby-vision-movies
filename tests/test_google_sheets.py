@@ -2,6 +2,7 @@ from google_sheets import (
     google_sheet_csv_url,
     parse_google_sheet_releases,
 )
+import pytest
 
 
 def test_google_sheet_csv_url_preserves_gid_from_edit_url():
@@ -14,6 +15,14 @@ def test_google_sheet_csv_url_preserves_gid_from_edit_url():
         "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/"
         "gviz/tq?tqx=out:csv&gid=828864432"
     )
+
+
+def test_google_sheet_csv_url_uses_fragment_gid_and_rejects_non_sheet_urls():
+    url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=12345"
+
+    assert google_sheet_csv_url(url).endswith("/gviz/tq?tqx=out:csv&gid=12345")
+    with pytest.raises(ValueError, match="not a Google Sheets URL"):
+        google_sheet_csv_url("https://docs.google.com/spreadsheets/u/0/")
 
 
 def test_parse_google_sheet_releases_detects_fel_rows_from_header_block():
@@ -111,3 +120,18 @@ Specific Movie,BD FEL,Good
     releases = parse_google_sheet_releases(csv_text, "https://docs.example.test/sheet")
 
     assert [release.movie_title for release in releases] == ["Specific Movie"]
+
+
+def test_parse_google_sheet_releases_ignores_rows_without_usable_title_or_source():
+    csv_text = """prelude,BD FEL
+Movie Name,DV Source,Notes
+,BD FEL,blank title
+Too Short
+Valid Movie 2020,BD FEL,usable row
+"""
+
+    releases = parse_google_sheet_releases(csv_text, "https://docs.example.test/sheet")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Valid Movie", "2020")
+    ]
