@@ -103,6 +103,9 @@ _RESULT_ANCHOR_RE = re.compile(
     r'[^>]*?title="([^"]*)"',
     re.S,
 )
+_DIRECT_4K_URL_RE = re.compile(
+    r"^https://www\.blu-ray\.com/movies/([^/?#]+)-4K-Blu-ray/\d+/?$"
+)
 _YEAR_IN_TITLE_RE = re.compile(r"\((\d{4})\)")
 DEFAULT_BLURAY_CACHE = Path(".cache/bluray.json")
 BLURAY_USER_AGENT = (
@@ -161,7 +164,11 @@ def fetch_bluray_details(client: httpx.Client, url: str) -> BlurayDetails:
 def search_bluray(client: httpx.Client, title: str, year: str) -> str | None:
     """Return the blu-ray.com 4K Blu-ray URL for a confident match."""
     url = _SEARCH_URL.format(keyword=urllib.parse.quote(title))
-    html_text = _get_with_retry(client, url).text
+    response = _get_with_retry(client, url, follow_redirects=True)
+    direct_url = _direct_4k_url_if_confident(str(response.url), title)
+    if direct_url is not None:
+        return direct_url
+    html_text = response.text
     want_title = canonical_title_key(title)
     want_year = int(year[:4]) if year[:4].isdigit() else None
 
@@ -175,6 +182,16 @@ def search_bluray(client: httpx.Client, title: str, year: str) -> str | None:
                 continue
         return href
     return None
+
+
+def _direct_4k_url_if_confident(url: str, title: str) -> str | None:
+    match = _DIRECT_4K_URL_RE.match(url)
+    if match is None:
+        return None
+    slug = match.group(1).replace("-", " ")
+    if canonical_title_key(slug) != canonical_title_key(title):
+        return None
+    return url
 
 
 class BlurayMatcher(Protocol):
