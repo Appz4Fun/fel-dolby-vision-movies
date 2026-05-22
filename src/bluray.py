@@ -105,6 +105,10 @@ _RESULT_ANCHOR_RE = re.compile(
 )
 _YEAR_IN_TITLE_RE = re.compile(r"\((\d{4})\)")
 DEFAULT_BLURAY_CACHE = Path(".cache/bluray.json")
+BLURAY_USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
+)
 
 
 @dataclass(frozen=True)
@@ -218,7 +222,7 @@ class BlurayResolver:
     ) -> None:
         self.client = client or httpx.Client(
             timeout=httpx.Timeout(20.0),
-            headers={"User-Agent": "fel-dolby-vision-movies/1.0 (+github)"},
+            headers={"User-Agent": BLURAY_USER_AGENT},
         )
         self._owns_client = client is None
         self.cache_path = cache_path

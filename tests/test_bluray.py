@@ -135,3 +135,11 @@ def test_bluray_resolver_caches_lookups(tmp_path: Path):
         assert cached is not None
         assert cached.audio_formats == first.audio_formats
     assert len(calls) == calls_after_first
+
+
+def test_bluray_resolver_uses_browser_user_agent():
+    resolver = BlurayResolver()
+    try:
+        assert resolver.client.headers["user-agent"].startswith("Mozilla/5.0")
+    finally:
+        resolver.close()
