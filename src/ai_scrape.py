@@ -19,7 +19,7 @@ import httpx
 from compare import AIClient, AISettings, FoundCandidate
 import fetcher
 import google_sheets
-from models import UNKNOWN, FelEvidence, FelRelease
+from models import UNKNOWN, FelEvidence, FelRelease, release_from_dict
 import sources
 
 
@@ -126,6 +126,20 @@ def _google_sheets_path_for(source_path: Path) -> Path:
     return source_path.with_name("google_sheets.txt")
 
 
+def _load_existing_releases(output_dir: Path) -> list[FelRelease]:
+    """Load releases already published by the deterministic scrape, if any.
+
+    In the daily pipeline the ``run`` command writes (and enriches) this file
+    before ``ai-scrape`` runs, so AI-discovered releases must be *merged into*
+    it rather than replacing it.
+    """
+    releases_path = output_dir / "data" / "releases.json"
+    if not releases_path.exists():
+        return []
+    raw = json.loads(releases_path.read_text(encoding="utf-8"))
+    return [release_from_dict(item) for item in raw]
+
+
 def run_ai_scrape(source_path: Path, output_dir: Path, cache_dir: Path) -> int:
     import artifacts
     import main
@@ -139,22 +153,29 @@ def run_ai_scrape(source_path: Path, output_dir: Path, cache_dir: Path) -> int:
 
     forum_urls = sources.read_source_urls(source_path)
     sheet_urls = sources.read_source_urls(_google_sheets_path_for(source_path))
-    existing = list(dict.fromkeys([*forum_urls, *sheet_urls]))
+    existing_urls = list(dict.fromkeys([*forum_urls, *sheet_urls]))
 
     with AIClient(settings) as ai_client:
-        discovered = ai_discover_sources(ai_client, existing)
+        discovered = ai_discover_sources(ai_client, existing_urls)
         if discovered:
             sources.merge_confirmed_sources(source_path, discovered)
-        all_urls = list(dict.fromkeys([*existing, *discovered]))
+        all_urls = list(dict.fromkeys([*existing_urls, *discovered]))
         ai_releases = ai_scrape_releases(all_urls, cache_dir, ai_client)
 
-    unique = dedupe_releases(ai_releases, canonical_key)
-    main._enrich_if_possible(unique)
-    sorted_releases = artifacts.publish_outputs(unique, output_dir=output_dir)
+    # Enrich only the AI-discovered releases; entries already in releases.json
+    # were enriched by the deterministic ``run`` step earlier in the pipeline.
+    unique_ai = dedupe_releases(ai_releases, canonical_key)
+    main._enrich_if_possible(unique_ai)
+
+    # Merge into (never replace) the existing database before publishing.
+    existing_releases = _load_existing_releases(output_dir)
+    merged = dedupe_releases([*existing_releases, *unique_ai], canonical_key)
+    sorted_releases = artifacts.publish_outputs(merged, output_dir=output_dir)
     print(
         "ai-scrape complete; "
         f"discovered_sources={len(discovered)} "
         f"ai_releases={len(ai_releases)} "
+        f"existing_releases={len(existing_releases)} "
         f"releases={len(sorted_releases)}"
     )
     return 0
