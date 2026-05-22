@@ -25,7 +25,9 @@ def build_dashboard(
     cards = "\n".join(_render_card(release) for release in sorted_releases)
 
     (dist / "releases.json").write_text(payload + "\n", encoding="utf-8")
-    (dist / "index.html").write_text(_render_html(cards, payload), encoding="utf-8")
+    (dist / "index.html").write_text(
+        _render_html(cards, payload, len(sorted_releases)), encoding="utf-8"
+    )
 
     poster_source = Path(poster_src)
     if poster_source.is_dir():
@@ -66,6 +68,8 @@ def _render_card(release: FelRelease) -> str:
             release.studio,
             release.english_audio,
             " ".join(audio_formats),
+            " ".join(release.audio_languages),
+            " ".join(release.hdr_formats),
         ]
     ).lower()
     if release.poster_path:
@@ -82,6 +86,12 @@ def _render_card(release: FelRelease) -> str:
             f'<a href="{escape(release.release_url, quote=True)}" '
             f'rel="noreferrer">TMDB</a>'
         )
+    bluray_link = ""
+    if release.bluray_url:
+        bluray_link = (
+            f'<a href="{escape(release.bluray_url, quote=True)}" '
+            f'rel="noreferrer">Blu-ray</a>'
+        )
     return f"""<article data-card data-search="{escape(search_text, quote=True)}">
   {poster}
   <div class="body">
@@ -95,13 +105,14 @@ def _render_card(release: FelRelease) -> str:
     <div class="links">
       <a href="{escape(release.source_url, quote=True)}" rel="noreferrer">Source</a>
       {tmdb_link}
+      {bluray_link}
     </div>
   </div>
 </article>"""
 
 
-def _render_html(cards: str, payload: str) -> str:
-    escaped_payload = escape(payload)
+def _render_html(cards: str, payload: str, total: int) -> str:
+    script_payload = payload.replace("<", "\\u003c")
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -133,6 +144,7 @@ def _render_html(cards: str, payload: str) -> str:
     }}
     header {{ display: grid; gap: 16px; margin-bottom: 24px; }}
     h1 {{ margin: 0; font-size: 34px; letter-spacing: 0; }}
+    .count {{ color: var(--muted); font-size: 15px; }}
     label {{ color: var(--muted); display: grid; gap: 8px; max-width: 420px; }}
     input {{
       width: 100%;
@@ -143,11 +155,33 @@ def _render_html(cards: str, payload: str) -> str:
       padding: 11px 12px;
       font: inherit;
     }}
+    .views {{ display: flex; gap: 8px; margin-bottom: 16px; }}
+    .views button {{
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font: inherit;
+      cursor: pointer;
+    }}
+    .views button.active {{ border-color: var(--accent); color: var(--accent); }}
     #cards {{
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 16px;
     }}
+    #list {{ display: none; overflow-x: auto; }}
+    table {{ width: 100%; border-collapse: collapse; font-size: 14px; }}
+    th, td {{
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }}
+    th {{ cursor: pointer; user-select: none; white-space: nowrap; }}
+    th:hover {{ color: var(--accent); }}
+    table img {{ width: 46px; height: 69px; object-fit: cover; display: block; }}
     article {{
       border: 1px solid var(--line);
       background: var(--panel);
@@ -192,18 +226,104 @@ def _render_html(cards: str, payload: str) -> str:
   <main>
     <header>
       <h1>FEL Dolby Vision Movies</h1>
+      <div class="count">{total} confirmed Profile 7 FEL releases</div>
       <label>Filter <input id="filter" type="search" placeholder="Title, studio, audio"></label>
     </header>
+    <div class="views">
+      <button id="view-cards" class="active">Cards</button>
+      <button id="view-list">List</button>
+    </div>
+    <div id="list"></div>
     <section id="cards">{cards}</section>
   </main>
-  <script type="application/json" id="release-data">{escaped_payload}</script>
+  <script type="application/json" id="release-data">{script_payload}</script>
   <script>
+    const data = JSON.parse(document.getElementById("release-data").textContent);
     const filter = document.getElementById("filter");
+    const cardsView = document.getElementById("cards");
+    const listView = document.getElementById("list");
+    const btnCards = document.getElementById("view-cards");
+    const btnList = document.getElementById("view-list");
+
+    const columns = [
+      ["", r => r.poster_path
+        ? `<img src="posters/${{r.poster_path.split("/").pop()}}" alt="">` : ""],
+      ["Movie", r => r.movie_title],
+      ["Year", r => (r.release_date || "").slice(0, 4)],
+      ["Studio", r => r.studio || ""],
+      ["Audio", r => (r.audio_formats || []).join(", ")],
+      ["Language", r => (r.audio_languages || []).join(", ")],
+      ["HDR", r => (r.hdr_formats || []).join(", ")],
+      ["FEL", r => {{
+        const bitrate = (r.additional_characteristics || {{}}).enhancement_bitrate_mbps;
+        return bitrate == null ? "" : bitrate;
+      }}],
+      ["Release Date", r => r.release_date || ""],
+      ["Blu-ray Date", r => r.bluray_release_date || ""],
+      ["Links", r => [
+        r.source_url && `<a href="${{r.source_url}}" rel="noreferrer">src</a>`,
+        r.release_url && `<a href="${{r.release_url}}" rel="noreferrer">TMDB</a>`,
+        r.bluray_url && `<a href="${{r.bluray_url}}" rel="noreferrer">blu-ray</a>`,
+      ].filter(Boolean).join(" · ")],
+    ];
+    let sortCol = 1;
+    let sortAsc = true;
+
+    function filteredRows() {{
+      const query = filter.value.trim().toLowerCase();
+      return data.filter(r => !query ||
+        `${{r.movie_title}} ${{r.studio || ""}} ${{(r.audio_formats || []).join(" ")}} ${{(r.hdr_formats || []).join(" ")}}`
+          .toLowerCase()
+          .includes(query));
+    }}
+
+    function renderTable() {{
+      const rows = filteredRows().slice().sort((a, b) => {{
+        const va = columns[sortCol][1](a).toString().toLowerCase();
+        const vb = columns[sortCol][1](b).toString().toLowerCase();
+        return (va < vb ? -1 : va > vb ? 1 : 0) * (sortAsc ? 1 : -1);
+      }});
+      const head = "<tr>" + columns.map((column, i) =>
+        `<th data-col="${{i}}">${{column[0]}}${{i === sortCol
+          ? (sortAsc ? " ▲" : " ▼") : ""}}</th>`).join("") + "</tr>";
+      const body = rows.map(row => "<tr>" +
+        columns.map(column => `<td>${{column[1](row)}}</td>`).join("") +
+        "</tr>").join("");
+      listView.innerHTML = `<table><thead>${{head}}</thead><tbody>${{body}}</tbody></table>`;
+      listView.querySelectorAll("th").forEach(th => th.addEventListener("click", () => {{
+        const col = Number(th.dataset.col);
+        if (col === sortCol) {{
+          sortAsc = !sortAsc;
+        }} else {{
+          sortCol = col;
+          sortAsc = true;
+        }}
+        renderTable();
+      }}));
+    }}
+    function sortTable() {{ renderTable(); }}
+
     filter.addEventListener("input", () => {{
       const query = filter.value.trim().toLowerCase();
       document.querySelectorAll("[data-card]").forEach(card => {{
         card.hidden = query && !card.dataset.search.includes(query);
       }});
+      if (listView.style.display !== "none") {{
+        renderTable();
+      }}
+    }});
+    btnCards.addEventListener("click", () => {{
+      cardsView.style.display = "";
+      listView.style.display = "none";
+      btnCards.classList.add("active");
+      btnList.classList.remove("active");
+    }});
+    btnList.addEventListener("click", () => {{
+      cardsView.style.display = "none";
+      listView.style.display = "block";
+      btnList.classList.add("active");
+      btnCards.classList.remove("active");
+      renderTable();
     }});
   </script>
 </body>

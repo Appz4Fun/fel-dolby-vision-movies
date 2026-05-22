@@ -88,3 +88,17 @@ def test_dashboard_renders_poster_image_and_both_links(tmp_path: Path):
     assert 'href="https://reddit.test/fel"' in html
     assert 'href="https://www.themoviedb.org/movie/426063"' in html
     assert (tmp_path / "dist" / "posters" / "426063.jpg").exists()
+
+
+def test_dashboard_has_total_count_and_sortable_list(tmp_path: Path):
+    build_dashboard(
+        [_enriched_release(), _enriched_release()],
+        output_dir=tmp_path / "dist",
+        poster_src=tmp_path / "data" / "posters",
+    )
+
+    html = (tmp_path / "dist" / "index.html").read_text(encoding="utf-8")
+    assert "2 confirmed Profile 7 FEL releases" in html
+    assert 'id="view-cards"' in html
+    assert 'id="view-list"' in html
+    assert "<table" in html and "sortTable" in html
