@@ -98,3 +98,60 @@ def test_load_existing_releases_round_trips(tmp_path):
 
 def test_load_existing_releases_missing_file_returns_empty(tmp_path):
     assert _load_existing_releases(tmp_path) == []
+
+
+def test_run_ai_scrape_merges_into_existing_database(tmp_path, monkeypatch):
+    """ai-scrape must add to releases.json, never replace it."""
+    import ai_scrape as ai_scrape_mod
+
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    (data_dir / "posters").mkdir()
+    existing = FelRelease(
+        movie_title="Existing Movie",
+        release_date="2020",
+        fel_evidence=FelEvidence(
+            source_url="https://forum.test/1",
+            quote="Existing FEL",
+            evidence_type="forum-post",
+        ),
+        source_label="forums",
+        collected_at="2026-05-01T00:00:00+00:00",
+    )
+    (data_dir / "releases.json").write_text(
+        json.dumps([existing.to_dict()]), encoding="utf-8"
+    )
+    (tmp_path / "forums.txt").write_text("https://forum.test/1\n", encoding="utf-8")
+    (tmp_path / "google_sheets.txt").write_text("", encoding="utf-8")
+
+    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+
+    class _NoopClient:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+    ai_candidate = FoundCandidate(
+        "New AI Movie", "2025", "https://ai.test", "New AI Movie FEL", "ai"
+    )
+    monkeypatch.setattr(ai_scrape_mod, "AIClient", lambda settings: _NoopClient())
+    monkeypatch.setattr(ai_scrape_mod, "ai_discover_sources", lambda *a, **k: [])
+    monkeypatch.setattr(
+        ai_scrape_mod,
+        "ai_scrape_releases",
+        lambda *a, **k: [
+            _candidate_to_release(ai_candidate, "2026-05-21T00:00:00+00:00")
+        ],
+    )
+
+    rc = ai_scrape_mod.run_ai_scrape(
+        tmp_path / "forums.txt", tmp_path, tmp_path / ".cache"
+    )
+
+    assert rc == 0
+    result = json.loads((data_dir / "releases.json").read_text(encoding="utf-8"))
+    titles = {row["movie_title"] for row in result}
+    assert "Existing Movie" in titles  # pre-existing data preserved
+    assert "New AI Movie" in titles  # AI-discovered release added
