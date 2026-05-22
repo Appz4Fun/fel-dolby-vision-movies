@@ -1,5 +1,7 @@
 .env
 .cache/
+.venv/
+uv.lock
 .coverage
 .DS_Store
 dist/
