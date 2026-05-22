@@ -3780,68 +3780,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Hellboy",
-    "fel_confirmed": true,
-    "release_date": "2004-04-02",
-    "studio": "Revolution Studios",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?p=23318439",
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=135",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=27",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=28",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=43",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=45",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=47",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=48",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=7",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=8",
-        "https://forum.blu-ray.com/showthread.php?t=377093&page=7",
-        "https://forum.blu-ray.com/showthread.php?t=385031&page=2",
-        "https://forum.blu-ray.com/showthread.php?t=387630&page=5",
-        "https://forum.blu-ray.com/showthread.php?t=387630&page=6",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?p=23318439",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1487",
-    "imdb_id": "tt0167190",
-    "poster_path": "data/posters/1487.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1487",
-    "bluray_url": "https://www.blu-ray.com/movies/Hellboy-4K-Blu-ray/214052/",
-    "bluray_release_date": "2019-10-15",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Portuguese",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?p=23318439",
-      "quote": "Hellboy (2004) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Big Fish",
     "fel_confirmed": true,
     "release_date": "2003-12-10",
@@ -11153,40 +11091,6 @@
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "The Trial (1962) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
-  },
-  {
-    "movie_title": "The Witch",
-    "fel_confirmed": true,
-    "release_date": "2016-02-19",
-    "studio": "Very Special Projects",
-    "audio_formats": [
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "FEL.txt",
-    "tmdb_id": "310131",
-    "imdb_id": "tt4263482",
-    "poster_path": "data/posters/310131.jpg",
-    "release_url": "https://www.themoviedb.org/movie/310131",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Witch-4K-Blu-ray/231318/",
-    "bluray_release_date": "2019-04-23",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "The VVitch (2015) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
