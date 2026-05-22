@@ -1,0 +1,63 @@
+name: Deploy Pages
+
+# Fast path: re-render and publish the GitHub Pages site on every push to
+# main WITHOUT scraping or AI extraction. Data refreshes stay owned by the
+# daily "Scrape and Deploy Pages" workflow; this only rebuilds the dashboard
+# from the committed data so code/data changes merged to main reach the live
+# site in well under a minute instead of waiting for the daily run.
+#
+# Note: the daily workflow commits its data refresh with "[skip ci]", so that
+# commit does not trigger this workflow (the daily run deploys it directly).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Share the "pages" concurrency group with the daily scrape workflow so the
+# two never deploy at the same time.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  PYTHONPATH: src
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Build dashboard (no scrape, no AI)
+        run: python -m build_pages
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
