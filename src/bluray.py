@@ -4,10 +4,12 @@ from dataclasses import dataclass, field
 from datetime import datetime
 import html
 import re
+import urllib.parse
 
 import httpx
 
 from enrich import _get_with_retry
+from merge import canonical_title_key
 
 _FREQ_RE = re.compile(r"\s*\([^)]*\)")
 _ABBREVIATIONS = (
@@ -88,6 +90,16 @@ _AUDIO_BLOCK_RE = re.compile(r'<div id="longaudio"[^>]*>(.*?)</div>', re.S)
 _HDR_RE = re.compile(r"HDR:\s*([^<]+)")
 _RELEASE_DATE_RE = re.compile(r"Release Date ([A-Z][a-z]+ \d{1,2}, \d{4})")
 _TAG_RE = re.compile(r"<[^>]+>")
+_SEARCH_URL = (
+    "https://www.blu-ray.com/search/?quicksearch=1&section=bluraymovies"
+    "&quicksearch_keyword={keyword}"
+)
+_RESULT_ANCHOR_RE = re.compile(
+    r'href="(https://www\.blu-ray\.com/movies/[A-Za-z0-9][^"]*?-4K-Blu-ray/\d+/)"'
+    r'[^>]*?title="([^"]*)"',
+    re.S,
+)
+_YEAR_IN_TITLE_RE = re.compile(r"\((\d{4})\)")
 
 
 @dataclass(frozen=True)
@@ -135,3 +147,22 @@ def fetch_bluray_details(client: httpx.Client, url: str) -> BlurayDetails:
         audio_languages=list(dict.fromkeys(lang for lang, _ in tracks)),
         hdr_formats=hdr_formats,
     )
+
+
+def search_bluray(client: httpx.Client, title: str, year: str) -> str | None:
+    """Return the blu-ray.com 4K Blu-ray URL for a confident match."""
+    url = _SEARCH_URL.format(keyword=urllib.parse.quote(title))
+    html_text = _get_with_retry(client, url).text
+    want_title = canonical_title_key(title)
+    want_year = int(year[:4]) if year[:4].isdigit() else None
+
+    for href, anchor_title in _RESULT_ANCHOR_RE.findall(html_text):
+        slug = href.rsplit("/movies/", 1)[1].rsplit("-4K-Blu-ray/", 1)[0]
+        if canonical_title_key(slug.replace("-", " ")) != want_title:
+            continue
+        year_match = _YEAR_IN_TITLE_RE.search(anchor_title)
+        if want_year and year_match:
+            if abs(int(year_match.group(1)) - want_year) > 1:
+                continue
+        return href
+    return None
