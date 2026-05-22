@@ -40,3 +40,8 @@ https://www.dvdtalk.com/reviews/review/74361
 https://discourse.coreelec.org/t/firecube-and-dolby-vision-profile-7/54019
 https://forum.kodi.tv/showthread.php?tid=371521
 https://forum.makemkv.com/forum/viewtopic.php?t=33122
+https://www.avsforum.com/threads/dolby-vision-profile-7-fel-with-full-lossless-audio-truehd-atmos-and-dts-x.3339774
+https://www.reddit.com/r/ShieldAndroidTV/comments/1d1qtqu/is_dv_profile_7_without_fel_worse_or_better_then
+https://www.reddit.com/r/CoreELEC/comments/1jacyav/dolby_vision_profile_7_fel_trakt_list_for_coreelec
+https://www.reddit.com/r/AndroidTV/comments/18kmowh/dolby_vision_profile_7_full_enhancement_layer_fel?tl=hi-latn
+https://www.reddit.com/r/CoreELEC/comments/1rn3gp6/dune_hd_pro_vision_4k_with_full_dolby_vision
