@@ -106,6 +106,21 @@ def test_search_bluray_returns_high_confidence_4k_match():
     assert wrong_year is None
 
 
+def test_search_bluray_accepts_direct_4k_redirect():
+    direct_url = "https://www.blu-ray.com/movies/Send-Help-4K-Blu-ray/405659/"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if "/search/" in request.url.path:
+            return httpx.Response(302, headers={"Location": direct_url})
+        return httpx.Response(200, text=_DISC_HTML, request=request)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    try:
+        assert search_bluray(client, "Send Help", "2025") == direct_url
+    finally:
+        client.close()
+
+
 def test_static_bluray_resolver_returns_details():
     details = BlurayDetails(url="u", hdr_formats=["Dolby Vision"])
     resolver = StaticBlurayResolver({("The Northman", "2022"): details})
