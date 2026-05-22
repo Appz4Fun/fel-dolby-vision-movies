@@ -9884,5 +9884,3602 @@
     "collected_at": "2026-05-22T02:12:54+00:00",
     "removal_comment": "Removed from releases.json first pass: free-form sentence parser output is not a movie title with direct Profile 7 FEL evidence.",
     "removed_at": "2026-05-22T16:56:50+00:00"
+  },
+  {
+    "movie_title": "11 Rebels",
+    "fel_confirmed": true,
+    "release_date": "2024-11-01",
+    "studio": "Toei Company",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1310682",
+    "imdb_id": "tt33367745",
+    "poster_path": "data/posters/1310682.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1310682",
+    "bluray_url": "https://www.blu-ray.com/movies/11-Rebels-4K-Blu-ray/383816/",
+    "bluray_release_date": "2025-06-10",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Japanese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The HTML page is titled “List of Dolby Vision P7-FEL Films,” and its meta description explicitly includes “11 Rebels (2024).”",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T04:52:57+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "48 Hrs. AKA 48 Hours",
+    "fel_confirmed": true,
+    "release_date": "1982",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as '48 Hrs. AKA 48 Hours [1982]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "A Better Tomorrow",
+    "fel_confirmed": true,
+    "release_date": "1986-08-02",
+    "studio": "Cinema City",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "11471",
+    "imdb_id": "tt0092263",
+    "poster_path": "data/posters/11471.jpg",
+    "release_url": "https://www.themoviedb.org/movie/11471",
+    "bluray_url": "https://www.blu-ray.com/movies/A-Better-Tomorrow-4K-Blu-ray/395895/",
+    "bluray_release_date": "2025-11-18",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Ying hung boon sik (1986) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "A Better Tomorrow II",
+    "fel_confirmed": true,
+    "release_date": "1987-12-17",
+    "studio": "Film Workshop",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "18305",
+    "imdb_id": "tt0094357",
+    "poster_path": "data/posters/18305.jpg",
+    "release_url": "https://www.themoviedb.org/movie/18305",
+    "bluray_url": "https://www.blu-ray.com/movies/A-Better-Tomorrow-II-4K-Blu-ray/395897/",
+    "bluray_release_date": "2025-11-18",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "A Better Tomorrow II (1987) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "A Better Tomorrow III: Love and Death in Saigon",
+    "fel_confirmed": true,
+    "release_date": "1989-10-20",
+    "studio": "Film Workshop",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "41244",
+    "imdb_id": "tt0098691",
+    "poster_path": "data/posters/41244.jpg",
+    "release_url": "https://www.themoviedb.org/movie/41244",
+    "bluray_url": "https://www.blu-ray.com/movies/A-Better-Tomorrow-III-Love-and-Death-in-Saigon-4K-Blu-ray/395898/",
+    "bluray_release_date": "2025-11-18",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "A Better Tomorrow III: Love and Death in Saigon (1989) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "A Moment of Romance",
+    "fel_confirmed": true,
+    "release_date": "1990-06-14",
+    "studio": "Paka Hill Film Production Co.",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "81128",
+    "imdb_id": "tt0100777",
+    "poster_path": "data/posters/81128.jpg",
+    "release_url": "https://www.themoviedb.org/movie/81128",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "A Moment of Romance (1990) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "A Writer's Odyssey",
+    "fel_confirmed": true,
+    "release_date": "2021-02-12",
+    "studio": "United Entertainment Partners",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "611698",
+    "imdb_id": "tt9685342",
+    "poster_path": "data/posters/611698.jpg",
+    "release_url": "https://www.themoviedb.org/movie/611698",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "A Writer's Odyssey (2021) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Aguirre, der Zorn Gottes AKA Aguirre, the Wrath of God",
+    "fel_confirmed": true,
+    "release_date": "1972",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Aguirre, der Zorn Gottes AKA Aguirre, the Wrath of God [1972]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Aguirre, the Wrath of God",
+    "fel_confirmed": true,
+    "release_date": "1972-12-29",
+    "studio": "Werner Herzog Filmproduktion",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "2000",
+    "imdb_id": "tt0068182",
+    "poster_path": "data/posters/2000.jpg",
+    "release_url": "https://www.themoviedb.org/movie/2000",
+    "bluray_url": "https://www.blu-ray.com/movies/Aguirre-the-Wrath-of-God-4K-Blu-ray/370414/",
+    "bluray_release_date": "2024-12-03",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "German",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Aguirre, the Wrath of God (1972) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Ajeossi AKA The Man from Nowhere",
+    "fel_confirmed": true,
+    "release_date": "2010",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Ajeossi AKA The Man from Nowhere [2010]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Alphaville",
+    "fel_confirmed": true,
+    "release_date": "1965-05-05",
+    "studio": "Filmstudio",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "8072",
+    "imdb_id": "tt0058898",
+    "poster_path": "data/posters/8072.jpg",
+    "release_url": "https://www.themoviedb.org/movie/8072",
+    "bluray_url": "https://www.blu-ray.com/movies/Alphaville-4K-Blu-ray/357721/",
+    "bluray_release_date": "2024-08-27",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Alphaville (1965) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "An Autumn's Tale",
+    "fel_confirmed": true,
+    "release_date": "1987-07-16",
+    "studio": "D & B Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "64015",
+    "imdb_id": "tt0093426",
+    "poster_path": "data/posters/64015.jpg",
+    "release_url": "https://www.themoviedb.org/movie/64015",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Chau tin dik tung wa (1987) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Antoine and Colette",
+    "fel_confirmed": true,
+    "release_date": "1962-06-22",
+    "studio": "Les Films du Carrosse",
+    "audio_formats": [
+      "LPCM Mono"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "256",
+    "imdb_id": "tt1180329",
+    "poster_path": "data/posters/256.jpg",
+    "release_url": "https://www.themoviedb.org/movie/256",
+    "bluray_url": "https://www.blu-ray.com/movies/Antoine-and-Colette-4K-Blu-ray/386352/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Antoine and Colette (1962) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Army of Shadows",
+    "fel_confirmed": true,
+    "release_date": "1969-09-10",
+    "studio": "Fono Roma",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "15383",
+    "imdb_id": "tt0064040",
+    "poster_path": "data/posters/15383.jpg",
+    "release_url": "https://www.themoviedb.org/movie/15383",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Army of Shadows (1969) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Black Cat, White Cat",
+    "fel_confirmed": true,
+    "release_date": "1998-06-01",
+    "studio": "CiBy 2000",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1075",
+    "imdb_id": "tt0118843",
+    "poster_path": "data/posters/1075.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1075",
+    "bluray_url": "https://www.blu-ray.com/movies/Black-Cat-White-Cat-4K-Blu-ray/329044/",
+    "bluray_release_date": "2023-04-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Serbian"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Black Cat, White Cat (1998) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "BlacKkKlansman AKA Black Klansman",
+    "fel_confirmed": true,
+    "release_date": "2018",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'BlacKkKlansman AKA Black Klansman [2018]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Blue Is the Warmest Color",
+    "fel_confirmed": true,
+    "release_date": "2013-10-09",
+    "studio": "Wild Bunch",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "152584",
+    "imdb_id": "tt2278871",
+    "poster_path": "data/posters/152584.jpg",
+    "release_url": "https://www.themoviedb.org/movie/152584",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Blue Is the Warmest Color (2013) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Breathless",
+    "fel_confirmed": true,
+    "release_date": "1960-03-16",
+    "studio": "Les Films Impéria",
+    "audio_formats": [
+      "LPCM Mono"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "269",
+    "imdb_id": "tt0053472",
+    "poster_path": "data/posters/269.jpg",
+    "release_url": "https://www.themoviedb.org/movie/269",
+    "bluray_url": "https://www.blu-ray.com/movies/Breathless-4K-Blu-ray/336554/",
+    "bluray_release_date": "2023-07-18",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Breathless (1960) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Bud Abbott and Lou Costello Meet the Invisible Man",
+    "fel_confirmed": true,
+    "release_date": "1951-03-14",
+    "studio": "Universal Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "33475",
+    "imdb_id": "tt0043255",
+    "poster_path": "data/posters/33475.jpg",
+    "release_url": "https://www.themoviedb.org/movie/33475",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Bud Abbott and Lou Costello Meet the Invisible Man (1951) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Busanhaeng AKA Train to Busan",
+    "fel_confirmed": true,
+    "release_date": "2016",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Busanhaeng AKA Train to Busan [2016]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Cabaret",
+    "fel_confirmed": true,
+    "release_date": "1986-04-26",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "357299",
+    "imdb_id": "tt0368629",
+    "poster_path": "data/posters/357299.jpg",
+    "release_url": "https://www.themoviedb.org/movie/357299",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Kyabarê (1986) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Chou tin dik tong wah AKA An Autumn’s Tale",
+    "fel_confirmed": true,
+    "release_date": "1987",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Chou tin dik tong wah AKA An Autumn’s Tale [1987]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Contempt",
+    "fel_confirmed": true,
+    "release_date": "1963-10-29",
+    "studio": "Rome-Paris Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "266",
+    "imdb_id": "tt0057345",
+    "poster_path": "data/posters/266.jpg",
+    "release_url": "https://www.themoviedb.org/movie/266",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Contempt (1963) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Crna mačka, beli mačor AKA Black Cat, White Cat",
+    "fel_confirmed": true,
+    "release_date": "1998",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Crna mačka, beli mačor AKA Black Cat, White Cat [1998]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "C’era una volta il West AKA Once Upon a Time in the West",
+    "fel_confirmed": true,
+    "release_date": "1968",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'C’era una volta il West AKA Once Upon a Time in the West [1968]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Daylight",
+    "fel_confirmed": true,
+    "release_date": "1996-12-06",
+    "studio": "Davis Entertainment",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
+    "source_label": "FEL.txt",
+    "tmdb_id": "11228",
+    "imdb_id": "tt0116040",
+    "poster_path": "data/posters/11228.jpg",
+    "release_url": "https://www.themoviedb.org/movie/11228",
+    "bluray_url": "https://www.blu-ray.com/movies/Daylight-4K-Blu-ray/372528/",
+    "bluray_release_date": "2025-03-11",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Daylight (1996) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Dead of Night",
+    "fel_confirmed": true,
+    "release_date": "1974-08-29",
+    "studio": "Impact Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "38996",
+    "imdb_id": "tt0068457",
+    "poster_path": "data/posters/38996.jpg",
+    "release_url": "https://www.themoviedb.org/movie/38996",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Dead of Night (1974) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Deathstalker II: Duel of the Titans",
+    "fel_confirmed": true,
+    "release_date": "1987-06-03",
+    "studio": "Aries Film International",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "28218",
+    "imdb_id": "tt0092860",
+    "poster_path": "data/posters/28218.jpg",
+    "release_url": "https://www.themoviedb.org/movie/28218",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Deathstalker II: Duel of the Titans (1987) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Der Hauptmann AKA The Captain",
+    "fel_confirmed": true,
+    "release_date": "2017",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Der Hauptmann AKA The Captain [2017]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Detective Story",
+    "fel_confirmed": true,
+    "release_date": "1983-07-16",
+    "studio": "Toei Company",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "292674",
+    "imdb_id": "tt0217080",
+    "poster_path": "data/posters/292674.jpg",
+    "release_url": "https://www.themoviedb.org/movie/292674",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Detective Story (1983) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Documenting the Grey Man",
+    "fel_confirmed": true,
+    "release_date": "2011-01-31",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "120881",
+    "imdb_id": "tt1808076",
+    "poster_path": "data/posters/120881.jpg",
+    "release_url": "https://www.themoviedb.org/movie/120881",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Documenting the Grey Man (2011) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Dog 51",
+    "fel_confirmed": true,
+    "release_date": "2025-10-15",
+    "studio": "Chi-Fou-Mi Productions",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1266798",
+    "imdb_id": "tt33255286",
+    "poster_path": "data/posters/1266798.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1266798",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Dog 51 (2025) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Dogtooth",
+    "fel_confirmed": true,
+    "release_date": "2009-10-22",
+    "studio": "Greek Film Centre",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "38810",
+    "imdb_id": "tt1379182",
+    "poster_path": "data/posters/38810.jpg",
+    "release_url": "https://www.themoviedb.org/movie/38810",
+    "bluray_url": "https://www.blu-ray.com/movies/Dogtooth-4K-Blu-ray/390485/",
+    "bluray_release_date": "2025-09-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Greek"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Dogtooth (2009) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Dragon Ball Super: Super Hero",
+    "fel_confirmed": true,
+    "release_date": "2022-06-11",
+    "studio": "Toei Animation",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "Dolby TrueHD/Atmos 5.1",
+      "Dolby TrueHD 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "610150",
+    "imdb_id": "tt14614892",
+    "poster_path": "data/posters/610150.jpg",
+    "release_url": "https://www.themoviedb.org/movie/610150",
+    "bluray_url": "https://www.blu-ray.com/movies/Dragon-Ball-Super-Super-Hero-4K-Blu-ray/343894/",
+    "bluray_release_date": "2023-11-21",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Japanese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Dragon Ball Super: Super Hero (2022) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Dragon Inn",
+    "fel_confirmed": true,
+    "release_date": "1967-11-23",
+    "studio": "Union Film Company",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "104237",
+    "imdb_id": "tt0060635",
+    "poster_path": "data/posters/104237.jpg",
+    "release_url": "https://www.themoviedb.org/movie/104237",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Long men ke zhen (1967) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Due occhi diabolici AKA Two Evil Eyes",
+    "fel_confirmed": true,
+    "release_date": "1990",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Due occhi diabolici AKA Two Evil Eyes [1990]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Escape from Mogadishu",
+    "fel_confirmed": true,
+    "release_date": "2021-07-28",
+    "studio": "Filmmaker R&K",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "607844",
+    "imdb_id": "tt14810692",
+    "poster_path": "data/posters/607844.jpg",
+    "release_url": "https://www.themoviedb.org/movie/607844",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Escape from Mogadishu (2021) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Eugenie",
+    "fel_confirmed": true,
+    "release_date": "1970-02-20",
+    "studio": "Video-Tel International Productions",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "87503",
+    "imdb_id": "tt0064494",
+    "poster_path": "data/posters/87503.jpg",
+    "release_url": "https://www.themoviedb.org/movie/87503",
+    "bluray_url": "https://www.blu-ray.com/movies/Eugenie-4K-Blu-ray/325794/",
+    "bluray_release_date": "2023-02-21",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Eugenie (1970) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Evil Dead II AKA Evil Dead 2: Dead by Dawn",
+    "fel_confirmed": true,
+    "release_date": "1987",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Evil Dead II AKA Evil Dead 2: Dead by Dawn [1987]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Expend4bles AKA The Expendables 4",
+    "fel_confirmed": true,
+    "release_date": "2023",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Expend4bles AKA The Expendables 4 [2023]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Film Bug I",
+    "fel_confirmed": true,
+    "release_date": "2006-06-07",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "552414",
+    "imdb_id": "",
+    "poster_path": "data/posters/552414.jpg",
+    "release_url": "https://www.themoviedb.org/movie/552414",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Film Bug I (2006) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "G.I. Samurai",
+    "fel_confirmed": true,
+    "release_date": "1979-09-17",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "73990",
+    "imdb_id": "tt0083050",
+    "poster_path": "data/posters/73990.jpg",
+    "release_url": "https://www.themoviedb.org/movie/73990",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "G.I. Samurai (1979) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Gamera 2: Attack of Legion",
+    "fel_confirmed": true,
+    "release_date": "1996-07-12",
+    "studio": "Tokuma International",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "59480",
+    "imdb_id": "tt0116390",
+    "poster_path": "data/posters/59480.jpg",
+    "release_url": "https://www.themoviedb.org/movie/59480",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Gamera 2: Attack of Legion (1996) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Gamera 3: Revenge of Iris",
+    "fel_confirmed": true,
+    "release_date": "1999-03-06",
+    "studio": "Daiei Film",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "60159",
+    "imdb_id": "tt0184503",
+    "poster_path": "data/posters/60159.jpg",
+    "release_url": "https://www.themoviedb.org/movie/60159",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Gamera 3: Revenge of Iris (1999) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Gamera: Guardian of the Universe",
+    "fel_confirmed": true,
+    "release_date": "1995-03-11",
+    "studio": "Nippon Television Network Corporation",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "54433",
+    "imdb_id": "tt0113142",
+    "poster_path": "data/posters/54433.jpg",
+    "release_url": "https://www.themoviedb.org/movie/54433",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Gamera: Guardian of the Universe (1995) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Goodbye Uncle Tom",
+    "fel_confirmed": true,
+    "release_date": "1971-09-23",
+    "studio": "Euro International Films",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "48691",
+    "imdb_id": "tt0180396",
+    "poster_path": "data/posters/48691.jpg",
+    "release_url": "https://www.themoviedb.org/movie/48691",
+    "bluray_url": "https://www.blu-ray.com/movies/Goodbye-Uncle-Tom-4K-Blu-ray/294307/",
+    "bluray_release_date": "2024-04-23",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10+"
+    ],
+    "audio_languages": [
+      "English",
+      "Italian"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Goodbye Uncle Tom (1971) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Hibiscus Town",
+    "fel_confirmed": true,
+    "release_date": "1987-03-05",
+    "studio": "Shanghai Film Studio",
+    "audio_formats": [
+      "LPCM Mono"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "122973",
+    "imdb_id": "tt0087301",
+    "poster_path": "data/posters/122973.jpg",
+    "release_url": "https://www.themoviedb.org/movie/122973",
+    "bluray_url": "https://www.blu-ray.com/movies/Hibiscus-Town-4K-Blu-ray/297845/",
+    "bluray_release_date": "2022-11-25",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Mandarin"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Fu Rong Zhen (1986) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "High Crime",
+    "fel_confirmed": true,
+    "release_date": "1973-08-12",
+    "studio": "Capitolina Produzioni Cinematografiche",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "87362",
+    "imdb_id": "tt0070552",
+    "poster_path": "data/posters/87362.jpg",
+    "release_url": "https://www.themoviedb.org/movie/87362",
+    "bluray_url": "https://www.blu-ray.com/movies/High-Crime-4K-Blu-ray/358734/",
+    "bluray_release_date": "2024-08-27",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10+"
+    ],
+    "audio_languages": [
+      "English",
+      "Italian"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "High Crime (1973) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Highlander",
+    "fel_confirmed": true,
+    "release_date": "1986-03-07",
+    "studio": "Davis-Panzer Productions",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "8009",
+    "imdb_id": "tt0091203",
+    "poster_path": "data/posters/8009.jpg",
+    "release_url": "https://www.themoviedb.org/movie/8009",
+    "bluray_url": "https://www.blu-ray.com/movies/Highlander-4K-Blu-ray/296191/",
+    "bluray_release_date": "2022-12-13",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Highlander (1986) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Ip Man",
+    "fel_confirmed": true,
+    "release_date": "2008-12-12",
+    "studio": "Mandarin Films",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1",
+      "DD 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "14756",
+    "imdb_id": "tt1220719",
+    "poster_path": "data/posters/14756.jpg",
+    "release_url": "https://www.themoviedb.org/movie/14756",
+    "bluray_url": "https://www.blu-ray.com/movies/Ip-Man-4K-Blu-ray/280168/",
+    "bluray_release_date": "2022-11-22",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English",
+      "Mandarin",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Yip Man (2008) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Ip Man 2",
+    "fel_confirmed": true,
+    "release_date": "2010-04-29",
+    "studio": "Mandarin Films",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "37472",
+    "imdb_id": "tt1386932",
+    "poster_path": "data/posters/37472.jpg",
+    "release_url": "https://www.themoviedb.org/movie/37472",
+    "bluray_url": "https://www.blu-ray.com/movies/Ip-Man-2-4K-Blu-ray/280167/",
+    "bluray_release_date": "2022-11-22",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English",
+      "Mandarin",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Ip Man 2 (2010) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Ip Man 3",
+    "fel_confirmed": true,
+    "release_date": "2015-12-24",
+    "studio": "Dreams Salon Entertainment Culture",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "365222",
+    "imdb_id": "tt2888046",
+    "poster_path": "data/posters/365222.jpg",
+    "release_url": "https://www.themoviedb.org/movie/365222",
+    "bluray_url": "https://www.blu-ray.com/movies/Ip-Man-3-4K-Blu-ray/325876/",
+    "bluray_release_date": "2022-12-06",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English",
+      "Spanish",
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Ip Man 3 (2015) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Ip Man 4: The Finale",
+    "fel_confirmed": true,
+    "release_date": "2019-12-19",
+    "studio": "Mandarin Films",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "449924",
+    "imdb_id": "tt2076298",
+    "poster_path": "data/posters/449924.jpg",
+    "release_url": "https://www.themoviedb.org/movie/449924",
+    "bluray_url": "https://www.blu-ray.com/movies/Ip-Man-4-The-Finale-4K-Blu-ray/260362/",
+    "bluray_release_date": "2020-04-21",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Ip Man 4: The Finale (2019) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Kaamelott: The First Chapter",
+    "fel_confirmed": true,
+    "release_date": "2021-07-21",
+    "studio": "SND",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "577242",
+    "imdb_id": "tt9844322",
+    "poster_path": "data/posters/577242.jpg",
+    "release_url": "https://www.themoviedb.org/movie/577242",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Kaamelott: The First Chapter (2021) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Kaamelott: The Second Chapter (Part I)",
+    "fel_confirmed": true,
+    "release_date": "2025-10-22",
+    "studio": "Regular Production",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1076897",
+    "imdb_id": "tt34624872",
+    "poster_path": "data/posters/1076897.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1076897",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Kaamelott: The Second Chapter (Part I) (2025) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Laid-Back Camp the Movie",
+    "fel_confirmed": true,
+    "release_date": "2022-07-01",
+    "studio": "C-Station",
+    "audio_formats": [
+      "Dolby TrueHD 7.1",
+      "LPCM 5.1"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "566466",
+    "imdb_id": "tt14364238",
+    "poster_path": "data/posters/566466.jpg",
+    "release_url": "https://www.themoviedb.org/movie/566466",
+    "bluray_url": "https://www.blu-ray.com/movies/Laid-Back-Camp-The-Movie-4K-Blu-ray/331943/",
+    "bluray_release_date": "2023-04-26",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Japanese"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Laid-Back Camp the Movie (2022) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Last Cannibal World",
+    "fel_confirmed": true,
+    "release_date": "1977-02-08",
+    "studio": "Erre Cinematograsica S.r.l.",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "30876",
+    "imdb_id": "tt0078437",
+    "poster_path": "data/posters/30876.jpg",
+    "release_url": "https://www.themoviedb.org/movie/30876",
+    "bluray_url": "https://www.blu-ray.com/movies/Last-Cannibal-World-4K-Blu-ray/385926/",
+    "bluray_release_date": "2025-06-24",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Last Cannibal World (1977) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Le Gendarme de Saint-Tropez",
+    "fel_confirmed": true,
+    "release_date": "1964-09-08",
+    "studio": "SNC",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "4727",
+    "imdb_id": "tt0058135",
+    "poster_path": "data/posters/4727.jpg",
+    "release_url": "https://www.themoviedb.org/movie/4727",
+    "bluray_url": "https://www.blu-ray.com/movies/Le-Gendarme-de-Saint-Tropez-4K-Blu-ray/317734/",
+    "bluray_release_date": "2022-07-13",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Le Gendarme de Saint-Tropez (1964) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Let Him Rest in Peace",
+    "fel_confirmed": true,
+    "release_date": "1985-06-14",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "226860",
+    "imdb_id": "tt0380761",
+    "poster_path": "data/posters/226860.jpg",
+    "release_url": "https://www.themoviedb.org/movie/226860",
+    "bluray_url": "https://www.blu-ray.com/movies/Let-Him-Rest-in-Peace-4K-Blu-ray/360534/",
+    "bluray_release_date": "2023-02-24",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Let Him Rest in Peace (1985) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Manhunt",
+    "fel_confirmed": true,
+    "release_date": "1976-02-11",
+    "studio": "Daiei Film",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "69846",
+    "imdb_id": "tt0327002",
+    "poster_path": "data/posters/69846.jpg",
+    "release_url": "https://www.themoviedb.org/movie/69846",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Manhunt (1976) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Ne Zha",
+    "fel_confirmed": true,
+    "release_date": "2019-07-26",
+    "studio": "Beijing Enlight Pictures",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "615453",
+    "imdb_id": "tt10627720",
+    "poster_path": "data/posters/615453.jpg",
+    "release_url": "https://www.themoviedb.org/movie/615453",
+    "bluray_url": "https://www.blu-ray.com/movies/Ne-Zha-4K-Blu-ray/254413/",
+    "bluray_release_date": "2020-03-03",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "Mandarin"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Ne Zha (2019) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Never Give Up",
+    "fel_confirmed": true,
+    "release_date": "1978-10-07",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "26868",
+    "imdb_id": "tt0326436",
+    "poster_path": "data/posters/26868.jpg",
+    "release_url": "https://www.themoviedb.org/movie/26868",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Never Give Up (1978) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Ninja Wars",
+    "fel_confirmed": true,
+    "release_date": "1982-12-18",
+    "studio": "Toei Company",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "52970",
+    "imdb_id": "tt0089691",
+    "poster_path": "data/posters/52970.jpg",
+    "release_url": "https://www.themoviedb.org/movie/52970",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Ninja Wars (1982) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Notre-Dame on Fire",
+    "fel_confirmed": true,
+    "release_date": "2022-03-16",
+    "studio": "Pathé",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "811596",
+    "imdb_id": "tt12264966",
+    "poster_path": "data/posters/811596.jpg",
+    "release_url": "https://www.themoviedb.org/movie/811596",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Notre-Dame on Fire (2022) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "November",
+    "fel_confirmed": true,
+    "release_date": "2022-10-05",
+    "studio": "Chi-Fou-Mi Productions",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "823951",
+    "imdb_id": "tt14542254",
+    "poster_path": "data/posters/823951.jpg",
+    "release_url": "https://www.themoviedb.org/movie/823951",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "November (2022) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Once a Thief",
+    "fel_confirmed": true,
+    "release_date": "1991-02-02",
+    "studio": "Golden Princess Film Productions",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "47423",
+    "imdb_id": "tt0101020",
+    "poster_path": "data/posters/47423.jpg",
+    "release_url": "https://www.themoviedb.org/movie/47423",
+    "bluray_url": "https://www.blu-ray.com/movies/Once-a-Thief-4K-Blu-ray/400265/",
+    "bluray_release_date": "2026-01-27",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Once a Thief (1991) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Our Little Sister",
+    "fel_confirmed": true,
+    "release_date": "2015-06-13",
+    "studio": "Shogakukan",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "315846",
+    "imdb_id": "tt3756788",
+    "poster_path": "data/posters/315846.jpg",
+    "release_url": "https://www.themoviedb.org/movie/315846",
+    "bluray_url": "https://www.blu-ray.com/movies/Our-Little-Sister-4K-Blu-ray/365947/",
+    "bluray_release_date": "2024-08-21",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10+"
+    ],
+    "audio_languages": [
+      "Japanese"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Our Little Sister (2015) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Peking Opera Blues",
+    "fel_confirmed": true,
+    "release_date": "1986-09-06",
+    "studio": "Film Workshop",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "39776",
+    "imdb_id": "tt0090952",
+    "poster_path": "data/posters/39776.jpg",
+    "release_url": "https://www.themoviedb.org/movie/39776",
+    "bluray_url": "https://www.blu-ray.com/movies/Peking-Opera-Blues-4K-Blu-ray/387361/",
+    "bluray_release_date": "2025-09-23",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Peking Opera Blues (1986) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Peninsula",
+    "fel_confirmed": true,
+    "release_date": "2020-07-15",
+    "studio": "Next Entertainment World",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "581392",
+    "imdb_id": "tt8850222",
+    "poster_path": "data/posters/581392.jpg",
+    "release_url": "https://www.themoviedb.org/movie/581392",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Peninsula (2020) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Port of Shadows",
+    "fel_confirmed": true,
+    "release_date": "1938-05-17",
+    "studio": "Ciné-Alliance",
+    "audio_formats": [
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "46326",
+    "imdb_id": "tt0030643",
+    "poster_path": "data/posters/46326.jpg",
+    "release_url": "https://www.themoviedb.org/movie/46326",
+    "bluray_url": "https://www.blu-ray.com/movies/Port-of-Shadows-4K-Blu-ray/402158/",
+    "bluray_release_date": "2026-03-17",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Port of Shadows (1938) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Prison on Fire",
+    "fel_confirmed": true,
+    "release_date": "1987-11-13",
+    "studio": "Cinema City Company Limited",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "53653",
+    "imdb_id": "tt0093304",
+    "poster_path": "data/posters/53653.jpg",
+    "release_url": "https://www.themoviedb.org/movie/53653",
+    "bluray_url": "https://www.blu-ray.com/movies/Prison-on-Fire-4K-Blu-ray/401961/",
+    "bluray_release_date": "2026-02-24",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Gaam yuk fung wan (1987) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Prison on Fire II",
+    "fel_confirmed": true,
+    "release_date": "1991-06-22",
+    "studio": "Golden Princess Film Productions",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "56251",
+    "imdb_id": "tt0103044",
+    "poster_path": "data/posters/56251.jpg",
+    "release_url": "https://www.themoviedb.org/movie/56251",
+    "bluray_url": "https://www.blu-ray.com/movies/Prison-on-Fire-II-4K-Blu-ray/401962/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Jian yu feng yun II: Tao fan (1991) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Proof of the Man",
+    "fel_confirmed": true,
+    "release_date": "1977-10-08",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "287765",
+    "imdb_id": "tt0076460",
+    "poster_path": "data/posters/287765.jpg",
+    "release_url": "https://www.themoviedb.org/movie/287765",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Proof of the Man (1977) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Quiet Days in Clichy",
+    "fel_confirmed": true,
+    "release_date": "1970-06-01",
+    "studio": "SBA",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "62759",
+    "imdb_id": "tt0066407",
+    "poster_path": "data/posters/62759.jpg",
+    "release_url": "https://www.themoviedb.org/movie/62759",
+    "bluray_url": "https://www.blu-ray.com/movies/Quiet-Days-in-Clichy-4K-Blu-ray/318039/",
+    "bluray_release_date": "2022-10-25",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Quiet Days in Clichy (1970) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Read My Lips",
+    "fel_confirmed": true,
+    "release_date": "2001-10-17",
+    "studio": "Ciné B",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "6173",
+    "imdb_id": "tt0274117",
+    "poster_path": "data/posters/6173.jpg",
+    "release_url": "https://www.themoviedb.org/movie/6173",
+    "bluray_url": "https://www.blu-ray.com/movies/Read-My-Lips-4K-Blu-ray/390419/",
+    "bluray_release_date": "2025-09-23",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Read My Lips (2001) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Ride On",
+    "fel_confirmed": true,
+    "release_date": "2023-04-07",
+    "studio": "Alibaba Pictures Group",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "931102",
+    "imdb_id": "tt15430628",
+    "poster_path": "data/posters/931102.jpg",
+    "release_url": "https://www.themoviedb.org/movie/931102",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Ride On (2023) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Secrets of the Heavenly Book",
+    "fel_confirmed": true,
+    "release_date": "1983-01-01",
+    "studio": "Shanghai Animation Film Studio",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "134575",
+    "imdb_id": "tt6035092",
+    "poster_path": "data/posters/134575.jpg",
+    "release_url": "https://www.themoviedb.org/movie/134575",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Secrets of the Heavenly Book (1983) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Shadow Girl",
+    "fel_confirmed": true,
+    "release_date": "1971-09-10",
+    "studio": "Shaw Brothers",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "187050",
+    "imdb_id": "tt0200297",
+    "poster_path": "data/posters/187050.jpg",
+    "release_url": "https://www.themoviedb.org/movie/187050",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Shadow Girl (1971) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Shaolin Temple",
+    "fel_confirmed": true,
+    "release_date": "1982-01-21",
+    "studio": "Chung Yuen Motion Picture Co.",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "10275",
+    "imdb_id": "tt0079891",
+    "poster_path": "data/posters/10275.jpg",
+    "release_url": "https://www.themoviedb.org/movie/10275",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Shaolin Temple (1982) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Shin Kamen Rider",
+    "fel_confirmed": true,
+    "release_date": "2023-03-17",
+    "studio": "khara",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "813477",
+    "imdb_id": "tt14379088",
+    "poster_path": "data/posters/813477.jpg",
+    "release_url": "https://www.themoviedb.org/movie/813477",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Shin Kamen Rider (2023) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Stolen Kisses",
+    "fel_confirmed": true,
+    "release_date": "1968-09-04",
+    "studio": "Les Films du Carrosse",
+    "audio_formats": [
+      "LPCM Mono"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "255",
+    "imdb_id": "tt0062695",
+    "poster_path": "data/posters/255.jpg",
+    "release_url": "https://www.themoviedb.org/movie/255",
+    "bluray_url": "https://www.blu-ray.com/movies/Stolen-Kisses-4K-Blu-ray/386353/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Stolen Kisses (1968) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Suddenly in the Dark",
+    "fel_confirmed": true,
+    "release_date": "1981-07-17",
+    "studio": "Nam-a Pictures",
+    "audio_formats": [
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "124310",
+    "imdb_id": "tt0301345",
+    "poster_path": "data/posters/124310.jpg",
+    "release_url": "https://www.themoviedb.org/movie/124310",
+    "bluray_url": "https://www.blu-ray.com/movies/Suddenly-in-the-Dark-4K-Blu-ray/380730/",
+    "bluray_release_date": "2025-08-05",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Korean"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Suddenly in the Dark (1981) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Swordsman",
+    "fel_confirmed": true,
+    "release_date": "1990-04-05",
+    "studio": "Film Workshop",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "18860",
+    "imdb_id": "tt0100973",
+    "poster_path": "data/posters/18860.jpg",
+    "release_url": "https://www.themoviedb.org/movie/18860",
+    "bluray_url": "https://www.blu-ray.com/movies/Swordsman-4K-Blu-ray/404152/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Swordsman (1990) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Animal Kingdom",
+    "fel_confirmed": true,
+    "release_date": "2023-10-04",
+    "studio": "StudioCanal",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "943134",
+    "imdb_id": "tt16606592",
+    "poster_path": "data/posters/943134.jpg",
+    "release_url": "https://www.themoviedb.org/movie/943134",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Animal Kingdom (2023) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Beast to Die",
+    "fel_confirmed": true,
+    "release_date": "1980-10-04",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "43964",
+    "imdb_id": "tt0314913",
+    "poster_path": "data/posters/43964.jpg",
+    "release_url": "https://www.themoviedb.org/movie/43964",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Beast to Die (1980) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Big Blue",
+    "fel_confirmed": true,
+    "release_date": "1988-02-13",
+    "studio": "ZDF",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "657524",
+    "imdb_id": "tt0094738",
+    "poster_path": "data/posters/657524.jpg",
+    "release_url": "https://www.themoviedb.org/movie/657524",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Big-Blue-4K-Blu-ray/396852/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Big Blue (1988) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Count of Monte Cristo",
+    "fel_confirmed": true,
+    "release_date": "2024-06-28",
+    "studio": "Chapter 2",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1084736",
+    "imdb_id": "tt26446278",
+    "poster_path": "data/posters/1084736.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1084736",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Count-of-Monte-Cristo-4K-Blu-ray/399451/",
+    "bluray_release_date": "2025-11-11",
+    "hdr_formats": [],
+    "audio_languages": [
+      "French",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Count of Monte Cristo (2024) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Crimson Rivers",
+    "fel_confirmed": true,
+    "release_date": "2000-09-27",
+    "studio": "Gaumont",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "60670",
+    "imdb_id": "tt0228786",
+    "poster_path": "data/posters/60670.jpg",
+    "release_url": "https://www.themoviedb.org/movie/60670",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Crimson Rivers (2000) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Croods: A New Age AKA The Croods 2",
+    "fel_confirmed": true,
+    "release_date": "2020",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "codex-ai",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'The Croods: A New Age AKA The Croods 2 [2020]'.",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:53:14+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Double Life of Véronique",
+    "fel_confirmed": true,
+    "release_date": "1991-05-15",
+    "studio": "Sidéral Productions",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1600",
+    "imdb_id": "tt0101765",
+    "poster_path": "data/posters/1600.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1600",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Double Life of Véronique (1991) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Emperor's New Groove",
+    "fel_confirmed": true,
+    "release_date": "2000-12-15",
+    "studio": "Walt Disney Feature Animation",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://www.blu-ray.com/movies/Rabid-4K-Blu-ray/397990/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "11688",
+    "imdb_id": "tt0120917",
+    "poster_path": "data/posters/11688.jpg",
+    "release_url": "https://www.themoviedb.org/movie/11688",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Emperor's New Groove (2000) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Fantastic 4: First Steps",
+    "fel_confirmed": true,
+    "release_date": "2025-07-23",
+    "studio": "Marvel Studios",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "617126",
+    "imdb_id": "tt10676052",
+    "poster_path": "data/posters/617126.jpg",
+    "release_url": "https://www.themoviedb.org/movie/617126",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Fantastic 4: First Steps (2025) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The French Dispatch of the Liberty, Kansas Evening Sun",
+    "fel_confirmed": true,
+    "release_date": "2021-10-21",
+    "studio": "Indian Paintbrush",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "542178",
+    "imdb_id": "tt8847712",
+    "poster_path": "data/posters/542178.jpg",
+    "release_url": "https://www.themoviedb.org/movie/542178",
+    "bluray_url": "https://www.blu-ray.com/movies/The-French-Dispatch-of-the-Liberty-Kansas-Evening-Sun-4K-Blu-ray/389100/",
+    "bluray_release_date": "2025-09-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The French Dispatch of the Liberty, Kansas Evening Sun (2021) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Funhouse",
+    "fel_confirmed": true,
+    "release_date": "1981-03-13",
+    "studio": "Mace Neufeld Productions",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://www.blu-ray.com/movies/Rabid-4K-Blu-ray/397990/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "13555",
+    "imdb_id": "tt0082427",
+    "poster_path": "data/posters/13555.jpg",
+    "release_url": "https://www.themoviedb.org/movie/13555",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Funhouse-4K-Blu-ray/314644/",
+    "bluray_release_date": "2022-09-06",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Funhouse (1981) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Girl from Rio",
+    "fel_confirmed": true,
+    "release_date": "1969-03-14",
+    "studio": "Terra-Filmkunst",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "42620",
+    "imdb_id": "tt0062808",
+    "poster_path": "data/posters/42620.jpg",
+    "release_url": "https://www.themoviedb.org/movie/42620",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Girl-from-Rio-4K-Blu-ray/328632/",
+    "bluray_release_date": "2023-09-26",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Girl from Rio (1969) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Killer",
+    "fel_confirmed": true,
+    "release_date": "1989-03-24",
+    "studio": "Film Workshop",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "10835",
+    "imdb_id": "tt0097202",
+    "poster_path": "data/posters/10835.jpg",
+    "release_url": "https://www.themoviedb.org/movie/10835",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Killer-4K-Blu-ray/379720/",
+    "bluray_release_date": "2025-12-02",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Killer (1989) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Last Hero",
+    "fel_confirmed": true,
+    "release_date": "1982-12-18",
+    "studio": "Toei Company",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "547151",
+    "imdb_id": "tt0165232",
+    "poster_path": "data/posters/547151.jpg",
+    "release_url": "https://www.themoviedb.org/movie/547151",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Last Hero (1982) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Magnificent One",
+    "fel_confirmed": true,
+    "release_date": "1973-11-23",
+    "studio": "Mondex Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "19562",
+    "imdb_id": "tt0070354",
+    "poster_path": "data/posters/19562.jpg",
+    "release_url": "https://www.themoviedb.org/movie/19562",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Magnificent One (1973) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Man from Nowhere",
+    "fel_confirmed": true,
+    "release_date": "2010-08-04",
+    "studio": "Opus Pictures",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "51608",
+    "imdb_id": "tt1527788",
+    "poster_path": "data/posters/51608.jpg",
+    "release_url": "https://www.themoviedb.org/movie/51608",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Man-from-Nowhere-4K-Blu-ray/347621/",
+    "bluray_release_date": "2023-12-12",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Korean",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Man from Nowhere (2010) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Prosecutor",
+    "fel_confirmed": true,
+    "release_date": "2024-12-08",
+    "studio": "Mandarin Motion Pictures",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1128650",
+    "imdb_id": "tt30024043",
+    "poster_path": "data/posters/1128650.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1128650",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Prosecutor-4K-Blu-ray/384202/",
+    "bluray_release_date": "2025-05-27",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Prosecutor (2024) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Resurrection of the Golden Wolf",
+    "fel_confirmed": true,
+    "release_date": "1979-08-04",
+    "studio": "KADOKAWA",
+    "audio_formats": [
+      "LPCM 4.0",
+      "LPCM 2.0 Mono",
+      "Dolby Atmos"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "43963",
+    "imdb_id": "tt0080159",
+    "poster_path": "data/posters/43963.jpg",
+    "release_url": "https://www.themoviedb.org/movie/43963",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Resurrection-of-the-Golden-Wolf-4K-Blu-ray/324680/",
+    "bluray_release_date": "2022-12-23",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Japanese"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Yomigaeru kinrô (1979) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Stranger",
+    "fel_confirmed": true,
+    "release_date": "2016-09-23",
+    "studio": "Carroña Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1413713",
+    "imdb_id": "tt13950614",
+    "poster_path": "data/posters/1413713.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1413713",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Stranger (2016) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Three Musketeers: D'Artagnan",
+    "fel_confirmed": true,
+    "release_date": "2023-04-05",
+    "studio": "Pathé",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "796185",
+    "imdb_id": "tt12672536",
+    "poster_path": "data/posters/796185.jpg",
+    "release_url": "https://www.themoviedb.org/movie/796185",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Three Musketeers: D'Artagnan (2023) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Three Musketeers: Milady",
+    "fel_confirmed": true,
+    "release_date": "2023-12-13",
+    "studio": "Pathé",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "845111",
+    "imdb_id": "tt12672620",
+    "poster_path": "data/posters/845111.jpg",
+    "release_url": "https://www.themoviedb.org/movie/845111",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Three Musketeers: Milady (2023) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Trial",
+    "fel_confirmed": true,
+    "release_date": "1962-08-25",
+    "studio": "Hisa-Film",
+    "audio_formats": [
+      "LPCM Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "3009",
+    "imdb_id": "tt0057427",
+    "poster_path": "data/posters/3009.jpg",
+    "release_url": "https://www.themoviedb.org/movie/3009",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Trial-4K-Blu-ray/340039/",
+    "bluray_release_date": "2023-09-19",
+    "hdr_formats": [],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The Trial (1962) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "The Witch",
+    "fel_confirmed": true,
+    "release_date": "2016-02-19",
+    "studio": "Very Special Projects",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "310131",
+    "imdb_id": "tt4263482",
+    "poster_path": "data/posters/310131.jpg",
+    "release_url": "https://www.themoviedb.org/movie/310131",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Witch-4K-Blu-ray/231318/",
+    "bluray_release_date": "2019-04-23",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "The VVitch (2015) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Three Colors: Blue",
+    "fel_confirmed": true,
+    "release_date": "1993-09-08",
+    "studio": "MK2 Films",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "108",
+    "imdb_id": "tt0108394",
+    "poster_path": "data/posters/108.jpg",
+    "release_url": "https://www.themoviedb.org/movie/108",
+    "bluray_url": "https://www.blu-ray.com/movies/Three-Colors-Blue-4K-Blu-ray/327469/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Three Colors: Blue (1993) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Three Colors: Red",
+    "fel_confirmed": true,
+    "release_date": "1994-05-12",
+    "studio": "MK2 Films",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "110",
+    "imdb_id": "tt0111495",
+    "poster_path": "data/posters/110.jpg",
+    "release_url": "https://www.themoviedb.org/movie/110",
+    "bluray_url": "https://www.blu-ray.com/movies/Three-Colors-Red-4K-Blu-ray/327471/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Three Colors: Red (1994) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Three Colors: White",
+    "fel_confirmed": true,
+    "release_date": "1994-01-26",
+    "studio": "MK2 Films",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "109",
+    "imdb_id": "tt0111507",
+    "poster_path": "data/posters/109.jpg",
+    "release_url": "https://www.themoviedb.org/movie/109",
+    "bluray_url": "https://www.blu-ray.com/movies/Three-Colors-White-4K-Blu-ray/327470/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Three Colors: White (1994) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Throw Down",
+    "fel_confirmed": true,
+    "release_date": "2004-07-08",
+    "studio": "Milkyway Image",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "25664",
+    "imdb_id": "tt0415380",
+    "poster_path": "data/posters/25664.jpg",
+    "release_url": "https://www.themoviedb.org/movie/25664",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Throw Down (2004) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Train to Busan",
+    "fel_confirmed": true,
+    "release_date": "2016-07-20",
+    "studio": "Next Entertainment World",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "FEL.txt",
+    "tmdb_id": "396535",
+    "imdb_id": "tt5700672",
+    "poster_path": "data/posters/396535.jpg",
+    "release_url": "https://www.themoviedb.org/movie/396535",
+    "bluray_url": "https://www.blu-ray.com/movies/Train-to-Busan-4K-Blu-ray/325001/",
+    "bluray_release_date": "2022-11-29",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Korean",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Train to Busan (2016) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Tune in for Love",
+    "fel_confirmed": true,
+    "release_date": "2019-08-28",
+    "studio": "Jung Ji-woo Film",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "570503",
+    "imdb_id": "tt10763618",
+    "poster_path": "data/posters/570503.jpg",
+    "release_url": "https://www.themoviedb.org/movie/570503",
+    "bluray_url": "https://www.blu-ray.com/movies/Tune-in-for-Love-4K-Blu-ray/376311/",
+    "bluray_release_date": "2025-01-17",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10+"
+    ],
+    "audio_languages": [
+      "Korean"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Yuyeolui eumagaelbeom (2019) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Twilight of the Warriors: Walled In",
+    "fel_confirmed": true,
+    "release_date": "2024-05-01",
+    "studio": "Entertaining Power",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS:X 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "923667",
+    "imdb_id": "tt20316748",
+    "poster_path": "data/posters/923667.jpg",
+    "release_url": "https://www.themoviedb.org/movie/923667",
+    "bluray_url": "https://www.blu-ray.com/movies/Twilight-of-the-Warriors-Walled-In-4K-Blu-ray/367831/",
+    "bluray_release_date": "2024-11-19",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Twilight of the Warriors: Walled In (2024) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Two Stage Sisters",
+    "fel_confirmed": true,
+    "release_date": "1964-02-07",
+    "studio": "Tianma Film Studio 天马电影制片厂",
+    "audio_formats": [
+      "LPCM Mono"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "154633",
+    "imdb_id": "tt0081553",
+    "poster_path": "data/posters/154633.jpg",
+    "release_url": "https://www.themoviedb.org/movie/154633",
+    "bluray_url": "https://www.blu-ray.com/movies/Two-Stage-Sisters-4K-Blu-ray/307086/",
+    "bluray_release_date": "2023-03-31",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Mandarin"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Two Stage Sisters (1964) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Violet Evergarden: The Movie",
+    "fel_confirmed": true,
+    "release_date": "2020-09-18",
+    "studio": "Kyoto Animation",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "533514",
+    "imdb_id": "tt8652818",
+    "poster_path": "data/posters/533514.jpg",
+    "release_url": "https://www.themoviedb.org/movie/533514",
+    "bluray_url": "https://www.blu-ray.com/movies/Violet-Evergarden-The-Movie-4K-Blu-ray/333126/",
+    "bluray_release_date": "2023-05-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Japanese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Violet Evergarden: The Movie (2020) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "Warfare",
+    "fel_confirmed": true,
+    "release_date": "2025-04-09",
+    "studio": "DNA Films",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1241436",
+    "imdb_id": "tt31434639",
+    "poster_path": "data/posters/1241436.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1241436",
+    "bluray_url": "https://www.blu-ray.com/movies/Warfare-4K-Blu-ray/386223/",
+    "bluray_release_date": "2025-07-01",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "Warfare (2025) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "We The Surfers",
+    "fel_confirmed": true,
+    "release_date": "2024-08-29",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
+    "tmdb_id": "1430855",
+    "imdb_id": "tt34953193",
+    "poster_path": "data/posters/1430855.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1430855",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "FEL.txt (curated Profile 7 FEL list)",
+      "quote": "We The Surfers (2024) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
   }
 ]
