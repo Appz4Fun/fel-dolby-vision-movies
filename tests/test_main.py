@@ -953,7 +953,7 @@ def test_run_migration_merges_files_and_writes_report(tmp_path, monkeypatch):
 
     def fake_enrich(releases):
         for release in releases:
-            release.tmdb_id = "999"
+            release.tmdb_id = "100" if release.movie_title == "Drop" else "101"
 
     monkeypatch.setattr(main, "_enrich_if_possible", fake_enrich)
 
@@ -971,7 +971,7 @@ def test_run_migration_merges_files_and_writes_report(tmp_path, monkeypatch):
 
     rows = list(_csv.DictReader((tmp_path / "data/migration_report.csv").open()))
     assert {row["input_title"] for row in rows} == {"Drop", "Apocalypse Now"}
-    assert all(row["tmdb_id"] == "999" for row in rows)
+    assert {row["tmdb_id"] for row in rows} == {"100", "101"}
 
 
 def test_run_migration_report_marks_unresolved_titles(tmp_path, monkeypatch):

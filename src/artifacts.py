@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from merge import canonical_key, dedupe_releases
+from merge import canonical_key, dedupe_releases, tmdb_key
 from models import UNKNOWN, FelRelease, release_from_dict
 
 
@@ -41,6 +41,7 @@ def write_artifacts(
         ]
 
     merged = dedupe_releases([*existing, *releases], canonical_key)
+    merged = dedupe_releases(merged, tmdb_key)
     sorted_releases = sorted(merged, key=_sort_key)
 
     data_dir.mkdir(parents=True, exist_ok=True)
@@ -75,8 +76,8 @@ def _render_readme(releases: list[FelRelease]) -> str:
         "Confirmed Dolby Vision Profile 7 FEL physical media releases.",
         "",
         "| Movie | Poster | FEL | Release Date | Studio | Audio | "
-        "English Audio | Additional | Source | TMDB |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "English Audio | HDR | Additional | Source | TMDB | Blu-ray |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for release in releases:
         poster = (
@@ -96,9 +97,11 @@ def _render_readme(releases: list[FelRelease]) -> str:
                     release.studio,
                     ", ".join(release.audio_formats) or UNKNOWN,
                     release.english_audio,
+                    ", ".join(release.hdr_formats) or UNKNOWN,
                     _render_additional(release.additional_characteristics),
                     f"[source]({release.source_url})",
                     tmdb,
+                    (f"[blu-ray]({release.bluray_url})" if release.bluray_url else ""),
                 ]
             )
             + " |"
