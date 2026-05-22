@@ -83,6 +83,30 @@ def test_write_artifacts_renders_poster_and_tmdb_columns(tmp_path: Path):
     assert "[TMDB](https://www.themoviedb.org/movie/111)" in readme
 
 
+def test_write_artifacts_dedupes_by_tmdb_id(tmp_path: Path):
+    first = release("Spelling One", "2021")
+    first.tmdb_id = "777"
+    second = release("Spelling Two", "2021")
+    second.tmdb_id = "777"
+
+    write_artifacts([first, second], output_dir=tmp_path)
+
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    assert sum(1 for item in data if item["tmdb_id"] == "777") == 1
+
+
+def test_readme_has_hdr_and_bluray_columns(tmp_path: Path):
+    item = release("Enriched", "2024")
+    item.hdr_formats = ["Dolby Vision", "HDR10"]
+    item.bluray_url = "https://www.blu-ray.com/movies/Enriched-4K-Blu-ray/9/"
+
+    write_artifacts([item], output_dir=tmp_path)
+
+    readme = (tmp_path / "README.md").read_text(encoding="utf-8")
+    assert "Dolby Vision, HDR10" in readme
+    assert "[blu-ray](https://www.blu-ray.com/movies/Enriched-4K-Blu-ray/9/)" in readme
+
+
 def test_links_contains_only_unique_source_urls(tmp_path: Path):
     write_artifacts([release("A", "2020"), release("A", "2020")], output_dir=tmp_path)
 

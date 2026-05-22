@@ -98,6 +98,14 @@ def merge_releases(base: FelRelease, other: FelRelease) -> FelRelease:
         imdb_id=base.imdb_id or other.imdb_id,
         poster_path=base.poster_path or other.poster_path,
         release_url=base.release_url or other.release_url,
+        bluray_url=base.bluray_url or other.bluray_url,
+        bluray_release_date=_prefer_date(
+            base.bluray_release_date, other.bluray_release_date
+        ),
+        hdr_formats=list(dict.fromkeys([*base.hdr_formats, *other.hdr_formats])),
+        audio_languages=list(
+            dict.fromkeys([*base.audio_languages, *other.audio_languages])
+        ),
     )
 
 

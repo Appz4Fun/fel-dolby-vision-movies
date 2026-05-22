@@ -42,6 +42,22 @@ def test_merge_releases_unions_fields_and_prefers_known_values():
     assert merged.tmdb_id == "438631"
 
 
+def test_merge_releases_preserves_bluray_enrichment_fields():
+    base = make("Dune", "2021")
+    enriched = make("Dune", "2021")
+    enriched.bluray_url = "https://www.blu-ray.com/movies/Dune-4K-Blu-ray/1/"
+    enriched.bluray_release_date = "2022-01-11"
+    enriched.hdr_formats = ["Dolby Vision", "HDR10"]
+    enriched.audio_languages = ["English", "French"]
+
+    merged = merge_releases(base, enriched)
+
+    assert merged.bluray_url.endswith("/1/")
+    assert merged.bluray_release_date == "2022-01-11"
+    assert merged.hdr_formats == ["Dolby Vision", "HDR10"]
+    assert merged.audio_languages == ["English", "French"]
+
+
 def test_dedupe_releases_merges_same_canonical_key():
     releases = [
         make("Sicario", "2015"),
