@@ -68,46 +68,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Beating Hearts",
-    "fel_confirmed": true,
-    "release_date": "2024-10-16",
-    "studio": "Trésor Films",
-    "audio_formats": [
-      "DTS-HD MA 2.0",
-      "Dolby Atmos"
-    ],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "959604",
-    "imdb_id": "tt27490099",
-    "poster_path": "data/posters/959604.jpg",
-    "release_url": "https://www.themoviedb.org/movie/959604",
-    "bluray_url": "https://www.blu-ray.com/movies/Beating-Hearts-4K-Blu-ray/375041/",
-    "bluray_release_date": "2025-02-19",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
-      "quote": "Beating Hearts (2024) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Inside Out 2",
     "fel_confirmed": true,
     "release_date": "2024-06-11",
@@ -177,211 +137,6 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Kingdom of the Planet of the Apes (2024) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Bob Marley: One Love",
-    "fel_confirmed": true,
-    "release_date": "2024-02-14",
-    "studio": "Paramount Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-    "source_label": "FEL.txt",
-    "tmdb_id": "802219",
-    "imdb_id": "tt8521778",
-    "poster_path": "data/posters/802219.jpg",
-    "release_url": "https://www.themoviedb.org/movie/802219",
-    "bluray_url": "https://www.blu-ray.com/movies/Bob-Marley-One-Love-4K-Blu-ray/355433/",
-    "bluray_release_date": "2024-05-28",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "German",
-      "Spanish",
-      "French (Canada)"
-    ],
-    "fel_evidence": {
-      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Bob Marley: One Love [2024]'.",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "The Beekeeper",
-    "fel_confirmed": true,
-    "release_date": "2024-01-08",
-    "studio": "Miramax",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-    "source_label": "FEL.txt",
-    "tmdb_id": "866398",
-    "imdb_id": "tt15314262",
-    "poster_path": "data/posters/866398.jpg",
-    "release_url": "https://www.themoviedb.org/movie/866398",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Beekeeper-4K-Blu-ray/354572/",
-    "bluray_release_date": "2024-04-23",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'The Beekeeper [2024]'.",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Ferrari",
-    "fel_confirmed": true,
-    "release_date": "2023-12-14",
-    "studio": "STXfilms",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=43",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-    "source_label": "FEL.txt",
-    "tmdb_id": "365620",
-    "imdb_id": "tt3758542",
-    "poster_path": "data/posters/365620.jpg",
-    "release_url": "https://www.themoviedb.org/movie/365620",
-    "bluray_url": "https://www.blu-ray.com/movies/Ferrari-4K-Blu-ray/352764/",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Ferrari [2023]'.",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Perfect Days",
-    "fel_confirmed": true,
-    "release_date": "2023-11-10",
-    "studio": "Master Mind",
-    "audio_formats": [
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "976893",
-    "imdb_id": "tt27503384",
-    "poster_path": "data/posters/976893.jpg",
-    "release_url": "https://www.themoviedb.org/movie/976893",
-    "bluray_url": "https://www.blu-ray.com/movies/Perfect-Days-4K-Blu-ray/359328/",
-    "bluray_release_date": "2024-07-16",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "Japanese"
-    ],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Perfect Days (2023) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Haunted Mansion",
-    "fel_confirmed": true,
-    "release_date": "2023-07-26",
-    "studio": "Walt Disney Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1",
-      "DD+ 7.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "FEL.txt",
-    "tmdb_id": "616747",
-    "imdb_id": "tt1695843",
-    "poster_path": "data/posters/616747.jpg",
-    "release_url": "https://www.themoviedb.org/movie/616747",
-    "bluray_url": "https://www.blu-ray.com/movies/Haunted-Mansion-4K-Blu-ray/345719/",
-    "bluray_release_date": "2023-10-17",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Haunted Mansion (2023) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -538,45 +293,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Cocaine Bear",
-    "fel_confirmed": true,
-    "release_date": "2023-02-22",
-    "studio": "Universal Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=360081&page=2",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=360081&page=2",
-    "source_label": "FEL.txt",
-    "tmdb_id": "804150",
-    "imdb_id": "tt14209916",
-    "poster_path": "data/posters/804150.jpg",
-    "release_url": "https://www.themoviedb.org/movie/804150",
-    "bluray_url": "https://www.blu-ray.com/movies/Cocaine-Bear-4K-Blu-ray/343643/",
-    "bluray_release_date": "2023-09-19",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=360081&page=2",
-      "quote": "Cocaine Bear (2023) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Ant-Man and the Wasp: Quantumania",
     "fel_confirmed": true,
     "release_date": "2023-02-15",
@@ -647,56 +363,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Avatar: The Way of Water",
-    "fel_confirmed": true,
-    "release_date": "2022-12-14",
-    "studio": "20th Century Studios",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 2.0",
-      "DD 5.1",
-      "DD+ 7.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=22",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=24",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
-        "https://github.com/iammarxg/FEL",
-        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-    "source_label": "FEL.txt",
-    "tmdb_id": "76600",
-    "imdb_id": "tt1630029",
-    "poster_path": "data/posters/76600.jpg",
-    "release_url": "https://www.themoviedb.org/movie/76600",
-    "bluray_url": "https://www.blu-ray.com/movies/Avatar-The-Way-of-Water-4K-Blu-ray/316453/",
-    "bluray_release_date": "2023-06-20",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish",
-      "Japanese",
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Avatar: The Way of Water [2022]'.",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
@@ -841,47 +507,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "The 355",
-    "fel_confirmed": true,
-    "release_date": "2022-01-05",
-    "studio": "Freckle Films",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-    "source_label": "FEL.txt",
-    "tmdb_id": "522016",
-    "imdb_id": "tt8356942",
-    "poster_path": "data/posters/522016.jpg",
-    "release_url": "https://www.themoviedb.org/movie/522016",
-    "bluray_url": "https://www.blu-ray.com/movies/The-355-4K-Blu-ray/352652/",
-    "bluray_release_date": "2024-03-05",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'The 355 [2022]'.",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
@@ -1805,57 +1430,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Parasite",
-    "fel_confirmed": true,
-    "release_date": "2019-05-30",
-    "studio": "Barunson E&A",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "6.26",
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=146",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=154",
-        "https://forum.blu-ray.com/showthread.php?t=327042",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=17",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=49"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "496243",
-    "imdb_id": "tt6751668",
-    "poster_path": "data/posters/496243.jpg",
-    "release_url": "https://www.themoviedb.org/movie/496243",
-    "bluray_url": "https://www.blu-ray.com/movies/Parasite-4K-Blu-ray/265925/",
-    "bluray_release_date": "2020-06-02",
-    "hdr_formats": [
-      "HDR10+"
-    ],
-    "audio_languages": [
-      "Korean",
-      "French (Canada)"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Parasite (2019) FEL - 6.26 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:36:04+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Brightburn",
     "fel_confirmed": true,
     "release_date": "2019-05-09",
@@ -2276,55 +1850,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "John Wick: Chapter 2",
-    "fel_confirmed": true,
-    "release_date": "2017-02-08",
-    "studio": "Thunder Road",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 2.0",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-        "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=27",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=28",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=39",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "324552",
-    "imdb_id": "tt4425200",
-    "poster_path": "data/posters/324552.jpg",
-    "release_url": "https://www.themoviedb.org/movie/324552",
-    "bluray_url": "https://www.blu-ray.com/movies/John-Wick-Chapter-2-4K-Blu-ray/170797/",
-    "bluray_release_date": "2017-06-13",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish",
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "John.Wick.Chapter.2 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Fantastic.Beasts.The.Secrets.of.Dumbledore.2022 | (+24) | MAX | plot | cmv4.0 bloc can be restored to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Passengers",
     "fel_confirmed": true,
     "release_date": "2016-12-21",
@@ -2398,56 +1923,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "La La Land",
-    "fel_confirmed": true,
-    "release_date": "2016-12-01",
-    "studio": "Summit Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 2.0",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=165",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=166",
-        "https://forum.blu-ray.com/showthread.php?t=327042",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=6",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "313369",
-    "imdb_id": "tt3783958",
-    "poster_path": "data/posters/313369.jpg",
-    "release_url": "https://www.themoviedb.org/movie/313369",
-    "bluray_url": "https://www.blu-ray.com/movies/La-La-Land-4K-Blu-ray/170219/",
-    "bluray_release_date": "2017-04-25",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "La La Land (2016) ITA | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Giant.1956 | (+16 L127/R127) | HBO | HDR COMP | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:37:17+00:00",
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
@@ -2623,50 +2098,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Deepwater Horizon",
-    "fel_confirmed": true,
-    "release_date": "2016-09-28",
-    "studio": "Summit Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 2.0",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "296524",
-    "imdb_id": "tt1860357",
-    "poster_path": "data/posters/296524.jpg",
-    "release_url": "https://www.themoviedb.org/movie/296524",
-    "bluray_url": "https://www.blu-ray.com/movies/Deepwater-Horizon-4K-Blu-ray/165360/",
-    "bluray_release_date": "2017-01-10",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Deepwater.Horizon.2016 | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Blade.Runner.2049.2017 | (-314 T280/B280) | MAX | HDR COMP | nits",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Mechanic: Resurrection",
     "fel_confirmed": true,
     "release_date": "2016-08-25",
@@ -2782,54 +2213,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Kingsglaive: Final Fantasy XV",
-    "fel_confirmed": true,
-    "release_date": "2016-07-09",
-    "studio": "Visual Works",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "390734",
-    "imdb_id": "tt5595168",
-    "poster_path": "data/posters/390734.jpg",
-    "release_url": "https://www.themoviedb.org/movie/390734",
-    "bluray_url": "https://www.blu-ray.com/movies/Kingsglaive-Final-Fantasy-XV-4K-Blu-ray/283115/",
-    "bluray_release_date": "2021-03-30",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "German",
-      "Hungarian",
-      "Italian",
-      "Japanese",
-      "Polish",
-      "Portuguese",
-      "Spanish",
-      "Thai"
-    ],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Kingsglaive: Final Fantasy XV (2016) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Central Intelligence",
     "fel_confirmed": true,
     "release_date": "2016-06-15",
@@ -2904,51 +2287,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Allegiant",
-    "fel_confirmed": true,
-    "release_date": "2016-03-09",
-    "studio": "Mandeville Films",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 2.0",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
-        "https://github.com/iammarxg/FEL",
-        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "262504",
-    "imdb_id": "tt3410834",
-    "poster_path": "data/posters/262504.jpg",
-    "release_url": "https://www.themoviedb.org/movie/262504",
-    "bluray_url": "https://www.blu-ray.com/movies/Allegiant-4K-Blu-ray/152715/",
-    "bluray_release_date": "2016-07-12",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Allegiant 2016 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | A.Christmas.Story.1983 | (+58 T42/B42) | iTunes | HDR COMP | L1 | Hancock 2008 -24 t280b280 | itunes | HDR COMP | nits | only 133 shot but has dynamic L2",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
@@ -3044,84 +2382,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "The Hunger Games: Mockingjay - Part 2",
-    "fel_confirmed": true,
-    "release_date": "2015-11-18",
-    "studio": "Lionsgate",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "131634",
-    "imdb_id": "tt1951266",
-    "poster_path": "data/posters/131634.jpg",
-    "release_url": "https://www.themoviedb.org/movie/131634",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Hunger-Games-Mockingjay-Part-2-4K-Blu-ray/163460/",
-    "bluray_release_date": "2016-11-08",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish",
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "The.Hunger.Games.Mockingjay.Part.2.2015 ITA | BD FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Road.Trip.2000 | 0 | fandango | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:37:17+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "The Last Witch Hunter",
-    "fel_confirmed": true,
-    "release_date": "2015-10-21",
-    "studio": "NeoReel",
-    "audio_formats": [
-      "DTS:X 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "274854",
-    "imdb_id": "tt1618442",
-    "poster_path": "data/posters/274854.jpg",
-    "release_url": "https://www.themoviedb.org/movie/274854",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Last-Witch-Hunter-4K-Blu-ray/377306/",
-    "bluray_release_date": "2025-01-28",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "The.Last.Witch.Hunter.2015 FRA BD | BD FEL | HDR COMP | plot | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | San.Andreas.2015 | (+24 T276/B276) | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:37:17+00:00",
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
@@ -3291,49 +2551,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Insurgent",
-    "fel_confirmed": true,
-    "release_date": "2015-03-18",
-    "studio": "Summit Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "262500",
-    "imdb_id": "tt2908446",
-    "poster_path": "data/posters/262500.jpg",
-    "release_url": "https://www.themoviedb.org/movie/262500",
-    "bluray_url": "https://www.blu-ray.com/movies/Insurgent-4K-Blu-ray/155901/",
-    "bluray_release_date": "2016-07-12",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Insurgent 2015 | BD-FEL | HDR COMP | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Elysium.2013 | (+24 T280/B280) | iTunes | L1 | MDL mismatch",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Cinderella",
     "fel_confirmed": true,
     "release_date": "2015-03-06",
@@ -3382,49 +2599,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "The Hunger Games: Mockingjay - Part 1",
-    "fel_confirmed": true,
-    "release_date": "2014-11-19",
-    "studio": "Lionsgate",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "131631",
-    "imdb_id": "tt1951265",
-    "poster_path": "data/posters/131631.jpg",
-    "release_url": "https://www.themoviedb.org/movie/131631",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Hunger-Games-Mockingjay-Part-1-4K-Blu-ray/163461/",
-    "bluray_release_date": "2016-11-08",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish",
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "The.Hunger.Games.Mockingjay.Part.1.2014 ITA | BD FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Risen.2016 | FraMeSToR | L1 | FraMeSToR over cropped L5 old cmv2.9, no trims",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:37:17+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Fury",
     "fel_confirmed": true,
     "release_date": "2014-10-15",
@@ -3467,48 +2641,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "The Expendables 3",
-    "fel_confirmed": true,
-    "release_date": "2014-08-07",
-    "studio": "Davis Films",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "138103",
-    "imdb_id": "tt2333784",
-    "poster_path": "data/posters/138103.jpg",
-    "release_url": "https://www.themoviedb.org/movie/138103",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Expendables-3-4K-Blu-ray/147733/",
-    "bluray_release_date": "2016-03-01",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Expendables.3.2014 FRA BD | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Central.Intelligence.2016 | FraMeSToR | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
@@ -3643,137 +2775,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Divergente",
-    "fel_confirmed": true,
-    "release_date": "2014-03-14",
-    "studio": "Summit Entertainment",
-    "audio_formats": [
-      "DTS:X 7.1",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=55",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "157350",
-    "imdb_id": "tt1840309",
-    "poster_path": "data/posters/157350.jpg",
-    "release_url": "https://www.themoviedb.org/movie/157350",
-    "bluray_url": "https://www.blu-ray.com/movies/Divergent-4K-Blu-ray/155902/",
-    "bluray_release_date": "2016-07-12",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Divergente 2014 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Bob.Marley.One.Love.2024 | (-24) | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Lone Survivor",
-    "fel_confirmed": true,
-    "release_date": "2013-12-24",
-    "studio": "EFO Films",
-    "audio_formats": [
-      "DTS:X 7.1",
-      "DTS Headphone:X",
-      "DTS 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=176",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=20",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "193756",
-    "imdb_id": "tt1091191",
-    "poster_path": "data/posters/193756.jpg",
-    "release_url": "https://www.themoviedb.org/movie/193756",
-    "bluray_url": "https://www.blu-ray.com/movies/Lone-Survivor-4K-Blu-ray/154625/",
-    "bluray_release_date": "2016-08-09",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Lone.Survivor.2013 FRA BD | BD FEL | HDR COMP | sample | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Green.Lantern.BewarePower.2022 | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:37:17+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "The Hunger Games: Catching Fire",
-    "fel_confirmed": true,
-    "release_date": "2013-11-15",
-    "studio": "Lionsgate",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "101299",
-    "imdb_id": "tt1951264",
-    "poster_path": "data/posters/101299.jpg",
-    "release_url": "https://www.themoviedb.org/movie/101299",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Hunger-Games-Catching-Fire-4K-Blu-ray/163478/",
-    "bluray_release_date": "2016-11-08",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish",
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "The.Hunger.Games.Catching.Fire.2013 ITA | BD FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Resident.Evil.Welcome.to.Raccoon.City.2021 | (+47) | fandango | PLOT | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:37:17+00:00",
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
@@ -3916,48 +2917,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Now You See Me",
-    "fel_confirmed": true,
-    "release_date": "2013-05-29",
-    "studio": "Summit Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-    "source_label": "FEL.txt",
-    "tmdb_id": "75656",
-    "imdb_id": "tt1670345",
-    "poster_path": "data/posters/75656.jpg",
-    "release_url": "https://www.themoviedb.org/movie/75656",
-    "bluray_url": "https://www.blu-ray.com/movies/Now-You-See-Me-4K-Blu-ray/153266/",
-    "bluray_release_date": "2016-05-31",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
-      "quote": "Now.You.See.Me.2013 FRA | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Inferno.2016 | (+24 T42/B42) | iTunes | HDR COMP | L1",
-      "evidence_type": "google-sheet-row",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:37:17+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Iron Man 3",
     "fel_confirmed": true,
     "release_date": "2013-04-18",
@@ -3991,48 +2950,6 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Iron Man 3 (2013) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "The Expendables 2",
-    "fel_confirmed": true,
-    "release_date": "2012-08-08",
-    "studio": "Millennium Media",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 2.0",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "76163",
-    "imdb_id": "tt1764651",
-    "poster_path": "data/posters/76163.jpg",
-    "release_url": "https://www.themoviedb.org/movie/76163",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Expendables-2-4K-Blu-ray/174339/",
-    "bluray_release_date": "2017-05-02",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish",
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "The Expendables 2 (2012) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -4115,49 +3032,6 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Men in Black 3 (2012) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "The Hunger Games",
-    "fel_confirmed": true,
-    "release_date": "2012-03-12",
-    "studio": "Lionsgate",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "FEL.txt",
-    "tmdb_id": "70160",
-    "imdb_id": "tt1392170",
-    "poster_path": "data/posters/70160.jpg",
-    "release_url": "https://www.themoviedb.org/movie/70160",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Hunger-Games-4K-Blu-ray/163462/",
-    "bluray_release_date": "2016-11-08",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish",
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "The Hunger Games (2012) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -4356,50 +3230,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "The Expendables",
-    "fel_confirmed": true,
-    "release_date": "2010-08-07",
-    "studio": "Nimar Studios",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 2.0",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-    "source_label": "FEL.txt",
-    "tmdb_id": "27578",
-    "imdb_id": "tt1320253",
-    "poster_path": "data/posters/27578.jpg",
-    "release_url": "https://www.themoviedb.org/movie/27578",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Expendables-4K-Blu-ray/174338/",
-    "bluray_release_date": "2017-05-02",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish",
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-      "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'The Expendables [2010]'.",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
@@ -4671,51 +3501,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Watchmen",
-    "fel_confirmed": true,
-    "release_date": "2009-03-04",
-    "studio": "Warner Bros. Pictures",
-    "audio_formats": [
-      "Dolby TrueHD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "4.96",
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=17",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=18",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "13183",
-    "imdb_id": "tt0409459",
-    "poster_path": "data/posters/13183.jpg",
-    "release_url": "https://www.themoviedb.org/movie/13183",
-    "bluray_url": "https://www.blu-ray.com/movies/Watchmen-4K-Blu-ray/157841/",
-    "bluray_release_date": "2016-07-19",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Watchmen (2009) FEL - 4.96 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:36:04+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Pineapple Express",
     "fel_confirmed": true,
     "release_date": "2008-08-06",
@@ -4757,57 +3542,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "The Incredible Hulk",
-    "fel_confirmed": true,
-    "release_date": "2008-06-12",
-    "studio": "Marvel Studios",
-    "audio_formats": [
-      "DTS:X 7.1",
-      "DTS 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "5.68",
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=145",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=151",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=37",
-        "https://forum.blu-ray.com/showthread.php?t=354888&page=7",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1724",
-    "imdb_id": "tt0800080",
-    "poster_path": "data/posters/1724.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1724",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Incredible-Hulk-4K-Blu-ray/198383/",
-    "bluray_release_date": "2018-04-10",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish",
-      "French (Canada)",
-      "Portuguese"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "The Incredible Hulk (2008) FEL - 5.68 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:36:04+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Kung Fu Panda",
     "fel_confirmed": true,
     "release_date": "2008-06-04",
@@ -4844,103 +3578,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Kung Fu Panda (2008) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Iron Man",
-    "fel_confirmed": true,
-    "release_date": "2008-04-30",
-    "studio": "Marvel Studios",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD+ 7.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "5.68",
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=113",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=144",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=145",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=151",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=22",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=8",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=15",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=16",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=37",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=4",
-        "https://forum.blu-ray.com/showthread.php?t=354888&page=7",
-        "https://forum.blu-ray.com/showthread.php?t=387630&page=4",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1726",
-    "imdb_id": "tt0371746",
-    "poster_path": "data/posters/1726.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1726",
-    "bluray_url": "https://www.blu-ray.com/movies/Iron-Man-4K-Blu-ray/242624/",
-    "bluray_release_date": "2019-08-13",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish",
-      "French",
-      "Italian"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Iron Man (2008) FEL - 5.68 Mb/s (M6 Video)",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:36:04+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Resident Evil: Extinction",
-    "fel_confirmed": true,
-    "release_date": "2007-09-20",
-    "studio": "Screen Gems",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "7737",
-    "imdb_id": "tt0432021",
-    "poster_path": "data/posters/7737.jpg",
-    "release_url": "https://www.themoviedb.org/movie/7737",
-    "bluray_url": "https://www.blu-ray.com/movies/Resident-Evil-Extinction-4K-Blu-ray/274258/",
-    "bluray_release_date": "2020-11-17",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Resident Evil: Extinction (2007) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -5022,93 +3659,6 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Spider-Man 3 (2007) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "The Girl Who Leapt Through Time",
-    "fel_confirmed": true,
-    "release_date": "2006-07-15",
-    "studio": "Madhouse",
-    "audio_formats": [
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "14069",
-    "imdb_id": "tt0808506",
-    "poster_path": "data/posters/14069.jpg",
-    "release_url": "https://www.themoviedb.org/movie/14069",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Girl-Who-Leapt-Through-Time-4K-Blu-ray/384926/",
-    "bluray_release_date": "2025-10-07",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Japanese"
-    ],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "The Girl Who Leapt Through Time (2006) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Resident Evil: Apocalypse",
-    "fel_confirmed": true,
-    "release_date": "2004-09-10",
-    "studio": "Davis Films/Impact Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "1577",
-    "imdb_id": "tt0318627",
-    "poster_path": "data/posters/1577.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1577",
-    "bluray_url": "https://www.blu-ray.com/movies/Resident-Evil-Apocalypse-4K-Blu-ray/274256/",
-    "bluray_release_date": "2020-11-17",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "French (Canada)",
-      "Hindi",
-      "Italian",
-      "Japanese",
-      "Polish",
-      "Portuguese",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Resident Evil: Apocalypse (2004) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -5331,46 +3881,6 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Big Fish (2003) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Love Actually",
-    "fel_confirmed": true,
-    "release_date": "2003-09-07",
-    "studio": "Working Title Films",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "508",
-    "imdb_id": "tt0314331",
-    "poster_path": "data/posters/508.jpg",
-    "release_url": "https://www.themoviedb.org/movie/508",
-    "bluray_url": "https://www.blu-ray.com/movies/Love-Actually-4K-Blu-ray/348642/",
-    "bluray_release_date": "2023-11-28",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Love Actually (2003) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -5640,92 +4150,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Blade",
-    "fel_confirmed": true,
-    "release_date": "1998-08-21",
-    "studio": "New Line Cinema",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1",
-      "DD 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=11",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=12",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=174",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=29",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=30",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=40",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=47",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=52",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=74",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=75",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=76",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=77",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=80",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=82",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=84",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=85",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=86",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=88",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=90",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=91",
-        "https://forum.blu-ray.com/showthread.php?t=327042",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=15",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=27",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=28",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=29",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=30",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=31",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=32",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=33",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=38",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=4",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=5",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=50",
-        "https://forum.blu-ray.com/showthread.php?t=354888&page=31",
-        "https://forum.blu-ray.com/showthread.php?t=354888&page=33",
-        "https://forum.blu-ray.com/showthread.php?t=387117&page=5",
-        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
-    "source_label": "FEL.txt",
-    "tmdb_id": "36647",
-    "imdb_id": "tt0120611",
-    "poster_path": "data/posters/36647.jpg",
-    "release_url": "https://www.themoviedb.org/movie/36647",
-    "bluray_url": "https://www.blu-ray.com/movies/Blade-4K-Blu-ray/276893/",
-    "bluray_release_date": "2020-12-01",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "German",
-      "Italian",
-      "Spanish",
-      "Czech",
-      "Polish",
-      "Japanese"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
-      "quote": "row: Blade.1998 FRA; source starts: BD FEL VS B",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T02:58:05+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Batman & Robin",
     "fel_confirmed": true,
     "release_date": "1997-06-20",
@@ -5940,60 +4364,6 @@
     "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
   },
   {
-    "movie_title": "Cliffhanger",
-    "fel_confirmed": true,
-    "release_date": "1993-05-28",
-    "studio": "Carolco Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DD 5.1",
-      "DD 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "11.67",
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=176",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=25",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=26",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=4",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
-    "tmdb_id": "9350",
-    "imdb_id": "tt0106582",
-    "poster_path": "data/posters/9350.jpg",
-    "release_url": "https://www.themoviedb.org/movie/9350",
-    "bluray_url": "https://www.blu-ray.com/movies/Cliffhanger-4K-Blu-ray/217843/",
-    "bluray_release_date": "2019-01-15",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "French (Canada)",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Cliffhanger (1993) FEL - 11.67 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:53:14+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
     "movie_title": "Groundhog Day",
     "fel_confirmed": true,
     "release_date": "1993-02-11",
@@ -6042,62 +4412,6 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=173",
       "quote": "Groundhog Day (1993) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Glory",
-    "fel_confirmed": true,
-    "release_date": "1989-12-15",
-    "studio": "Freddie Fields Productions",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=170",
-        "https://forum.blu-ray.com/showthread.php?t=327042&page=57",
-        "https://forum.blu-ray.com/showthread.php?t=365211&page=6",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=170",
-    "source_label": "FEL.txt",
-    "tmdb_id": "9665",
-    "imdb_id": "tt0097441",
-    "poster_path": "data/posters/9665.jpg",
-    "release_url": "https://www.themoviedb.org/movie/9665",
-    "bluray_url": "https://www.blu-ray.com/movies/Glory-4K-Blu-ray/240867/",
-    "bluray_release_date": "2019-07-30",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "Czech",
-      "French",
-      "German",
-      "Hungarian",
-      "Italian",
-      "Japanese",
-      "Polish",
-      "Portuguese",
-      "Spanish",
-      "Thai"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=170",
-      "quote": "Glory (1989) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -6519,44 +4833,6 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Singin' in the Rain (1952) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Blu-ray.com lists this as an HDR10-only disc, so it cannot carry a Dolby Vision FEL. Came in via FEL.txt, which needs more validation."
-  },
-  {
-    "movie_title": "Hold That Ghost",
-    "fel_confirmed": true,
-    "release_date": "1941-08-07",
-    "studio": "Universal Pictures",
-    "audio_formats": [
-      "DTS-HD MA 2.0 Mono"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "14604",
-    "imdb_id": "tt0033723",
-    "poster_path": "data/posters/14604.jpg",
-    "release_url": "https://www.themoviedb.org/movie/14604",
-    "bluray_url": "https://www.blu-ray.com/movies/Hold-That-Ghost-4K-Blu-ray/382815/",
-    "bluray_release_date": "2026-04-28",
-    "hdr_formats": [
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Hold That Ghost (1941) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -9446,47 +7722,6 @@
     "removed_at": "2026-05-22T16:56:50+00:00"
   },
   {
-    "movie_title": "The Breakfast Club",
-    "fel_confirmed": true,
-    "release_date": "1985-02-15",
-    "studio": "Universal Pictures",
-    "audio_formats": [
-      "LPCM Mono",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "2108",
-    "imdb_id": "tt0088847",
-    "poster_path": "data/posters/2108.jpg",
-    "release_url": "https://www.themoviedb.org/movie/2108",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Breakfast-Club-4K-Blu-ray/394738/",
-    "bluray_release_date": "2025-11-04",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "L E The Breakfast Club (1985) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Removed from releases.json first pass: evidence_type=fel-list and the only primary evidence source is local FEL.txt, with no HTTP source to validate.",
-    "removed_at": "2026-05-22T16:56:50+00:00"
-  },
-  {
     "movie_title": "Ghoulies",
     "fel_confirmed": true,
     "release_date": "1985-01-18",
@@ -9804,52 +8039,6 @@
     "fel_evidence": {
       "source_url": "FEL.txt (curated Profile 7 FEL list)",
       "quote": "Abbott and Costello Meet Dr. Jekyll and Mr. Hyde (1953) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00",
-    "removal_comment": "Removed from releases.json first pass: evidence_type=fel-list and the only primary evidence source is local FEL.txt, with no HTTP source to validate.",
-    "removed_at": "2026-05-22T16:56:50+00:00"
-  },
-  {
-    "movie_title": "Alice in Wonderland",
-    "fel_confirmed": true,
-    "release_date": "1951-08-09",
-    "studio": "Walt Disney Productions",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DD 2.0 Mono",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://www.blu-ray.com/movies/Rabid-4K-Blu-ray/397990/"
-      ]
-    },
-    "source_url": "FEL.txt (curated Profile 7 FEL list)",
-    "source_label": "FEL.txt",
-    "tmdb_id": "12092",
-    "imdb_id": "tt0043274",
-    "poster_path": "data/posters/12092.jpg",
-    "release_url": "https://www.themoviedb.org/movie/12092",
-    "bluray_url": "https://www.blu-ray.com/movies/Alice-in-Wonderland-4K-Blu-ray/409895/",
-    "bluray_release_date": "2026-05-05",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish",
-      "Japanese"
-    ],
-    "fel_evidence": {
-      "source_url": "FEL.txt (curated Profile 7 FEL list)",
-      "quote": "L E Alice in Wonderland (1951) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
