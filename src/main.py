@@ -425,28 +425,41 @@ def _scrape_source(
                 releases = google_sheets.parse_always_fel_sheet(text, url)
             else:
                 releases = google_sheets.parse_google_sheet_releases(text, url)
-        elif "reddit.com" in domain:
+        elif always_fel and "reddit.com" in domain:
             releases = reddit_source.parse_reddit_releases(
                 html_fetcher.fetch(url).text, url
             )
-        elif "github.com" in domain:
-            readme = html_fetcher.fetch(_github_readme_url(url)).text
+        elif always_fel and "github.com" in domain:
+            readme = html_fetcher.fetch(_github_raw_url(url)).text
             releases = list_sources.parse_github_md_list(readme, url)
-        elif "web.archive.org" in domain:
+        elif always_fel and "web.archive.org" in domain:
             releases = list_sources.parse_discourse_list(
                 html_fetcher.fetch(url).text, url
             )
-        elif "letterboxd.com" in domain:
+        elif always_fel and "letterboxd.com" in domain:
             releases = _scrape_letterboxd(url, html_fetcher)
         else:
+            # needs-evidence (any domain), or always-fel with an unknown domain --
+            # require a direct FEL marker near the title.
             releases = fel_parser.parse_fel_releases(html_fetcher.fetch(url).text, url)
     except Exception as exc:  # pragma: no cover - exact network/parser errors vary
         return _SourceScrapeResult(url=url, releases=[], error=exc.__class__.__name__)
     return _SourceScrapeResult(url=url, releases=releases)
 
 
-def _github_readme_url(url: str) -> str:
+def _github_raw_url(url: str) -> str:
+    """Map a github.com URL to its raw.githubusercontent.com equivalent.
+
+    `github.com/owner/repo/blob/BRANCH/PATH...` is preserved verbatim as the
+    raw URL of that specific file. The repo-root form
+    (`github.com/owner/repo`) falls back to `HEAD/README.md`.
+    """
     parts = [part for part in urlparse(url).path.split("/") if part]
+    if len(parts) >= 5 and parts[2] == "blob":
+        return (
+            f"https://raw.githubusercontent.com/{parts[0]}/{parts[1]}/"
+            f"{parts[3]}/{'/'.join(parts[4:])}"
+        )
     if len(parts) >= 2:
         return f"https://raw.githubusercontent.com/{parts[0]}/{parts[1]}/HEAD/README.md"
     return url

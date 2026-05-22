@@ -69,10 +69,16 @@ def test_dedupe_releases_merges_same_canonical_key():
 
 
 def test_merge_prefers_real_evidence_over_weak_list_membership():
-    weak = make("Dune", "2021", evidence_type="fel-list")
-    strong = make("Dune", "2021", evidence_type="reddit-list")
-    assert merge_releases(weak, strong).fel_evidence.evidence_type == "reddit-list"
-    assert merge_releases(strong, weak).fel_evidence.evidence_type == "reddit-list"
+    # Any *-list evidence type is weak (list membership with a synthesized
+    # quote). A real scraped evidence type wins regardless of order.
+    list_only = make("Dune", "2021", evidence_type="reddit-list")
+    real = make("Dune", "2021", evidence_type="ai-extracted")
+    assert merge_releases(list_only, real).fel_evidence.evidence_type == "ai-extracted"
+    assert merge_releases(real, list_only).fel_evidence.evidence_type == "ai-extracted"
+    # Two weak list memberships tie -- first arg wins.
+    fel = make("Dune", "2021", evidence_type="fel-list")
+    github = make("Dune", "2021", evidence_type="github-list")
+    assert merge_releases(fel, github).fel_evidence.evidence_type == "fel-list"
 
 
 def test_merge_prefers_full_date_over_bare_year():

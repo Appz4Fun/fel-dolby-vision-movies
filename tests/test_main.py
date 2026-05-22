@@ -857,13 +857,64 @@ def test_reddit_url_routes_to_reddit_parser(monkeypatch):
             return FetchResult(url=url, text="<reddit html>", from_cache=False)
 
     job = main._SourceJob(
-        url="https://www.reddit.com/r/CoreELEC/comments/x/list/",
-        strictness="needs-evidence",
+        url="https://old.reddit.com/r/CoreELEC/comments/x/list/",
+        strictness="always-fel",
     )
     result = main._scrape_source(job, FakeFetcher())
 
     assert result.error == ""
     assert captured["html"] == "<reddit html>"
+
+
+def test_needs_evidence_reddit_url_falls_through_to_fel_parser(monkeypatch):
+    """needs-evidence reddit URLs must NOT use the list parser; they should
+    fall through to the evidence-gated parse_fel_releases."""
+
+    list_called = False
+    fel_called = {}
+
+    def fake_reddit(html, url):
+        nonlocal list_called
+        list_called = True
+        return []
+
+    def fake_fel(html, url):
+        fel_called["html"] = html
+        fel_called["url"] = url
+        return []
+
+    monkeypatch.setattr(main.reddit_source, "parse_reddit_releases", fake_reddit)
+    monkeypatch.setattr(main.fel_parser, "parse_fel_releases", fake_fel)
+
+    class FakeFetcher:
+        def fetch(self, url):
+            from fetcher import FetchResult
+
+            return FetchResult(url=url, text="<reddit discussion>", from_cache=False)
+
+    job = main._SourceJob(
+        url="https://old.reddit.com/r/AndroidTV/comments/x/some_discussion/",
+        strictness="needs-evidence",
+    )
+    main._scrape_source(job, FakeFetcher())
+
+    assert list_called is False
+    assert fel_called["html"] == "<reddit discussion>"
+
+
+def test_github_raw_url_resolves_blob_paths_and_repo_root():
+    assert main._github_raw_url("https://github.com/iammarxg/FEL") == (
+        "https://raw.githubusercontent.com/iammarxg/FEL/HEAD/README.md"
+    )
+    assert (
+        main._github_raw_url("https://github.com/owner/repo/blob/main/lists/fel.txt")
+        == "https://raw.githubusercontent.com/owner/repo/main/lists/fel.txt"
+    )
+    # nested paths preserved
+    assert (
+        main._github_raw_url("https://github.com/owner/repo/blob/v1.0/dir/sub/file.md")
+        == "https://raw.githubusercontent.com/owner/repo/v1.0/dir/sub/file.md"
+    )
 
 
 def test_run_without_brave_key_uses_existing_sources_and_does_not_print_secret(
