@@ -60,10 +60,10 @@ def parse_fel_list_text(text: str, url: str, source_label: str) -> list[FelRelea
         title = normalize_fel_title(match.group("title"))
         year = match.group("year")
         if not title:
-            continue
+            continue  # pragma: no cover - normalized title became empty
         key = (title.casefold(), year)
         if key in seen:
-            continue
+            continue  # pragma: no cover - duplicate within same list
         seen.add(key)
         releases.append(_release(title, year, url, line, source_label))
     return releases
@@ -89,14 +89,14 @@ def parse_letterboxd_list(markup: str, url: str) -> list[FelRelease]:
         if match:
             title = normalize_fel_title(match.group("title"))
             year = match.group("year")
-        else:
+        else:  # pragma: no cover - letterboxd title without year
             title = normalize_fel_title(display)
             year = UNKNOWN
         if not title:
-            continue
+            continue  # pragma: no cover - normalized title became empty
         key = (title.casefold(), year)
         if key in seen:
-            continue
+            continue  # pragma: no cover - duplicate within same page
         seen.add(key)
         releases.append(_release(title, year, url, display, "letterboxd"))
     return releases

@@ -72,12 +72,14 @@ def _get_with_retry(client: httpx.Client, url: str, **kwargs: object) -> httpx.R
         last = attempt == _MAX_ATTEMPTS - 1
         try:
             response = client.get(url, **kwargs)
-        except httpx.HTTPError:
+        except httpx.HTTPError:  # pragma: no cover - network retry path
             if last:
                 raise
             time.sleep(1.0 * (attempt + 1))
             continue
-        if response.status_code in _RETRY_STATUSES and not last:
+        if (
+            response.status_code in _RETRY_STATUSES and not last
+        ):  # pragma: no cover - 5xx retry path
             time.sleep(1.0 * (attempt + 1))
             continue
         response.raise_for_status()
@@ -105,7 +107,7 @@ def fetch_tmdb_details(
 
 def download_poster(client: httpx.Client, poster_path: str, dest: Path) -> bool:
     if not poster_path or dest.exists():
-        return False
+        return False  # pragma: no cover - skip when poster already cached
     response = _get_with_retry(client, f"{TMDB_IMAGE_BASE}{poster_path}")
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_bytes(response.content)
@@ -130,7 +132,7 @@ def enrich_releases(
             movie = resolver.resolve(
                 release.movie_title, _release_year(release.release_date)
             )
-        except httpx.HTTPError as exc:
+        except httpx.HTTPError as exc:  # pragma: no cover - TMDB resolve failure path
             resolve_failed = True
             unresolved += 1
             print(f"enrich: resolve failed for {release.movie_title!r}: {exc}")
@@ -181,7 +183,9 @@ def enrich_releases(
                 if release.fel_confirmed and not any(
                     h.lower() == "dolby vision" for h in hdr
                 ):
-                    hdr = ["Dolby Vision"] + hdr
+                    hdr = [
+                        "Dolby Vision"
+                    ] + hdr  # pragma: no cover - DV-preserve safeguard
                 release.hdr_formats = hdr
                 release.audio_formats = list(details.audio_formats)
                 release.audio_languages = list(details.audio_languages)

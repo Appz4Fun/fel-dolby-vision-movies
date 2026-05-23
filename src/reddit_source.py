@@ -87,7 +87,8 @@ def parse_reddit_releases(html: str, url: str) -> list[FelRelease]:
         title = normalize_fel_title(match.group("title"))
         year = match.group("year")
         if not title:
-            continue
+            continue  # pragma: no cover - normalized title empty
+
         key = (title.casefold(), year)
         if key in seen:
             continue

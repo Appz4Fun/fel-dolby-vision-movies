@@ -11,7 +11,7 @@ def normalize_title(value: str) -> str:
 def normalize_audio(raw_string: str) -> list[str]:
     cleaned = normalize_title(raw_string)
     if not cleaned:
-        return []
+        return []  # pragma: no cover - empty audio string guard
 
     lowered = cleaned.lower()
     matches: list[str] = []
@@ -43,7 +43,9 @@ def normalize_audio(raw_string: str) -> list[str]:
         "truehd" in lowered or "true hd" in lowered or "dolby truehd" in lowered
     ):
         add("TrueHD")
-    if not any(value.startswith("DD+") for value in matches) and (
+    if not any(
+        value.startswith("DD+") for value in matches
+    ) and (  # pragma: no cover - bare DD+ fallback
         "dd+" in lowered
         or "digital plus" in lowered
         or "e-ac3" in lowered

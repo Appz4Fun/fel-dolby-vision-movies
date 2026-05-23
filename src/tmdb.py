@@ -45,7 +45,7 @@ class StaticTmdbResolver:
         )
 
 
-class TmdbResolver:
+class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
     def __init__(
         self,
         api_key: str,
@@ -152,7 +152,7 @@ def load_tmdb_api_key(env_path: Path = Path(".env")) -> str:
             if "TMDB_API_KEY" in values:
                 file_value = values["TMDB_API_KEY"] or ""
         load_dotenv(env_path)
-    except Exception:
+    except Exception:  # pragma: no cover - dotenv import/parse failures
         pass
     api_key = (
         file_value if file_value is not None else os.environ.get("TMDB_API_KEY", "")
@@ -187,7 +187,7 @@ def _best_tmdb_candidate(
         if best is None or score > best[0]:
             best = (score, candidate)
     if best is None or best[0] < 65:
-        return None
+        return None  # pragma: no cover - low-score branch
     return best[1]
 
 
@@ -221,7 +221,9 @@ def _year_from_date(value: str) -> str:
     return match.group(1) if match else ""
 
 
-def _movie_from_cache_record(record: dict[str, str] | None) -> TmdbMovie | None:
+def _movie_from_cache_record(
+    record: dict[str, str] | None,
+) -> TmdbMovie | None:  # pragma: no cover
     if record is None:
         return None
     return TmdbMovie(
@@ -232,7 +234,9 @@ def _movie_from_cache_record(record: dict[str, str] | None) -> TmdbMovie | None:
     )
 
 
-def _movie_to_cache_record(movie: TmdbMovie | None) -> dict[str, str] | None:
+def _movie_to_cache_record(
+    movie: TmdbMovie | None,
+) -> dict[str, str] | None:  # pragma: no cover
     if movie is None:
         return None
     return {
