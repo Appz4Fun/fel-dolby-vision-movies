@@ -44261,5 +44261,297 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Game of Thrones: The Complete Second Season",
+    "fel_confirmed": true,
+    "release_date": "2012-04-01",
+    "studio": "HBO",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "DD 2.0",
+      "DTS 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Second-Season-4K-Blu-ray/272489/"
+      ]
+    },
+    "source_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Second-Season-4K-Blu-ray/272489/",
+    "source_label": "blu-ray-forum",
+    "tmdb_id": "1399",
+    "imdb_id": "tt0944947",
+    "poster_path": "data/posters/got-1399.jpg",
+    "release_url": "https://www.themoviedb.org/tv/1399",
+    "bluray_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Second-Season-4K-Blu-ray/272489/",
+    "bluray_release_date": "2021-04-12",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish",
+      "German",
+      "Italian",
+      "Portuguese",
+      "Czech",
+      "Hungarian",
+      "Polish",
+      "Russian"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+      "quote": "Game of Thrones: The Complete Second Season (2012) FEL — blu-ray.com forum thread",
+      "evidence_type": "forum-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:08:02+00:00"
+  },
+  {
+    "movie_title": "Game of Thrones: The Complete Third Season",
+    "fel_confirmed": true,
+    "release_date": "2013-03-31",
+    "studio": "HBO",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "DD 2.0",
+      "DTS 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Third-Season-4K-Blu-ray/272490/"
+      ]
+    },
+    "source_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Third-Season-4K-Blu-ray/272490/",
+    "source_label": "blu-ray-forum",
+    "tmdb_id": "1399",
+    "imdb_id": "tt0944947",
+    "poster_path": "data/posters/got-1399.jpg",
+    "release_url": "https://www.themoviedb.org/tv/1399",
+    "bluray_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Third-Season-4K-Blu-ray/272490/",
+    "bluray_release_date": "2021-04-12",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish",
+      "German",
+      "Italian",
+      "Portuguese",
+      "Czech",
+      "Hungarian",
+      "Polish",
+      "Russian"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+      "quote": "Game of Thrones: The Complete Third Season (2013) FEL — blu-ray.com forum thread",
+      "evidence_type": "forum-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:08:02+00:00"
+  },
+  {
+    "movie_title": "Game of Thrones: The Complete Fourth Season",
+    "fel_confirmed": true,
+    "release_date": "2014-04-06",
+    "studio": "HBO",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "DD 2.0",
+      "DTS 2.0",
+      "DTS 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Fourth-Season-4K-Blu-ray/272491/"
+      ]
+    },
+    "source_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Fourth-Season-4K-Blu-ray/272491/",
+    "source_label": "blu-ray-forum",
+    "tmdb_id": "1399",
+    "imdb_id": "tt0944947",
+    "poster_path": "data/posters/got-1399.jpg",
+    "release_url": "https://www.themoviedb.org/tv/1399",
+    "bluray_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Fourth-Season-4K-Blu-ray/272491/",
+    "bluray_release_date": "2021-04-12",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish",
+      "German",
+      "Italian",
+      "Portuguese",
+      "Czech",
+      "Hungarian",
+      "Polish",
+      "Russian"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+      "quote": "Game of Thrones: The Complete Fourth Season (2014) FEL — blu-ray.com forum thread",
+      "evidence_type": "forum-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:08:02+00:00"
+  },
+  {
+    "movie_title": "Game of Thrones: The Complete Fifth Season",
+    "fel_confirmed": true,
+    "release_date": "2015-04-12",
+    "studio": "HBO",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "DD 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Fifth-Season-4K-Blu-ray/272492/"
+      ]
+    },
+    "source_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Fifth-Season-4K-Blu-ray/272492/",
+    "source_label": "blu-ray-forum",
+    "tmdb_id": "1399",
+    "imdb_id": "tt0944947",
+    "poster_path": "data/posters/got-1399.jpg",
+    "release_url": "https://www.themoviedb.org/tv/1399",
+    "bluray_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Fifth-Season-4K-Blu-ray/272492/",
+    "bluray_release_date": "2021-04-12",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish",
+      "German",
+      "Italian",
+      "Portuguese",
+      "Czech",
+      "Hungarian",
+      "Polish",
+      "Russian"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+      "quote": "Game of Thrones: The Complete Fifth Season (2015) FEL — blu-ray.com forum thread",
+      "evidence_type": "forum-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:08:02+00:00"
+  },
+  {
+    "movie_title": "Game of Thrones: The Complete Sixth Season",
+    "fel_confirmed": true,
+    "release_date": "2016-04-24",
+    "studio": "HBO",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "DD 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Sixth-Season-4K-Blu-ray/272493/"
+      ]
+    },
+    "source_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Sixth-Season-4K-Blu-ray/272493/",
+    "source_label": "blu-ray-forum",
+    "tmdb_id": "1399",
+    "imdb_id": "tt0944947",
+    "poster_path": "data/posters/got-1399.jpg",
+    "release_url": "https://www.themoviedb.org/tv/1399",
+    "bluray_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Sixth-Season-4K-Blu-ray/272493/",
+    "bluray_release_date": "2021-04-12",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish",
+      "German",
+      "Italian",
+      "Portuguese",
+      "Czech",
+      "Hungarian",
+      "Polish",
+      "Russian"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+      "quote": "Game of Thrones: The Complete Sixth Season (2016) FEL — blu-ray.com forum thread",
+      "evidence_type": "forum-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:08:02+00:00"
+  },
+  {
+    "movie_title": "Game of Thrones: The Complete Seventh Season",
+    "fel_confirmed": true,
+    "release_date": "2017-07-16",
+    "studio": "HBO",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "DD 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Seventh-Season-4K-Blu-ray/272494/"
+      ]
+    },
+    "source_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Seventh-Season-4K-Blu-ray/272494/",
+    "source_label": "blu-ray-forum",
+    "tmdb_id": "1399",
+    "imdb_id": "tt0944947",
+    "poster_path": "data/posters/got-1399.jpg",
+    "release_url": "https://www.themoviedb.org/tv/1399",
+    "bluray_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Seventh-Season-4K-Blu-ray/272494/",
+    "bluray_release_date": "2021-04-12",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish",
+      "German",
+      "Italian",
+      "Portuguese",
+      "Czech",
+      "Hungarian",
+      "Polish",
+      "Russian"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+      "quote": "Game of Thrones: The Complete Seventh Season (2017) FEL — blu-ray.com forum thread",
+      "evidence_type": "forum-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:08:02+00:00"
   }
 ]
