@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
+import time
 import urllib.parse
 
 import httpx
@@ -33,6 +34,7 @@ _DISCOVERY_USER = (
     "array of up to 25 direct URL strings and nothing else."
 )
 AI_EXTRACTION_ATTEMPTS = 3
+AI_EXTRACTION_RETRY_BASE_DELAY_SECONDS = 1.0
 
 
 def _parse_url_list(text: str) -> list[str]:
@@ -106,11 +108,13 @@ def _extract_candidates_with_retries(
     ai_client: AIClient, source_url: str, text: str
 ) -> list[FoundCandidate]:
     last_error: httpx.HTTPError | None = None
-    for _attempt in range(AI_EXTRACTION_ATTEMPTS):
+    for attempt in range(AI_EXTRACTION_ATTEMPTS):
         try:
             return ai_client.extract_candidates(source_url, text)
         except httpx.HTTPError as exc:
             last_error = exc
+            if attempt < AI_EXTRACTION_ATTEMPTS - 1:
+                time.sleep(AI_EXTRACTION_RETRY_BASE_DELAY_SECONDS * (2**attempt))
     assert last_error is not None
     raise last_error
 
@@ -145,7 +149,12 @@ def ai_scrape_releases(
 
 
 def _fetch_url_for_ai_source(url: str) -> str:
-    if "docs.google.com/spreadsheets/" in url:
+    parsed = urllib.parse.urlparse(url)
+    hostname = parsed.hostname
+    if (
+        hostname == "docs.google.com"
+        or (hostname is not None and hostname.endswith(".docs.google.com"))
+    ) and parsed.path.startswith("/spreadsheets/"):
         return google_sheets.google_sheet_csv_url(url)
     return url
 

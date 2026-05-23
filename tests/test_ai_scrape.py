@@ -5,6 +5,7 @@ import pytest
 
 from ai_scrape import (
     _candidate_to_release,
+    _fetch_url_for_ai_source,
     _is_google_doc_url,
     _load_existing_releases,
     _parse_url_list,
@@ -131,6 +132,40 @@ def test_ai_extract_releases_retries_transient_http_errors():
     assert [release.movie_title for release in releases] == ["Alien"]
 
 
+def test_ai_extract_releases_backs_off_between_retry_attempts(monkeypatch):
+    import ai_scrape as ai_scrape_mod
+
+    source_url = "https://forum.example.test/thread"
+    sleeps: list[float] = []
+
+    class FlakyAIClient(FakeAIClient):
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def extract_candidates(self, source_url: str, text: str):
+            self.calls += 1
+            if self.calls < 3:
+                raise httpx.HTTPError("temporary read failure")
+            return [
+                FoundCandidate(
+                    "Alien",
+                    "1979",
+                    source_url,
+                    "Alien is confirmed Profile 7 FEL",
+                    "ai",
+                )
+            ]
+
+    monkeypatch.setattr(ai_scrape_mod.time, "sleep", sleeps.append)
+    client = FlakyAIClient()
+
+    releases = ai_extract_releases(client, [(source_url, "<html>Alien FEL</html>")])
+
+    assert client.calls == 3
+    assert sleeps == [1.0, 2.0]
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
 def test_ai_extract_releases_moves_on_after_retries_are_exhausted(capsys):
     sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
     forum_url = "https://forum.example.test/thread"
@@ -170,6 +205,19 @@ def test_is_google_doc_url_uses_hostname_not_substring():
     assert not _is_google_doc_url(
         "https://example.test/thread?next=https://docs.google.com/spreadsheets/d/id"
     )
+
+
+def test_fetch_url_for_ai_source_only_converts_real_google_sheets_urls():
+    sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
+    non_google_url = (
+        "https://example.test/thread?"
+        "next=https://docs.google.com/spreadsheets/d/sheet-id/edit"
+    )
+
+    assert _fetch_url_for_ai_source(sheet_url) == (
+        "https://docs.google.com/spreadsheets/d/sheet-id/gviz/tq?tqx=out:csv&gid=99"
+    )
+    assert _fetch_url_for_ai_source(non_google_url) == non_google_url
 
 
 def test_ai_scrape_releases_uses_google_sheet_csv_urls_and_fetches_forum_sources(

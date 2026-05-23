@@ -2,6 +2,7 @@ from pathlib import Path
 import threading
 
 import httpx
+import pytest
 import respx
 
 from fetcher import DomainRateLimiter, Fetcher
@@ -84,6 +85,19 @@ def test_fetcher_can_record_failed_fetch_without_raising(tmp_path: Path):
     assert result.from_cache is False
     assert result.error is not None
     assert "503" in result.error
+    assert route.call_count == 3
+
+
+@respx.mock
+def test_fetcher_raises_detailed_failed_fetch_message(tmp_path: Path):
+    route = respx.get("https://example.test/thread").mock(
+        return_value=httpx.Response(503, text="temporarily unavailable")
+    )
+    fetcher = Fetcher(cache_dir=tmp_path, retry_sleep_seconds=0)
+
+    with pytest.raises(RuntimeError, match="503 Service Unavailable"):
+        fetcher.fetch("https://example.test/thread")
+
     assert route.call_count == 3
 
 
