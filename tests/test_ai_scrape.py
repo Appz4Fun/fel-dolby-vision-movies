@@ -100,6 +100,68 @@ def test_ai_extract_releases_skips_sources_that_raise_http_errors():
     )
 
 
+def test_ai_extract_releases_retries_transient_http_errors():
+    sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
+
+    class FlakyAIClient(FakeAIClient):
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def extract_candidates(self, source_url: str, text: str):
+            self.calls += 1
+            if self.calls == 1:
+                raise httpx.HTTPError("incomplete chunked read")
+            return [
+                FoundCandidate(
+                    "Alien",
+                    "1979",
+                    source_url,
+                    "Alien is confirmed Profile 7 FEL",
+                    "ai",
+                )
+            ]
+
+    client = FlakyAIClient()
+
+    releases = ai_extract_releases(client, [(sheet_url, "Movie Name,DV Source\n")])
+
+    assert client.calls == 2
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
+def test_ai_extract_releases_moves_on_after_retries_are_exhausted(capsys):
+    sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
+    forum_url = "https://forum.example.test/thread"
+    calls: list[str] = []
+
+    class FailingSheetAIClient(FakeAIClient):
+        def extract_candidates(self, source_url: str, text: str):
+            calls.append(source_url)
+            if source_url == sheet_url:
+                raise httpx.HTTPError("peer closed connection")
+            return [
+                FoundCandidate(
+                    "Heat",
+                    "1995",
+                    source_url,
+                    "Heat is confirmed Profile 7 FEL",
+                    "ai",
+                )
+            ]
+
+    releases = ai_extract_releases(
+        FailingSheetAIClient(),
+        [
+            (sheet_url, "Movie Name,DV Source\n"),
+            (forum_url, "Heat (1995) is confirmed Profile 7 FEL."),
+        ],
+    )
+
+    assert calls == [sheet_url, sheet_url, sheet_url, forum_url]
+    assert [release.movie_title for release in releases] == ["Heat"]
+    assert f"ai-scrape: extraction failed for {sheet_url}" in capsys.readouterr().out
+
+
 def test_ai_scrape_releases_uses_google_sheet_csv_urls_and_skips_fetch_errors(
     monkeypatch,
     tmp_path,
@@ -147,17 +209,82 @@ def test_ai_scrape_releases_uses_google_sheet_csv_urls_and_skips_fetch_errors(
     )
 
     sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
+    forum_url = "https://forum.example.test/thread"
     releases = ai_scrape_releases(
-        [sheet_url, "https://bad.test/thread"],
+        [sheet_url, forum_url, "https://bad.test/thread"],
         tmp_path / ".cache",
         FakeAIClient(),
     )
 
     assert fetched_urls == [
         "https://docs.google.com/spreadsheets/d/sheet-id/gviz/tq?tqx=out:csv&gid=99",
+        forum_url,
         "https://bad.test/thread",
     ]
-    assert [release.movie_title for release in releases] == [sheet_url]
+    assert [release.movie_title for release in releases] == [sheet_url, forum_url]
+
+
+def test_ai_scrape_releases_catches_google_sheet_fetch_exceptions(
+    monkeypatch,
+    tmp_path,
+    capsys,
+):
+    import ai_scrape as ai_scrape_mod
+
+    fetched_urls: list[str] = []
+    sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
+    forum_url = "https://forum.example.test/thread"
+
+    class FakeFetchResult:
+        def __init__(self, text: str = "", error: str = "") -> None:
+            self.text = text
+            self.error = error
+
+    class FakeFetcher:
+        def __init__(self, *args, **kwargs) -> None:
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+        def fetch(self, url: str, raise_on_error: bool = False):
+            fetched_urls.append(url)
+            if "gviz/tq" in url:
+                raise RuntimeError("read failed")
+            return FakeFetchResult(text="<html>Heat FEL</html>")
+
+    monkeypatch.setattr(ai_scrape_mod.fetcher, "Fetcher", FakeFetcher)
+    monkeypatch.setattr(
+        ai_scrape_mod,
+        "ai_extract_releases",
+        lambda client, pages: [
+            FelRelease(
+                movie_title=source_url,
+                fel_evidence=FelEvidence(
+                    source_url=source_url,
+                    quote=text,
+                    evidence_type="ai-extracted",
+                ),
+            )
+            for source_url, text in pages
+        ],
+    )
+
+    releases = ai_scrape_releases(
+        [sheet_url, forum_url],
+        tmp_path / ".cache",
+        FakeAIClient(),
+    )
+
+    assert fetched_urls == [
+        "https://docs.google.com/spreadsheets/d/sheet-id/gviz/tq?tqx=out:csv&gid=99",
+        forum_url,
+    ]
+    assert [release.movie_title for release in releases] == [forum_url]
+    assert f"ai-scrape: fetch failed for {sheet_url}" in capsys.readouterr().out
 
 
 def test_load_existing_releases_round_trips(tmp_path):
