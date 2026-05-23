@@ -248,6 +248,7 @@ def test_is_google_doc_url_uses_hostname_not_substring():
 
 def test_fetch_url_for_ai_source_only_converts_real_google_sheets_urls():
     sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
+    scoped_sheet_url = "https://docs.google.com/spreadsheets/u/0/d/sheet-id/edit#gid=99"
     malformed_sheet_url = "https://docs.google.com/spreadsheets/edit#gid=99"
     non_google_url = (
         "https://example.test/thread?"
@@ -255,6 +256,9 @@ def test_fetch_url_for_ai_source_only_converts_real_google_sheets_urls():
     )
 
     assert _fetch_url_for_ai_source(sheet_url) == (
+        "https://docs.google.com/spreadsheets/d/sheet-id/gviz/tq?tqx=out:csv&gid=99"
+    )
+    assert _fetch_url_for_ai_source(scoped_sheet_url) == (
         "https://docs.google.com/spreadsheets/d/sheet-id/gviz/tq?tqx=out:csv&gid=99"
     )
     assert _fetch_url_for_ai_source(malformed_sheet_url) == malformed_sheet_url

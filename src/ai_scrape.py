@@ -149,10 +149,21 @@ def ai_scrape_releases(
 def _fetch_url_for_ai_source(url: str) -> str:
     parsed = urllib.parse.urlparse(url)
     hostname = parsed.hostname
+    path_parts = [part for part in parsed.path.split("/") if part]
+    is_standard_sheet_path = len(path_parts) >= 3 and path_parts[:2] == [
+        "spreadsheets",
+        "d",
+    ]
+    is_session_scoped_sheet_path = (
+        len(path_parts) >= 5
+        and path_parts[:2] == ["spreadsheets", "u"]
+        and path_parts[2].isdigit()
+        and path_parts[3] == "d"
+    )
     if (
         hostname == "docs.google.com"
         or (hostname is not None and hostname.endswith(".docs.google.com"))
-    ) and parsed.path.startswith("/spreadsheets/d/"):
+    ) and (is_standard_sheet_path or is_session_scoped_sheet_path):
         return google_sheets.google_sheet_csv_url(url)
     return url
 
