@@ -1778,14 +1778,11 @@
     "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-    "source_label": "FEL.txt",
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
     "tmdb_id": "11601",
     "imdb_id": "tt0164181",
     "poster_path": "data/posters/11601.jpg",
@@ -1800,9 +1797,9 @@
       "English"
     ],
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "Stir of Echoes (1999) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "\"Stir of Echoes [1999]\" listed in the iammarxg/FEL master README (curated Profile 7 FEL list).",
+      "evidence_type": "github-list",
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
@@ -2067,12 +2064,11 @@
     "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-    "source_label": "FEL.txt",
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+    "source_label": "letterboxd",
     "tmdb_id": "68",
     "imdb_id": "tt0088846",
     "poster_path": "data/posters/68.jpg",
@@ -2087,9 +2083,9 @@
       "English"
     ],
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "Brazil (1985) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+      "quote": "\"Brazil (1985)\" listed on mikimajk's \"List of Dolby Vision P7-FEL Films\" Letterboxd list (page 2).",
+      "evidence_type": "letterboxd-list",
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
@@ -6457,45 +6453,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "The Hunted (2003) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "10 to Midnight",
-    "fel_confirmed": true,
-    "release_date": "1983-03-11",
-    "studio": "Y & M Productions",
-    "audio_formats": [
-      "DTS-HD MA 2.0 Mono",
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-    "source_label": "FEL.txt",
-    "tmdb_id": "18587",
-    "imdb_id": "tt0085121",
-    "poster_path": "data/posters/18587.jpg",
-    "release_url": "https://www.themoviedb.org/movie/18587",
-    "bluray_url": "https://www.blu-ray.com/movies/10-to-Midnight-4K-Blu-ray/394243/",
-    "bluray_release_date": "2026-05-12",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "10 to Midnight (1983) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -14262,15 +14219,11 @@
     "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=168",
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-    "source_label": "FEL.txt",
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
     "tmdb_id": "117",
     "imdb_id": "tt0094226",
     "poster_path": "data/posters/117.jpg",
@@ -14293,9 +14246,9 @@
       "Polish"
     ],
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "The Untouchables (1987) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "\"The Untouchables [1987]\" listed in the iammarxg/FEL master README (curated Profile 7 FEL list).",
+      "evidence_type": "github-list",
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
@@ -25645,46 +25598,6 @@
     "collected_at": "2026-05-22T12:36:04+00:00"
   },
   {
-    "movie_title": "The Ninth Gate",
-    "fel_confirmed": true,
-    "release_date": "1999-08-25",
-    "studio": "R.P. Productions",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1",
-      "LPCM 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-    "source_label": "FEL.txt",
-    "tmdb_id": "622",
-    "imdb_id": "tt0142688",
-    "poster_path": "data/posters/622.jpg",
-    "release_url": "https://www.themoviedb.org/movie/622",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Ninth-Gate-4K-Blu-ray/408649/",
-    "bluray_release_date": "2026-04-21",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "The Ninth Gate (1999) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "The Boogens",
     "fel_confirmed": true,
     "release_date": "1981-09-25",
@@ -27079,42 +26992,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Smile 2 (2024) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Wicked",
-    "fel_confirmed": true,
-    "release_date": "2024-10-16",
-    "studio": "Universal Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD+ 7.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-    "source_label": "FEL.txt",
-    "tmdb_id": "402431",
-    "imdb_id": "tt1262426",
-    "poster_path": "data/posters/402431.jpg",
-    "release_url": "https://www.themoviedb.org/movie/402431",
-    "bluray_url": "https://www.blu-ray.com/movies/Wicked-4K-Blu-ray/376398/",
-    "bluray_release_date": "2025-02-04",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "Wicked (2024) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -32036,44 +31913,6 @@
     "collected_at": "2026-05-22T12:36:04+00:00"
   },
   {
-    "movie_title": "The Great Outdoors",
-    "fel_confirmed": true,
-    "release_date": "1988-06-17",
-    "studio": "Universal Pictures",
-    "audio_formats": [
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-    "source_label": "FEL.txt",
-    "tmdb_id": "2617",
-    "imdb_id": "tt0095253",
-    "poster_path": "data/posters/2617.jpg",
-    "release_url": "https://www.themoviedb.org/movie/2617",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Great-Outdoors-4K-Blu-ray/399698/",
-    "bluray_release_date": "2026-05-26",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "The Great Outdoors (1988) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Enter the Ninja",
     "fel_confirmed": true,
     "release_date": "1981-07-17",
@@ -35507,35 +35346,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Arrow Sworn",
-    "fel_confirmed": true,
-    "release_date": "2022-06-18",
-    "studio": "Fresh Wave",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-    "source_label": "FEL.txt",
-    "tmdb_id": "990397",
-    "imdb_id": "",
-    "poster_path": "data/posters/990397.jpg",
-    "release_url": "https://www.themoviedb.org/movie/990397",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "Arrow Sworn (2022) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Land of the Dead",
     "fel_confirmed": true,
     "release_date": "2005-06-18",
@@ -38707,47 +38517,6 @@
     "collected_at": "2026-05-22T23:06:02+00:00"
   },
   {
-    "movie_title": "Wicked: For Good",
-    "fel_confirmed": true,
-    "release_date": "2025-11-19",
-    "studio": "Universal Pictures",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD+ 7.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-    "source_label": "FEL.txt",
-    "tmdb_id": "967941",
-    "imdb_id": "tt19847976",
-    "poster_path": "data/posters/967941.jpg",
-    "release_url": "https://www.themoviedb.org/movie/967941",
-    "bluray_url": "https://www.blu-ray.com/movies/Wicked-For-Good-4K-Blu-ray/390121/",
-    "bluray_release_date": "2026-01-20",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "Wicked: For Good (2025) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
     "movie_title": "Sleepy Hollow",
     "fel_confirmed": true,
     "release_date": "1999-11-19",
@@ -40395,12 +40164,11 @@
     "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-    "source_label": "FEL.txt",
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/",
+    "source_label": "letterboxd",
     "tmdb_id": "15121",
     "imdb_id": "tt0059742",
     "poster_path": "data/posters/15121.jpg",
@@ -40420,9 +40188,9 @@
       "Japanese"
     ],
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
-      "quote": "The Sound of Music (1965) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/",
+      "quote": "\"The Sound of Music (1965)\" listed on mikimajk's \"List of Dolby Vision P7-FEL Films\" Letterboxd list (page 8).",
+      "evidence_type": "letterboxd-list",
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
