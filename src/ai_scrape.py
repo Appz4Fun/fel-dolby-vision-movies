@@ -32,6 +32,7 @@ _DISCOVERY_USER = (
     "track confirmed Dolby Vision Profile 7 FEL Blu-ray releases. Return a JSON "
     "array of up to 25 direct URL strings and nothing else."
 )
+AI_EXTRACTION_ATTEMPTS = 3
 
 
 def _parse_url_list(text: str) -> list[str]:
@@ -91,7 +92,7 @@ def ai_extract_releases(
     releases: list[FelRelease] = []
     for source_url, text in pages:
         try:
-            candidates = ai_client.extract_candidates(source_url, text)
+            candidates = _extract_candidates_with_retries(ai_client, source_url, text)
         except httpx.HTTPError as exc:
             print(f"ai-scrape: extraction failed for {source_url}: {exc}")
             continue
@@ -99,6 +100,19 @@ def ai_extract_releases(
             if candidate.title:
                 releases.append(_candidate_to_release(candidate, collected_at))
     return releases
+
+
+def _extract_candidates_with_retries(
+    ai_client: AIClient, source_url: str, text: str
+) -> list[FoundCandidate]:
+    last_error: httpx.HTTPError | None = None
+    for _attempt in range(AI_EXTRACTION_ATTEMPTS):
+        try:
+            return ai_client.extract_candidates(source_url, text)
+        except httpx.HTTPError as exc:
+            last_error = exc
+    assert last_error is not None
+    raise last_error
 
 
 def ai_scrape_releases(
@@ -110,14 +124,30 @@ def ai_scrape_releases(
         cookie_header=os.environ.get("FORUM_COOKIE_HEADER"),
     ) as html_fetcher:
         for source_url in source_urls:
-            fetch_url = source_url
-            if "docs.google.com/spreadsheets/" in source_url:
-                fetch_url = google_sheets.google_sheet_csv_url(source_url)
-            result = html_fetcher.fetch(fetch_url, raise_on_error=False)
+            try:
+                fetch_url = _fetch_url_for_ai_source(source_url)
+                result = html_fetcher.fetch(fetch_url, raise_on_error=False)
+            except Exception as exc:
+                if _is_google_doc_url(source_url):
+                    print(f"ai-scrape: fetch failed for {source_url}: {exc}")
+                    continue
+                raise
             if result.error:
+                if _is_google_doc_url(source_url):
+                    print(f"ai-scrape: fetch failed for {source_url}: {result.error}")
                 continue
             pages.append((source_url, result.text))
     return ai_extract_releases(ai_client, pages)
+
+
+def _fetch_url_for_ai_source(url: str) -> str:
+    if "docs.google.com/spreadsheets/" in url:
+        return google_sheets.google_sheet_csv_url(url)
+    return url
+
+
+def _is_google_doc_url(url: str) -> bool:
+    return "docs.google.com/" in url
 
 
 def _always_fel_path_for(source_path: Path) -> Path:
