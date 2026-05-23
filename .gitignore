@@ -12,3 +12,7 @@ docs/superpowers/
 .pytest_cache/
 .ruff_cache/
 CONTEXT.md
+
+
+#Ignore vscode AI rules
+.github/instructions/codacy.instructions.md
