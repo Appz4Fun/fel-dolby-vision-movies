@@ -124,18 +124,20 @@ def ai_scrape_releases(
         cookie_header=os.environ.get("FORUM_COOKIE_HEADER"),
     ) as html_fetcher:
         for source_url in source_urls:
+            is_google_doc = _is_google_doc_url(source_url)
             try:
                 fetch_url = _fetch_url_for_ai_source(source_url)
-                result = html_fetcher.fetch(fetch_url, raise_on_error=False)
+                result = html_fetcher.fetch(fetch_url, raise_on_error=not is_google_doc)
             except Exception as exc:
-                if _is_google_doc_url(source_url):
+                if is_google_doc:
                     print(f"ai-scrape: fetch failed for {source_url}: {exc}")
                     continue
                 raise
             if result.error:
-                if _is_google_doc_url(source_url):
+                if is_google_doc:
                     print(f"ai-scrape: fetch failed for {source_url}: {result.error}")
-                continue
+                    continue
+                raise RuntimeError(result.error)
             pages.append((source_url, result.text))
     return ai_extract_releases(ai_client, pages)
 
@@ -147,7 +149,10 @@ def _fetch_url_for_ai_source(url: str) -> str:
 
 
 def _is_google_doc_url(url: str) -> bool:
-    return "docs.google.com/" in url
+    hostname = urllib.parse.urlparse(url).hostname
+    return hostname == "docs.google.com" or (
+        hostname is not None and hostname.endswith(".docs.google.com")
+    )
 
 
 def _always_fel_path_for(source_path: Path) -> Path:

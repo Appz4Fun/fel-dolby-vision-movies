@@ -1,9 +1,11 @@
 import json
 
 import httpx
+import pytest
 
 from ai_scrape import (
     _candidate_to_release,
+    _is_google_doc_url,
     _load_existing_releases,
     _parse_url_list,
     ai_discover_sources,
@@ -162,7 +164,15 @@ def test_ai_extract_releases_moves_on_after_retries_are_exhausted(capsys):
     assert f"ai-scrape: extraction failed for {sheet_url}" in capsys.readouterr().out
 
 
-def test_ai_scrape_releases_uses_google_sheet_csv_urls_and_skips_fetch_errors(
+def test_is_google_doc_url_uses_hostname_not_substring():
+    assert _is_google_doc_url("https://docs.google.com/spreadsheets/d/sheet-id/edit")
+    assert _is_google_doc_url("https://foo.docs.google.com/document/d/doc-id/edit")
+    assert not _is_google_doc_url(
+        "https://example.test/thread?next=https://docs.google.com/spreadsheets/d/id"
+    )
+
+
+def test_ai_scrape_releases_uses_google_sheet_csv_urls_and_fetches_forum_sources(
     monkeypatch,
     tmp_path,
 ):
@@ -187,8 +197,6 @@ def test_ai_scrape_releases_uses_google_sheet_csv_urls_and_skips_fetch_errors(
 
         def fetch(self, url: str, raise_on_error: bool = False):
             fetched_urls.append(url)
-            if "bad.test" in url:
-                return FakeFetchResult(error="failed")
             return FakeFetchResult(text="<html>Alien FEL</html>")
 
     monkeypatch.setattr(ai_scrape_mod.fetcher, "Fetcher", FakeFetcher)
@@ -211,7 +219,7 @@ def test_ai_scrape_releases_uses_google_sheet_csv_urls_and_skips_fetch_errors(
     sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
     forum_url = "https://forum.example.test/thread"
     releases = ai_scrape_releases(
-        [sheet_url, forum_url, "https://bad.test/thread"],
+        [sheet_url, forum_url],
         tmp_path / ".cache",
         FakeAIClient(),
     )
@@ -219,9 +227,44 @@ def test_ai_scrape_releases_uses_google_sheet_csv_urls_and_skips_fetch_errors(
     assert fetched_urls == [
         "https://docs.google.com/spreadsheets/d/sheet-id/gviz/tq?tqx=out:csv&gid=99",
         forum_url,
-        "https://bad.test/thread",
     ]
     assert [release.movie_title for release in releases] == [sheet_url, forum_url]
+
+
+def test_ai_scrape_releases_raises_non_google_fetch_result_errors(
+    monkeypatch,
+    tmp_path,
+):
+    import ai_scrape as ai_scrape_mod
+
+    fetched_urls: list[str] = []
+    bad_url = "https://bad.test/thread"
+
+    class FakeFetchResult:
+        text = ""
+        error = "failed to fetch bad URL"
+
+    class FakeFetcher:
+        def __init__(self, *args, **kwargs) -> None:
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+        def fetch(self, url: str, raise_on_error: bool = False):
+            fetched_urls.append(url)
+            assert raise_on_error is True
+            return FakeFetchResult()
+
+    monkeypatch.setattr(ai_scrape_mod.fetcher, "Fetcher", FakeFetcher)
+
+    with pytest.raises(RuntimeError, match="failed to fetch bad URL"):
+        ai_scrape_releases([bad_url], tmp_path / ".cache", FakeAIClient())
+
+    assert fetched_urls == [bad_url]
 
 
 def test_ai_scrape_releases_catches_google_sheet_fetch_exceptions(
