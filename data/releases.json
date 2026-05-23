@@ -15123,8 +15123,7 @@
     "bluray_url": "https://www.blu-ray.com/movies/The-Twilight-Saga-Breaking-Dawn-Part-2-4K-Blu-ray/346101/",
     "bluray_release_date": "",
     "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
+      "Dolby Vision"
     ],
     "audio_languages": [
       "English",
@@ -17035,8 +17034,7 @@
     "bluray_url": "https://www.blu-ray.com/movies/The-Twilight-Saga-Eclipse-4K-Blu-ray/346103/",
     "bluray_release_date": "",
     "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
+      "Dolby Vision"
     ],
     "audio_languages": [
       "English",
@@ -17331,8 +17329,7 @@
     "bluray_url": "https://www.blu-ray.com/movies/Dead-Again-4K-Blu-ray/384804/",
     "bluray_release_date": "2026-03-17",
     "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
+      "Dolby Vision"
     ],
     "audio_languages": [],
     "fel_evidence": {
@@ -27180,8 +27177,7 @@
     "bluray_url": "https://www.blu-ray.com/movies/The-Twilight-Saga-Breaking-Dawn-Part-1-4K-Blu-ray/346102/",
     "bluray_release_date": "",
     "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
+      "Dolby Vision"
     ],
     "audio_languages": [
       "English",
@@ -41070,5 +41066,3655 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Child's Play",
+    "fel_confirmed": true,
+    "release_date": "2019-06-19",
+    "studio": "KatzSmith Productions",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+    "source_label": "letterboxd",
+    "tmdb_id": "533642",
+    "imdb_id": "tt8663516",
+    "poster_path": "data/posters/533642.jpg",
+    "release_url": "https://www.themoviedb.org/movie/533642",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+      "quote": "Child's Play",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Lilo & Stitch",
+    "fel_confirmed": true,
+    "release_date": "2025-05-17",
+    "studio": "Walt Disney Pictures",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD+ 7.1",
+      "DD 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/6/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/6/",
+    "source_label": "letterboxd",
+    "tmdb_id": "552524",
+    "imdb_id": "tt11655566",
+    "poster_path": "data/posters/552524.jpg",
+    "release_url": "https://www.themoviedb.org/movie/552524",
+    "bluray_url": "https://www.blu-ray.com/movies/Lilo-and-Stitch-4K-Blu-ray/392930/",
+    "bluray_release_date": "2025-08-26",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish",
+      "Japanese"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/6/",
+      "quote": "\"Lilo & Stitch\" (appears twice on the list)",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Killer's Game",
+    "fel_confirmed": true,
+    "release_date": "2024-09-12",
+    "studio": "Dogbone Entertainment",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+    "source_label": "letterboxd",
+    "tmdb_id": "507241",
+    "imdb_id": "tt0327785",
+    "poster_path": "data/posters/507241.jpg",
+    "release_url": "https://www.themoviedb.org/movie/507241",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+      "quote": "Listed as entry #62 on Letterboxd mikimajk P7-FEL list page 5: 'The Killer's Game'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Willy's Wonderland",
+    "fel_confirmed": true,
+    "release_date": "2021-02-12",
+    "studio": "Saturn Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+    "source_label": "letterboxd",
+    "tmdb_id": "643586",
+    "imdb_id": "tt8114980",
+    "poster_path": "data/posters/643586.jpg",
+    "release_url": "https://www.themoviedb.org/movie/643586",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+      "quote": "\"Willy's Wonderland\"",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Bill & Ted Face the Music",
+    "fel_confirmed": true,
+    "release_date": "2020-08-27",
+    "studio": "Endeavor Content",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/",
+    "source_label": "letterboxd",
+    "tmdb_id": "501979",
+    "imdb_id": "tt1086064",
+    "poster_path": "data/posters/501979.jpg",
+    "release_url": "https://www.themoviedb.org/movie/501979",
+    "bluray_url": "https://www.blu-ray.com/movies/Bill-and-Ted-Face-the-Music-4K-Blu-ray/362973/",
+    "bluray_release_date": "2024-08-06",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/",
+      "quote": "Bill & Ted Face the Music",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Man from U.N.C.L.E.",
+    "fel_confirmed": true,
+    "release_date": "2015-08-13",
+    "studio": "Wigram Productions",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "203801",
+    "imdb_id": "tt1638355",
+    "poster_path": "data/posters/203801.jpg",
+    "release_url": "https://www.themoviedb.org/movie/203801",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "Listed as #340 on iammarxg/FEL README: 'The Man from U.N.C.L.E. (2015)'. Also present on letterboxd mikimajk P7-FEL list (page 6).",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "You're Next",
+    "fel_confirmed": true,
+    "release_date": "2013-08-22",
+    "studio": "Snoot Entertainment",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+    "source_label": "letterboxd",
+    "tmdb_id": "83899",
+    "imdb_id": "tt1853739",
+    "poster_path": "data/posters/83899.jpg",
+    "release_url": "https://www.themoviedb.org/movie/83899",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+      "quote": "\"You're Next\"",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Pride & Prejudice",
+    "fel_confirmed": true,
+    "release_date": "2005-09-16",
+    "studio": "StudioCanal",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+    "source_label": "letterboxd",
+    "tmdb_id": "4348",
+    "imdb_id": "tt0414387",
+    "poster_path": "data/posters/4348.jpg",
+    "release_url": "https://www.themoviedb.org/movie/4348",
+    "bluray_url": "https://www.blu-ray.com/movies/Pride-and-Prejudice-4K-Blu-ray/398080/",
+    "bluray_release_date": "2025-11-25",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+      "quote": "Listed on letterboxd mikimajk P7-FEL list page 7: 'Pride & Prejudice'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Devil's Rejects",
+    "fel_confirmed": true,
+    "release_date": "2005-07-22",
+    "studio": "Cinerenta",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+    "source_label": "letterboxd",
+    "tmdb_id": "1696",
+    "imdb_id": "tt0395584",
+    "poster_path": "data/posters/1696.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1696",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+      "quote": "\"The Devil's Rejects\" — appears in the curated 'List of Dolby Vision P7-FEL Films' on Letterboxd (page 3).",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Kill Bill: Vol. 2",
+    "fel_confirmed": true,
+    "release_date": "2004-04-16",
+    "studio": "Super Cool ManChu",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "393",
+    "imdb_id": "tt0378194",
+    "poster_path": "data/posters/393.jpg",
+    "release_url": "https://www.themoviedb.org/movie/393",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "277. Kill Bill: Vol. 2 [2004]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Kill Bill: Vol. 1",
+    "fel_confirmed": true,
+    "release_date": "2003-10-10",
+    "studio": "Miramax",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "24",
+    "imdb_id": "tt0266697",
+    "poster_path": "data/posters/24.jpg",
+    "release_url": "https://www.themoviedb.org/movie/24",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "Kill Bill: Vol. 1 [2003]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Lilo & Stitch",
+    "fel_confirmed": true,
+    "release_date": "2002-06-21",
+    "studio": "Walt Disney Pictures",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/6/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/6/",
+    "source_label": "letterboxd",
+    "tmdb_id": "11544",
+    "imdb_id": "tt0275847",
+    "poster_path": "data/posters/11544.jpg",
+    "release_url": "https://www.themoviedb.org/movie/11544",
+    "bluray_url": "https://www.blu-ray.com/movies/Lilo-and-Stitch-4K-Blu-ray/385554/",
+    "bluray_release_date": "2025-05-06",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French (Canada)",
+      "Spanish",
+      "Japanese"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/6/",
+      "quote": "Lilo & Stitch",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Asterix & Obelix: Mission Cleopatra",
+    "fel_confirmed": true,
+    "release_date": "2002-01-30",
+    "studio": "Pathé",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "letterboxd",
+    "tmdb_id": "2899",
+    "imdb_id": "tt0250223",
+    "poster_path": "data/posters/2899.jpg",
+    "release_url": "https://www.themoviedb.org/movie/2899",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+      "quote": "Asterix & Obelix: Mission Cleopatra",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "But I'm a Cheerleader",
+    "fel_confirmed": true,
+    "release_date": "2000-07-07",
+    "studio": "Ignite Entertainment",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+    "source_label": "letterboxd",
+    "tmdb_id": "20770",
+    "imdb_id": "tt0179116",
+    "poster_path": "data/posters/20770.jpg",
+    "release_url": "https://www.themoviedb.org/movie/20770",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+      "quote": "\"But I'm a Cheerleader\" — appears in the curated 'List of Dolby Vision P7-FEL Films' on Letterboxd (page 2).",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The General's Daughter",
+    "fel_confirmed": true,
+    "release_date": "1999-06-18",
+    "studio": "MFP Munich Film Partners GmbH & Company I. Produktions KG",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/",
+    "source_label": "letterboxd",
+    "tmdb_id": "2275",
+    "imdb_id": "tt0144214",
+    "poster_path": "data/posters/2275.jpg",
+    "release_url": "https://www.themoviedb.org/movie/2275",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/",
+      "quote": "\"The General's Daughter\"",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Pi",
+    "fel_confirmed": true,
+    "release_date": "1998-07-10",
+    "studio": "Harvest Filmworks",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+    "source_label": "letterboxd",
+    "tmdb_id": "473",
+    "imdb_id": "tt0138704",
+    "poster_path": "data/posters/473.jpg",
+    "release_url": "https://www.themoviedb.org/movie/473",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+      "quote": "Pi",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "In & Out",
+    "fel_confirmed": true,
+    "release_date": "1997-09-10",
+    "studio": "Paramount Pictures",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+    "source_label": "letterboxd",
+    "tmdb_id": "10806",
+    "imdb_id": "tt0119360",
+    "poster_path": "data/posters/10806.jpg",
+    "release_url": "https://www.themoviedb.org/movie/10806",
+    "bluray_url": "https://www.blu-ray.com/movies/In-and-Out-4K-Blu-ray/353502/",
+    "bluray_release_date": "2024-07-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+      "quote": "Listed as entry #8 on Letterboxd mikimajk P7-FEL list page 5: 'In & Out'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Dante's Peak",
+    "fel_confirmed": true,
+    "release_date": "1997-02-07",
+    "studio": "Pacific Western",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+    "source_label": "letterboxd",
+    "tmdb_id": "9619",
+    "imdb_id": "tt0118928",
+    "poster_path": "data/posters/9619.jpg",
+    "release_url": "https://www.themoviedb.org/movie/9619",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+      "quote": "Listed on letterboxd mikimajk P7-FEL list page 2: 'Dante's Peak'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Wayne's World 2",
+    "fel_confirmed": true,
+    "release_date": "1993-12-10",
+    "studio": "Paramount Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+    "source_label": "letterboxd",
+    "tmdb_id": "8873",
+    "imdb_id": "tt0108525",
+    "poster_path": "data/posters/8873.jpg",
+    "release_url": "https://www.themoviedb.org/movie/8873",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+      "quote": "Wayne's World 2 appears on page 10 of the curated 'List of Dolby Vision P7-FEL Films' on Letterboxd.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Jacob's Ladder",
+    "fel_confirmed": true,
+    "release_date": "1990-11-02",
+    "studio": "Carolco Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+    "source_label": "letterboxd",
+    "tmdb_id": "2291",
+    "imdb_id": "tt0099871",
+    "poster_path": "data/posters/2291.jpg",
+    "release_url": "https://www.themoviedb.org/movie/2291",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+      "quote": "Jacob's Ladder",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "April Fool's Day",
+    "fel_confirmed": true,
+    "release_date": "1986-03-27",
+    "studio": "YCTM",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "letterboxd",
+    "tmdb_id": "24913",
+    "imdb_id": "tt0090655",
+    "poster_path": "data/posters/24913.jpg",
+    "release_url": "https://www.themoviedb.org/movie/24913",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+      "quote": "April Fool's Day",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "To Live and Die in L.A.",
+    "fel_confirmed": true,
+    "release_date": "1985-11-01",
+    "studio": "SLM Production Group",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "9846",
+    "imdb_id": "tt0090180",
+    "poster_path": "data/posters/9846.jpg",
+    "release_url": "https://www.themoviedb.org/movie/9846",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Listed as entry #551 in iammarxg/FEL README: 'To Live and Die in L.A. [1985]'.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Pee-wee's Big Adventure",
+    "fel_confirmed": true,
+    "release_date": "1985-07-26",
+    "studio": "Aspen Film Society",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+    "source_label": "letterboxd",
+    "tmdb_id": "5683",
+    "imdb_id": "tt0089791",
+    "poster_path": "data/posters/5683.jpg",
+    "release_url": "https://www.themoviedb.org/movie/5683",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+      "quote": "Listed on Letterboxd mikimajk 'List of Dolby Vision P7-FEL Films' (page 7).",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Coal Miner's Daughter",
+    "fel_confirmed": true,
+    "release_date": "1980-03-07",
+    "studio": "Universal Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+    "source_label": "letterboxd",
+    "tmdb_id": "16769",
+    "imdb_id": "tt0080549",
+    "poster_path": "data/posters/16769.jpg",
+    "release_url": "https://www.themoviedb.org/movie/16769",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+      "quote": "Coal Miner's Daughter",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Donovan's Reef",
+    "fel_confirmed": true,
+    "release_date": "1963-06-12",
+    "studio": "Paramount Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+    "source_label": "letterboxd",
+    "tmdb_id": "15875",
+    "imdb_id": "tt0057007",
+    "poster_path": "data/posters/15875.jpg",
+    "release_url": "https://www.themoviedb.org/movie/15875",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+      "quote": "Donovan's Reef",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Abbott and Costello Meet Dr. Jekyll and Mr. Hyde",
+    "fel_confirmed": true,
+    "release_date": "1953-08-01",
+    "studio": "Universal Pictures",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/",
+    "source_label": "letterboxd",
+    "tmdb_id": "3023",
+    "imdb_id": "tt0045469",
+    "poster_path": "data/posters/3023.jpg",
+    "release_url": "https://www.themoviedb.org/movie/3023",
+    "bluray_url": "https://www.blu-ray.com/movies/Abbott-and-Costello-Meet-Dr-Jekyll-and-Mr-Hyde-4K-Blu-ray/382818/",
+    "bluray_release_date": "2025-11-25",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/",
+      "quote": "Listed as entry #13 on Letterboxd mikimajk P7-FEL list page 1: 'Abbott and Costello Meet Dr. Jekyll and Mr. Hyde'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "11 Rebels",
+    "fel_confirmed": true,
+    "release_date": "2024-11-01",
+    "studio": "Toei Company",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "letterboxd",
+    "tmdb_id": "1310682",
+    "imdb_id": "tt33367745",
+    "poster_path": "data/posters/1310682.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1310682",
+    "bluray_url": "https://www.blu-ray.com/movies/11-Rebels-4K-Blu-ray/383816/",
+    "bluray_release_date": "2025-06-10",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Japanese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+      "quote": "Listed on letterboxd mikimajk P7-FEL list page 1: '11 Rebels'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "48 Hrs. AKA 48 Hours",
+    "fel_confirmed": true,
+    "release_date": "1982",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "\"3. 48 Hrs. AKA 48 Hours [1982]\" — entry #3 in the iammarxg/FEL master list (627 P7-FEL titles, refreshed 2025-02-24). Also confirmed on Letterboxd P7-FEL list page 1.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "A Better Tomorrow II",
+    "fel_confirmed": true,
+    "release_date": "1987-12-17",
+    "studio": "Film Workshop",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "letterboxd",
+    "tmdb_id": "18305",
+    "imdb_id": "tt0094357",
+    "poster_path": "data/posters/18305.jpg",
+    "release_url": "https://www.themoviedb.org/movie/18305",
+    "bluray_url": "https://www.blu-ray.com/movies/A-Better-Tomorrow-II-4K-Blu-ray/395897/",
+    "bluray_release_date": "2025-11-18",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+      "quote": "\"A Better Tomorrow II\"",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "A Better Tomorrow III: Love and Death in Saigon",
+    "fel_confirmed": true,
+    "release_date": "1989-10-20",
+    "studio": "Film Workshop",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/",
+    "source_label": "letterboxd",
+    "tmdb_id": "41244",
+    "imdb_id": "tt0098691",
+    "poster_path": "data/posters/41244.jpg",
+    "release_url": "https://www.themoviedb.org/movie/41244",
+    "bluray_url": "https://www.blu-ray.com/movies/A-Better-Tomorrow-III-Love-and-Death-in-Saigon-4K-Blu-ray/395898/",
+    "bluray_release_date": "2025-11-18",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/",
+      "quote": "A Better Tomorrow III: Love and Death in Saigon",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "A Moment of Romance",
+    "fel_confirmed": true,
+    "release_date": "1990-06-14",
+    "studio": "Paka Hill Film Production Co.",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "81128",
+    "imdb_id": "tt0100777",
+    "poster_path": "data/posters/81128.jpg",
+    "release_url": "https://www.themoviedb.org/movie/81128",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "A Moment of Romance [1990]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Aguirre, der Zorn Gottes AKA Aguirre, the Wrath of God",
+    "fel_confirmed": true,
+    "release_date": "1972",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "11. Aguirre, der Zorn Gottes AKA Aguirre, the Wrath of God [1972]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Aguirre, the Wrath of God",
+    "fel_confirmed": true,
+    "release_date": "1972-12-29",
+    "studio": "Werner Herzog Filmproduktion",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "2000",
+    "imdb_id": "tt0068182",
+    "poster_path": "data/posters/2000.jpg",
+    "release_url": "https://www.themoviedb.org/movie/2000",
+    "bluray_url": "https://www.blu-ray.com/movies/Aguirre-the-Wrath-of-God-4K-Blu-ray/370414/",
+    "bluray_release_date": "2024-12-03",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "German",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Listed as entry #11 in iammarxg/FEL README: 'Aguirre, der Zorn Gottes AKA Aguirre, the Wrath of God [1972]'.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Ajeossi AKA The Man from Nowhere",
+    "fel_confirmed": true,
+    "release_date": "2010",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "iammarxg/FEL README entry #13: 'The Man from Nowhere (2010)'. Also confirmed on Letterboxd mikimajk list page 6.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Alphaville",
+    "fel_confirmed": true,
+    "release_date": "1965-05-05",
+    "studio": "Filmstudio",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "letterboxd",
+    "tmdb_id": "8072",
+    "imdb_id": "tt0058898",
+    "poster_path": "data/posters/8072.jpg",
+    "release_url": "https://www.themoviedb.org/movie/8072",
+    "bluray_url": "https://www.blu-ray.com/movies/Alphaville-4K-Blu-ray/357721/",
+    "bluray_release_date": "2024-08-27",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+      "quote": "Listed on letterboxd mikimajk P7-FEL list page 1: 'Alphaville'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "An Autumn's Tale",
+    "fel_confirmed": true,
+    "release_date": "1987-07-16",
+    "studio": "D & B Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "64015",
+    "imdb_id": "tt0093426",
+    "poster_path": "data/posters/64015.jpg",
+    "release_url": "https://www.themoviedb.org/movie/64015",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "\"Chou tin dik tong wah AKA An Autumn's Tale [1987]\" — listed (entry near top, C-range) in iammarxg/FEL master list. Also on Letterboxd P7-FEL list page 1.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Army of Shadows",
+    "fel_confirmed": true,
+    "release_date": "1969-09-10",
+    "studio": "Fono Roma",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "15383",
+    "imdb_id": "tt0064040",
+    "poster_path": "data/posters/15383.jpg",
+    "release_url": "https://www.themoviedb.org/movie/15383",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "L'armée des ombres AKA Army of Shadows [1969]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Black Cat, White Cat",
+    "fel_confirmed": true,
+    "release_date": "1998-06-01",
+    "studio": "CiBy 2000",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "1075",
+    "imdb_id": "tt0118843",
+    "poster_path": "data/posters/1075.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1075",
+    "bluray_url": "https://www.blu-ray.com/movies/Black-Cat-White-Cat-4K-Blu-ray/329044/",
+    "bluray_release_date": "2023-04-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Serbian"
+    ],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "89. Crna mačka, beli mačor AKA Black Cat, White Cat [1998]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "BlacKkKlansman AKA Black Klansman",
+    "fel_confirmed": true,
+    "release_date": "2018",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "BlacKkKlansman [2018]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Blue Is the Warmest Color",
+    "fel_confirmed": true,
+    "release_date": "2013-10-09",
+    "studio": "Wild Bunch",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "letterboxd",
+    "tmdb_id": "152584",
+    "imdb_id": "tt2278871",
+    "poster_path": "data/posters/152584.jpg",
+    "release_url": "https://www.themoviedb.org/movie/152584",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+      "quote": "Blue Is the Warmest Color",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Breathless",
+    "fel_confirmed": true,
+    "release_date": "1960-03-16",
+    "studio": "Les Films Impéria",
+    "audio_formats": [
+      "LPCM Mono"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "269",
+    "imdb_id": "tt0053472",
+    "poster_path": "data/posters/269.jpg",
+    "release_url": "https://www.themoviedb.org/movie/269",
+    "bluray_url": "https://www.blu-ray.com/movies/Breathless-4K-Blu-ray/336554/",
+    "bluray_release_date": "2023-07-18",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "627. À bout de souffle AKA Breathless [1960]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Bud Abbott and Lou Costello Meet the Invisible Man",
+    "fel_confirmed": true,
+    "release_date": "1951-03-14",
+    "studio": "Universal Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+    "source_label": "letterboxd",
+    "tmdb_id": "33475",
+    "imdb_id": "tt0043255",
+    "poster_path": "data/posters/33475.jpg",
+    "release_url": "https://www.themoviedb.org/movie/33475",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
+      "quote": "Listed as entry #30 on Letterboxd mikimajk P7-FEL list page 2: 'Bud Abbott and Lou Costello Meet the Invisible Man'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Busanhaeng AKA Train to Busan",
+    "fel_confirmed": true,
+    "release_date": "2016",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "iammarxg/FEL README entry #65: 'Train to Busan (2016)'. Also on Letterboxd mikimajk list page 9.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Chou tin dik tong wah AKA An Autumn’s Tale",
+    "fel_confirmed": true,
+    "release_date": "1987",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "\"Chou tin dik tong wah AKA An Autumn's Tale [1987]\" — listed in iammarxg/FEL master list.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Contempt",
+    "fel_confirmed": true,
+    "release_date": "1963-10-29",
+    "studio": "Rome-Paris Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "266",
+    "imdb_id": "tt0057345",
+    "poster_path": "data/posters/266.jpg",
+    "release_url": "https://www.themoviedb.org/movie/266",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "309. Le mépris AKA Contempt [1963]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Crna mačka, beli mačor AKA Black Cat, White Cat",
+    "fel_confirmed": true,
+    "release_date": "1998",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Crna mačka, beli mačor AKA Black Cat, White Cat [1998]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "C’era una volta il West AKA Once Upon a Time in the West",
+    "fel_confirmed": true,
+    "release_date": "1968",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "66. C'era una volta il West AKA Once Upon a Time in the West [1968]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Dead of Night",
+    "fel_confirmed": true,
+    "release_date": "1974-08-29",
+    "studio": "Impact Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+    "source_label": "letterboxd",
+    "tmdb_id": "38996",
+    "imdb_id": "tt0068457",
+    "poster_path": "data/posters/38996.jpg",
+    "release_url": "https://www.themoviedb.org/movie/38996",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+      "quote": "Dead of Night",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Der Hauptmann AKA The Captain",
+    "fel_confirmed": true,
+    "release_date": "2017",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Listed as entry #115 in iammarxg/FEL README: 'Der Hauptmann AKA The Captain [2017]'.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Detective Story",
+    "fel_confirmed": true,
+    "release_date": "1983-07-16",
+    "studio": "Toei Company",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+    "source_label": "letterboxd",
+    "tmdb_id": "292674",
+    "imdb_id": "tt0217080",
+    "poster_path": "data/posters/292674.jpg",
+    "release_url": "https://www.themoviedb.org/movie/292674",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+      "quote": "Listed on Letterboxd mikimajk 'List of Dolby Vision P7-FEL Films' (page 3, D section).",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Dogtooth",
+    "fel_confirmed": true,
+    "release_date": "2009-10-22",
+    "studio": "Greek Film Centre",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+    "source_label": "letterboxd",
+    "tmdb_id": "38810",
+    "imdb_id": "tt1379182",
+    "poster_path": "data/posters/38810.jpg",
+    "release_url": "https://www.themoviedb.org/movie/38810",
+    "bluray_url": "https://www.blu-ray.com/movies/Dogtooth-4K-Blu-ray/390485/",
+    "bluray_release_date": "2025-09-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Greek"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+      "quote": "Dogtooth appears on page 3 of the curated 'List of Dolby Vision P7-FEL Films' on Letterboxd.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Dragon Ball Super: Super Hero",
+    "fel_confirmed": true,
+    "release_date": "2022-06-11",
+    "studio": "Toei Animation",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "Dolby TrueHD/Atmos 5.1",
+      "Dolby TrueHD 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+    "source_label": "letterboxd",
+    "tmdb_id": "610150",
+    "imdb_id": "tt14614892",
+    "poster_path": "data/posters/610150.jpg",
+    "release_url": "https://www.themoviedb.org/movie/610150",
+    "bluray_url": "https://www.blu-ray.com/movies/Dragon-Ball-Super-Super-Hero-4K-Blu-ray/343894/",
+    "bluray_release_date": "2023-11-21",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Japanese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+      "quote": "\"Dragon Ball Super: Super Hero\"",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Dragon Inn",
+    "fel_confirmed": true,
+    "release_date": "1967-11-23",
+    "studio": "Union Film Company",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "104237",
+    "imdb_id": "tt0060635",
+    "poster_path": "data/posters/104237.jpg",
+    "release_url": "https://www.themoviedb.org/movie/104237",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "326. Long men ke zhen AKA Dragon Inn [1967]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Due occhi diabolici AKA Two Evil Eyes",
+    "fel_confirmed": true,
+    "release_date": "1990",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "Two Evil Eyes [1990]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Eugenie",
+    "fel_confirmed": true,
+    "release_date": "1970-02-20",
+    "studio": "Video-Tel International Productions",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "letterboxd",
+    "tmdb_id": "87503",
+    "imdb_id": "tt0064494",
+    "poster_path": "data/posters/87503.jpg",
+    "release_url": "https://www.themoviedb.org/movie/87503",
+    "bluray_url": "https://www.blu-ray.com/movies/Eugenie-4K-Blu-ray/325794/",
+    "bluray_release_date": "2023-02-21",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+      "quote": "Eugenie",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Evil Dead II AKA Evil Dead 2: Dead by Dawn",
+    "fel_confirmed": true,
+    "release_date": "1987",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Listed as entry #149 in iammarxg/FEL README: 'Evil Dead II AKA Evil Dead 2: Dead by Dawn [1987]'.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Expend4bles AKA The Expendables 4",
+    "fel_confirmed": true,
+    "release_date": "2023",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "iammarxg/FEL README entry #153: 'The Expendables 4 (2023)'. Also on Letterboxd mikimajk list page 3.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "G.I. Samurai",
+    "fel_confirmed": true,
+    "release_date": "1979-09-17",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/",
+    "source_label": "letterboxd",
+    "tmdb_id": "73990",
+    "imdb_id": "tt0083050",
+    "poster_path": "data/posters/73990.jpg",
+    "release_url": "https://www.themoviedb.org/movie/73990",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/",
+      "quote": "\"G.I. Samurai\" — appears in the curated 'List of Dolby Vision P7-FEL Films' on Letterboxd (page 4).",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Goodbye Uncle Tom",
+    "fel_confirmed": true,
+    "release_date": "1971-09-23",
+    "studio": "Euro International Films",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/",
+    "source_label": "letterboxd",
+    "tmdb_id": "48691",
+    "imdb_id": "tt0180396",
+    "poster_path": "data/posters/48691.jpg",
+    "release_url": "https://www.themoviedb.org/movie/48691",
+    "bluray_url": "https://www.blu-ray.com/movies/Goodbye-Uncle-Tom-4K-Blu-ray/294307/",
+    "bluray_release_date": "2024-04-23",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10+"
+    ],
+    "audio_languages": [
+      "English",
+      "Italian"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/",
+      "quote": "Goodbye Uncle Tom",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "High Crime",
+    "fel_confirmed": true,
+    "release_date": "1973-08-12",
+    "studio": "Capitolina Produzioni Cinematografiche",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "87362",
+    "imdb_id": "tt0070552",
+    "poster_path": "data/posters/87362.jpg",
+    "release_url": "https://www.themoviedb.org/movie/87362",
+    "bluray_url": "https://www.blu-ray.com/movies/High-Crime-4K-Blu-ray/358734/",
+    "bluray_release_date": "2024-08-27",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10+"
+    ],
+    "audio_languages": [
+      "English",
+      "Italian"
+    ],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "296. La polizia incrimina la legge assolve AKA High Crime AKA The Marseilles Connection [1973]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Ip Man",
+    "fel_confirmed": true,
+    "release_date": "2008-12-12",
+    "studio": "Mandarin Films",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1",
+      "DD 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "14756",
+    "imdb_id": "tt1220719",
+    "poster_path": "data/posters/14756.jpg",
+    "release_url": "https://www.themoviedb.org/movie/14756",
+    "bluray_url": "https://www.blu-ray.com/movies/Ip-Man-4K-Blu-ray/280168/",
+    "bluray_release_date": "2022-11-22",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English",
+      "Mandarin",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "iammarxg/FEL README entry #624: 'Ip Man (2008)'. Also on Letterboxd mikimajk list page 5.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Ip Man 2",
+    "fel_confirmed": true,
+    "release_date": "2010-04-29",
+    "studio": "Mandarin Films",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "37472",
+    "imdb_id": "tt1386932",
+    "poster_path": "data/posters/37472.jpg",
+    "release_url": "https://www.themoviedb.org/movie/37472",
+    "bluray_url": "https://www.blu-ray.com/movies/Ip-Man-2-4K-Blu-ray/280167/",
+    "bluray_release_date": "2022-11-22",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English",
+      "Mandarin",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "Listed as #621 on iammarxg/FEL README: 'Ip Man 2 (2010)'. Also on letterboxd mikimajk P7-FEL list (page 5).",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Ip Man 3",
+    "fel_confirmed": true,
+    "release_date": "2015-12-24",
+    "studio": "Dreams Salon Entertainment Culture",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "365222",
+    "imdb_id": "tt2888046",
+    "poster_path": "data/posters/365222.jpg",
+    "release_url": "https://www.themoviedb.org/movie/365222",
+    "bluray_url": "https://www.blu-ray.com/movies/Ip-Man-3-4K-Blu-ray/325876/",
+    "bluray_release_date": "2022-12-06",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English",
+      "Spanish",
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "\"622. Yip Man 3 AKA Ip Man 3 [2015]\" — entry #622 in iammarxg/FEL master list.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Ip Man 4: The Finale",
+    "fel_confirmed": true,
+    "release_date": "2019-12-19",
+    "studio": "Mandarin Films",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "449924",
+    "imdb_id": "tt2076298",
+    "poster_path": "data/posters/449924.jpg",
+    "release_url": "https://www.themoviedb.org/movie/449924",
+    "bluray_url": "https://www.blu-ray.com/movies/Ip-Man-4-The-Finale-4K-Blu-ray/260362/",
+    "bluray_release_date": "2020-04-21",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "623. Yip Man 4 AKA Ip Man 4: The Finale [2019]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Kaamelott: The First Chapter",
+    "fel_confirmed": true,
+    "release_date": "2021-07-21",
+    "studio": "SND",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "577242",
+    "imdb_id": "tt9844322",
+    "poster_path": "data/posters/577242.jpg",
+    "release_url": "https://www.themoviedb.org/movie/577242",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Kaamelott - Premier volet AKA Kaamelott: First Installment [2021]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Last Cannibal World",
+    "fel_confirmed": true,
+    "release_date": "1977-02-08",
+    "studio": "Erre Cinematograsica S.r.l.",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+    "source_label": "letterboxd",
+    "tmdb_id": "30876",
+    "imdb_id": "tt0078437",
+    "poster_path": "data/posters/30876.jpg",
+    "release_url": "https://www.themoviedb.org/movie/30876",
+    "bluray_url": "https://www.blu-ray.com/movies/Last-Cannibal-World-4K-Blu-ray/385926/",
+    "bluray_release_date": "2025-06-24",
+    "hdr_formats": [
+      "Dolby Vision"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+      "quote": "Last Cannibal World",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Le Gendarme de Saint-Tropez",
+    "fel_confirmed": true,
+    "release_date": "1964-09-08",
+    "studio": "SNC",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "4727",
+    "imdb_id": "tt0058135",
+    "poster_path": "data/posters/4727.jpg",
+    "release_url": "https://www.themoviedb.org/movie/4727",
+    "bluray_url": "https://www.blu-ray.com/movies/Le-Gendarme-de-Saint-Tropez-4K-Blu-ray/317734/",
+    "bluray_release_date": "2022-07-13",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "307. Le gendarme de St. Tropez AKA The Troops of St. Tropez AKA The Gendarme of St. Tropez [1964]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Let Him Rest in Peace",
+    "fel_confirmed": true,
+    "release_date": "1985-06-14",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+    "source_label": "letterboxd",
+    "tmdb_id": "226860",
+    "imdb_id": "tt0380761",
+    "poster_path": "data/posters/226860.jpg",
+    "release_url": "https://www.themoviedb.org/movie/226860",
+    "bluray_url": "https://www.blu-ray.com/movies/Let-Him-Rest-in-Peace-4K-Blu-ray/360534/",
+    "bluray_release_date": "2023-02-24",
+    "hdr_formats": [
+      "Dolby Vision"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+      "quote": "Listed as entry #99 on Letterboxd mikimajk P7-FEL list page 5: 'Let Him Rest in Peace'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Manhunt",
+    "fel_confirmed": true,
+    "release_date": "1976-02-11",
+    "studio": "Daiei Film",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "69846",
+    "imdb_id": "tt0327002",
+    "poster_path": "data/posters/69846.jpg",
+    "release_url": "https://www.themoviedb.org/movie/69846",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "iammarxg/FEL README entry #280: 'Manhunt (1976)'. Also on Letterboxd mikimajk list page 6.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Ninja Wars",
+    "fel_confirmed": true,
+    "release_date": "1982-12-18",
+    "studio": "Toei Company",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "52970",
+    "imdb_id": "tt0089691",
+    "poster_path": "data/posters/52970.jpg",
+    "release_url": "https://www.themoviedb.org/movie/52970",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "238. Iga ninpôchô AKA Ninja Wars AKA The Book of Iga Ninja Arts [1982]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Notre-Dame on Fire",
+    "fel_confirmed": true,
+    "release_date": "2022-03-16",
+    "studio": "Pathé",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+    "source_label": "letterboxd",
+    "tmdb_id": "811596",
+    "imdb_id": "tt12264966",
+    "poster_path": "data/posters/811596.jpg",
+    "release_url": "https://www.themoviedb.org/movie/811596",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+      "quote": "\"Notre-Dame on Fire\"",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Peking Opera Blues",
+    "fel_confirmed": true,
+    "release_date": "1986-09-06",
+    "studio": "Film Workshop",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "letterboxd",
+    "tmdb_id": "39776",
+    "imdb_id": "tt0090952",
+    "poster_path": "data/posters/39776.jpg",
+    "release_url": "https://www.themoviedb.org/movie/39776",
+    "bluray_url": "https://www.blu-ray.com/movies/Peking-Opera-Blues-4K-Blu-ray/387361/",
+    "bluray_release_date": "2025-09-23",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+      "quote": "Peking Opera Blues",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Peninsula",
+    "fel_confirmed": true,
+    "release_date": "2020-07-15",
+    "studio": "Next Entertainment World",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "581392",
+    "imdb_id": "tt8850222",
+    "poster_path": "data/posters/581392.jpg",
+    "release_url": "https://www.themoviedb.org/movie/581392",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Listed as entry #559 in iammarxg/FEL README: 'Train to Busan 2 AKA Train to Busan Presents: Peninsula [2020]'.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Port of Shadows",
+    "fel_confirmed": true,
+    "release_date": "1938-05-17",
+    "studio": "Ciné-Alliance",
+    "audio_formats": [
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+    "source_label": "letterboxd",
+    "tmdb_id": "46326",
+    "imdb_id": "tt0030643",
+    "poster_path": "data/posters/46326.jpg",
+    "release_url": "https://www.themoviedb.org/movie/46326",
+    "bluray_url": "https://www.blu-ray.com/movies/Port-of-Shadows-4K-Blu-ray/402158/",
+    "bluray_release_date": "2026-03-17",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+      "quote": "Listed on Letterboxd mikimajk 'List of Dolby Vision P7-FEL Films' (page 7, P section).",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Proof of the Man",
+    "fel_confirmed": true,
+    "release_date": "1977-10-08",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+    "source_label": "letterboxd",
+    "tmdb_id": "287765",
+    "imdb_id": "tt0076460",
+    "poster_path": "data/posters/287765.jpg",
+    "release_url": "https://www.themoviedb.org/movie/287765",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+      "quote": "Proof of the Man appears on page 7 of the curated 'List of Dolby Vision P7-FEL Films' on Letterboxd.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Quiet Days in Clichy",
+    "fel_confirmed": true,
+    "release_date": "1970-06-01",
+    "studio": "SBA",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+    "source_label": "letterboxd",
+    "tmdb_id": "62759",
+    "imdb_id": "tt0066407",
+    "poster_path": "data/posters/62759.jpg",
+    "release_url": "https://www.themoviedb.org/movie/62759",
+    "bluray_url": "https://www.blu-ray.com/movies/Quiet-Days-in-Clichy-4K-Blu-ray/318039/",
+    "bluray_release_date": "2022-10-25",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+      "quote": "\"Quiet Days in Clichy\"",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Read My Lips",
+    "fel_confirmed": true,
+    "release_date": "2001-10-17",
+    "studio": "Ciné B",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+    "source_label": "letterboxd",
+    "tmdb_id": "6173",
+    "imdb_id": "tt0274117",
+    "poster_path": "data/posters/6173.jpg",
+    "release_url": "https://www.themoviedb.org/movie/6173",
+    "bluray_url": "https://www.blu-ray.com/movies/Read-My-Lips-4K-Blu-ray/390419/",
+    "bluray_release_date": "2025-09-23",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
+      "quote": "Read My Lips",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Ride On",
+    "fel_confirmed": true,
+    "release_date": "2023-04-07",
+    "studio": "Alibaba Pictures Group",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/",
+    "source_label": "letterboxd",
+    "tmdb_id": "931102",
+    "imdb_id": "tt15430628",
+    "poster_path": "data/posters/931102.jpg",
+    "release_url": "https://www.themoviedb.org/movie/931102",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/",
+      "quote": "Ride On",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Shaolin Temple",
+    "fel_confirmed": true,
+    "release_date": "1982-01-21",
+    "studio": "Chung Yuen Motion Picture Co.",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "10275",
+    "imdb_id": "tt0079891",
+    "poster_path": "data/posters/10275.jpg",
+    "release_url": "https://www.themoviedb.org/movie/10275",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Listed as entry #484 in iammarxg/FEL README: 'Shao Lin Si AKA The Shaolin Temple [1982]'.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Shin Kamen Rider",
+    "fel_confirmed": true,
+    "release_date": "2023-03-17",
+    "studio": "khara",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "813477",
+    "imdb_id": "tt14379088",
+    "poster_path": "data/posters/813477.jpg",
+    "release_url": "https://www.themoviedb.org/movie/813477",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "iammarxg/FEL README entry #487: 'Shin Kamen Rider (2023)'. Also on Letterboxd mikimajk list page 8.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Stolen Kisses",
+    "fel_confirmed": true,
+    "release_date": "1968-09-04",
+    "studio": "Les Films du Carrosse",
+    "audio_formats": [
+      "LPCM Mono"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/9/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/9/",
+    "source_label": "letterboxd",
+    "tmdb_id": "255",
+    "imdb_id": "tt0062695",
+    "poster_path": "data/posters/255.jpg",
+    "release_url": "https://www.themoviedb.org/movie/255",
+    "bluray_url": "https://www.blu-ray.com/movies/Stolen-Kisses-4K-Blu-ray/386353/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/9/",
+      "quote": "Listed on letterboxd mikimajk P7-FEL list page 9: 'Stolen Kisses'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Animal Kingdom",
+    "fel_confirmed": true,
+    "release_date": "2023-10-04",
+    "studio": "StudioCanal",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "943134",
+    "imdb_id": "tt16606592",
+    "poster_path": "data/posters/943134.jpg",
+    "release_url": "https://www.themoviedb.org/movie/943134",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Le règne animal AKA The Animal Kingdom [2023]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Beast to Die",
+    "fel_confirmed": true,
+    "release_date": "1980-10-04",
+    "studio": "KADOKAWA",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/",
+    "source_label": "letterboxd",
+    "tmdb_id": "43964",
+    "imdb_id": "tt0314913",
+    "poster_path": "data/posters/43964.jpg",
+    "release_url": "https://www.themoviedb.org/movie/43964",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/1/",
+      "quote": "The Beast to Die",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Big Blue",
+    "fel_confirmed": true,
+    "release_date": "1988-02-13",
+    "studio": "ZDF",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "letterboxd",
+    "tmdb_id": "657524",
+    "imdb_id": "tt0094738",
+    "poster_path": "data/posters/657524.jpg",
+    "release_url": "https://www.themoviedb.org/movie/657524",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Big-Blue-4K-Blu-ray/396852/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+      "quote": "The Big Blue",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Count of Monte Cristo",
+    "fel_confirmed": true,
+    "release_date": "2024-06-28",
+    "studio": "Chapter 2",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "1084736",
+    "imdb_id": "tt26446278",
+    "poster_path": "data/posters/1084736.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1084736",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Count-of-Monte-Cristo-4K-Blu-ray/399451/",
+    "bluray_release_date": "2025-11-11",
+    "hdr_formats": [
+      "Dolby Vision"
+    ],
+    "audio_languages": [
+      "French",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "306. Le comte de Monte-Cristo AKA The Count of Monte-Cristo [2024]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Crimson Rivers",
+    "fel_confirmed": true,
+    "release_date": "2000-09-27",
+    "studio": "Gaumont",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "60670",
+    "imdb_id": "tt0228786",
+    "poster_path": "data/posters/60670.jpg",
+    "release_url": "https://www.themoviedb.org/movie/60670",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "314. Les rivières pourpres AKA The Crimson Rivers [2000]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Croods: A New Age AKA The Croods 2",
+    "fel_confirmed": true,
+    "release_date": "2020",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Listed as entry #90 in iammarxg/FEL README: 'The Croods: A New Age AKA The Croods 2 [2020]'.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Double Life of Véronique",
+    "fel_confirmed": true,
+    "release_date": "1991-05-15",
+    "studio": "Sidéral Productions",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "1600",
+    "imdb_id": "tt0101765",
+    "poster_path": "data/posters/1600.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1600",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "iammarxg/FEL README entry #291: 'The Double Life of Veronique (1991)'. Also on Letterboxd mikimajk list page 3.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Emperor's New Groove",
+    "fel_confirmed": true,
+    "release_date": "2000-12-15",
+    "studio": "Walt Disney Feature Animation",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+    "source_label": "letterboxd",
+    "tmdb_id": "11688",
+    "imdb_id": "tt0120917",
+    "poster_path": "data/posters/11688.jpg",
+    "release_url": "https://www.themoviedb.org/movie/11688",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
+      "quote": "Listed on letterboxd mikimajk P7-FEL list page 3: 'The Emperor's New Groove'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The French Dispatch of the Liberty, Kansas Evening Sun",
+    "fel_confirmed": true,
+    "release_date": "2021-10-21",
+    "studio": "Indian Paintbrush",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/",
+    "source_label": "letterboxd",
+    "tmdb_id": "542178",
+    "imdb_id": "tt8847712",
+    "poster_path": "data/posters/542178.jpg",
+    "release_url": "https://www.themoviedb.org/movie/542178",
+    "bluray_url": "https://www.blu-ray.com/movies/The-French-Dispatch-of-the-Liberty-Kansas-Evening-Sun-4K-Blu-ray/389100/",
+    "bluray_release_date": "2025-09-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/",
+      "quote": "The French Dispatch of the Liberty, Kansas Evening Sun (page 4 of the curated FEL list).",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Killer",
+    "fel_confirmed": true,
+    "release_date": "1989-03-24",
+    "studio": "Film Workshop",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+    "source_label": "letterboxd",
+    "tmdb_id": "10835",
+    "imdb_id": "tt0097202",
+    "poster_path": "data/posters/10835.jpg",
+    "release_url": "https://www.themoviedb.org/movie/10835",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Killer-4K-Blu-ray/379720/",
+    "bluray_release_date": "2025-12-02",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Cantonese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+      "quote": "The Killer",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Last Hero",
+    "fel_confirmed": true,
+    "release_date": "1982-12-18",
+    "studio": "Toei Company",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+    "source_label": "letterboxd",
+    "tmdb_id": "547151",
+    "imdb_id": "tt0165232",
+    "poster_path": "data/posters/547151.jpg",
+    "release_url": "https://www.themoviedb.org/movie/547151",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/5/",
+      "quote": "The Last Hero",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Magnificent One",
+    "fel_confirmed": true,
+    "release_date": "1973-11-23",
+    "studio": "Mondex Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+    "source_label": "letterboxd",
+    "tmdb_id": "19562",
+    "imdb_id": "tt0070354",
+    "poster_path": "data/posters/19562.jpg",
+    "release_url": "https://www.themoviedb.org/movie/19562",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
+      "quote": "The Magnificent One",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Man from Nowhere",
+    "fel_confirmed": true,
+    "release_date": "2010-08-04",
+    "studio": "Opus Pictures",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "51608",
+    "imdb_id": "tt1527788",
+    "poster_path": "data/posters/51608.jpg",
+    "release_url": "https://www.themoviedb.org/movie/51608",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Man-from-Nowhere-4K-Blu-ray/347621/",
+    "bluray_release_date": "2023-12-12",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Korean",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Listed as entry #13 in iammarxg/FEL README: 'Ajeossi AKA The Man from Nowhere [2010]'.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Resurrection of the Golden Wolf",
+    "fel_confirmed": true,
+    "release_date": "1979-08-04",
+    "studio": "KADOKAWA",
+    "audio_formats": [
+      "LPCM 4.0",
+      "LPCM 2.0 Mono",
+      "Dolby Atmos"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/",
+    "source_label": "letterboxd",
+    "tmdb_id": "43963",
+    "imdb_id": "tt0080159",
+    "poster_path": "data/posters/43963.jpg",
+    "release_url": "https://www.themoviedb.org/movie/43963",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Resurrection-of-the-Golden-Wolf-4K-Blu-ray/324680/",
+    "bluray_release_date": "2022-12-23",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Japanese"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/",
+      "quote": "Listed on letterboxd mikimajk P7-FEL list page 8: 'The Resurrection of the Golden Wolf'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Three Musketeers: D'Artagnan",
+    "fel_confirmed": true,
+    "release_date": "2023-04-05",
+    "studio": "Pathé",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "796185",
+    "imdb_id": "tt12672536",
+    "poster_path": "data/posters/796185.jpg",
+    "release_url": "https://www.themoviedb.org/movie/796185",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "315. Les trois mousquetaires: D'Artagnan AKA The Three Musketeers: D'Artagnan [2023]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The Three Musketeers: Milady",
+    "fel_confirmed": true,
+    "release_date": "2023-12-13",
+    "studio": "Pathé",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "845111",
+    "imdb_id": "tt12672620",
+    "poster_path": "data/posters/845111.jpg",
+    "release_url": "https://www.themoviedb.org/movie/845111",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Les Trois Mousquetaires: Milady AKA The Three Musketeers - Part II: Milady [2023]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Three Colors: Blue",
+    "fel_confirmed": true,
+    "release_date": "1993-09-08",
+    "studio": "MK2 Films",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "108",
+    "imdb_id": "tt0108394",
+    "poster_path": "data/posters/108.jpg",
+    "release_url": "https://www.themoviedb.org/movie/108",
+    "bluray_url": "https://www.blu-ray.com/movies/Three-Colors-Blue-4K-Blu-ray/327469/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "Three Colors: Blue [1993]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Three Colors: Red",
+    "fel_confirmed": true,
+    "release_date": "1994-05-12",
+    "studio": "MK2 Films",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "110",
+    "imdb_id": "tt0111495",
+    "poster_path": "data/posters/110.jpg",
+    "release_url": "https://www.themoviedb.org/movie/110",
+    "bluray_url": "https://www.blu-ray.com/movies/Three-Colors-Red-4K-Blu-ray/327471/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "571. Trois couleurs: Rouge AKA Three Colors: Red [1994]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Three Colors: White",
+    "fel_confirmed": true,
+    "release_date": "1994-01-26",
+    "studio": "MK2 Films",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL"
+      ]
+    },
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "109",
+    "imdb_id": "tt0111507",
+    "poster_path": "data/posters/109.jpg",
+    "release_url": "https://www.themoviedb.org/movie/109",
+    "bluray_url": "https://www.blu-ray.com/movies/Three-Colors-White-4K-Blu-ray/327470/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "569. Trois couleurs: Blanc AKA Three Colors: White [1994]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Train to Busan",
+    "fel_confirmed": true,
+    "release_date": "2016-07-20",
+    "studio": "Next Entertainment World",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
+    "tmdb_id": "396535",
+    "imdb_id": "tt5700672",
+    "poster_path": "data/posters/396535.jpg",
+    "release_url": "https://www.themoviedb.org/movie/396535",
+    "bluray_url": "https://www.blu-ray.com/movies/Train-to-Busan-4K-Blu-ray/325001/",
+    "bluray_release_date": "2022-11-29",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Korean",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "iammarxg/FEL README entry #65: 'Train to Busan (2016)'. Also on Letterboxd mikimajk list page 9.",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Tune in for Love",
+    "fel_confirmed": true,
+    "release_date": "2019-08-28",
+    "studio": "Jung Ji-woo Film",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "No",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+    "source_label": "letterboxd",
+    "tmdb_id": "570503",
+    "imdb_id": "tt10763618",
+    "poster_path": "data/posters/570503.jpg",
+    "release_url": "https://www.themoviedb.org/movie/570503",
+    "bluray_url": "https://www.blu-ray.com/movies/Tune-in-for-Love-4K-Blu-ray/376311/",
+    "bluray_release_date": "2025-01-17",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10+"
+    ],
+    "audio_languages": [
+      "Korean"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+      "quote": "Listed on letterboxd mikimajk P7-FEL list page 10: 'Tune in for Love'.",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Violet Evergarden: The Movie",
+    "fel_confirmed": true,
+    "release_date": "2020-09-18",
+    "studio": "Kyoto Animation",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+    "source_label": "letterboxd",
+    "tmdb_id": "533514",
+    "imdb_id": "tt8652818",
+    "poster_path": "data/posters/533514.jpg",
+    "release_url": "https://www.themoviedb.org/movie/533514",
+    "bluray_url": "https://www.blu-ray.com/movies/Violet-Evergarden-The-Movie-4K-Blu-ray/333126/",
+    "bluray_release_date": "2023-05-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Japanese",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+      "quote": "\"Violet Evergarden: The Movie\"",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Warfare",
+    "fel_confirmed": true,
+    "release_date": "2025-04-09",
+    "studio": "DNA Films",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/"
+      ]
+    },
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+    "source_label": "letterboxd",
+    "tmdb_id": "1241436",
+    "imdb_id": "tt31434639",
+    "poster_path": "data/posters/1241436.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1241436",
+    "bluray_url": "https://www.blu-ray.com/movies/Warfare-4K-Blu-ray/386223/",
+    "bluray_release_date": "2025-07-01",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/10/",
+      "quote": "Warfare",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-23T00:01:49+00:00"
   }
 ]
