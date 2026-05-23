@@ -6062,7 +6062,7 @@
   {
     "movie_title": "Der Hauptmann",
     "fel_confirmed": true,
-    "release_date": "1971-02-11",
+    "release_date": "2017-09-09",
     "studio": "Filmgalerie 451",
     "audio_formats": [],
     "english_audio": "Unknown",
@@ -6071,11 +6071,12 @@
         "https://github.com/iammarxg/FEL",
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
         "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
       ]
     },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "FEL.txt",
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
     "tmdb_id": "508015",
     "imdb_id": "tt1685499",
     "poster_path": "",
@@ -6088,9 +6089,9 @@
     ],
     "audio_languages": [],
     "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Der Hauptmann (1971) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Listed as entry #115 in iammarxg/FEL README: 'Der Hauptmann AKA The Captain [2017]'.",
+      "evidence_type": "github-list",
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
@@ -7699,7 +7700,11 @@
       "DD Mono"
     ],
     "english_audio": "Yes",
-    "additional_characteristics": {},
+    "additional_characteristics": {
+      "source_urls": [
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
     "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
     "source_label": "FEL.txt",
     "tmdb_id": "335",
@@ -15445,7 +15450,7 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Evil Dead II (Dead by Dawn",
+    "movie_title": "Evil Dead II: Dead by Dawn",
     "fel_confirmed": true,
     "release_date": "1987-03-13",
     "studio": "Rosebud Releasing Corporation",
@@ -15460,7 +15465,8 @@
       "source_urls": [
         "https://forum.blu-ray.com/showthread.php?t=276448",
         "https://forum.blu-ray.com/showthread.php?t=276448&page=1",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=127"
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=127",
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
       ]
     },
     "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
@@ -17498,45 +17504,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T04:52:57+00:00"
-  },
-  {
-    "movie_title": "Longma jingshen",
-    "fel_confirmed": true,
-    "release_date": "2023-04-07",
-    "studio": "Alibaba Pictures Group",
-    "audio_formats": [
-      "DTS-HD MA 5.1"
-    ],
-    "english_audio": "No",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
-      ]
-    },
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "FEL.txt",
-    "tmdb_id": "931102",
-    "imdb_id": "tt15430628",
-    "poster_path": "data/posters/931102.jpg",
-    "release_url": "https://www.themoviedb.org/movie/931102",
-    "bluray_url": "https://www.blu-ray.com/movies/Ride-On-4K-Blu-ray/338116/",
-    "bluray_release_date": "2023-08-24",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "German",
-      "Mandarin"
-    ],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Longma jingshen (2023) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "The Exorcist: Believer",
@@ -24012,7 +23979,8 @@
         "https://github.com/iammarxg/FEL",
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
         "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
       ]
     },
     "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
@@ -24330,7 +24298,8 @@
     "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=154"
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=154",
+        "https://github.com/iammarxg/FEL"
       ]
     },
     "source_url": "https://github.com/iammarxg/FEL",
@@ -24377,11 +24346,12 @@
         "https://github.com/iammarxg/FEL",
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
         "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
       ]
     },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "FEL.txt",
+    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+    "source_label": "github",
     "tmdb_id": "529203",
     "imdb_id": "tt2850386",
     "poster_path": "data/posters/529203.jpg",
@@ -24398,9 +24368,9 @@
       "French (Canada)"
     ],
     "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "The Croods: A New Age (2020) FEL - 7.90 Mb/s",
-      "evidence_type": "list-item",
+      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+      "quote": "Listed as entry #90 in iammarxg/FEL README: 'The Croods: A New Age AKA The Croods 2 [2020]'.",
+      "evidence_type": "github-list",
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
@@ -30037,7 +30007,8 @@
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
         "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-        "https://forum.blu-ray.com/showthread.php?t=276448&page=172"
+        "https://forum.blu-ray.com/showthread.php?t=276448&page=172",
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
       ]
     },
     "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
@@ -42003,39 +41974,6 @@
     "collected_at": "2026-05-23T00:01:49+00:00"
   },
   {
-    "movie_title": "48 Hrs. AKA 48 Hours",
-    "fel_confirmed": true,
-    "release_date": "1982",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "\"3. 48 Hrs. AKA 48 Hours [1982]\" — entry #3 in the iammarxg/FEL master list (627 P7-FEL titles, refreshed 2025-02-24). Also confirmed on Letterboxd P7-FEL list page 1.",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
     "movie_title": "A Better Tomorrow II",
     "fel_confirmed": true,
     "release_date": "1987-12-17",
@@ -42145,39 +42083,6 @@
     "collected_at": "2026-05-23T00:01:49+00:00"
   },
   {
-    "movie_title": "Aguirre, der Zorn Gottes AKA Aguirre, the Wrath of God",
-    "fel_confirmed": true,
-    "release_date": "1972",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL"
-      ]
-    },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "11. Aguirre, der Zorn Gottes AKA Aguirre, the Wrath of God [1972]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
     "movie_title": "Aguirre, the Wrath of God",
     "fel_confirmed": true,
     "release_date": "1972-12-29",
@@ -42189,7 +42094,8 @@
     "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
+        "https://github.com/iammarxg/FEL"
       ]
     },
     "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
@@ -42211,39 +42117,6 @@
     "fel_evidence": {
       "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
       "quote": "Listed as entry #11 in iammarxg/FEL README: 'Aguirre, der Zorn Gottes AKA Aguirre, the Wrath of God [1972]'.",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "Ajeossi AKA The Man from Nowhere",
-    "fel_confirmed": true,
-    "release_date": "2010",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "iammarxg/FEL README entry #13: 'The Man from Nowhere (2010)'. Also confirmed on Letterboxd mikimajk list page 6.",
       "evidence_type": "github-list",
       "location": "Unknown"
     },
@@ -42391,39 +42264,6 @@
     "collected_at": "2026-05-23T00:01:49+00:00"
   },
   {
-    "movie_title": "BlacKkKlansman AKA Black Klansman",
-    "fel_confirmed": true,
-    "release_date": "2018",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL"
-      ]
-    },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "BlacKkKlansman [2018]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
     "movie_title": "Blue Is the Warmest Color",
     "fel_confirmed": true,
     "release_date": "2013-10-09",
@@ -42527,72 +42367,6 @@
     "collected_at": "2026-05-23T00:01:49+00:00"
   },
   {
-    "movie_title": "Busanhaeng AKA Train to Busan",
-    "fel_confirmed": true,
-    "release_date": "2016",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "iammarxg/FEL README entry #65: 'Train to Busan (2016)'. Also on Letterboxd mikimajk list page 9.",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "Chou tin dik tong wah AKA An Autumn’s Tale",
-    "fel_confirmed": true,
-    "release_date": "1987",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "\"Chou tin dik tong wah AKA An Autumn's Tale [1987]\" — listed in iammarxg/FEL master list.",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
     "movie_title": "Contempt",
     "fel_confirmed": true,
     "release_date": "1963-10-29",
@@ -42620,72 +42394,6 @@
     "fel_evidence": {
       "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
       "quote": "309. Le mépris AKA Contempt [1963]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "Crna mačka, beli mačor AKA Black Cat, White Cat",
-    "fel_confirmed": true,
-    "release_date": "1998",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "Crna mačka, beli mačor AKA Black Cat, White Cat [1998]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "C’era una volta il West AKA Once Upon a Time in the West",
-    "fel_confirmed": true,
-    "release_date": "1968",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "66. C'era una volta il West AKA Once Upon a Time in the West [1968]",
       "evidence_type": "github-list",
       "location": "Unknown"
     },
@@ -42720,39 +42428,6 @@
       "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
       "quote": "Dead of Night",
       "evidence_type": "letterboxd-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "Der Hauptmann AKA The Captain",
-    "fel_confirmed": true,
-    "release_date": "2017",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "Listed as entry #115 in iammarxg/FEL README: 'Der Hauptmann AKA The Captain [2017]'.",
-      "evidence_type": "github-list",
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
@@ -42902,39 +42577,6 @@
     "collected_at": "2026-05-23T00:01:49+00:00"
   },
   {
-    "movie_title": "Due occhi diabolici AKA Two Evil Eyes",
-    "fel_confirmed": true,
-    "release_date": "1990",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL"
-      ]
-    },
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Two Evil Eyes [1990]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
     "movie_title": "Eugenie",
     "fel_confirmed": true,
     "release_date": "1970-02-20",
@@ -42968,72 +42610,6 @@
       "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
       "quote": "Eugenie",
       "evidence_type": "letterboxd-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "Evil Dead II AKA Evil Dead 2: Dead by Dawn",
-    "fel_confirmed": true,
-    "release_date": "1987",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "Listed as entry #149 in iammarxg/FEL README: 'Evil Dead II AKA Evil Dead 2: Dead by Dawn [1987]'.",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "Expend4bles AKA The Expendables 4",
-    "fel_confirmed": true,
-    "release_date": "2023",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "iammarxg/FEL README entry #153: 'The Expendables 4 (2023)'. Also on Letterboxd mikimajk list page 3.",
-      "evidence_type": "github-list",
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
@@ -43767,11 +43343,13 @@
     "english_audio": "Unknown",
     "additional_characteristics": {
       "source_urls": [
-        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/"
+        "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
       ]
     },
-    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/",
-    "source_label": "letterboxd",
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "FEL.txt",
     "tmdb_id": "931102",
     "imdb_id": "tt15430628",
     "poster_path": "data/posters/931102.jpg",
@@ -43784,9 +43362,9 @@
     ],
     "audio_languages": [],
     "fel_evidence": {
-      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/8/",
-      "quote": "Ride On",
-      "evidence_type": "letterboxd-list",
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Longma jingshen (2023) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
@@ -44069,39 +43647,6 @@
     "collected_at": "2026-05-23T00:01:49+00:00"
   },
   {
-    "movie_title": "The Croods: A New Age AKA The Croods 2",
-    "fel_confirmed": true,
-    "release_date": "2020",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-    "source_label": "github",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "Listed as entry #90 in iammarxg/FEL README: 'The Croods: A New Age AKA The Croods 2 [2020]'.",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
     "movie_title": "The Double Life of Véronique",
     "fel_confirmed": true,
     "release_date": "1991-05-15",
@@ -44340,7 +43885,7 @@
     ],
     "fel_evidence": {
       "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
-      "quote": "Listed as entry #13 in iammarxg/FEL README: 'Ajeossi AKA The Man from Nowhere [2010]'.",
+      "quote": "iammarxg/FEL README entry #13: 'The Man from Nowhere (2010)'. Also confirmed on Letterboxd mikimajk list page 6.",
       "evidence_type": "github-list",
       "location": "Unknown"
     },
