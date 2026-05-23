@@ -93,9 +93,7 @@ class Fetcher:
         if last_error is not None:
             message = f"{message}: {last_error}"
         if raise_on_error:
-            raise RuntimeError(
-                f"failed to fetch {url}"
-            ) from last_error  # pragma: no cover - exhausted retries
+            raise RuntimeError(message) from last_error  # pragma: no cover
         return FetchResult(url=url, text="", from_cache=False, error=message)
 
     def close(self) -> None:
