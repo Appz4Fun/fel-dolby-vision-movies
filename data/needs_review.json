@@ -8236,5 +8236,240 @@
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00",
     "removal_comment": "Removed by crawl-footprint cleanup: every source URL on this release was a bulk crawl-footprint attribution and could not be validated -- the title is not on any FEL list it was tagged with, and it has no forum post or per-title page as evidence. Needs a genuine FEL source."
+  },
+  {
+    "movie_title": "10 to Midnight",
+    "fel_confirmed": true,
+    "release_date": "1983-03-11",
+    "studio": "Y & M Productions",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+    "source_label": "FEL.txt",
+    "tmdb_id": "18587",
+    "imdb_id": "tt0085121",
+    "poster_path": "data/posters/18587.jpg",
+    "release_url": "https://www.themoviedb.org/movie/18587",
+    "bluray_url": "https://www.blu-ray.com/movies/10-to-Midnight-4K-Blu-ray/394243/",
+    "bluray_release_date": "2026-05-12",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+      "quote": "10 to Midnight (1983) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "No authoritative Profile 7 FEL source found. Only evidence was the local data/FEL.txt curated list with a forum-root placeholder URL; not present on iammarxg/FEL README, Letterboxd mikimajk P7-FEL list, or other validated sources.",
+    "removed_at": "2026-05-23T00:29:23+00:00"
+  },
+  {
+    "movie_title": "The Ninth Gate",
+    "fel_confirmed": true,
+    "release_date": "1999-08-25",
+    "studio": "R.P. Productions",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "LPCM 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+    "source_label": "FEL.txt",
+    "tmdb_id": "622",
+    "imdb_id": "tt0142688",
+    "poster_path": "data/posters/622.jpg",
+    "release_url": "https://www.themoviedb.org/movie/622",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Ninth-Gate-4K-Blu-ray/408649/",
+    "bluray_release_date": "2026-04-21",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+      "quote": "The Ninth Gate (1999) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "No authoritative Profile 7 FEL source found. Only evidence was the local data/FEL.txt curated list with a forum-root placeholder URL; not present on iammarxg/FEL README, Letterboxd mikimajk P7-FEL list, or other validated sources.",
+    "removed_at": "2026-05-23T00:29:23+00:00"
+  },
+  {
+    "movie_title": "Wicked",
+    "fel_confirmed": true,
+    "release_date": "2024-10-16",
+    "studio": "Universal Pictures",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD+ 7.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+    "source_label": "FEL.txt",
+    "tmdb_id": "402431",
+    "imdb_id": "tt1262426",
+    "poster_path": "data/posters/402431.jpg",
+    "release_url": "https://www.themoviedb.org/movie/402431",
+    "bluray_url": "https://www.blu-ray.com/movies/Wicked-4K-Blu-ray/376398/",
+    "bluray_release_date": "2025-02-04",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+      "quote": "Wicked (2024) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "No authoritative Profile 7 FEL source found. Only evidence was the local data/FEL.txt curated list with a forum-root placeholder URL; not present on iammarxg/FEL README, Letterboxd mikimajk P7-FEL list, or other validated sources.",
+    "removed_at": "2026-05-23T00:29:23+00:00"
+  },
+  {
+    "movie_title": "The Great Outdoors",
+    "fel_confirmed": true,
+    "release_date": "1988-06-17",
+    "studio": "Universal Pictures",
+    "audio_formats": [
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+    "source_label": "FEL.txt",
+    "tmdb_id": "2617",
+    "imdb_id": "tt0095253",
+    "poster_path": "data/posters/2617.jpg",
+    "release_url": "https://www.themoviedb.org/movie/2617",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Great-Outdoors-4K-Blu-ray/399698/",
+    "bluray_release_date": "2026-05-26",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+      "quote": "The Great Outdoors (1988) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "No authoritative Profile 7 FEL source found. Only evidence was the local data/FEL.txt curated list with a forum-root placeholder URL; not present on iammarxg/FEL README, Letterboxd mikimajk P7-FEL list, or other validated sources.",
+    "removed_at": "2026-05-23T00:29:23+00:00"
+  },
+  {
+    "movie_title": "Arrow Sworn",
+    "fel_confirmed": true,
+    "release_date": "2022-06-18",
+    "studio": "Fresh Wave",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+    "source_label": "FEL.txt",
+    "tmdb_id": "990397",
+    "imdb_id": "",
+    "poster_path": "data/posters/990397.jpg",
+    "release_url": "https://www.themoviedb.org/movie/990397",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+      "quote": "Arrow Sworn (2022) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "No authoritative Profile 7 FEL source found. Only evidence was the local data/FEL.txt curated list with a forum-root placeholder URL; not present on iammarxg/FEL README, Letterboxd mikimajk P7-FEL list, or other validated sources.",
+    "removed_at": "2026-05-23T00:29:23+00:00"
+  },
+  {
+    "movie_title": "Wicked: For Good",
+    "fel_confirmed": true,
+    "release_date": "2025-11-19",
+    "studio": "Universal Pictures",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD+ 7.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/"
+      ]
+    },
+    "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+    "source_label": "FEL.txt",
+    "tmdb_id": "967941",
+    "imdb_id": "tt19847976",
+    "poster_path": "data/posters/967941.jpg",
+    "release_url": "https://www.themoviedb.org/movie/967941",
+    "bluray_url": "https://www.blu-ray.com/movies/Wicked-For-Good-4K-Blu-ray/390121/",
+    "bluray_release_date": "2026-01-20",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/forumdisplay.php?f=203",
+      "quote": "Wicked: For Good (2025) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00",
+    "removal_comment": "No authoritative Profile 7 FEL source found. Only evidence was the local data/FEL.txt curated list with a forum-root placeholder URL; not present on iammarxg/FEL README, Letterboxd mikimajk P7-FEL list, or other validated sources.",
+    "removed_at": "2026-05-23T00:29:23+00:00"
   }
 ]
