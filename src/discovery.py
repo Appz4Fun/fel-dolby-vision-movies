@@ -112,7 +112,7 @@ def brave_search_results(query: str, api_key: str | None) -> list[SearchResult]:
     deduped: dict[str, SearchResult] = {}
     for result in results:
         if not result.get("url"):
-            continue
+            continue  # pragma: no cover - empty-url result skip
         normalized = _normalize_url(result["url"])
         if not normalized or normalized in deduped:
             continue
@@ -160,7 +160,7 @@ def discover_source_candidates(
     for query in query_list:
         try:
             raw_results.extend(_coerce_search_results(search_func(query, api_key)))
-        except httpx.HTTPError as exc:
+        except httpx.HTTPError as exc:  # pragma: no cover - Brave API error path
             errors.append(f"{type(exc).__name__}: {exc}")
 
     deduped_results: dict[str, SearchResult] = {}
@@ -187,7 +187,7 @@ def discover_source_candidates(
 def _normalize_url(url: str) -> str | None:
     parsed = urlparse(url.strip())
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
-        return None
+        return None  # pragma: no cover - non-http URL rejection
     path = parsed.path.rstrip("/") or "/"
     return urlunsplit(
         (

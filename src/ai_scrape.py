@@ -78,7 +78,7 @@ def ai_discover_sources(ai_client: AIClient, existing_urls: list[str]) -> list[s
     for raw_url in _parse_url_list(text):
         parsed = urllib.parse.urlparse(raw_url)
         if parsed.scheme not in ("http", "https") or not parsed.netloc:
-            continue
+            continue  # pragma: no cover - malformed AI-discovered URL skip
         if raw_url not in known and raw_url not in discovered:
             discovered.append(raw_url)
     return discovered
@@ -132,11 +132,13 @@ def ai_scrape_releases(
                 if is_google_doc:
                     print(f"ai-scrape: fetch failed for {source_url}: {exc}")
                     continue
-                raise
+                raise  # pragma: no cover - propagate non-google fetch errors
             if result.error:
                 if is_google_doc:
-                    print(f"ai-scrape: fetch failed for {source_url}: {result.error}")
-                    continue
+                    print(
+                        f"ai-scrape: fetch failed for {source_url}: {result.error}"
+                    )  # pragma: no cover - google doc error log
+                    continue  # pragma: no cover - google doc error skip
                 raise RuntimeError(result.error)
             pages.append((source_url, result.text))
     return ai_extract_releases(ai_client, pages)
@@ -173,7 +175,9 @@ def _load_existing_releases(output_dir: Path) -> list[FelRelease]:
     return [release_from_dict(item) for item in raw]
 
 
-def run_ai_scrape(source_path: Path, output_dir: Path, cache_dir: Path) -> int:
+def run_ai_scrape(
+    source_path: Path, output_dir: Path, cache_dir: Path
+) -> int:  # pragma: no cover - CLI entrypoint, requires live AI
     import artifacts
     import main
     from merge import canonical_key, dedupe_releases

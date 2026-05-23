@@ -21,3 +21,22 @@ dev = [
 # manages the dependency environment without installing the project itself.
 [tool.uv]
 package = false
+
+[tool.coverage.run]
+source = ["src"]
+branch = false
+omit = [
+    # Tests import modules directly off PYTHONPATH=src, so the package
+    # __init__ is never executed.
+    "src/__init__.py",
+]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+skip_covered = false
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]

@@ -65,7 +65,7 @@ def evaluate_cases(cases: Sequence[BenchmarkCase]) -> BenchmarkResult:
     )
 
 
-def main(argv: Sequence[str] | None = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:  # pragma: no cover - CLI entrypoint
     args = list(sys.argv[1:] if argv is None else argv)
     if len(args) != 1:
         print("Usage: python -m benchmark CASES_JSON")

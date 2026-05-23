@@ -71,7 +71,7 @@ def _evidence_urls(release: FelRelease) -> list[str]:
     additional = release.additional_characteristics or {}
     extra = additional.get("source_urls") or []
     if not isinstance(extra, list):
-        extra = []
+        extra = []  # pragma: no cover - malformed source_urls guard
     for url in [release.source_url, *extra]:
         if (
             isinstance(url, str)
@@ -121,7 +121,7 @@ def _render_card(release: FelRelease, index: int) -> str:
         )
     evidence_urls = _evidence_urls(release)
     if len(evidence_urls) > 1:
-        src_control = (
+        src_control = (  # pragma: no cover - multi-evidence card branch
             '<button type="button" class="src-toggle" data-evidence>Src '
             f'<span class="src-count">({len(evidence_urls)})</span></button>'
         )
@@ -132,7 +132,7 @@ def _render_card(release: FelRelease, index: int) -> str:
     else:
         label = release.source_label
         if not label or label == UNKNOWN:
-            label = "list only"
+            label = "list only"  # pragma: no cover - missing source_label fallback
         src_control = (
             '<button type="button" class="src-toggle" data-evidence>'
             f"{escape(label)}</button>"

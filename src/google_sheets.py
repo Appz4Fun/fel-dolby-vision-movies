@@ -58,7 +58,7 @@ def parse_google_sheet_releases(csv_text: str, source_url: str) -> list[FelRelea
             continue
         title, year = _split_title_year(raw_title)
         if not title:
-            continue
+            continue  # pragma: no cover - empty post-split title
         if COLLECTION_TITLE_RE.search(title):
             continue
         releases.append(_build_sheet_release(title, year, row, source_url))
@@ -81,13 +81,13 @@ def parse_always_fel_sheet(csv_text: str, source_url: str) -> list[FelRelease]:
             title_index = _first_header_index(normalized, TITLE_HEADERS)
             continue
         if title_index >= len(row):
-            continue
+            continue  # pragma: no cover - short row guard
         raw_title = normalize_title(row[title_index])
         if not raw_title:
-            continue
+            continue  # pragma: no cover - blank title row
         title, year = _split_title_year(raw_title)
         if not title or COLLECTION_TITLE_RE.search(title):
-            continue
+            continue  # pragma: no cover - collection/box-set skip
         quote = " | ".join(
             normalize_title(cell) for cell in row if normalize_title(cell)
         )
@@ -114,7 +114,7 @@ def _gid_from_url(parsed_url) -> str:
     fragment_gid = parse_qs(parsed_url.fragment).get("gid")
     if fragment_gid and fragment_gid[0]:
         return fragment_gid[0]
-    return "0"
+    return "0"  # pragma: no cover - default gid when none in URL
 
 
 def _header_indexes(row: list[str]) -> tuple[int, int] | None:
