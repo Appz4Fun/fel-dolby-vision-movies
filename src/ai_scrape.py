@@ -35,6 +35,7 @@ _DISCOVERY_USER = (
 )
 AI_EXTRACTION_ATTEMPTS = 3
 AI_EXTRACTION_RETRY_BASE_DELAY_SECONDS = 1.0
+AI_EXTRACTION_RETRYABLE_STATUS_CODES = {408, 409, 425, 429, 500, 502, 503, 504}
 
 
 def _parse_url_list(text: str) -> list[str]:
@@ -113,10 +114,18 @@ def _extract_candidates_with_retries(
             return ai_client.extract_candidates(source_url, text)
         except httpx.HTTPError as exc:
             last_error = exc
+            if not _is_retryable_extraction_error(exc):
+                raise
             if attempt < AI_EXTRACTION_ATTEMPTS - 1:
                 time.sleep(AI_EXTRACTION_RETRY_BASE_DELAY_SECONDS * (2**attempt))
     assert last_error is not None
     raise last_error
+
+
+def _is_retryable_extraction_error(exc: httpx.HTTPError) -> bool:
+    if isinstance(exc, httpx.HTTPStatusError):
+        return exc.response.status_code in AI_EXTRACTION_RETRYABLE_STATUS_CODES
+    return True
 
 
 def ai_scrape_releases(
@@ -128,22 +137,11 @@ def ai_scrape_releases(
         cookie_header=os.environ.get("FORUM_COOKIE_HEADER"),
     ) as html_fetcher:
         for source_url in source_urls:
-            is_google_doc = _is_google_doc_url(source_url)
-            try:
-                fetch_url = _fetch_url_for_ai_source(source_url)
-                result = html_fetcher.fetch(fetch_url, raise_on_error=not is_google_doc)
-            except Exception as exc:
-                if is_google_doc:
-                    print(f"ai-scrape: fetch failed for {source_url}: {exc}")
-                    continue
-                raise  # pragma: no cover - propagate non-google fetch errors
+            fetch_url = _fetch_url_for_ai_source(source_url)
+            result = html_fetcher.fetch(fetch_url, raise_on_error=False)
             if result.error:
-                if is_google_doc:
-                    print(
-                        f"ai-scrape: fetch failed for {source_url}: {result.error}"
-                    )  # pragma: no cover - google doc error log
-                    continue  # pragma: no cover - google doc error skip
-                raise RuntimeError(result.error)
+                print(f"ai-scrape: fetch failed for {source_url}: {result.error}")
+                continue
             pages.append((source_url, result.text))
     return ai_extract_releases(ai_client, pages)
 
@@ -154,7 +152,7 @@ def _fetch_url_for_ai_source(url: str) -> str:
     if (
         hostname == "docs.google.com"
         or (hostname is not None and hostname.endswith(".docs.google.com"))
-    ) and parsed.path.startswith("/spreadsheets/"):
+    ) and parsed.path.startswith("/spreadsheets/d/"):
         return google_sheets.google_sheet_csv_url(url)
     return url
 

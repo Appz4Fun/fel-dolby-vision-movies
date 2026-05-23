@@ -113,7 +113,13 @@ def test_ai_extract_releases_retries_transient_http_errors():
         def extract_candidates(self, source_url: str, text: str):
             self.calls += 1
             if self.calls == 1:
-                raise httpx.HTTPError("incomplete chunked read")
+                request = httpx.Request("POST", "https://api.example.test/extract")
+                response = httpx.Response(503, request=request)
+                raise httpx.HTTPStatusError(
+                    "service unavailable",
+                    request=request,
+                    response=response,
+                )
             return [
                 FoundCandidate(
                     "Alien",
@@ -130,6 +136,39 @@ def test_ai_extract_releases_retries_transient_http_errors():
 
     assert client.calls == 2
     assert [release.movie_title for release in releases] == ["Alien"]
+
+
+def test_ai_extract_releases_does_not_retry_permanent_status_errors(
+    monkeypatch,
+    capsys,
+):
+    import ai_scrape as ai_scrape_mod
+
+    source_url = "https://forum.example.test/thread"
+    sleeps: list[float] = []
+    request = httpx.Request("POST", "https://api.example.test/extract")
+    response = httpx.Response(401, request=request)
+
+    class PermanentFailureAIClient(FakeAIClient):
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def extract_candidates(self, source_url: str, text: str):
+            self.calls += 1
+            raise httpx.HTTPStatusError(
+                "unauthorized",
+                request=request,
+                response=response,
+            )
+
+    monkeypatch.setattr(ai_scrape_mod.time, "sleep", sleeps.append)
+    client = PermanentFailureAIClient()
+
+    assert ai_extract_releases(client, [(source_url, "<html>Alien FEL</html>")]) == []
+
+    assert client.calls == 1
+    assert sleeps == []
+    assert f"ai-scrape: extraction failed for {source_url}" in capsys.readouterr().out
 
 
 def test_ai_extract_releases_backs_off_between_retry_attempts(monkeypatch):
@@ -209,6 +248,7 @@ def test_is_google_doc_url_uses_hostname_not_substring():
 
 def test_fetch_url_for_ai_source_only_converts_real_google_sheets_urls():
     sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
+    malformed_sheet_url = "https://docs.google.com/spreadsheets/edit#gid=99"
     non_google_url = (
         "https://example.test/thread?"
         "next=https://docs.google.com/spreadsheets/d/sheet-id/edit"
@@ -217,6 +257,7 @@ def test_fetch_url_for_ai_source_only_converts_real_google_sheets_urls():
     assert _fetch_url_for_ai_source(sheet_url) == (
         "https://docs.google.com/spreadsheets/d/sheet-id/gviz/tq?tqx=out:csv&gid=99"
     )
+    assert _fetch_url_for_ai_source(malformed_sheet_url) == malformed_sheet_url
     assert _fetch_url_for_ai_source(non_google_url) == non_google_url
 
 
@@ -279,9 +320,10 @@ def test_ai_scrape_releases_uses_google_sheet_csv_urls_and_fetches_forum_sources
     assert [release.movie_title for release in releases] == [sheet_url, forum_url]
 
 
-def test_ai_scrape_releases_raises_non_google_fetch_result_errors(
+def test_ai_scrape_releases_skips_non_google_fetch_result_errors(
     monkeypatch,
     tmp_path,
+    capsys,
 ):
     import ai_scrape as ai_scrape_mod
 
@@ -304,18 +346,18 @@ def test_ai_scrape_releases_raises_non_google_fetch_result_errors(
 
         def fetch(self, url: str, raise_on_error: bool = False):
             fetched_urls.append(url)
-            assert raise_on_error is True
+            assert raise_on_error is False
             return FakeFetchResult()
 
     monkeypatch.setattr(ai_scrape_mod.fetcher, "Fetcher", FakeFetcher)
 
-    with pytest.raises(RuntimeError, match="failed to fetch bad URL"):
-        ai_scrape_releases([bad_url], tmp_path / ".cache", FakeAIClient())
+    assert ai_scrape_releases([bad_url], tmp_path / ".cache", FakeAIClient()) == []
 
     assert fetched_urls == [bad_url]
+    assert f"ai-scrape: fetch failed for {bad_url}" in capsys.readouterr().out
 
 
-def test_ai_scrape_releases_catches_google_sheet_fetch_exceptions(
+def test_ai_scrape_releases_skips_google_sheet_fetch_errors(
     monkeypatch,
     tmp_path,
     capsys,
@@ -344,7 +386,7 @@ def test_ai_scrape_releases_catches_google_sheet_fetch_exceptions(
         def fetch(self, url: str, raise_on_error: bool = False):
             fetched_urls.append(url)
             if "gviz/tq" in url:
-                raise RuntimeError("read failed")
+                return FakeFetchResult(error="read failed")
             return FakeFetchResult(text="<html>Heat FEL</html>")
 
     monkeypatch.setattr(ai_scrape_mod.fetcher, "Fetcher", FakeFetcher)
@@ -376,6 +418,33 @@ def test_ai_scrape_releases_catches_google_sheet_fetch_exceptions(
     ]
     assert [release.movie_title for release in releases] == [forum_url]
     assert f"ai-scrape: fetch failed for {sheet_url}" in capsys.readouterr().out
+
+
+def test_ai_scrape_releases_propagates_unexpected_google_fetch_exceptions(
+    monkeypatch,
+    tmp_path,
+):
+    import ai_scrape as ai_scrape_mod
+
+    sheet_url = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=99"
+
+    class FakeFetcher:
+        def __init__(self, *args, **kwargs) -> None:
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+        def fetch(self, url: str, raise_on_error: bool = False):
+            raise AssertionError("internal fetcher bug")
+
+    monkeypatch.setattr(ai_scrape_mod.fetcher, "Fetcher", FakeFetcher)
+
+    with pytest.raises(AssertionError, match="internal fetcher bug"):
+        ai_scrape_releases([sheet_url], tmp_path / ".cache", FakeAIClient())
 
 
 def test_load_existing_releases_round_trips(tmp_path):
