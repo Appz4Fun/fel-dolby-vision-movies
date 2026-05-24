@@ -136,8 +136,9 @@ def enrich_releases(
             resolve_failed = True
             unresolved += 1
             print(f"enrich: resolve failed for {release.movie_title!r}: {exc}")
-        if movie is None and not resolve_failed:
-            unresolved += 1
+        if movie is None:
+            if not resolve_failed:
+                unresolved += 1
         else:
             resolved += 1
             release.tmdb_id = movie.tmdb_id

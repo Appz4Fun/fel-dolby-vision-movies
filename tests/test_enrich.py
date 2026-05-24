@@ -117,6 +117,29 @@ def test_enrich_releases_tolerates_poster_download_failure(tmp_path, monkeypatch
     assert releases[0].poster_path == ""
 
 
+def test_enrich_releases_treats_resolver_http_errors_as_unresolved(tmp_path, capsys):
+    class FailingResolver:
+        def resolve(self, title: str, year: str):
+            raise httpx.HTTPStatusError(
+                "server error",
+                request=httpx.Request("GET", "https://api.example.test/search"),
+                response=httpx.Response(500),
+            )
+
+    client = httpx.Client(transport=httpx.MockTransport(_handler))
+    releases = [make("Rain Man", "1988")]
+
+    summary = enrich_releases(
+        releases, FailingResolver(), client=client, api_key="x", poster_dir=tmp_path
+    )
+    client.close()
+
+    assert summary.resolved == 0
+    assert summary.unresolved == 1
+    assert releases[0].tmdb_id == ""
+    assert "enrich: resolve failed for 'Rain Man'" in capsys.readouterr().out
+
+
 def test_enrich_releases_applies_bluray_details(tmp_path):
     resolver = StaticTmdbResolver(
         {
