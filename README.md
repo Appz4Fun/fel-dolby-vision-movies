@@ -7,8 +7,9 @@ Dolby Vision **Profile 7 FEL** (Full Enhancement Layer) video track.
 
 A daily automated pipeline scrapes physical-media forums and curated lists,
 verifies each release against Profile 7 FEL evidence, enriches it with TMDB
-and blu-ray.com metadata, and renders everything to the dashboard linked
-above. The machine-readable data lives in
+and blu-ray.com metadata, and opens a data-refresh pull request when new
+releases are found. After that PR is manually merged, GitHub Pages renders the
+dashboard linked above. The machine-readable data lives in
 [`data/releases.json`](data/releases.json).
 
 For manual entry submit your FEL releases to this reddit thread which will be

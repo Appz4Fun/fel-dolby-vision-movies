@@ -122,10 +122,13 @@ updating the symlink.
   Branches outside those push patterns still get CI once a PR is opened.
 - CI uses Python 3.13, `uv`, `PYTHONPATH=src`, Ruff, pytest with coverage, and
   `python -m benchmark tests/fixtures/benchmark_cases.json`.
-- The Pages workflow runs on schedule and manual dispatch. It runs tests before
-  scraping, runs the deterministic scraper, runs `ai-scrape`, commits refreshed
-  `data/releases.json`, `data/posters/`, and `data/forums.txt` on `main`, then
-  uploads `dist/` through the branchless Pages artifact flow.
+- The scheduled scrape workflow runs tests before scraping, runs the
+  deterministic scraper, runs `ai-scrape`, and opens or updates one persistent
+  `daily-fel-refresh` pull request when new FEL releases are added to
+  `data/releases.json`. It must not push refreshed data directly to protected
+  `main`.
+- The Pages-only workflow publishes `dist/` after data/code changes are merged
+  to `main`; it does not scrape or run the AI worker.
 - The manual Secret Smoke Test only verifies `BRAVE_SEARCH_API_KEY`; it is not
   required for normal CI.
 - Basic CI must not require optional API secrets to pass.

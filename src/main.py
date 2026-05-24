@@ -20,6 +20,7 @@ import fetcher
 import google_sheets
 import list_sources
 import parser as fel_parser
+import release_delta
 from merge import canonical_key, dedupe_releases
 from models import FelRelease, release_from_dict
 import reddit_source
@@ -82,6 +83,21 @@ def main(argv: Sequence[str] | None = None) -> int:
         return run_migration(args.fel, args.raw_fel, args.output_dir, args.report)
     if args.command == "ai-scrape":  # pragma: no cover - AI scrape entrypoint
         return ai_scrape.run_ai_scrape(args.sources, args.output_dir, args.cache_dir)
+    if args.command == "pr-summary":
+        summary = release_delta.write_pr_summary(
+            args.base_releases,
+            args.previous_releases,
+            args.head_releases,
+            args.body_output,
+            args.github_output,
+        )
+        print(
+            "release delta complete; "
+            f"pending={summary.pending_release_count} "
+            f"new={summary.new_release_count} "
+            f"body={args.body_output}"
+        )
+        return 0
     parser.error(
         f"unknown command: {args.command}"
     )  # pragma: no cover - argparse already enforces choices
@@ -194,6 +210,15 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     ai_scrape_parser.add_argument("--output-dir", type=Path, default=Path("."))
     ai_scrape_parser.add_argument("--cache-dir", type=Path, default=Path(".cache/html"))
+    pr_summary = subparsers.add_parser(
+        "pr-summary",
+        help="write the daily refresh PR body and GitHub Actions outputs",
+    )
+    pr_summary.add_argument("--base-releases", type=Path, required=True)
+    pr_summary.add_argument("--previous-releases", type=Path, required=True)
+    pr_summary.add_argument("--head-releases", type=Path, required=True)
+    pr_summary.add_argument("--body-output", type=Path, required=True)
+    pr_summary.add_argument("--github-output", type=Path, default=None)
     return parser
 
 

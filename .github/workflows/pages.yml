@@ -1,4 +1,4 @@
-name: Scrape and Deploy Pages
+name: Scrape and Propose Data Refresh
 
 on:
   workflow_dispatch:
@@ -7,15 +7,15 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
+  pull-requests: write
 
 concurrency:
-  group: pages
+  group: data-refresh-pr
   cancel-in-progress: false
 
 env:
   PYTHONPATH: src
+  PR_BRANCH: daily-fel-refresh
 
 jobs:
   scrape:
@@ -23,10 +23,32 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
 
-      - name: Update queued main checkout
-        if: github.ref == 'refs/heads/main'
-        run: git pull --ff-only origin "$GITHUB_REF_NAME"
+      - name: Prepare refresh branch
+        id: prepare_branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch origin main:refs/remotes/origin/main
+          pr_number="$(gh pr list \
+            --base main \
+            --head "$PR_BRANCH" \
+            --state open \
+            --json number \
+            --jq '.[0].number // ""')"
+          if [ -n "$pr_number" ]; then
+            git fetch origin "$PR_BRANCH:refs/remotes/origin/$PR_BRANCH"
+            git checkout -B "$PR_BRANCH" "origin/$PR_BRANCH"
+            git rebase origin/main
+          else
+            git checkout -B "$PR_BRANCH" origin/main
+          fi
+          git show origin/main:data/releases.json > "$RUNNER_TEMP/base-releases.json"
+          cp data/releases.json "$RUNNER_TEMP/previous-releases.json"
+          echo "pr_number=$pr_number" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -59,35 +81,42 @@ jobs:
           uv run --with-requirements requirements.txt
           python -m main ai-scrape --sources data/sources_needs_evidence.txt
 
-      - name: Commit refreshed data
-        if: github.ref == 'refs/heads/main'
+      - name: Summarize release additions
+        id: release_delta
+        run: >
+          uv run --with-requirements requirements.txt
+          python -m main pr-summary
+          --base-releases "$RUNNER_TEMP/base-releases.json"
+          --previous-releases "$RUNNER_TEMP/previous-releases.json"
+          --head-releases data/releases.json
+          --body-output "$RUNNER_TEMP/pr-body.md"
+          --github-output "$GITHUB_OUTPUT"
+
+      - name: Update refresh branch and PR
+        if: steps.release_delta.outputs.has_new_releases == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.prepare_branch.outputs.pr_number }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/releases.json data/posters data/sources_needs_evidence.txt
           if git diff --cached --quiet; then
-            echo "no data changes to commit"
+            echo "new releases were detected, but no tracked files changed"
           else
-            git commit -m "chore: refresh FEL releases data [skip ci]"
-            git pull --rebase --autostash origin "$GITHUB_REF_NAME"
-            git push origin "HEAD:$GITHUB_REF_NAME"
+            git commit -m "chore: refresh FEL releases data"
+            git push --force-with-lease origin "HEAD:$PR_BRANCH"
+            if [ -n "$PR_NUMBER" ]; then
+              gh pr edit "$PR_NUMBER" --body-file "$RUNNER_TEMP/pr-body.md"
+            else
+              gh pr create \
+                --base main \
+                --head "$PR_BRANCH" \
+                --title "chore: refresh FEL releases data" \
+                --body-file "$RUNNER_TEMP/pr-body.md"
+            fi
           fi
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v6
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: dist
-
-  deploy:
-    needs: scrape
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - name: No new FEL releases
+        if: steps.release_delta.outputs.has_new_releases != 'true'
+        run: echo "No new FEL release identities found; leaving the refresh PR unchanged."

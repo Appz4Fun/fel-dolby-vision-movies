@@ -1,13 +1,9 @@
 name: Deploy Pages
 
 # Fast path: re-render and publish the GitHub Pages site on every push to
-# main WITHOUT scraping or AI extraction. Data refreshes stay owned by the
-# daily "Scrape and Deploy Pages" workflow; this only rebuilds the dashboard
-# from the committed data so code/data changes merged to main reach the live
-# site in well under a minute instead of waiting for the daily run.
-#
-# Note: the daily workflow commits its data refresh with "[skip ci]", so that
-# commit does not trigger this workflow (the daily run deploys it directly).
+# main WITHOUT scraping or AI extraction. The daily scrape workflow opens or
+# updates a data-refresh PR; after that PR is manually merged, this workflow
+# publishes the committed data to GitHub Pages.
 
 on:
   push:
@@ -19,8 +15,7 @@ permissions:
   pages: write
   id-token: write
 
-# Share the "pages" concurrency group with the daily scrape workflow so the
-# two never deploy at the same time.
+# Keep Pages deployments serialized when push and manual rebuilds overlap.
 concurrency:
   group: pages
   cancel-in-progress: false

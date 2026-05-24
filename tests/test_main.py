@@ -284,6 +284,43 @@ def test_compare_found_uses_ai_flag_without_printing_secret(
     assert "secret-token" not in output
 
 
+def test_pr_summary_command_writes_body_and_github_outputs(tmp_path: Path, capsys):
+    base_path = tmp_path / "base.json"
+    previous_path = tmp_path / "previous.json"
+    head_path = tmp_path / "head.json"
+    body_path = tmp_path / "body.md"
+    github_output_path = tmp_path / "github-output.txt"
+    new_release = release("New Movie", "https://forum.example.test/new")
+
+    base_path.write_text("[]\n", encoding="utf-8")
+    previous_path.write_text("[]\n", encoding="utf-8")
+    head_path.write_text(json.dumps([new_release.to_dict()]) + "\n", encoding="utf-8")
+
+    exit_code = main.main(
+        [
+            "pr-summary",
+            "--base-releases",
+            str(base_path),
+            "--previous-releases",
+            str(previous_path),
+            "--head-releases",
+            str(head_path),
+            "--body-output",
+            str(body_path),
+            "--github-output",
+            str(github_output_path),
+        ]
+    )
+
+    assert exit_code == 0
+    assert "| New Movie | Unknown |" in body_path.read_text(encoding="utf-8")
+    assert "new_release_count=1" in github_output_path.read_text(encoding="utf-8")
+    output = capsys.readouterr().out
+    assert "release delta complete" in output
+    assert "pending=1" in output
+    assert "new=1" in output
+
+
 def test_scrape_for_titles_continues_after_fetch_errors(
     tmp_path: Path, monkeypatch, capsys
 ):
