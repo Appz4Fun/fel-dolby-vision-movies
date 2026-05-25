@@ -38,6 +38,23 @@ def test_parse_discourse_list_strips_html_tags():
     assert releases[0].source_label == "discourse"
 
 
+def test_parse_discourse_list_strips_bare_archived_ordinals():
+    html = """
+    <p>281 Nobody (2021)</p>
+    <p>354 Scream (2022)</p>
+    <p>10 Cloverfield Lane (2016)</p>
+    <p>1917 (2019)</p>
+    """
+    releases = parse_discourse_list(html, "https://web.archive.org/x")
+
+    assert [r.movie_title for r in releases] == [
+        "Nobody",
+        "Scream",
+        "10 Cloverfield Lane",
+        "1917",
+    ]
+
+
 def test_parse_letterboxd_list_reads_item_display_names():
     html = (
         '<li data-item-full-display-name="The Matrix (1999)"></li>'

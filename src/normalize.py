@@ -74,10 +74,33 @@ def _looks_like_audio_label(value: str) -> bool:
 
 
 _FEL_TITLE_PREFIXES = ("L.E. ", "EDIT: ", "EDIT ", "--", "-")
+_BARE_LIST_ORDINAL_RE = re.compile(r"^\s*(?P<number>[1-9]\d{2})\s+(?P<title>[A-Z].*)")
+_NUMERIC_TITLE_PREFIXES = (
+    "100 Streets",
+    "101 Dalmatians",
+    "102 Dalmatians",
+    "127 Hours",
+    "200 Cigarettes",
+    "300 Rise",
+    "365 Days",
+)
+
+
+def _strip_bare_list_ordinal(title: str) -> str:
+    match = _BARE_LIST_ORDINAL_RE.match(title)
+    if match is None:
+        return title
+    if any(
+        title.casefold().startswith(prefix.casefold())
+        for prefix in _NUMERIC_TITLE_PREFIXES
+    ):
+        return title
+    return match.group("title")
 
 
 def normalize_fel_title(value: str) -> str:
     title = html.unescape(value).strip()
+    title = _strip_bare_list_ordinal(title)
     changed = True
     while changed:
         changed = False

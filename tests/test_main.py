@@ -903,21 +903,18 @@ def test_reddit_url_routes_to_reddit_parser(monkeypatch):
     assert captured["html"] == "<reddit html>"
 
 
-def test_needs_evidence_reddit_url_falls_through_to_fel_parser(monkeypatch):
-    """needs-evidence reddit URLs must NOT use the list parser; they should
-    fall through to the evidence-gated parse_fel_releases."""
-
-    list_called = False
-    fel_called = {}
+def test_needs_evidence_reddit_url_routes_to_reddit_parser(monkeypatch):
+    list_called = {}
+    fel_called = False
 
     def fake_reddit(html, url):
-        nonlocal list_called
-        list_called = True
+        list_called["html"] = html
+        list_called["url"] = url
         return []
 
     def fake_fel(html, url):
-        fel_called["html"] = html
-        fel_called["url"] = url
+        nonlocal fel_called
+        fel_called = True
         return []
 
     monkeypatch.setattr(main.reddit_source, "parse_reddit_releases", fake_reddit)
@@ -935,8 +932,8 @@ def test_needs_evidence_reddit_url_falls_through_to_fel_parser(monkeypatch):
     )
     main._scrape_source(job, FakeFetcher())
 
-    assert list_called is False
-    assert fel_called["html"] == "<reddit discussion>"
+    assert list_called["html"] == "<reddit discussion>"
+    assert fel_called is False
 
 
 def test_github_raw_url_resolves_blob_paths_and_repo_root():

@@ -456,9 +456,7 @@ def _scrape_source(
                 )  # pragma: no cover - live google-sheets path
             else:
                 releases = google_sheets.parse_google_sheet_releases(text, url)
-        elif (
-            always_fel and "reddit.com" in domain
-        ):  # pragma: no cover - live reddit path
+        elif "reddit.com" in domain:  # pragma: no cover - live reddit path
             releases = reddit_source.parse_reddit_releases(
                 html_fetcher.fetch(url).text, url
             )

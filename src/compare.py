@@ -17,11 +17,20 @@ import fetcher
 import google_sheets
 import sources
 from models import FelRelease
+from normalize import normalize_fel_title
 
 
 DEFAULT_AI_MODEL = "gpt-5.5"
 DEFAULT_AI_REASONING_EFFORT = "xhigh"
 DEFAULT_AI_BASE_URL = "https://api.theclawbay.com/backend-api/codex"
+AI_EXTRACTION_SYSTEM_PROMPT = (
+    "Extract confirmed Dolby Vision Profile 7 FEL movie entries. "
+    "Return JSON only with items: title, year, evidence. "
+    "Use the real movie title only. Do not include list numbering, bullets, "
+    "row indexes, or ordinal prefixes in titles; for example, if the source "
+    "line is '281 Nobody (2021)', return title 'Nobody'. "
+    "Do not include MEL-only, generic REMUX, or ambiguous entries."
+)
 
 
 @dataclass(frozen=True)
@@ -88,11 +97,7 @@ class AIClient:  # pragma: no cover - exercised via live OpenAI-compatible API o
             "input": [
                 {
                     "role": "system",
-                    "content": (
-                        "Extract confirmed Dolby Vision Profile 7 FEL movie entries. "
-                        "Return JSON only with items: title, year, evidence. "
-                        "Do not include MEL-only, generic REMUX, or ambiguous entries."
-                    ),
+                    "content": AI_EXTRACTION_SYSTEM_PROMPT,
                 },
                 {
                     "role": "user",
@@ -540,7 +545,7 @@ def _candidates_from_payload_text(
     for item in items:
         if not isinstance(item, dict):
             continue
-        title = str(item.get("title", "")).strip()
+        title = normalize_fel_title(str(item.get("title", "")).strip())
         year = str(item.get("year", "Unknown")).strip() or "Unknown"
         evidence = str(item.get("evidence", "")).strip()
         if title:

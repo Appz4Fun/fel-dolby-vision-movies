@@ -84,6 +84,13 @@ def test_normalize_fel_title_strips_prefixes_and_aka():
     assert normalize_fel_title(",- ") == ""
 
 
+def test_normalize_fel_title_preserves_known_numeric_titles():
+    assert normalize_fel_title("101 Dalmatians") == "101 Dalmatians"
+    assert normalize_fel_title("127 Hours") == "127 Hours"
+    assert normalize_fel_title("300 Rise of an Empire") == "300 Rise of an Empire"
+    assert normalize_fel_title("365 Days") == "365 Days"
+
+
 def test_normalize_fel_title_decodes_html_entities():
     assert normalize_fel_title("Fast &amp; Furious") == "Fast & Furious"
     assert normalize_fel_title("Hansel &amp; Gretel") == "Hansel & Gretel"

@@ -101,6 +101,11 @@ def test_ai_client_loads_env_without_printing_secret(monkeypatch):
     assert settings.reasoning_effort == "xhigh"
 
 
+def test_ai_extraction_prompt_rejects_list_ordinals():
+    assert "Do not include list numbering" in compare.AI_EXTRACTION_SYSTEM_PROMPT
+    assert "281 Nobody" in compare.AI_EXTRACTION_SYSTEM_PROMPT
+
+
 def test_candidates_from_ai_response_accepts_responses_sse():
     body = "\n".join(
         [
@@ -138,6 +143,31 @@ def test_candidates_from_ai_response_accepts_responses_sse():
             extraction_method="ai",
         )
     ]
+
+
+def test_candidates_from_ai_response_strips_list_ordinals():
+    body = json.dumps(
+        {
+            "output_text": json.dumps(
+                {
+                    "items": [
+                        {
+                            "title": "281 Nobody",
+                            "year": "2021",
+                            "evidence": "281 Nobody (2021)",
+                        }
+                    ]
+                }
+            )
+        }
+    )
+
+    candidates = compare._candidates_from_ai_response_text(
+        body,
+        "https://forum.example.test/thread",
+    )
+
+    assert [candidate.title for candidate in candidates] == ["Nobody"]
 
 
 def test_compare_found_with_ai_fetches_sources_and_marks_origin(
