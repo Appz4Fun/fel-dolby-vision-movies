@@ -26,7 +26,6 @@ from models import FelRelease, release_from_dict
 import reddit_source
 import sources
 
-
 DEFAULT_SCRAPE_WORKERS = 6
 
 
@@ -142,6 +141,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"unchanged={summary.unchanged} "
             f"skipped={len(summary.skipped)}"
         )
+        if summary.skipped:
+            preview = ", ".join(summary.skipped[:20])
+            suffix = (
+                ""
+                if len(summary.skipped) <= 20
+                else f" (+{len(summary.skipped) - 20} more)"
+            )
+            print(f"skipped titles: {preview}{suffix}")
         return 0
     parser.error(
         f"unknown command: {args.command}"

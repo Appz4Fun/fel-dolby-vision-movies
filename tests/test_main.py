@@ -1213,6 +1213,38 @@ def test_main_trakt_sync_invokes_run_sync_and_prints_summary(
     assert "added=1 removed=0 unchanged=2 skipped=0" in out
 
 
+def test_main_trakt_sync_prints_skipped_titles_when_present(
+    tmp_path, capsys, monkeypatch
+):
+    import main
+    import trakt_sync
+
+    monkeypatch.setenv("TRAKT_APP_CLIENT_ID", "cid")
+    monkeypatch.setenv("TRAKT_APP_CLIENT_SECRET", "csec")
+    monkeypatch.setenv("TRAKT_REFRESH_TOKEN", "rtok")
+    monkeypatch.delenv("TRAKT_REFRESH_TOKEN_OUT", raising=False)
+
+    releases = tmp_path / "r.json"
+    releases.write_text('[{"movie_title": "A", "imdb_id": "tt0001"}]')
+
+    skipped_titles = [f"Bad Title {i}" for i in range(25)]
+    monkeypatch.setattr(
+        trakt_sync,
+        "run_sync",
+        lambda **kw: trakt_sync.SyncSummary(0, 0, 1, skipped_titles, "x"),
+    )
+
+    exit_code = main.main(["trakt-sync", "--releases", str(releases)])
+
+    assert exit_code == 0
+    out = capsys.readouterr().out
+    assert "skipped=25" in out
+    assert "skipped titles:" in out
+    # First 20 titles previewed, overflow count shown
+    assert "Bad Title 0" in out
+    assert "(+5 more)" in out
+
+
 def test_main_trakt_sync_dry_run_flag_passes_through(tmp_path, monkeypatch):
     import main
     import trakt_sync
