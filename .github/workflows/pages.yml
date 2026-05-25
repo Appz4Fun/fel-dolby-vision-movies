@@ -33,6 +33,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           git fetch origin main:refs/remotes/origin/main
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           pr_number="$(gh pr list \
             --base main \
             --head "$PR_BRANCH" \
@@ -98,8 +100,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ steps.prepare_branch.outputs.pr_number }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/releases.json data/posters data/sources_needs_evidence.txt
           if git diff --cached --quiet; then
             echo "new releases were detected, but no tracked files changed"
