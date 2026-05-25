@@ -2,9 +2,9 @@ name: Sync Trakt FEL List
 
 on:
   push:
-    branches: [main]
-    paths:
-      - data/releases.json
+    branches: [main, feat/trakt-list-sync]
+#    paths:
+#      - data/releases.json
   schedule:
     - cron: "53 10,22 * * *"
   workflow_dispatch:
