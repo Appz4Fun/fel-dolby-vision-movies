@@ -37,6 +37,12 @@ lint:
     @paths="src"; test ! -d tests || paths="$paths tests"; uv run --with-requirements requirements-dev.txt ruff check $paths
     @paths="src"; test ! -d tests || paths="$paths tests"; uv run --with-requirements requirements-dev.txt ruff format --check $paths
 
+trakt-sync:
+    uv run --with-requirements requirements.txt python -m main trakt-sync
+
+trakt-sync-dry:
+    uv run --with-requirements requirements.txt python -m main trakt-sync --dry-run
+
 ci:
     just lint
     just test
