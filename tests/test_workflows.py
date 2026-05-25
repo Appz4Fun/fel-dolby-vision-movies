@@ -60,3 +60,28 @@ def test_pages_workflow_refreshes_force_with_lease_before_push():
     assert update_step.index(fetch_line) < update_step.index(
         "git push --force-with-lease"
     )
+
+
+def test_pages_workflow_dispatches_ci_after_refresh_push():
+    workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
+    permissions_start = workflow.index("permissions:")
+    permissions_end = workflow.index("concurrency:", permissions_start)
+    permissions = workflow[permissions_start:permissions_end]
+    update_start = workflow.index("- name: Update refresh branch and PR")
+    update_end = workflow.index("- name: No new FEL releases", update_start)
+    update_step = workflow[update_start:update_end]
+
+    assert "actions: write" in permissions
+    assert 'gh workflow run ci.yml --ref "$PR_BRANCH"' in update_step
+    assert update_step.index("git push --force-with-lease") < update_step.index(
+        'gh workflow run ci.yml --ref "$PR_BRANCH"'
+    )
+
+
+def test_ci_workflow_can_be_dispatched_for_refresh_branch():
+    workflow = Path(".github/workflows/ci.yml").read_text(encoding="utf-8")
+    trigger_start = workflow.index("on:")
+    trigger_end = workflow.index("permissions:", trigger_start)
+    trigger_block = workflow[trigger_start:trigger_end]
+
+    assert "workflow_dispatch:" in trigger_block
