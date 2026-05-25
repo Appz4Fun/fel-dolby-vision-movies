@@ -78,6 +78,77 @@ def test_search_for_sources_merges_only_accepted_urls(
     assert "secret-token" not in output
 
 
+def test_prune_posters_removes_added_and_untracked_unref_candidates(
+    tmp_path: Path, monkeypatch, capsys
+):
+    releases_path = tmp_path / "data/releases.json"
+    poster_dir = tmp_path / "data/posters"
+    poster_dir.mkdir(parents=True)
+    releases_path.parent.mkdir(parents=True, exist_ok=True)
+    referenced = release("Referenced")
+    referenced.poster_path = "data/posters/111.jpg"
+    releases_path.write_text(
+        json.dumps([referenced.to_dict()]) + "\n",
+        encoding="utf-8",
+    )
+    for name in ("111.jpg", "222.jpg", "333.jpg", "444.jpg"):
+        (poster_dir / name).write_bytes(name.encode("utf-8"))
+    calls: list[list[str]] = []
+
+    def fake_check_output(command: list[str], text: bool):
+        calls.append(command)
+        assert text is True
+        if command[1] == "diff":
+            return f"{poster_dir / '111.jpg'}\n{poster_dir / '222.jpg'}\n"
+        if command[1] == "ls-files":
+            return f"{poster_dir / '333.jpg'}\n"
+        raise AssertionError(command)
+
+    monkeypatch.setattr(main.subprocess, "check_output", fake_check_output)
+
+    exit_code = main.main(
+        [
+            "prune-posters",
+            "--releases",
+            str(releases_path),
+            "--poster-dir",
+            str(poster_dir),
+            "--base-ref",
+            "origin/main",
+            "--include-added",
+            "--include-untracked",
+        ]
+    )
+
+    assert exit_code == 0
+    assert calls == [
+        [
+            "git",
+            "diff",
+            "--name-only",
+            "--diff-filter=A",
+            "origin/main",
+            "--",
+            str(poster_dir),
+        ],
+        [
+            "git",
+            "ls-files",
+            "--others",
+            "--exclude-standard",
+            "--",
+            str(poster_dir),
+        ],
+    ]
+    assert (poster_dir / "111.jpg").exists()
+    assert not (poster_dir / "222.jpg").exists()
+    assert not (poster_dir / "333.jpg").exists()
+    assert (poster_dir / "444.jpg").exists()
+    output = capsys.readouterr().out
+    assert "candidates=3" in output
+    assert "removed=2" in output
+
+
 def test_scrape_for_titles_fetches_sources_and_writes_artifacts(
     tmp_path: Path, monkeypatch, capsys
 ):

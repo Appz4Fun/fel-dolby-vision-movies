@@ -43,9 +43,13 @@ def test_pages_workflow_regenerates_releases_from_main_data():
     )
     assert 'cp data/releases.json "$RUNNER_TEMP/previous-releases.json"' in prepare_step
     assert 'cp "$RUNNER_TEMP/base-releases.json" data/releases.json' in prepare_step
+    assert "git checkout origin/main -- data/posters" in prepare_step
     assert prepare_step.index(
         'cp data/releases.json "$RUNNER_TEMP/previous-releases.json"'
     ) < prepare_step.index('cp "$RUNNER_TEMP/base-releases.json" data/releases.json')
+    assert prepare_step.index(
+        'cp "$RUNNER_TEMP/base-releases.json" data/releases.json'
+    ) < (prepare_step.index("git checkout origin/main -- data/posters"))
 
 
 def test_pages_workflow_refreshes_force_with_lease_before_push():
@@ -76,6 +80,21 @@ def test_pages_workflow_dispatches_ci_after_refresh_push():
     assert update_step.index("git push --force-with-lease") < update_step.index(
         'gh workflow run ci.yml --ref "$PR_BRANCH"'
     )
+
+
+def test_pages_workflow_prunes_only_added_unreferenced_posters_before_diff_check():
+    workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
+    ai_start = workflow.index("- name: Run AI discovery and scraping")
+    prune_start = workflow.index("- name: Prune refresh-only stale posters")
+    summary_start = workflow.index("- name: Summarize release additions")
+    check_start = workflow.index("- name: Check refresh branch changes")
+    prune_step = workflow[prune_start:summary_start]
+
+    assert ai_start < prune_start < summary_start < check_start
+    assert "python -m main prune-posters" in prune_step
+    assert "--base-ref origin/main" in prune_step
+    assert "--include-added" in prune_step
+    assert "--include-untracked" in prune_step
 
 
 def test_pages_workflow_closes_existing_refresh_pr_when_no_pending_releases():

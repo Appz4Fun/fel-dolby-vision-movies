@@ -52,6 +52,7 @@ jobs:
           git show origin/main:data/releases.json > "$RUNNER_TEMP/base-releases.json"
           cp data/releases.json "$RUNNER_TEMP/previous-releases.json"
           cp "$RUNNER_TEMP/base-releases.json" data/releases.json
+          git checkout origin/main -- data/posters
           echo "pr_number=$pr_number" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
@@ -84,6 +85,16 @@ jobs:
         run: >
           uv run --with-requirements requirements.txt
           python -m main ai-scrape --sources data/sources_needs_evidence.txt
+
+      - name: Prune refresh-only stale posters
+        run: >
+          uv run --with-requirements requirements.txt
+          python -m main prune-posters
+          --releases data/releases.json
+          --poster-dir data/posters
+          --base-ref origin/main
+          --include-added
+          --include-untracked
 
       - name: Summarize release additions
         id: release_delta

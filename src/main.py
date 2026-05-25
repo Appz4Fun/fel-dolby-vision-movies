@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import json
 import os
 from pathlib import Path
+import subprocess
 from typing import Sequence
 from urllib.parse import urlparse
 
@@ -97,6 +98,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"body={args.body_output}"
         )
         return 0
+    if args.command == "prune-posters":
+        return _prune_posters(args)
     if args.command == "trakt-sync":
         import httpx
         import trakt_sync
@@ -271,6 +274,15 @@ def _build_parser() -> argparse.ArgumentParser:
     pr_summary.add_argument("--head-releases", type=Path, required=True)
     pr_summary.add_argument("--body-output", type=Path, required=True)
     pr_summary.add_argument("--github-output", type=Path, default=None)
+    prune_posters = subparsers.add_parser(
+        "prune-posters",
+        help="remove refresh-generated poster files not referenced by releases.json",
+    )
+    prune_posters.add_argument("--releases", type=Path, required=True)
+    prune_posters.add_argument("--poster-dir", type=Path, required=True)
+    prune_posters.add_argument("--base-ref", default="origin/main")
+    prune_posters.add_argument("--include-added", action="store_true")
+    prune_posters.add_argument("--include-untracked", action="store_true")
     trakt = subparsers.add_parser(
         "trakt-sync",
         help="sync data/releases.json into the configured Trakt list",
@@ -309,6 +321,73 @@ def _positive_int(value: str) -> int:
     if parsed < 1:
         raise argparse.ArgumentTypeError("must be >= 1")
     return parsed
+
+
+def _prune_posters(args: argparse.Namespace) -> int:
+    releases = [
+        release_from_dict(item)
+        for item in json.loads(args.releases.read_text(encoding="utf-8"))
+    ]
+    candidate_names = _refresh_poster_candidate_names(
+        args.poster_dir,
+        base_ref=args.base_ref,
+        include_added=args.include_added,
+        include_untracked=args.include_untracked,
+    )
+    removed = artifacts.prune_unreferenced_posters(
+        args.poster_dir,
+        releases,
+        candidate_names=candidate_names,
+    )
+    print(
+        "poster prune complete; "
+        f"candidates={len(candidate_names)} "
+        f"removed={len(removed)}"
+    )
+    return 0
+
+
+def _refresh_poster_candidate_names(
+    poster_dir: Path,
+    *,
+    base_ref: str,
+    include_added: bool,
+    include_untracked: bool,
+) -> list[str]:
+    paths: list[str] = []
+    poster_arg = str(poster_dir)
+    if include_added:
+        paths.extend(
+            _git_output_lines(
+                [
+                    "git",
+                    "diff",
+                    "--name-only",
+                    "--diff-filter=A",
+                    base_ref,
+                    "--",
+                    poster_arg,
+                ]
+            )
+        )
+    if include_untracked:
+        paths.extend(
+            _git_output_lines(
+                [
+                    "git",
+                    "ls-files",
+                    "--others",
+                    "--exclude-standard",
+                    "--",
+                    poster_arg,
+                ]
+            )
+        )
+    return list(dict.fromkeys(Path(path).name for path in paths))
+
+
+def _git_output_lines(command: list[str]) -> list[str]:
+    return subprocess.check_output(command, text=True).splitlines()
 
 
 def _search_for_sources(source_path: Path) -> int:

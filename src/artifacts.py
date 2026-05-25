@@ -4,6 +4,7 @@ from dataclasses import replace
 import json
 from pathlib import Path
 import re
+from typing import Iterable
 
 from merge import canonical_key, dedupe_releases, title_bluray_key, tmdb_key
 from models import UNKNOWN, FelRelease, release_from_dict
@@ -70,19 +71,26 @@ def write_artifacts(
         + "\n",
         encoding="utf-8",
     )
-    _prune_unreferenced_posters(data_dir / "posters", sorted_releases)
     return sorted_releases
 
 
-def _prune_unreferenced_posters(poster_dir: Path, releases: list[FelRelease]) -> None:
+def prune_unreferenced_posters(
+    poster_dir: Path,
+    releases: list[FelRelease],
+    candidate_names: Iterable[str],
+) -> list[Path]:
     if not poster_dir.exists():
-        return
+        return []
     referenced = {
         Path(release.poster_path).name for release in releases if release.poster_path
     }
-    for poster_path in poster_dir.iterdir():
+    removed: list[Path] = []
+    for candidate_name in dict.fromkeys(Path(name).name for name in candidate_names):
+        poster_path = poster_dir / candidate_name
         if poster_path.is_file() and poster_path.name not in referenced:
             poster_path.unlink()
+            removed.append(poster_path)
+    return removed
 
 
 def _normalize_release_titles(releases: list[FelRelease]) -> list[FelRelease]:

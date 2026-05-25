@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+import artifacts
 from artifacts import publish_outputs, write_artifacts
 from models import FelEvidence, FelRelease
 
@@ -176,13 +177,13 @@ def test_write_artifacts_preserves_enriched_fields(tmp_path: Path):
     assert entry["bluray_url"].endswith("/9/")
 
 
-def test_write_artifacts_removes_unreferenced_poster_files(tmp_path: Path):
+def test_write_artifacts_preserves_unreferenced_existing_poster_files(tmp_path: Path):
     poster_dir = tmp_path / "data/posters"
     poster_dir.mkdir(parents=True)
     referenced = poster_dir / "111.jpg"
-    stale = poster_dir / "222.jpg"
+    existing_unreferenced = poster_dir / "222.jpg"
     referenced.write_bytes(b"referenced")
-    stale.write_bytes(b"stale")
+    existing_unreferenced.write_bytes(b"existing")
 
     item = release("Enriched", "2024")
     item.tmdb_id = "111"
@@ -191,4 +192,39 @@ def test_write_artifacts_removes_unreferenced_poster_files(tmp_path: Path):
     write_artifacts([item], output_dir=tmp_path)
 
     assert referenced.exists()
-    assert not stale.exists()
+    assert existing_unreferenced.exists()
+
+
+def test_prune_unreferenced_posters_removes_only_candidate_files(tmp_path: Path):
+    poster_dir = tmp_path / "data/posters"
+    poster_dir.mkdir(parents=True)
+    referenced = poster_dir / "111.jpg"
+    stale_candidate = poster_dir / "222.jpg"
+    protected_unreferenced = poster_dir / "333.jpg"
+    referenced.write_bytes(b"referenced")
+    stale_candidate.write_bytes(b"stale")
+    protected_unreferenced.write_bytes(b"protected")
+
+    item = release("Enriched", "2024")
+    item.poster_path = "data/posters/111.jpg"
+
+    removed = artifacts.prune_unreferenced_posters(
+        poster_dir,
+        [item],
+        candidate_names=["111.jpg", "222.jpg"],
+    )
+
+    assert removed == [stale_candidate]
+    assert referenced.exists()
+    assert not stale_candidate.exists()
+    assert protected_unreferenced.exists()
+
+
+def test_prune_unreferenced_posters_noops_when_poster_dir_is_missing(tmp_path: Path):
+    removed = artifacts.prune_unreferenced_posters(
+        tmp_path / "missing",
+        [release("Enriched", "2024")],
+        candidate_names=["222.jpg"],
+    )
+
+    assert removed == []
