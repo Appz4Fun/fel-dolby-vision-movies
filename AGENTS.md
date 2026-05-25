@@ -143,6 +143,21 @@ The sync code lives in `src/trakt_sync.py` and is invoked via
 `python -m main trakt-sync` (or `just trakt-sync` / `just trakt-sync-dry`
 locally). Required repo secrets: `TRAKT_APP_CLIENT_ID`,
 `TRAKT_APP_CLIENT_SECRET`, `TRAKT_REFRESH_TOKEN`, and `TRAKT_SYNC_PAT` (a
-fine-grained PAT with `actions:write` on this repo, used by the workflow to
-rotate `TRAKT_REFRESH_TOKEN` after each successful run). To mint the initial
-refresh token, run `scripts/trakt_bootstrap.py` locally once.
+fine-grained PAT with `Secrets: Read and write` on this repo, used by the
+workflow to rotate `TRAKT_REFRESH_TOKEN` after each successful run). To mint
+the initial refresh token, run `just trakt-bootstrap` locally once.
+
+**Don't burn the refresh-token chain.** Every successful refresh consumes the
+old token and issues a new one. The workflow persists the new one back to
+the secret automatically, but every *local* `just trakt-sync*` or
+`just trakt-bootstrap` call also consumes a token without writing it
+anywhere CI can see, leaving the secret stale. Trakt also rate-limits
+`/oauth/token` aggressively (a stampede can lock the endpoint for ~45
+minutes per-account). Practical rules:
+- Don't run `just trakt-bootstrap` more than once unless you've verified the
+  previous token is genuinely broken.
+- Don't run local sync commands while CI is healthy — let the workflow own
+  the rotation chain.
+- If you hit `429 REFRESH_TOKEN_API_GET_LIMIT`, wait the full Retry-After
+  window before any further attempts. The code raises `TraktRateLimitError`
+  with `retry_after_seconds` rather than burning more retries.

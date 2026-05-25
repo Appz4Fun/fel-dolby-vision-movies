@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
@@ -15,6 +16,13 @@ TRAKT_BASE_URL = "https://api.trakt.tv"
 TRAKT_REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob"
 TRAKT_API_VERSION = "2"
 
+# Cap CI-blocking sleep when Trakt reports a long Retry-After. The actual
+# rate-limit window for /oauth/token can be ~45 minutes, which is too long to
+# block a workflow; we fail fast and let the next scheduled run retry.
+MAX_RETRY_SLEEP_SECONDS = 10
+DEFAULT_RETRY_SLEEP_SECONDS = 5
+_RETRY_AFTER_BODY_RE = re.compile(r"wait\s+(\d+)\s+seconds", re.IGNORECASE)
+
 
 class TraktError(RuntimeError):
     """Base class for Trakt sync errors."""
@@ -22,6 +30,40 @@ class TraktError(RuntimeError):
 
 class TraktAuthError(TraktError):
     """OAuth refresh failed."""
+
+
+class TraktRateLimitError(TraktError):
+    """Trakt returned HTTP 429."""
+
+    def __init__(self, message: str, retry_after_seconds: int | None) -> None:
+        super().__init__(message)
+        self.retry_after_seconds = retry_after_seconds
+
+
+def _parse_retry_after(response: httpx.Response) -> int | None:
+    header = response.headers.get("Retry-After")
+    if header and header.strip().isdigit():
+        return int(header.strip())
+    match = _RETRY_AFTER_BODY_RE.search(response.text or "")
+    if match:
+        return int(match.group(1))
+    return None
+
+
+def _rate_limit_error(response: httpx.Response, context: str) -> TraktRateLimitError:
+    retry_after = _parse_retry_after(response)
+    suffix = f" retry-after={retry_after}s" if retry_after is not None else ""
+    return TraktRateLimitError(
+        f"trakt {context} rate limit hit: {response.status_code} {response.text}"
+        f"{suffix}",
+        retry_after_seconds=retry_after,
+    )
+
+
+def _sleep_for_retry(response: httpx.Response) -> None:
+    retry_after = _parse_retry_after(response)
+    delay = retry_after if retry_after is not None else DEFAULT_RETRY_SLEEP_SECONDS
+    time.sleep(float(min(delay, MAX_RETRY_SLEEP_SECONDS)))
 
 
 @dataclass(frozen=True)
@@ -47,6 +89,10 @@ def refresh_access_token(
             "redirect_uri": TRAKT_REDIRECT_URI,
         },
     )
+    if response.status_code == 429:
+        # Wait window can be ~45 min — too long to block CI; fail fast and let
+        # the next scheduled run retry.
+        raise _rate_limit_error(response, "refresh")
     if response.status_code >= 400:
         raise TraktAuthError(
             f"trakt refresh failed: {response.status_code} {response.text}"
@@ -75,10 +121,14 @@ def fetch_list_imdb_ids(
     access_token: str,
     client_id: str,
 ) -> set[str]:
-    response = http.get(
-        f"/users/{user}/lists/{slug}/items/movies",
-        headers=_auth_headers(access_token, client_id),
-    )
+    headers = _auth_headers(access_token, client_id)
+    path = f"/users/{user}/lists/{slug}/items/movies"
+    response = http.get(path, headers=headers)
+    if response.status_code == 429:
+        _sleep_for_retry(response)
+        response = http.get(path, headers=headers)
+        if response.status_code == 429:
+            raise _rate_limit_error(response, f"GET {path}")
     if response.status_code >= 400:
         raise TraktError(
             f"trakt list fetch failed: {response.status_code} {response.text}"
@@ -136,6 +186,11 @@ def _post_movies(
     for i, batch in enumerate(_batched(imdb_ids, BATCH_SIZE), start=1):
         body = {"movies": [{"ids": {"imdb": imdb}} for imdb in batch]}
         response = http.post(path, headers=headers, json=body)
+        if response.status_code == 429:
+            _sleep_for_retry(response)
+            response = http.post(path, headers=headers, json=body)
+            if response.status_code == 429:
+                raise _rate_limit_error(response, f"POST {path} batch {i}")
         if response.status_code >= 400:
             raise TraktError(
                 f"trakt {path} failed on batch {i}: {response.status_code} {response.text}"

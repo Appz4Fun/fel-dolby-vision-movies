@@ -425,3 +425,210 @@ def test_run_sync_persists_rotated_token_even_when_mutations_fail(tmp_path: Path
     # Token must be persisted even though mutations failed — otherwise the
     # workflow can't rotate the now-invalidated old refresh token.
     assert token_out.read_text() == "FRESH"
+
+
+# ---------- 429 rate-limit handling ----------
+
+
+def test_refresh_access_token_raises_rate_limit_with_retry_after_from_body():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            429,
+            text=(
+                "REFRESH_TOKEN_API_GET_LIMIT rate limit exceeded. "
+                "Please wait 2489 seconds then retry your request."
+            ),
+        )
+
+    with _mock_client(handler) as client:
+        with pytest.raises(trakt_sync.TraktRateLimitError) as exc:
+            trakt_sync.refresh_access_token(
+                http=client,
+                client_id="cid",
+                client_secret="csec",
+                refresh_token="r",
+            )
+
+    assert exc.value.retry_after_seconds == 2489
+    assert "rate limit" in str(exc.value).lower()
+
+
+def test_refresh_access_token_raises_rate_limit_with_retry_after_header():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(429, headers={"Retry-After": "60"}, text="too many")
+
+    with _mock_client(handler) as client:
+        with pytest.raises(trakt_sync.TraktRateLimitError) as exc:
+            trakt_sync.refresh_access_token(
+                http=client,
+                client_id="cid",
+                client_secret="csec",
+                refresh_token="r",
+            )
+
+    assert exc.value.retry_after_seconds == 60
+
+
+def test_refresh_access_token_rate_limit_without_parseable_retry_after():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(429, text="slow down")
+
+    with _mock_client(handler) as client:
+        with pytest.raises(trakt_sync.TraktRateLimitError) as exc:
+            trakt_sync.refresh_access_token(
+                http=client,
+                client_id="cid",
+                client_secret="csec",
+                refresh_token="r",
+            )
+
+    assert exc.value.retry_after_seconds is None
+
+
+def test_trakt_rate_limit_error_is_a_trakt_error():
+    assert issubclass(trakt_sync.TraktRateLimitError, trakt_sync.TraktError)
+
+
+def test_post_movies_retries_once_on_429_then_succeeds(monkeypatch):
+    sleeps: list[float] = []
+    monkeypatch.setattr("time.sleep", lambda s: sleeps.append(s))
+
+    call_count = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        call_count["n"] += 1
+        if call_count["n"] == 1:
+            return httpx.Response(429, headers={"Retry-After": "2"}, text="slow down")
+        return httpx.Response(201, json={"added": {"movies": 1}})
+
+    with _mock_client(handler) as client:
+        trakt_sync.add_items(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+            imdb_ids=["tt0001"],
+        )
+
+    assert call_count["n"] == 2
+    assert sleeps == [2.0]
+
+
+def test_post_movies_raises_rate_limit_after_second_429(monkeypatch):
+    monkeypatch.setattr("time.sleep", lambda _: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(429, headers={"Retry-After": "1"}, text="still limited")
+
+    with _mock_client(handler) as client:
+        with pytest.raises(trakt_sync.TraktRateLimitError) as exc:
+            trakt_sync.add_items(
+                http=client,
+                user="u",
+                slug="s",
+                access_token="atok",
+                client_id="cid",
+                imdb_ids=["tt0001"],
+            )
+
+    assert exc.value.retry_after_seconds == 1
+
+
+def test_fetch_list_imdb_ids_raises_rate_limit_after_second_429(monkeypatch):
+    monkeypatch.setattr("time.sleep", lambda _: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(429, headers={"Retry-After": "1"}, text="still limited")
+
+    with _mock_client(handler) as client:
+        with pytest.raises(trakt_sync.TraktRateLimitError) as exc:
+            trakt_sync.fetch_list_imdb_ids(
+                http=client,
+                user="u",
+                slug="s",
+                access_token="atok",
+                client_id="cid",
+            )
+
+    assert exc.value.retry_after_seconds == 1
+
+
+def test_fetch_list_imdb_ids_retries_once_on_429_then_succeeds(monkeypatch):
+    sleeps: list[float] = []
+    monkeypatch.setattr("time.sleep", lambda s: sleeps.append(s))
+
+    call_count = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        call_count["n"] += 1
+        if call_count["n"] == 1:
+            return httpx.Response(429, headers={"Retry-After": "3"})
+        return httpx.Response(
+            200,
+            json=[{"movie": {"ids": {"imdb": "tt0001"}}}],
+        )
+
+    with _mock_client(handler) as client:
+        ids = trakt_sync.fetch_list_imdb_ids(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+        )
+
+    assert ids == {"tt0001"}
+    assert call_count["n"] == 2
+    assert sleeps == [3.0]
+
+
+def test_retry_sleep_is_capped_at_max(monkeypatch):
+    sleeps: list[float] = []
+    monkeypatch.setattr("time.sleep", lambda s: sleeps.append(s))
+
+    call_count = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        call_count["n"] += 1
+        if call_count["n"] == 1:
+            # Trakt could return a very long Retry-After; we must not block CI for that.
+            return httpx.Response(429, headers={"Retry-After": "3600"})
+        return httpx.Response(201)
+
+    with _mock_client(handler) as client:
+        trakt_sync.add_items(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+            imdb_ids=["tt0001"],
+        )
+
+    assert sleeps == [float(trakt_sync.MAX_RETRY_SLEEP_SECONDS)]
+
+
+def test_retry_sleep_uses_default_when_no_retry_after(monkeypatch):
+    sleeps: list[float] = []
+    monkeypatch.setattr("time.sleep", lambda s: sleeps.append(s))
+
+    call_count = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        call_count["n"] += 1
+        if call_count["n"] == 1:
+            return httpx.Response(429, text="too many")
+        return httpx.Response(201)
+
+    with _mock_client(handler) as client:
+        trakt_sync.add_items(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+            imdb_ids=["tt0001"],
+        )
+
+    assert sleeps == [float(trakt_sync.DEFAULT_RETRY_SLEEP_SECONDS)]
