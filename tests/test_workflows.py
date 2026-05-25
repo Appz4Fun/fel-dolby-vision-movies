@@ -78,6 +78,18 @@ def test_pages_workflow_dispatches_ci_after_refresh_push():
     )
 
 
+def test_pages_workflow_closes_existing_refresh_pr_when_no_pending_releases():
+    workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
+    cleanup_start = workflow.index("- name: Close empty refresh PR")
+    cleanup_end = workflow.index("- name: No new FEL releases", cleanup_start)
+    cleanup_step = workflow[cleanup_start:cleanup_end]
+
+    assert "steps.release_delta.outputs.pending_release_count == '0'" in cleanup_step
+    assert "steps.prepare_branch.outputs.pr_number != ''" in cleanup_step
+    assert 'gh pr close "$PR_NUMBER"' in cleanup_step
+    assert "--delete-branch" in cleanup_step
+
+
 def test_ci_workflow_can_be_dispatched_for_refresh_branch():
     workflow = Path(".github/workflows/ci.yml").read_text(encoding="utf-8")
     trigger_start = workflow.index("on:")

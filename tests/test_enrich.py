@@ -198,6 +198,107 @@ def test_enrich_releases_applies_bluray_details(tmp_path):
     assert summary.bluray_failed == 0
 
 
+def test_enrich_releases_uses_known_lookup_alias_for_tmdb_and_bluray(tmp_path):
+    resolver = StaticTmdbResolver(
+        {
+            ("Ip Man", "2008"): {
+                "tmdb_id": "14756",
+                "title": "Ip Man",
+                "year": "2008",
+                "imdb_id": "tt1220719",
+            }
+        }
+    )
+    bluray = StaticBlurayResolver(
+        {
+            ("Ip Man", "2008"): BlurayDetails(
+                url="https://www.blu-ray.com/movies/Ip-Man-4K-Blu-ray/280168/",
+                bluray_release_date="2022-11-22",
+                audio_formats=["Dolby TrueHD/Atmos 7.1"],
+                audio_languages=["Cantonese", "English"],
+                hdr_formats=["Dolby Vision", "HDR10"],
+            )
+        }
+    )
+
+    def handler(request):
+        if request.url.path == "/3/movie/14756":
+            return httpx.Response(
+                200,
+                json={
+                    "poster_path": "/ip-man.jpg",
+                    "release_date": "2008-12-12",
+                    "production_companies": [{"name": "Mandarin Films"}],
+                },
+            )
+        return httpx.Response(200, content=b"jpeg")
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    releases = [make("Yip Man", "2008")]
+    summary = enrich_releases(
+        releases,
+        resolver,
+        client=client,
+        api_key="x",
+        poster_dir=tmp_path,
+        bluray_resolver=bluray,
+    )
+    client.close()
+
+    release = releases[0]
+    assert release.movie_title == "Ip Man"
+    assert release.tmdb_id == "14756"
+    assert release.imdb_id == "tt1220719"
+    assert release.release_date == "2008-12-12"
+    assert release.bluray_url.endswith("/280168/")
+    assert release.audio_languages == ["Cantonese", "English"]
+    assert summary.resolved == 1
+    assert summary.bluray_matched == 1
+
+
+def test_enrich_releases_uses_alias_year_when_source_year_is_not_tmdb_year(
+    tmp_path,
+):
+    resolver = StaticTmdbResolver(
+        {
+            ("The Witch", "2016"): {
+                "tmdb_id": "310131",
+                "title": "The Witch",
+                "year": "2016",
+                "imdb_id": "tt4263482",
+            }
+        }
+    )
+
+    def handler(request):
+        if request.url.path == "/3/movie/310131":
+            return httpx.Response(
+                200,
+                json={
+                    "poster_path": "",
+                    "release_date": "2016-02-19",
+                    "production_companies": [{"name": "A24"}],
+                },
+            )
+        return httpx.Response(404)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    releases = [make("The VVitch", "2015")]
+    summary = enrich_releases(
+        releases,
+        resolver,
+        client=client,
+        api_key="x",
+        poster_dir=tmp_path,
+    )
+    client.close()
+
+    assert releases[0].movie_title == "The Witch"
+    assert releases[0].tmdb_id == "310131"
+    assert releases[0].release_date == "2016-02-19"
+    assert summary.resolved == 1
+
+
 def test_enrich_releases_counts_bluray_failures(tmp_path):
     class FailingBlurayResolver:
         def resolve(self, title: str, year: str):
