@@ -6,6 +6,7 @@ on:
     - cron: "23 10 * * *"
 
 permissions:
+  actions: write
   contents: write
   pull-requests: write
 
@@ -129,6 +130,7 @@ jobs:
                 --title "chore: refresh FEL releases data" \
                 --body-file "$RUNNER_TEMP/pr-body.md"
             fi
+            gh workflow run ci.yml --ref "$PR_BRANCH"
           fi
 
       - name: No new FEL releases
