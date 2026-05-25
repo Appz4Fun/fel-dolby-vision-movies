@@ -381,5 +381,47 @@ def test_run_sync_does_not_write_token_when_out_is_none(tmp_path: Path):
             dry_run=False,
             allow_empty=False,
         )
-    # If we got here without errors, the test passes; the lack of a refresh_token_out
-    # path means rotation is the caller's responsibility (no file written).
+    # Only the releases file should be present — no token file written.
+    assert [p.name for p in sorted(tmp_path.iterdir())] == ["releases.json"]
+
+
+def test_run_sync_persists_rotated_token_even_when_mutations_fail(tmp_path: Path):
+    releases = tmp_path / "releases.json"
+    releases.write_text(json.dumps([{"movie_title": "A", "imdb_id": "tt0001"}]))
+    token_out = tmp_path / "new-refresh"
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/oauth/token":
+            return httpx.Response(
+                200,
+                json={
+                    "access_token": "atok",
+                    "refresh_token": "FRESH",
+                    "expires_in": 1,
+                    "token_type": "Bearer",
+                },
+            )
+        if request.url.path.endswith("/items/movies") and request.method == "GET":
+            return httpx.Response(200, json=[])
+        if request.url.path.endswith("/items") and request.method == "POST":
+            return httpx.Response(500, json={"error": "boom"})
+        return httpx.Response(404)
+
+    with _mock_client(handler) as client:
+        with pytest.raises(trakt_sync.TraktError):
+            trakt_sync.run_sync(
+                http=client,
+                client_id="cid",
+                client_secret="csec",
+                refresh_token="old",
+                user="u",
+                slug="s",
+                releases_path=releases,
+                refresh_token_out=token_out,
+                dry_run=False,
+                allow_empty=False,
+            )
+
+    # Token must be persisted even though mutations failed — otherwise the
+    # workflow can't rotate the now-invalidated old refresh token.
+    assert token_out.read_text() == "FRESH"

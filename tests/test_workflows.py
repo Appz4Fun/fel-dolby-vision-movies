@@ -80,9 +80,10 @@ def test_trakt_sync_workflow_has_required_shape():
         assert marker in workflow, f"missing: {marker!r}"
 
 
-def test_trakt_sync_workflow_rotates_only_on_success():
+def test_trakt_sync_workflow_rotates_on_always_so_invalidated_tokens_are_persisted():
     workflow = Path(".github/workflows/trakt-sync.yml").read_text(encoding="utf-8")
     rotate_start = workflow.index("- name: Rotate refresh-token secret")
     rotate_end = workflow.index("env:", rotate_start)
     rotate_header = workflow[rotate_start:rotate_end]
-    assert "if: success()" in rotate_header
+    assert "if: always()" in rotate_header
+    assert "if: success()" not in rotate_header

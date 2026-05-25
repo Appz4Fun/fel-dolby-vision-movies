@@ -133,12 +133,12 @@ def _post_movies(
     if not imdb_ids:
         return
     headers = _auth_headers(access_token, client_id)
-    for batch in _batched(imdb_ids, BATCH_SIZE):
+    for i, batch in enumerate(_batched(imdb_ids, BATCH_SIZE), start=1):
         body = {"movies": [{"ids": {"imdb": imdb}} for imdb in batch]}
         response = http.post(path, headers=headers, json=body)
         if response.status_code >= 400:
             raise TraktError(
-                f"trakt {path} failed: {response.status_code} {response.text}"
+                f"trakt {path} failed on batch {i}: {response.status_code} {response.text}"
             )
 
 
@@ -215,6 +215,9 @@ def run_sync(
         refresh_token=refresh_token,
     )
 
+    if refresh_token_out is not None:
+        refresh_token_out.write_text(tokens.refresh_token)
+
     current_ids = fetch_list_imdb_ids(
         http=http,
         user=user,
@@ -245,9 +248,6 @@ def run_sync(
             client_id=client_id,
             imdb_ids=to_remove,
         )
-
-    if refresh_token_out is not None:
-        refresh_token_out.write_text(tokens.refresh_token)
 
     return SyncSummary(
         added=len(to_add),
