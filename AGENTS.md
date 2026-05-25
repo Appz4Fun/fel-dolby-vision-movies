@@ -132,3 +132,16 @@ updating the symlink.
 - The manual Secret Smoke Test only verifies `BRAVE_SEARCH_API_KEY`; it is not
   required for normal CI.
 - Basic CI must not require optional API secrets to pass.
+
+## Trakt List Sync
+
+`.github/workflows/trakt-sync.yml` mirrors `data/releases.json` into the Trakt
+list `yellowbrick242/xbmc4lyfe-fel-content`. It runs on push to `main` whenever
+`data/releases.json` changes and on a daily cron (10:53 UTC) as a safety net.
+The sync code lives in `src/trakt_sync.py` and is invoked via
+`python -m main trakt-sync` (or `just trakt-sync` / `just trakt-sync-dry`
+locally). Required repo secrets: `TRAKT_APP_CLIENT_ID`,
+`TRAKT_APP_CLIENT_SECRET`, `TRAKT_REFRESH_TOKEN`, and `TRAKT_SYNC_PAT` (a
+fine-grained PAT with `actions:write` on this repo, used by the workflow to
+rotate `TRAKT_REFRESH_TOKEN` after each successful run). To mint the initial
+refresh token, run `scripts/trakt_bootstrap.py` locally once.
