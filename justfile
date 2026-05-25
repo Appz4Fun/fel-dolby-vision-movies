@@ -43,6 +43,9 @@ trakt-sync:
 trakt-sync-dry:
     uv run --with-requirements requirements.txt python -m main trakt-sync --dry-run
 
+trakt-bootstrap:
+    uv run --with-requirements requirements.txt python scripts/trakt_bootstrap.py
+
 ci:
     just lint
     just test
