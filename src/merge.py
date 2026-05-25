@@ -93,11 +93,6 @@ def _prefer_evidence(left: FelEvidence, right: FelEvidence) -> FelEvidence:
     return left
 
 
-def _prefer_recent(left: str, right: str) -> str:
-    candidates = [value for value in (left, right) if value and value != UNKNOWN]
-    return max(candidates) if candidates else UNKNOWN
-
-
 def merge_releases(base: FelRelease, other: FelRelease) -> FelRelease:
     # dedupe_releases folds left: merge(merge(a, b), c). The _prefer_* rules are
     # deterministic but order-sensitive for ties (equal-length titles, two full
@@ -119,7 +114,7 @@ def merge_releases(base: FelRelease, other: FelRelease) -> FelRelease:
         english_audio=_prefer_known(base.english_audio, other.english_audio),
         additional_characteristics=additional,
         source_label=_prefer_known(base.source_label, other.source_label),
-        collected_at=_prefer_recent(base.collected_at, other.collected_at),
+        collected_at=_prefer_known(base.collected_at, other.collected_at),
         fel_confirmed=base.fel_confirmed or other.fel_confirmed,
         tmdb_id=base.tmdb_id or other.tmdb_id,
         imdb_id=base.imdb_id or other.imdb_id,

@@ -95,6 +95,13 @@ def test_merge_prefers_real_timestamp_over_unknown():
     assert merge_releases(no_ts, has_ts).collected_at == "2026-05-21T00:00:00+00:00"
 
 
+def test_merge_preserves_existing_timestamp_over_new_scrape():
+    existing = make("Sisu", "2022", collected_at="2026-05-21T00:00:00+00:00")
+    scraped = make("Sisu", "2022", collected_at="2026-05-25T00:00:00+00:00")
+
+    assert merge_releases(existing, scraped).collected_at == "2026-05-21T00:00:00+00:00"
+
+
 def test_merge_prefers_title_with_fewer_dots():
     dotted = make("The.Northman", "2022")
     spaced = make("The Northman", "2022")
