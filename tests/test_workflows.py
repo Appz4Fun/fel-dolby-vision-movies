@@ -29,3 +29,20 @@ def test_pages_workflow_updates_existing_refresh_pr_when_data_changes():
     assert "steps.refresh_changes.outputs.has_tracked_changes == 'true'" in update_step
     assert "steps.release_delta.outputs.pending_release_count != '0'" in update_step
     assert "steps.release_delta.outputs.has_new_releases == 'true'" not in update_step
+
+
+def test_pages_workflow_regenerates_releases_from_main_data():
+    workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
+    prepare_start = workflow.index("- name: Prepare refresh branch")
+    prepare_end = workflow.index("- name: Set up Python", prepare_start)
+    prepare_step = workflow[prepare_start:prepare_end]
+
+    assert (
+        'git show origin/main:data/releases.json > "$RUNNER_TEMP/base-releases.json"'
+        in prepare_step
+    )
+    assert 'cp data/releases.json "$RUNNER_TEMP/previous-releases.json"' in prepare_step
+    assert 'cp "$RUNNER_TEMP/base-releases.json" data/releases.json' in prepare_step
+    assert prepare_step.index(
+        'cp data/releases.json "$RUNNER_TEMP/previous-releases.json"'
+    ) < prepare_step.index('cp "$RUNNER_TEMP/base-releases.json" data/releases.json')
