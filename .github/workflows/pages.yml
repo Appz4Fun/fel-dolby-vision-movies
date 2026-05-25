@@ -94,8 +94,20 @@ jobs:
           --body-output "$RUNNER_TEMP/pr-body.md"
           --github-output "$GITHUB_OUTPUT"
 
+      - name: Check refresh branch changes
+        id: refresh_changes
+        run: |
+          git add data/releases.json data/posters data/sources_needs_evidence.txt
+          if git diff --cached --quiet; then
+            echo "has_tracked_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_tracked_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Update refresh branch and PR
-        if: steps.release_delta.outputs.has_new_releases == 'true'
+        if: >
+          steps.refresh_changes.outputs.has_tracked_changes == 'true' &&
+          steps.release_delta.outputs.pending_release_count != '0'
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ steps.prepare_branch.outputs.pr_number }}
@@ -118,5 +130,7 @@ jobs:
           fi
 
       - name: No new FEL releases
-        if: steps.release_delta.outputs.has_new_releases != 'true'
-        run: echo "No new FEL release identities found; leaving the refresh PR unchanged."
+        if: >
+          steps.refresh_changes.outputs.has_tracked_changes != 'true' ||
+          steps.release_delta.outputs.pending_release_count == '0'
+        run: echo "No refresh PR data changes found; leaving the refresh PR unchanged."
