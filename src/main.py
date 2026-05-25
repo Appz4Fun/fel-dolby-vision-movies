@@ -26,7 +26,6 @@ from models import FelRelease, release_from_dict
 import reddit_source
 import sources
 
-
 DEFAULT_SCRAPE_WORKERS = 6
 
 
@@ -97,6 +96,59 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"new={summary.new_release_count} "
             f"body={args.body_output}"
         )
+        return 0
+    if args.command == "trakt-sync":
+        import httpx
+        import trakt_sync
+
+        required = {
+            "TRAKT_APP_CLIENT_ID": os.environ.get("TRAKT_APP_CLIENT_ID"),
+            "TRAKT_APP_CLIENT_SECRET": os.environ.get("TRAKT_APP_CLIENT_SECRET"),
+            "TRAKT_REFRESH_TOKEN": os.environ.get("TRAKT_REFRESH_TOKEN"),
+        }
+        missing = [name for name, value in required.items() if not value]
+        if missing:
+            print(f"trakt-sync missing required env: {', '.join(missing)}")
+            return 2
+
+        user = args.user or os.environ.get("TRAKT_LIST_USER", "yellowbrick242")
+        slug = args.slug or os.environ.get("TRAKT_LIST_SLUG", "xbmc4lyfe-fel-content")
+        token_out_env = os.environ.get("TRAKT_REFRESH_TOKEN_OUT")
+        token_out = Path(token_out_env) if token_out_env else None
+
+        try:
+            with httpx.Client(base_url=trakt_sync.TRAKT_BASE_URL, timeout=30.0) as http:
+                summary = trakt_sync.run_sync(
+                    http=http,
+                    client_id=required["TRAKT_APP_CLIENT_ID"],
+                    client_secret=required["TRAKT_APP_CLIENT_SECRET"],
+                    refresh_token=required["TRAKT_REFRESH_TOKEN"],
+                    user=user,
+                    slug=slug,
+                    releases_path=args.releases,
+                    refresh_token_out=token_out,
+                    dry_run=args.dry_run,
+                    allow_empty=args.allow_empty,
+                )
+        except trakt_sync.TraktError as exc:
+            print(f"trakt-sync failed: {exc}")
+            return 1
+
+        print(
+            "trakt-sync complete; "
+            f"added={summary.added} "
+            f"removed={summary.removed} "
+            f"unchanged={summary.unchanged} "
+            f"skipped={len(summary.skipped)}"
+        )
+        if summary.skipped:
+            preview = ", ".join(summary.skipped[:20])
+            suffix = (
+                ""
+                if len(summary.skipped) <= 20
+                else f" (+{len(summary.skipped) - 20} more)"
+            )
+            print(f"skipped titles: {preview}{suffix}")
         return 0
     parser.error(
         f"unknown command: {args.command}"
@@ -219,6 +271,36 @@ def _build_parser() -> argparse.ArgumentParser:
     pr_summary.add_argument("--head-releases", type=Path, required=True)
     pr_summary.add_argument("--body-output", type=Path, required=True)
     pr_summary.add_argument("--github-output", type=Path, default=None)
+    trakt = subparsers.add_parser(
+        "trakt-sync",
+        help="sync data/releases.json into the configured Trakt list",
+    )
+    trakt.add_argument(
+        "--releases",
+        type=Path,
+        default=Path("data/releases.json"),
+        help="releases dataset to sync (default: data/releases.json)",
+    )
+    trakt.add_argument(
+        "--user",
+        default=None,
+        help="trakt username owning the list (default: $TRAKT_LIST_USER or yellowbrick242)",
+    )
+    trakt.add_argument(
+        "--slug",
+        default=None,
+        help="trakt list slug (default: $TRAKT_LIST_SLUG or xbmc4lyfe-fel-content)",
+    )
+    trakt.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="compute the diff but do not POST changes",
+    )
+    trakt.add_argument(
+        "--allow-empty",
+        action="store_true",
+        help="allow syncing an empty releases set (would wipe the list)",
+    )
     return parser
 
 

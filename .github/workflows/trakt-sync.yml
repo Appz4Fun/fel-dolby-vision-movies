@@ -1,0 +1,64 @@
+name: Sync Trakt FEL List
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - data/releases.json
+  schedule:
+    - cron: "53 10,22 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: trakt-sync
+  cancel-in-progress: false
+
+env:
+  PYTHONPATH: src
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v8.1.0
+        with:
+          enable-cache: true
+
+      - name: Sync list
+        env:
+          TRAKT_APP_CLIENT_ID:     ${{ secrets.TRAKT_APP_CLIENT_ID }}
+          TRAKT_APP_CLIENT_SECRET: ${{ secrets.TRAKT_APP_CLIENT_SECRET }}
+          TRAKT_REFRESH_TOKEN:     ${{ secrets.TRAKT_REFRESH_TOKEN }}
+          TRAKT_LIST_USER: yellowbrick242
+          TRAKT_LIST_SLUG: xbmc4lyfe-fel-content
+          TRAKT_REFRESH_TOKEN_OUT: ${{ runner.temp }}/new-refresh-token
+        run: >
+          uv run --with-requirements requirements.txt
+          python -m main trakt-sync --releases data/releases.json
+
+      - name: Rotate refresh-token secret
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.TRAKT_SYNC_PAT }}
+          NEW_TOKEN_FILE: ${{ runner.temp }}/new-refresh-token
+        run: |
+          if [ -s "$NEW_TOKEN_FILE" ]; then
+            gh secret set TRAKT_REFRESH_TOKEN \
+              --repo "${GITHUB_REPOSITORY}" \
+              --body "$(cat "$NEW_TOKEN_FILE")"
+            echo "rotated TRAKT_REFRESH_TOKEN"
+          else
+            echo "no rotated refresh token written; skipping"
+          fi

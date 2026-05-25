@@ -85,3 +85,30 @@ def test_ci_workflow_can_be_dispatched_for_refresh_branch():
     trigger_block = workflow[trigger_start:trigger_end]
 
     assert "workflow_dispatch:" in trigger_block
+
+
+def test_trakt_sync_workflow_has_required_shape():
+    workflow = Path(".github/workflows/trakt-sync.yml").read_text(encoding="utf-8")
+    for marker in (
+        "name: Sync Trakt FEL List",
+        "paths:\n      - data/releases.json",
+        'cron: "53 10,22 * * *"',
+        "workflow_dispatch:",
+        "concurrency:\n  group: trakt-sync",
+        "${{ secrets.TRAKT_APP_CLIENT_ID }}",
+        "${{ secrets.TRAKT_APP_CLIENT_SECRET }}",
+        "${{ secrets.TRAKT_REFRESH_TOKEN }}",
+        "${{ secrets.TRAKT_SYNC_PAT }}",
+        "python -m main trakt-sync",
+        "gh secret set TRAKT_REFRESH_TOKEN",
+    ):
+        assert marker in workflow, f"missing: {marker!r}"
+
+
+def test_trakt_sync_workflow_rotates_on_always_so_invalidated_tokens_are_persisted():
+    workflow = Path(".github/workflows/trakt-sync.yml").read_text(encoding="utf-8")
+    rotate_start = workflow.index("- name: Rotate refresh-token secret")
+    rotate_end = workflow.index("env:", rotate_start)
+    rotate_header = workflow[rotate_start:rotate_end]
+    assert "if: always()" in rotate_header
+    assert "if: success()" not in rotate_header
