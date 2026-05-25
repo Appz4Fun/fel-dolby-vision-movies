@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Iterable
 
 import httpx
@@ -173,4 +175,84 @@ def remove_items(
         access_token=access_token,
         client_id=client_id,
         imdb_ids=imdb_ids,
+    )
+
+
+@dataclass(frozen=True)
+class SyncSummary:
+    added: int
+    removed: int
+    unchanged: int
+    skipped: list[str]
+    rotated_refresh_token: str
+
+
+def run_sync(
+    *,
+    http: httpx.Client,
+    client_id: str,
+    client_secret: str,
+    refresh_token: str,
+    user: str,
+    slug: str,
+    releases_path: Path,
+    refresh_token_out: Path | None,
+    dry_run: bool,
+    allow_empty: bool,
+) -> SyncSummary:
+    releases = json.loads(releases_path.read_text())
+    desired_ids, skipped = extract_imdb_ids(releases)
+    if not desired_ids and not allow_empty:
+        raise TraktError(
+            "refusing to sync an empty desired set; "
+            "pass --allow-empty to wipe the trakt list"
+        )
+
+    tokens = refresh_access_token(
+        http=http,
+        client_id=client_id,
+        client_secret=client_secret,
+        refresh_token=refresh_token,
+    )
+
+    current_ids = fetch_list_imdb_ids(
+        http=http,
+        user=user,
+        slug=slug,
+        access_token=tokens.access_token,
+        client_id=client_id,
+    )
+    to_add, to_remove = compute_diff(
+        current=current_ids,
+        desired=set(desired_ids),
+    )
+    unchanged = len(set(desired_ids) & current_ids)
+
+    if not dry_run:
+        add_items(
+            http=http,
+            user=user,
+            slug=slug,
+            access_token=tokens.access_token,
+            client_id=client_id,
+            imdb_ids=to_add,
+        )
+        remove_items(
+            http=http,
+            user=user,
+            slug=slug,
+            access_token=tokens.access_token,
+            client_id=client_id,
+            imdb_ids=to_remove,
+        )
+
+    if refresh_token_out is not None:
+        refresh_token_out.write_text(tokens.refresh_token)
+
+    return SyncSummary(
+        added=len(to_add),
+        removed=len(to_remove),
+        unchanged=unchanged,
+        skipped=skipped,
+        rotated_refresh_token=tokens.refresh_token,
     )
