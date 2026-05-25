@@ -110,3 +110,67 @@ def compute_diff(
     to_add = sorted(desired - current)
     to_remove = sorted(current - desired)
     return to_add, to_remove
+
+
+BATCH_SIZE = 500
+
+
+def _batched(seq: list[str], size: int) -> Iterable[list[str]]:
+    for start in range(0, len(seq), size):
+        yield seq[start : start + size]
+
+
+def _post_movies(
+    *,
+    http: httpx.Client,
+    path: str,
+    access_token: str,
+    client_id: str,
+    imdb_ids: list[str],
+) -> None:
+    if not imdb_ids:
+        return
+    headers = _auth_headers(access_token, client_id)
+    for batch in _batched(imdb_ids, BATCH_SIZE):
+        body = {"movies": [{"ids": {"imdb": imdb}} for imdb in batch]}
+        response = http.post(path, headers=headers, json=body)
+        if response.status_code >= 400:
+            raise TraktError(
+                f"trakt {path} failed: {response.status_code} {response.text}"
+            )
+
+
+def add_items(
+    *,
+    http: httpx.Client,
+    user: str,
+    slug: str,
+    access_token: str,
+    client_id: str,
+    imdb_ids: list[str],
+) -> None:
+    _post_movies(
+        http=http,
+        path=f"/users/{user}/lists/{slug}/items",
+        access_token=access_token,
+        client_id=client_id,
+        imdb_ids=imdb_ids,
+    )
+
+
+def remove_items(
+    *,
+    http: httpx.Client,
+    user: str,
+    slug: str,
+    access_token: str,
+    client_id: str,
+    imdb_ids: list[str],
+) -> None:
+    _post_movies(
+        http=http,
+        path=f"/users/{user}/lists/{slug}/items/remove",
+        access_token=access_token,
+        client_id=client_id,
+        imdb_ids=imdb_ids,
+    )

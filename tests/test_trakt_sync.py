@@ -138,3 +138,91 @@ def test_compute_diff_returns_sorted_add_and_remove_lists():
 
     assert to_add == ["tt0003", "tt0004"]
     assert to_remove == ["tt0001", "tt0099"]
+
+
+def test_add_items_batches_in_chunks_of_500_and_posts_correct_payload():
+    requests: list[httpx.Request] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        return httpx.Response(201, json={"added": {"movies": 0}})
+
+    ids = [f"tt{i:07d}" for i in range(1200)]
+
+    with _mock_client(handler) as client:
+        trakt_sync.add_items(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+            imdb_ids=ids,
+        )
+
+    assert len(requests) == 3
+    bodies = [json.loads(r.content) for r in requests]
+    assert all(r.url.path == "/users/u/lists/s/items" for r in requests)
+    assert len(bodies[0]["movies"]) == 500
+    assert len(bodies[1]["movies"]) == 500
+    assert len(bodies[2]["movies"]) == 200
+    assert bodies[0]["movies"][0] == {"ids": {"imdb": "tt0000000"}}
+
+
+def test_remove_items_posts_to_remove_endpoint():
+    captured: list[httpx.Request] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        captured.append(request)
+        return httpx.Response(200, json={"deleted": {"movies": 0}})
+
+    with _mock_client(handler) as client:
+        trakt_sync.remove_items(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+            imdb_ids=["tt0001", "tt0002"],
+        )
+
+    assert len(captured) == 1
+    assert captured[0].url.path == "/users/u/lists/s/items/remove"
+    assert json.loads(captured[0].content) == {
+        "movies": [{"ids": {"imdb": "tt0001"}}, {"ids": {"imdb": "tt0002"}}]
+    }
+
+
+def test_add_items_with_empty_list_makes_no_requests():
+    requests: list[httpx.Request] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        return httpx.Response(201, json={})
+
+    with _mock_client(handler) as client:
+        trakt_sync.add_items(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="a",
+            client_id="c",
+            imdb_ids=[],
+        )
+
+    assert requests == []
+
+
+def test_add_items_raises_trakt_error_on_non_2xx():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(422, json={"error": "unprocessable"})
+
+    with _mock_client(handler) as client:
+        with pytest.raises(trakt_sync.TraktError):
+            trakt_sync.add_items(
+                http=client,
+                user="u",
+                slug="s",
+                access_token="atok",
+                client_id="cid",
+                imdb_ids=["tt0001"],
+            )
