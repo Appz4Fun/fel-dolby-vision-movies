@@ -62,3 +62,54 @@ def test_refresh_access_token_raises_on_non_2xx():
                 client_secret="csecret",
                 refresh_token="old-refresh",
             )
+
+
+def test_fetch_list_imdb_ids_returns_set_of_imdb_ids():
+    captured: dict = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        captured["path"] = request.url.path
+        captured["auth"] = request.headers["Authorization"]
+        captured["api_key"] = request.headers["trakt-api-key"]
+        captured["api_version"] = request.headers["trakt-api-version"]
+        return httpx.Response(
+            200,
+            json=[
+                {"movie": {"ids": {"trakt": 1, "imdb": "tt0001", "tmdb": 100}}},
+                {"movie": {"ids": {"trakt": 2, "imdb": "tt0002", "tmdb": 200}}},
+                {"movie": {"ids": {"trakt": 3, "imdb": None, "tmdb": 300}}},
+            ],
+        )
+
+    with _mock_client(handler) as client:
+        ids = trakt_sync.fetch_list_imdb_ids(
+            http=client,
+            user="yellowbrick242",
+            slug="xbmc4lyfe-fel-content",
+            access_token="atok",
+            client_id="cid",
+        )
+
+    assert ids == {"tt0001", "tt0002"}
+    assert (
+        captured["path"]
+        == "/users/yellowbrick242/lists/xbmc4lyfe-fel-content/items/movies"
+    )
+    assert captured["auth"] == "Bearer atok"
+    assert captured["api_key"] == "cid"
+    assert captured["api_version"] == "2"
+
+
+def test_fetch_list_imdb_ids_raises_on_non_2xx():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(404, json={"error": "not found"})
+
+    with _mock_client(handler) as client:
+        with pytest.raises(trakt_sync.TraktError):
+            trakt_sync.fetch_list_imdb_ids(
+                http=client,
+                user="x",
+                slug="y",
+                access_token="atok",
+                client_id="cid",
+            )

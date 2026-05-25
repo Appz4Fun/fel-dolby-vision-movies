@@ -52,3 +52,36 @@ def refresh_access_token(
         access_token=payload["access_token"],
         refresh_token=payload["refresh_token"],
     )
+
+
+def _auth_headers(access_token: str, client_id: str) -> dict[str, str]:
+    return {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json",
+        "trakt-api-version": TRAKT_API_VERSION,
+        "trakt-api-key": client_id,
+    }
+
+
+def fetch_list_imdb_ids(
+    *,
+    http: httpx.Client,
+    user: str,
+    slug: str,
+    access_token: str,
+    client_id: str,
+) -> set[str]:
+    response = http.get(
+        f"/users/{user}/lists/{slug}/items/movies",
+        headers=_auth_headers(access_token, client_id),
+    )
+    if response.status_code >= 400:
+        raise TraktError(
+            f"trakt list fetch failed: {response.status_code} {response.text}"
+        )
+    items = response.json()
+    return {
+        item["movie"]["ids"]["imdb"]
+        for item in items
+        if item.get("movie", {}).get("ids", {}).get("imdb")
+    }
