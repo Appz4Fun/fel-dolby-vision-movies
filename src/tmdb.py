@@ -165,7 +165,7 @@ def load_tmdb_api_key(env_path: Path = Path(".env")) -> str:
 def _best_tmdb_candidate(
     query_title: str, query_year: str, candidates: list[dict[str, Any]]
 ) -> dict[str, Any] | None:
-    best: tuple[int, dict[str, Any]] | None = None
+    best: tuple[int, float, dict[str, Any]] | None = None
     query_key = _canonical_title_key(query_title)
     for candidate in candidates:
         title = str(candidate.get("title") or candidate.get("name") or "")
@@ -184,11 +184,22 @@ def _best_tmdb_candidate(
             score += 20
         if original_key == query_key:
             score += 20
-        if best is None or score > best[0]:
-            best = (score, candidate)
+        popularity = _candidate_popularity(candidate)
+        if best is None or (score, popularity) > (best[0], best[1]):
+            best = (score, popularity, candidate)
     if best is None or best[0] < 65:
         return None  # pragma: no cover - low-score branch
-    return best[1]
+    return best[2]
+
+
+def _candidate_popularity(candidate: dict[str, Any]) -> float:
+    value = candidate.get("popularity")
+    if isinstance(value, int | float):
+        return float(value)
+    try:
+        return float(str(value))
+    except (TypeError, ValueError):
+        return 0.0
 
 
 def _title_score(left: str, right: str) -> int:

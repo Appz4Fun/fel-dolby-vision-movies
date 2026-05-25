@@ -133,8 +133,31 @@ jobs:
             gh workflow run ci.yml --ref "$PR_BRANCH"
           fi
 
+      - name: Close empty refresh PR
+        if: >
+          steps.release_delta.outputs.pending_release_count == '0' &&
+          steps.prepare_branch.outputs.pr_number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.prepare_branch.outputs.pr_number }}
+        run: |
+          git add data/releases.json data/posters data/sources_needs_evidence.txt
+          if git diff --cached --quiet; then
+            echo "refresh branch already has no pending release additions"
+          else
+            git commit -m "chore: clear empty FEL refresh"
+            git fetch origin "$PR_BRANCH:refs/remotes/origin/$PR_BRANCH"
+            git push --force-with-lease origin "HEAD:$PR_BRANCH"
+          fi
+          gh pr close "$PR_NUMBER" \
+            --delete-branch \
+            --comment "No pending FEL release additions remain after the latest refresh; closing this stale refresh PR."
+
       - name: No new FEL releases
         if: >
-          steps.refresh_changes.outputs.has_tracked_changes != 'true' ||
-          steps.release_delta.outputs.pending_release_count == '0'
+          steps.prepare_branch.outputs.pr_number == '' &&
+          (
+            steps.refresh_changes.outputs.has_tracked_changes != 'true' ||
+            steps.release_delta.outputs.pending_release_count == '0'
+          )
         run: echo "No refresh PR data changes found; leaving the refresh PR unchanged."
