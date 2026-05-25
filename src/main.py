@@ -505,15 +505,44 @@ def _github_raw_url(url: str) -> str:
 def _scrape_letterboxd(
     url: str, html_fetcher: fetcher.Fetcher
 ) -> list[FelRelease]:  # pragma: no cover - live letterboxd pagination
-    first_page = html_fetcher.fetch(url).text
-    releases = list_sources.parse_letterboxd_list(first_page, url)
+    first_page = html_fetcher.fetch(_letterboxd_fetch_page_url(url, 1)).text
+    releases = list_sources.parse_letterboxd_list(
+        first_page, _letterboxd_source_page_url(url, 1)
+    )
     for page in range(2, list_sources.letterboxd_page_count(first_page) + 1):
-        page_html = html_fetcher.fetch(
-            f"{url.rstrip('/')}/page/{page}/", raise_on_error=False
-        ).text
+        page_url = _letterboxd_fetch_page_url(url, page)
+        page_html = html_fetcher.fetch(page_url, raise_on_error=False).text
         if page_html:
-            releases.extend(list_sources.parse_letterboxd_list(page_html, url))
+            releases.extend(
+                list_sources.parse_letterboxd_list(
+                    page_html, _letterboxd_source_page_url(url, page)
+                )
+            )
     return releases
+
+
+def _letterboxd_list_root(url: str) -> str:
+    root = url.rstrip("/")
+    for marker in ("/detail/page/", "/page/"):
+        if marker in root:
+            root = root.split(marker, 1)[0]
+    if root.endswith("/detail"):
+        root = root[: -len("/detail")]
+    return root
+
+
+def _letterboxd_fetch_page_url(url: str, page: int) -> str:
+    root = _letterboxd_list_root(url)
+    if page == 1:
+        return f"{root}/"
+    return f"{root}/page/{page}/"
+
+
+def _letterboxd_source_page_url(url: str, page: int) -> str:
+    root = _letterboxd_list_root(url)
+    if page == 1:
+        return f"{root}/detail/"
+    return f"{root}/detail/page/{page}/"
 
 
 def _always_fel_path_for(source_path: Path) -> Path:

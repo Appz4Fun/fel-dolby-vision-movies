@@ -936,6 +936,64 @@ def test_needs_evidence_reddit_url_routes_to_reddit_parser(monkeypatch):
     assert fel_called is False
 
 
+def test_scrape_letterboxd_records_detail_page_source_urls():
+    base_url = "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/"
+    first_page = (
+        '<a href="/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/">2</a>'
+        '<li data-item-full-display-name="The Matrix (1999)"></li>'
+    )
+    second_page = '<li data-item-full-display-name="Never Give Up (1978)"></li>'
+    calls = []
+
+    class FakeFetcher:
+        def fetch(self, url: str, *, raise_on_error: bool = True):
+            calls.append((url, raise_on_error))
+            text = second_page if url.endswith("/page/2/") else first_page
+            return type(
+                "FetchResult",
+                (),
+                {"url": url, "text": text, "from_cache": False},
+            )()
+
+    releases = main._scrape_letterboxd(base_url, FakeFetcher())
+
+    assert calls == [
+        (base_url, True),
+        (
+            "https://letterboxd.com/mikimajk/list/"
+            "list-of-dolby-vision-p7-fel-films/page/2/",
+            False,
+        ),
+    ]
+    assert [(release.movie_title, release.source_url) for release in releases] == [
+        (
+            "The Matrix",
+            "https://letterboxd.com/mikimajk/list/"
+            "list-of-dolby-vision-p7-fel-films/detail/",
+        ),
+        (
+            "Never Give Up",
+            "https://letterboxd.com/mikimajk/list/"
+            "list-of-dolby-vision-p7-fel-films/detail/page/2/",
+        ),
+    ]
+    assert releases[1].fel_evidence.source_url.endswith("/detail/page/2/")
+
+
+def test_letterboxd_page_urls_normalize_existing_page_variants():
+    root = "https://letterboxd.com/user/list/example/"
+
+    assert main._letterboxd_fetch_page_url(f"{root}page/6/", 2) == (
+        "https://letterboxd.com/user/list/example/page/2/"
+    )
+    assert main._letterboxd_source_page_url(f"{root}detail/page/6/", 6) == (
+        "https://letterboxd.com/user/list/example/detail/page/6/"
+    )
+    assert main._letterboxd_source_page_url(f"{root}detail/", 1) == (
+        "https://letterboxd.com/user/list/example/detail/"
+    )
+
+
 def test_github_raw_url_resolves_blob_paths_and_repo_root():
     assert main._github_raw_url("https://github.com/iammarxg/FEL") == (
         "https://raw.githubusercontent.com/iammarxg/FEL/HEAD/README.md"

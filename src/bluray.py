@@ -167,7 +167,24 @@ def fetch_bluray_details(client: httpx.Client, url: str) -> BlurayDetails:
 
 def search_bluray(client: httpx.Client, title: str, year: str) -> str | None:
     """Return the blu-ray.com 4K Blu-ray URL for a confident match."""
-    url = _SEARCH_URL.format(keyword=urllib.parse.quote(title))
+    for keyword in _search_keywords(title):
+        url = _SEARCH_URL.format(keyword=urllib.parse.quote(keyword))
+        match = _search_bluray_keyword(client, url, title, year)
+        if match is not None:
+            return match
+    return None
+
+
+def _search_keywords(title: str) -> list[str]:
+    keywords = [title]
+    if "4k" not in title.casefold():
+        keywords.append(f"{title} 4K")
+    return keywords
+
+
+def _search_bluray_keyword(
+    client: httpx.Client, url: str, title: str, year: str
+) -> str | None:
     response = _get_with_retry(client, url, follow_redirects=True)
     direct_url = _direct_4k_url_if_confident(str(response.url), title)
     if direct_url is not None:

@@ -121,6 +121,34 @@ def test_search_bluray_accepts_direct_4k_redirect():
         client.close()
 
 
+def test_search_bluray_retries_with_4k_when_bare_title_redirects_wrong():
+    wrong_redirect = "https://www.blu-ray.com/movies/Galaxy-Quest-Blu-ray/247576/"
+    search_html = """
+    <a class="hoverlink"
+       href="https://www.blu-ray.com/movies/Never-Give-Up-4K-Blu-ray/367655/"
+       title="Never Give Up 4K (1978)">x</a>
+    """
+    requested_keywords = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        keyword = str(request.url.params.get("quicksearch_keyword", ""))
+        if "/search/" not in request.url.path:
+            return httpx.Response(200, text="<title>Galaxy Quest Blu-ray</title>")
+        requested_keywords.append(keyword)
+        if keyword == "Never Give Up":
+            return httpx.Response(302, headers={"Location": wrong_redirect})
+        return httpx.Response(200, text=search_html)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    try:
+        assert search_bluray(client, "Never Give Up", "1978") == (
+            "https://www.blu-ray.com/movies/Never-Give-Up-4K-Blu-ray/367655/"
+        )
+    finally:
+        client.close()
+    assert requested_keywords == ["Never Give Up", "Never Give Up 4K"]
+
+
 def test_static_bluray_resolver_returns_details():
     details = BlurayDetails(url="u", hdr_formats=["Dolby Vision"])
     resolver = StaticBlurayResolver({("The Northman", "2022"): details})
