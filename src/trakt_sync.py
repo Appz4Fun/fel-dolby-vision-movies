@@ -23,6 +23,12 @@ MAX_RETRY_SLEEP_SECONDS = 10
 DEFAULT_RETRY_SLEEP_SECONDS = 5
 _RETRY_AFTER_BODY_RE = re.compile(r"wait\s+(\d+)\s+seconds", re.IGNORECASE)
 
+# Trakt paginates list-item responses. We ask for the max allowed page size to
+# minimize round-trips. The safety cap protects against a misbehaving server
+# that never advances the page-count header.
+LIST_FETCH_PAGE_LIMIT = 100
+MAX_LIST_FETCH_PAGES = 100
+
 
 class TraktError(RuntimeError):
     """Base class for Trakt sync errors."""
@@ -113,6 +119,35 @@ def _auth_headers(access_token: str, client_id: str) -> dict[str, str]:
     }
 
 
+def _parse_pagination_total_pages(response: httpx.Response) -> int | None:
+    raw = response.headers.get("X-Pagination-Page-Count")
+    if raw and raw.strip().isdigit():
+        return int(raw.strip())
+    return None
+
+
+def _get_list_page(
+    *,
+    http: httpx.Client,
+    path: str,
+    headers: dict[str, str],
+    page: int,
+) -> httpx.Response:
+    params = {"page": page, "limit": LIST_FETCH_PAGE_LIMIT}
+    response = http.get(path, headers=headers, params=params)
+    if response.status_code == 429:
+        _sleep_for_retry(response)
+        response = http.get(path, headers=headers, params=params)
+        if response.status_code == 429:
+            raise _rate_limit_error(response, f"GET {path} page {page}")
+    if response.status_code >= 400:
+        raise TraktError(
+            f"trakt list fetch failed on page {page}: "
+            f"{response.status_code} {response.text}"
+        )
+    return response
+
+
 def fetch_list_imdb_ids(
     *,
     http: httpx.Client,
@@ -123,22 +158,34 @@ def fetch_list_imdb_ids(
 ) -> set[str]:
     headers = _auth_headers(access_token, client_id)
     path = f"/users/{user}/lists/{slug}/items/movies"
-    response = http.get(path, headers=headers)
-    if response.status_code == 429:
-        _sleep_for_retry(response)
-        response = http.get(path, headers=headers)
-        if response.status_code == 429:
-            raise _rate_limit_error(response, f"GET {path}")
-    if response.status_code >= 400:
-        raise TraktError(
-            f"trakt list fetch failed: {response.status_code} {response.text}"
+    imdb_ids: set[str] = set()
+    for page in range(1, MAX_LIST_FETCH_PAGES + 1):
+        response = _get_list_page(http=http, path=path, headers=headers, page=page)
+        items = response.json()
+        imdb_ids.update(
+            item["movie"]["ids"]["imdb"]
+            for item in items
+            if item.get("movie", {}).get("ids", {}).get("imdb")
         )
-    items = response.json()
-    return {
-        item["movie"]["ids"]["imdb"]
-        for item in items
-        if item.get("movie", {}).get("ids", {}).get("imdb")
-    }
+        total_pages = _parse_pagination_total_pages(response)
+        if total_pages is not None:
+            if page >= total_pages:
+                break
+        else:
+            # Trakt convention: a partial page means we're on the last page.
+            # Defensive fallback when the page-count header is missing.
+            if len(items) < LIST_FETCH_PAGE_LIMIT:
+                break
+    else:
+        # Loop exhausted without natural termination — Trakt's pagination is
+        # either misbehaving or the list is larger than we can safely fetch.
+        # Fail closed rather than return an incomplete set (which would cause
+        # the sync to re-POST "missing" entries forever).
+        raise TraktError(
+            f"trakt list fetch exceeded {MAX_LIST_FETCH_PAGES} pages "
+            f"({len(imdb_ids)} items collected) without pagination terminating"
+        )
+    return imdb_ids
 
 
 _IMDB_ID_RE = re.compile(r"^tt\d+$")
