@@ -67,7 +67,7 @@ def test_trakt_sync_workflow_has_required_shape():
     for marker in (
         "name: Sync Trakt FEL List",
         "paths:\n      - data/releases.json",
-        'cron: "53 10 * * *"',
+        'cron: "53 10,22 * * *"',
         "workflow_dispatch:",
         "concurrency:\n  group: trakt-sync",
         "${{ secrets.TRAKT_APP_CLIENT_ID }}",

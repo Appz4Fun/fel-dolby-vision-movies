@@ -137,7 +137,8 @@ updating the symlink.
 
 `.github/workflows/trakt-sync.yml` mirrors `data/releases.json` into the Trakt
 list `yellowbrick242/xbmc4lyfe-fel-content`. It runs on push to `main` whenever
-`data/releases.json` changes and on a daily cron (10:53 UTC) as a safety net.
+`data/releases.json` changes and twice daily at 10:53 and 22:53 UTC as a
+safety net.
 The sync code lives in `src/trakt_sync.py` and is invoked via
 `python -m main trakt-sync` (or `just trakt-sync` / `just trakt-sync-dry`
 locally). Required repo secrets: `TRAKT_APP_CLIENT_ID`,
