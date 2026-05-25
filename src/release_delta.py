@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import json
 from pathlib import Path
 
-from merge import canonical_key
+from merge import canonical_key, title_bluray_key
 from models import FelRelease, release_from_dict
 
 
@@ -100,6 +100,8 @@ def _identity_key_set(releases: list[FelRelease]) -> set[tuple[str, str]]:
 
 def _release_identity_keys(release: FelRelease) -> set[tuple[str, str]]:
     keys = {("canonical", "\0".join(canonical_key(release)))}
+    if release.bluray_url:
+        keys.add(title_bluray_key(release))
     if release.tmdb_id:
         keys.add(("tmdb", release.tmdb_id))
     if release.imdb_id:

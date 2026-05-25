@@ -72,6 +72,25 @@ def test_write_artifacts_normalizes_existing_release_titles(tmp_path: Path):
     assert [item["movie_title"] for item in data] == ["Nobody"]
 
 
+def test_write_artifacts_dedupes_same_title_same_bluray_url_across_years(
+    tmp_path: Path,
+):
+    existing = release("Sisu", "2022")
+    existing.tmdb_id = "840326"
+    existing.bluray_url = "https://www.blu-ray.com/movies/Sisu-4K-Blu-ray/333344/"
+    incoming = release("Sisu", "2023")
+    incoming.tmdb_id = "935906"
+    incoming.bluray_url = "https://www.blu-ray.com/movies/Sisu-4K-Blu-ray/333344/"
+
+    write_artifacts([existing], output_dir=tmp_path)
+    write_artifacts([incoming], output_dir=tmp_path)
+
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    assert [(item["movie_title"], item["tmdb_id"]) for item in data] == [
+        ("Sisu", "840326")
+    ]
+
+
 def test_write_artifacts_replaces_stale_rows_from_refreshed_sources(tmp_path: Path):
     stale = release("Rango.2011.", "Unknown")
     stale.fel_evidence = FelEvidence(

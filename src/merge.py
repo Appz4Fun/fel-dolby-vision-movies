@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable, Iterable
 import re
 import unicodedata
+import urllib.parse
 
 from models import UNKNOWN, FelEvidence, FelRelease
 
@@ -36,6 +37,26 @@ def _year(value: str) -> str:
 
 def canonical_key(release: FelRelease) -> tuple[str, str]:
     return (canonical_title_key(release.movie_title), _year(release.release_date))
+
+
+def canonical_url_key(value: str) -> str:
+    parsed = urllib.parse.urlparse(value.strip())
+    if not parsed.netloc:
+        return ""
+    scheme = (parsed.scheme or "https").lower()
+    hostname = parsed.netloc.lower()
+    path = parsed.path.rstrip("/")
+    return urllib.parse.urlunparse((scheme, hostname, path, "", "", ""))
+
+
+def title_bluray_key(release: FelRelease) -> tuple[str, str]:
+    bluray_url = canonical_url_key(release.bluray_url)
+    if bluray_url:
+        return (
+            "title-bluray",
+            f"{canonical_title_key(release.movie_title)}\0{bluray_url}",
+        )
+    return canonical_key(release)
 
 
 def tmdb_key(release: FelRelease) -> tuple[str, str]:

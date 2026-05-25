@@ -70,6 +70,15 @@ def test_added_releases_matches_existing_by_imdb_id():
     assert release_delta.added_releases(base, head) == []
 
 
+def test_added_releases_matches_same_title_same_bluray_url_across_years():
+    base = [release("Sisu", "2022", tmdb_id="840326")]
+    base[0].bluray_url = "https://www.blu-ray.com/movies/Sisu-4K-Blu-ray/333344/"
+    head = [release("Sisu", "2023", tmdb_id="935906")]
+    head[0].bluray_url = "https://www.blu-ray.com/movies/Sisu-4K-Blu-ray/333344/"
+
+    assert release_delta.added_releases(base, head) == []
+
+
 def test_build_pr_body_lists_added_releases_with_evidence_links():
     additions = [
         release("Alien", "1979", "https://forum.example.test/alien", tmdb_id="348"),
