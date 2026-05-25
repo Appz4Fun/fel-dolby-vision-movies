@@ -70,7 +70,19 @@ def write_artifacts(
         + "\n",
         encoding="utf-8",
     )
+    _prune_unreferenced_posters(data_dir / "posters", sorted_releases)
     return sorted_releases
+
+
+def _prune_unreferenced_posters(poster_dir: Path, releases: list[FelRelease]) -> None:
+    if not poster_dir.exists():
+        return
+    referenced = {
+        Path(release.poster_path).name for release in releases if release.poster_path
+    }
+    for poster_path in poster_dir.iterdir():
+        if poster_path.is_file() and poster_path.name not in referenced:
+            poster_path.unlink()
 
 
 def _normalize_release_titles(releases: list[FelRelease]) -> list[FelRelease]:

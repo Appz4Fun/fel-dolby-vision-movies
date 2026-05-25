@@ -174,3 +174,21 @@ def test_write_artifacts_preserves_enriched_fields(tmp_path: Path):
     assert entry["poster_path"] == "data/posters/111.jpg"
     assert entry["hdr_formats"] == ["Dolby Vision", "HDR10"]
     assert entry["bluray_url"].endswith("/9/")
+
+
+def test_write_artifacts_removes_unreferenced_poster_files(tmp_path: Path):
+    poster_dir = tmp_path / "data/posters"
+    poster_dir.mkdir(parents=True)
+    referenced = poster_dir / "111.jpg"
+    stale = poster_dir / "222.jpg"
+    referenced.write_bytes(b"referenced")
+    stale.write_bytes(b"stale")
+
+    item = release("Enriched", "2024")
+    item.tmdb_id = "111"
+    item.poster_path = "data/posters/111.jpg"
+
+    write_artifacts([item], output_dir=tmp_path)
+
+    assert referenced.exists()
+    assert not stale.exists()
