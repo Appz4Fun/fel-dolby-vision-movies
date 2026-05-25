@@ -46,3 +46,17 @@ def test_pages_workflow_regenerates_releases_from_main_data():
     assert prepare_step.index(
         'cp data/releases.json "$RUNNER_TEMP/previous-releases.json"'
     ) < prepare_step.index('cp "$RUNNER_TEMP/base-releases.json" data/releases.json')
+
+
+def test_pages_workflow_refreshes_force_with_lease_before_push():
+    workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
+    update_start = workflow.index("- name: Update refresh branch and PR")
+    update_end = workflow.index("- name: No new FEL releases", update_start)
+    update_step = workflow[update_start:update_end]
+
+    fetch_line = 'git fetch origin "$PR_BRANCH:refs/remotes/origin/$PR_BRANCH"'
+    assert fetch_line in update_step
+    assert update_step.index("git commit -m") < update_step.index(fetch_line)
+    assert update_step.index(fetch_line) < update_step.index(
+        "git push --force-with-lease"
+    )

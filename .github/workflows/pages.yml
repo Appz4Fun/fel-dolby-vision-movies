@@ -118,6 +118,7 @@ jobs:
             echo "new releases were detected, but no tracked files changed"
           else
             git commit -m "chore: refresh FEL releases data"
+            git fetch origin "$PR_BRANCH:refs/remotes/origin/$PR_BRANCH"
             git push --force-with-lease origin "HEAD:$PR_BRANCH"
             if [ -n "$PR_NUMBER" ]; then
               gh pr edit "$PR_NUMBER" --body-file "$RUNNER_TEMP/pr-body.md"
