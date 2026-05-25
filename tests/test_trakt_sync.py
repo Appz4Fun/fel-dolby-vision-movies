@@ -113,3 +113,28 @@ def test_fetch_list_imdb_ids_raises_on_non_2xx():
                 access_token="atok",
                 client_id="cid",
             )
+
+
+def test_extract_imdb_ids_keeps_valid_skips_invalid():
+    releases = [
+        {"movie_title": "Good", "imdb_id": "tt0001"},
+        {"movie_title": "Numeric", "imdb_id": "0002"},  # missing tt prefix → skip
+        {"movie_title": "Empty", "imdb_id": ""},  # empty → skip
+        {"movie_title": "None", "imdb_id": None},  # None → skip
+        {"movie_title": "Also good", "imdb_id": "tt12345"},
+    ]
+
+    valid, skipped = trakt_sync.extract_imdb_ids(releases)
+
+    assert valid == ["tt0001", "tt12345"]
+    assert skipped == ["Numeric", "Empty", "None"]
+
+
+def test_compute_diff_returns_sorted_add_and_remove_lists():
+    current = {"tt0001", "tt0002", "tt0099"}
+    desired = {"tt0002", "tt0003", "tt0004"}
+
+    to_add, to_remove = trakt_sync.compute_diff(current=current, desired=desired)
+
+    assert to_add == ["tt0003", "tt0004"]
+    assert to_remove == ["tt0001", "tt0099"]

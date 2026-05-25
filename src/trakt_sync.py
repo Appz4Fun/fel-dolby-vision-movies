@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
+from typing import Iterable
 
 import httpx
 
@@ -85,3 +87,26 @@ def fetch_list_imdb_ids(
         for item in items
         if item.get("movie", {}).get("ids", {}).get("imdb")
     }
+
+
+_IMDB_ID_RE = re.compile(r"^tt\d+$")
+
+
+def extract_imdb_ids(releases: Iterable[dict]) -> tuple[list[str], list[str]]:
+    valid: list[str] = []
+    skipped: list[str] = []
+    for release in releases:
+        imdb_id = release.get("imdb_id")
+        if isinstance(imdb_id, str) and _IMDB_ID_RE.match(imdb_id):
+            valid.append(imdb_id)
+        else:
+            skipped.append(str(release.get("movie_title", "<unknown>")))
+    return valid, skipped
+
+
+def compute_diff(
+    *, current: set[str], desired: set[str]
+) -> tuple[list[str], list[str]]:
+    to_add = sorted(desired - current)
+    to_remove = sorted(current - desired)
+    return to_add, to_remove
