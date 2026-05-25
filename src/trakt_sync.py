@@ -176,6 +176,15 @@ def fetch_list_imdb_ids(
             # Defensive fallback when the page-count header is missing.
             if len(items) < LIST_FETCH_PAGE_LIMIT:
                 break
+    else:
+        # Loop exhausted without natural termination — Trakt's pagination is
+        # either misbehaving or the list is larger than we can safely fetch.
+        # Fail closed rather than return an incomplete set (which would cause
+        # the sync to re-POST "missing" entries forever).
+        raise TraktError(
+            f"trakt list fetch exceeded {MAX_LIST_FETCH_PAGES} pages "
+            f"({len(imdb_ids)} items collected) without pagination terminating"
+        )
     return imdb_ids
 
 

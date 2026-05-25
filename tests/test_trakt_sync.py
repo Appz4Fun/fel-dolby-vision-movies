@@ -792,9 +792,10 @@ def test_fetch_list_imdb_ids_429_retry_per_page(monkeypatch):
     assert page2_calls["n"] == 2  # one 429 + one success
 
 
-def test_fetch_list_imdb_ids_caps_at_max_pages(monkeypatch):
-    """Safety cap: if a misbehaving server keeps returning full pages without
-    advancing the page count, the loop must not run forever."""
+def test_fetch_list_imdb_ids_fails_closed_at_max_pages(monkeypatch):
+    """If pagination never terminates within MAX_LIST_FETCH_PAGES, we must
+    raise rather than return an incomplete set — otherwise the sync would
+    re-POST the "missing" entries forever and removal correctness breaks."""
     monkeypatch.setattr(trakt_sync, "MAX_LIST_FETCH_PAGES", 3)
     requested_pages: list[str] = []
 
@@ -813,12 +814,14 @@ def test_fetch_list_imdb_ids_caps_at_max_pages(monkeypatch):
         )
 
     with _mock_client(handler) as client:
-        trakt_sync.fetch_list_imdb_ids(
-            http=client,
-            user="u",
-            slug="s",
-            access_token="atok",
-            client_id="cid",
-        )
+        with pytest.raises(trakt_sync.TraktError, match="exceeded 3 pages"):
+            trakt_sync.fetch_list_imdb_ids(
+                http=client,
+                user="u",
+                slug="s",
+                access_token="atok",
+                client_id="cid",
+            )
 
+    # Loop must stop at the cap — no extra requests beyond MAX_LIST_FETCH_PAGES.
     assert requested_pages == ["1", "2", "3"]
