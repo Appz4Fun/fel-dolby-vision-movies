@@ -116,6 +116,11 @@ BLURAY_USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
 )
+_TITLE_ALIASES = {
+    canonical_title_key("The Fantastic 4: First Steps"): (
+        "The Fantastic Four: First Steps",
+    ),
+}
 
 
 @dataclass(frozen=True)
@@ -167,37 +172,39 @@ def fetch_bluray_details(client: httpx.Client, url: str) -> BlurayDetails:
 
 def search_bluray(client: httpx.Client, title: str, year: str) -> str | None:
     """Return the blu-ray.com 4K Blu-ray URL for a confident match."""
-    for keyword in _search_keywords(title):
+    for keyword, match_titles in _search_keywords(title):
         url = _SEARCH_URL.format(keyword=urllib.parse.quote(keyword))
-        match = _search_bluray_keyword(client, url, title, year)
+        match = _search_bluray_keyword(client, url, match_titles, year)
         if match is not None:
             return match
     return None
 
 
-def _search_keywords(title: str) -> list[str]:
-    keywords = [title]
+def _search_keywords(title: str) -> list[tuple[str, tuple[str, ...]]]:
+    keywords: list[tuple[str, tuple[str, ...]]] = [(title, (title,))]
     if "4k" not in title.casefold():
-        keywords.append(f"{title} 4K")
+        keywords.append((f"{title} 4K", (title,)))
+    for alias in _TITLE_ALIASES.get(canonical_title_key(title), ()):
+        keywords.append((alias, (title, alias)))
     return keywords
 
 
 def _search_bluray_keyword(
-    client: httpx.Client, url: str, title: str, year: str
+    client: httpx.Client, url: str, match_titles: tuple[str, ...], year: str
 ) -> str | None:
     response = _get_with_retry(client, url, follow_redirects=True)
-    direct_url = _direct_4k_url_if_confident(str(response.url), title)
+    direct_url = _direct_4k_url_if_confident(str(response.url), match_titles)
     if direct_url is not None:
         return direct_url
     html_text = response.text
-    want_title = canonical_title_key(title)
+    want_titles = {canonical_title_key(title) for title in match_titles}
     want_year = int(year[:4]) if year[:4].isdigit() else None
 
     for href, anchor_title in _RESULT_ANCHOR_RE.findall(
         html_text
     ):  # pragma: no cover - search-result fallback
         slug = href.rsplit("/movies/", 1)[1].rsplit("-4K-Blu-ray/", 1)[0]
-        if canonical_title_key(slug.replace("-", " ")) != want_title:
+        if canonical_title_key(slug.replace("-", " ")) not in want_titles:
             continue
         year_match = _YEAR_IN_TITLE_RE.search(anchor_title)
         if want_year and year_match:
@@ -207,12 +214,14 @@ def _search_bluray_keyword(
     return None
 
 
-def _direct_4k_url_if_confident(url: str, title: str) -> str | None:
+def _direct_4k_url_if_confident(url: str, match_titles: tuple[str, ...]) -> str | None:
     match = _DIRECT_4K_URL_RE.match(url)
     if match is None:
         return None
     slug = match.group(1).replace("-", " ")
-    if canonical_title_key(slug) != canonical_title_key(title):
+    if canonical_title_key(slug) not in {
+        canonical_title_key(title) for title in match_titles
+    }:
         return None  # pragma: no cover - direct-URL title mismatch
     return url
 

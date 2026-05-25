@@ -149,6 +149,36 @@ def test_search_bluray_retries_with_4k_when_bare_title_redirects_wrong():
     assert requested_keywords == ["Never Give Up", "Never Give Up 4K"]
 
 
+def test_search_bluray_tries_known_title_aliases():
+    alias_url = (
+        "https://www.blu-ray.com/movies/"
+        "The-Fantastic-Four-First-Steps-4K-Blu-ray/397023/"
+    )
+    requested_keywords = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if "/search/" not in request.url.path:
+            return httpx.Response(200, text="")
+        keyword = str(request.url.params.get("quicksearch_keyword", ""))
+        requested_keywords.append(keyword)
+        if keyword == "The Fantastic Four: First Steps":
+            return httpx.Response(302, headers={"Location": alias_url})
+        return httpx.Response(200, text="")
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    try:
+        assert search_bluray(client, "The Fantastic 4: First Steps", "2025") == (
+            alias_url
+        )
+    finally:
+        client.close()
+    assert requested_keywords == [
+        "The Fantastic 4: First Steps",
+        "The Fantastic 4: First Steps 4K",
+        "The Fantastic Four: First Steps",
+    ]
+
+
 def test_static_bluray_resolver_returns_details():
     details = BlurayDetails(url="u", hdr_formats=["Dolby Vision"])
     resolver = StaticBlurayResolver({("The Northman", "2022"): details})
