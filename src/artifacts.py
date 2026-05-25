@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+from dataclasses import replace
 import json
 from pathlib import Path
 import re
 
 from merge import canonical_key, dedupe_releases, tmdb_key
 from models import UNKNOWN, FelRelease, release_from_dict
+from normalize import normalize_fel_title
 
 
 STALE_SHEET_COLLECTION_RE = re.compile(
@@ -47,6 +49,8 @@ def write_artifacts(
     existing = [
         release for release in existing if not _is_stale_google_sheet_release(release)
     ]
+    existing = _normalize_release_titles(existing)
+    releases = _normalize_release_titles(releases)
     releases = [
         release for release in releases if not _is_stale_google_sheet_release(release)
     ]
@@ -66,6 +70,14 @@ def write_artifacts(
         encoding="utf-8",
     )
     return sorted_releases
+
+
+def _normalize_release_titles(releases: list[FelRelease]) -> list[FelRelease]:
+    normalized: list[FelRelease] = []
+    for release in releases:
+        title = normalize_fel_title(release.movie_title) or release.movie_title
+        normalized.append(replace(release, movie_title=title))
+    return normalized
 
 
 def _is_stale_google_sheet_release(release: FelRelease) -> bool:

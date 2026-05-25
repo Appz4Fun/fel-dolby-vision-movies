@@ -64,6 +64,14 @@ def test_write_artifacts_merges_into_existing_releases_json(tmp_path: Path):
     assert titles == ["First", "Second"]
 
 
+def test_write_artifacts_normalizes_existing_release_titles(tmp_path: Path):
+    write_artifacts([release("281 Nobody", "2021")], output_dir=tmp_path)
+    write_artifacts([release("Nobody", "2021")], output_dir=tmp_path)
+
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    assert [item["movie_title"] for item in data] == ["Nobody"]
+
+
 def test_write_artifacts_replaces_stale_rows_from_refreshed_sources(tmp_path: Path):
     stale = release("Rango.2011.", "Unknown")
     stale.fel_evidence = FelEvidence(
