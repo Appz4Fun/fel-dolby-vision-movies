@@ -1164,3 +1164,113 @@ def test_run_migration_reports_dropped_fel_rows(tmp_path, monkeypatch, capsys):
     assert "fel_txt_rows=2" in out
     assert "fel_ingested=1" in out
     assert "fel_dropped=1" in out
+
+
+def test_main_trakt_sync_invokes_run_sync_and_prints_summary(
+    tmp_path, capsys, monkeypatch
+):
+    import main
+    import trakt_sync
+
+    monkeypatch.setenv("TRAKT_APP_CLIENT_ID", "cid")
+    monkeypatch.setenv("TRAKT_APP_CLIENT_SECRET", "csec")
+    monkeypatch.setenv("TRAKT_REFRESH_TOKEN", "rtok")
+    monkeypatch.setenv("TRAKT_LIST_USER", "u")
+    monkeypatch.setenv("TRAKT_LIST_SLUG", "s")
+    token_out = tmp_path / "new-refresh"
+    monkeypatch.setenv("TRAKT_REFRESH_TOKEN_OUT", str(token_out))
+
+    releases = tmp_path / "r.json"
+    releases.write_text('[{"movie_title": "A", "imdb_id": "tt0001"}]')
+
+    captured: dict = {}
+
+    def fake_run_sync(**kwargs):
+        captured.update(kwargs)
+        return trakt_sync.SyncSummary(
+            added=1,
+            removed=0,
+            unchanged=2,
+            skipped=[],
+            rotated_refresh_token="ROT",
+        )
+
+    monkeypatch.setattr(trakt_sync, "run_sync", fake_run_sync)
+
+    exit_code = main.main(["trakt-sync", "--releases", str(releases)])
+
+    assert exit_code == 0
+    assert captured["client_id"] == "cid"
+    assert captured["client_secret"] == "csec"
+    assert captured["refresh_token"] == "rtok"
+    assert captured["user"] == "u"
+    assert captured["slug"] == "s"
+    assert captured["releases_path"] == releases
+    assert captured["refresh_token_out"] == token_out
+    assert captured["dry_run"] is False
+    assert captured["allow_empty"] is False
+    out = capsys.readouterr().out
+    assert "added=1 removed=0 unchanged=2 skipped=0" in out
+
+
+def test_main_trakt_sync_dry_run_flag_passes_through(tmp_path, monkeypatch):
+    import main
+    import trakt_sync
+
+    monkeypatch.setenv("TRAKT_APP_CLIENT_ID", "cid")
+    monkeypatch.setenv("TRAKT_APP_CLIENT_SECRET", "csec")
+    monkeypatch.setenv("TRAKT_REFRESH_TOKEN", "rtok")
+
+    releases = tmp_path / "r.json"
+    releases.write_text('[{"movie_title": "A", "imdb_id": "tt0001"}]')
+
+    captured: dict = {}
+    monkeypatch.setattr(
+        trakt_sync,
+        "run_sync",
+        lambda **kw: captured.update(kw) or trakt_sync.SyncSummary(0, 0, 0, [], "x"),
+    )
+
+    main.main(["trakt-sync", "--releases", str(releases), "--dry-run", "--allow-empty"])
+
+    assert captured["dry_run"] is True
+    assert captured["allow_empty"] is True
+
+
+def test_main_trakt_sync_missing_required_env_exits_nonzero(tmp_path, monkeypatch):
+    import main
+
+    monkeypatch.delenv("TRAKT_APP_CLIENT_ID", raising=False)
+    monkeypatch.delenv("TRAKT_APP_CLIENT_SECRET", raising=False)
+    monkeypatch.delenv("TRAKT_REFRESH_TOKEN", raising=False)
+
+    releases = tmp_path / "r.json"
+    releases.write_text("[]")
+
+    exit_code = main.main(["trakt-sync", "--releases", str(releases)])
+    assert exit_code == 2
+
+
+def test_main_trakt_sync_trakt_error_returns_exit_1(tmp_path, capsys, monkeypatch):
+    import main
+    import trakt_sync
+
+    monkeypatch.setenv("TRAKT_APP_CLIENT_ID", "cid")
+    monkeypatch.setenv("TRAKT_APP_CLIENT_SECRET", "csec")
+    monkeypatch.setenv("TRAKT_REFRESH_TOKEN", "rtok")
+    monkeypatch.delenv("TRAKT_REFRESH_TOKEN_OUT", raising=False)
+
+    releases = tmp_path / "r.json"
+    releases.write_text('[{"movie_title": "A", "imdb_id": "tt0001"}]')
+
+    monkeypatch.setattr(
+        trakt_sync,
+        "run_sync",
+        lambda **kw: (_ for _ in ()).throw(trakt_sync.TraktError("boom")),
+    )
+
+    exit_code = main.main(["trakt-sync", "--releases", str(releases)])
+
+    assert exit_code == 1
+    out = capsys.readouterr().out
+    assert "trakt-sync failed: boom" in out
