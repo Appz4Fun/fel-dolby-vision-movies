@@ -632,3 +632,193 @@ def test_retry_sleep_uses_default_when_no_retry_after(monkeypatch):
         )
 
     assert sleeps == [float(trakt_sync.DEFAULT_RETRY_SLEEP_SECONDS)]
+
+
+# ---------- pagination ----------
+
+
+def test_fetch_list_imdb_ids_sends_pagination_query_params():
+    captured: list[dict] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        captured.append(dict(request.url.params))
+        return httpx.Response(
+            200,
+            json=[{"movie": {"ids": {"imdb": "tt0001"}}}],
+            headers={"X-Pagination-Page-Count": "1"},
+        )
+
+    with _mock_client(handler) as client:
+        trakt_sync.fetch_list_imdb_ids(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+        )
+
+    assert captured == [{"page": "1", "limit": str(trakt_sync.LIST_FETCH_PAGE_LIMIT)}]
+
+
+def test_fetch_list_imdb_ids_follows_pagination_across_multiple_pages():
+    pages_data = {
+        "1": [{"movie": {"ids": {"imdb": f"tt{i:04d}"}}} for i in range(1, 101)],
+        "2": [{"movie": {"ids": {"imdb": f"tt{i:04d}"}}} for i in range(101, 201)],
+        "3": [{"movie": {"ids": {"imdb": f"tt{i:04d}"}}} for i in range(201, 251)],
+    }
+    requested_pages: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        page = request.url.params.get("page", "1")
+        requested_pages.append(page)
+        return httpx.Response(
+            200,
+            json=pages_data[page],
+            headers={
+                "X-Pagination-Page": page,
+                "X-Pagination-Limit": "100",
+                "X-Pagination-Page-Count": "3",
+                "X-Pagination-Item-Count": "250",
+            },
+        )
+
+    with _mock_client(handler) as client:
+        ids = trakt_sync.fetch_list_imdb_ids(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+        )
+
+    assert requested_pages == ["1", "2", "3"]
+    assert len(ids) == 250
+    assert "tt0001" in ids
+    assert "tt0250" in ids
+
+
+def test_fetch_list_imdb_ids_stops_after_last_page_per_header():
+    requested_pages: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        page = request.url.params.get("page", "1")
+        requested_pages.append(page)
+        # Returns a FULL page (== LIST_FETCH_PAGE_LIMIT items) but header says
+        # this is the only page — pagination must trust the header even though
+        # the response is full.
+        items = [
+            {"movie": {"ids": {"imdb": f"tt{i:04d}"}}}
+            for i in range(trakt_sync.LIST_FETCH_PAGE_LIMIT)
+        ]
+        return httpx.Response(
+            200,
+            json=items,
+            headers={"X-Pagination-Page-Count": "1"},
+        )
+
+    with _mock_client(handler) as client:
+        trakt_sync.fetch_list_imdb_ids(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+        )
+
+    assert requested_pages == ["1"]
+
+
+def test_fetch_list_imdb_ids_stops_on_partial_page_when_header_missing():
+    """Trakt convention: a response smaller than the requested limit means
+    we're on the last page. Defensive fallback when X-Pagination-Page-Count
+    is absent (e.g. proxy stripped headers)."""
+    requested_pages: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        page = request.url.params.get("page", "1")
+        requested_pages.append(page)
+        return httpx.Response(
+            200,
+            json=[{"movie": {"ids": {"imdb": "tt0001"}}}],
+            # No X-Pagination-Page-Count header.
+        )
+
+    with _mock_client(handler) as client:
+        ids = trakt_sync.fetch_list_imdb_ids(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+        )
+
+    assert ids == {"tt0001"}
+    assert requested_pages == ["1"]
+
+
+def test_fetch_list_imdb_ids_429_retry_per_page(monkeypatch):
+    """A 429 on page 2 must retry that page, not abort the whole pagination."""
+    monkeypatch.setattr("time.sleep", lambda _: None)
+    page2_calls = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        page = request.url.params.get("page", "1")
+        if page == "1":
+            return httpx.Response(
+                200,
+                json=[{"movie": {"ids": {"imdb": "tt0001"}}}],
+                headers={"X-Pagination-Page-Count": "2"},
+            )
+        # page 2 — first call 429, retry succeeds
+        page2_calls["n"] += 1
+        if page2_calls["n"] == 1:
+            return httpx.Response(429, headers={"Retry-After": "1"})
+        return httpx.Response(
+            200,
+            json=[{"movie": {"ids": {"imdb": "tt0002"}}}],
+            headers={"X-Pagination-Page-Count": "2"},
+        )
+
+    with _mock_client(handler) as client:
+        ids = trakt_sync.fetch_list_imdb_ids(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+        )
+
+    assert ids == {"tt0001", "tt0002"}
+    assert page2_calls["n"] == 2  # one 429 + one success
+
+
+def test_fetch_list_imdb_ids_caps_at_max_pages(monkeypatch):
+    """Safety cap: if a misbehaving server keeps returning full pages without
+    advancing the page count, the loop must not run forever."""
+    monkeypatch.setattr(trakt_sync, "MAX_LIST_FETCH_PAGES", 3)
+    requested_pages: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        page = request.url.params.get("page", "1")
+        requested_pages.append(page)
+        # Always returns a full page with a header that lies about pages.
+        items = [
+            {"movie": {"ids": {"imdb": f"tt{int(page):04d}-{i:03d}"}}}
+            for i in range(trakt_sync.LIST_FETCH_PAGE_LIMIT)
+        ]
+        return httpx.Response(
+            200,
+            json=items,
+            headers={"X-Pagination-Page-Count": "9999"},
+        )
+
+    with _mock_client(handler) as client:
+        trakt_sync.fetch_list_imdb_ids(
+            http=client,
+            user="u",
+            slug="s",
+            access_token="atok",
+            client_id="cid",
+        )
+
+    assert requested_pages == ["1", "2", "3"]
