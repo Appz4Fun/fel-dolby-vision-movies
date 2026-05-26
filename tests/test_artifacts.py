@@ -158,6 +158,39 @@ def test_write_artifacts_dedupes_by_tmdb_id(tmp_path: Path):
     assert sum(1 for item in data if item["tmdb_id"] == "777") == 1
 
 
+def test_write_artifacts_preserves_same_tmdb_distinct_bluray_releases(
+    tmp_path: Path,
+):
+    first = release("Game of Thrones: The Complete First Season", "2011")
+    first.tmdb_id = "1399"
+    first.bluray_url = (
+        "https://www.blu-ray.com/movies/"
+        "Game-of-Thrones-The-Complete-First-Season-4K-Blu-ray/202472/"
+    )
+    seventh = release("Game of Thrones: The Complete Seventh Season", "2017-07-16")
+    seventh.tmdb_id = "1399"
+    seventh.bluray_url = (
+        "https://www.blu-ray.com/movies/"
+        "Game-of-Thrones-The-Complete-Seventh-Season-4K-Blu-ray/272494/"
+    )
+
+    write_artifacts([first, seventh], output_dir=tmp_path)
+
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    assert [(item["movie_title"], item["release_date"]) for item in data] == [
+        ("Game of Thrones: The Complete Seventh Season", "2017-07-16"),
+        ("Game of Thrones: The Complete First Season", "2011"),
+    ]
+    assert {
+        (item["movie_title"], item["bluray_url"])
+        for item in data
+        if item["tmdb_id"] == "1399"
+    } == {
+        (first.movie_title, first.bluray_url),
+        (seventh.movie_title, seventh.bluray_url),
+    }
+
+
 def test_write_artifacts_preserves_enriched_fields(tmp_path: Path):
     item = release("Enriched", "2024")
     item.tmdb_id = "111"

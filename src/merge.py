@@ -61,6 +61,9 @@ def title_bluray_key(release: FelRelease) -> tuple[str, str]:
 
 def tmdb_key(release: FelRelease) -> tuple[str, str]:
     if release.tmdb_id:
+        bluray_url = canonical_url_key(release.bluray_url)
+        if bluray_url:
+            return ("tmdb-bluray", f"{release.tmdb_id}\0{bluray_url}")
         return ("tmdb", release.tmdb_id)
     return canonical_key(release)
 

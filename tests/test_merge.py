@@ -118,6 +118,17 @@ def test_tmdb_key_uses_tmdb_id_when_present_else_canonical():
     assert tmdb_key(unresolved) == canonical_key(unresolved)
 
 
+def test_tmdb_key_includes_bluray_url_when_present():
+    resolved = make("Dune", "2021")
+    resolved.tmdb_id = "438631"
+    resolved.bluray_url = "https://www.blu-ray.com/movies/Dune-4K-Blu-ray/1/?x=1"
+
+    assert tmdb_key(resolved) == (
+        "tmdb-bluray",
+        "438631\0https://www.blu-ray.com/movies/Dune-4K-Blu-ray/1",
+    )
+
+
 def test_dedupe_is_order_independent_for_strong_evidence():
     weak = make("Sicario", "2015", evidence_type="fel-list")
     strong = make("Sicario", "2015", evidence_type="google-sheet-row")
