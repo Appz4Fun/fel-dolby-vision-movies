@@ -191,6 +191,33 @@ def test_write_artifacts_preserves_same_tmdb_distinct_bluray_releases(
     }
 
 
+def test_write_artifacts_merges_same_tmdb_when_existing_lacks_bluray(
+    tmp_path: Path,
+):
+    existing = release("The Three Musketeers: Milady", "2023-12-13")
+    existing.tmdb_id = "845111"
+    existing.imdb_id = "tt12672620"
+    existing.release_url = "https://www.themoviedb.org/movie/845111"
+
+    incoming = release("Les Trois Mousquetaires: Milady", "2023-12-13")
+    incoming.tmdb_id = "845111"
+    incoming.imdb_id = "tt12672620"
+    incoming.release_url = "https://www.themoviedb.org/movie/845111"
+    incoming.bluray_url = (
+        "https://www.blu-ray.com/movies/"
+        "Les-Trois-Mousquetaires--Milady-4K-Blu-ray/347971/"
+    )
+
+    write_artifacts([existing], output_dir=tmp_path)
+    write_artifacts([incoming], output_dir=tmp_path)
+
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    assert [(item["movie_title"], item["tmdb_id"]) for item in data] == [
+        ("The Three Musketeers: Milady", "845111")
+    ]
+    assert data[0]["bluray_url"] == incoming.bluray_url
+
+
 def test_write_artifacts_preserves_enriched_fields(tmp_path: Path):
     item = release("Enriched", "2024")
     item.tmdb_id = "111"

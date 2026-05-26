@@ -6,7 +6,7 @@ from pathlib import Path
 import re
 from typing import Iterable
 
-from merge import canonical_key, dedupe_releases, title_bluray_key, tmdb_key
+from merge import canonical_key, dedupe_releases, dedupe_tmdb_releases, title_bluray_key
 from models import UNKNOWN, FelRelease, release_from_dict
 from normalize import normalize_fel_title
 
@@ -58,7 +58,7 @@ def write_artifacts(
 
     merged = dedupe_releases([*existing, *releases], canonical_key)
     merged = dedupe_releases(merged, title_bluray_key)
-    merged = dedupe_releases(merged, tmdb_key)
+    merged = dedupe_tmdb_releases(merged)
     sorted_releases = sorted(merged, key=_sort_key)
 
     data_dir.mkdir(parents=True, exist_ok=True)

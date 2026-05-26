@@ -68,6 +68,130 @@ def tmdb_key(release: FelRelease) -> tuple[str, str]:
     return canonical_key(release)
 
 
+def dedupe_tmdb_releases(releases: Iterable[FelRelease]) -> list[FelRelease]:
+    grouped: dict[tuple[str, str], list[FelRelease]] = {}
+    order: list[tuple[str, str]] = []
+    no_tmdb_index = 0
+    for release in releases:
+        if release.tmdb_id:
+            key = ("tmdb", release.tmdb_id)
+        else:
+            key = ("no-tmdb", str(no_tmdb_index))
+            no_tmdb_index += 1
+        if key not in grouped:
+            grouped[key] = []
+            order.append(key)
+        grouped[key].append(release)
+
+    deduped: list[FelRelease] = []
+    for key in order:
+        group = grouped[key]
+        if key[0] == "tmdb":
+            deduped.extend(_dedupe_one_tmdb_group(group))
+        else:
+            deduped.extend(group)
+    return deduped
+
+
+def _dedupe_one_tmdb_group(releases: list[FelRelease]) -> list[FelRelease]:
+    if len(releases) <= 1:
+        return list(releases)
+
+    bluray_groups: dict[str, list[tuple[int, FelRelease]]] = {}
+    bluray_order: list[str] = []
+    unresolved: list[tuple[int, FelRelease]] = []
+    for index, release in enumerate(releases):
+        bluray_url = canonical_url_key(release.bluray_url)
+        if not bluray_url:
+            unresolved.append((index, release))
+            continue
+        if bluray_url not in bluray_groups:
+            bluray_groups[bluray_url] = []
+            bluray_order.append(bluray_url)
+        bluray_groups[bluray_url].append((index, release))
+
+    if not bluray_groups:
+        return [
+            _merge_identity_group([(index, release) for index, release in unresolved])[
+                1
+            ]
+        ]
+
+    resolved = [
+        _merge_identity_group(bluray_groups[bluray_url]) for bluray_url in bluray_order
+    ]
+
+    for index, release in unresolved:
+        target_index = _find_tmdb_merge_target(release, resolved)
+        if target_index is None:
+            resolved.append((index, release))
+            continue
+        target_position, target = resolved[target_index]
+        if index < target_position:
+            resolved[target_index] = (
+                index,
+                _merge_preserving_base_title(release, target),
+            )
+        else:
+            resolved[target_index] = (
+                target_position,
+                _merge_preserving_base_title(target, release),
+            )
+
+    return [release for _, release in sorted(resolved, key=lambda item: item[0])]
+
+
+def _merge_identity_group(
+    releases: list[tuple[int, FelRelease]],
+) -> tuple[int, FelRelease]:
+    first_index, merged = releases[0]
+    for _, release in releases[1:]:
+        merged = _merge_preserving_base_title(merged, release)
+    return first_index, merged
+
+
+def _merge_preserving_base_title(base: FelRelease, other: FelRelease) -> FelRelease:
+    title = base.movie_title
+    merged = merge_releases(base, other)
+    merged.movie_title = title
+    return merged
+
+
+def _find_tmdb_merge_target(
+    release: FelRelease, candidates: list[tuple[int, FelRelease]]
+) -> int | None:
+    canonical_matches = [
+        index
+        for index, (_, candidate) in enumerate(candidates)
+        if canonical_key(candidate) == canonical_key(release)
+    ]
+    if len(canonical_matches) == 1:
+        return canonical_matches[0]
+
+    title_key = canonical_title_key(release.movie_title)
+    title_matches = [
+        index
+        for index, (_, candidate) in enumerate(candidates)
+        if canonical_title_key(candidate.movie_title) == title_key
+    ]
+    if len(title_matches) == 1:
+        return title_matches[0]
+
+    release_year = _year(release.release_date)
+    if release_year:
+        year_matches = [
+            index
+            for index, (_, candidate) in enumerate(candidates)
+            if _year(candidate.release_date) == release_year
+        ]
+        if len(year_matches) == 1:
+            return year_matches[0]
+
+    if len(candidates) == 1:
+        return 0
+    return None
+
+
 def _prefer_known(left: str, right: str) -> str:
     if left and left != UNKNOWN:
         return left

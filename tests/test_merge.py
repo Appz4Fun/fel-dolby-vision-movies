@@ -1,4 +1,10 @@
-from merge import canonical_key, dedupe_releases, merge_releases, tmdb_key
+from merge import (
+    canonical_key,
+    dedupe_releases,
+    dedupe_tmdb_releases,
+    merge_releases,
+    tmdb_key,
+)
 from models import FelEvidence, FelRelease
 
 
@@ -127,6 +133,67 @@ def test_tmdb_key_includes_bluray_url_when_present():
         "tmdb-bluray",
         "438631\0https://www.blu-ray.com/movies/Dune-4K-Blu-ray/1",
     )
+
+
+def test_dedupe_tmdb_releases_merges_unresolved_canonical_match():
+    resolved = make("Dune", "2021")
+    resolved.tmdb_id = "438631"
+    resolved.bluray_url = "https://www.blu-ray.com/movies/Dune-4K-Blu-ray/1/"
+    unresolved = make("dune!", "2021")
+    unresolved.tmdb_id = "438631"
+
+    deduped = dedupe_tmdb_releases([resolved, unresolved])
+
+    assert len(deduped) == 1
+    assert deduped[0].movie_title == "Dune"
+
+
+def test_dedupe_tmdb_releases_merges_unresolved_title_match():
+    resolved = make("Dune", "2021")
+    resolved.tmdb_id = "438631"
+    resolved.bluray_url = "https://www.blu-ray.com/movies/Dune-4K-Blu-ray/1/"
+    unresolved = make("Dune", "Unknown")
+    unresolved.tmdb_id = "438631"
+
+    deduped = dedupe_tmdb_releases([resolved, unresolved])
+
+    assert len(deduped) == 1
+    assert deduped[0].release_date == "2021"
+
+
+def test_dedupe_tmdb_releases_merges_single_candidate_without_year():
+    resolved = make("The Three Musketeers: Milady", "2023-12-13")
+    resolved.tmdb_id = "845111"
+    resolved.bluray_url = (
+        "https://www.blu-ray.com/movies/"
+        "Les-Trois-Mousquetaires--Milady-4K-Blu-ray/347971/"
+    )
+    unresolved = make("Les Trois Mousquetaires: Milady", "Unknown")
+    unresolved.tmdb_id = "845111"
+
+    deduped = dedupe_tmdb_releases([resolved, unresolved])
+
+    assert len(deduped) == 1
+    assert deduped[0].movie_title == "The Three Musketeers: Milady"
+
+
+def test_dedupe_tmdb_releases_keeps_ambiguous_unresolved_row():
+    theatrical = make("Avatar", "2009-12-16")
+    theatrical.tmdb_id = "19995"
+    theatrical.bluray_url = "https://www.blu-ray.com/movies/Avatar-4K-Blu-ray/349437/"
+    extended = make("Avatar: Extended Collector's Edition", "2009-12-16")
+    extended.tmdb_id = "19995"
+    extended.bluray_url = "https://www.blu-ray.com/movies/Avatar-4K-Blu-ray/191856/"
+    ambiguous = make("Avatar Collection", "Unknown")
+    ambiguous.tmdb_id = "19995"
+
+    deduped = dedupe_tmdb_releases([theatrical, extended, ambiguous])
+
+    assert [release.movie_title for release in deduped] == [
+        "Avatar",
+        "Avatar: Extended Collector's Edition",
+        "Avatar Collection",
+    ]
 
 
 def test_dedupe_is_order_independent_for_strong_evidence():
