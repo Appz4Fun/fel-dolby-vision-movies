@@ -97,6 +97,18 @@ def test_pages_workflow_prunes_only_added_unreferenced_posters_before_diff_check
     assert "--include-untracked" in prune_step
 
 
+def test_pages_workflow_does_not_commit_ai_source_registry_churn():
+    workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
+    ai_start = workflow.index("- name: Run AI discovery and scraping")
+    restore_start = workflow.index("- name: Restore source registry from main")
+    prune_start = workflow.index("- name: Prune refresh-only stale posters")
+    check_start = workflow.index("- name: Check refresh branch changes")
+    restore_step = workflow[restore_start:prune_start]
+
+    assert ai_start < restore_start < prune_start < check_start
+    assert "git checkout origin/main -- data/sources_needs_evidence.txt" in restore_step
+
+
 def test_pages_workflow_closes_existing_refresh_pr_when_no_pending_releases():
     workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
     cleanup_start = workflow.index("- name: Close empty refresh PR")

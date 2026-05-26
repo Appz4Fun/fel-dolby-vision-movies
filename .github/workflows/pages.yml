@@ -86,6 +86,9 @@ jobs:
           uv run --with-requirements requirements.txt
           python -m main ai-scrape --sources data/sources_needs_evidence.txt
 
+      - name: Restore source registry from main
+        run: git checkout origin/main -- data/sources_needs_evidence.txt
+
       - name: Prune refresh-only stale posters
         run: >
           uv run --with-requirements requirements.txt
