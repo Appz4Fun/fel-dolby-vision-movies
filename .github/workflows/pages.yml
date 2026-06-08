@@ -133,7 +133,12 @@ jobs:
             echo "new releases were detected, but no tracked files changed"
           else
             git commit -m "chore: refresh FEL releases data"
-            git fetch origin "$PR_BRANCH:refs/remotes/origin/$PR_BRANCH"
+            # The refresh branch is deleted whenever its PR merges/closes, so on
+            # the next run it does not exist on the remote yet. A plain fetch of a
+            # missing ref exits 128 and, under `bash -e`, aborts before the push
+            # below -- leaving the branch/PR permanently uncreated. Tolerate the
+            # miss; force-with-lease still creates the branch from scratch.
+            git fetch origin "$PR_BRANCH:refs/remotes/origin/$PR_BRANCH" || true
             git push --force-with-lease origin "HEAD:$PR_BRANCH"
             if [ -n "$PR_NUMBER" ]; then
               gh pr edit "$PR_NUMBER" --body-file "$RUNNER_TEMP/pr-body.md"
@@ -160,7 +165,7 @@ jobs:
             echo "refresh branch already has no pending release additions"
           else
             git commit -m "chore: clear empty FEL refresh"
-            git fetch origin "$PR_BRANCH:refs/remotes/origin/$PR_BRANCH"
+            git fetch origin "$PR_BRANCH:refs/remotes/origin/$PR_BRANCH" || true
             git push --force-with-lease origin "HEAD:$PR_BRANCH"
           fi
           gh pr close "$PR_NUMBER" \
