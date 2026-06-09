@@ -20,7 +20,12 @@ env:
 
 jobs:
   scrape:
-    runs-on: ubuntu-latest
+    # Runs on a self-hosted runner (home server, residential IP) because
+    # Reddit returns 403 Blocked to GitHub's datacenter IPs, which prevents
+    # the always-FEL Reddit lists from being scraped on ubuntu-latest. The
+    # custom `reddit-scraper` label keeps this job pinned to that runner;
+    # all other workflows (ci.yml, claude-code-review.yml) stay hosted.
+    runs-on: [self-hosted, reddit-scraper]
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
