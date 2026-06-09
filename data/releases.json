@@ -1,5 +1,99 @@
 [
   {
+    "movie_title": "Hoppers",
+    "fel_confirmed": true,
+    "release_date": "2026-03-04",
+    "studio": "Pixar",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD+/Atmos 7.1",
+      "DD 2.0",
+      "DD+ 7.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "1327819",
+    "imdb_id": "tt26443616",
+    "poster_path": "data/posters/1327819.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1327819",
+    "bluray_url": "https://www.blu-ray.com/movies/Hoppers-4K-Blu-ray/411267/",
+    "bluray_release_date": "2026-06-02",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French (Canada)",
+      "Spanish",
+      "Japanese"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Hoppers [2026]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
+    "movie_title": "Scream 7",
+    "fel_confirmed": true,
+    "release_date": "2026-02-25",
+    "studio": "Paramount Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "1159559",
+    "imdb_id": "tt27047903",
+    "poster_path": "data/posters/1159559.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1159559",
+    "bluray_url": "https://www.blu-ray.com/movies/Scream-7-4K-Blu-ray/400031/",
+    "bluray_release_date": "2026-06-16",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Scream 7 [2026]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
+    "movie_title": "Good Luck, Have Fun, Don't Die",
+    "fel_confirmed": true,
+    "release_date": "2026-02-13",
+    "studio": "Constantin Film",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "1119449",
+    "imdb_id": "tt1341338",
+    "poster_path": "data/posters/1119449.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1119449",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Good Luck, Have Fun, Don't Die [2025]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Send Help",
     "fel_confirmed": true,
     "release_date": "2026-01-22",
@@ -43,6 +137,145 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Cold Storage",
+    "fel_confirmed": true,
+    "release_date": "2026-01-22",
+    "studio": "Pariah",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "696393",
+    "imdb_id": "tt8879928",
+    "poster_path": "data/posters/696393.jpg",
+    "release_url": "https://www.themoviedb.org/movie/696393",
+    "bluray_url": "https://www.blu-ray.com/movies/Cold-Storage-4K-Blu-ray/409639/",
+    "bluray_release_date": "2026-04-28",
+    "hdr_formats": [
+      "Dolby Vision"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Cold Storage [2026]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "Walking Tall (2004), Tron: Ares",
+    "fel_confirmed": true,
+    "release_date": "2025",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "L.E. Walking Tall (2004), Tron: Ares (2025)",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
+    "movie_title": "Bottle Rocket (1996), Nobody 2",
+    "fel_confirmed": true,
+    "release_date": "2025",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Bottle Rocket (1996), Nobody 2 (2025)",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
+    "movie_title": "Erin Brockovich (2000), Ballerina",
+    "fel_confirmed": true,
+    "release_date": "2025",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Erin Brockovich (2000), Ballerina (2025)",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
+    "movie_title": "Harvey (1950), Lilo & Stitch",
+    "fel_confirmed": true,
+    "release_date": "2025",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Harvey (1950), Lilo & Stitch (2025)",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
   },
   {
     "movie_title": "Is This Thing On?",
@@ -160,6 +393,70 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Avatar: Fire and Ash",
+    "fel_confirmed": true,
+    "release_date": "2025-12-17",
+    "studio": "20th Century Studios",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 2.0",
+      "DD 5.1",
+      "DD+ 7.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "83533",
+    "imdb_id": "tt1757678",
+    "poster_path": "data/posters/83533.jpg",
+    "release_url": "https://www.themoviedb.org/movie/83533",
+    "bluray_url": "https://www.blu-ray.com/movies/Avatar-Fire-and-Ash-4K-Blu-ray/393376/",
+    "bluray_release_date": "2026-05-19",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "Spanish",
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Avatar: Fire and Ash [2025]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
+    "movie_title": "Five Nights at Freddy's 2",
+    "fel_confirmed": true,
+    "release_date": "2025-12-03",
+    "studio": "Blumhouse Productions",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "1228246",
+    "imdb_id": "tt30274401",
+    "poster_path": "data/posters/1228246.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1228246",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Five Nights at Freddy's 2 [2025]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Hamnet",
     "fel_confirmed": true,
     "release_date": "2025-11-26",
@@ -241,6 +538,105 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Wicked: For Good",
+    "fel_confirmed": true,
+    "release_date": "2025-11-19",
+    "studio": "Universal Pictures",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD+ 7.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "967941",
+    "imdb_id": "tt19847976",
+    "poster_path": "data/posters/967941.jpg",
+    "release_url": "https://www.themoviedb.org/movie/967941",
+    "bluray_url": "https://www.blu-ray.com/movies/Wicked-For-Good-4K-Blu-ray/390121/",
+    "bluray_release_date": "2026-01-20",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Wicked: For Good [2025]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "Now You See Me: Now You Don't",
+    "fel_confirmed": true,
+    "release_date": "2025-11-12",
+    "studio": "Lionsgate",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "425274",
+    "imdb_id": "tt4712810",
+    "poster_path": "data/posters/425274.jpg",
+    "release_url": "https://www.themoviedb.org/movie/425274",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Now You See Me: Now You Don't [2025]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "The Running Man",
+    "fel_confirmed": true,
+    "release_date": "2025-11-11",
+    "studio": "Paramount Pictures",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "798645",
+    "imdb_id": "tt14107334",
+    "poster_path": "data/posters/798645.jpg",
+    "release_url": "https://www.themoviedb.org/movie/798645",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Running-Man-4K-Blu-ray/401014/",
+    "bluray_release_date": "2026-03-03",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French (Canada)",
+      "French",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "The Running Man [2025]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Nuremberg",
@@ -402,6 +798,39 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Kaamelott - Deuxième volet: Partie 1",
+    "fel_confirmed": true,
+    "release_date": "2025-10-22",
+    "studio": "Regular Production",
+    "audio_formats": [
+      "Dolby Atmos"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "1076897",
+    "imdb_id": "tt34624872",
+    "poster_path": "data/posters/1076897.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1076897",
+    "bluray_url": "https://www.blu-ray.com/movies/Kaamelott-Deuxieme-volet-Partie-1-4K-Blu-ray/407124/",
+    "bluray_release_date": "2026-02-26",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Kaamelott - Deuxième volet: Partie 1 [2025]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Black Phone 2",
     "fel_confirmed": true,
     "release_date": "2025-10-15",
@@ -440,6 +869,39 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Chien 51",
+    "fel_confirmed": true,
+    "release_date": "2025-10-15",
+    "studio": "Chi-Fou-Mi Productions",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "1266798",
+    "imdb_id": "tt33255286",
+    "poster_path": "data/posters/1266798.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1266798",
+    "bluray_url": "https://www.blu-ray.com/movies/Chien-51-4K-Blu-ray/399980/",
+    "bluray_release_date": "2026-02-18",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Chien 51 AKA Dog 51 [2025]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Good Fortune",
@@ -569,8 +1031,11 @@
     "fel_confirmed": true,
     "release_date": "2025-10-01",
     "studio": "What’s Wrong with Your Dog?",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "LPCM 2.0"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -583,13 +1048,15 @@
     "imdb_id": "tt35521922",
     "poster_path": "data/posters/1422096.jpg",
     "release_url": "https://www.themoviedb.org/movie/1422096",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Good-Boy-4K-Blu-ray/402519/",
+    "bluray_release_date": "2026-02-16",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Good Boy (2025) listed as Profile 7 FEL",
@@ -967,6 +1434,32 @@
     "collected_at": "2026-05-26T13:26:55.586910+00:00"
   },
   {
+    "movie_title": "O Agente Secreto",
+    "fel_confirmed": true,
+    "release_date": "2025-07-23",
+    "studio": "Lemming Film",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "1220564",
+    "imdb_id": "tt27847051",
+    "poster_path": "data/posters/1220564.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1220564",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "O Agente Secreto AKA The Secret Agent [2025]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Eddington",
     "fel_confirmed": true,
     "release_date": "2025-07-16",
@@ -1004,7 +1497,7 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Jurassic World Rebirth",
+    "movie_title": "Jurassic World: Rebirth",
     "fel_confirmed": true,
     "release_date": "2025-07-01",
     "studio": "Universal Pictures",
@@ -1587,8 +2080,11 @@
     "fel_confirmed": true,
     "release_date": "2025-04-03",
     "studio": "SBS Productions",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "LPCM 2.0"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -1601,13 +2097,15 @@
     "imdb_id": "tt20212786",
     "poster_path": "data/posters/970947.jpg",
     "release_url": "https://www.themoviedb.org/movie/970947",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Shrouds-4K-Blu-ray/395905/",
+    "bluray_release_date": "2025-12-08",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "The Shrouds (2025) listed as Profile 7 FEL",
@@ -1878,6 +2376,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
+  },
+  {
+    "movie_title": "Are you sure about Joker: Folie à Deux",
+    "fel_confirmed": true,
+    "release_date": "2024",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Are you sure about Joker: Folie à Deux [2024]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "A Complete Unknown",
@@ -2466,6 +2990,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Wicked: Part I",
+    "fel_confirmed": true,
+    "release_date": "2024-10-16",
+    "studio": "Universal Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "402431",
+    "imdb_id": "tt1262426",
+    "poster_path": "data/posters/402431.jpg",
+    "release_url": "https://www.themoviedb.org/movie/402431",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Wicked: Part I AKA Wicked [2024]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Terrifier 3",
@@ -3315,6 +3865,32 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Jiu Long cheng zhai · Wei cheng",
+    "fel_confirmed": true,
+    "release_date": "2024-05-01",
+    "studio": "Entertaining Power",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "923667",
+    "imdb_id": "tt20316748",
+    "poster_path": "data/posters/923667.jpg",
+    "release_url": "https://www.themoviedb.org/movie/923667",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Jiu Long cheng zhai · Wei cheng AKA Twilight of the Warriors: Walled In [2024]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "The Fall Guy",
     "fel_confirmed": true,
     "release_date": "2024-04-24",
@@ -3725,6 +4301,104 @@
     "collected_at": "2026-05-22T23:06:02+00:00"
   },
   {
+    "movie_title": "Longma jingshen",
+    "fel_confirmed": true,
+    "release_date": "2023",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Longma jingshen AKA Ride On [2023]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "Ahsoka: The Complete First Season",
+    "fel_confirmed": true,
+    "release_date": "2023",
+    "studio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Ahsoka-The-Complete-First-Season-4K-Blu-ray/347798/",
+    "bluray_release_date": "2024-12-03",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Ahsoka: The Complete First Season [2023]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
+    "movie_title": "The Mandalorian: The Complete Third Season",
+    "fel_confirmed": true,
+    "release_date": "2023",
+    "studio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Mandalorian-The-Complete-Third-Season-4K-Blu-ray/374175/",
+    "bluray_release_date": "2024-12-03",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "The Mandalorian: The Complete Third Season  [2023]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
     "movie_title": "All of Us Strangers",
     "fel_confirmed": true,
     "release_date": "2023-12-22",
@@ -3875,6 +4549,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Mr. Monk's Last Case: A Monk Movie",
+    "fel_confirmed": true,
+    "release_date": "2023-12-08",
+    "studio": "UCP",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "1100795",
+    "imdb_id": "tt27145269",
+    "poster_path": "data/posters/1100795.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1100795",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Mr. Monk's Last Case: A Monk Movie [2023]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Migration",
@@ -4813,8 +5513,10 @@
     "fel_confirmed": true,
     "release_date": "2023-06-02",
     "studio": "A24",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://forum.blu-ray.com/showthread.php?t=373287&page=2",
@@ -4828,17 +5530,20 @@
     "imdb_id": "tt13238346",
     "poster_path": "data/posters/666277.jpg",
     "release_url": "https://www.themoviedb.org/movie/666277",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Past-Lives-4K-Blu-ray/360156/",
+    "bluray_release_date": "2024-06-20",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "Italian"
+    ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=373287",
-      "quote": "Past Lives (2023) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "quote": "The source page is for “Past Lives 4K UHD (2023)” and the posted disc/video metadata confirms Dolby Vision Profile 7 FEL, including “dvhe.07.06” and “BL+FEL+RPU” / “Dolby Vision FEL.”",
+      "evidence_type": "ai-extracted",
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
@@ -5901,6 +6606,38 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Novembre",
+    "fel_confirmed": true,
+    "release_date": "2022-10-05",
+    "studio": "Chi-Fou-Mi Productions",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "823951",
+    "imdb_id": "tt14542254",
+    "poster_path": "data/posters/823951.jpg",
+    "release_url": "https://www.themoviedb.org/movie/823951",
+    "bluray_url": "https://www.blu-ray.com/movies/Novembre-4K-Blu-ray/329893/",
+    "bluray_release_date": "2023-02-08",
+    "hdr_formats": [
+      "Dolby Vision"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Novembre AKA November [2022]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Hellraiser",
     "fel_confirmed": true,
     "release_date": "2022-09-28",
@@ -6225,6 +6962,32 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Eiga yurukyan",
+    "fel_confirmed": true,
+    "release_date": "2022-07-01",
+    "studio": "C-Station",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "566466",
+    "imdb_id": "tt14364238",
+    "poster_path": "data/posters/566466.jpg",
+    "release_url": "https://www.themoviedb.org/movie/566466",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Eiga yurukyan AKA Laid-Back Camp: The Movie [2022]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Minions: The Rise of Gru",
     "fel_confirmed": true,
     "release_date": "2022-06-29",
@@ -6352,7 +7115,7 @@
     "collected_at": "2026-05-23T00:01:49+00:00"
   },
   {
-    "movie_title": "Jurassic World Dominion",
+    "movie_title": "Jurassic World: Dominion",
     "fel_confirmed": true,
     "release_date": "2022-06-01",
     "studio": "Amblin Entertainment",
@@ -6911,7 +7674,10 @@
     "fel_confirmed": true,
     "release_date": "2022-03-16",
     "studio": "Pathé",
-    "audio_formats": [],
+    "audio_formats": [
+      "Dolby Atmos",
+      "Dolby TrueHD 7.1."
+    ],
     "english_audio": "Unknown",
     "additional_characteristics": {
       "source_urls": [
@@ -6924,13 +7690,16 @@
     "imdb_id": "tt12264966",
     "poster_path": "data/posters/811596.jpg",
     "release_url": "https://www.themoviedb.org/movie/811596",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Notre-Dame-brule-4K-Blu-ray/318799/",
+    "bluray_release_date": "2022-07-20",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "French",
+      "Note"
+    ],
     "fel_evidence": {
       "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/7/",
       "quote": "\"Notre-Dame on Fire\"",
@@ -7679,6 +8448,32 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
+    "movie_title": "Mogadisyu",
+    "fel_confirmed": true,
+    "release_date": "2021-07-28",
+    "studio": "Filmmaker R&K",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "607844",
+    "imdb_id": "tt14810692",
+    "poster_path": "data/posters/607844.jpg",
+    "release_url": "https://www.themoviedb.org/movie/607844",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Mogadisyu AKA Escape from Mogadishu [2021]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Old",
     "fel_confirmed": true,
     "release_date": "2021-07-21",
@@ -8247,6 +9042,58 @@
     "collected_at": "2026-05-23T00:01:49+00:00"
   },
   {
+    "movie_title": "Ci sha xiao shuo jia",
+    "fel_confirmed": true,
+    "release_date": "2021-02-12",
+    "studio": "United Entertainment Partners",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "611698",
+    "imdb_id": "tt9685342",
+    "poster_path": "data/posters/611698.jpg",
+    "release_url": "https://www.themoviedb.org/movie/611698",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Ci sha xiao shuo jia AKA A Writer's Odyssey [2021]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "Hamilton (musical)",
+    "fel_confirmed": true,
+    "release_date": "2020",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Hamilton (musical) [2020]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
     "movie_title": "The Croods: A New Age",
     "fel_confirmed": true,
     "release_date": "2020-11-25",
@@ -8778,6 +9625,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:36:04+00:00"
+  },
+  {
+    "movie_title": "Yuyeolui eumagaelbeom",
+    "fel_confirmed": true,
+    "release_date": "2019",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Yuyeolui eumagaelbeom AKA Tune in for Love [2019]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "1917",
@@ -9397,6 +10270,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
+  },
+  {
+    "movie_title": "Ne Zha zhi mo tong jiang shi",
+    "fel_confirmed": true,
+    "release_date": "2019-07-26",
+    "studio": "Beijing Enlight Pictures",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "615453",
+    "imdb_id": "tt10627720",
+    "poster_path": "data/posters/615453.jpg",
+    "release_url": "https://www.themoviedb.org/movie/615453",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Ne Zha zhi mo tong jiang shi AKA Ne Zha [2019]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Weathering with You",
@@ -13781,6 +14680,35 @@
     "collected_at": "2026-05-22T23:06:02+00:00"
   },
   {
+    "movie_title": "Patchwork",
+    "fel_confirmed": true,
+    "release_date": "2015-10-15",
+    "studio": "Infinite Lives Entertainment",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "360007",
+    "imdb_id": "tt4929720",
+    "poster_path": "data/posters/360007.jpg",
+    "release_url": "https://www.themoviedb.org/movie/360007",
+    "bluray_url": "https://www.blu-ray.com/movies/Patchwork-4K-Blu-ray/395588/",
+    "bluray_release_date": "2026-04-28",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Patchwork [2015]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "The Man from U.N.C.L.E.",
     "fel_confirmed": true,
     "release_date": "2015-08-13",
@@ -14025,6 +14953,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:37:17+00:00"
+  },
+  {
+    "movie_title": "Umimachi Diary",
+    "fel_confirmed": true,
+    "release_date": "2015-06-13",
+    "studio": "Shogakukan",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "315846",
+    "imdb_id": "tt3756788",
+    "poster_path": "data/posters/315846.jpg",
+    "release_url": "https://www.themoviedb.org/movie/315846",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Umimachi Diary AKA Our Little Sister [2015]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Jurassic World",
@@ -16697,6 +17651,41 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
+    "movie_title": "Scream 4",
+    "fel_confirmed": true,
+    "release_date": "2011-04-13",
+    "studio": "Dimension Films",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "41446",
+    "imdb_id": "tt1262416",
+    "poster_path": "data/posters/41446.jpg",
+    "release_url": "https://www.themoviedb.org/movie/41446",
+    "bluray_url": "https://www.blu-ray.com/movies/Scream-4-4K-Blu-ray/403625/",
+    "bluray_release_date": "2026-06-09",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Scream 4 [2011]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
     "movie_title": "Source Code",
     "fel_confirmed": true,
     "release_date": "2011-03-30",
@@ -17532,6 +18521,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
+  },
+  {
+    "movie_title": "Midnight Cowboy (1969), Fantastic Mr. Fox",
+    "fel_confirmed": true,
+    "release_date": "2009",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "L.E. Midnight Cowboy (1969), Fantastic Mr. Fox (2009)",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
   },
   {
     "movie_title": "Avatar",
@@ -19824,6 +20839,32 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
+    "movie_title": "Jurassic World: Rebirth (2025), Kung Fu Panda 2 (2011), Cinderella Man",
+    "fel_confirmed": true,
+    "release_date": "2005",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Jurassic World: Rebirth (2025), Kung Fu Panda 2 (2011), Cinderella Man (2005)",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
     "movie_title": "Aeon Flux",
     "fel_confirmed": true,
     "release_date": "2005-11-30",
@@ -20719,7 +21760,10 @@
     "fel_confirmed": true,
     "release_date": "2004-11-24",
     "studio": "Gaumont",
-    "audio_formats": [],
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
     "english_audio": "Unknown",
     "additional_characteristics": {},
     "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
@@ -20728,13 +21772,15 @@
     "imdb_id": "tt0390808",
     "poster_path": "data/posters/7291.jpg",
     "release_url": "https://www.themoviedb.org/movie/7291",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/36-Quai-des-Orfevres-4K-Blu-ray/397986/",
+    "bluray_release_date": "2025-10-01",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "French"
+    ],
     "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
       "quote": "source: BD FEL VS BL",
@@ -21155,6 +22201,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-26T13:26:51.556162+00:00"
+  },
+  {
+    "movie_title": "Yau doh lung fu bong",
+    "fel_confirmed": true,
+    "release_date": "2004-07-08",
+    "studio": "Milkyway Image",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "25664",
+    "imdb_id": "tt0415380",
+    "poster_path": "data/posters/25664.jpg",
+    "release_url": "https://www.themoviedb.org/movie/25664",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Yau doh lung fu bong AKA Throw Down [2004]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Anchorman: The Legend of Ron Burgundy",
@@ -22767,7 +23839,9 @@
     "fel_confirmed": true,
     "release_date": "2002-01-30",
     "studio": "Pathé",
-    "audio_formats": [],
+    "audio_formats": [
+      "Dolby Atmos"
+    ],
     "english_audio": "Unknown",
     "additional_characteristics": {
       "source_urls": [
@@ -22780,13 +23854,15 @@
     "imdb_id": "tt0250223",
     "poster_path": "data/posters/2899.jpg",
     "release_url": "https://www.themoviedb.org/movie/2899",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Asterix-and-Obelix-Mission-Cleopatre-4K-Blu-ray/354093/",
+    "bluray_release_date": "2024-05-15",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "French"
+    ],
     "fel_evidence": {
       "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
       "quote": "Asterix & Obelix: Mission Cleopatra",
@@ -23372,6 +24448,39 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Ginger Snaps",
+    "fel_confirmed": true,
+    "release_date": "2000-12-11",
+    "studio": "Copperheart Entertainment",
+    "audio_formats": [
+      "Dolby TrueHD 7.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "9871",
+    "imdb_id": "tt0210070",
+    "poster_path": "data/posters/9871.jpg",
+    "release_url": "https://www.themoviedb.org/movie/9871",
+    "bluray_url": "https://www.blu-ray.com/movies/Ginger-Snaps-4K-Blu-ray/411151/",
+    "bluray_release_date": "2026-05-19",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Ginger Snaps [2000]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
   },
   {
     "movie_title": "How the Grinch Stole Christmas",
@@ -24176,6 +25285,32 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Notting Hilll",
+    "fel_confirmed": true,
+    "release_date": "1999",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Notting Hilll [1999]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
     "movie_title": "Galaxy Quest",
     "fel_confirmed": true,
     "release_date": "1999-12-25",
@@ -24510,6 +25645,41 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "The Ninth Gate",
+    "fel_confirmed": true,
+    "release_date": "1999-08-25",
+    "studio": "R.P. Productions",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "LPCM 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "622",
+    "imdb_id": "tt0142688",
+    "poster_path": "data/posters/622.jpg",
+    "release_url": "https://www.themoviedb.org/movie/622",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Ninth-Gate-4K-Blu-ray/408649/",
+    "bluray_release_date": "2026-04-21",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "The Ninth Gate [1999]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Mystery Men",
     "fel_confirmed": true,
     "release_date": "1999-08-06",
@@ -24747,6 +25917,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
+  },
+  {
+    "movie_title": "Gamera 3: Iris kakusei",
+    "fel_confirmed": true,
+    "release_date": "1999-03-06",
+    "studio": "Daiei Film",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "60159",
+    "imdb_id": "tt0184503",
+    "poster_path": "data/posters/60159.jpg",
+    "release_url": "https://www.themoviedb.org/movie/60159",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Gamera 3: Iris kakusei AKA Gamera 3: Revenge of Iris [1999]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Varsity Blues",
@@ -25912,6 +27108,32 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "The Devil's Advocate",
+    "fel_confirmed": true,
+    "release_date": "1997-10-17",
+    "studio": "Monarchy Enterprises B.V.",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "1813",
+    "imdb_id": "tt0118971",
+    "poster_path": "data/posters/1813.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1813",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "The Devil's Advocate [1997]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "The Peacemaker",
     "fel_confirmed": true,
     "release_date": "1997-09-26",
@@ -26602,6 +27824,32 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
+    "movie_title": "Gamera 2: Region shurai",
+    "fel_confirmed": true,
+    "release_date": "1996-07-12",
+    "studio": "Tokuma International",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "59480",
+    "imdb_id": "tt0116390",
+    "poster_path": "data/posters/59480.jpg",
+    "release_url": "https://www.themoviedb.org/movie/59480",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Gamera 2: Region shurai AKA Gamera 2: Assault of the Legion [1996]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Kingpin",
     "fel_confirmed": true,
     "release_date": "1996-07-04",
@@ -27055,6 +28303,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T04:52:57+00:00"
+  },
+  {
+    "movie_title": "The Pink Panther (1963), A Shot in the Dark (1964), Babe",
+    "fel_confirmed": true,
+    "release_date": "1995",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "L.E. The Pink Panther (1963), A Shot in the Dark (1964), Babe (1995)",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
   },
   {
     "movie_title": "Things to Do in Denver When You're Dead",
@@ -27790,6 +29064,32 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Gamera daikaijû kuchu kessen",
+    "fel_confirmed": true,
+    "release_date": "1995-03-11",
+    "studio": "Nippon Television Network Corporation",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "54433",
+    "imdb_id": "tt0113142",
+    "poster_path": "data/posters/54433.jpg",
+    "release_url": "https://www.themoviedb.org/movie/54433",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Gamera daikaijû kuchu kessen AKA Gamera: Guardian of the Universe [1995]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Outbreak",
     "fel_confirmed": true,
     "release_date": "1995-03-10",
@@ -27907,6 +29207,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Nobody's Fool",
+    "fel_confirmed": true,
+    "release_date": "1994-12-23",
+    "studio": "Capella International",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "11593",
+    "imdb_id": "tt0110684",
+    "poster_path": "data/posters/11593.jpg",
+    "release_url": "https://www.themoviedb.org/movie/11593",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Nobody's Fool [1994]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Little Women",
@@ -28400,6 +29726,35 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:37:17+00:00"
+  },
+  {
+    "movie_title": "The Flintstones",
+    "fel_confirmed": true,
+    "release_date": "1994-05-27",
+    "studio": "Hanna-Barbera Cartoons",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "888",
+    "imdb_id": "tt0109813",
+    "poster_path": "data/posters/888.jpg",
+    "release_url": "https://www.themoviedb.org/movie/888",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Flintstones-4K-Blu-ray/401622/",
+    "bluray_release_date": "2026-06-02",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "The Flintstones [1994]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
   },
   {
     "movie_title": "Beverly Hills Cop III",
@@ -30240,6 +31595,58 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Jian yu feng yun II: Tao fan",
+    "fel_confirmed": true,
+    "release_date": "1991",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Jian yu feng yun II: Tao fan AKA Prison on Fire II [1991]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "The Mechanic (1972), Chung hang sei hoi",
+    "fel_confirmed": true,
+    "release_date": "1991",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "The Mechanic (1972), Chung hang sei hoi AKA Once a Thief (1991)",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
+  },
+  {
     "movie_title": "JFK",
     "fel_confirmed": true,
     "release_date": "1991-12-20",
@@ -30982,6 +32389,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Chung hang sei hoi",
+    "fel_confirmed": true,
+    "release_date": "1991-02-02",
+    "studio": "Golden Princess Film Productions",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "47423",
+    "imdb_id": "tt0101020",
+    "poster_path": "data/posters/47423.jpg",
+    "release_url": "https://www.themoviedb.org/movie/47423",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Chung hang sei hoi AKA Once a Thief [1991]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "The Godfather: Part III",
@@ -31946,6 +33379,32 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Siu ngo gong woo",
+    "fel_confirmed": true,
+    "release_date": "1990-04-05",
+    "studio": "Film Workshop",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "18860",
+    "imdb_id": "tt0100973",
+    "poster_path": "data/posters/18860.jpg",
+    "release_url": "https://www.themoviedb.org/movie/18860",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Siu ngo gong woo AKA The Swordsman [1990]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "The Hunt for Red October",
     "fel_confirmed": true,
     "release_date": "1990-03-02",
@@ -32577,6 +34036,43 @@
     "collected_at": "2026-05-22T12:36:04+00:00"
   },
   {
+    "movie_title": "Parenthood",
+    "fel_confirmed": true,
+    "release_date": "1989-07-31",
+    "studio": "Universal Pictures",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "1552",
+    "imdb_id": "tt0098067",
+    "poster_path": "data/posters/1552.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1552",
+    "bluray_url": "https://www.blu-ray.com/movies/Parenthood-4K-Blu-ray/409825/",
+    "bluray_release_date": "2026-05-26",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish",
+      "German"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Parenthood [1989]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "UHF",
     "fel_confirmed": true,
     "release_date": "1989-07-21",
@@ -33000,6 +34496,38 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T04:52:57+00:00"
+  },
+  {
+    "movie_title": "The 'Burbs",
+    "fel_confirmed": true,
+    "release_date": "1989-02-17",
+    "studio": "Universal Pictures",
+    "audio_formats": [
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "11974",
+    "imdb_id": "tt0096734",
+    "poster_path": "data/posters/11974.jpg",
+    "release_url": "https://www.themoviedb.org/movie/11974",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Burbs-4K-Blu-ray/409687/",
+    "bluray_release_date": "2026-06-09",
+    "hdr_formats": [
+      "Dolby Vision"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "The 'Burbs [1989]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
   },
   {
     "movie_title": "Major League",
@@ -33674,6 +35202,39 @@
     "collected_at": "2026-05-22T12:36:04+00:00"
   },
   {
+    "movie_title": "The Great Outdoors",
+    "fel_confirmed": true,
+    "release_date": "1988-06-17",
+    "studio": "Universal Pictures",
+    "audio_formats": [
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "2617",
+    "imdb_id": "tt0095253",
+    "poster_path": "data/posters/2617.jpg",
+    "release_url": "https://www.themoviedb.org/movie/2617",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Great-Outdoors-4K-Blu-ray/399698/",
+    "bluray_release_date": "2026-05-26",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "The Great Outdoors [1988]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Pumpkinhead",
     "fel_confirmed": true,
     "release_date": "1988-06-09",
@@ -33802,6 +35363,39 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Le grand bleu",
+    "fel_confirmed": true,
+    "release_date": "1988-05-10",
+    "studio": "Gaumont",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "175",
+    "imdb_id": "tt0095250",
+    "poster_path": "data/posters/175.jpg",
+    "release_url": "https://www.themoviedb.org/movie/175",
+    "bluray_url": "https://www.blu-ray.com/movies/Le-grand-bleu-4K-Blu-ray/397219/",
+    "bluray_release_date": "2025-12-11",
+    "hdr_formats": [
+      "Dolby Vision"
+    ],
+    "audio_languages": [
+      "German",
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Le grand bleu AKA The Big Blue [1988]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "The Big Blue",
     "fel_confirmed": true,
     "release_date": "1988-02-13",
@@ -33838,6 +35432,58 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Chau tin dik tung wa",
+    "fel_confirmed": true,
+    "release_date": "1987",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Chau tin dik tung wa AKA An Autumn's Tale [1987]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "Gaam yuk fung wan",
+    "fel_confirmed": true,
+    "release_date": "1987",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Gaam yuk fung wan AKA Prison on Fire [1987]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "A Better Tomorrow II",
@@ -34453,6 +36099,40 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Harry and the Hendersons",
+    "fel_confirmed": true,
+    "release_date": "1987-06-05",
+    "studio": "Amblin Entertainment",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "8989",
+    "imdb_id": "tt0093148",
+    "poster_path": "data/posters/8989.jpg",
+    "release_url": "https://www.themoviedb.org/movie/8989",
+    "bluray_url": "https://www.blu-ray.com/movies/Harry-and-the-Hendersons-4K-Blu-ray/400261/",
+    "bluray_release_date": "2026-05-26",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Harry and the Hendersons [1987]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "The Untouchables",
     "fel_confirmed": true,
     "release_date": "1987-06-03",
@@ -34499,6 +36179,39 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Deathstalker II",
+    "fel_confirmed": true,
+    "release_date": "1987-06-03",
+    "studio": "Aries Film International",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "28218",
+    "imdb_id": "tt0092860",
+    "poster_path": "data/posters/28218.jpg",
+    "release_url": "https://www.themoviedb.org/movie/28218",
+    "bluray_url": "https://www.blu-ray.com/movies/Deathstalker-II-4K-Blu-ray/389269/",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Deathstalker II [1987]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Beverly Hills Cop II",
@@ -34631,6 +36344,84 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Fu Rong Zhen",
+    "fel_confirmed": true,
+    "release_date": "1986",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Fu Rong Zhen AKA Hibiscus Town [1986]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "Kyabarê",
+    "fel_confirmed": true,
+    "release_date": "1986",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Kyabarê AKA Cabaret [1986]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "Ying hung boon sik",
+    "fel_confirmed": true,
+    "release_date": "1986",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Ying hung boon sik AKA A Better Tomorrow [1986]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Platoon",
@@ -34880,6 +36671,43 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Labyrinth",
+    "fel_confirmed": true,
+    "release_date": "1986-06-27",
+    "studio": "Henson Associates",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 2.0",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "13597",
+    "imdb_id": "tt0091369",
+    "poster_path": "data/posters/13597.jpg",
+    "release_url": "https://www.themoviedb.org/movie/13597",
+    "bluray_url": "https://www.blu-ray.com/movies/Labyrinth-4K-Blu-ray/369884/",
+    "bluray_release_date": "2025-10-07",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Labyrinth [1986]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "The Karate Kid, Part II",
@@ -37231,6 +39059,40 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
+    "movie_title": "10 to Midnight",
+    "fel_confirmed": true,
+    "release_date": "1983-03-11",
+    "studio": "Y & M Productions",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "18587",
+    "imdb_id": "tt0085121",
+    "poster_path": "data/posters/18587.jpg",
+    "release_url": "https://www.themoviedb.org/movie/18587",
+    "bluray_url": "https://www.blu-ray.com/movies/10-to-Midnight-4K-Blu-ray/394243/",
+    "bluray_release_date": "2026-05-12",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "10 to Midnight [1983]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Uncommon Valor",
     "fel_confirmed": true,
     "release_date": "1983-01-22",
@@ -37268,6 +39130,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Tian shu qi tan",
+    "fel_confirmed": true,
+    "release_date": "1983-01-01",
+    "studio": "Shanghai Animation Film Studio",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "134575",
+    "imdb_id": "tt6035092",
+    "poster_path": "data/posters/134575.jpg",
+    "release_url": "https://www.themoviedb.org/movie/134575",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Tian shu qi tan AKA The Legend of Sealed Book [1983]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Ninja Wars",
@@ -39473,6 +41361,32 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
+    "movie_title": "Yomigaeru kinrô",
+    "fel_confirmed": true,
+    "release_date": "1979",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Yomigaeru kinrô AKA The Resurrection of the Golden Wolf [1979]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Star Trek: The Motion Picture",
     "fel_confirmed": true,
     "release_date": "1979-12-07",
@@ -39908,6 +41822,32 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
+  },
+  {
+    "movie_title": "L'amour en fuite",
+    "fel_confirmed": true,
+    "release_date": "1979-01-24",
+    "studio": "Les Films du Carrosse",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "259",
+    "imdb_id": "tt0078771",
+    "poster_path": "data/posters/259.jpg",
+    "release_url": "https://www.themoviedb.org/movie/259",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "L'amour en fuite AKA Love on the Run [1979]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "The Deer Hunter",
@@ -40634,6 +42574,40 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Ultimo mondo cannibale",
+    "fel_confirmed": true,
+    "release_date": "1977-02-08",
+    "studio": "Erre Cinematograsica S.r.l.",
+    "audio_formats": [
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "30876",
+    "imdb_id": "tt0078437",
+    "poster_path": "data/posters/30876.jpg",
+    "release_url": "https://www.themoviedb.org/movie/30876",
+    "bluray_url": "https://www.blu-ray.com/movies/Ultimo-Mondo-Cannibale-4K-Blu-ray/356115/",
+    "bluray_release_date": "2024-04-04",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Italian",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Ultimo mondo cannibale AKA Jungle Holocaust [1977]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Carrie",
@@ -41419,8 +43393,10 @@
     "fel_confirmed": true,
     "release_date": "1974-08-29",
     "studio": "Impact Films",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/"
@@ -41432,13 +43408,15 @@
     "imdb_id": "tt0068457",
     "poster_path": "data/posters/38996.jpg",
     "release_url": "https://www.themoviedb.org/movie/38996",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Deathdream-4K-Blu-ray/336168/",
+    "bluray_release_date": "2024-05-21",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
       "quote": "Dead of Night",
@@ -42699,6 +44677,35 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Domicile conjugal",
+    "fel_confirmed": true,
+    "release_date": "1970-09-09",
+    "studio": "Valoria Films",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "258",
+    "imdb_id": "tt0065651",
+    "poster_path": "data/posters/258.jpg",
+    "release_url": "https://www.themoviedb.org/movie/258",
+    "bluray_url": "https://www.blu-ray.com/movies/Domicile-conjugal-4K-Blu-ray/320187/",
+    "bluray_release_date": "2023-12-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Domicile conjugal AKA Bed & Board [1970]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "Performance",
     "fel_confirmed": true,
     "release_date": "1970-08-03",
@@ -43154,6 +45161,32 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Die sieben Männer der Sumuru",
+    "fel_confirmed": true,
+    "release_date": "1969-03-14",
+    "studio": "Terra-Filmkunst",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "42620",
+    "imdb_id": "tt0062808",
+    "poster_path": "data/posters/42620.jpg",
+    "release_url": "https://www.themoviedb.org/movie/42620",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Die sieben Männer der Sumuru AKA The Girl from Rio AKA Rio 70 [1969]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "The Swimming Pool",
     "fel_confirmed": true,
     "release_date": "1969-01-31",
@@ -43308,6 +45341,68 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Baisers volés",
+    "fel_confirmed": true,
+    "release_date": "1968-09-04",
+    "studio": "Les Films du Carrosse",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "255",
+    "imdb_id": "tt0062695",
+    "poster_path": "data/posters/255.jpg",
+    "release_url": "https://www.themoviedb.org/movie/255",
+    "bluray_url": "https://www.blu-ray.com/movies/Baisers-voles-4K-Blu-ray/320188/",
+    "bluray_release_date": "2023-12-30",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Baisers volés AKA Stolen Kisses [1968]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "The Blood of Fu Manchu",
+    "fel_confirmed": true,
+    "release_date": "1968-08-23",
+    "studio": "Ada Films",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "3483",
+    "imdb_id": "tt0062741",
+    "poster_path": "data/posters/3483.jpg",
+    "release_url": "https://www.themoviedb.org/movie/3483",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Blood-of-Fu-Manchu-4K-Blu-ray/381626/",
+    "bluray_release_date": "2025-07-29",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "The Blood of Fu Manchu [1968]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:57.459874+00:00"
   },
   {
     "movie_title": "Rosemary's Baby",
@@ -43696,6 +45791,32 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Wutai jiemei",
+    "fel_confirmed": true,
+    "release_date": "1964-02-07",
+    "studio": "Tianma Film Studio 天马电影制片厂",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "154633",
+    "imdb_id": "tt0081553",
+    "poster_path": "data/posters/154633.jpg",
+    "release_url": "https://www.themoviedb.org/movie/154633",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Wutai jiemei AKA Two Stage Sisters [1964]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "The Pink Panther",
     "fel_confirmed": true,
     "release_date": "1963-12-18",
@@ -43848,6 +45969,40 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "The Haunting",
+    "fel_confirmed": true,
+    "release_date": "1963-03-28",
+    "studio": "Argyle Enterprises",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono",
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "11772",
+    "imdb_id": "tt0057129",
+    "poster_path": "data/posters/11772.jpg",
+    "release_url": "https://www.themoviedb.org/movie/11772",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Haunting-4K-Blu-ray/407592/",
+    "bluray_release_date": "2026-05-26",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "The Haunting [1963]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
     "movie_title": "The Manchurian Candidate",
     "fel_confirmed": true,
     "release_date": "1962-10-24",
@@ -43887,6 +46042,58 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Le procès",
+    "fel_confirmed": true,
+    "release_date": "1962-08-25",
+    "studio": "Hisa-Film",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "3009",
+    "imdb_id": "tt0057427",
+    "poster_path": "data/posters/3009.jpg",
+    "release_url": "https://www.themoviedb.org/movie/3009",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Le procès AKA The Trial [1962]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
+  },
+  {
+    "movie_title": "Antoine et Colette",
+    "fel_confirmed": true,
+    "release_date": "1962-06-22",
+    "studio": "Les Films du Carrosse",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "256",
+    "imdb_id": "tt1180329",
+    "poster_path": "data/posters/256.jpg",
+    "release_url": "https://www.themoviedb.org/movie/256",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Antoine et Colette AKA Antoine and Colette [1962]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:55.796807+00:00"
   },
   {
     "movie_title": "Hatari!",
@@ -45142,8 +47349,10 @@
     "fel_confirmed": true,
     "release_date": "1951-03-14",
     "studio": "Universal Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/"
@@ -45155,13 +47364,15 @@
     "imdb_id": "tt0043255",
     "poster_path": "data/posters/33475.jpg",
     "release_url": "https://www.themoviedb.org/movie/33475",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Abbott-and-Costello-Meet-the-Invisible-Man-4K-Blu-ray/382817/",
+    "bluray_release_date": "2025-11-25",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/2/",
       "quote": "Listed as entry #30 on Letterboxd mikimajk P7-FEL list page 2: 'Bud Abbott and Lou Costello Meet the Invisible Man'.",
@@ -45643,5 +47854,31 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "The single biggest reason this device",
+    "fel_confirmed": true,
+    "release_date": "Unknown",
+    "studio": "Unknown",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://www.avsforum.com/threads/dolby-vision-profile-7-fel-with-full-lossless-audio-truehd-atmos-and-dts-x.3339774",
+    "source_label": "Unknown",
+    "tmdb_id": "",
+    "imdb_id": "",
+    "poster_path": "",
+    "release_url": "",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://www.avsforum.com/threads/dolby-vision-profile-7-fel-with-full-lossless-audio-truehd-atmos-and-dts-x.3339774",
+      "quote": "Why Experts Love It: The Dolby Vision FEL Advantage:\nThe single biggest reason this device is revered is its rare ability to correctly process TV-led Dolby Vision Profile 7, including the Full Enhancement Layer (FEL).",
+      "evidence_type": "sentence",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T09:24:52+00:00"
   }
 ]
