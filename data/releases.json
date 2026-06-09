@@ -2336,8 +2336,8 @@
     ],
     "fel_evidence": {
       "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/",
-      "quote": "Listed on letterboxd mikimajk P7-FEL list page 1: '11 Rebels'.",
-      "evidence_type": "letterboxd-list",
+      "quote": "The HTML identifies the page as “List of Dolby Vision P7-FEL Films” and the meta description includes “11 Rebels (2024)”.",
+      "evidence_type": "ai-extracted",
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
@@ -3364,7 +3364,8 @@
     "release_date": "2024-04-11",
     "studio": "Monumental Pictures",
     "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1"
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD 5.1"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -3386,7 +3387,8 @@
       "HDR10"
     ],
     "audio_languages": [
-      "English"
+      "English",
+      "French"
     ],
     "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
@@ -6148,7 +6150,8 @@
     "audio_formats": [
       "Dolby TrueHD/Atmos 7.1",
       "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
+      "DTS-HD MA 2.0",
+      "Dolby TrueHD 7.1"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -13218,14 +13221,15 @@
     "poster_path": "data/posters/267860.jpg",
     "release_url": "https://www.themoviedb.org/movie/267860",
     "bluray_url": "https://www.blu-ray.com/movies/London-Has-Fallen-4K-Blu-ray/272351/",
-    "bluray_release_date": "",
+    "bluray_release_date": "2026-06-02",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
     "audio_languages": [
       "English",
-      "German"
+      "German",
+      "French"
     ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
@@ -15458,14 +15462,15 @@
     "poster_path": "data/posters/117263.jpg",
     "release_url": "https://www.themoviedb.org/movie/117263",
     "bluray_url": "https://www.blu-ray.com/movies/Olympus-Has-Fallen-4K-Blu-ray/272352/",
-    "bluray_release_date": "",
+    "bluray_release_date": "2026-06-02",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
     "audio_languages": [
       "English",
-      "German"
+      "German",
+      "French"
     ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
@@ -23527,6 +23532,39 @@
     "collected_at": "2026-05-23T00:01:49+00:00"
   },
   {
+    "movie_title": "Les rivières pourpres",
+    "fel_confirmed": true,
+    "release_date": "2000-09-27",
+    "studio": "Gaumont",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://github.com/iammarxg/FEL",
+    "source_label": "github",
+    "tmdb_id": "60670",
+    "imdb_id": "tt0228786",
+    "poster_path": "data/posters/60670.jpg",
+    "release_url": "https://www.themoviedb.org/movie/60670",
+    "bluray_url": "https://www.blu-ray.com/movies/Les-Rivieres-Pourpres-4K-Blu-ray/383058/",
+    "bluray_release_date": "2025-05-01",
+    "hdr_formats": [
+      "Dolby Vision"
+    ],
+    "audio_languages": [
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://github.com/iammarxg/FEL",
+      "quote": "Les rivières pourpres AKA The Crimson Rivers [2000]",
+      "evidence_type": "github-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T06:11:13.838236+00:00"
+  },
+  {
     "movie_title": "Almost Famous",
     "fel_confirmed": true,
     "release_date": "2000-09-15",
@@ -24625,6 +24663,41 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Notting Hill",
+    "fel_confirmed": true,
+    "release_date": "1999-05-21",
+    "studio": "Working Title Films",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+    "source_label": "codex-ai",
+    "tmdb_id": "509",
+    "imdb_id": "tt0125439",
+    "poster_path": "data/posters/509.jpg",
+    "release_url": "https://www.themoviedb.org/movie/509",
+    "bluray_url": "https://www.blu-ray.com/movies/Notting-Hill-4K-Blu-ray/410715/",
+    "bluray_release_date": "2026-06-09",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French"
+    ],
+    "fel_evidence": {
+      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
+      "quote": "Notting.Hill.1999 | BD FEL | HDR COMP | sample | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | DiscoD HONE | PROOF | older encodes might not have FEL baked | SPx | Re-encode with P7 without converting to P8 + garbage encode settings",
+      "evidence_type": "google-sheet-row",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-09T06:10:59+00:00"
   },
   {
     "movie_title": "Election",
@@ -34813,8 +34886,13 @@
     "fel_confirmed": true,
     "release_date": "1986-06-18",
     "studio": "Columbia Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://github.com/iammarxg/FEL",
@@ -34833,7 +34911,14 @@
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "French",
+      "German",
+      "Hungarian",
+      "Italian",
+      "Spanish"
+    ],
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "The Karate Kid Part II (1986) listed as Profile 7 FEL",
@@ -37434,7 +37519,8 @@
     "audio_formats": [
       "DTS-HD MA 5.1",
       "DTS-HD MA 2.0",
-      "Dolby Atmos"
+      "Dolby Atmos",
+      "Dolby TrueHD/Atmos 7.1"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
