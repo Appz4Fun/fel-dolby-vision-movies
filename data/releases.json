@@ -5,7 +5,7 @@
     "release_date": "2026-04-01",
     "studio": "Illumination",
     "audio_formats": [
-      "Dolby Atmos",
+      "Dolby TrueHD/Atmos 7.1",
       "DD+ 7.1"
     ],
     "english_audio": "Yes",
@@ -16,7 +16,7 @@
     "imdb_id": "tt28650488",
     "poster_path": "data/posters/1226863.jpg",
     "release_url": "https://www.themoviedb.org/movie/1226863",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Super-Mario-Galaxy-Movie-4K-Blu-ray/409905/",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Super-Mario-Galaxy-Movie-4K-Blu-ray/409891/",
     "bluray_release_date": "2026-06-16",
     "hdr_formats": [
       "Dolby Vision",
@@ -24,8 +24,8 @@
     ],
     "audio_languages": [
       "English",
-      "Spanish",
-      "French"
+      "French",
+      "Spanish"
     ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -33,7 +33,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Hoppers",
@@ -72,7 +72,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Scream 7",
@@ -101,7 +101,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "How to Make a Killing",
@@ -129,7 +129,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Good Luck, Have Fun, Don't Die",
@@ -155,7 +155,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Gourou",
@@ -188,7 +188,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Send Help",
@@ -268,7 +268,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Walking Tall (2004), Tron: Ares",
@@ -294,7 +294,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "Bottle Rocket (1996), Nobody 2",
@@ -320,7 +320,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "Erin Brockovich (2000), Ballerina",
@@ -346,7 +346,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "Harvey (1950), Lilo & Stitch",
@@ -372,7 +372,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "Is This Thing On?",
@@ -525,7 +525,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Five Nights at Freddy's 2",
@@ -551,7 +551,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Hamnet",
@@ -653,8 +653,8 @@
     "imdb_id": "tt19847976",
     "poster_path": "data/posters/967941.jpg",
     "release_url": "https://www.themoviedb.org/movie/967941",
-    "bluray_url": "https://www.blu-ray.com/movies/Wicked-For-Good-4K-Blu-ray/401436/",
-    "bluray_release_date": "2026-02-10",
+    "bluray_url": "https://www.blu-ray.com/movies/Wicked-For-Good-4K-Blu-ray/390121/",
+    "bluray_release_date": "2026-01-20",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
@@ -670,7 +670,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Now You See Me: Now You Don't",
@@ -696,7 +696,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Running Man",
@@ -734,7 +734,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Nuremberg",
@@ -926,7 +926,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Black Phone 2",
@@ -999,7 +999,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Good Fortune",
@@ -1326,6 +1326,39 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Hamilton",
+    "fel_confirmed": true,
+    "release_date": "2025-09-05",
+    "studio": "RadicalMedia",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "556574",
+    "imdb_id": "tt8503618",
+    "poster_path": "data/posters/556574.jpg",
+    "release_url": "https://www.themoviedb.org/movie/556574",
+    "bluray_url": "https://www.blu-ray.com/movies/Hamilton-4K-Blu-ray/412442/",
+    "bluray_release_date": "2026-06-16",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Hamilton [2020]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
+  },
+  {
     "movie_title": "Highest 2 Lowest",
     "fel_confirmed": true,
     "release_date": "2025-08-14",
@@ -1566,7 +1599,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "O Agente Secreto",
@@ -1592,7 +1625,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Eddington",
@@ -1662,7 +1695,8 @@
     "audio_languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "French (Canada)"
     ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -1789,7 +1823,8 @@
     "audio_languages": [
       "English",
       "Spanish",
-      "French (Canada)"
+      "French (Canada)",
+      "French"
     ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=387117&page=2",
@@ -1823,7 +1858,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Ballerina",
@@ -2378,7 +2413,8 @@
       "Dolby TrueHD/Atmos 7.1",
       "DTS-HD MA 7.1",
       "DD+ 7.1",
-      "DD 5.1"
+      "DD 5.1",
+      "DD 2.0"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -2563,7 +2599,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "A Complete Unknown",
@@ -3177,7 +3213,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Terrifier 3",
@@ -3410,8 +3446,7 @@
     "audio_languages": [
       "English",
       "French (Canada)",
-      "Spanish",
-      "French"
+      "Spanish"
     ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=387630&page=9",
@@ -4053,7 +4088,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Fall Guy",
@@ -4489,7 +4524,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Ahsoka: The Complete First Season",
@@ -4525,7 +4560,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "The Mandalorian: The Complete Third Season",
@@ -4561,7 +4596,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "All of Us Strangers",
@@ -4739,7 +4774,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Migration",
@@ -5707,8 +5742,8 @@
     ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=373287",
-      "quote": "Past Lives (2023) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
+      "quote": "Dolby Vision Profile 7 FEL",
+      "evidence_type": "ai-extracted",
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
@@ -5762,8 +5797,7 @@
     "release_date": "2023-04-14",
     "studio": "A24",
     "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 7.1"
+      "DTS-HD MA 5.1"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -5788,8 +5822,7 @@
     ],
     "audio_languages": [
       "English",
-      "French",
-      "German"
+      "French"
     ],
     "fel_evidence": {
       "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
@@ -6264,8 +6297,7 @@
     ],
     "audio_languages": [
       "Mandarin",
-      "English",
-      "French"
+      "English"
     ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -6803,7 +6835,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Hellraiser",
@@ -7153,7 +7185,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Minions: The Rise of Gru",
@@ -7457,8 +7489,8 @@
     "studio": "Tsuburaya Productions",
     "audio_formats": [
       "DTS-HD MA 5.1",
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 2.0"
+      "DTS-HD MA 2.0",
+      "Dolby Atmos"
     ],
     "english_audio": "Unknown",
     "additional_characteristics": {
@@ -7708,7 +7740,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Everything Everywhere All at Once",
@@ -8680,7 +8712,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Old",
@@ -8891,8 +8923,7 @@
     "audio_formats": [
       "Dolby TrueHD/Atmos 7.1",
       "DTS-HD MA 5.1",
-      "DTS 2.0",
-      "DTS-HD MA 2.0"
+      "DTS 2.0"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -9275,33 +9306,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
-  },
-  {
-    "movie_title": "Hamilton (musical)",
-    "fel_confirmed": true,
-    "release_date": "2020",
-    "studio": "Unknown",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-    "source_label": "reddit",
-    "tmdb_id": "",
-    "imdb_id": "",
-    "poster_path": "",
-    "release_url": "",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-      "quote": "Hamilton (musical) [2020]",
-      "evidence_type": "reddit-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Croods: A New Age",
@@ -9793,39 +9798,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Hamilton",
-    "fel_confirmed": true,
-    "release_date": "2020-01-01",
-    "studio": "Unknown",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-    "source_label": "reddit",
-    "tmdb_id": "1050949",
-    "imdb_id": "",
-    "poster_path": "data/posters/1050949.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1050949",
-    "bluray_url": "https://www.blu-ray.com/movies/Hamilton-4K-Blu-ray/412442/",
-    "bluray_release_date": "2026-06-16",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-      "quote": "Hamilton [2020]",
-      "evidence_type": "reddit-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
-  },
-  {
     "movie_title": "Game of Thrones: The Complete Eighth Season",
     "fel_confirmed": true,
     "release_date": "2019",
@@ -9893,7 +9865,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "1917",
@@ -10538,7 +10510,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Weathering with You",
@@ -12041,7 +12013,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Uncle Drew",
@@ -12675,7 +12647,8 @@
     "audio_formats": [
       "Dolby TrueHD/Atmos 7.1",
       "DD 5.1",
-      "DTS-HD MA 5.1"
+      "DTS-HD MA 5.1",
+      "Dolby Atmos"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -14987,7 +14960,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Man from U.N.C.L.E.",
@@ -15259,7 +15232,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Jurassic World",
@@ -17358,8 +17331,7 @@
     "audio_formats": [
       "Dolby TrueHD/Atmos 7.1",
       "DD 2.0",
-      "DD 5.1 EX",
-      "DD 5.1"
+      "DD 5.1 EX"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -17965,7 +17937,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Source Code",
@@ -18828,7 +18800,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "Avatar",
@@ -19161,7 +19133,7 @@
       "evidence_type": "google-sheet-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50+00:00"
+    "collected_at": "2026-06-16T15:23:59+00:00"
   },
   {
     "movie_title": "G I Joe: The Rise of Cobra",
@@ -21170,7 +21142,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "Aeon Flux",
@@ -22534,7 +22506,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Anchorman: The Legend of Ron Burgundy",
@@ -22717,8 +22689,7 @@
     "audio_formats": [
       "Dolby TrueHD/Atmos 7.1",
       "DTS 5.1",
-      "DTS:X 7.1",
-      "DTS:X"
+      "DTS:X 7.1"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -22745,8 +22716,7 @@
       "English",
       "Spanish",
       "French (Canada)",
-      "German",
-      "Italian"
+      "German"
     ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=124",
@@ -24164,8 +24134,8 @@
     "imdb_id": "tt0250223",
     "poster_path": "data/posters/2899.jpg",
     "release_url": "https://www.themoviedb.org/movie/2899",
-    "bluray_url": "https://www.blu-ray.com/movies/Asterix-and-Obelix-Mission-Cleopatre-4K-Blu-ray/354093/",
-    "bluray_release_date": "2024-05-15",
+    "bluray_url": "https://www.blu-ray.com/movies/Asterix-and-Obelix-Mission-Cleopatre-4K-Blu-ray/345418/",
+    "bluray_release_date": "2023-12-13",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
@@ -24388,7 +24358,8 @@
     "studio": "Universal Pictures",
     "audio_formats": [
       "Dolby TrueHD/Atmos 7.1",
-      "DTS 5.1"
+      "DTS 5.1",
+      "DTS:X 7.1"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -24412,7 +24383,9 @@
     "audio_languages": [
       "English",
       "French",
-      "Spanish"
+      "Spanish",
+      "Japanese",
+      "Portuguese"
     ],
     "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
@@ -24790,7 +24763,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "How the Grinch Stole Christmas",
@@ -25584,8 +25557,7 @@
       "Spanish",
       "French",
       "Italian",
-      "Japanese",
-      "Portuguese"
+      "Japanese"
     ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?page=7&t=360081",
@@ -25619,7 +25591,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "Galaxy Quest",
@@ -25716,7 +25688,8 @@
     "audio_formats": [
       "DTS-HD MA 5.1",
       "DD 5.1",
-      "DD 2.0"
+      "DD 2.0",
+      "DTS 5.1"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -25988,7 +25961,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Bowfinger",
@@ -26022,7 +25995,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Mystery Men",
@@ -26287,7 +26260,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Varsity Blues",
@@ -27402,7 +27375,8 @@
       "Spanish",
       "French (Canada)",
       "Italian",
-      "Japanese"
+      "Japanese",
+      "French"
     ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448&page=165",
@@ -27476,7 +27450,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Peacemaker",
@@ -28195,7 +28169,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Kingpin",
@@ -28676,7 +28650,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "Things to Do in Denver When You're Dead",
@@ -29436,7 +29410,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Outbreak",
@@ -29581,7 +29555,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Little Women",
@@ -30103,7 +30077,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Beverly Hills Cop III",
@@ -30950,7 +30924,8 @@
     "audio_formats": [
       "DTS-HD MA 7.1",
       "Dolby Atmos",
-      "DTS 5.1"
+      "DTS 5.1",
+      "DTS:X 7.1"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -30974,7 +30949,9 @@
     "audio_languages": [
       "English",
       "French",
-      "Spanish"
+      "Spanish",
+      "Japanese",
+      "Portuguese"
     ],
     "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
@@ -31967,7 +31944,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Mechanic (1972), Chung hang sei hoi",
@@ -31993,7 +31970,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:50.330750+00:00"
+    "collected_at": "2026-06-16T15:23:59.203044+00:00"
   },
   {
     "movie_title": "JFK",
@@ -32763,7 +32740,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Godfather: Part III",
@@ -33751,7 +33728,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Hunt for Red October",
@@ -34419,7 +34396,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "UHF",
@@ -34876,7 +34853,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Major League",
@@ -35581,7 +35558,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Pumpkinhead",
@@ -35695,7 +35672,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Willow",
@@ -35772,7 +35749,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Big Blue",
@@ -35836,7 +35813,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Gaam yuk fung wan",
@@ -35862,7 +35839,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "A Better Tomorrow II",
@@ -36509,7 +36486,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Untouchables",
@@ -36590,7 +36567,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Beverly Hills Cop II",
@@ -36748,7 +36725,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Kyabarê",
@@ -36774,7 +36751,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Ying hung boon sik",
@@ -36800,7 +36777,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Platoon",
@@ -37086,7 +37063,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Karate Kid, Part II",
@@ -38048,7 +38025,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Lifeforce",
@@ -38199,7 +38176,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Subway",
@@ -39070,8 +39047,7 @@
     "studio": "Paramount Pictures",
     "audio_formats": [
       "DTS-HD MA 5.1",
-      "DD 2.0",
-      "DD 2.0 Mono"
+      "DD 2.0"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -39544,7 +39520,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Uncommon Valor",
@@ -39609,7 +39585,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Ninja Wars",
@@ -39970,7 +39946,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Tron",
@@ -40144,6 +40120,41 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
+    "movie_title": "Fossilized Wilderness",
+    "fel_confirmed": true,
+    "release_date": "1982-04-17",
+    "studio": "KADOKAWA",
+    "audio_formats": [
+      "DD 4.0",
+      "DD 2.0 Mono",
+      "DD 2.0"
+    ],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/4/",
+    "source_label": "letterboxd",
+    "tmdb_id": "1023730",
+    "imdb_id": "tt0382776",
+    "poster_path": "data/posters/1023730.jpg",
+    "release_url": "https://www.themoviedb.org/movie/1023730",
+    "bluray_url": "https://www.blu-ray.com/movies/Fossilized-Wilderness-4K-Blu-ray/326066/",
+    "bluray_release_date": "2023-01-27",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Japanese"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/4/",
+      "quote": "Fossilized Wilderness (1982)",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-16T15:24:02.281576+00:00"
   },
   {
     "movie_title": "Cat People",
@@ -41873,7 +41884,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Star Trek: The Motion Picture",
@@ -41882,8 +41893,7 @@
     "studio": "Paramount Pictures",
     "audio_formats": [
       "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1",
-      "DD 2.0"
+      "DD 5.1"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -41911,8 +41921,7 @@
       "English",
       "German",
       "Spanish",
-      "French",
-      "Music"
+      "French"
     ],
     "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
@@ -42338,7 +42347,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Deer Hunter",
@@ -43098,7 +43107,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Carrie",
@@ -45194,7 +45203,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Performance",
@@ -45675,7 +45684,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Swimming Pool",
@@ -45745,7 +45754,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "ONCE UPON A TIME IN THE WEST",
@@ -45893,7 +45902,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Blood of Fu Manchu",
@@ -45926,7 +45935,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Rosemary's Baby",
@@ -45989,7 +45998,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Dragon Inn",
@@ -46367,7 +46376,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Pink Panther",
@@ -46444,6 +46453,40 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
+  },
+  {
+    "movie_title": "Le mépris",
+    "fel_confirmed": true,
+    "release_date": "1963-10-29",
+    "studio": "Rome-Paris Films",
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "266",
+    "imdb_id": "tt0057345",
+    "poster_path": "data/posters/266.jpg",
+    "release_url": "https://www.themoviedb.org/movie/266",
+    "bluray_url": "https://www.blu-ray.com/movies/Le-Mepris-4K-Blu-ray/347624/",
+    "bluray_release_date": "2023-10-24",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "French",
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+      "quote": "Le mépris AKA Contempt [1963]",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Donovan's Reef",
@@ -46553,7 +46596,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Manchurian Candidate",
@@ -46620,7 +46663,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Antoine et Colette",
@@ -46646,7 +46689,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "Hatari!",
@@ -47605,7 +47648,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:48.552984+00:00"
+    "collected_at": "2026-06-16T15:23:57.489778+00:00"
   },
   {
     "movie_title": "The Big Heat",
@@ -48461,6 +48504,6 @@
       "evidence_type": "sentence",
       "location": "Unknown"
     },
-    "collected_at": "2026-06-15T16:06:41+00:00"
+    "collected_at": "2026-06-16T15:23:52+00:00"
   }
 ]
