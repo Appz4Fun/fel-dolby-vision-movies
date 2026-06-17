@@ -640,6 +640,15 @@ def test_rejects_sentence_with_source_prose_colon_prefix():
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
+def test_rejects_hardware_device_prose_sentence_as_title():
+    html = (
+        "<p>The single biggest reason this device is revered is its rare ability "
+        "to correctly process TV-led Dolby Vision Profile 7, including the Full "
+        "Enhancement Layer (FEL).</p>"
+    )
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
 def test_rejects_sentence_with_source_prose_comma_prefix():
     html = "<p>The post says, Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
     assert parse_fel_releases(html, "https://example.test/thread") == []

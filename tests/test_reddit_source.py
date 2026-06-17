@@ -78,3 +78,26 @@ def test_parse_reddit_releases_strips_varied_comment_prefixes():
     )
     releases = parse_reddit_releases(html, "https://reddit.test/fel")
     assert [r.movie_title for r in releases] == ["Tenet", "Arrival"]
+
+
+def test_parse_reddit_releases_splits_comma_joined_multi_title_line():
+    html = (
+        '<div class="usertext-body"><div class="md">'
+        "<p>Walking Tall (2004), Tron: Ares (2025)</p>"
+        "</div></div>"
+    )
+    releases = parse_reddit_releases(html, "https://reddit.test/fel")
+    assert [(r.movie_title, r.release_date) for r in releases] == [
+        ("Walking Tall", "2004"),
+        ("Tron: Ares", "2025"),
+    ]
+
+
+def test_parse_reddit_releases_rejects_line_with_trailing_non_title_text():
+    html = (
+        '<div class="usertext-body"><div class="md">'
+        "<p>Great movie (2024), really loved the audio</p>"
+        "</div></div>"
+    )
+    releases = parse_reddit_releases(html, "https://reddit.test/fel")
+    assert releases == []

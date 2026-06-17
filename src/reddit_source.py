@@ -17,8 +17,14 @@ from models import FelEvidence, FelRelease
 from normalize import normalize_fel_title
 
 
-# A clean list line: the whole line is "<title> [YYYY]" or "<title> (YYYY)".
-_LIST_LINE_RE = re.compile(r"^(?P<title>.+?)\s*[\[(](?P<year>(?:19|20)\d{2})[\])]\s*$")
+# A clean list line is one or more "<title> [YYYY]"/"<title> (YYYY)" segments
+# joined by commas. A single segment is the common case; comma-joined segments
+# (e.g. "Walking Tall (2004), Tron: Ares (2025)") are split into one release
+# each. Segments must tile the whole line, so prose with a trailing year is
+# still rejected.
+_LIST_SEGMENT_RE = re.compile(
+    r"\s*(?P<title>.+?)\s*[\[(](?P<year>(?:19|20)\d{2})[\])]\s*(?:,\s*|$)"
+)
 # Comment lead-ins that precede a title in discussion replies, e.g.
 # "You forgot Sicario [2015]" -> the title is "Sicario".
 _COMMENT_PREFIX_RE = re.compile(
@@ -81,29 +87,45 @@ def parse_reddit_releases(html: str, url: str) -> list[FelRelease]:
         if not line or _MEL_RE.search(line):
             continue
         candidate = _COMMENT_PREFIX_RE.sub("", line)
-        match = _LIST_LINE_RE.match(candidate)
-        if not match:
-            continue
-        title = normalize_fel_title(match.group("title"))
-        year = match.group("year")
-        if not title:
-            continue  # pragma: no cover - normalized title empty
+        for title, year in _split_list_line(candidate):
+            title = normalize_fel_title(title)
+            if not title:
+                continue  # pragma: no cover - normalized title empty
 
-        key = (title.casefold(), year)
-        if key in seen:
-            continue
-        seen.add(key)
-        releases.append(
-            FelRelease(
-                movie_title=title,
-                release_date=year,
-                fel_evidence=FelEvidence(
-                    source_url=url,
-                    quote=line,
-                    evidence_type="reddit-list",
-                ),
-                source_label="reddit",
-                collected_at=collected_at,
+            key = (title.casefold(), year)
+            if key in seen:
+                continue
+            seen.add(key)
+            releases.append(
+                FelRelease(
+                    movie_title=title,
+                    release_date=year,
+                    fel_evidence=FelEvidence(
+                        source_url=url,
+                        quote=line,
+                        evidence_type="reddit-list",
+                    ),
+                    source_label="reddit",
+                    collected_at=collected_at,
+                )
             )
-        )
     return releases
+
+
+def _split_list_line(candidate: str) -> list[tuple[str, str]]:
+    """Split a clean list line into its (title, year) segments.
+
+    Returns one tuple per "<title> (YYYY)" segment when the segments tile the
+    whole line (single or comma-joined). Returns an empty list if any part of
+    the line falls outside a segment, so mid-sentence prose is not extracted.
+    """
+    segments: list[tuple[str, str]] = []
+    position = 0
+    for match in _LIST_SEGMENT_RE.finditer(candidate):
+        if match.start() != position:
+            return []
+        segments.append((match.group("title"), match.group("year")))
+        position = match.end()
+    if position != len(candidate):
+        return []
+    return segments

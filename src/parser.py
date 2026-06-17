@@ -110,6 +110,16 @@ LIST_ITEM_FEL_BITRATE_RE = re.compile(
     rf"{FEL_TOKEN_PATTERN}\s*-\s*(?P<bitrate>\d+(?:\.\d+)?)\s*Mb/s",
     re.IGNORECASE,
 )
+# Substrings that mark a candidate as AV-hardware jargon or prose subject
+# rather than a film title (e.g. "...this device...", "the splitter").
+_BANNED_TITLE_WORDS = (
+    "hardware",
+    "player",
+    "splitter",
+    "profile",
+    "dolby vision",
+    "device",
+)
 
 
 def parse_fel_releases(html: str, source_url: str) -> list[FelRelease]:
@@ -361,10 +371,7 @@ def _looks_like_title(value: str) -> bool:
         return False
     if re.search(r"\b(?:and|or)\b", lowered):
         return False
-    if any(
-        word in lowered
-        for word in ("hardware", "player", "splitter", "profile", "dolby vision")
-    ):
+    if any(word in lowered for word in _BANNED_TITLE_WORDS):
         return False  # pragma: no cover - banned-word title rejection
     return any(character.isalnum() for character in value)
 
@@ -379,10 +386,7 @@ def _looks_like_list_item_title(
         return False
     if FORUM_TIMESTAMP_RE.search(value):
         return False
-    if any(
-        word in lowered
-        for word in ("hardware", "player", "splitter", "profile", "dolby vision")
-    ):
+    if any(word in lowered for word in _BANNED_TITLE_WORDS):
         return False
     return any(character.isalnum() for character in value)
 
