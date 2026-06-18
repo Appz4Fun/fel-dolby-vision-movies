@@ -34,6 +34,23 @@ _COMMENT_PREFIX_RE = re.compile(
 # MEL (Minimal Enhancement Layer) lines are not FEL; skip them. Matched as a
 # whole uppercase word so titles like "Melancholia" are not affected.
 _MEL_RE = re.compile(r"\bMEL\b")
+# Discussion/question lines that happen to end in a bracketed year are comment
+# prose, not list entries (e.g. "Are you sure about Joker: Folie a Deux [2024]").
+# Anchored multi-word interrogative openers no real film title uses, so genuine
+# titles such as "Are We There Yet", "Is Paris Burning?", "What Women Want", and
+# "Did You Hear About the Morgans?" are kept.
+_QUESTION_PROSE_RE = re.compile(
+    r"^(?:"
+    r"are\s+you\s+sure\b|"
+    r"(?:is|are)\s+(?:this|that|these|those|it|there)\b|"
+    r"do\s+you\b|does\s+anyone\b|did\s+anyone\b|"
+    r"anyone\s+(?:know|knows|got|have|has|confirm|confirmed)\b|"
+    r"(?:can|could|would|should)\s+(?:anyone|someone)\b|"
+    r"what\s+about\b|how\s+about\b|"
+    r"why\s+(?:is|are|does|do)\b"
+    r")",
+    re.IGNORECASE,
+)
 
 
 class _RedditUserTextParser(HTMLParser):
@@ -87,6 +104,8 @@ def parse_reddit_releases(html: str, url: str) -> list[FelRelease]:
         if not line or _MEL_RE.search(line):
             continue
         candidate = _COMMENT_PREFIX_RE.sub("", line)
+        if _QUESTION_PROSE_RE.match(candidate):
+            continue
         for title, year in _split_list_line(candidate):
             title = normalize_fel_title(title)
             if not title:
@@ -122,8 +141,8 @@ def _split_list_line(candidate: str) -> list[tuple[str, str]]:
     segments: list[tuple[str, str]] = []
     position = 0
     for match in _LIST_SEGMENT_RE.finditer(candidate):
-        if match.start() != position:
-            return []
+        if match.start() != position:  # pragma: no cover - defensive; the leading
+            return []  # `.+?` makes finditer matches contiguous, so never hit
         segments.append((match.group("title"), match.group("year")))
         position = match.end()
     if position != len(candidate):

@@ -21,6 +21,23 @@ def _is_weak_evidence(evidence_type: str) -> bool:
     return evidence_type.endswith(_WEAK_EVIDENCE_SUFFIX)
 
 
+# Title tokens that mark a genuinely distinct physical release sharing one TMDB
+# id (editions, cuts, season/series discs). When a tmdb group's titles carry one
+# of these we keep the rows separate; otherwise same-tmdb rows are pure AKA /
+# translation / spelling variants of one film and should collapse to one record.
+_EDITION_DESCRIPTOR_RE = re.compile(
+    r"\b(?:extended|collector|collectors|director|directors|theatrical|"
+    r"remaster|remastered|restored|uncut|unrated|special\s+edition|anniversary|"
+    r"complete|season|series|volume|vol\.|part\s+\w+|chapter|disc|criterion|"
+    r"limited|ultimate|deluxe|definitive|edition)\b",
+    re.IGNORECASE,
+)
+
+
+def _has_edition_descriptor(title: str) -> bool:
+    return bool(_EDITION_DESCRIPTOR_RE.search(title or ""))
+
+
 def canonical_title_key(value: str) -> str:
     normalized = unicodedata.normalize("NFKD", value)
     normalized = "".join(c for c in normalized if not unicodedata.combining(c))
@@ -120,6 +137,21 @@ def _dedupe_one_tmdb_group(releases: list[FelRelease]) -> list[FelRelease]:
     resolved = [
         _merge_identity_group(bluray_groups[bluray_url]) for bluray_url in bluray_order
     ]
+
+    # Same tmdb_id across several blu-ray editions: if NO title carries an
+    # edition/season descriptor these are AKA/translation duplicates of one film
+    # (different blu-ray.com pages for the same release), so collapse them into a
+    # single enriched record. Distinct editions/seasons keep their descriptor and
+    # stay separate.
+    if len(resolved) > 1 and not any(
+        _has_edition_descriptor(release.movie_title) for _, release in resolved
+    ):
+        # resolved is in first-occurrence order, so resolved[0] holds the lowest
+        # original index; fold the rest into it, preserving its base title.
+        base_index, base = resolved[0]
+        for _, release in resolved[1:]:
+            base = _merge_preserving_base_title(base, release)
+        resolved = [(base_index, base)]
 
     for index, release in unresolved:
         target_index = _find_tmdb_merge_target(release, resolved)

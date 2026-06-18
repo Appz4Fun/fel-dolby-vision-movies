@@ -36,6 +36,13 @@ KNOWN_CODECS = (
     "PCM",
 )
 KNOWN_HDR = ("Dolby Vision", "HDR10+", "HDR10", "HLG")
+# Blu-ray.com audio blocks sometimes carry prose lines ("Note: Atmos is French
+# only", "Music: ...") that split into a fake "language: codec" pair. The codec
+# filter alone lets them through when the remainder starts with a real codec, so
+# reject these label words on the language side.
+_NON_LANGUAGE_LABELS = frozenset(
+    {"note", "notes", "comment", "comments", "subtitle", "subtitles", "music"}
+)
 
 
 def parse_hdr(hdr_text: str) -> list[str]:
@@ -154,6 +161,8 @@ def fetch_bluray_details(client: httpx.Client, url: str) -> BlurayDetails:
                 continue
             language, fmt = text.split(":", 1)
             language, fmt = language.strip(), fmt.strip()
+            if language.casefold() in _NON_LANGUAGE_LABELS:
+                continue
             if not fmt.startswith(KNOWN_CODECS):
                 continue  # pragma: no cover - unrecognized audio codec skip
             tracks.append((language, fmt))

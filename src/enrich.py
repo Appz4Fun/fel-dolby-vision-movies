@@ -15,6 +15,7 @@ from tmdb import (
     load_tmdb_api_key,
 )
 from models import UNKNOWN, FelRelease
+from normalize import normalize_fel_title
 
 if TYPE_CHECKING:
     from bluray import BlurayMatcher
@@ -84,7 +85,49 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
     ("van wilder", "2002"): _LookupCandidate("National Lampoon's Van Wilder", "2002"),
     ("xia nu", "1971"): _LookupCandidate("A Touch of Zen", "1970"),
     ("yip man", "2008"): _LookupCandidate("Ip Man", "2008"),
+    # Native title resolves to a separate TMDB record from the canonical English
+    # entry, so pin it to the English title shared by the canonical row.
+    ("le grand bleu", "1988"): _LookupCandidate("The Big Blue", "1988"),
+    # Source-list misspelling ("Notting Hilll"); map to the real title so it
+    # enriches to the same id as the canonical row instead of duplicating it.
+    ("notting hilll", "1999"): _LookupCandidate("Notting Hill", "1999"),
 }
+
+
+_AKA_SPLIT_RE = re.compile(r"\bAKA\b", re.IGNORECASE)
+_TRAILING_YEAR_RE = re.compile(r"[\[(]\s*(?:19|20)\d{2}\s*[\])].*$")
+
+
+def _aka_titles_from_quote(quote: str) -> list[str]:
+    """Pull the English alternate(s) out of a "Native AKA English [year]" quote.
+
+    Reddit FEL lists frequently title foreign films by their romanized native
+    name with the English title after "AKA"; ``normalize_fel_title`` keeps the
+    left side, so the English alternate is offered here as a fallback resolution
+    candidate (after the native title) to recover the canonical TMDB identity.
+    """
+    parts = _AKA_SPLIT_RE.split(quote or "")
+    if len(parts) < 2:
+        return []
+    akas: list[str] = []
+    for part in parts[1:]:
+        cleaned = _TRAILING_YEAR_RE.sub("", part).split(",")[0]
+        title = normalize_fel_title(cleaned)
+        if title and title not in akas:
+            akas.append(title)
+    return akas
+
+
+def _resolution_candidates(release: FelRelease, year: str) -> list[_LookupCandidate]:
+    candidates = _lookup_candidates(release.movie_title, year)
+    seen = {(candidate.title, candidate.year) for candidate in candidates}
+    for aka in _aka_titles_from_quote(release.fel_evidence.quote):
+        for candidate in _lookup_candidates(aka, year):
+            key = (candidate.title, candidate.year)
+            if key not in seen:
+                seen.add(key)
+                candidates.append(candidate)
+    return candidates
 
 
 def release_url_for(tmdb_id: str, imdb_id: str) -> str:
@@ -186,7 +229,12 @@ def enrich_releases(
         resolve_failed = False
         release_year = _release_year(release.release_date)
         try:
-            for candidate in _lookup_candidates(release.movie_title, release_year):
+            for candidate in _resolution_candidates(release, release_year):
+                if not candidate.year:
+                    # Never guess a specific release for a yearless title; that
+                    # would assert a one-to-one FEL correlation the evidence does
+                    # not support (e.g. ambiguous "Halloween II" sheet rows).
+                    continue
                 movie = resolver.resolve(candidate.title, candidate.year)
                 if movie is not None:
                     movie_candidate = candidate
@@ -213,7 +261,15 @@ def enrich_releases(
                 details = fetch_tmdb_details(client, api_key, movie.tmdb_id)
                 if details["studio"] and release.studio in ("", UNKNOWN):
                     release.studio = details["studio"]
-                if details["release_date"] and "-" not in release.release_date:
+                # Only adopt TMDB's full date when its year matches the year that
+                # resolved the movie, so enrichment never drifts a row out of the
+                # year its FEL evidence proves (e.g. a [2025] quote -> 2026 date).
+                candidate_year = movie_candidate.year if movie_candidate else ""
+                if (
+                    details["release_date"]
+                    and "-" not in release.release_date
+                    and _release_year(details["release_date"]) == candidate_year
+                ):
                     release.release_date = details["release_date"]
                 if details["poster_path"]:
                     dest = poster_dir / f"{movie.tmdb_id}.jpg"
@@ -229,9 +285,11 @@ def enrich_releases(
         if bluray_resolver is not None:
             try:
                 details = None
-                for candidate in _lookup_candidates(
-                    release.movie_title, _release_year(release.release_date)
+                for candidate in _resolution_candidates(
+                    release, _release_year(release.release_date)
                 ):
+                    if not candidate.year:
+                        continue
                     details = bluray_resolver.resolve(candidate.title, candidate.year)
                     if details is not None:
                         break
