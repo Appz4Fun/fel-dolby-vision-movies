@@ -21,6 +21,10 @@ def _is_weak_evidence(evidence_type: str) -> bool:
     return evidence_type.endswith(_WEAK_EVIDENCE_SUFFIX)
 
 
+def _is_ai_evidence(evidence_type: str) -> bool:
+    return evidence_type == "ai-extracted"
+
+
 # Title tokens that mark a genuinely distinct physical release sharing one TMDB
 # id (editions, cuts, season/series discs). When a tmdb group's titles carry one
 # of these we keep the rows separate; otherwise same-tmdb rows are pure AKA /
@@ -245,6 +249,15 @@ def _prefer_title(left: str, right: str) -> str:
 
 
 def _prefer_evidence(left: FelEvidence, right: FelEvidence) -> FelEvidence:
+    # AGENTS.md: ai-scrape must merge into existing data and never replace
+    # deterministic scraper results. When exactly one side is AI-extracted, keep
+    # the deterministic side regardless of its strength -- AI evidence is
+    # supplemental and must not overwrite the title/year-specific quote that ties
+    # the FEL claim to one release.
+    left_ai = _is_ai_evidence(left.evidence_type)
+    right_ai = _is_ai_evidence(right.evidence_type)
+    if left_ai != right_ai:
+        return right if left_ai else left
     left_weak = _is_weak_evidence(left.evidence_type)
     right_weak = _is_weak_evidence(right.evidence_type)
     if left_weak and not right_weak:
