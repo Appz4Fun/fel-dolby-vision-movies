@@ -13,7 +13,7 @@ import httpx
 from artifacts import _sort_key, write_artifacts
 from bluray import StaticBlurayResolver, fetch_bluray_details
 from enrich import StaticTmdbResolver, enrich_releases
-from merge import dedupe_tmdb_releases
+from merge import canonical_key, dedupe_releases, dedupe_tmdb_releases
 from models import FelEvidence, FelRelease
 from reddit_source import parse_reddit_releases
 
@@ -334,3 +334,35 @@ def test_enrich_pins_misspelled_title_to_canonical_via_alias(tmp_path: Path):
 
     assert release.tmdb_id == "509"
     assert release.movie_title == "Notting Hill"
+
+
+# --- Bucket K: ai-extracted evidence never replaces deterministic evidence ---
+
+
+def test_merge_keeps_deterministic_evidence_over_ai_extracted():
+    # AGENTS.md: ai-scrape must merge into existing data and never replace
+    # deterministic scraper results. The prior Past Lives row carried a
+    # title/year-specific fel-list quote; a refresh that adds a generic
+    # ai-extracted phrase from the same thread must not overwrite it (either
+    # merge order), so the published audit trail keeps the one-to-one FEL link.
+    deterministic = _release(
+        "Past Lives",
+        "2023-06-02",
+        evidence_type="fel-list",
+        source_label="FEL.txt",
+        quote="Past Lives [2023]",
+    )
+    ai = _release(
+        "Past Lives",
+        "2023-06-02",
+        evidence_type="ai-extracted",
+        source_label="codex-ai",
+        quote="Dolby Vision Profile 7 FEL",
+    )
+    forward = dedupe_releases([deterministic, ai], canonical_key)[0]
+    backward = dedupe_releases([ai, deterministic], canonical_key)[0]
+
+    assert forward.fel_evidence.evidence_type == "fel-list"
+    assert forward.fel_evidence.quote == "Past Lives [2023]"
+    assert backward.fel_evidence.evidence_type == "fel-list"
+    assert backward.fel_evidence.quote == "Past Lives [2023]"
