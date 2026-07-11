@@ -93,17 +93,19 @@ def ai_extract_releases(
     """Extract FEL releases from already-fetched (source_url, html) pages."""
     collected_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
     releases: list[FelRelease] = []
+    rejection_reasons: list[str] = []
     for source_url, text in pages:
         try:
-            candidates = validate_ai_candidates(
-                _extract_candidates_with_retries(ai_client, source_url, text), text
-            )
+            candidates = validate_ai_candidates(_extract_candidates_with_retries(ai_client, source_url, text), text, rejection_reasons)
         except httpx.HTTPError as exc:
             print(f"ai-scrape: extraction failed for {source_url}: {exc}")
             continue
         for candidate in candidates:
             if candidate.title and candidate.evidence:
                 releases.append(_candidate_to_release(candidate, collected_at))
+    if rejection_reasons:
+        counts = {reason: rejection_reasons.count(reason) for reason in sorted(set(rejection_reasons))}
+        print("ai-scrape rejected candidates: " + ", ".join(f"{k}={v}" for k, v in counts.items()))
     return releases
 
 
@@ -196,7 +198,7 @@ def _load_existing_releases(output_dir: Path) -> list[FelRelease]:
 
 
 def run_ai_scrape(
-    source_path: Path, output_dir: Path, cache_dir: Path
+    source_path: Path, output_dir: Path, cache_dir: Path, review_output_path: Path | None = None
 ) -> int:  # pragma: no cover - CLI entrypoint, requires live AI
     import artifacts
     import main
@@ -204,6 +206,9 @@ def run_ai_scrape(
     try:
         settings = AISettings.from_env()
     except RuntimeError:
+        if review_output_path is not None:
+            review_output_path.parent.mkdir(parents=True, exist_ok=True)
+            review_output_path.write_text('{"review_count": 0, "items": []}\n', encoding="utf-8")
         print("ai-scrape skipped; OPENAI_API_KEY / CODEX_API_KEY is not configured")
         return 0
 
@@ -224,7 +229,7 @@ def run_ai_scrape(
     main._enrich_if_possible(ai_releases)
     existing_releases = _load_existing_releases(output_dir)
     sorted_releases = artifacts.publish_outputs(
-        ai_releases, output_dir=output_dir
+        ai_releases, output_dir=output_dir, review_output_path=review_output_path
     )
     print(
         "ai-scrape complete; "
