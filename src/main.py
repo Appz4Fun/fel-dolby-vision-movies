@@ -36,6 +36,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "search-for-sources":
         return _search_for_sources(args.sources)
     if args.command == "scrape-for-titles":
+        if not _valid_review_output_for_cli(args.output_dir, args.review_output):
+            return 2
         return _scrape_for_titles(
             args.sources,
             args.output_dir,
@@ -66,6 +68,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         return 0
     if args.command == "run":
+        if not _valid_review_output_for_cli(args.output_dir, args.review_output):
+            return 2
         search_exit_code = _search_for_sources(args.sources)
         if search_exit_code != 0:  # pragma: no cover - discovery-failure recovery
             existing_urls = sources.read_source_urls(args.sources)
@@ -174,6 +178,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         f"unknown command: {args.command}"
     )  # pragma: no cover - argparse already enforces choices
     return 2  # pragma: no cover
+
+
+def _valid_review_output_for_cli(
+    output_dir: Path,
+    review_output_path: Path | None,
+) -> bool:
+    try:
+        artifacts.validate_review_output_path(output_dir, review_output_path)
+    except ValueError as exc:
+        print(exc)
+        return False
+    return True
 
 
 def _build_parser() -> argparse.ArgumentParser:

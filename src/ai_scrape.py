@@ -8,6 +8,7 @@ AI-found releases are tagged ``evidence_type="ai-extracted"`` and merged into
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Iterator
 from datetime import datetime, timezone
 import json
 import os
@@ -17,11 +18,21 @@ import urllib.parse
 
 import httpx
 
-from compare import AIClient, AISettings, FoundCandidate, validate_ai_candidates
+from compare import (
+    AIClient,
+    AIGlobalHTTPError,
+    AIResponseFormatError,
+    AISettings,
+    FoundCandidate,
+    global_ai_http_error,
+    safe_ai_http_error_diagnostic,
+    validate_ai_candidates,
+)
 import fetcher
 import google_sheets
 from models import UNKNOWN, FelEvidence, FelRelease, release_from_dict
 import sources
+from url_security import Resolver, UnsafeURLError, canonicalize_url, validate_public_url
 
 
 _DISCOVERY_SYSTEM = (
@@ -36,9 +47,15 @@ _DISCOVERY_USER = (
 AI_EXTRACTION_ATTEMPTS = 3
 AI_EXTRACTION_RETRY_BASE_DELAY_SECONDS = 1.0
 AI_EXTRACTION_RETRYABLE_STATUS_CODES = {408, 409, 425, 429, 500, 502, 503, 504}
+MAX_AI_DISCOVERY_ITEMS = 100
 
 
 def _parse_url_list(text: str) -> list[str]:
+    urls, _ = _parse_url_list_result(text)
+    return urls
+
+
+def _parse_url_list_result(text: str) -> tuple[list[str], bool]:
     text = text.strip()
     if text.startswith("```"):
         text = text.strip("`")
@@ -46,13 +63,27 @@ def _parse_url_list(text: str) -> list[str]:
             text = text.split("\n", 1)[1]
     try:
         data = json.loads(text)
-    except json.JSONDecodeError:
-        return []
+    except (ValueError, RecursionError):
+        return [], False
     if isinstance(data, dict):
-        data = data.get("urls") or data.get("items") or []
+        has_invalid_status = "status" in data and data["status"] != "completed"
+        has_failure_details = (
+            data.get("error") is not None or data.get("incomplete_details") is not None
+        )
+        if has_invalid_status or has_failure_details:
+            return [], False
+        if "urls" in data:
+            data = data["urls"]
+        elif "items" in data:
+            data = data["items"]
+        else:
+            return [], False
     if not isinstance(data, list):
-        return []
-    return [item.strip() for item in data if isinstance(item, str) and item.strip()]
+        return [], False
+    if len(data) > MAX_AI_DISCOVERY_ITEMS:
+        return [], False
+    urls = [item.strip() for item in data if isinstance(item, str) and item.strip()]
+    return urls, not data or bool(urls)
 
 
 def _candidate_to_release(candidate: FoundCandidate, collected_at: str) -> FelRelease:
@@ -69,26 +100,61 @@ def _candidate_to_release(candidate: FoundCandidate, collected_at: str) -> FelRe
     )
 
 
-def ai_discover_sources(ai_client: AIClient, existing_urls: list[str]) -> list[str]:
+def ai_discover_sources(
+    ai_client: AIClient,
+    existing_urls: list[str],
+    *,
+    resolver: Resolver | None = None,
+) -> list[str]:
     """Ask the AI for FEL source URLs; return well-formed, not-yet-known ones."""
     try:
         text = ai_client.complete(_DISCOVERY_SYSTEM, _DISCOVERY_USER)
-    except httpx.HTTPError as exc:
-        print(f"ai-scrape: source discovery failed: {exc}")
+    except AIResponseFormatError:
+        raise
+    except AIGlobalHTTPError:
+        raise
+    except (httpx.HTTPError, httpx.InvalidURL) as exc:
+        if global_error := global_ai_http_error(exc):
+            raise global_error from None
+        print(
+            "ai-scrape: source discovery failed: " + safe_ai_http_error_diagnostic(exc)
+        )
         return []
-    known = set(existing_urls)
+    source_candidates, valid = _parse_url_list_result(text)
+    if not valid:
+        raise AIResponseFormatError()
+    known = {
+        sources.canonical_source_key(canonical_url)
+        for url in existing_urls
+        if (canonical_url := _canonical_url_or_none(url)) is not None
+    }
+    validate_kwargs = {} if resolver is None else {"resolver": resolver}
+    discovered_keys: set[str] = set()
     discovered: list[str] = []
-    for raw_url in _parse_url_list(text):
-        parsed = urllib.parse.urlparse(raw_url)
-        if parsed.scheme not in ("http", "https") or not parsed.netloc:
-            continue  # pragma: no cover - malformed AI-discovered URL skip
-        if raw_url not in known and raw_url not in discovered:
-            discovered.append(raw_url)
+    for raw_url in source_candidates:
+        try:
+            validated = validate_public_url(raw_url, **validate_kwargs)
+        except UnsafeURLError:
+            continue
+        source_key = sources.canonical_source_key(validated.url)
+        if source_key in known or source_key in discovered_keys:
+            continue
+        discovered.append(validated.url)
+        discovered_keys.add(source_key)
+        if len(discovered) == 25:
+            break
     return discovered
 
 
+def _canonical_url_or_none(url: str) -> str | None:
+    try:
+        return canonicalize_url(url)
+    except UnsafeURLError:
+        return None
+
+
 def ai_extract_releases(
-    ai_client: AIClient, pages: list[tuple[str, str]]
+    ai_client: AIClient, pages: Iterable[tuple[str, str]]
 ) -> list[FelRelease]:
     """Extract FEL releases from already-fetched (source_url, html) pages."""
     collected_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -101,8 +167,14 @@ def ai_extract_releases(
                 text,
                 rejection_reasons,
             )
-        except httpx.HTTPError as exc:
-            print(f"ai-scrape: extraction failed for {source_url}: {exc}")
+        except AIResponseFormatError:
+            raise
+        except AIGlobalHTTPError:
+            raise
+        except (httpx.HTTPError, httpx.InvalidURL) as exc:
+            if global_error := global_ai_http_error(exc):
+                raise global_error from None
+            print("ai-scrape: extraction failed: " + safe_ai_http_error_diagnostic(exc))
             continue
         for candidate in candidates:
             if candidate.title and candidate.evidence:
@@ -122,11 +194,11 @@ def ai_extract_releases(
 def _extract_candidates_with_retries(
     ai_client: AIClient, source_url: str, text: str
 ) -> list[FoundCandidate]:
-    last_error: httpx.HTTPError | None = None
+    last_error: Exception | None = None
     for attempt in range(AI_EXTRACTION_ATTEMPTS):
         try:
             return ai_client.extract_candidates(source_url, text)
-        except httpx.HTTPError as exc:
+        except (httpx.HTTPError, httpx.InvalidURL) as exc:
             last_error = exc
             if not _is_retryable_extraction_error(exc):
                 raise
@@ -136,7 +208,9 @@ def _extract_candidates_with_retries(
     raise last_error
 
 
-def _is_retryable_extraction_error(exc: httpx.HTTPError) -> bool:
+def _is_retryable_extraction_error(exc: Exception) -> bool:
+    if isinstance(exc, AIResponseFormatError) or global_ai_http_error(exc):
+        return False
     if isinstance(exc, httpx.HTTPStatusError):
         return exc.response.status_code in AI_EXTRACTION_RETRYABLE_STATUS_CODES
     return True
@@ -145,19 +219,21 @@ def _is_retryable_extraction_error(exc: httpx.HTTPError) -> bool:
 def ai_scrape_releases(
     source_urls: list[str], cache_dir: Path, ai_client: AIClient
 ) -> list[FelRelease]:
-    pages: list[tuple[str, str]] = []
     with fetcher.Fetcher(
         cache_dir=cache_dir,
         cookie_header=os.environ.get("FORUM_COOKIE_HEADER"),
     ) as html_fetcher:
-        for source_url in source_urls:
-            fetch_url = _fetch_url_for_ai_source(source_url)
-            result = html_fetcher.fetch(fetch_url, raise_on_error=False)
-            if result.error:
-                print(f"ai-scrape: fetch failed for {source_url}: {result.error}")
-                continue
-            pages.append((source_url, result.text))
-    return ai_extract_releases(ai_client, pages)
+
+        def fetched_pages() -> Iterator[tuple[str, str]]:
+            for source_url in source_urls:
+                fetch_url = _fetch_url_for_ai_source(source_url)
+                result = html_fetcher.fetch(fetch_url, raise_on_error=False)
+                if result.error:
+                    print("ai-scrape: fetch failed")
+                    continue
+                yield source_url, result.text
+
+        return ai_extract_releases(ai_client, fetched_pages())
 
 
 def _fetch_url_for_ai_source(url: str) -> str:
@@ -228,26 +304,42 @@ def run_ai_scrape(
     cache_dir: Path,
     review_output_path: Path | None = None,
 ) -> int:  # pragma: no cover - CLI entrypoint, requires live AI
+    import artifacts
+
+    try:
+        artifacts.validate_review_output_path(output_dir, review_output_path)
+    except ValueError as exc:
+        print(exc)
+        return 2
+
     try:
         settings = AISettings.from_env()
     except RuntimeError:
         if review_output_path is not None:
-            import artifacts
-
             artifacts.write_empty_review_output(review_output_path)
-        print("ai-scrape skipped; OPENAI_API_KEY / CODEX_API_KEY is not configured")
+        print(
+            "ai-scrape skipped; OPENAI_API_KEY / CODEX_API_KEY / "
+            "THECLAWBAY_API_KEY is not configured"
+        )
         return 0
 
     needs_evidence_urls = sources.read_source_urls(source_path)
     always_fel_urls = sources.read_source_urls(_always_fel_path_for(source_path))
     existing_urls = list(dict.fromkeys([*needs_evidence_urls, *always_fel_urls]))
 
-    with AIClient(settings) as ai_client:
-        discovered = ai_discover_sources(ai_client, existing_urls)
-        if discovered:
-            sources.merge_confirmed_sources(source_path, discovered)
-        all_urls = list(dict.fromkeys([*existing_urls, *discovered]))
-        ai_releases = ai_scrape_releases(all_urls, cache_dir, ai_client)
+    try:
+        with AIClient(settings) as ai_client:
+            discovered = ai_discover_sources(ai_client, existing_urls)
+            if discovered:
+                sources.merge_confirmed_sources(source_path, discovered)
+            all_urls = list(dict.fromkeys([*existing_urls, *discovered]))
+            ai_releases = ai_scrape_releases(all_urls, cache_dir, ai_client)
+    except AIResponseFormatError:
+        print("ai-scrape failed; AI response format is invalid")
+        return 1
+    except AIGlobalHTTPError as exc:
+        print("ai-scrape failed; " + safe_ai_http_error_diagnostic(exc))
+        return 1
 
     # Enrich only the AI-discovered releases; entries already in releases.json
     # were enriched by the deterministic ``run`` step earlier in the pipeline.

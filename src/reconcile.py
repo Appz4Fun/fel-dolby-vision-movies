@@ -4,7 +4,13 @@ from collections.abc import Iterable
 from dataclasses import dataclass, replace
 from itertools import chain
 
-from merge import canonical_key, canonical_title_key, canonical_url_key, merge_releases
+from merge import (
+    canonical_key,
+    canonical_title_key,
+    canonical_url_key,
+    dedupe_tmdb_release_groups,
+    merge_releases,
+)
 from models import FelRelease
 
 
@@ -37,10 +43,10 @@ def reconcile_releases(
     existing_rows = list(existing)
     incoming_rows = list(incoming)
     catalog = [release for release in existing_rows if _year(release)]
+    catalog_is_addition = [False] * len(catalog)
     existing_yearless = [release for release in existing_rows if not _year(release)]
     incoming_dated = [release for release in incoming_rows if _year(release)]
     incoming_yearless = [release for release in incoming_rows if not _year(release)]
-    additions_by_index: dict[int, FelRelease] = {}
     review_items: list[ReviewItem] = []
     merged_count = 0
 
@@ -56,12 +62,12 @@ def reconcile_releases(
                 ReviewItem(candidate, decision.reason, decision.candidate_titles)
             )
         elif decision.index is not None:
-            if is_existing and decision.index in additions_by_index:
+            if is_existing and catalog_is_addition[decision.index]:
                 target = catalog[decision.index]
                 catalog[decision.index] = replace(
                     merge_releases(candidate, target), movie_title=target.movie_title
                 )
-                del additions_by_index[decision.index]
+                catalog_is_addition[decision.index] = False
             else:
                 target = catalog[decision.index]
                 catalog[decision.index] = replace(
@@ -72,12 +78,19 @@ def reconcile_releases(
             review_items.append(ReviewItem(candidate, "missing-year-no-match"))
         else:
             catalog.append(candidate)
-            if track_addition:
-                additions_by_index[len(catalog) - 1] = candidate
+            catalog_is_addition.append(track_addition)
 
-    return ReconciliationResult(
-        catalog, list(additions_by_index.values()), review_items, merged_count
-    )
+    finalized = dedupe_tmdb_release_groups(catalog)
+    releases = [release for release, _ in finalized]
+    additions = [
+        release
+        for release, source_indices in finalized
+        if all(catalog_is_addition[index] for index in source_indices)
+    ]
+    # Keep the established review contract: merged_count covers matches made in
+    # the candidate loop. Proven AKA cleanup only finalizes catalog/addition
+    # identity and does not retroactively change that diagnostic count.
+    return ReconciliationResult(releases, additions, review_items, merged_count)
 
 
 def _match_candidate(

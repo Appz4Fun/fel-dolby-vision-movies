@@ -55,6 +55,10 @@ def test_canonical_url_key_ignores_transport_and_tracking_parts():
 
 def test_has_edition_descriptor_is_public():
     assert has_edition_descriptor("Avatar: Extended Collector's Edition")
+    assert has_edition_descriptor("Game of Thrones S01")
+    assert has_edition_descriptor("Game of Thrones S1")
+    assert has_edition_descriptor("Dune Steelbook")
+    assert has_edition_descriptor("Blade Runner: The Final Cut")
     assert not has_edition_descriptor("Avatar")
 
 

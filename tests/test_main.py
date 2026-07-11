@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import os
 import re
 
 import pytest
@@ -220,12 +221,15 @@ def test_scrape_for_titles_fetches_sources_and_writes_artifacts(
         ("fetch", urls[1]),
     ]
     data = json.loads((output_dir / "data/releases.json").read_text(encoding="utf-8"))
-    assert [release["movie_title"] for release in data] == ["Beta"]
+    assert [(release["movie_title"], release["release_date"]) for release in data] == [
+        ("Beta", "2024"),
+        ("Alpha", "2023"),
+    ]
     assert (output_dir / "dist/index.html").exists()
     output = capsys.readouterr().out
     assert "sources=2" in output
     assert "fetched=2" in output
-    assert "releases=1" in output
+    assert "releases=2" in output
     assert "errors=0" in output
     assert "session=secret" not in output
 
@@ -1400,6 +1404,91 @@ def test_run_forwards_review_output_path(monkeypatch, tmp_path):
     review = tmp_path / "review.json"
     assert main.main(["run", "--review-output", str(review)]) == 0
     assert captured["kwargs"] == {"review_output_path": review}
+
+
+@pytest.mark.parametrize("command", ["scrape-for-titles", "run"])
+def test_scrape_commands_reject_review_collision_before_side_effects(
+    command,
+    monkeypatch,
+    tmp_path,
+    capsys,
+):
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    releases_path = data_dir / "releases.json"
+    original_bytes = b'[{"sentinel": "existing release body"}]\n'
+    releases_path.write_bytes(original_bytes)
+    events = []
+
+    monkeypatch.setattr(
+        main,
+        "_search_for_sources",
+        lambda *_args, **_kwargs: events.append("search") or 0,
+    )
+    monkeypatch.setattr(
+        main,
+        "_scrape_for_titles",
+        lambda *_args, **_kwargs: events.append("scrape") or 0,
+    )
+
+    exit_code = main.main(
+        [
+            command,
+            "--output-dir",
+            str(tmp_path),
+            "--review-output",
+            str(releases_path),
+        ]
+    )
+
+    assert exit_code == 2
+    assert events == []
+    assert releases_path.read_bytes() == original_bytes
+    output = capsys.readouterr().out
+    assert output.strip() == "review output must not refer to data/releases.json"
+    assert "existing release body" not in output
+
+
+@pytest.mark.parametrize("target_kind", ["directory", "fifo", "symlink-loop"])
+def test_scrape_rejects_invalid_review_target_before_side_effects(
+    target_kind,
+    monkeypatch,
+    tmp_path,
+    capsys,
+):
+    review_path = tmp_path / "review.json"
+    if target_kind == "directory":
+        review_path.mkdir()
+    elif target_kind == "fifo":
+        if not hasattr(os, "mkfifo"):
+            pytest.skip("FIFO unsupported")
+        os.mkfifo(review_path)
+    else:
+        other_path = tmp_path / "other"
+        review_path.symlink_to(other_path)
+        other_path.symlink_to(review_path)
+    events = []
+    monkeypatch.setattr(
+        main,
+        "_scrape_for_titles",
+        lambda *_args, **_kwargs: events.append("scrape") or 0,
+    )
+
+    exit_code = main.main(
+        [
+            "scrape-for-titles",
+            "--output-dir",
+            str(tmp_path),
+            "--review-output",
+            str(review_path),
+        ]
+    )
+
+    assert exit_code == 2
+    assert events == []
+    output = capsys.readouterr().out
+    assert output.strip() == "review output must be a regular file path"
+    assert str(review_path) not in output
 
 
 def test_scrape_and_ai_forward_review_output_path(monkeypatch, tmp_path):

@@ -40,12 +40,13 @@ def test_yearless_duplicate_refresh_cases_have_one_decision(case):
 
 def release(title: str, date: str, **kwargs: str) -> FelRelease:
     evidence_type = kwargs.pop("evidence_type", "fel-list")
+    quote = kwargs.pop("quote", f"{title} is FEL")
     return FelRelease(
         movie_title=title,
         release_date=date,
         fel_evidence=FelEvidence(
             source_url=f"https://source.test/{title}",
-            quote=f"{title} is FEL",
+            quote=quote,
             evidence_type=evidence_type,
         ),
         **kwargs,
@@ -156,6 +157,350 @@ def test_known_year_without_match_is_a_real_addition():
 
     assert result.releases == [candidate]
     assert result.additions == [candidate]
+
+
+def test_addition_references_final_release_after_later_metadata_merge():
+    first_seen = release("New Film", "2026")
+    enriched = release(
+        "New Film",
+        "2026-07-11",
+        tmdb_id="123",
+        imdb_id="tt0000123",
+        bluray_url="https://www.blu-ray.com/movies/New-Film/123/",
+    )
+
+    result = reconcile_releases([], [first_seen, enriched])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].release_date == "2026-07-11"
+    assert result.releases[0].tmdb_id == "123"
+    assert result.additions == result.releases
+    assert result.additions[0] is result.releases[0]
+
+
+def test_new_translated_aliases_collapse_to_one_final_addition():
+    english = release(
+        "The Movie",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/The-Movie/1/",
+    )
+    localized = release(
+        "Le Film",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Le-Film/2/",
+        quote="The Movie AKA Le Film [2000]",
+    )
+
+    result = reconcile_releases([], [english, localized])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "The Movie"
+    assert result.additions == result.releases
+    assert result.additions[0] is result.releases[0]
+
+
+def test_translated_alias_of_existing_release_is_not_an_addition():
+    existing = release(
+        "The Movie",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/The-Movie/1/",
+    )
+    localized = release(
+        "Le Film",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Le-Film/2/",
+        quote="The Movie AKA Le Film [2000]",
+    )
+
+    result = reconcile_releases([existing], [localized])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "The Movie"
+    assert result.additions == []
+
+
+def test_alias_finalization_keeps_mixed_physical_release_group():
+    first = release(
+        "The Movie",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/The-Movie/1/",
+    )
+    second = release(
+        "the movie!",
+        "2000-01-01",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/The-Movie/2/",
+    )
+    localized = release(
+        "Le Film",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Le-Film/3/",
+    )
+
+    result = reconcile_releases([first, second, localized], [])
+
+    assert result.releases == [first, second, localized]
+    assert result.additions == []
+
+
+def test_alias_finalization_keeps_rows_with_conflicting_imdb_ids():
+    first = release(
+        "The Movie",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/The-Movie/1/",
+    )
+    conflicting = release(
+        "Le Film",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000002",
+        bluray_url="https://www.blu-ray.com/movies/Le-Film/2/",
+    )
+
+    result = reconcile_releases([first, conflicting], [])
+
+    assert result.releases == [first, conflicting]
+    assert result.additions == []
+
+
+@pytest.mark.parametrize(
+    ("first_title", "second_title"),
+    [
+        ("Game of Thrones S01", "Game of Thrones S02"),
+        ("Game of Thrones S1", "Game of Thrones S2"),
+        ("Dune", "Dune Steelbook"),
+        ("Blade Runner", "Blade Runner: The Final Cut"),
+    ],
+)
+def test_alias_finalization_keeps_compact_season_and_edition_labels(
+    first_title: str,
+    second_title: str,
+):
+    first = release(
+        first_title,
+        "2024",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Release/1/",
+    )
+    second = release(
+        second_title,
+        "2024",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Release/2/",
+    )
+
+    result = reconcile_releases([first, second], [])
+
+    assert result.releases == [first, second]
+    assert result.additions == []
+
+
+@pytest.mark.parametrize(
+    "variant_title",
+    ["Movie 3D", "Movie Workprint", "Movie Open Matte"],
+)
+def test_alias_finalization_keeps_unproven_physical_variants(variant_title: str):
+    movie = release(
+        "Movie",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Movie/1/",
+    )
+    variant = release(
+        variant_title,
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Movie-Variant/2/",
+    )
+
+    result = reconcile_releases([movie, variant], [])
+
+    assert result.releases == [movie, variant]
+    assert result.additions == []
+
+
+def test_orthographic_similarity_alone_does_not_prove_an_alias():
+    american = release(
+        "Three Colors: Blue",
+        "1993",
+        tmdb_id="108",
+        imdb_id="tt0108394",
+        bluray_url="https://www.blu-ray.com/movies/Three-Colors-Blue/1/",
+    )
+    british = release(
+        "Three Colours: Blue",
+        "1993",
+        tmdb_id="108",
+        imdb_id="tt0108394",
+        bluray_url="https://www.blu-ray.com/movies/Three-Colours-Blue/2/",
+    )
+
+    result = reconcile_releases([american, british], [])
+
+    assert result.releases == [american, british]
+
+
+def test_explicit_aka_evidence_connects_real_three_colors_alias_group():
+    american = release(
+        "Three Colors: Blue",
+        "1993-09-08",
+        tmdb_id="108",
+        imdb_id="tt0108394",
+        bluray_url="https://www.blu-ray.com/movies/Three-Colors-Blue/1/",
+    )
+    french = release(
+        "Trois couleurs: Bleu",
+        "1993-09-08",
+        tmdb_id="108",
+        imdb_id="tt0108394",
+        quote="Trois couleurs: Bleu AKA Three Colors: Blue [1993]",
+    )
+    british = release(
+        "Three Colours: Blue",
+        "1993-09-08",
+        tmdb_id="108",
+        imdb_id="tt0108394",
+        bluray_url="https://www.blu-ray.com/movies/Three-Colours-Blue/2/",
+    )
+
+    result = reconcile_releases([american, french, british], [])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Three Colors: Blue"
+
+
+@pytest.mark.parametrize(
+    "quote",
+    [
+        "Movie is FEL. Unrelated AKA Le Film",
+        "Movie is not AKA Le Film",
+    ],
+)
+def test_nonlocal_or_negated_aka_text_does_not_prove_an_alias(quote: str):
+    movie = release(
+        "Movie",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Movie/1/",
+    )
+    localized = release(
+        "Le Film",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Le-Film/2/",
+        quote=quote,
+    )
+
+    result = reconcile_releases([movie, localized], [])
+
+    assert result.releases == [movie, localized]
+
+
+def test_ordinal_punctuation_and_accent_aka_evidence_proves_an_alias():
+    english = release(
+        "The Crimson Rivers",
+        "2000",
+        tmdb_id="60670",
+        imdb_id="tt0228786",
+        bluray_url="https://www.blu-ray.com/movies/The-Crimson-Rivers/1/",
+    )
+    french = release(
+        "Les rivières pourpres",
+        "2000",
+        tmdb_id="60670",
+        imdb_id="tt0228786",
+        bluray_url="https://www.blu-ray.com/movies/Les-Rivieres-Pourpres/2/",
+        quote="314. Les rivières pourpres AKA The Crimson Rivers [2000]",
+    )
+
+    result = reconcile_releases([english, french], [])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "The Crimson Rivers"
+
+
+def test_multi_aka_chain_connects_only_adjacent_named_titles():
+    first = release(
+        "Film A",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Film-A/1/",
+        quote="Film A AKA Film B AKA Film C [2000]",
+    )
+    second = release(
+        "Film B",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Film-B/2/",
+    )
+    third = release(
+        "Film C",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Film-C/3/",
+    )
+
+    result = reconcile_releases([first, second, third], [])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Film A"
+
+
+def test_alias_finalization_restores_interleaved_catalog_order():
+    first = release("Series S01", "2024", tmdb_id="1", imdb_id="tt0000001")
+    between = release("Between", "2024", tmdb_id="2", imdb_id="tt0000002")
+    second = release("Series S02", "2024", tmdb_id="1", imdb_id="tt0000001")
+
+    result = reconcile_releases([first, between, second], [])
+
+    assert result.releases == [first, between, second]
+
+
+def test_additions_follow_final_catalog_first_index_order():
+    first = release(
+        "Series S01",
+        "2024",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Series-S01/1/",
+    )
+    between = release("Between", "2024", tmdb_id="2", imdb_id="tt0000002")
+    second = release(
+        "Series S02",
+        "2024",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Series-S02/2/",
+    )
+
+    result = reconcile_releases([], [first, between, second])
+
+    assert result.releases == [first, between, second]
+    assert result.additions == result.releases
 
 
 def test_exact_bluray_url_selects_one_of_two_editions():

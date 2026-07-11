@@ -1,10 +1,24 @@
 from pathlib import Path
 
 from sources import (
+    canonical_source_key,
     merge_confirmed_sources,
     read_source_urls,
     write_source_urls,
 )
+
+
+def test_google_sheet_source_keys_preserve_distinct_numeric_tabs(tmp_path: Path):
+    gid_1 = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=1"
+    gid_1_duplicate = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=01"
+    gid_2 = "https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=2"
+
+    assert canonical_source_key(gid_1) == canonical_source_key(gid_1_duplicate)
+    assert canonical_source_key(gid_1) != canonical_source_key(gid_2)
+
+    path = tmp_path / "google_sheets.txt"
+    write_source_urls(path, [gid_1, gid_1_duplicate, gid_2])
+    assert read_source_urls(path) == [gid_1, gid_2]
 
 
 def test_read_source_urls_ignores_blanks_and_comments(tmp_path: Path):

@@ -11,6 +11,7 @@ def release(
     source_url: str = "https://forum.example.test/thread",
     tmdb_id: str = "",
     imdb_id: str = "",
+    quote: str = "",
 ) -> FelRelease:
     return FelRelease(
         movie_title=title,
@@ -19,7 +20,7 @@ def release(
         imdb_id=imdb_id,
         fel_evidence=FelEvidence(
             source_url=source_url,
-            quote=f"{title} is confirmed Profile 7 FEL",
+            quote=quote or f"{title} is confirmed Profile 7 FEL",
             evidence_type="forum-post",
         ),
     )
@@ -77,6 +78,59 @@ def test_added_releases_matches_same_title_same_bluray_url_across_years():
     head[0].bluray_url = "https://www.blu-ray.com/movies/Sisu-4K-Blu-ray/333344/"
 
     assert release_delta.added_releases(base, head) == []
+
+
+def test_added_releases_ignores_translated_alias_of_existing_release():
+    english = release("The Movie", "2000", tmdb_id="1", imdb_id="tt0000001")
+    english.bluray_url = "https://www.blu-ray.com/movies/The-Movie/1/"
+    localized = release(
+        "Le Film",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        quote="The Movie AKA Le Film [2000]",
+    )
+    localized.bluray_url = "https://www.blu-ray.com/movies/Le-Film/2/"
+
+    additions = release_delta.added_releases([english], [english, localized])
+
+    assert additions == []
+
+
+def test_added_releases_collapses_new_aliases_to_final_catalog_row():
+    english = release("The Movie", "2000", tmdb_id="1", imdb_id="tt0000001")
+    english.bluray_url = "https://www.blu-ray.com/movies/The-Movie/1/"
+    localized = release(
+        "Le Film",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        quote="The Movie AKA Le Film [2000]",
+    )
+    localized.bluray_url = "https://www.blu-ray.com/movies/Le-Film/2/"
+
+    additions = release_delta.added_releases([], [english, localized])
+
+    assert len(additions) == 1
+    assert additions[0].movie_title == "The Movie"
+
+
+def test_added_releases_returns_final_enriched_addition():
+    first_seen = release("New Film", "2026")
+    enriched = release(
+        "New Film",
+        "2026-07-11",
+        tmdb_id="123",
+        imdb_id="tt0000123",
+    )
+    enriched.bluray_url = "https://www.blu-ray.com/movies/New-Film/123/"
+
+    additions = release_delta.added_releases([], [first_seen, enriched])
+
+    assert len(additions) == 1
+    assert additions[0].release_date == "2026-07-11"
+    assert additions[0].tmdb_id == "123"
+    assert additions[0].bluray_url == enriched.bluray_url
 
 
 def test_build_pr_body_lists_added_releases_with_evidence_links():

@@ -56,7 +56,21 @@ def _canonical_source_key(url: str) -> str:
     query = urllib.parse.urlencode(
         sorted(urllib.parse.parse_qsl(parsed.query, keep_blank_values=True))
     )
-    return urllib.parse.urlunparse((scheme, hostname, path, "", query, ""))
+    fragment = ""
+    gid_match = re.fullmatch(r"gid=(\d+)", parsed.fragment)
+    if (
+        (hostname == "docs.google.com" or hostname.endswith(".docs.google.com"))
+        and path.startswith("/spreadsheets/")
+        and gid_match
+    ):
+        normalized_gid = gid_match.group(1).lstrip("0") or "0"
+        fragment = f"gid={normalized_gid}"
+    return urllib.parse.urlunparse((scheme, hostname, path, "", query, fragment))
+
+
+def canonical_source_key(url: str) -> str:
+    """Return the stable identity used to de-duplicate source registry URLs."""
+    return _canonical_source_key(url)
 
 
 def _is_reddit_host(hostname: str) -> bool:
