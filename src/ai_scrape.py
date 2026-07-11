@@ -207,8 +207,8 @@ def run_ai_scrape(
         settings = AISettings.from_env()
     except RuntimeError:
         if review_output_path is not None:
-            review_output_path.parent.mkdir(parents=True, exist_ok=True)
-            review_output_path.write_text('{"review_count": 0, "items": []}\n', encoding="utf-8")
+            import artifacts
+            artifacts.write_empty_review_output(review_output_path)
         print("ai-scrape skipped; OPENAI_API_KEY / CODEX_API_KEY is not configured")
         return 0
 

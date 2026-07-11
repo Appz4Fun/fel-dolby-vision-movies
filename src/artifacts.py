@@ -38,6 +38,13 @@ def publish_outputs(
     return sorted_releases
 
 
+def write_empty_review_output(path: Path | str) -> None:
+    """Write the canonical empty reconciliation review document."""
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps({"merged_count": 0, "addition_count": 0, "review_count": 0, "items": []}, indent=2) + "\n", encoding="utf-8")
+
+
 def write_artifacts(
     releases: list[FelRelease],
     output_dir: Path | str = ".",
