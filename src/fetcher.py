@@ -231,9 +231,16 @@ class Fetcher:
                         f"decoded response body exceeds {MAX_RESPONSE_BODY_BYTES} bytes"
                     )
                 chunks.append(chunk)
+            # iter_bytes() already decoded any Content-Encoding (gzip/br/deflate).
+            # Carrying that header onto the rebuilt Response makes httpx try to
+            # decode the now-plain bytes a second time and raise DecodingError,
+            # so drop it along with the now-stale compressed Content-Length.
+            decoded_headers = httpx.Headers(response.headers)
+            decoded_headers.pop("content-encoding", None)
+            decoded_headers.pop("content-length", None)
             return httpx.Response(
                 status_code=response.status_code,
-                headers=response.headers,
+                headers=decoded_headers,
                 content=b"".join(chunks),
                 request=request,
                 extensions=response.extensions,

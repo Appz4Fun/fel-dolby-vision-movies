@@ -323,6 +323,33 @@ def test_fetcher_caps_compressed_expansion(tmp_path: Path, monkeypatch):
     assert stream.closed is True
 
 
+def test_fetcher_reads_gzip_compressed_response_within_limit(tmp_path: Path):
+    # The rebuilt Response in _send_single_request must drop Content-Encoding:
+    # iter_bytes() already decoded the gzip stream, so keeping that header
+    # makes httpx try to gzip-decode the now-plain bytes a second time.
+    body = "<html>" + "x" * 200 + "</html>"
+    stream = TrackingStream([gzip.compress(body.encode())])
+
+    def handler(_request):
+        return httpx.Response(
+            200,
+            headers={"Content-Encoding": "gzip"},
+            stream=stream,
+        )
+
+    html_fetcher = Fetcher(
+        cache_dir=tmp_path,
+        retry_sleep_seconds=0,
+        resolver=lambda _hostname: (PUBLIC_IP,),
+        transport=SafeMockTransport(handler),
+    )
+
+    result = html_fetcher.fetch("https://example.test/compressed", raise_on_error=False)
+
+    assert result.error is None
+    assert result.text == body
+
+
 def test_fetcher_closes_response_on_decode_failure_without_retry(tmp_path: Path):
     stream = TrackingStream([b"not-gzip"])
     calls = 0
