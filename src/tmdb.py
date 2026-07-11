@@ -25,6 +25,16 @@ class TmdbMovie:
     imdb_id: str = ""
     original_title: str = ""
 
+    @classmethod
+    def from_dict(cls, record: dict[str, str]) -> TmdbMovie:
+        return cls(
+            tmdb_id=record["tmdb_id"],
+            title=record["title"],
+            year=record["year"],
+            imdb_id=record.get("imdb_id", ""),
+            original_title=record.get("original_title", ""),
+        )
+
 
 class MovieResolver(Protocol):
     def resolve(self, title: str, year: str) -> TmdbMovie | None: ...
@@ -38,13 +48,7 @@ class StaticTmdbResolver:
         record = self.records.get((title, year))
         if record is None:
             return None
-        return TmdbMovie(
-            tmdb_id=record["tmdb_id"],
-            title=record["title"],
-            year=record["year"],
-            imdb_id=record.get("imdb_id", ""),
-            original_title=record.get("original_title", ""),
-        )
+        return TmdbMovie.from_dict(record)
 
 
 class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
@@ -135,6 +139,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         return {
             str(key): value if isinstance(value, dict) else None
             for key, value in data.items()
+            if not _is_legacy_cache_record(value)
         }
 
     def _write_cache(self) -> None:
@@ -143,6 +148,17 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             json.dumps(self.cache, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
+
+
+def _is_legacy_cache_record(value: object) -> bool:
+    """Report whether a cache record predates original_title capture.
+
+    Such records cannot prove a foreign film's canonical/original title pair,
+    so they are dropped at load time and re-fetched on demand rather than being
+    served stale until the cache file is deleted. Negative records (None) stay
+    valid: they never carry titles.
+    """
+    return isinstance(value, dict) and "original_title" not in value
 
 
 def load_tmdb_api_key(env_path: Path = Path(".env")) -> str:
@@ -240,13 +256,7 @@ def _movie_from_cache_record(
 ) -> TmdbMovie | None:  # pragma: no cover
     if record is None:
         return None
-    return TmdbMovie(
-        tmdb_id=record["tmdb_id"],
-        title=record["title"],
-        year=record["year"],
-        imdb_id=record.get("imdb_id", ""),
-        original_title=record.get("original_title", ""),
-    )
+    return TmdbMovie.from_dict(record)
 
 
 def _movie_to_cache_record(
