@@ -11,9 +11,11 @@ import httpx
 from tmdb import (
     MovieResolver,
     StaticTmdbResolver,
+    TmdbMovie,
     TmdbResolver,
     load_tmdb_api_key,
 )
+from merge import TMDB_ORIGINAL_TITLE_KEY, TMDB_TITLE_KEY, canonical_title_key
 from models import UNKNOWN, FelRelease
 from normalize import normalize_fel_title
 
@@ -128,6 +130,24 @@ def _resolution_candidates(release: FelRelease, year: str) -> list[_LookupCandid
                 seen.add(key)
                 candidates.append(candidate)
     return candidates
+
+
+def _record_tmdb_title_pair(release: FelRelease, movie: TmdbMovie) -> None:
+    """Record TMDB's canonical/original title pair for foreign-language films.
+
+    Reconciliation treats the recorded pair as deterministic proof that a row
+    titled by the film's original (native) title and a row titled by its
+    canonical (English) title are the same film, so sources that never spell
+    out a "Native AKA English" quote still collapse into one entry.
+    """
+    if not movie.original_title:
+        return
+    if canonical_title_key(movie.title) == canonical_title_key(movie.original_title):
+        return
+    release.additional_characteristics.setdefault(TMDB_TITLE_KEY, movie.title)
+    release.additional_characteristics.setdefault(
+        TMDB_ORIGINAL_TITLE_KEY, movie.original_title
+    )
 
 
 def release_url_for(tmdb_id: str, imdb_id: str) -> str:
@@ -257,6 +277,7 @@ def enrich_releases(
             release.tmdb_id = movie.tmdb_id
             release.imdb_id = movie.imdb_id
             release.release_url = release_url_for(movie.tmdb_id, movie.imdb_id)
+            _record_tmdb_title_pair(release, movie)
             try:
                 details = fetch_tmdb_details(client, api_key, movie.tmdb_id)
                 if details["studio"] and release.studio in ("", UNKNOWN):

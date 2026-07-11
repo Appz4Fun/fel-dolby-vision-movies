@@ -23,6 +23,7 @@ class TmdbMovie:
     title: str
     year: str
     imdb_id: str = ""
+    original_title: str = ""
 
 
 class MovieResolver(Protocol):
@@ -42,6 +43,7 @@ class StaticTmdbResolver:
             title=record["title"],
             year=record["year"],
             imdb_id=record.get("imdb_id", ""),
+            original_title=record.get("original_title", ""),
         )
 
 
@@ -94,6 +96,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             title=str(best.get("title") or best.get("name") or title).strip(),
             year=_year_from_date(str(best.get("release_date") or "")) or year,
             imdb_id=str(external.get("imdb_id") or ""),
+            original_title=str(best.get("original_title") or "").strip(),
         )
 
     def _search_candidates(self, title: str, year: str) -> dict[str, Any] | None:
@@ -242,6 +245,7 @@ def _movie_from_cache_record(
         title=record["title"],
         year=record["year"],
         imdb_id=record.get("imdb_id", ""),
+        original_title=record.get("original_title", ""),
     )
 
 
@@ -255,4 +259,5 @@ def _movie_to_cache_record(
         "title": movie.title,
         "year": movie.year,
         "imdb_id": movie.imdb_id,
+        "original_title": movie.original_title,
     }
