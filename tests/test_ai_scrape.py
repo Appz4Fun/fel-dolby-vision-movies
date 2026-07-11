@@ -478,6 +478,26 @@ def test_load_existing_releases_missing_file_returns_empty(tmp_path):
     assert _load_existing_releases(tmp_path) == []
 
 
+def test_publish_ai_releases_forwards_review_path(monkeypatch, tmp_path):
+    import ai_scrape as mod
+    seen = {}
+    monkeypatch.setattr("main._enrich_if_possible", lambda releases: seen.setdefault("enriched", releases))
+    monkeypatch.setattr("artifacts.publish_outputs", lambda releases, **kwargs: seen.update(kwargs) or releases)
+    review = tmp_path / "review.json"
+    releases = [FelRelease("Movie", "2025", FelEvidence("https://src", "Movie (2025) Profile 7 FEL", "ai-extracted"))]
+    assert mod._publish_ai_releases(releases, tmp_path, review) == releases
+    assert seen["review_output_path"] == review
+
+
+def test_run_ai_scrape_missing_credentials_writes_canonical_review(tmp_path, monkeypatch):
+    import ai_scrape as mod
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("CODEX_API_KEY", raising=False)
+    review = tmp_path / "review.json"
+    assert mod.run_ai_scrape(tmp_path / "forums.txt", tmp_path, tmp_path / "cache", review) == 0
+    assert json.loads(review.read_text()) == {"merged_count": 0, "addition_count": 0, "review_count": 0, "items": []}
+
+
 def test_run_ai_scrape_merges_into_existing_database(tmp_path, monkeypatch):
     """ai-scrape must add to releases.json, never replace it."""
     import ai_scrape as ai_scrape_mod

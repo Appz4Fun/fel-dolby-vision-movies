@@ -197,12 +197,20 @@ def _load_existing_releases(output_dir: Path) -> list[FelRelease]:
     return [release_from_dict(item) for item in raw]
 
 
-def run_ai_scrape(
-    source_path: Path, output_dir: Path, cache_dir: Path, review_output_path: Path | None = None
-) -> int:  # pragma: no cover - CLI entrypoint, requires live AI
+def _publish_ai_releases(ai_releases: list[FelRelease], output_dir: Path, review_output_path: Path | None = None) -> list[FelRelease]:
+    """Enrich and publish AI releases through the shared artifact pipeline."""
     import artifacts
     import main
 
+    main._enrich_if_possible(ai_releases)
+    return artifacts.publish_outputs(
+        ai_releases, output_dir=output_dir, review_output_path=review_output_path
+    )
+
+
+def run_ai_scrape(
+    source_path: Path, output_dir: Path, cache_dir: Path, review_output_path: Path | None = None
+) -> int:  # pragma: no cover - CLI entrypoint, requires live AI
     try:
         settings = AISettings.from_env()
     except RuntimeError:
@@ -226,11 +234,8 @@ def run_ai_scrape(
     # Enrich only the AI-discovered releases; entries already in releases.json
     # were enriched by the deterministic ``run`` step earlier in the pipeline.
     # Shared artifact reconciliation owns identity and deduplication.
-    main._enrich_if_possible(ai_releases)
     existing_releases = _load_existing_releases(output_dir)
-    sorted_releases = artifacts.publish_outputs(
-        ai_releases, output_dir=output_dir, review_output_path=review_output_path
-    )
+    sorted_releases = _publish_ai_releases(ai_releases, output_dir, review_output_path)
     print(
         "ai-scrape complete; "
         f"discovered_sources={len(discovered)} "
