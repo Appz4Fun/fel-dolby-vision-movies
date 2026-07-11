@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import re
+import html
 import sys
 from typing import Any
 
@@ -24,12 +25,14 @@ DEFAULT_AI_MODEL = "gpt-5.5"
 DEFAULT_AI_REASONING_EFFORT = "xhigh"
 DEFAULT_AI_BASE_URL = "https://api.theclawbay.com/backend-api/codex"
 AI_EXTRACTION_SYSTEM_PROMPT = (
-    "Extract confirmed Dolby Vision Profile 7 FEL movie entries. "
+    "Extract only confirmed Dolby Vision Profile 7 FEL movie entries. "
     "Return JSON only with items: title, year, evidence. "
     "Use the real movie title only. Do not include list numbering, bullets, "
     "row indexes, or ordinal prefixes in titles; for example, if the source "
     "line is '281 Nobody (2021)', return title 'Nobody'. "
-    "Do not include MEL-only, generic REMUX, or ambiguous entries."
+    "Return the exact source excerpt containing the title and affirmative FEL marker. "
+    "Year must be explicitly present in that same excerpt; use Unknown when absent and never infer. "
+    "Exclude MEL-only, generic REMUX, negated FEL, cross-release, or ambiguous entries."
 )
 
 
@@ -287,7 +290,9 @@ def _extract_ai_candidates(  # pragma: no cover - requires live AI credentials
                 errors.append(f"{source_url}\t{result.error}")
                 continue
             try:
-                candidates.extend(ai_client.extract_candidates(source_url, result.text))
+                candidates.extend(validate_ai_candidates(
+                    ai_client.extract_candidates(source_url, result.text), result.text
+                ))
             except httpx.HTTPError as exc:
                 errors.append(f"{source_url}\t{exc.__class__.__name__}")
                 continue
@@ -295,6 +300,38 @@ def _extract_ai_candidates(  # pragma: no cover - requires live AI credentials
         error_path = cache_dir.parent / "ai_compare_errors.txt"
         error_path.write_text("\n".join(errors) + "\n", encoding="utf-8")
     return _dedupe_candidates(candidates)
+
+
+def _normalized_source(text: str) -> str:
+    text = html.unescape(re.sub(r"<[^>]+>", " ", text))
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def validate_ai_candidates(
+    candidates: list[FoundCandidate], source_text: str
+) -> list[FoundCandidate]:
+    """Keep only candidates whose exact evidence binds to affirmative FEL source text."""
+    source = _normalized_source(source_text)
+    accepted: list[FoundCandidate] = []
+    for candidate in candidates:
+        evidence = _normalized_source(candidate.evidence)
+        title = _normalized_source(candidate.title)
+        if not title or not evidence or evidence.casefold() not in source.casefold():
+            continue
+        if not re.search(rf"(?<!\w){re.escape(title)}(?!\w)", evidence, re.I):
+            continue
+        if re.search(r"\b(?:MEL(?:-only)?|REMUX)\b", evidence, re.I):
+            continue
+        if re.search(r"\b(?:FEL\s*:\s*No|No\s+FEL|without\s+FEL|not\s+FEL)\b", evidence, re.I):
+            continue
+        if not re.search(r"\b(?:Profile\s*7|P7)\b", evidence, re.I) or not re.search(r"\bFEL\b", evidence, re.I):
+            continue
+        years = re.findall(r"\b(?:19|20)\d{2}\b", evidence)
+        year = candidate.year if re.fullmatch(r"(?:19|20)\d{2}", candidate.year) else "Unknown"
+        if year != "Unknown" and year not in years:
+            continue
+        accepted.append(FoundCandidate(candidate.title, year, candidate.source_url, candidate.evidence, candidate.extraction_method))
+    return accepted
 
 
 def _dedupe_candidates(candidates: list[FoundCandidate]) -> list[FoundCandidate]:

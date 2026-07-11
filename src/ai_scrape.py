@@ -17,7 +17,7 @@ import urllib.parse
 
 import httpx
 
-from compare import AIClient, AISettings, FoundCandidate
+from compare import AIClient, AISettings, FoundCandidate, validate_ai_candidates
 import fetcher
 import google_sheets
 from models import UNKNOWN, FelEvidence, FelRelease, release_from_dict
@@ -95,12 +95,14 @@ def ai_extract_releases(
     releases: list[FelRelease] = []
     for source_url, text in pages:
         try:
-            candidates = _extract_candidates_with_retries(ai_client, source_url, text)
+            candidates = validate_ai_candidates(
+                _extract_candidates_with_retries(ai_client, source_url, text), text
+            )
         except httpx.HTTPError as exc:
             print(f"ai-scrape: extraction failed for {source_url}: {exc}")
             continue
         for candidate in candidates:
-            if candidate.title:
+            if candidate.title and candidate.evidence:
                 releases.append(_candidate_to_release(candidate, collected_at))
     return releases
 
@@ -198,7 +200,6 @@ def run_ai_scrape(
 ) -> int:  # pragma: no cover - CLI entrypoint, requires live AI
     import artifacts
     import main
-    from merge import canonical_key, dedupe_releases
 
     try:
         settings = AISettings.from_env()
@@ -219,13 +220,12 @@ def run_ai_scrape(
 
     # Enrich only the AI-discovered releases; entries already in releases.json
     # were enriched by the deterministic ``run`` step earlier in the pipeline.
-    unique_ai = dedupe_releases(ai_releases, canonical_key)
-    main._enrich_if_possible(unique_ai)
-
-    # Merge into (never replace) the existing database before publishing.
+    # Shared artifact reconciliation owns identity and deduplication.
+    main._enrich_if_possible(ai_releases)
     existing_releases = _load_existing_releases(output_dir)
-    merged = dedupe_releases([*existing_releases, *unique_ai], canonical_key)
-    sorted_releases = artifacts.publish_outputs(merged, output_dir=output_dir)
+    sorted_releases = artifacts.publish_outputs(
+        ai_releases, output_dir=output_dir
+    )
     print(
         "ai-scrape complete; "
         f"discovered_sources={len(discovered)} "
