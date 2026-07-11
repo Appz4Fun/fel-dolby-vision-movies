@@ -273,6 +273,13 @@ class PinnedHTTPTransport(httpx.HTTPTransport):
 
     def __init__(self) -> None:
         super().__init__(trust_env=False)
+        if not hasattr(self._pool, "_network_backend"):
+            raise RuntimeError(
+                "httpx.HTTPTransport's connection pool no longer exposes "
+                "_network_backend; PinnedHTTPTransport cannot install DNS "
+                "pinning and must not silently fetch unvalidated hosts. Pin a "
+                "compatible httpx/httpcore version or update this transport."
+            )
         self._pinned_backend = PinnedNetworkBackend(self._pool._network_backend)
         self._pool._network_backend = self._pinned_backend
 

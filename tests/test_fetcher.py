@@ -7,7 +7,7 @@ import pytest
 import respx
 
 import fetcher as fetcher_module
-from fetcher import DomainRateLimiter, Fetcher
+from fetcher import DomainRateLimiter, Fetcher, PinnedHTTPTransport
 
 
 PUBLIC_IP = "93.184.216.34"
@@ -600,6 +600,24 @@ def test_fetcher_rejects_unpinned_http_transport_injection(tmp_path: Path):
             Fetcher(cache_dir=tmp_path, transport=unsafe_transport)
     finally:
         unsafe_transport.close()
+
+
+def test_pinned_http_transport_installs_pinned_network_backend():
+    transport = PinnedHTTPTransport()
+    try:
+        assert transport._pool._network_backend is transport._pinned_backend
+    finally:
+        transport.close()
+
+
+def test_pinned_http_transport_fails_clearly_without_network_backend(monkeypatch):
+    def init_without_network_backend(self, **_kwargs):
+        self._pool = object()
+
+    monkeypatch.setattr(httpx.HTTPTransport, "__init__", init_without_network_backend)
+
+    with pytest.raises(RuntimeError, match="_network_backend"):
+        PinnedHTTPTransport()
 
 
 def test_fetcher_raises_for_unsafe_url_by_default(tmp_path: Path):
