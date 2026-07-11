@@ -1,7 +1,10 @@
 from merge import (
     canonical_key,
+    canonical_title_key,
+    canonical_url_key,
     dedupe_releases,
     dedupe_tmdb_releases,
+    has_edition_descriptor,
     merge_releases,
     tmdb_key,
 )
@@ -25,6 +28,23 @@ def test_canonical_key_ignores_case_punctuation_and_uses_year():
     left = make("The Northman", "2022")
     right = make("the northman!", "2022-04-22")
     assert canonical_key(left) == canonical_key(right)
+
+
+def test_canonical_title_key_collapses_possessive_apostrophes():
+    assert canonical_title_key("Schindler's List") == canonical_title_key(
+        "Schindlers List"
+    )
+
+
+def test_canonical_url_key_ignores_transport_and_tracking_parts():
+    left = "http://WWW.BLU-RAY.COM/movies/Alien/123/?ref=list#details"
+    right = "https://www.blu-ray.com/movies/Alien/123"
+    assert canonical_url_key(left) == canonical_url_key(right)
+
+
+def test_has_edition_descriptor_is_public():
+    assert has_edition_descriptor("Avatar: Extended Collector's Edition")
+    assert not has_edition_descriptor("Avatar")
 
 
 def test_merge_releases_unions_fields_and_prefers_known_values():
@@ -198,6 +218,49 @@ def test_dedupe_tmdb_releases_keeps_ambiguous_unresolved_row():
         "Avatar: Extended Collector's Edition",
         "Avatar Collection",
     ]
+
+
+def test_dedupe_tmdb_releases_keeps_same_identity_with_distinct_bluray_urls():
+    first = make("Movie", "2000")
+    first.tmdb_id = "1"
+    first.bluray_url = "https://www.blu-ray.com/movies/Movie/1/"
+    second = make("movie!", "2000-01-01")
+    second.tmdb_id = "1"
+    second.bluray_url = "https://www.blu-ray.com/movies/Movie/2/"
+
+    deduped = dedupe_tmdb_releases([first, second])
+
+    assert deduped == [first, second]
+
+
+def test_dedupe_tmdb_releases_still_collapses_different_title_aliases():
+    english = make("The Movie", "2000")
+    english.tmdb_id = "1"
+    english.bluray_url = "https://www.blu-ray.com/movies/The-Movie/1/"
+    localized = make("Le Film", "2000")
+    localized.tmdb_id = "1"
+    localized.bluray_url = "https://www.blu-ray.com/movies/Le-Film/2/"
+
+    deduped = dedupe_tmdb_releases([english, localized])
+
+    assert len(deduped) == 1
+    assert deduped[0].movie_title == "The Movie"
+
+
+def test_dedupe_tmdb_releases_keeps_physical_rows_in_mixed_alias_group():
+    first = make("The Movie", "2000")
+    first.tmdb_id = "1"
+    first.bluray_url = "https://www.blu-ray.com/movies/The-Movie/1/"
+    second = make("the movie!", "2000-01-01")
+    second.tmdb_id = "1"
+    second.bluray_url = "https://www.blu-ray.com/movies/The-Movie/2/"
+    localized = make("Le Film", "2000")
+    localized.tmdb_id = "1"
+    localized.bluray_url = "https://www.blu-ray.com/movies/Le-Film/3/"
+
+    deduped = dedupe_tmdb_releases([first, second, localized])
+
+    assert deduped == [first, second, localized]
 
 
 def test_dedupe_is_order_independent_for_strong_evidence():

@@ -38,7 +38,7 @@ _EDITION_DESCRIPTOR_RE = re.compile(
 )
 
 
-def _has_edition_descriptor(title: str) -> bool:
+def has_edition_descriptor(title: str) -> bool:
     return bool(_EDITION_DESCRIPTOR_RE.search(title or ""))
 
 
@@ -46,7 +46,7 @@ def canonical_title_key(value: str) -> str:
     normalized = unicodedata.normalize("NFKD", value)
     normalized = "".join(c for c in normalized if not unicodedata.combining(c))
     normalized = normalized.casefold().replace("&", " and ")
-    normalized = re.sub(r"['`´']", "'", normalized)
+    normalized = re.sub(r"['`´’]", "", normalized)
     normalized = re.sub(r"[^a-z0-9]+", " ", normalized)
     return re.sub(r"\s+", " ", normalized).strip()
 
@@ -62,12 +62,10 @@ def canonical_key(release: FelRelease) -> tuple[str, str]:
 
 def canonical_url_key(value: str) -> str:
     parsed = urllib.parse.urlparse(value.strip())
-    if not parsed.netloc:
+    if parsed.scheme.lower() not in ("http", "https") or not parsed.hostname:
         return ""
-    scheme = (parsed.scheme or "https").lower()
-    hostname = parsed.netloc.lower()
     path = parsed.path.rstrip("/")
-    return urllib.parse.urlunparse((scheme, hostname, path, "", "", ""))
+    return urllib.parse.urlunparse(("https", parsed.hostname.lower(), path, "", "", ""))
 
 
 def title_bluray_key(release: FelRelease) -> tuple[str, str]:
@@ -142,13 +140,16 @@ def _dedupe_one_tmdb_group(releases: list[FelRelease]) -> list[FelRelease]:
         _merge_identity_group(bluray_groups[bluray_url]) for bluray_url in bluray_order
     ]
 
-    # Same tmdb_id across several blu-ray editions: if NO title carries an
-    # edition/season descriptor these are AKA/translation duplicates of one film
-    # (different blu-ray.com pages for the same release), so collapse them into a
-    # single enriched record. Distinct editions/seasons keep their descriptor and
-    # stay separate.
-    if len(resolved) > 1 and not any(
-        _has_edition_descriptor(release.movie_title) for _, release in resolved
+    # Same tmdb_id across several blu-ray pages: collapse different-title AKA /
+    # translation rows only when every row has a distinct canonical identity and
+    # no title carries an edition descriptor. If any canonical identity repeats,
+    # keep the whole group so a mixed alias cannot swallow physical releases.
+    if (
+        len(resolved) > 1
+        and len({canonical_key(release) for _, release in resolved}) == len(resolved)
+        and not any(
+            has_edition_descriptor(release.movie_title) for _, release in resolved
+        )
     ):
         # resolved is in first-occurrence order, so resolved[0] holds the lowest
         # original index; fold the rest into it, preserving its base title.
