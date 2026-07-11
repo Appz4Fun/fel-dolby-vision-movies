@@ -36,6 +36,10 @@ def test_publish_outputs_writes_data_and_dashboard_from_releases(tmp_path: Path)
     assert (tmp_path / "dist/releases.json").exists()
 
 
+def test_sort_key_places_unknown_dates_last():
+    assert artifacts._sort_key(release("Unknown", "Unknown"))[0] == 1
+
+
 def test_write_artifacts_quarantines_unmatched_unknown_and_writes_review(
     tmp_path: Path,
 ):
