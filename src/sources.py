@@ -46,13 +46,14 @@ def _canonical_source_key(url: str) -> str:
         if thread_id:
             return f"avsforum:{thread_id}"
         hostname = "avsforum.com"
+    netloc = _netloc_with_port(hostname, scheme, parsed)
     if hostname == "forum.makemkv.com" and path.endswith("/viewtopic.php"):
         params = urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
         significant = [
             (name, value) for name, value in params if name in {"p", "start", "t"}
         ]
         query = urllib.parse.urlencode(sorted(significant))
-        return urllib.parse.urlunparse((scheme, hostname, path, "", query, ""))
+        return urllib.parse.urlunparse((scheme, netloc, path, "", query, ""))
     query = urllib.parse.urlencode(
         sorted(urllib.parse.parse_qsl(parsed.query, keep_blank_values=True))
     )
@@ -65,7 +66,21 @@ def _canonical_source_key(url: str) -> str:
     ):
         normalized_gid = gid_match.group(1).lstrip("0") or "0"
         fragment = f"gid={normalized_gid}"
-    return urllib.parse.urlunparse((scheme, hostname, path, "", query, fragment))
+    return urllib.parse.urlunparse((scheme, netloc, path, "", query, fragment))
+
+
+def _netloc_with_port(
+    hostname: str, scheme: str, parsed: urllib.parse.ParseResult
+) -> str:
+    """Keep non-default ports in the netloc so distinct hosts don't collide."""
+    try:
+        port = parsed.port
+    except ValueError:
+        return hostname
+    default_port = 443 if scheme == "https" else 80
+    if port and port != default_port:
+        return f"{hostname}:{port}"
+    return hostname
 
 
 def canonical_source_key(url: str) -> str:
