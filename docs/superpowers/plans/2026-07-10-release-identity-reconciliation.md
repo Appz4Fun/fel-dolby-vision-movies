@@ -608,8 +608,15 @@ def test_ai_scrape_passes_review_output_to_runner(monkeypatch, tmp_path):
     )
     review = tmp_path / "ai-review.json"
     assert main.main(["ai-scrape", "--review-output", str(review)]) == 0
-    assert captured["review_output_path"] == review
+assert captured["review_output_path"] == review
 ```
+
+Also assert deterministic and AI CLI output contains the aggregate
+`merged=... additions=... review=...` reconciliation line emitted by their
+publication call. Cover the `scrape-for-titles` command separately. Add a
+non-live test of the extracted AI orchestration helper that creates the review
+file and calls publication with a temporary catalog; do not leave the entire
+`run_ai_scrape` function under `# pragma: no cover`.
 
 - [ ] **Step 2: Write failing workflow-shape test**
 
@@ -667,6 +674,10 @@ Pass separate files to the two commands and add this step after AI scraping:
 The self-hosted runner already executes Node 24 actions (`checkout@v6` and
 `setup-python@v6`), satisfying the current official action runtime requirement.
 Do not add either review file to any `git add` command.
+
+When `OPENAI_API_KEY`/`CODEX_API_KEY` is absent, an explicitly requested AI
+review path must still receive an empty valid review JSON before the command
+returns zero; test this skip path.
 
 - [ ] **Step 6: Verify GREEN and commit**
 

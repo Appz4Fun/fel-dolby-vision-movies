@@ -181,7 +181,9 @@ The Python boundary remains authoritative. Before converting a
 
 Unsupported AI candidates are skipped with non-secret aggregate diagnostics.
 Valid but unresolved yearless candidates proceed to reconciliation and appear
-in the review artifact.
+in the review artifact. If AI credentials are absent and an explicit review
+path was requested, the AI command still writes a valid empty review object
+before returning success.
 
 ### PR delta calculation
 
