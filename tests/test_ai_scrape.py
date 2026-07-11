@@ -309,6 +309,19 @@ def test_ai_extract_releases_converts_nonblank_candidates():
     assert releases[0].fel_evidence.evidence_type == "ai-extracted"
 
 
+def test_ai_extract_releases_rejects_playback_device_candidates(capsys):
+    evidence = "Ugoos AM6B Plus: Dolby Vision Profile 7 FEL"
+    candidates = [
+        FoundCandidate("Ugoos AM6B Plus", "Unknown", "https://src.test", evidence, "ai")
+    ]
+    client = FakeAIClient(candidates=candidates)
+
+    releases = ai_extract_releases(client, [("https://src.test", evidence)])
+
+    assert releases == []
+    assert "device-title=1" in capsys.readouterr().out
+
+
 def test_ai_extract_releases_skips_sources_that_raise_http_errors():
     class FailingAIClient(FakeAIClient):
         def extract_candidates(self, source_url: str, text: str):

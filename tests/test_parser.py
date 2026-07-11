@@ -1138,6 +1138,28 @@ def test_rejects_hardware_device_prose_sentence_as_title():
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
+@pytest.mark.parametrize(
+    "device",
+    [
+        "The Ugoos AM6B Plus",
+        "Zidoo Z9X Pro",
+        "Dune HD Max Vision 4K",
+        "Nvidia Shield TV Pro",
+        "Apple TV 4K",
+        "Homatics Box R 4K Plus",
+    ],
+)
+def test_rejects_playback_device_name_sentence_as_title(device):
+    html = f"<p>{device} is confirmed as Dolby Vision Profile 7 FEL.</p>"
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_movie_title_resembling_device_brand():
+    html = "<p>Shield of Straw is confirmed as Dolby Vision Profile 7 FEL.</p>"
+    releases = parse_fel_releases(html, "https://example.test/thread")
+    assert [release.movie_title for release in releases] == ["Shield of Straw"]
+
+
 def test_rejects_sentence_with_source_prose_comma_prefix():
     html = "<p>The post says, Alien is confirmed as Dolby Vision Profile 7 FEL.</p>"
     assert parse_fel_releases(html, "https://example.test/thread") == []

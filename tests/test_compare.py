@@ -223,6 +223,53 @@ def test_ai_extraction_prompt_rejects_list_ordinals():
     assert "281 Nobody" in compare.AI_EXTRACTION_SYSTEM_PROMPT
 
 
+def test_ai_extraction_prompt_excludes_playback_hardware():
+    assert "Never return playback hardware" in compare.AI_EXTRACTION_SYSTEM_PROMPT
+    assert "Ugoos" in compare.AI_EXTRACTION_SYSTEM_PROMPT
+
+
+@pytest.mark.parametrize(
+    "title,evidence",
+    [
+        ("Ugoos AM6B Plus", "Ugoos AM6B Plus: Dolby Vision Profile 7 FEL"),
+        ("Zidoo Z9X Pro", "Zidoo Z9X Pro Profile 7 FEL"),
+        ("Dune HD Max Vision 4K", "Dune HD Max Vision 4K Dolby Vision Profile 7 FEL"),
+        ("Nvidia Shield TV Pro", "Nvidia Shield TV Pro Profile 7 FEL"),
+        ("Shield TV Pro", "Shield TV Pro Profile 7 FEL"),
+        ("Apple TV 4K", "Apple TV 4K: Dolby Vision Profile 7 FEL"),
+        ("Oppo UDP-203", "Oppo UDP-203 Profile 7 FEL"),
+        ("Homatics Box R 4K Plus", "Homatics Box R 4K Plus Profile 7 FEL"),
+        ("Fire TV Stick 4K Max", "Fire TV Stick 4K Max Profile 7 FEL"),
+        ("Z9X", "Z9X Profile 7 FEL"),
+        ("4K Blu-ray Player", "4K Blu-ray Player Profile 7 FEL"),
+    ],
+)
+def test_validate_ai_candidates_rejects_playback_device_titles(title, evidence):
+    candidate = compare.FoundCandidate(
+        title, "Unknown", "https://src.test", evidence, "ai"
+    )
+    diagnostics: list[str] = []
+
+    assert compare.validate_ai_candidates([candidate], evidence, diagnostics) == []
+    assert diagnostics == ["device-title"]
+
+
+@pytest.mark.parametrize(
+    "title,year",
+    [
+        ("Dune", "2021"),
+        ("Oppenheimer", "2023"),
+        ("Shield of Straw", "2013"),
+        ("Drive", "2011"),
+    ],
+)
+def test_validate_ai_candidates_accepts_titles_resembling_device_words(title, year):
+    evidence = f"{title} ({year}) Profile 7 FEL"
+    candidate = compare.FoundCandidate(title, year, "https://src.test", evidence, "ai")
+
+    assert compare.validate_ai_candidates([candidate], evidence) == [candidate]
+
+
 @pytest.mark.parametrize(
     "title,evidence,reason",
     [
