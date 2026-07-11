@@ -252,6 +252,20 @@ def _is_reconciliation_alias_group(
     return _graph_connects_all_rows(len(rows), edges)
 
 
+def _recorded_tmdb_title_pairs(rows: list[FelRelease]) -> set[frozenset[str]]:
+    """Distinct canonical/original title-key pairs recorded by enrichment."""
+    pairs: set[frozenset[str]] = set()
+    for row in rows:
+        characteristics = row.additional_characteristics
+        title_key = canonical_title_key(str(characteristics.get(TMDB_TITLE_KEY, "")))
+        original_key = canonical_title_key(
+            str(characteristics.get(TMDB_ORIGINAL_TITLE_KEY, ""))
+        )
+        if title_key and original_key and title_key != original_key:
+            pairs.add(frozenset((title_key, original_key)))
+    return pairs
+
+
 def _tmdb_title_alias_edges(rows: list[FelRelease]) -> set[tuple[int, int]]:
     """Edges proven by enrichment's recorded TMDB canonical/original title pair.
 
@@ -260,15 +274,7 @@ def _tmdb_title_alias_edges(rows: list[FelRelease]) -> set[tuple[int, int]]:
     titled by the canonical (English) title name the same film, even when no
     scraped quote spells out an explicit "Native AKA English" alias.
     """
-    alias_pairs: set[frozenset[str]] = set()
-    for row in rows:
-        characteristics = row.additional_characteristics
-        title_key = canonical_title_key(str(characteristics.get(TMDB_TITLE_KEY, "")))
-        original_key = canonical_title_key(
-            str(characteristics.get(TMDB_ORIGINAL_TITLE_KEY, ""))
-        )
-        if title_key and original_key and title_key != original_key:
-            alias_pairs.add(frozenset((title_key, original_key)))
+    alias_pairs = _recorded_tmdb_title_pairs(rows)
     if not alias_pairs:
         return set()
     row_keys = [canonical_title_key(row.movie_title) for row in rows]
