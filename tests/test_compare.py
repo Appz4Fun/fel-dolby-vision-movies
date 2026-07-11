@@ -1151,6 +1151,8 @@ def test_candidate_api_accepts_direct_candidate_payload(payload):
     ids=["object", "list", "number", "boolean", "null"],
 )
 def test_candidate_api_rejects_item_with_non_string_field(field, invalid_value):
+    if field == "year" and invalid_value == 7:
+        pytest.skip("a bare integer year is coerced to a string, not rejected")
     invalid_item = dict(_AI_ITEM)
     invalid_item[field] = invalid_value
 
@@ -1197,7 +1199,7 @@ def test_candidate_api_preserves_omitted_optional_field_defaults():
     [
         [{"title": "", "year": "2024", "evidence": "Profile 7 FEL"}],
         [{"title": "   ", "year": "2024", "evidence": "Profile 7 FEL"}],
-        [{"title": "Dune", "year": 2021, "evidence": "Profile 7 FEL"}],
+        [{"title": "Dune", "year": [2021], "evidence": "Profile 7 FEL"}],
         [None, 7, "invalid"],
     ],
 )
@@ -1231,6 +1233,21 @@ def test_ai_client_accepts_mixed_candidate_list_and_skips_invalid_items():
         ] == ["The Matrix"]
     finally:
         client.close()
+
+
+def test_ai_client_coerces_integer_year_to_string():
+    # The model sometimes returns a bare JSON number for a 4-digit year
+    # instead of a string. Silently dropping that candidate (and, via SSE,
+    # failing the whole page) discards real FEL releases the AI did find.
+    body = json.dumps(
+        {"items": [{"title": "WALL·E", "year": 2008, "evidence": "Profile 7 FEL"}]}
+    )
+    client = _ai_client_for_body(body)
+    try:
+        candidates = client.extract_candidates(_AI_SOURCE_URL, "source")
+    finally:
+        client.close()
+    assert [(c.title, c.year) for c in candidates] == [("WALL·E", "2008")]
 
 
 def test_ai_candidate_item_limit_accepts_limit_and_rejects_limit_plus_one():
