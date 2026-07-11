@@ -84,38 +84,38 @@ def _match_candidate(
     candidate: FelRelease, catalog: list[FelRelease]
 ) -> _MatchDecision:
     candidate_url = canonical_url_key(candidate.bluray_url)
-    if candidate_url:
-        url_matches = [
-            index
-            for index, release in enumerate(catalog)
-            if canonical_url_key(release.bluray_url) == candidate_url
-        ]
-        if len(url_matches) == 1:
-            return _target_decision(candidate, catalog, url_matches[0])
-
+    url_matches = [
+        index
+        for index, release in enumerate(catalog)
+        if candidate_url and canonical_url_key(release.bluray_url) == candidate_url
+    ]
     tmdb_matches = _id_matches(candidate.tmdb_id, "tmdb_id", catalog)
     imdb_matches = _id_matches(candidate.imdb_id, "imdb_id", catalog)
-    if tmdb_matches and imdb_matches:
-        imdb_match_set = set(imdb_matches)
-        shared_matches = [index for index in tmdb_matches if index in imdb_match_set]
-        if not shared_matches:
+    signal_matches = [
+        matches for matches in (url_matches, tmdb_matches, imdb_matches) if matches
+    ]
+    if signal_matches:
+        implicated_matches = sorted(set().union(*signal_matches))
+        if not _match_sets_are_connected(signal_matches):
             return _review_decision(
                 "identity-conflict",
                 catalog,
-                _ordered_union(tmdb_matches, imdb_matches),
+                implicated_matches,
             )
-        id_matches = shared_matches
-    else:
-        id_matches = _ordered_union(tmdb_matches, imdb_matches)
+        if len(url_matches) == 1:
+            return _target_decision(candidate, catalog, url_matches[0])
 
-    if id_matches:
+        common_matches = sorted(
+            set(signal_matches[0]).intersection(*signal_matches[1:])
+        )
+        target_matches = common_matches or implicated_matches
         consistent_matches = [
             index
-            for index in id_matches
+            for index in target_matches
             if _ids_are_consistent(candidate, catalog[index])
         ]
         if not consistent_matches:
-            return _review_decision("identity-conflict", catalog, id_matches)
+            return _review_decision("identity-conflict", catalog, target_matches)
         if len(consistent_matches) == 1:
             return _target_decision(candidate, catalog, consistent_matches[0])
 
@@ -196,6 +196,19 @@ def _id_matches(
     ]
 
 
+def _match_sets_are_connected(match_sets: list[list[int]]) -> bool:
+    component = set(match_sets[0])
+    pending = [set(matches) for matches in match_sets[1:]]
+    while pending:
+        overlapping = [matches for matches in pending if component & matches]
+        if not overlapping:
+            return False
+        for matches in overlapping:
+            component.update(matches)
+            pending.remove(matches)
+    return True
+
+
 def _ids_are_consistent(left: FelRelease, right: FelRelease) -> bool:
     return all(
         not left_value or not right_value or left_value == right_value
@@ -210,10 +223,6 @@ def _has_distinct_url(left: FelRelease, right: FelRelease) -> bool:
     left_url = canonical_url_key(left.bluray_url)
     right_url = canonical_url_key(right.bluray_url)
     return bool(left_url and right_url and left_url != right_url)
-
-
-def _ordered_union(left: list[int], right: list[int]) -> list[int]:
-    return sorted({*left, *right})
 
 
 def _review_decision(

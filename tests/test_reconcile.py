@@ -259,6 +259,105 @@ def test_exact_bluray_url_with_conflicting_strong_id_is_review_only():
     assert result.review_items[0].reason == "identity-conflict"
 
 
+def test_conflicting_bluray_url_and_tmdb_matches_are_review_only():
+    tmdb_match = release(
+        "TMDB Match",
+        "2001",
+        tmdb_id="1",
+        bluray_url="https://www.blu-ray.com/movies/TMDB-Match/1/",
+    )
+    url_match = release(
+        "URL Match",
+        "2002",
+        bluray_url="https://www.blu-ray.com/movies/URL-Match/2/",
+    )
+    candidate = release(
+        "Candidate",
+        "2003",
+        tmdb_id="1",
+        bluray_url="http://www.blu-ray.com/movies/URL-Match/2/?src=list",
+    )
+
+    result = reconcile_releases([tmdb_match, url_match], [candidate])
+
+    assert result.releases == [tmdb_match, url_match]
+    assert result.additions == []
+    assert result.merged_count == 0
+    assert result.review_items[0].reason == "identity-conflict"
+    assert result.review_items[0].candidate_titles == ("TMDB Match", "URL Match")
+
+
+def test_unique_bluray_url_merges_sparse_ids_across_sibling_editions():
+    theatrical = release(
+        "Movie: Theatrical Edition",
+        "2001",
+        tmdb_id="1",
+        bluray_url="https://www.blu-ray.com/movies/Movie/1/",
+    )
+    extended = release(
+        "Movie: Extended Edition",
+        "2001",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Movie-Extended/2/",
+    )
+    candidate = release(
+        "Movie: Theatrical Edition",
+        "Unknown",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="http://www.blu-ray.com/movies/Movie/1/?src=list",
+    )
+
+    result = reconcile_releases([theatrical, extended], [candidate])
+
+    assert len(result.releases) == 2
+    assert result.releases[0].imdb_id == "tt0000001"
+    assert result.releases[1] == extended
+    assert result.additions == []
+    assert result.review_items == []
+    assert result.merged_count == 1
+
+
+def test_connected_signals_without_unique_url_are_narrowed_by_title_year():
+    url_only = release(
+        "URL Only",
+        "1999",
+        bluray_url="https://www.blu-ray.com/movies/Shared/1/",
+    )
+    title_year_match = release(
+        "Movie",
+        "2000",
+        tmdb_id="1",
+        bluray_url="https://www.blu-ray.com/movies/Shared/1/",
+    )
+    id_match = release(
+        "ID Match",
+        "2001",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/ID-Match/2/",
+    )
+    candidate = release(
+        "movie!",
+        "2000-01-01",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="http://www.blu-ray.com/movies/Shared/1/?src=list",
+    )
+
+    result = reconcile_releases(
+        [url_only, title_year_match, id_match],
+        [candidate],
+    )
+
+    assert len(result.releases) == 3
+    assert result.releases[1].imdb_id == "tt0000001"
+    assert result.additions == []
+    assert result.review_items == []
+    assert result.merged_count == 1
+
+
 def test_canonical_title_and_year_with_conflicting_strong_id_is_review_only():
     base = release("Movie", "2001-01-01", imdb_id="tt0000001")
     candidate = release("movie!", "2001", imdb_id="tt0000002")
