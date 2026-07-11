@@ -332,6 +332,10 @@ def validate_ai_candidates(
                 diagnostics.append(reason)
             continue
         years = re.findall(r"\b(?:19|20)\d{2}\b", evidence)
+        if len(set(years)) > 1:
+            if diagnostics is not None:
+                diagnostics.append("ambiguous-year")
+            continue
         year = candidate.year if re.fullmatch(r"(?:19|20)\d{2}", candidate.year) else "Unknown"
         if year != "Unknown" and year not in years:
             if diagnostics is not None:

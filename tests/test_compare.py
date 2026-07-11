@@ -2,6 +2,7 @@ from pathlib import Path
 import csv
 import hashlib
 import json
+import pytest
 
 import compare
 import main
@@ -104,6 +105,31 @@ def test_ai_client_loads_env_without_printing_secret(monkeypatch):
 def test_ai_extraction_prompt_rejects_list_ordinals():
     assert "Do not include list numbering" in compare.AI_EXTRACTION_SYSTEM_PROMPT
     assert "281 Nobody" in compare.AI_EXTRACTION_SYSTEM_PROMPT
+
+
+@pytest.mark.parametrize(
+    "title,evidence,reason",
+    [
+        ("Up", "Setup (2019) Profile 7 FEL", "title-not-bound"),
+        ("Dune", "Dune (2021) Profile 7 MEL", "excluded-format"),
+        ("Dune", "Dune (2021) Profile 7 MEL", "excluded-format"),
+        ("Dune", "Dune (2021) Profile 7 FEL: No", "negated-fel"),
+        ("Dune", "Dune (2021) Profile 7 REMUX", "excluded-format"),
+    ],
+)
+def test_validate_ai_candidates_rejects_adversarial_evidence(title, evidence, reason):
+    candidate = compare.FoundCandidate(title, "2021", "https://src.test", evidence, "ai")
+    diagnostics: list[str] = []
+    assert compare.validate_ai_candidates([candidate], evidence, diagnostics) == []
+    assert diagnostics == [reason]
+
+
+def test_validate_ai_candidates_rejects_competing_years_in_excerpt():
+    evidence = "Dune (1984), Dune (2021) Profile 7 FEL"
+    candidate = compare.FoundCandidate("Dune", "2021", "https://src.test", evidence, "ai")
+    diagnostics: list[str] = []
+    assert compare.validate_ai_candidates([candidate], evidence, diagnostics) == []
+    assert diagnostics == ["ambiguous-year"]
 
 
 def test_candidates_from_ai_response_accepts_responses_sse():
