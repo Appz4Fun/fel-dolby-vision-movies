@@ -309,6 +309,35 @@ def test_ai_extract_releases_converts_nonblank_candidates():
     assert releases[0].fel_evidence.evidence_type == "ai-extracted"
 
 
+def test_ai_extract_releases_dedupes_repeated_candidates():
+    drop_evidence = "Drop (2025) Profile 7 FEL"
+    heat_evidence = "Heat (1995) is confirmed Profile 7 FEL."
+
+    class RepeatingAIClient(FakeAIClient):
+        def extract_candidates(self, source_url: str, text: str):
+            candidate = FoundCandidate("Drop", "2025", source_url, drop_evidence, "ai")
+            candidates = [candidate, candidate]
+            if heat_evidence in text:
+                candidates.append(
+                    FoundCandidate("Heat", "1995", source_url, heat_evidence, "ai")
+                )
+            return candidates
+
+    releases = ai_extract_releases(
+        RepeatingAIClient(),
+        [
+            ("https://a.test/list", drop_evidence),
+            ("https://b.test/thread", f"{drop_evidence}\n{heat_evidence}"),
+        ],
+    )
+
+    assert [release.movie_title for release in releases] == ["Drop", "Heat"]
+    assert releases[0].fel_evidence.source_url == "https://a.test/list"
+    assert all(
+        release.fel_evidence.evidence_type == "ai-extracted" for release in releases
+    )
+
+
 def test_ai_extract_releases_skips_sources_that_raise_http_errors():
     class FailingAIClient(FakeAIClient):
         def extract_candidates(self, source_url: str, text: str):

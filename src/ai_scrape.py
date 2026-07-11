@@ -30,6 +30,7 @@ from compare import (
 )
 import fetcher
 import google_sheets
+from merge import canonical_key, dedupe_releases
 from models import UNKNOWN, FelEvidence, FelRelease, release_from_dict
 import sources
 from url_security import Resolver, UnsafeURLError, canonicalize_url, validate_public_url
@@ -188,7 +189,11 @@ def ai_extract_releases(
             "ai-scrape rejected candidates: "
             + ", ".join(f"{k}={v}" for k, v in counts.items())
         )
-    return releases
+    # The same movie is often listed on several AI source pages (and the model
+    # can repeat a candidate within one response). Collapse to one release per
+    # canonical identity before enrichment/publication, mirroring the
+    # deterministic scrape (main._scrape_for_titles dedupes on canonical_key).
+    return dedupe_releases(releases, canonical_key)
 
 
 def _extract_candidates_with_retries(
