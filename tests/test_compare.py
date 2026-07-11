@@ -136,6 +136,25 @@ def test_validate_ai_candidates_rejects_competing_years_in_excerpt():
     assert diagnostics == ["ambiguous-year"]
 
 
+def test_validate_ai_candidates_invalid_year_becomes_unknown():
+    evidence = "Dune Profile 7 FEL"
+    candidate = compare.FoundCandidate(
+        "Dune", "TBD", "https://src.test", evidence, "ai"
+    )
+    accepted = compare.validate_ai_candidates([candidate], evidence)
+    assert accepted[0].year == "Unknown"
+
+
+def test_validate_ai_candidates_rejects_year_absent_from_evidence():
+    evidence = "Dune Profile 7 FEL"
+    candidate = compare.FoundCandidate(
+        "Dune", "2021", "https://src.test", evidence, "ai"
+    )
+    diagnostics: list[str] = []
+    assert compare.validate_ai_candidates([candidate], evidence, diagnostics) == []
+    assert diagnostics == ["year-not-in-evidence"]
+
+
 def test_candidates_from_ai_response_accepts_responses_sse():
     body = "\n".join(
         [

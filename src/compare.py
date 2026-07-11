@@ -290,11 +290,17 @@ def _extract_ai_candidates(  # pragma: no cover - requires live AI credentials
                 errors.append(f"{source_url}\t{result.error}")
                 continue
             try:
+                rejection_diagnostics: list[str] = []
                 candidates.extend(
                     validate_ai_candidates(
                         ai_client.extract_candidates(source_url, result.text),
                         result.text,
+                        rejection_diagnostics,
                     )
+                )
+                errors.extend(
+                    f"{source_url}\tai-rejected:{reason}"
+                    for reason in rejection_diagnostics
                 )
             except httpx.HTTPError as exc:
                 errors.append(f"{source_url}\t{exc.__class__.__name__}")
