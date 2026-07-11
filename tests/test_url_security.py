@@ -130,6 +130,81 @@ def test_validate_public_url_accepts_public_nat64_embedded_ipv4():
     assert validated.resolved_ips == (address,)
 
 
+# A network-specific Pref64 (RFC 6052) unrelated to the well-known 64:ff9b::/96,
+# built independently of production code so these tests don't mask a bug in
+# the byte-slicing logic they're meant to catch.
+_CUSTOM_NAT64_PREFIX = "2600:1f18:aaaa:bbbb::"
+
+
+def _embed_via_custom_prefix(ipv4_text: str) -> str:
+    prefix_bytes = socket.inet_pton(socket.AF_INET6, _CUSTOM_NAT64_PREFIX)[:12]
+    v4_bytes = socket.inet_aton(ipv4_text)
+    return socket.inet_ntop(socket.AF_INET6, prefix_bytes + v4_bytes)
+
+
+def _resolver_with_discoverable_prefix(target_answer: str):
+    rfc7050_probes = [
+        _embed_via_custom_prefix("192.0.0.170"),
+        _embed_via_custom_prefix("192.0.0.171"),
+    ]
+
+    def resolver(hostname: str) -> list[str]:
+        if hostname == "ipv4only.arpa":
+            return rfc7050_probes
+        return [target_answer]
+
+    return resolver
+
+
+def test_validate_public_url_rejects_nonpublic_embedded_ipv4_behind_discovered_prefix():
+    private_answer = _embed_via_custom_prefix("10.0.0.5")
+
+    with pytest.raises(UnsafeURLError, match="embedded IPv4"):
+        validate_public_url(
+            "https://translated.example/list",
+            resolver=_resolver_with_discoverable_prefix(private_answer),
+        )
+
+
+def test_validate_public_url_accepts_public_embedded_ipv4_behind_discovered_prefix():
+    public_answer = _embed_via_custom_prefix("93.184.216.34")
+
+    validated = validate_public_url(
+        "https://translated.example/list",
+        resolver=_resolver_with_discoverable_prefix(public_answer),
+    )
+
+    assert validated.resolved_ips == (public_answer,)
+
+
+def test_validate_public_url_skips_unparseable_nat64_discovery_answers():
+    private_answer = _embed_via_custom_prefix("10.0.0.5")
+
+    def resolver(hostname: str) -> list[str]:
+        if hostname == "ipv4only.arpa":
+            return [
+                "not-an-ip-address",
+                _embed_via_custom_prefix("192.0.0.170"),
+                _embed_via_custom_prefix("192.0.0.171"),
+            ]
+        return [private_answer]
+
+    with pytest.raises(UnsafeURLError, match="embedded IPv4"):
+        validate_public_url("https://translated.example/list", resolver=resolver)
+
+
+def test_validate_public_url_falls_back_to_well_known_prefix_when_undiscoverable():
+    # A resolver that doesn't answer ipv4only.arpa at all (no local DNS64) still
+    # catches embedding through the RFC 7050 well-known prefix.
+    def resolver(hostname: str) -> list[str]:
+        if hostname == "ipv4only.arpa":
+            raise OSError("NXDOMAIN")
+        return ["64:ff9b::7f00:1"]
+
+    with pytest.raises(UnsafeURLError, match="embedded IPv4"):
+        validate_public_url("https://legacy.example/list", resolver=resolver)
+
+
 def test_validate_public_url_returns_canonical_url_and_all_public_answers():
     validated = validate_public_url(
         "HTTPS://EXAMPLE.COM:443/list#fragment",

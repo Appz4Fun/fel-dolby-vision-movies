@@ -13,7 +13,15 @@ import urllib.parse
 
 MAX_URL_LENGTH = 2048
 Resolver = Callable[[str], Sequence[str]]
-_NAT64_WELL_KNOWN_PREFIX = ipaddress.ip_network("64:ff9b::/96")
+_NAT64_WELL_KNOWN_PREFIX = ipaddress.IPv6Network("64:ff9b::/96")
+# RFC 7050 discovery target and the two "any" IPv4 answers it synthesizes to.
+_NAT64_DISCOVERY_HOSTNAME = "ipv4only.arpa"
+_NAT64_DISCOVERY_IPV4_LITERALS = (
+    ipaddress.IPv4Address("192.0.0.170"),
+    ipaddress.IPv4Address("192.0.0.171"),
+)
+# The only Prefix Lengths RFC 6052 Section 2.2 defines for embedding IPv4.
+_RFC6052_PREFIX_LENGTHS = (32, 40, 48, 56, 64, 96)
 
 
 class UnsafeURLError(ValueError):
@@ -121,6 +129,7 @@ def validate_public_url(
     if not raw_answers:
         raise UnsafeURLError(f"hostname {hostname} did not resolve")
     resolved_ips: list[str] = []
+    nat64_prefixes: tuple[ipaddress.IPv6Network, ...] | None = None
     for answer in raw_answers:
         try:
             address = ipaddress.ip_address(answer)
@@ -128,10 +137,17 @@ def validate_public_url(
             raise UnsafeURLError(
                 f"resolver returned invalid IP address {answer}"
             ) from exc
+        if isinstance(address, ipaddress.IPv6Address) and nat64_prefixes is None:
+            nat64_prefixes = (
+                _NAT64_WELL_KNOWN_PREFIX,
+                *_discover_nat64_prefixes(resolver),
+            )
         unsafe_embedded = next(
             (
                 embedded
-                for embedded in _embedded_ipv4_addresses(address)
+                for embedded in _embedded_ipv4_addresses(
+                    address, nat64_prefixes or (_NAT64_WELL_KNOWN_PREFIX,)
+                )
                 if not embedded.is_global or embedded.is_multicast
             ),
             None,
@@ -213,18 +229,73 @@ def _is_control_character(character: str) -> bool:
 
 def _embedded_ipv4_addresses(
     address: ipaddress.IPv4Address | ipaddress.IPv6Address,
+    nat64_prefixes: Sequence[ipaddress.IPv6Network] = (_NAT64_WELL_KNOWN_PREFIX,),
 ) -> tuple[ipaddress.IPv4Address, ...]:
     if not isinstance(address, ipaddress.IPv6Address):
         return ()
     embedded: list[ipaddress.IPv4Address] = []
-    if address in _NAT64_WELL_KNOWN_PREFIX:
-        embedded.append(ipaddress.IPv4Address(int(address) & 0xFFFFFFFF))
+    for prefix in nat64_prefixes:
+        if address in prefix:
+            embedded.append(_extract_rfc6052_ipv4(address, prefix.prefixlen))
     for candidate in (address.ipv4_mapped, address.sixtofour):
         if candidate is not None:
             embedded.append(candidate)
     if address.teredo is not None:
         embedded.extend(address.teredo)
     return tuple(dict.fromkeys(embedded))
+
+
+def _extract_rfc6052_ipv4(
+    address: ipaddress.IPv6Address, prefix_length: int
+) -> ipaddress.IPv4Address:
+    """Pull the embedded IPv4 out of an address per RFC 6052 Section 2.2.
+
+    Prefix lengths below 96 place a reserved all-zero octet at bits 64-71,
+    splitting the 32-bit IPv4 payload around it; dropping that octet first
+    lets every non-96 prefix length share one slicing rule.
+    """
+    address_bytes = address.packed
+    if prefix_length == 96:
+        embedded_bytes = address_bytes[12:16]
+    else:
+        without_reserved_octet = address_bytes[:8] + address_bytes[9:]
+        start = prefix_length // 8
+        embedded_bytes = without_reserved_octet[start : start + 4]
+    return ipaddress.IPv4Address(embedded_bytes)
+
+
+def _discover_nat64_prefixes(resolver: Resolver) -> tuple[ipaddress.IPv6Network, ...]:
+    """Discover a network-specific NAT64 prefix per RFC 7050, if any is active.
+
+    A DNS64 resolver can synthesize AAAA records from a locally-configured
+    Pref64::/n instead of the well-known 64:ff9b::/96. Querying the reserved
+    ipv4only.arpa name through the same resolver used for the real hostname
+    and checking which Prefix Length recovers one of RFC 7050's two
+    well-known IPv4 answers (192.0.0.170/171) reveals that prefix.
+    """
+    try:
+        answers = resolver(_NAT64_DISCOVERY_HOSTNAME)
+    except Exception:
+        return ()
+    prefixes: list[ipaddress.IPv6Network] = []
+    for answer in answers:
+        try:
+            address = ipaddress.ip_address(answer)
+        except ValueError:
+            continue
+        if not isinstance(address, ipaddress.IPv6Address):
+            continue
+        for prefix_length in _RFC6052_PREFIX_LENGTHS:
+            if _extract_rfc6052_ipv4(address, prefix_length) in (
+                _NAT64_DISCOVERY_IPV4_LITERALS
+            ):
+                network = ipaddress.IPv6Network(
+                    f"{address}/{prefix_length}", strict=False
+                )
+                if network not in prefixes:
+                    prefixes.append(network)
+                break
+    return tuple(prefixes)
 
 
 def _validate_hostname_syntax(hostname: str) -> None:
