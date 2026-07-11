@@ -6,9 +6,10 @@ from pathlib import Path
 import re
 from typing import Iterable
 
-from merge import canonical_key, dedupe_releases, dedupe_tmdb_releases, title_bluray_key
+from merge import dedupe_releases, title_bluray_key
 from models import UNKNOWN, FelRelease, release_from_dict
 from normalize import normalize_fel_title
+from reconcile import ReconciliationResult, reconcile_releases
 
 
 STALE_SHEET_COLLECTION_RE = re.compile(
@@ -19,12 +20,16 @@ STALE_DOTTED_YEAR_TITLE_RE = re.compile(r"[._-](?:19|20)\d{2}[.\s_-]*$")
 
 
 def publish_outputs(
-    releases: list[FelRelease], output_dir: Path | str = "."
+    releases: list[FelRelease],
+    output_dir: Path | str = ".",
+    review_output_path: Path | str | None = None,
 ) -> list[FelRelease]:
     from dashboard import build_dashboard
 
     root = Path(output_dir)
-    sorted_releases = write_artifacts(releases, output_dir=root)
+    sorted_releases = write_artifacts(
+        releases, output_dir=root, review_output_path=review_output_path
+    )
     build_dashboard(
         sorted_releases,
         output_dir=root / "dist",
@@ -34,7 +39,9 @@ def publish_outputs(
 
 
 def write_artifacts(
-    releases: list[FelRelease], output_dir: Path | str = "."
+    releases: list[FelRelease],
+    output_dir: Path | str = ".",
+    review_output_path: Path | str | None = None,
 ) -> list[FelRelease]:
     root = Path(output_dir)
     data_dir = root / "data"
@@ -56,9 +63,10 @@ def write_artifacts(
         release for release in releases if not _is_stale_google_sheet_release(release)
     ]
 
-    merged = dedupe_releases([*existing, *releases], canonical_key)
-    merged = dedupe_releases(merged, title_bluray_key)
-    merged = dedupe_tmdb_releases(merged)
+    reconciliation = reconcile_releases(existing, releases)
+    # Reconciliation is edition-aware; only collapse exact title/URL duplicates
+    # defensively. A title/year-only dedupe would erase distinct physical cuts.
+    merged = dedupe_releases(reconciliation.releases, title_bluray_key)
     _enforce_ai_source_label(merged)
     sorted_releases = sorted(merged, key=_sort_key)
 
@@ -72,7 +80,35 @@ def write_artifacts(
         + "\n",
         encoding="utf-8",
     )
+    if review_output_path is not None:
+        _write_review_output(Path(review_output_path), reconciliation)
+    print(
+        "reconciliation complete; "
+        f"merged={reconciliation.merged_count} "
+        f"additions={len(reconciliation.additions)} "
+        f"review={len(reconciliation.review_items)}"
+    )
     return sorted_releases
+
+
+def _write_review_output(path: Path, result: ReconciliationResult) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "merged": result.merged_count,
+        "additions": len(result.additions),
+        "review": len(result.review_items),
+        "items": [
+            {
+                "reason": item.reason,
+                "candidate": item.release.to_dict(),
+                "candidate_titles": list(item.candidate_titles),
+            }
+            for item in result.review_items
+        ],
+    }
+    path.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
 
 
 def prune_unreferenced_posters(

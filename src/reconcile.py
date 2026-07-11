@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from itertools import chain
 
 from merge import canonical_key, canonical_title_key, canonical_url_key, merge_releases
@@ -57,13 +57,15 @@ def reconcile_releases(
             )
         elif decision.index is not None:
             if is_existing and decision.index in additions_by_index:
-                catalog[decision.index] = merge_releases(
-                    candidate, catalog[decision.index]
+                target = catalog[decision.index]
+                catalog[decision.index] = replace(
+                    merge_releases(candidate, target), movie_title=target.movie_title
                 )
                 del additions_by_index[decision.index]
             else:
-                catalog[decision.index] = merge_releases(
-                    catalog[decision.index], candidate
+                target = catalog[decision.index]
+                catalog[decision.index] = replace(
+                    merge_releases(target, candidate), movie_title=target.movie_title
                 )
             merged_count += 1
         elif not _year(candidate):

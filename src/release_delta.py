@@ -4,8 +4,8 @@ from dataclasses import dataclass
 import json
 from pathlib import Path
 
-from merge import canonical_key, title_bluray_key
 from models import FelRelease, release_from_dict
+from reconcile import reconcile_releases
 
 
 @dataclass(frozen=True)
@@ -22,12 +22,7 @@ def load_releases(path: Path) -> list[FelRelease]:
 def added_releases(
     base_releases: list[FelRelease], head_releases: list[FelRelease]
 ) -> list[FelRelease]:
-    base_keys = _identity_key_set(base_releases)
-    return [
-        release
-        for release in head_releases
-        if _release_identity_keys(release).isdisjoint(base_keys)
-    ]
+    return reconcile_releases(base_releases, head_releases).additions
 
 
 def build_pr_body(additions: list[FelRelease]) -> str:
@@ -89,24 +84,6 @@ def write_pr_summary(
             encoding="utf-8",
         )
     return summary
-
-
-def _identity_key_set(releases: list[FelRelease]) -> set[tuple[str, str]]:
-    keys: set[tuple[str, str]] = set()
-    for release in releases:
-        keys.update(_release_identity_keys(release))
-    return keys
-
-
-def _release_identity_keys(release: FelRelease) -> set[tuple[str, str]]:
-    keys = {("canonical", "\0".join(canonical_key(release)))}
-    if release.bluray_url:
-        keys.add(title_bluray_key(release))
-    if release.tmdb_id:
-        keys.add(("tmdb", release.tmdb_id))
-    if release.imdb_id:
-        keys.add(("imdb", release.imdb_id))
-    return keys
 
 
 def _source_link(url: str) -> str:
