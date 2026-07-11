@@ -19,6 +19,7 @@ FEL_TRAILING_DENIAL_RE = re.compile(
     re.IGNORECASE,
 )
 TITLE_HEADER_RE = re.compile(r"\b(?:title|movie|film)\b", re.IGNORECASE)
+TABLE_TITLE_YEAR_RE = re.compile(r"^(?P<title>.+?)\s*\((?P<year>(?:19|20)\d{2})\)$")
 NON_TITLE_HEADER_RE = re.compile(
     r"\b(?:group|release\s*group|team|encoder|uploader|audio|sound|"
     r"language|region|country|studio|label|year|date|notes?|evidence|"
@@ -49,10 +50,10 @@ TITLE_BINDING_SUFFIX_RE = re.compile(
 )
 SUFFIX_TITLE_BINDING_RE = re.compile(
     r"\b(?:confirmed\s+for|for|on|in|applies\s+to)\s+"
-    r"[\"']?(?P<title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})[\"']?"
+    r"[\"']?(?P<title>[A-Z0-9][A-Za-z0-9:'&.,!?\- ]{0,80})[\"']?"
     r"(?:\s+\(\d{4}\))?(?=[.!?,;:]|$)"
     r"|\bconfirmed\s*:\s*"
-    r"[\"']?(?P<confirmed_title>[A-Z][A-Za-z0-9:'&.,!?\- ]{0,80})"
+    r"[\"']?(?P<confirmed_title>[A-Z0-9][A-Za-z0-9:'&.,!?\- ]{0,80})"
     r"[\"']?(?:\s+\(\d{4}\))?(?=[.!?,;:]|$)",
     re.IGNORECASE,
 )
@@ -172,11 +173,35 @@ def _parse_tables(soup: BeautifulSoup, source_url: str) -> list[FelRelease]:
             title = normalize_title(cells[title_index])
             if not _looks_like_title(title):
                 continue
-            if not _has_table_evidence_for_title(title, cells, headers, title_index):
-                continue
-            releases.append(
-                _build_release(title, " ".join(cells), source_url, "table-row")
+            title_year_match = TABLE_TITLE_YEAR_RE.fullmatch(title)
+            release_title = (
+                normalize_title(title_year_match.group("title"))
+                if title_year_match
+                else title
             )
+            if not _looks_like_title(release_title):
+                continue
+            has_correlated_evidence = _has_table_evidence_for_title(
+                title, cells, headers, title_index
+            )
+            if title_year_match:
+                expected_year = title_year_match.group("year")
+                if _has_conflicting_bound_title_year(
+                    release_title, expected_year, cells, title_index
+                ):
+                    continue
+                if not has_correlated_evidence:
+                    has_correlated_evidence = _has_table_evidence_for_title(
+                        release_title, cells, headers, title_index
+                    )
+            if not has_correlated_evidence:
+                continue
+            release = _build_release(
+                release_title, " ".join(cells), source_url, "table-row"
+            )
+            if title_year_match:
+                release.release_date = title_year_match.group("year")
+            releases.append(release)
     return releases
 
 
@@ -234,6 +259,28 @@ def _has_table_evidence_for_title(
         if not headers:
             return _cell_supports_row_title(cell, title)
         if _title_specific_cell_supports_row_title(cell, title):
+            return True
+    return False
+
+
+def _has_conflicting_bound_title_year(
+    title: str,
+    expected_year: str,
+    cells: list[str],
+    title_index: int,
+) -> bool:
+    title_year_re = re.compile(
+        rf"(?<![A-Za-z0-9]){re.escape(normalize_title(title))}\s*"
+        rf"\((?P<year>(?:19|20)\d{{2}})\)(?![A-Za-z0-9])",
+        re.IGNORECASE,
+    )
+    for index, cell in enumerate(cells):
+        if index == title_index:
+            continue
+        if any(
+            match.group("year") != expected_year
+            for match in title_year_re.finditer(normalize_title(cell))
+        ):
             return True
     return False
 

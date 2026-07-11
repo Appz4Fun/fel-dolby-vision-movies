@@ -4,6 +4,7 @@ from pathlib import Path
 import artifacts
 from artifacts import publish_outputs, write_artifacts
 from models import FelEvidence, FelRelease
+from parser import parse_fel_releases
 
 
 def release(title: str, date: str) -> FelRelease:
@@ -34,6 +35,28 @@ def test_publish_outputs_writes_data_and_dashboard_from_releases(tmp_path: Path)
     assert (tmp_path / "data/releases.json").exists()
     assert (tmp_path / "dist/index.html").exists()
     assert (tmp_path / "dist/releases.json").exists()
+
+
+def test_publish_outputs_keeps_table_release_with_embedded_year_without_enrichment(
+    tmp_path: Path,
+):
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha (2023)</td><td>Profile 7 FEL</td></tr>
+    </table>
+    """
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    published = publish_outputs(releases, output_dir=tmp_path)
+
+    assert [(item.movie_title, item.release_date) for item in published] == [
+        ("Alpha", "2023")
+    ]
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    assert [(item["movie_title"], item["release_date"]) for item in data] == [
+        ("Alpha", "2023")
+    ]
 
 
 def test_sort_key_places_unknown_dates_last():

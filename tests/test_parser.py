@@ -14,6 +14,107 @@ def test_parses_table_row_with_direct_fel_correlation():
     assert releases[0].english_audio == "Yes"
 
 
+def test_table_row_extracts_trailing_parenthesized_year_from_title():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha (2023)</td><td>Profile 7 FEL</td></tr>
+      <tr><td>1917 (2019)</td><td>Profile 7 FEL</td></tr>
+      <tr><td>Alpha (Director's Cut)</td><td>Profile 7 FEL</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Alpha", "2023"),
+        ("1917", "2019"),
+        ("Alpha (Director's Cut)", "Unknown"),
+    ]
+
+
+def test_table_row_year_accepts_clean_and_raw_title_evidence_bindings():
+    parsed = []
+    for evidence in (
+        "Alpha is Profile 7 FEL",
+        "Alpha (2023) is Profile 7 FEL",
+    ):
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>DV</th></tr>
+          <tr><td>Alpha (2023)</td><td>{evidence}</td></tr>
+        </table>
+        """
+        parsed.append(
+            [
+                (release.movie_title, release.release_date)
+                for release in parse_fel_releases(html, "https://example.test/thread")
+            ]
+        )
+
+    assert parsed == [
+        [("Alpha", "2023")],
+        [("Alpha", "2023")],
+    ]
+
+
+def test_table_row_year_rejects_conflicting_title_bound_evidence_year():
+    examples = (
+        ("Alpha (2023)", "Profile 7 FEL confirmed for Alpha (2024)."),
+        ("Alpha(2023)", "Profile 7 FEL confirmed for Alpha(2024)."),
+        ("1917 (2019)", "Profile 7 FEL confirmed for 1917 (2020)."),
+    )
+    for title, evidence in examples:
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>DV</th></tr>
+          <tr><td>{title}</td><td>{evidence}</td></tr>
+        </table>
+        """
+
+        assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_table_row_year_rejects_conflicting_bound_year_in_separate_cell():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th><th>Notes</th></tr>
+      <tr>
+        <td>Alpha (2023)</td>
+        <td>Profile 7 FEL</td>
+        <td>Confirmed for Alpha (2024)</td>
+      </tr>
+    </table>
+    """
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_table_row_without_year_accepts_matching_title_bound_evidence_year():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha</td><td>Profile 7 FEL confirmed for Alpha (2024).</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["Alpha"]
+
+
+def test_table_row_year_rejects_title_empty_after_year_extraction():
+    for title in ("--- (2023)", "() (2023)"):
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>DV</th></tr>
+          <tr><td>{title}</td><td>Profile 7 FEL</td></tr>
+        </table>
+        """
+
+        assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
 def test_parses_only_verified_fel_release_from_multi_title_forum_table():
     html = """
     <article class="post">
