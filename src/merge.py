@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Iterable
+from dataclasses import dataclass
 import re
 import unicodedata
 import urllib.parse
@@ -26,19 +27,21 @@ def _is_ai_evidence(evidence_type: str) -> bool:
 
 
 # Title tokens that mark a genuinely distinct physical release sharing one TMDB
-# id (editions, cuts, season/series discs). When a tmdb group's titles carry one
-# of these we keep the rows separate; otherwise same-tmdb rows are pure AKA /
-# translation / spelling variants of one film and should collapse to one record.
+# id (editions, cuts, season/series discs). These are a conservative stop signal,
+# not proof that descriptor-free rows are aliases; reconciliation separately
+# requires explicit cross-title AKA evidence before it can collapse them.
 _EDITION_DESCRIPTOR_RE = re.compile(
     r"\b(?:extended|collector|collectors|director|directors|theatrical|"
     r"remaster|remastered|restored|uncut|unrated|special\s+edition|anniversary|"
-    r"complete|season|series|volume|vol\.|part\s+\w+|chapter|disc|criterion|"
-    r"limited|ultimate|deluxe|definitive|edition)\b",
+    r"complete|season|s0*[1-9]\d*|series|volume|vol\.|part\s+\w+|chapter|disc|"
+    r"criterion|steelbook|final\s+cut|limited|ultimate|deluxe|definitive|edition)\b",
     re.IGNORECASE,
 )
+_AKA_RE = re.compile(r"\baka\b", re.IGNORECASE)
+_AKA_LOCAL_BOUNDARY_RE = re.compile(r"[.!?;\n]+")
 
 
-def _has_edition_descriptor(title: str) -> bool:
+def has_edition_descriptor(title: str) -> bool:
     return bool(_EDITION_DESCRIPTOR_RE.search(title or ""))
 
 
@@ -46,7 +49,7 @@ def canonical_title_key(value: str) -> str:
     normalized = unicodedata.normalize("NFKD", value)
     normalized = "".join(c for c in normalized if not unicodedata.combining(c))
     normalized = normalized.casefold().replace("&", " and ")
-    normalized = re.sub(r"['`´']", "'", normalized)
+    normalized = re.sub(r"['`´’]", "", normalized)
     normalized = re.sub(r"[^a-z0-9]+", " ", normalized)
     return re.sub(r"\s+", " ", normalized).strip()
 
@@ -62,12 +65,10 @@ def canonical_key(release: FelRelease) -> tuple[str, str]:
 
 def canonical_url_key(value: str) -> str:
     parsed = urllib.parse.urlparse(value.strip())
-    if not parsed.netloc:
+    if parsed.scheme.lower() not in ("http", "https") or not parsed.hostname:
         return ""
-    scheme = (parsed.scheme or "https").lower()
-    hostname = parsed.netloc.lower()
     path = parsed.path.rstrip("/")
-    return urllib.parse.urlunparse((scheme, hostname, path, "", "", ""))
+    return urllib.parse.urlunparse(("https", parsed.hostname.lower(), path, "", "", ""))
 
 
 def title_bluray_key(release: FelRelease) -> tuple[str, str]:
@@ -90,10 +91,37 @@ def tmdb_key(release: FelRelease) -> tuple[str, str]:
 
 
 def dedupe_tmdb_releases(releases: Iterable[FelRelease]) -> list[FelRelease]:
-    grouped: dict[tuple[str, str], list[FelRelease]] = {}
+    return [
+        release
+        for release, _ in _dedupe_tmdb_release_groups(
+            releases, reconciliation_safe=False
+        )
+    ]
+
+
+@dataclass(frozen=True)
+class _ReleaseGroup:
+    first_index: int
+    release: FelRelease
+    source_indices: tuple[int, ...]
+
+
+def dedupe_tmdb_release_groups(
+    releases: Iterable[FelRelease],
+) -> list[tuple[FelRelease, tuple[int, ...]]]:
+    """Return alias-safe TMDB groups with their input-row provenance."""
+    return _dedupe_tmdb_release_groups(releases, reconciliation_safe=True)
+
+
+def _dedupe_tmdb_release_groups(
+    releases: Iterable[FelRelease],
+    *,
+    reconciliation_safe: bool,
+) -> list[tuple[FelRelease, tuple[int, ...]]]:
+    grouped: dict[tuple[str, str], list[tuple[int, FelRelease]]] = {}
     order: list[tuple[str, str]] = []
     no_tmdb_index = 0
-    for release in releases:
+    for index, release in enumerate(releases):
         if release.tmdb_id:
             key = ("tmdb", release.tmdb_id)
         else:
@@ -102,26 +130,39 @@ def dedupe_tmdb_releases(releases: Iterable[FelRelease]) -> list[FelRelease]:
         if key not in grouped:
             grouped[key] = []
             order.append(key)
-        grouped[key].append(release)
+        grouped[key].append((index, release))
 
-    deduped: list[FelRelease] = []
+    deduped: list[_ReleaseGroup] = []
     for key in order:
         group = grouped[key]
         if key[0] == "tmdb":
-            deduped.extend(_dedupe_one_tmdb_group(group))
+            deduped.extend(
+                _dedupe_one_tmdb_group(group, reconciliation_safe=reconciliation_safe)
+            )
         else:
-            deduped.extend(group)
-    return deduped
+            index, release = group[0]
+            deduped.append(_ReleaseGroup(index, release, (index,)))
+    return [
+        (item.release, item.source_indices)
+        for item in sorted(deduped, key=lambda item: item.first_index)
+    ]
 
 
-def _dedupe_one_tmdb_group(releases: list[FelRelease]) -> list[FelRelease]:
+def _dedupe_one_tmdb_group(
+    releases: list[tuple[int, FelRelease]],
+    *,
+    reconciliation_safe: bool,
+) -> list[_ReleaseGroup]:
     if len(releases) <= 1:
-        return list(releases)
+        index, release = releases[0]
+        return [_ReleaseGroup(index, release, (index,))]
+    if reconciliation_safe and not _is_reconciliation_alias_group(releases):
+        return [_ReleaseGroup(index, release, (index,)) for index, release in releases]
 
     bluray_groups: dict[str, list[tuple[int, FelRelease]]] = {}
     bluray_order: list[str] = []
     unresolved: list[tuple[int, FelRelease]] = []
-    for index, release in enumerate(releases):
+    for index, release in releases:
         bluray_url = canonical_url_key(release.bluray_url)
         if not bluray_url:
             unresolved.append((index, release))
@@ -132,58 +173,169 @@ def _dedupe_one_tmdb_group(releases: list[FelRelease]) -> list[FelRelease]:
         bluray_groups[bluray_url].append((index, release))
 
     if not bluray_groups:
-        return [
-            _merge_identity_group([(index, release) for index, release in unresolved])[
-                1
-            ]
-        ]
+        return [_merge_identity_group(unresolved)]
 
     resolved = [
         _merge_identity_group(bluray_groups[bluray_url]) for bluray_url in bluray_order
     ]
 
-    # Same tmdb_id across several blu-ray editions: if NO title carries an
-    # edition/season descriptor these are AKA/translation duplicates of one film
-    # (different blu-ray.com pages for the same release), so collapse them into a
-    # single enriched record. Distinct editions/seasons keep their descriptor and
-    # stay separate.
-    if len(resolved) > 1 and not any(
-        _has_edition_descriptor(release.movie_title) for _, release in resolved
+    # The legacy public deduper reaches this check directly. Reconciliation only
+    # reaches it after the whole group passes the explicit AKA proof graph above.
+    # In both paths, repeated canonical identity or an edition descriptor keeps
+    # the physical rows separate.
+    if (
+        len(resolved) > 1
+        and len({canonical_key(item.release) for item in resolved}) == len(resolved)
+        and not any(
+            has_edition_descriptor(item.release.movie_title) for item in resolved
+        )
     ):
         # resolved is in first-occurrence order, so resolved[0] holds the lowest
         # original index; fold the rest into it, preserving its base title.
-        base_index, base = resolved[0]
-        for _, release in resolved[1:]:
-            base = _merge_preserving_base_title(base, release)
-        resolved = [(base_index, base)]
+        base = resolved[0]
+        for item in resolved[1:]:
+            base = _merge_release_groups(base, item)
+        resolved = [base]
 
     for index, release in unresolved:
-        target_index = _find_tmdb_merge_target(release, resolved)
+        target_index = _find_tmdb_merge_target(
+            release,
+            [(item.first_index, item.release) for item in resolved],
+        )
         if target_index is None:
-            resolved.append((index, release))
+            resolved.append(_ReleaseGroup(index, release, (index,)))
             continue
-        target_position, target = resolved[target_index]
-        if index < target_position:
-            resolved[target_index] = (
-                index,
-                _merge_preserving_base_title(release, target),
-            )
+        target = resolved[target_index]
+        incoming = _ReleaseGroup(index, release, (index,))
+        if index < target.first_index:
+            resolved[target_index] = _merge_release_groups(incoming, target)
         else:
-            resolved[target_index] = (
-                target_position,
-                _merge_preserving_base_title(target, release),
-            )
+            resolved[target_index] = _merge_release_groups(target, incoming)
 
-    return [release for _, release in sorted(resolved, key=lambda item: item[0])]
+    return sorted(resolved, key=lambda item: item.first_index)
+
+
+def _is_reconciliation_alias_group(
+    releases: list[tuple[int, FelRelease]],
+) -> bool:
+    rows = [release for _, release in releases]
+    years = {_year(release.release_date) for release in rows}
+    title_keys = {canonical_title_key(release.movie_title) for release in rows}
+    imdb_ids = {release.imdb_id for release in rows}
+    identity_is_compatible = (
+        "" not in years
+        and len(years) == 1
+        and len(title_keys) == len(rows)
+        and "" not in imdb_ids
+        and len(imdb_ids) == 1
+        and not any(has_edition_descriptor(release.movie_title) for release in rows)
+    )
+    if not identity_is_compatible:
+        return False
+
+    explicit_edges = _explicit_aka_edges(rows)
+    if not explicit_edges:
+        return False
+
+    edges = set(explicit_edges)
+    orthographic_keys = [_orthographic_title_key(row.movie_title) for row in rows]
+    for left_index in range(len(rows)):
+        for right_index in range(left_index + 1, len(rows)):
+            if orthographic_keys[left_index] == orthographic_keys[right_index]:
+                edges.add((left_index, right_index))
+    return _graph_connects_all_rows(len(rows), edges)
+
+
+def _explicit_aka_edges(rows: list[FelRelease]) -> set[tuple[int, int]]:
+    edges: set[tuple[int, int]] = set()
+    for left_index in range(len(rows)):
+        for right_index in range(left_index + 1, len(rows)):
+            if any(
+                _quote_names_alias_pair(
+                    row.fel_evidence.quote,
+                    rows[left_index].movie_title,
+                    rows[right_index].movie_title,
+                )
+                for row in rows
+            ):
+                edges.add((left_index, right_index))
+    return edges
+
+
+def _quote_names_alias_pair(quote: str, left_title: str, right_title: str) -> bool:
+    left_key = canonical_title_key(left_title)
+    right_key = canonical_title_key(right_title)
+    segments = _AKA_RE.split(quote)
+    for before, after in zip(segments, segments[1:], strict=False):
+        local_before = _AKA_LOCAL_BOUNDARY_RE.split(before)[-1]
+        local_after = _AKA_LOCAL_BOUNDARY_RE.split(after, maxsplit=1)[0]
+        if (
+            _left_aka_side_names_title(local_before, left_key)
+            and _right_aka_side_names_title(local_after, right_key)
+        ) or (
+            _left_aka_side_names_title(local_before, right_key)
+            and _right_aka_side_names_title(local_after, left_key)
+        ):
+            return True
+    return False
+
+
+def _left_aka_side_names_title(text: str, title: str) -> bool:
+    local_key = canonical_title_key(text)
+    return bool(title) and (
+        local_key == title
+        or bool(re.fullmatch(rf"\d+\s+{re.escape(title)}", local_key))
+    )
+
+
+def _right_aka_side_names_title(text: str, title: str) -> bool:
+    local_key = canonical_title_key(text)
+    return bool(title) and (
+        local_key == title
+        or bool(re.fullmatch(rf"{re.escape(title)}\s+(?:19|20)\d{{2}}", local_key))
+    )
+
+
+def _orthographic_title_key(title: str) -> str:
+    replacements = {"colour": "color", "colours": "colors"}
+    return " ".join(
+        replacements.get(token, token) for token in canonical_title_key(title).split()
+    )
+
+
+def _graph_connects_all_rows(
+    row_count: int,
+    edges: set[tuple[int, int]],
+) -> bool:
+    connected = {0}
+    while True:
+        expanded = connected | {
+            right if left in connected else left
+            for left, right in edges
+            if left in connected or right in connected
+        }
+        if expanded == connected:
+            return len(connected) == row_count
+        connected = expanded
 
 
 def _merge_identity_group(
     releases: list[tuple[int, FelRelease]],
-) -> tuple[int, FelRelease]:
+) -> _ReleaseGroup:
     first_index, merged = releases[0]
-    for _, release in releases[1:]:
+    source_indices = [first_index]
+    for index, release in releases[1:]:
         merged = _merge_preserving_base_title(merged, release)
-    return first_index, merged
+        source_indices.append(index)
+    return _ReleaseGroup(first_index, merged, tuple(source_indices))
+
+
+def _merge_release_groups(base: _ReleaseGroup, other: _ReleaseGroup) -> _ReleaseGroup:
+    return _ReleaseGroup(
+        first_index=base.first_index,
+        release=_merge_preserving_base_title(base.release, other.release),
+        source_indices=tuple(sorted((*base.source_indices, *other.source_indices))),
+    )
 
 
 def _merge_preserving_base_title(base: FelRelease, other: FelRelease) -> FelRelease:

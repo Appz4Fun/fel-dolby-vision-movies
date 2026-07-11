@@ -1,3 +1,7 @@
+import pytest
+
+import parser as fel_parser
+
 from parser import parse_fel_releases
 
 
@@ -12,6 +16,333 @@ def test_parses_table_row_with_direct_fel_correlation():
     assert [release.movie_title for release in releases] == ["The Matrix"]
     assert releases[0].audio_formats == ["TrueHD Atmos"]
     assert releases[0].english_audio == "Yes"
+
+
+def test_parses_table_row_without_headers_when_evidence_matches_title():
+    html = """
+    <table>
+      <tr><td>Alpha</td><td>Profile 7 FEL</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["Alpha"]
+
+
+@pytest.mark.parametrize(
+    "evidence",
+    [
+        "Alpha Profile 7 FEL REMUX",
+        "Alpha Profile 7 FEL MEL",
+        "Alpha has no Profile 7 FEL",
+        "Alpha Profile 7 FEL: no",
+    ],
+)
+def test_direct_fel_defenses_reject_forbidden_evidence(evidence, monkeypatch):
+    monkeypatch.setattr(fel_parser, "has_correlated_fel_clause", lambda *_args: True)
+
+    assert fel_parser._has_direct_fel(evidence, "Alpha") is False
+
+
+def test_bound_table_title_span_rejects_empty_title_or_incomplete_markers():
+    assert fel_parser._bound_table_title_span("Profile 7 FEL", "") is None
+    assert fel_parser._bound_table_title_span("Alpha has Profile 7", "Alpha") is None
+
+
+def test_title_guard_rejects_forum_timestamp_directly():
+    assert fel_parser._looks_like_title("Mon Jan 29, 2024 4:36 pm") is False
+
+
+@pytest.mark.parametrize(
+    "audio_metadata,expected_audio,expected_english",
+    [
+        ("English TrueHD Atmos", "TrueHD Atmos", "Yes"),
+        ("English DTS-HD MA", "DTS-HD MA", "Yes"),
+        ("English DD+ Atmos", "DD+ Atmos", "Yes"),
+        ("DTS-HD MA", "DTS-HD MA", "Unknown"),
+        ("DD+ Atmos", "DD+ Atmos", "Unknown"),
+    ],
+)
+def test_table_status_accepts_finite_trailing_audio_metadata(
+    audio_metadata, expected_audio, expected_english
+):
+    html = f"""
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha</td><td>Profile 7 FEL {audio_metadata}</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["Alpha"]
+    assert releases[0].audio_formats == [expected_audio]
+    assert releases[0].english_audio == expected_english
+
+
+@pytest.mark.parametrize(
+    "residue",
+    ["English Beta", "Beta TrueHD Atmos", "English TrueHD Atmos Beta"],
+)
+def test_table_status_rejects_title_words_around_audio_like_residue(residue):
+    html = f"""
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha</td><td>Profile 7 FEL {residue}</td></tr>
+    </table>
+    """
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize(
+    "adverb", ["probably", "possibly", "allegedly", "supposedly", "reportedly"]
+)
+def test_table_status_rejects_uncertain_adverb_residue(adverb):
+    html = f"""
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha</td><td>Profile 7 FEL, {adverb}</td></tr>
+    </table>
+    """
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_table_status_accepts_allowlisted_parenthetical_adverb():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha</td><td>Profile 7 FEL, parenthetically</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["Alpha"]
+
+
+@pytest.mark.parametrize(
+    "status",
+    [
+        "Profile 7 full enhancement layer (FEL)",
+        "Profile 7 with full enhancement layer FEL",
+    ],
+)
+def test_table_status_accepts_full_enhancement_layer_fel(status):
+    html = f"""
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha</td><td>{status}</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["Alpha"]
+
+
+@pytest.mark.parametrize(
+    "separator",
+    [", ", ": ", "; ", " / ", " | ", " & ", " + ", " and "],
+)
+def test_table_status_rejects_profile_and_fel_split_across_clauses(separator):
+    html = f"""
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha</td><td>Profile 7{separator}FEL</td></tr>
+    </table>
+    """
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize(
+    "row_title,later_format",
+    [("Mel", "MEL"), ("Remux", "REMUX")],
+)
+def test_table_status_does_not_mask_unbound_format_token_matching_row_title(
+    row_title, later_format
+):
+    html = f"""
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>{row_title}</td><td>Profile 7 FEL, {later_format}</td></tr>
+    </table>
+    """
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize(
+    "row_title,evidence,expected",
+    [
+        ("Mel", "Mel: Profile 7 FEL", ("Mel", "Unknown")),
+        (
+            "Remux (2024)",
+            "Remux (2024) Profile 7 FEL",
+            ("Remux", "2024"),
+        ),
+    ],
+)
+def test_table_status_masks_only_explicit_leading_title_binding(
+    row_title, evidence, expected
+):
+    html = f"""
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>{row_title}</td><td>{evidence}</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        expected
+    ]
+
+
+def test_table_status_preserves_unbound_release_metadata_matching_row_title():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Release</td><td>Profile 7 FEL, release date 2024</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Release", "Unknown")
+    ]
+
+
+def test_table_status_rejects_unbound_later_row_title_token():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Release</td><td>Profile 7 FEL; release</td></tr>
+    </table>
+    """
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_table_status_masks_bound_release_title_not_later_metadata_token():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Release</td><td>Release: Profile 7 FEL, release date 2024</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Release", "Unknown")
+    ]
+
+
+def test_table_row_extracts_trailing_parenthesized_year_from_title():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha (2023)</td><td>Profile 7 FEL</td></tr>
+      <tr><td>1917 (2019)</td><td>Profile 7 FEL</td></tr>
+      <tr><td>Alpha (Director's Cut)</td><td>Profile 7 FEL</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Alpha", "2023"),
+        ("1917", "2019"),
+        ("Alpha (Director's Cut)", "Unknown"),
+    ]
+
+
+def test_table_row_year_accepts_clean_and_raw_title_evidence_bindings():
+    parsed = []
+    for evidence in (
+        "Alpha is Profile 7 FEL",
+        "Alpha (2023) is Profile 7 FEL",
+    ):
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>DV</th></tr>
+          <tr><td>Alpha (2023)</td><td>{evidence}</td></tr>
+        </table>
+        """
+        parsed.append(
+            [
+                (release.movie_title, release.release_date)
+                for release in parse_fel_releases(html, "https://example.test/thread")
+            ]
+        )
+
+    assert parsed == [
+        [("Alpha", "2023")],
+        [("Alpha", "2023")],
+    ]
+
+
+def test_table_row_year_rejects_conflicting_title_bound_evidence_year():
+    examples = (
+        ("Alpha (2023)", "Profile 7 FEL confirmed for Alpha (2024)."),
+        ("Alpha(2023)", "Profile 7 FEL confirmed for Alpha(2024)."),
+        ("1917 (2019)", "Profile 7 FEL confirmed for 1917 (2020)."),
+    )
+    for title, evidence in examples:
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>DV</th></tr>
+          <tr><td>{title}</td><td>{evidence}</td></tr>
+        </table>
+        """
+
+        assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_table_row_year_rejects_conflicting_bound_year_in_separate_cell():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th><th>Notes</th></tr>
+      <tr>
+        <td>Alpha (2023)</td>
+        <td>Profile 7 FEL</td>
+        <td>Confirmed for Alpha (2024)</td>
+      </tr>
+    </table>
+    """
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_table_row_without_year_accepts_matching_title_bound_evidence_year():
+    html = """
+    <table>
+      <tr><th>Title</th><th>DV</th></tr>
+      <tr><td>Alpha</td><td>Profile 7 FEL confirmed for Alpha (2024).</td></tr>
+    </table>
+    """
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["Alpha"]
+
+
+def test_table_row_year_rejects_title_empty_after_year_extraction():
+    for title in ("--- (2023)", "() (2023)"):
+        html = f"""
+        <table>
+          <tr><th>Title</th><th>DV</th></tr>
+          <tr><td>{title}</td><td>Profile 7 FEL</td></tr>
+        </table>
+        """
+
+        assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
 def test_parses_only_verified_fel_release_from_multi_title_forum_table():
@@ -548,6 +879,164 @@ def test_rejects_forum_list_item_without_title_year_bitrate_correlation():
     assert parse_fel_releases(html, "https://example.test/thread") == []
 
 
+class _TitleRegexMustNotRun:
+    def search(self, *_args, **_kwargs):
+        raise AssertionError("title regex should have been skipped")
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Alpha (2024) is an ordinary Blu-ray release.",
+        "Alpha (2024) is Profile 7 without an enhancement marker.",
+        "Alpha (2024) has FEL without the profile marker.",
+    ],
+)
+def test_sentence_marker_prefilter_skips_title_regex(text, monkeypatch):
+    monkeypatch.setattr(fel_parser, "TITLE_SENTENCE_RE", _TitleRegexMustNotRun())
+    monkeypatch.setattr(
+        fel_parser, "DIRECT_TITLE_YEAR_SENTENCE_RE", _TitleRegexMustNotRun()
+    )
+
+    assert parse_fel_releases(f"<p>{text}</p>", "https://example.test/thread") == []
+
+
+def test_oversized_sentence_skips_title_regex_even_with_both_markers(monkeypatch):
+    monkeypatch.setattr(fel_parser, "TITLE_SENTENCE_RE", _TitleRegexMustNotRun())
+    monkeypatch.setattr(
+        fel_parser, "DIRECT_TITLE_YEAR_SENTENCE_RE", _TitleRegexMustNotRun()
+    )
+    oversized = f"{'A' * (5 * 1024 * 1024)} Profile 7 FEL"
+
+    assert (
+        parse_fel_releases(f"<p>{oversized}</p>", "https://example.test/thread") == []
+    )
+
+
+def test_oversized_sibling_block_does_not_hide_short_valid_paragraph():
+    oversized = "A" * (fel_parser.MAX_FEL_SENTENCE_LENGTH + 1)
+    html = f"<div>{oversized}</div><p>Dune (2021) is Profile 7 FEL</p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Dune", "2021")
+    ]
+
+
+def test_inline_markup_stays_within_one_sentence_record():
+    html = "<p>Dune <b>(2021)</b> is <span>Profile 7</span> <b>FEL</b></p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Dune", "2021")
+    ]
+
+
+def test_nested_block_record_is_parsed_only_once(monkeypatch):
+    build_calls: list[str] = []
+    original_build_release = fel_parser._build_release
+
+    def tracking_build_release(title, evidence_text, source_url, evidence_type):
+        build_calls.append(title)
+        return original_build_release(title, evidence_text, source_url, evidence_type)
+
+    monkeypatch.setattr(fel_parser, "_build_release", tracking_build_release)
+    html = (
+        "<article><div><p>Dune <b>(2021)</b> is "
+        "<span>Profile 7 FEL</span></p></div></article>"
+    )
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["Dune"]
+    assert build_calls == ["Dune"]
+
+
+@pytest.mark.parametrize(
+    "html",
+    [
+        "Dune (2021) is Profile 7 FEL<p>Unrelated</p>",
+        "<body>Dune (2021) is Profile 7 FEL<p>Unrelated</p></body>",
+        "<div>Dune (2021) is Profile 7 FEL<p>Unrelated</p></div>",
+        "<div><p>Unrelated</p>Dune (2021) is Profile 7 FEL</div>",
+    ],
+)
+def test_container_own_text_survives_sibling_or_nested_blocks(html):
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Dune", "2021")
+    ]
+
+
+def test_inline_markup_stays_with_container_own_text_before_nested_block():
+    html = "<div>Dune <b>(2021)</b> is <span>Profile 7 FEL</span><p>Unrelated</p></div>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Dune", "2021")
+    ]
+
+
+def test_line_break_flushes_record_instead_of_joining_markers():
+    html = "<p>Dune (2021) is Profile 7<br>FEL</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_record_walker_handles_more_than_recursion_limit_nested_blocks():
+    depth = 1_100
+    html = ("<div>" * depth) + "Dune (2021) is Profile 7 FEL" + ("</div>" * depth)
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Dune", "2021")
+    ]
+
+
+def test_inline_markup_preserves_split_word_text_exactly():
+    html = "<p>Du<em>ne (2021) is Profile 7 FEL</p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Dune", "2021")
+    ]
+
+
+def test_ignored_script_does_not_synthesize_marker_boundary():
+    html = "<p>Dune (2021) is Profile 7<script>ignored</script>FEL</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_horizontal_rule_flushes_record_instead_of_joining_markers():
+    html = "<p>Dune (2021) is Profile 7<hr>FEL</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize("tag", ["head", "noscript", "script", "style", "template"])
+def test_non_content_subtree_does_not_produce_records(tag):
+    html = f"<{tag}>Dune (2021) is Profile 7 FEL</{tag}>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_doctype_does_not_prefix_direct_body_title():
+    html = "<!DOCTYPE html><body>Dune (2021) is Profile 7 FEL</body>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Dune", "2021")
+    ]
+
+
 def test_parses_direct_sentence_with_title_and_profile_7_fel():
     html = (
         "<p>Alien (1979) is confirmed as Dolby Vision Profile 7 FEL with DTS-HD MA.</p>"
@@ -730,6 +1219,203 @@ def test_accepts_fel_when_not_dolby_vision_mel_clarifies_layer_type():
     )
     releases = parse_fel_releases(html, "https://example.test/thread")
     assert [release.movie_title for release in releases] == ["Alien"]
+
+
+@pytest.mark.parametrize("clarification", ["no MEL", "without MEL"])
+def test_accepts_fel_when_leading_phrase_negates_mel(clarification):
+    html = f"<p>Alien is confirmed as Dolby Vision Profile 7 FEL, {clarification}.</p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
+@pytest.mark.parametrize(
+    "mel_context",
+    ["no doubt this is MEL", "not only Profile 7 MEL but also Profile 7 FEL"],
+)
+def test_rejects_fel_when_mel_negator_is_not_a_clarification(mel_context):
+    html = f"<p>Alien is confirmed as Profile 7 FEL; {mel_context}.</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize("denial", ["FEL — not present", "FEL is not present"])
+def test_rejects_fel_when_trailing_phrase_denies_presence(denial):
+    html = f"<p>Alien (1979) is confirmed as Dolby Vision Profile 7 {denial}.</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize(
+    "denial",
+    [
+        "has no Dolby Vision Profile 7 FEL",
+        "has no Profile 7 FEL",
+        "is not Profile 7 FEL",
+        "is without a Profile 7 FEL layer",
+    ],
+)
+def test_rejects_fel_when_leading_phrase_denies_presence(denial):
+    html = f"<p>Dune (2021) {denial}.</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize(
+    "assertion",
+    ["has no doubt it is Profile 7 FEL", "is not only Profile 7 FEL"],
+)
+def test_accepts_fel_when_negative_word_is_not_a_denial(assertion):
+    html = f"<p>Dune (2021) {assertion}.</p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Dune", "2021")
+    ]
+
+
+@pytest.mark.parametrize("title,year", [("Mel", "1998"), ("Remux", "2024")])
+def test_accepts_direct_title_year_when_title_is_a_format_token(title, year):
+    html = f"<p>{title} ({year}) Profile 7 FEL</p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        (title, year)
+    ]
+
+
+@pytest.mark.parametrize("separator", [",", ":"])
+def test_accepts_direct_title_year_with_separator_before_markers(separator):
+    html = f"<p>Alpha (2024){separator} Profile 7 FEL.</p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Alpha", "2024")
+    ]
+
+
+@pytest.mark.parametrize("separator", [",", ":"])
+def test_rejects_direct_title_year_separator_before_another_subject(separator):
+    html = f"<p>Alpha (2024){separator} Beta is Profile 7 FEL.</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize(
+    "evidence",
+    ["Alpha (2024): Profile 7, FEL.", "Alpha (2024), Profile 7: FEL."],
+)
+def test_rejects_direct_title_year_when_markers_are_split(evidence):
+    assert parse_fel_releases(f"<p>{evidence}</p>", "https://example.test/thread") == []
+
+
+def test_rejects_later_mel_after_mel_title_binding():
+    html = "<p>Mel (1998) Profile 7 FEL; MEL</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_rejects_later_remux_after_remux_title_binding():
+    html = "<p>Remux (2024) Profile 7 FEL; REMUX</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize(
+    "separator",
+    [", ", ": ", "; ", " / ", " | ", " & ", " + ", " and "],
+)
+def test_rejects_fel_borrowed_from_another_delimited_subject(separator):
+    html = f"<p>Alpha (2024) is listed{separator}Beta is Profile 7 FEL.</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize(
+    "separator",
+    [", ", ": ", "; ", " / ", " | ", " & ", " + ", " and "],
+)
+def test_rejects_profile_and_fel_split_across_clauses(separator):
+    html = f"<p>Alpha (2024) is Profile 7{separator}FEL.</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_comma_and_parenthetical_binding_in_one_clause():
+    html = "<p>Alpha (2024) is, parenthetically, Profile 7 FEL.</p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Alpha", "2024")
+    ]
+
+
+@pytest.mark.parametrize(
+    "adverb", ["probably", "possibly", "allegedly", "supposedly", "reportedly"]
+)
+def test_rejects_uncertain_adverb_between_title_and_fel_markers(adverb):
+    html = f"<p>Alpha (2024) is, {adverb}, Profile 7 FEL.</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize(
+    "statement",
+    [
+        "is Profile 7 full enhancement layer (FEL)",
+        "is Profile 7 with full enhancement layer FEL",
+    ],
+)
+def test_accepts_sentence_with_full_enhancement_layer_fel(statement):
+    html = f"<p>Alpha (2024) {statement}.</p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Alpha", "2024")
+    ]
+
+
+def test_accepts_comma_before_proof_metadata_after_complete_markers():
+    html = "<p>Alpha (2024) is Profile 7 FEL, confirmed by disc scan.</p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Alpha", "2024")
+    ]
+
+
+@pytest.mark.parametrize(
+    "denial",
+    ["is not confirmed as Profile 7 FEL", "is never confirmed Profile 7 FEL"],
+)
+def test_rejects_explicit_confirmation_denial(denial):
+    html = f"<p>Dune (2021) {denial}.</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+@pytest.mark.parametrize("status", ["absent", "unsupported", "not supported"])
+def test_rejects_fel_with_explicit_absence_status(status):
+    html = f"<p>Dune (2021) is Profile 7 FEL {status}.</p>"
+
+    assert parse_fel_releases(html, "https://example.test/thread") == []
+
+
+def test_accepts_fel_with_explicit_mel_absence_status():
+    html = "<p>Dune (2021) is Profile 7 FEL, MEL absent.</p>"
+
+    releases = parse_fel_releases(html, "https://example.test/thread")
+
+    assert [(release.movie_title, release.release_date) for release in releases] == [
+        ("Dune", "2021")
+    ]
 
 
 def test_rejects_fel_with_trailing_denial():

@@ -109,6 +109,45 @@ def test_pages_workflow_does_not_commit_ai_source_registry_churn():
     assert "git checkout origin/main -- data/sources_needs_evidence.txt" in restore_step
 
 
+def test_pages_workflow_uploads_python_and_ai_reconciliation_reviews():
+    workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
+    assert (
+        '--review-output "$RUNNER_TEMP/python-reconciliation-review.json"' in workflow
+    )
+    assert '--review-output "$RUNNER_TEMP/ai-reconciliation-review.json"' in workflow
+    assert "- name: Upload reconciliation reviews" in workflow
+    upload_start = workflow.index("- name: Upload reconciliation reviews")
+    upload_end = workflow.index("- name: Restore source registry", upload_start)
+    upload_step = workflow[upload_start:upload_end]
+    assert "if: always()" in upload_step
+    assert "uses: actions/upload-artifact@v7" in upload_step
+    assert "name: fel-reconciliation-review" in upload_step
+    assert "if-no-files-found: ignore" in upload_step
+    assert "retention-days: 14" in upload_step
+
+
+def test_pages_workflow_does_not_stage_reconciliation_review_files():
+    workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
+    staging_start = workflow.index("- name: Check refresh branch changes")
+    staging_end = workflow.index("- name: Update refresh branch and PR", staging_start)
+    staging = workflow[staging_start:staging_end]
+    assert "python-reconciliation-review.json" not in staging
+    assert "ai-reconciliation-review.json" not in staging
+
+
+def test_pages_workflow_uploads_reconciliation_reviews_even_after_failure():
+    workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
+    start = workflow.index("- name: Upload reconciliation reviews")
+    step = workflow[start : workflow.index("- name: Restore source registry", start)]
+    assert "if: always()" in step
+    assert "actions/upload-artifact@v7" in step
+    assert "if-no-files-found: ignore" in step
+    assert "retention-days: 14" in step
+    assert "python-reconciliation-review.json" in step
+    assert "ai-reconciliation-review.json" in step
+    assert "staging" not in step.lower()
+
+
 def test_pages_workflow_closes_existing_refresh_pr_when_no_pending_releases():
     workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
     cleanup_start = workflow.index("- name: Close empty refresh PR")

@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Atomic Blonde unique merge",
+    "existing": [{"movie_title": "Atomic Blonde", "release_date": "2017-07-26", "tmdb_id": "341013"}],
+    "incoming": [{"movie_title": "Atomic Blonde", "release_date": "Unknown", "evidence_type": "google-sheet-list"}],
+    "expected": {"kind": "merge", "release_date": "2017-07-26"}
+  },
+  {
+    "name": "John Wick Chapter 2 unique merge",
+    "existing": [{"movie_title": "John Wick: Chapter 2", "release_date": "2017-02-10"}],
+    "incoming": [{"movie_title": "John Wick Chapter 2", "release_date": "Unknown", "evidence_type": "google-sheet-list"}],
+    "expected": {"kind": "merge", "release_date": "2017-02-10"}
+  },
+  {
+    "name": "Schindlers List apostrophe variant merge",
+    "existing": [{"movie_title": "Schindler's List", "release_date": "1993-12-15"}],
+    "incoming": [{"movie_title": "Schindlers List!", "release_date": "Unknown", "evidence_type": "google-sheet-list"}],
+    "expected": {"kind": "merge", "release_date": "1993-12-15"}
+  },
+  {
+    "name": "Scream ambiguous",
+    "existing": [
+      {"movie_title": "Scream", "release_date": "1996"},
+      {"movie_title": "Scream", "release_date": "2022"}
+    ],
+    "incoming": [{"movie_title": "Scream", "release_date": "Unknown", "evidence_type": "google-sheet-list"}],
+    "expected": {"kind": "review", "reason": "ambiguous-yearless-title", "release_dates": ["1996", "2022"]}
+  },
+  {
+    "name": "Divergent unmatched review",
+    "existing": [],
+    "incoming": [{"movie_title": "Divergent", "release_date": "Unknown", "evidence_type": "google-sheet-list"}],
+    "expected": {"kind": "review", "reason": "missing-year-no-match"}
+  },
+  {
+    "name": "Evil Dead II unmatched review",
+    "existing": [],
+    "incoming": [{"movie_title": "Evil Dead II", "release_date": "Unknown", "evidence_type": "google-sheet-list"}],
+    "expected": {"kind": "review", "reason": "missing-year-no-match"}
+  },
+  {
+    "name": "F9 unmatched review",
+    "existing": [],
+    "incoming": [{"movie_title": "F9", "release_date": "Unknown", "evidence_type": "google-sheet-list"}],
+    "expected": {"kind": "review", "reason": "missing-year-no-match"}
+  }
+]
