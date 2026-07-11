@@ -94,9 +94,9 @@ def write_artifacts(
 def _write_review_output(path: Path, result: ReconciliationResult) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
-        "merged": result.merged_count,
-        "additions": len(result.additions),
-        "review": len(result.review_items),
+        "merged_count": result.merged_count,
+        "addition_count": len(result.additions),
+        "review_count": len(result.review_items),
         "items": [
             {
                 "reason": item.reason,

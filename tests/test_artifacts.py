@@ -36,9 +36,10 @@ def test_publish_outputs_writes_data_and_dashboard_from_releases(tmp_path: Path)
     assert (tmp_path / "dist/releases.json").exists()
 
 
-def test_write_artifacts_sorts_known_dates_newest_first_unknown_last(
+def test_write_artifacts_quarantines_unmatched_unknown_and_writes_review(
     tmp_path: Path,
 ):
+    review_path = tmp_path / "review.json"
     write_artifacts(
         [
             release("Unknown Date", "Unknown"),
@@ -46,14 +47,19 @@ def test_write_artifacts_sorts_known_dates_newest_first_unknown_last(
             release("Older", "2020"),
         ],
         output_dir=tmp_path,
+        review_output_path=review_path,
     )
 
     data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
     assert [item["movie_title"] for item in data] == [
         "Newer",
         "Older",
-        "Unknown Date",
     ]
+    review = json.loads(review_path.read_text(encoding="utf-8"))
+    assert review["merged_count"] == 0
+    assert review["addition_count"] == 2
+    assert review["review_count"] == 1
+    assert review["items"][0]["reason"] == "missing-year-no-match"
 
 
 def test_write_artifacts_merges_into_existing_releases_json(tmp_path: Path):
@@ -188,6 +194,23 @@ def test_write_artifacts_preserves_same_tmdb_distinct_bluray_releases(
     } == {
         (first.movie_title, first.bluray_url),
         (seventh.movie_title, seventh.bluray_url),
+    }
+
+
+def test_write_artifacts_keeps_same_title_year_different_bluray_urls(
+    tmp_path: Path,
+):
+    first = release("Avatar", "2009")
+    first.bluray_url = "https://www.blu-ray.com/movies/Avatar/1/"
+    second = release("Avatar", "2009")
+    second.bluray_url = "https://www.blu-ray.com/movies/Avatar/2/"
+
+    write_artifacts([first, second], output_dir=tmp_path)
+
+    data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
+    assert {item["bluray_url"] for item in data} == {
+        first.bluray_url,
+        second.bluray_url,
     }
 
 
