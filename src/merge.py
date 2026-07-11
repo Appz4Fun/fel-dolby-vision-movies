@@ -29,7 +29,8 @@ def _is_ai_evidence(evidence_type: str) -> bool:
 # Title tokens that mark a genuinely distinct physical release sharing one TMDB
 # id (editions, cuts, season/series discs). These are a conservative stop signal,
 # not proof that descriptor-free rows are aliases; reconciliation separately
-# requires explicit cross-title AKA evidence before it can collapse them.
+# requires alias proof (explicit cross-title AKA evidence, or titles that are
+# mere spelling variants of each other) before it can collapse them.
 _EDITION_DESCRIPTOR_RE = re.compile(
     r"\b(?:extended|collector|collectors|director|directors|theatrical|"
     r"remaster|remastered|restored|uncut|unrated|special\s+edition|anniversary|"
@@ -233,15 +234,12 @@ def _is_reconciliation_alias_group(
     if not identity_is_compatible:
         return False
 
-    explicit_edges = _explicit_aka_edges(rows)
-    if not explicit_edges:
-        return False
-
-    edges = set(explicit_edges)
-    orthographic_keys = [_orthographic_title_key(row.movie_title) for row in rows]
+    edges = _explicit_aka_edges(rows)
     for left_index in range(len(rows)):
         for right_index in range(left_index + 1, len(rows)):
-            if orthographic_keys[left_index] == orthographic_keys[right_index]:
+            if _titles_are_spelling_variants(
+                rows[left_index].movie_title, rows[right_index].movie_title
+            ):
                 edges.add((left_index, right_index))
     return _graph_connects_all_rows(len(rows), edges)
 
@@ -301,6 +299,61 @@ def _orthographic_title_key(title: str) -> str:
     return " ".join(
         replacements.get(token, token) for token in canonical_title_key(title).split()
     )
+
+
+_DIGIT_RUN_RE = re.compile(r"\d+")
+# Below this many letters a one-character edit rewrites too much of the title
+# ("Up" vs "Us") to be trusted as a typo, so short titles must match outright.
+_MIN_TYPO_TITLE_LENGTH = 5
+
+
+def _titles_are_spelling_variants(left_title: str, right_title: str) -> bool:
+    """True when two titles differ only by orthography or a single typo.
+
+    Callers must already hold identity corroboration (same TMDB id, same
+    non-empty IMDb id, same year, no edition descriptors); this predicate only
+    rejects edits that could still mark a distinct release: digit runs must
+    match exactly so sequels and numbered parts ("Iron Man 2" vs "Iron Man 3")
+    never count as typos, and very short titles must match outright.
+    """
+    left_key = _orthographic_title_key(left_title)
+    right_key = _orthographic_title_key(right_title)
+    if left_key == right_key:
+        return True
+    if _DIGIT_RUN_RE.findall(left_key) != _DIGIT_RUN_RE.findall(right_key):
+        return False
+    left_compact = left_key.replace(" ", "")
+    right_compact = right_key.replace(" ", "")
+    if min(len(left_compact), len(right_compact)) < _MIN_TYPO_TITLE_LENGTH:
+        return False
+    return _is_within_one_edit(left_compact, right_compact)
+
+
+def _is_within_one_edit(left: str, right: str) -> bool:
+    """True when at most one substitution, indel, or adjacent swap apart."""
+    if left == right:
+        return True
+    if len(left) == len(right):
+        mismatches = [
+            index
+            for index, (left_char, right_char) in enumerate(zip(left, right))
+            if left_char != right_char
+        ]
+        if len(mismatches) == 1:
+            return True
+        return (
+            len(mismatches) == 2
+            and mismatches[1] == mismatches[0] + 1
+            and left[mismatches[0]] == right[mismatches[1]]
+            and left[mismatches[1]] == right[mismatches[0]]
+        )
+    shorter, longer = sorted((left, right), key=len)
+    if len(longer) - len(shorter) != 1:
+        return False
+    for index in range(len(shorter)):
+        if shorter[index] != longer[index]:
+            return shorter[index:] == longer[index + 1 :]
+    return True
 
 
 def _graph_connects_all_rows(
