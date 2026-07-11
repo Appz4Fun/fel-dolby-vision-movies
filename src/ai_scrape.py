@@ -96,7 +96,11 @@ def ai_extract_releases(
     rejection_reasons: list[str] = []
     for source_url, text in pages:
         try:
-            candidates = validate_ai_candidates(_extract_candidates_with_retries(ai_client, source_url, text), text, rejection_reasons)
+            candidates = validate_ai_candidates(
+                _extract_candidates_with_retries(ai_client, source_url, text),
+                text,
+                rejection_reasons,
+            )
         except httpx.HTTPError as exc:
             print(f"ai-scrape: extraction failed for {source_url}: {exc}")
             continue
@@ -104,8 +108,14 @@ def ai_extract_releases(
             if candidate.title and candidate.evidence:
                 releases.append(_candidate_to_release(candidate, collected_at))
     if rejection_reasons:
-        counts = {reason: rejection_reasons.count(reason) for reason in sorted(set(rejection_reasons))}
-        print("ai-scrape rejected candidates: " + ", ".join(f"{k}={v}" for k, v in counts.items()))
+        counts = {
+            reason: rejection_reasons.count(reason)
+            for reason in sorted(set(rejection_reasons))
+        }
+        print(
+            "ai-scrape rejected candidates: "
+            + ", ".join(f"{k}={v}" for k, v in counts.items())
+        )
     return releases
 
 
@@ -197,7 +207,11 @@ def _load_existing_releases(output_dir: Path) -> list[FelRelease]:
     return [release_from_dict(item) for item in raw]
 
 
-def _publish_ai_releases(ai_releases: list[FelRelease], output_dir: Path, review_output_path: Path | None = None) -> list[FelRelease]:
+def _publish_ai_releases(
+    ai_releases: list[FelRelease],
+    output_dir: Path,
+    review_output_path: Path | None = None,
+) -> list[FelRelease]:
     """Enrich and publish AI releases through the shared artifact pipeline."""
     import artifacts
     import main
@@ -209,13 +223,17 @@ def _publish_ai_releases(ai_releases: list[FelRelease], output_dir: Path, review
 
 
 def run_ai_scrape(
-    source_path: Path, output_dir: Path, cache_dir: Path, review_output_path: Path | None = None
+    source_path: Path,
+    output_dir: Path,
+    cache_dir: Path,
+    review_output_path: Path | None = None,
 ) -> int:  # pragma: no cover - CLI entrypoint, requires live AI
     try:
         settings = AISettings.from_env()
     except RuntimeError:
         if review_output_path is not None:
             import artifacts
+
             artifacts.write_empty_review_output(review_output_path)
         print("ai-scrape skipped; OPENAI_API_KEY / CODEX_API_KEY is not configured")
         return 0

@@ -290,9 +290,12 @@ def _extract_ai_candidates(  # pragma: no cover - requires live AI credentials
                 errors.append(f"{source_url}\t{result.error}")
                 continue
             try:
-                candidates.extend(validate_ai_candidates(
-                    ai_client.extract_candidates(source_url, result.text), result.text
-                ))
+                candidates.extend(
+                    validate_ai_candidates(
+                        ai_client.extract_candidates(source_url, result.text),
+                        result.text,
+                    )
+                )
             except httpx.HTTPError as exc:
                 errors.append(f"{source_url}\t{exc.__class__.__name__}")
                 continue
@@ -308,7 +311,9 @@ def _normalized_source(text: str) -> str:
 
 
 def validate_ai_candidates(
-    candidates: list[FoundCandidate], source_text: str, diagnostics: list[str] | None = None
+    candidates: list[FoundCandidate],
+    source_text: str,
+    diagnostics: list[str] | None = None,
 ) -> list[FoundCandidate]:
     """Keep only candidates whose exact evidence binds to affirmative FEL source text."""
     source = _normalized_source(source_text)
@@ -323,9 +328,13 @@ def validate_ai_candidates(
             reason = "title-not-bound"
         elif re.search(r"\b(?:MEL(?:-only)?|REMUX)\b", evidence, re.I):
             reason = "excluded-format"
-        elif re.search(r"\b(?:FEL\s*:\s*No|No\s+FEL|without\s+FEL|not\s+FEL)\b", evidence, re.I):
+        elif re.search(
+            r"\b(?:FEL\s*:\s*No|No\s+FEL|without\s+FEL|not\s+FEL)\b", evidence, re.I
+        ):
             reason = "negated-fel"
-        elif not re.search(r"\b(?:Profile\s*7|P7)\b", evidence, re.I) or not re.search(r"\bFEL\b", evidence, re.I):
+        elif not re.search(r"\b(?:Profile\s*7|P7)\b", evidence, re.I) or not re.search(
+            r"\bFEL\b", evidence, re.I
+        ):
             reason = "missing-affirmative-fel"
         if reason:
             if diagnostics is not None:
@@ -336,12 +345,24 @@ def validate_ai_candidates(
             if diagnostics is not None:
                 diagnostics.append("ambiguous-year")
             continue
-        year = candidate.year if re.fullmatch(r"(?:19|20)\d{2}", candidate.year) else "Unknown"
+        year = (
+            candidate.year
+            if re.fullmatch(r"(?:19|20)\d{2}", candidate.year)
+            else "Unknown"
+        )
         if year != "Unknown" and year not in years:
             if diagnostics is not None:
                 diagnostics.append("year-not-in-evidence")
             continue
-        accepted.append(FoundCandidate(candidate.title, year, candidate.source_url, candidate.evidence, candidate.extraction_method))
+        accepted.append(
+            FoundCandidate(
+                candidate.title,
+                year,
+                candidate.source_url,
+                candidate.evidence,
+                candidate.extraction_method,
+            )
+        )
     return accepted
 
 

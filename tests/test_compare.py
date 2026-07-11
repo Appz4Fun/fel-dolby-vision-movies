@@ -118,7 +118,9 @@ def test_ai_extraction_prompt_rejects_list_ordinals():
     ],
 )
 def test_validate_ai_candidates_rejects_adversarial_evidence(title, evidence, reason):
-    candidate = compare.FoundCandidate(title, "2021", "https://src.test", evidence, "ai")
+    candidate = compare.FoundCandidate(
+        title, "2021", "https://src.test", evidence, "ai"
+    )
     diagnostics: list[str] = []
     assert compare.validate_ai_candidates([candidate], evidence, diagnostics) == []
     assert diagnostics == [reason]
@@ -126,7 +128,9 @@ def test_validate_ai_candidates_rejects_adversarial_evidence(title, evidence, re
 
 def test_validate_ai_candidates_rejects_competing_years_in_excerpt():
     evidence = "Dune (1984), Dune (2021) Profile 7 FEL"
-    candidate = compare.FoundCandidate("Dune", "2021", "https://src.test", evidence, "ai")
+    candidate = compare.FoundCandidate(
+        "Dune", "2021", "https://src.test", evidence, "ai"
+    )
     diagnostics: list[str] = []
     assert compare.validate_ai_candidates([candidate], evidence, diagnostics) == []
     assert diagnostics == ["ambiguous-year"]

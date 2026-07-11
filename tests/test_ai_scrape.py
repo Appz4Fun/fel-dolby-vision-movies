@@ -84,11 +84,15 @@ def test_ai_discover_sources_returns_empty_on_ai_http_error():
 
 def test_ai_extract_releases_converts_nonblank_candidates():
     candidates = [
-        FoundCandidate("Drop", "2025", "https://src.test", "Drop (2025) Profile 7 FEL", "ai"),
+        FoundCandidate(
+            "Drop", "2025", "https://src.test", "Drop (2025) Profile 7 FEL", "ai"
+        ),
         FoundCandidate("", "2020", "https://src.test", "blank", "ai"),
     ]
     client = FakeAIClient(candidates=candidates)
-    releases = ai_extract_releases(client, [("https://src.test", "Drop (2025) Profile 7 FEL")])
+    releases = ai_extract_releases(
+        client, [("https://src.test", "Drop (2025) Profile 7 FEL")]
+    )
     assert [r.movie_title for r in releases] == ["Drop"]
     assert releases[0].fel_evidence.evidence_type == "ai-extracted"
 
@@ -125,14 +129,16 @@ def test_ai_extract_releases_retries_transient_http_errors():
                     "Alien",
                     "1979",
                     source_url,
-                        "Alien (1979) is confirmed Profile 7 FEL",
+                    "Alien (1979) is confirmed Profile 7 FEL",
                     "ai",
                 )
             ]
 
     client = FlakyAIClient()
 
-    releases = ai_extract_releases(client, [(sheet_url, "Alien (1979) is confirmed Profile 7 FEL")])
+    releases = ai_extract_releases(
+        client, [(sheet_url, "Alien (1979) is confirmed Profile 7 FEL")]
+    )
 
     assert client.calls == 2
     assert [release.movie_title for release in releases] == ["Alien"]
@@ -190,7 +196,7 @@ def test_ai_extract_releases_backs_off_between_retry_attempts(monkeypatch):
                     "Alien",
                     "1979",
                     source_url,
-                        "Alien (1979) is confirmed Profile 7 FEL",
+                    "Alien (1979) is confirmed Profile 7 FEL",
                     "ai",
                 )
             ]
@@ -198,7 +204,9 @@ def test_ai_extract_releases_backs_off_between_retry_attempts(monkeypatch):
     monkeypatch.setattr(ai_scrape_mod.time, "sleep", sleeps.append)
     client = FlakyAIClient()
 
-    releases = ai_extract_releases(client, [(source_url, "Alien (1979) is confirmed Profile 7 FEL")])
+    releases = ai_extract_releases(
+        client, [(source_url, "Alien (1979) is confirmed Profile 7 FEL")]
+    )
 
     assert client.calls == 3
     assert sleeps == [1.0, 2.0]
@@ -480,22 +488,46 @@ def test_load_existing_releases_missing_file_returns_empty(tmp_path):
 
 def test_publish_ai_releases_forwards_review_path(monkeypatch, tmp_path):
     import ai_scrape as mod
+
     seen = {}
-    monkeypatch.setattr("main._enrich_if_possible", lambda releases: seen.setdefault("enriched", releases))
-    monkeypatch.setattr("artifacts.publish_outputs", lambda releases, **kwargs: seen.update(kwargs) or releases)
+    monkeypatch.setattr(
+        "main._enrich_if_possible",
+        lambda releases: seen.setdefault("enriched", releases),
+    )
+    monkeypatch.setattr(
+        "artifacts.publish_outputs",
+        lambda releases, **kwargs: seen.update(kwargs) or releases,
+    )
     review = tmp_path / "review.json"
-    releases = [FelRelease("Movie", "2025", FelEvidence("https://src", "Movie (2025) Profile 7 FEL", "ai-extracted"))]
+    releases = [
+        FelRelease(
+            "Movie",
+            "2025",
+            FelEvidence("https://src", "Movie (2025) Profile 7 FEL", "ai-extracted"),
+        )
+    ]
     assert mod._publish_ai_releases(releases, tmp_path, review) == releases
     assert seen["review_output_path"] == review
 
 
-def test_run_ai_scrape_missing_credentials_writes_canonical_review(tmp_path, monkeypatch):
+def test_run_ai_scrape_missing_credentials_writes_canonical_review(
+    tmp_path, monkeypatch
+):
     import ai_scrape as mod
+
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     monkeypatch.delenv("CODEX_API_KEY", raising=False)
     review = tmp_path / "review.json"
-    assert mod.run_ai_scrape(tmp_path / "forums.txt", tmp_path, tmp_path / "cache", review) == 0
-    assert json.loads(review.read_text()) == {"merged_count": 0, "addition_count": 0, "review_count": 0, "items": []}
+    assert (
+        mod.run_ai_scrape(tmp_path / "forums.txt", tmp_path, tmp_path / "cache", review)
+        == 0
+    )
+    assert json.loads(review.read_text()) == {
+        "merged_count": 0,
+        "addition_count": 0,
+        "review_count": 0,
+        "items": [],
+    }
 
 
 def test_run_ai_scrape_merges_into_existing_database(tmp_path, monkeypatch):
