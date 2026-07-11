@@ -61,7 +61,7 @@ def test_canonical_url_key_ignores_transport_and_tracking_parts():
 Run:
 
 ```bash
-just test tests/test_merge.py -q
+PYTHONPATH=src uv run --with-requirements requirements-dev.txt pytest tests/test_merge.py -q
 ```
 
 Expected: both new assertions fail against the current normalizers.
@@ -113,7 +113,7 @@ def test_yearless_remake_title_is_review_only():
         [release("Scream", "1996"), release("Scream", "2022")],
         [release("Scream", "Unknown")],
     )
-    assert [item.release.release_date for item in result.releases] == ["1996", "2022"]
+    assert [item.release_date for item in result.releases] == ["1996", "2022"]
     assert result.additions == []
     assert result.review_items[0].reason == "ambiguous-yearless-title"
 
@@ -190,12 +190,37 @@ def test_distinct_known_year_edition_remains_an_addition():
 Also assert that merging an AI candidate into deterministic evidence keeps the
 deterministic `FelEvidence` in either encounter order.
 
+Add existing-catalog sanitation cases:
+
+```python
+def test_existing_yearless_row_is_reconciled_before_incoming():
+    result = reconcile_releases(
+        [release("Atomic Blonde", "2017"), release("Atomic Blonde", "Unknown")],
+        [],
+    )
+    assert [(item.movie_title, item.release_date) for item in result.releases] == [
+        ("Atomic Blonde", "2017")
+    ]
+
+
+def test_existing_unmatched_yearless_row_is_quarantined():
+    result = reconcile_releases([release("F9", "Unknown")], [])
+    assert result.releases == []
+    assert result.review_items[0].reason == "missing-year-no-match"
+```
+
+Add URL-match and title/year-match cases with conflicting nonblank TMDB/IMDb
+IDs, and a same-title/year case with two different non-empty Blu-ray URLs. The
+latter must remain two releases. Extend the existing TMDB-dedupe tests so
+different-title AKA rows may collapse but same-title rows with different URLs
+do not.
+
 - [ ] **Step 5: Run reconciler tests and verify RED**
 
 Run:
 
 ```bash
-just test tests/test_reconcile.py tests/test_merge.py -q
+PYTHONPATH=src uv run --with-requirements requirements-dev.txt pytest tests/test_reconcile.py tests/test_merge.py -q
 ```
 
 Expected: import failure for the not-yet-created `reconcile` module after the
@@ -204,7 +229,9 @@ canonicalization tests pass.
 - [ ] **Step 6: Implement `src/reconcile.py` minimally**
 
 Implement `ReviewItem`, `ReconciliationResult`, `reconcile_releases`, and
-private helpers with this decision sequence:
+private helpers. Build the initial catalog from dated existing rows first,
+classify existing yearless rows second, then process incoming rows with this
+decision sequence:
 
 ```python
 for candidate in incoming:
@@ -223,18 +250,21 @@ for candidate in incoming:
         additions.append(candidate)
 ```
 
-Matching must use exact canonical Blu-ray URL, consistent TMDB/IMDb sets,
-canonical title/year, then unique canonical title for yearless candidates.
-When both rows have different Blu-ray URLs and either title has an edition
-descriptor, treat a known-year candidate as a distinct addition and a yearless
-candidate as `ambiguous-edition`.
+Before every match tier, reject different nonblank TMDB IDs, IMDb IDs, or
+canonical Blu-ray URLs as `identity-conflict`; URL-first must never override an
+ID conflict. Matching then uses exact canonical Blu-ray URL, consistent
+TMDB/IMDb sets, canonical title/year, and unique canonical title for yearless
+candidates. Different non-empty Blu-ray URLs remain distinct even when
+title/year or movie ID matches. A known-year candidate with a distinct URL is
+an addition; a yearless candidate without a decisive URL target is
+`ambiguous-edition`.
 
 - [ ] **Step 7: Verify GREEN and commit**
 
 Run:
 
 ```bash
-just test tests/test_reconcile.py tests/test_merge.py -q
+PYTHONPATH=src uv run --with-requirements requirements-dev.txt pytest tests/test_reconcile.py tests/test_merge.py -q
 git diff --check
 git add src/reconcile.py src/merge.py tests/test_reconcile.py tests/test_merge.py
 git commit -S -m "feat: reconcile release identities"
@@ -287,6 +317,11 @@ def test_write_artifacts_writes_review_json_for_ambiguous_yearless_row(tmp_path)
 
 Add a second review test with two dated `Scream` rows already in JSON and
 assert `candidate_titles` is stable and sorted in catalog order.
+Update the existing artifact test that currently expects an unmatched
+`Unknown Date` row to remain public: it must now assert that the row is omitted
+and represented in the review JSON. Add a test starting with an already-written
+dated row plus an already-written yearless duplicate and assert the stale row
+is removed on the next write.
 
 - [ ] **Step 2: Write failing PR delta tests**
 
@@ -315,7 +350,7 @@ def test_added_releases_keeps_known_year_new_title():
 Run:
 
 ```bash
-just test tests/test_artifacts.py tests/test_release_delta.py -q
+PYTHONPATH=src uv run --with-requirements requirements-dev.txt pytest tests/test_artifacts.py tests/test_release_delta.py -q
 ```
 
 Expected: the artifact API rejects `review_output_path` and yearless delta
@@ -329,8 +364,7 @@ sheet filtering, call:
 
 ```python
 result = reconcile_releases(existing, releases)
-merged = dedupe_releases(result.releases, canonical_key)
-merged = dedupe_releases(merged, title_bluray_key)
+merged = dedupe_releases(result.releases, title_bluray_key)
 merged = dedupe_tmdb_releases(merged)
 if review_output_path is not None:
     write_review_output(review_output_path, result)
@@ -354,6 +388,21 @@ top-level shape:
 }
 ```
 
+Do not run a canonical title/year-only pass before URL-aware cleanup. Confirm
+the adjusted `dedupe_tmdb_releases` from Task 1 cannot collapse same-title rows
+with different non-empty Blu-ray URLs.
+
+Keep `write_artifacts` returning its existing list API. Factor an internal
+helper that also returns the `ReconciliationResult`; `publish_outputs` uses it
+to print:
+
+```text
+reconciliation complete; merged=<n> additions=<n> review=<n>
+```
+
+Add a `capsys` assertion proving this aggregate line is emitted even when no
+review path is requested.
+
 Replace `release_delta.added_releases` with:
 
 ```python
@@ -368,7 +417,7 @@ Delete the now-private duplicate identity-set helpers and unused imports.
 Run:
 
 ```bash
-just test tests/test_reconcile.py tests/test_artifacts.py tests/test_release_delta.py -q
+PYTHONPATH=src uv run --with-requirements requirements-dev.txt pytest tests/test_reconcile.py tests/test_artifacts.py tests/test_release_delta.py -q
 git diff --check
 git add src/artifacts.py src/reconcile.py src/release_delta.py tests/test_artifacts.py tests/test_release_delta.py tests/test_reconcile.py
 git commit -S -m "fix: unify publication and release deltas"
@@ -416,11 +465,11 @@ def test_ai_extract_releases_requires_evidence_from_source_text():
 
 def test_ai_extract_releases_accepts_html_normalized_exact_evidence():
     client = FakeAIClient(candidates=[
-        FoundCandidate("Alien", "1979", "https://src.test", "Alien is Profile 7 FEL", "ai")
+        FoundCandidate("Alien", "1979", "https://src.test", "Alien (1979) is Profile 7 FEL", "ai")
     ])
     releases = ai_extract_releases(
         client,
-        [("https://src.test", "<p>Alien&nbsp;is <b>Profile 7 FEL</b></p>")],
+        [("https://src.test", "<p>Alien&nbsp;(1979) is <b>Profile 7 FEL</b></p>")],
     )
     assert [(item.movie_title, item.release_date) for item in releases] == [("Alien", "1979")]
 
@@ -450,7 +499,7 @@ def test_ai_extract_releases_requires_title_and_fel_marker_in_evidence():
 Run:
 
 ```bash
-just test tests/test_compare.py tests/test_ai_scrape.py -q
+PYTHONPATH=src uv run --with-requirements requirements-dev.txt pytest tests/test_compare.py tests/test_ai_scrape.py -q
 ```
 
 Expected: prompt assertions fail, blank evidence is accepted, unsupported
@@ -464,23 +513,36 @@ and nonblank evidence.
 
 In `src/ai_scrape.py`, normalize source and evidence with `html.unescape`, HTML
 tag removal, case folding, punctuation normalization through
-`canonical_title_key`, and whitespace collapse. Validate that:
+`canonical_title_key`, and whitespace collapse. Validate one local normalized
+source row/line/block at a time. A candidate is supported only when the complete
+normalized title phrase matches on token boundaries and that same excerpt
+contains an affirmative `FEL` marker:
 
 ```python
+title_phrase = f" {canonical_title_key(candidate.title)} "
+evidence_phrase = f" {canonical_title_key(candidate.evidence)} "
 supported = (
     normalized_evidence in normalized_source
-    and canonical_title_key(candidate.title) in canonical_title_key(candidate.evidence)
-    and re.search(r"\b(?:fel|p7|profile\s*7)\b", normalized_evidence)
+    and title_phrase in evidence_phrase
+    and re.search(r"\bfel\b", normalized_evidence)
 )
 ```
 
 Retain a candidate year only when it fully matches `(?:19|20)\d{2}` and the
 same year appears in its evidence; otherwise replace it with `Unknown` before
-conversion. Print only aggregate rejection counts by reason.
+conversion. Reject evidence that borrows the title, year, or FEL marker from a
+different row/block. `P7 MEL`, `Profile 7 MEL`, and generic REMUX without an
+affirmative FEL marker must fail. Print only aggregate rejection counts by
+reason. Add adversarial tests for `Up` inside `setup`, MEL-only evidence, and a
+multi-release excerpt whose FEL marker belongs to another title.
 
 Remove AI's pre-publication `dedupe_releases([*existing, *unique_ai], ...)`
 merge. Call `artifacts.publish_outputs(unique_ai, ...)` directly so the shared
 artifact reconciler owns all existing-vs-incoming decisions exactly once.
+The current `run_ai_scrape` entrypoint is marked `# pragma: no cover`; extract
+its existing-load/enrich/publish orchestration into a small covered helper (or
+remove that pragma) and test the helper with a temporary catalog so the new
+reconciliation forwarding is actually covered.
 
 - [ ] **Step 5: Add AI publication regression tests**
 
@@ -501,7 +563,7 @@ Use monkeypatched enrichment and temporary JSON; do not call a live API.
 Run:
 
 ```bash
-just test tests/test_compare.py tests/test_ai_scrape.py tests/test_artifacts.py tests/test_reconcile.py -q
+PYTHONPATH=src uv run --with-requirements requirements-dev.txt pytest tests/test_compare.py tests/test_ai_scrape.py tests/test_artifacts.py tests/test_reconcile.py -q
 git diff --check
 git add src/ai_scrape.py src/compare.py tests/test_ai_scrape.py tests/test_compare.py
 git commit -S -m "fix: validate and reconcile AI extraction"
@@ -569,7 +631,7 @@ assert "if-no-files-found: ignore" in workflow
 Run:
 
 ```bash
-just test tests/test_main.py tests/test_workflows.py -q
+PYTHONPATH=src uv run --with-requirements requirements-dev.txt pytest tests/test_main.py tests/test_workflows.py -q
 ```
 
 Expected: argparse rejects `--review-output` and the workflow markers are
@@ -611,7 +673,7 @@ Do not add either review file to any `git add` command.
 Run:
 
 ```bash
-just test tests/test_main.py tests/test_workflows.py tests/test_ai_scrape.py -q
+PYTHONPATH=src uv run --with-requirements requirements-dev.txt pytest tests/test_main.py tests/test_workflows.py tests/test_ai_scrape.py -q
 git diff --check
 git add src/main.py src/ai_scrape.py tests/test_main.py .github/workflows/pages.yml tests/test_workflows.py
 git commit -S -m "ci: upload release reconciliation reviews"
@@ -649,7 +711,7 @@ review cases have the exact expected reason.
 Run:
 
 ```bash
-just test tests/test_reconcile.py -q
+PYTHONPATH=src uv run --with-requirements requirements-dev.txt pytest tests/test_reconcile.py -q
 ```
 
 Expected: PASS.
@@ -683,6 +745,10 @@ for candidate in yearless:
     decision = reconcile_releases(base, [candidate])
     assert decision.additions == []
     assert (decision.merged_count, len(decision.review_items)) in {(1, 0), (0, 1)}
+assert all(item.release_date != "Unknown" for item in result.releases)
+assert {
+    (item.movie_title, item.release_date) for item in base
+} <= {(item.movie_title, item.release_date) for item in result.releases}
 print({
     "refresh_yearless": len(yearless),
     "yearless_additions": len(yearless_additions),
@@ -692,8 +758,8 @@ print({
 PY
 ```
 
-Expected: `refresh_yearless=94` and `yearless_additions=0`. Record the actual
-merged/review split in the PR body.
+Expected: `refresh_yearless=94`, `yearless_additions=0`, `merged=90`, and
+`review=4`. Record this split in the PR body.
 
 - [ ] **Step 4: Run the full repository gate**
 

@@ -82,18 +82,26 @@ def reconcile_releases(
 ) -> ReconciliationResult: ...
 ```
 
-The function processes incoming rows in stable input order and never mutates
-the caller's lists. Existing rows remain the authority. When an incoming row
-matches one existing row, `merge_releases(existing, incoming)` is used so the
-existing deterministic evidence wins over AI evidence under the invariant
-already enforced in `src/merge.py`.
+The function never mutates the caller's lists. It first builds an edition-aware
+catalog from dated existing rows, then reconciles existing yearless rows, and
+only then processes incoming rows in stable input order. This two-pass existing
+sanitation ensures an `Unknown` row already written by an older pipeline cannot
+remain public forever. When an incoming row matches one existing row,
+`merge_releases(existing, incoming)` is used so the existing deterministic
+evidence wins over AI evidence under the invariant already enforced in
+`src/merge.py`.
 
 ### Match hierarchy
 
-The reconciler applies the following tiers in order:
+Before applying any match tier, the reconciler compares every non-empty strong
+identifier present on both candidate and target. Different TMDB IDs, IMDb IDs,
+or canonical Blu-ray URLs are conflicts, so even a title/year or URL match
+cannot produce a mixed "Frankenstein" record.
+
+The reconciler then applies the following tiers in order:
 
 1. Canonical Blu-ray URL. A single exact URL match identifies the physical
-   release.
+   release only when its other populated strong IDs are consistent.
 2. TMDB or IMDb ID. A single matching catalog row is usable. If a movie ID
    matches multiple physical editions, canonical title/year and Blu-ray URL may
    narrow it; otherwise the candidate is review-only.
@@ -110,6 +118,10 @@ removed rather than converted to a token boundary, so `Schindler's` and
 
 No fuzzy or substring tier is added. Consequently, unmatched variants such as
 `F9` remain visible in review output but cannot become false public additions.
+Two rows with different non-empty canonical Blu-ray URLs are never merged merely
+because title/year or movie ID matches; those URLs may represent distinct
+physical editions. Existing AKA-title collapse is allowed only through an
+explicit, tested alias-safe path, never as a blanket same-TMDB rule.
 
 ### Classification rules
 
@@ -128,9 +140,11 @@ contracts agree by construction.
 
 ### Artifact publication
 
-`artifacts.write_artifacts` loads existing JSON, normalizes both sides, invokes
-the reconciler, and then runs the existing canonical/Blu-ray/TMDB dedupe passes
-as defensive cleanup. `publish_outputs` accepts an optional
+`artifacts.write_artifacts` loads existing JSON, normalizes both sides, and
+invokes the reconciler. Any final cleanup is edition-aware: it may merge the
+same canonical Blu-ray URL or a proven AKA identity, but it must not merge
+different non-empty Blu-ray URLs on title/year or movie ID alone.
+`publish_outputs` accepts an optional
 `review_output_path`. When supplied, it writes a stable JSON object containing
 counts and each review item's reason, candidate, and possible target titles.
 
@@ -155,10 +169,15 @@ The Python boundary remains authoritative. Before converting a
 `FoundCandidate` to `FelRelease`, it will:
 
 1. require a non-empty title and evidence excerpt;
-2. normalize HTML entities, tags, case, and whitespace and verify that the
-   evidence excerpt occurs in the fetched source text;
-3. accept a year only when it is a four-digit 19xx/20xx year present in the
-   evidence; otherwise normalize it to `Unknown`.
+2. normalize HTML entities, tags, case, and whitespace and verify that one
+   local source row/line/block contains the evidence excerpt;
+3. require a full token-boundary title phrase and an affirmative `FEL` marker
+   in that same local excerpt; generic P7, MEL-only, and REMUX evidence is not
+   sufficient;
+4. reject excerpts containing competing movie/year claims rather than borrowing
+   the FEL marker or year from a neighboring release;
+5. accept a year only when it is a four-digit 19xx/20xx year present in that
+   same excerpt; otherwise normalize it to `Unknown`.
 
 Unsupported AI candidates are skipped with non-secret aggregate diagnostics.
 Valid but unresolved yearless candidates proceed to reconciliation and appear
@@ -196,11 +215,16 @@ reconciler. Existing evidence and metadata remain authoritative.
 - unmatched `F9 | Unknown` is quarantined rather than added;
 - same TMDB ID across two editions is ambiguous without a Blu-ray URL;
 - exact Blu-ray URL selects one edition;
+- exact Blu-ray URL plus a conflicting TMDB/IMDb ID is quarantined;
+- title/year plus a conflicting TMDB/IMDb ID is quarantined;
+- same title/year with two different non-empty Blu-ray URLs remains distinct;
 - known-year new title is published as an addition;
 - conflicting TMDB/IMDb data is quarantined;
 - deterministic evidence survives either AI/existing input order;
 - review JSON is stable and includes reasons and possible targets;
 - AI evidence must be a normalized substring of the source;
+- short titles cannot match inside a larger word;
+- MEL-only, generic P7, generic REMUX, and cross-row evidence are rejected;
 - AI years absent from evidence become `Unknown`;
 - missing AI evidence is rejected.
 
@@ -208,6 +232,8 @@ reconciler. Existing evidence and metadata remain authoritative.
 
 - `artifacts.write_artifacts` removes the duplicate `Unknown` row while
   retaining the existing dated metadata and evidence;
+- an `Unknown` row already present in the existing JSON is also reconciled or
+  quarantined;
 - `release_delta.added_releases` reports the same classification;
 - CLI arguments reach deterministic and AI publication paths;
 - the workflow writes and uploads both review files without staging them;
@@ -220,8 +246,11 @@ catalog and `data/releases.json` from `origin/daily-fel-refresh` as incoming.
 The verification must prove:
 
 - zero `Unknown` rows are classified as additions;
-- all 94 current `Unknown` rows are either merged or review-only;
+- all 94 current `Unknown` rows are either merged or review-only (90 merge after
+  apostrophe normalization; `Scream`, `Divergent`, `Evil Dead II`, and `F9` are
+  review-only);
 - the dated base rows remain present;
+- the reconciled output contains no `Unknown` rows from this refresh;
 - no new duplicate normalized title/year identities are emitted.
 
 Finally run `just ci`, which covers Ruff lint/format, the full pytest suite with
@@ -241,11 +270,15 @@ Finally run `just ci`, which covers Ruff lint/format, the full pytest suite with
 ## Acceptance criteria
 
 1. The current 94 yearless refresh rows produce zero false additions.
-2. `Scream` remains two dated movies and gains no yearless third row.
-3. Existing deterministic evidence cannot be replaced by AI evidence.
-4. A genuinely new, source-supported, known-year AI result remains publishable.
-5. AI output without exact evidence or a source-backed year cannot bypass the
+2. The full current-data check proves 90 unique merges and four review-only
+   candidates, with no yearless rows left in publishable output.
+3. `Scream` remains two dated movies and gains no yearless third row.
+4. Existing deterministic evidence cannot be replaced by AI evidence.
+5. A genuinely new, source-supported, known-year AI result remains publishable.
+6. AI output without exact FEL evidence or a source-backed year cannot bypass the
    Python gate.
-6. Python publication and PR delta tests demonstrate identical classification.
-7. Review artifacts are uploaded and are not committed.
-8. `just ci` passes with 100% coverage and the benchmark green.
+7. Python publication and PR delta tests demonstrate identical classification.
+8. Review artifacts are uploaded and are not committed.
+9. Distinct non-empty Blu-ray URLs are not collapsed by title/year or movie ID
+   alone.
+10. `just ci` passes with 100% coverage and the benchmark green.
