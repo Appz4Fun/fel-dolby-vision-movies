@@ -56,29 +56,13 @@ def reconcile_releases(
         ((release, False, False) for release in incoming_yearless),
     )
     for candidate, is_existing, track_addition in candidates:
-        decision = _match_candidate(candidate, catalog)
-        if decision.reason:
-            review_items.append(
-                ReviewItem(candidate, decision.reason, decision.candidate_titles)
-            )
-        elif decision.index is not None:
-            if is_existing and catalog_is_addition[decision.index]:
-                target = catalog[decision.index]
-                catalog[decision.index] = replace(
-                    merge_releases(candidate, target), movie_title=target.movie_title
-                )
-                catalog_is_addition[decision.index] = False
-            else:
-                target = catalog[decision.index]
-                catalog[decision.index] = replace(
-                    merge_releases(target, candidate), movie_title=target.movie_title
-                )
+        review_item, merged = _process_candidate(
+            candidate, is_existing, track_addition, catalog, catalog_is_addition
+        )
+        if review_item is not None:
+            review_items.append(review_item)
+        if merged:
             merged_count += 1
-        elif not _year(candidate):
-            review_items.append(ReviewItem(candidate, "missing-year-no-match"))
-        else:
-            catalog.append(candidate)
-            catalog_is_addition.append(track_addition)
 
     finalized = dedupe_tmdb_release_groups(catalog)
     releases = [release for release, _ in finalized]
@@ -93,9 +77,60 @@ def reconcile_releases(
     return ReconciliationResult(releases, additions, review_items, merged_count)
 
 
+def _process_candidate(
+    candidate: FelRelease,
+    is_existing: bool,
+    track_addition: bool,
+    catalog: list[FelRelease],
+    catalog_is_addition: list[bool],
+) -> tuple[ReviewItem | None, bool]:
+    """Match one candidate against the catalog, updating it in place.
+
+    Returns (review_item, merged): review_item is set when the candidate
+    needs human review; merged is True when it was folded into an existing
+    catalog row (otherwise it was appended as a new row or sent to review).
+    """
+    decision = _match_candidate(candidate, catalog)
+    if decision.reason:
+        return (
+            ReviewItem(candidate, decision.reason, decision.candidate_titles),
+            False,
+        )
+    if decision.index is not None:
+        if is_existing and catalog_is_addition[decision.index]:
+            target = catalog[decision.index]
+            catalog[decision.index] = replace(
+                merge_releases(candidate, target), movie_title=target.movie_title
+            )
+            catalog_is_addition[decision.index] = False
+        else:
+            target = catalog[decision.index]
+            catalog[decision.index] = replace(
+                merge_releases(target, candidate), movie_title=target.movie_title
+            )
+        return None, True
+    if not _year(candidate):
+        return ReviewItem(candidate, "missing-year-no-match"), False
+    catalog.append(candidate)
+    catalog_is_addition.append(track_addition)
+    return None, False
+
+
 def _match_candidate(
     candidate: FelRelease, catalog: list[FelRelease]
 ) -> _MatchDecision:
+    signal_decision = _match_by_strong_signals(candidate, catalog)
+    if signal_decision is not None:
+        return signal_decision
+    if _year(candidate):
+        return _match_by_title_year(candidate, catalog)
+    return _match_by_yearless_title(candidate, catalog)
+
+
+def _match_by_strong_signals(
+    candidate: FelRelease, catalog: list[FelRelease]
+) -> _MatchDecision | None:
+    """Match by Blu-ray URL, TMDB id, or IMDb id; None if none of them hit."""
     candidate_url = canonical_url_key(candidate.bluray_url)
     url_matches = [
         index
@@ -107,64 +142,66 @@ def _match_candidate(
     signal_matches = [
         matches for matches in (url_matches, tmdb_matches, imdb_matches) if matches
     ]
-    if signal_matches:
-        implicated_matches = sorted(set().union(*signal_matches))
-        if not _match_sets_are_connected(signal_matches):
-            return _review_decision(
-                "identity-conflict",
-                catalog,
-                implicated_matches,
-            )
-        if len(url_matches) == 1:
-            return _target_decision(candidate, catalog, url_matches[0])
+    if not signal_matches:
+        return None
 
-        common_matches = sorted(
-            set(signal_matches[0]).intersection(*signal_matches[1:])
-        )
-        target_matches = common_matches or implicated_matches
-        consistent_matches = [
-            index
-            for index in target_matches
-            if _ids_are_consistent(candidate, catalog[index])
-        ]
-        if not consistent_matches:
-            return _review_decision("identity-conflict", catalog, target_matches)
-        if len(consistent_matches) == 1:
-            return _target_decision(candidate, catalog, consistent_matches[0])
+    implicated_matches = sorted(set().union(*signal_matches))
+    if not _match_sets_are_connected(signal_matches):
+        return _review_decision("identity-conflict", catalog, implicated_matches)
+    if len(url_matches) == 1:
+        return _target_decision(candidate, catalog, url_matches[0])
 
-        candidate_year = _year(candidate)
-        if candidate_year:
-            candidate_key = canonical_key(candidate)
-            narrowed = [
-                index
-                for index in consistent_matches
-                if canonical_key(catalog[index]) == candidate_key
-            ]
-            if len(narrowed) == 1:
-                return _target_decision(candidate, catalog, narrowed[0])
-        return _review_decision("ambiguous-edition", catalog, consistent_matches)
+    common_matches = sorted(set(signal_matches[0]).intersection(*signal_matches[1:]))
+    target_matches = common_matches or implicated_matches
+    consistent_matches = [
+        index
+        for index in target_matches
+        if _ids_are_consistent(candidate, catalog[index])
+    ]
+    if not consistent_matches:
+        return _review_decision("identity-conflict", catalog, target_matches)
+    if len(consistent_matches) == 1:
+        return _target_decision(candidate, catalog, consistent_matches[0])
 
     candidate_year = _year(candidate)
     if candidate_year:
         candidate_key = canonical_key(candidate)
-        title_year_matches = [
+        narrowed = [
             index
-            for index, release in enumerate(catalog)
-            if canonical_key(release) == candidate_key
+            for index in consistent_matches
+            if canonical_key(catalog[index]) == candidate_key
         ]
-        if title_year_matches:
-            if any(
-                not _ids_are_consistent(candidate, catalog[index])
-                for index in title_year_matches
-            ):
-                return _review_decision(
-                    "identity-conflict", catalog, title_year_matches
-                )
-            if len(title_year_matches) == 1:
-                return _target_decision(candidate, catalog, title_year_matches[0])
-            return _review_decision("ambiguous-edition", catalog, title_year_matches)
-        return _MatchDecision()
+        if len(narrowed) == 1:
+            return _target_decision(candidate, catalog, narrowed[0])
+    return _review_decision("ambiguous-edition", catalog, consistent_matches)
 
+
+def _match_by_title_year(
+    candidate: FelRelease, catalog: list[FelRelease]
+) -> _MatchDecision:
+    """Match a dated candidate with no strong-signal hit by title and year."""
+    candidate_key = canonical_key(candidate)
+    title_year_matches = [
+        index
+        for index, release in enumerate(catalog)
+        if canonical_key(release) == candidate_key
+    ]
+    if not title_year_matches:
+        return _MatchDecision()
+    if any(
+        not _ids_are_consistent(candidate, catalog[index])
+        for index in title_year_matches
+    ):
+        return _review_decision("identity-conflict", catalog, title_year_matches)
+    if len(title_year_matches) == 1:
+        return _target_decision(candidate, catalog, title_year_matches[0])
+    return _review_decision("ambiguous-edition", catalog, title_year_matches)
+
+
+def _match_by_yearless_title(
+    candidate: FelRelease, catalog: list[FelRelease]
+) -> _MatchDecision:
+    """Match a yearless candidate with no strong-signal hit by title alone."""
     title_key = canonical_title_key(candidate.movie_title)
     yearless_title_matches = [
         index
