@@ -82,6 +82,7 @@ jobs:
         run: >
           uv run --with-requirements requirements.txt
           python -m main run --sources data/sources_needs_evidence.txt
+          --review-output "$RUNNER_TEMP/python-reconciliation-review.json"
 
       - name: Run AI discovery and scraping
         env:
@@ -90,6 +91,18 @@ jobs:
         run: >
           uv run --with-requirements requirements.txt
           python -m main ai-scrape --sources data/sources_needs_evidence.txt
+          --review-output "$RUNNER_TEMP/ai-reconciliation-review.json"
+
+      - name: Upload reconciliation reviews
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fel-reconciliation-review
+          path: |
+            ${{ runner.temp }}/python-reconciliation-review.json
+            ${{ runner.temp }}/ai-reconciliation-review.json
+          if-no-files-found: ignore
+          retention-days: 14
 
       - name: Restore source registry from main
         run: git checkout origin/main -- data/sources_needs_evidence.txt

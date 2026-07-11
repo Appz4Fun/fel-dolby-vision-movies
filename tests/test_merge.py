@@ -9,6 +9,7 @@ from merge import (
     tmdb_key,
 )
 from models import FelEvidence, FelRelease
+import merge
 
 
 def make(title, date, **kwargs):
@@ -22,6 +23,16 @@ def make(title, date, **kwargs):
         ),
         **kwargs,
     )
+
+
+def test_merge_internal_tmdb_and_unresolved_paths():
+    plain = make("Plain", "2020")
+    assert merge.dedupe_tmdb_releases([plain]) == [plain]
+    first = make("Film", "2020", tmdb_id="1")
+    second = make("Film", "2021", tmdb_id="1")
+    merged = merge.dedupe_tmdb_releases([second, first])
+    assert len(merged) == 1
+    assert merge._find_tmdb_merge_target(make("Film", "2020"), [(0, first)]) == 0
 
 
 def test_canonical_key_ignores_case_punctuation_and_uses_year():
@@ -272,3 +283,38 @@ def test_dedupe_is_order_independent_for_strong_evidence():
     assert len(forward) == len(backward) == 1
     assert forward[0].fel_evidence.evidence_type == "google-sheet-row"
     assert backward[0].fel_evidence.evidence_type == "google-sheet-row"
+
+
+def test_dedupe_tmdb_covers_unresolved_and_year_fallback_paths():
+    # Two unresolved no-TMDB rows exercise the non-TMDB group passthrough.
+    assert len(dedupe_tmdb_releases([make("A", "2000"), make("B", "2001")])) == 2
+
+    # A single resolved group returns unchanged, while an unresolved row that
+    # precedes its resolved target exercises the index-before-target merge.
+    resolved = make("Resolved", "2000")
+    resolved.tmdb_id = "1"
+    resolved.bluray_url = "https://disc.test/resolved"
+    unresolved = make("Resolved", "2000")
+    unresolved.tmdb_id = "1"
+    assert dedupe_tmdb_releases([resolved]) == [resolved]
+    assert len(dedupe_tmdb_releases([unresolved, resolved])) == 1
+
+    # With two resolved titles sharing an ID, year is the final narrowing tier.
+    first = make("First Alias: Extended Edition", "1990")
+    first.tmdb_id = "2"
+    first.bluray_url = "https://disc.test/first"
+    second = make("Second Alias", "2000")
+    second.tmdb_id = "2"
+    second.bluray_url = "https://disc.test/second"
+    by_year = make("Unrelated Label", "2000")
+    by_year.tmdb_id = "2"
+    assert len(dedupe_tmdb_releases([first, second, by_year])) == 2
+
+
+def test_dedupe_tmdb_merges_multiple_unresolved_rows_without_urls():
+    first = make("Alias One", "2000")
+    first.tmdb_id = "3"
+    second = make("Alias One", "2000")
+    second.tmdb_id = "3"
+    deduped = dedupe_tmdb_releases([first, second])
+    assert len(deduped) == 1

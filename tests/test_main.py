@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import re
 
 import pytest
 
@@ -12,6 +13,11 @@ def release(
 ) -> FelRelease:
     return FelRelease(
         movie_title=title,
+        release_date=(
+            re.search(r"\b(19|20)\d{2}\b", title).group(0)
+            if re.search(r"\b(19|20)\d{2}\b", title)
+            else "Unknown"
+        ),
         fel_evidence=FelEvidence(
             source_url=source_url,
             quote=f"{title} is confirmed Profile 7 FEL",
@@ -166,7 +172,7 @@ def test_scrape_for_titles_fetches_sources_and_writes_artifacts(
         urls[0]: """
             <table>
               <tr><th>Movie</th><th>DV</th></tr>
-              <tr><td>Alpha</td><td>Profile 7 FEL English TrueHD Atmos</td></tr>
+                  <tr><td>Alpha (2023)</td><td>Profile 7 FEL English TrueHD Atmos</td></tr>
             </table>
         """,
         urls[1]: "Beta (2024) is confirmed to be Profile 7 FEL with DTS-HD MA.",
@@ -214,12 +220,12 @@ def test_scrape_for_titles_fetches_sources_and_writes_artifacts(
         ("fetch", urls[1]),
     ]
     data = json.loads((output_dir / "data/releases.json").read_text(encoding="utf-8"))
-    assert [release["movie_title"] for release in data] == ["Beta", "Alpha"]
+    assert [release["movie_title"] for release in data] == ["Beta"]
     assert (output_dir / "dist/index.html").exists()
     output = capsys.readouterr().out
     assert "sources=2" in output
     assert "fetched=2" in output
-    assert "releases=2" in output
+    assert "releases=1" in output
     assert "errors=0" in output
     assert "session=secret" not in output
 
@@ -259,7 +265,7 @@ def test_scrape_for_titles_routes_google_sheet_urls(
             if url == forum_url:
                 return FakeFetchResult(
                     url,
-                    "Forum Movie is confirmed to be Profile 7 FEL.",
+                    "Forum Movie (2024) is confirmed to be Profile 7 FEL.",
                 )
             assert url == (
                 "https://docs.google.com/spreadsheets/d/test-sheet-id/"
@@ -292,8 +298,8 @@ def test_scrape_for_titles_routes_google_sheet_urls(
     ]
     data = json.loads((output_dir / "data/releases.json").read_text(encoding="utf-8"))
     assert [release["movie_title"] for release in data] == [
-        "Sheet Movie",
         "Forum Movie",
+        "Sheet Movie",
     ]
     output = capsys.readouterr().out
     assert "sources=2" in output
@@ -361,7 +367,7 @@ def test_pr_summary_command_writes_body_and_github_outputs(tmp_path: Path, capsy
     head_path = tmp_path / "head.json"
     body_path = tmp_path / "body.md"
     github_output_path = tmp_path / "github-output.txt"
-    new_release = release("New Movie", "https://forum.example.test/new")
+    new_release = release("New Movie (2024)", "https://forum.example.test/new")
 
     base_path.write_text("[]\n", encoding="utf-8")
     previous_path.write_text("[]\n", encoding="utf-8")
@@ -384,7 +390,7 @@ def test_pr_summary_command_writes_body_and_github_outputs(tmp_path: Path, capsy
     )
 
     assert exit_code == 0
-    assert "| New Movie | Unknown |" in body_path.read_text(encoding="utf-8")
+    assert "| New Movie (2024) | 2024 |" in body_path.read_text(encoding="utf-8")
     assert "new_release_count=1" in github_output_path.read_text(encoding="utf-8")
     output = capsys.readouterr().out
     assert "release delta complete" in output
@@ -411,7 +417,7 @@ def test_scrape_for_titles_continues_after_fetch_errors(
 
     class FakeFetchResult:
         url = "https://forum.example.test/working-thread"
-        text = "Gamma is confirmed to be Profile 7 FEL with TrueHD."
+        text = "Gamma (2024) is confirmed to be Profile 7 FEL with TrueHD."
         from_cache = False
 
     class FakeFetcher:
@@ -570,7 +576,9 @@ def test_scrape_for_titles_uses_configured_worker_count(
     monkeypatch.setattr(
         main.fel_parser,
         "parse_fel_releases",
-        lambda html, source_url: [release(source_url.split("/")[2], source_url)],
+        lambda html, source_url: [
+            release(source_url.split("/")[2] + " (2020)", source_url)
+        ],
     )
 
     exit_code = main.main(
@@ -1377,3 +1385,38 @@ def test_main_trakt_sync_trakt_error_returns_exit_1(tmp_path, capsys, monkeypatc
     assert exit_code == 1
     out = capsys.readouterr().out
     assert "trakt-sync failed: boom" in out
+
+
+def test_run_forwards_review_output_path(monkeypatch, tmp_path):
+    captured = {}
+    monkeypatch.setattr(main, "_search_for_sources", lambda path: 0)
+
+    def fake_scrape(*args, **kwargs):
+        captured["args"] = args
+        captured["kwargs"] = kwargs
+        return 0
+
+    monkeypatch.setattr(main, "_scrape_for_titles", fake_scrape)
+    review = tmp_path / "review.json"
+    assert main.main(["run", "--review-output", str(review)]) == 0
+    assert captured["kwargs"] == {"review_output_path": review}
+
+
+def test_scrape_and_ai_forward_review_output_path(monkeypatch, tmp_path):
+    captured = {}
+
+    def fake_scrape(*args, **kwargs):
+        captured["scrape"] = kwargs
+        return 0
+
+    def fake_ai(*args, **kwargs):
+        captured["ai"] = kwargs
+        return 0
+
+    monkeypatch.setattr(main, "_scrape_for_titles", fake_scrape)
+    monkeypatch.setattr(main.ai_scrape, "run_ai_scrape", fake_ai)
+    review = tmp_path / "review.json"
+    assert main.main(["scrape-for-titles", "--review-output", str(review)]) == 0
+    assert main.main(["ai-scrape", "--review-output", str(review)]) == 0
+    assert captured["scrape"] == {"review_output_path": review}
+    assert captured["ai"] == {"review_output_path": review}

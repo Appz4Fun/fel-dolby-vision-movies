@@ -37,7 +37,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _search_for_sources(args.sources)
     if args.command == "scrape-for-titles":
         return _scrape_for_titles(
-            args.sources, args.output_dir, args.cache_dir, args.workers, False
+            args.sources,
+            args.output_dir,
+            args.cache_dir,
+            args.workers,
+            False,
+            **(
+                {"review_output_path": args.review_output} if args.review_output else {}
+            ),
         )
     if args.command == "compare-found":
         summary = compare.compare_found(
@@ -78,11 +85,21 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.cache_dir,
             args.workers,
             args.re_enrich,
+            **(
+                {"review_output_path": args.review_output} if args.review_output else {}
+            ),
         )
     if args.command == "migrate":  # pragma: no cover - one-off migration entrypoint
         return run_migration(args.fel, args.raw_fel, args.output_dir, args.report)
     if args.command == "ai-scrape":  # pragma: no cover - AI scrape entrypoint
-        return ai_scrape.run_ai_scrape(args.sources, args.output_dir, args.cache_dir)
+        return ai_scrape.run_ai_scrape(
+            args.sources,
+            args.output_dir,
+            args.cache_dir,
+            **(
+                {"review_output_path": args.review_output} if args.review_output else {}
+            ),
+        )
     if args.command == "pr-summary":
         summary = release_delta.write_pr_summary(
             args.base_releases,
@@ -185,6 +202,12 @@ def _build_parser() -> argparse.ArgumentParser:
             help=argparse.SUPPRESS,
         )
         scrape.add_argument(
+            "--review-output",
+            type=Path,
+            default=None,
+            help="path for reconciliation review JSON",
+        )
+        scrape.add_argument(
             "--output-dir",
             type=Path,
             default=Path("."),
@@ -265,6 +288,7 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     ai_scrape_parser.add_argument("--output-dir", type=Path, default=Path("."))
     ai_scrape_parser.add_argument("--cache-dir", type=Path, default=Path(".cache/html"))
+    ai_scrape_parser.add_argument("--review-output", type=Path, default=None)
     pr_summary = subparsers.add_parser(
         "pr-summary",
         help="write the daily refresh PR body and GitHub Actions outputs",
@@ -425,6 +449,7 @@ def _scrape_for_titles(
     cache_dir: Path,
     workers: int,
     re_enrich: bool = False,
+    review_output_path: Path | None = None,
 ) -> int:
     if not source_path.exists():
         print(f"scrape failed; sources file not found: {source_path}")
@@ -474,7 +499,11 @@ def _scrape_for_titles(
                 [*existing, *unique_releases], canonical_key
             )
     _enrich_if_possible(unique_releases)
-    sorted_releases = artifacts.publish_outputs(unique_releases, output_dir=output_dir)
+    sorted_releases = artifacts.publish_outputs(
+        unique_releases,
+        output_dir=output_dir,
+        **({"review_output_path": review_output_path} if review_output_path else {}),
+    )
 
     print(
         f"scrape complete; "
