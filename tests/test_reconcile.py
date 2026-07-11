@@ -44,6 +44,34 @@ def test_existing_yearless_title_merges_into_dated_catalog_row():
     assert result.merged_count == 1
 
 
+def test_existing_yearless_title_merges_with_incoming_dated_row():
+    existing = release("Atomic Blonde", "Unknown", evidence_type="google-sheet-row")
+    incoming = release("Atomic Blonde", "2017-07-26", evidence_type="ai-extracted")
+
+    result = reconcile_releases([existing], [incoming])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].release_date == "2017-07-26"
+    assert result.releases[0].fel_evidence == existing.fel_evidence
+    assert result.additions == []
+    assert result.review_items == []
+    assert result.merged_count == 1
+
+
+def test_incoming_yearless_title_waits_for_later_dated_row():
+    yearless = release("Atomic Blonde", "Unknown", evidence_type="ai-extracted")
+    dated = release("Atomic Blonde", "2017-07-26", evidence_type="google-sheet-row")
+
+    result = reconcile_releases([], [yearless, dated])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].release_date == "2017-07-26"
+    assert result.releases[0].fel_evidence == dated.fel_evidence
+    assert result.additions == [dated]
+    assert result.review_items == []
+    assert result.merged_count == 1
+
+
 def test_existing_unmatched_yearless_title_is_review_only():
     result = reconcile_releases([release("F9", "Unknown")], [])
 

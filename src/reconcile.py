@@ -35,33 +35,47 @@ def reconcile_releases(
     incoming: Iterable[FelRelease],
 ) -> ReconciliationResult:
     existing_rows = list(existing)
+    incoming_rows = list(incoming)
     catalog = [release for release in existing_rows if _year(release)]
     existing_yearless = [release for release in existing_rows if not _year(release)]
-    additions: list[FelRelease] = []
+    incoming_dated = [release for release in incoming_rows if _year(release)]
+    incoming_yearless = [release for release in incoming_rows if not _year(release)]
+    additions_by_index: dict[int, FelRelease] = {}
     review_items: list[ReviewItem] = []
     merged_count = 0
 
     candidates = chain(
-        ((release, False) for release in existing_yearless),
-        ((release, True) for release in incoming),
+        ((release, False, True) for release in incoming_dated),
+        ((release, True, False) for release in existing_yearless),
+        ((release, False, False) for release in incoming_yearless),
     )
-    for candidate, is_incoming in candidates:
+    for candidate, is_existing, track_addition in candidates:
         decision = _match_candidate(candidate, catalog)
         if decision.reason:
             review_items.append(
                 ReviewItem(candidate, decision.reason, decision.candidate_titles)
             )
         elif decision.index is not None:
-            catalog[decision.index] = merge_releases(catalog[decision.index], candidate)
+            if is_existing and decision.index in additions_by_index:
+                catalog[decision.index] = merge_releases(
+                    candidate, catalog[decision.index]
+                )
+                del additions_by_index[decision.index]
+            else:
+                catalog[decision.index] = merge_releases(
+                    catalog[decision.index], candidate
+                )
             merged_count += 1
         elif not _year(candidate):
             review_items.append(ReviewItem(candidate, "missing-year-no-match"))
         else:
             catalog.append(candidate)
-            if is_incoming:
-                additions.append(candidate)
+            if track_addition:
+                additions_by_index[len(catalog) - 1] = candidate
 
-    return ReconciliationResult(catalog, additions, review_items, merged_count)
+    return ReconciliationResult(
+        catalog, list(additions_by_index.values()), review_items, merged_count
+    )
 
 
 def _match_candidate(
