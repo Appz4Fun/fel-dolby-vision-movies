@@ -1,7 +1,41 @@
+import json
+from pathlib import Path
+
 import pytest
 
-from models import FelEvidence, FelRelease
+from models import FelEvidence, FelRelease, release_from_dict
 from reconcile import reconcile_releases
+
+
+@pytest.mark.parametrize(
+    "case",
+    json.loads(
+        (Path(__file__).parent / "fixtures/yearless_duplicate_cases.json").read_text()
+    ),
+    ids=lambda case: case["name"],
+)
+def test_yearless_duplicate_refresh_cases_have_one_decision(case):
+    existing = [release_from_dict(row) for row in case["existing"]]
+    incoming = [release_from_dict(row) for row in case["incoming"]]
+    result = reconcile_releases(existing, incoming)
+    expected = case["expected"]
+
+    assert not any(row.release_date == "Unknown" for row in result.releases)
+    if expected["kind"] == "merge":
+        assert result.merged_count == 1
+        assert result.additions == []
+        assert result.review_items == []
+        assert len(result.releases) == 1
+        assert result.releases[0].release_date == expected["release_date"]
+    else:
+        assert result.merged_count == 0
+        assert result.additions == []
+        assert len(result.review_items) == 1
+        assert result.review_items[0].reason == expected["reason"]
+        if "release_dates" in expected:
+            assert [row.release_date for row in result.releases] == expected[
+                "release_dates"
+            ]
 
 
 def release(title: str, date: str, **kwargs: str) -> FelRelease:
