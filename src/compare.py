@@ -630,14 +630,56 @@ def _analyze_evidence_clauses(
     return has_other_subject or not has_bound_fel_evidence, years
 
 
+def _classify_evidence_rejection(
+    title: str,
+    evidence: str,
+    evidence_casefold: str,
+    contextual_evidence: str,
+    source_casefold: str,
+    source_records: tuple[str, ...],
+) -> str | None:
+    """Return why a candidate's raw evidence text fails binding, or None."""
+    if not title or not evidence or evidence_casefold not in source_casefold:
+        return "evidence-not-found"
+    if not any(evidence_casefold in record for record in source_records):
+        return "cross-release-evidence"
+    if not re.search(rf"(?<!\w){re.escape(title)}(?!\w)", evidence, re.I):
+        return "title-not-bound"
+    if has_unnegated_mel(contextual_evidence) or re.search(
+        r"\bREMUX\b", contextual_evidence, re.I
+    ):
+        return "excluded-format"
+    if has_leading_fel_denial(contextual_evidence) or FEL_TRAILING_DENIAL_RE.search(
+        contextual_evidence
+    ):
+        return "negated-fel"
+    if not re.search(
+        r"\b(?:Profile\s*7|P7)\b", contextual_evidence, re.I
+    ) or not re.search(r"\bFEL\b", contextual_evidence, re.I):
+        return "missing-affirmative-fel"
+    return None
+
+
+def _resolve_candidate_year(
+    candidate: FoundCandidate, bound_year: str | None, years: list[str]
+) -> tuple[str, str | None]:
+    """Return (year, rejection_reason) for a candidate that passed evidence checks."""
+    candidate_has_valid_year = bool(re.fullmatch(r"(?:19|20)\d{2}", candidate.year))
+    year = candidate.year if candidate_has_valid_year else bound_year or "Unknown"
+    if not candidate_has_valid_year and bound_year is None and years:
+        return year, "year-not-in-evidence"
+    if year != "Unknown" and year not in years:
+        return year, "year-not-in-evidence"
+    return year, None
+
+
 def validate_ai_candidates(
     candidates: list[FoundCandidate],
     source_text: str,
     diagnostics: list[str] | None = None,
 ) -> list[FoundCandidate]:
     """Keep only candidates whose exact evidence binds to affirmative FEL source text."""
-    source = _normalized_source(source_text)
-    source_casefold = source.casefold()
+    source_casefold = _normalized_source(source_text).casefold()
     source_records = tuple(
         record.casefold() for record in _normalized_source_records(source_text)
     )
@@ -651,25 +693,14 @@ def validate_ai_candidates(
             if title
             else (evidence, None)
         )
-        reason = None
-        if not title or not evidence or evidence_casefold not in source_casefold:
-            reason = "evidence-not-found"
-        elif not any(evidence_casefold in record for record in source_records):
-            reason = "cross-release-evidence"
-        elif not re.search(rf"(?<!\w){re.escape(title)}(?!\w)", evidence, re.I):
-            reason = "title-not-bound"
-        elif has_unnegated_mel(contextual_evidence) or re.search(
-            r"\bREMUX\b", contextual_evidence, re.I
-        ):
-            reason = "excluded-format"
-        elif has_leading_fel_denial(
-            contextual_evidence
-        ) or FEL_TRAILING_DENIAL_RE.search(contextual_evidence):
-            reason = "negated-fel"
-        elif not re.search(
-            r"\b(?:Profile\s*7|P7)\b", contextual_evidence, re.I
-        ) or not re.search(r"\bFEL\b", contextual_evidence, re.I):
-            reason = "missing-affirmative-fel"
+        reason = _classify_evidence_rejection(
+            title,
+            evidence,
+            evidence_casefold,
+            contextual_evidence,
+            source_casefold,
+            source_records,
+        )
         if reason:
             if diagnostics is not None:
                 diagnostics.append(reason)
@@ -685,15 +716,10 @@ def validate_ai_candidates(
             if diagnostics is not None:
                 diagnostics.append("cross-release-evidence")
             continue
-        candidate_has_valid_year = bool(re.fullmatch(r"(?:19|20)\d{2}", candidate.year))
-        year = candidate.year if candidate_has_valid_year else bound_year or "Unknown"
-        if not candidate_has_valid_year and bound_year is None and years:
+        year, year_reason = _resolve_candidate_year(candidate, bound_year, years)
+        if year_reason:
             if diagnostics is not None:
-                diagnostics.append("year-not-in-evidence")
-            continue
-        if year != "Unknown" and year not in years:
-            if diagnostics is not None:
-                diagnostics.append("year-not-in-evidence")
+                diagnostics.append(year_reason)
             continue
         accepted.append(
             FoundCandidate(
