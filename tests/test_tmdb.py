@@ -83,6 +83,7 @@ def test_best_tmdb_candidate_uses_popularity_for_equal_alias_scores():
                 "title": "The Stranger",
                 "original_title": "Goksung (The Wailing)",
                 "release_date": "2016-09-23",
+                "vote_count": 40,
                 "popularity": 0.16,
             },
             {
@@ -90,6 +91,7 @@ def test_best_tmdb_candidate_uses_popularity_for_equal_alias_scores():
                 "title": "The Wailing",
                 "original_title": "Goksung (The Wailing)",
                 "release_date": "2016-05-12",
+                "vote_count": 40,
                 "popularity": 12.7,
             },
         ],
@@ -160,6 +162,67 @@ def test_best_tmdb_candidate_prefers_popular_exact_match_despite_year_mismatch()
 
     assert candidate is not None
     assert candidate["id"] == 530915
+
+
+def test_best_tmdb_candidate_prefers_voted_film_over_zero_vote_year_coincidence():
+    """Regression test: 'Obsession' [2025] (Reddit list year) matched an
+    obscure zero-vote same-titled entry whose TMDB year happened to equal
+    the query year, instead of the real film whose primary release drifted
+    to 2026 (festival premiere vs. wide release). A year coincidence only
+    counts for candidates with real votes, so engagement decides here."""
+    candidate = _best_tmdb_candidate(
+        "Obsession",
+        "2025",
+        [
+            {
+                "id": 1502633,
+                "title": "Obsession",
+                "original_title": "Obsession",
+                "release_date": "2025-03-13",
+                "vote_count": 0,
+                "poster_path": "/phantom.jpg",
+            },
+            {
+                "id": 1339713,
+                "title": "Obsession",
+                "original_title": "Obsession",
+                "release_date": "2026-05-15",
+                "vote_count": 300,
+            },
+        ],
+    )
+
+    assert candidate is not None
+    assert candidate["id"] == 1339713
+
+
+def test_best_tmdb_candidate_treats_one_year_drift_as_neutral():
+    """A single year of drift between the source-reported year and TMDB's
+    primary release year is routine (festival vs. wide release, theatrical
+    vs. home video), so it must not be penalized like a real mismatch."""
+    candidate = _best_tmdb_candidate(
+        "The Premiere",
+        "2021",
+        [
+            {
+                "id": 1,
+                "title": "The Premiere",
+                "original_title": "The Premiere",
+                "release_date": "2022-02-01",
+                "vote_count": 5,
+            },
+            {
+                "id": 2,
+                "title": "The Premiere",
+                "original_title": "The Premiere",
+                "release_date": "2024-06-01",
+                "vote_count": 3000,
+            },
+        ],
+    )
+
+    assert candidate is not None
+    assert candidate["id"] == 1
 
 
 def test_best_tmdb_candidate_rejects_weak_overlap_as_sole_candidate():
@@ -381,6 +444,200 @@ def test_resolver_falls_back_past_a_zero_relevance_year_coincidence(
     assert search_year_params == [("2023", "2023"), (None, None)]
 
 
+def test_alternative_title_rescue_order_filters_far_years_and_ranks_by_votes():
+    near_small = {"id": 1, "release_date": "2021-07-16", "vote_count": 10}
+    near_big = {"id": 2, "release_date": "2022-01-01", "vote_count": 500}
+    far = {"id": 3, "release_date": "1990-01-01", "vote_count": 9000}
+    undated = {"id": 4, "release_date": "", "vote_count": 50}
+
+    order = tmdb._alternative_title_rescue_order(
+        "2021", [near_small, near_big, far, undated]
+    )
+
+    # The far-year stranger is never checked, and any correctly-dated
+    # candidate outranks an undated one regardless of votes, so a high-vote
+    # undated placeholder cannot bypass the missing-date penalty via rescue.
+    assert [candidate["id"] for candidate in order] == [2, 1, 4]
+
+
+def test_alternative_title_rescue_order_keeps_all_years_for_yearless_query():
+    far = {"id": 3, "release_date": "1990-01-01", "vote_count": 9000}
+
+    order = tmdb._alternative_title_rescue_order("", [far])
+
+    assert [candidate["id"] for candidate in order] == [3]
+
+
+def test_matching_alternative_title_normalizes_diacritics():
+    records = [
+        {"iso_3166_1": "JP", "title": "Ryū to Sobakasu no Hime", "type": "romaji"},
+        {"iso_3166_1": "US", "title": "The Dragon and the Freckled Princess"},
+        {"title": None},
+    ]
+
+    assert (
+        tmdb._matching_alternative_title("ryu to sobakasu no hime", records)
+        == "Ryū to Sobakasu no Hime"
+    )
+    assert tmdb._matching_alternative_title("something else", records) == ""
+    assert tmdb._matching_alternative_title("", records) == ""
+
+
+def test_resolver_rescues_romanized_query_via_alternative_titles(
+    monkeypatch, tmp_path: Path
+):
+    """A romanized native-title query ('Ryu to sobakasu no hime') finds the
+    right film through TMDB's search index, which matches alternative titles
+    -- but the scorer only sees the English display title ('Belle') and the
+    CJK original title, so every candidate it was handed scores below
+    acceptance. The resolver must then confirm near-year, engaged candidates
+    against /alternative_titles instead of giving up, and must not spend a
+    lookup on the far-year same-titled stranger."""
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+    alt_title_requests: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 99,
+                            "title": "Belle",
+                            "original_title": "Belle",
+                            "release_date": "1990-01-01",
+                            "vote_count": 5000,
+                            "poster_path": "/other.jpg",
+                        },
+                        {
+                            "id": 776503,
+                            "title": "Belle",
+                            "original_title": "竜とそばかすの姫",
+                            "release_date": "2021-07-16",
+                            "vote_count": 1200,
+                            "poster_path": "/belle.jpg",
+                        },
+                    ]
+                },
+            )
+        if request.url.path.endswith("/alternative_titles"):
+            alt_title_requests.append(request.url.path)
+            return httpx.Response(
+                200,
+                json={
+                    "titles": [
+                        {
+                            "iso_3166_1": "JP",
+                            "title": "Ryū to Sobakasu no Hime",
+                            "type": "romaji",
+                        }
+                    ]
+                },
+            )
+        if request.url.path.endswith("/external_ids"):
+            return httpx.Response(200, json={"imdb_id": "tt13651628"})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    result = resolver.resolve("Ryu to sobakasu no hime", "2021")
+
+    assert result is not None
+    assert result.tmdb_id == "776503"
+    assert result.title == "Belle"
+    assert result.imdb_id == "tt13651628"
+    assert result.matched_alternative_title == "Ryū to Sobakasu no Hime"
+    assert alt_title_requests == ["/3/movie/776503/alternative_titles"]
+
+    # The matched alternative title must survive the cache round-trip so
+    # enrichment can retitle the row deterministically on cached replays.
+    cached = json.loads((tmp_path / "cache.json").read_text(encoding="utf-8"))
+    assert (
+        cached["Ryu to sobakasu no hime\x002021"]["matched_alternative_title"]
+        == "Ryū to Sobakasu no Hime"
+    )
+
+
+def test_resolver_returns_none_when_alternative_titles_do_not_match(
+    monkeypatch, tmp_path: Path
+):
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 42,
+                            "title": "Unrelated",
+                            "original_title": "Unrelated",
+                            "release_date": "2021-05-01",
+                            "vote_count": 80,
+                        }
+                    ]
+                },
+            )
+        if request.url.path.endswith("/alternative_titles"):
+            return httpx.Response(200, json={"titles": [{"title": "Still Unrelated"}]})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    assert resolver.resolve("Long ma jing shen", "2021") is None
+    # Negative decisions are version-stamped so a future scorer/rescue change
+    # re-fetches them instead of serving a stale "no match" forever.
+    cached = json.loads((tmp_path / "cache.json").read_text(encoding="utf-8"))
+    assert cached["Long ma jing shen\x002021"] == {
+        "scorer_version": tmdb._SCORER_VERSION
+    }
+
+
+def test_resolver_refetches_bare_none_negative_cache_records(tmp_path):
+    """A pre-versioning negative record (bare null) must be re-fetched: the
+    'no match' decision may have been made before the alternative-title
+    rescue existed, so on persistent runner caches it would otherwise keep
+    a now-resolvable title unresolved forever. A negative decided under the
+    current version is still served from cache."""
+    cache_path = tmp_path / "tmdb_cache.json"
+    cache_path.write_text(
+        json.dumps({"Long ma jing shen\x002023": None}), encoding="utf-8"
+    )
+    requests: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requests.append(request.url.path)
+        return httpx.Response(200, json={"results": []})
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    with TmdbResolver(
+        "key", cache_path=cache_path, client=client, delay_seconds=0
+    ) as resolver:
+        assert resolver.resolve("Long ma jing shen", "2023") is None
+    assert requests, "bare-None negative must be re-fetched, not served stale"
+
+    cached = json.loads(cache_path.read_text(encoding="utf-8"))
+    assert cached["Long ma jing shen\x002023"] == {
+        "scorer_version": tmdb._SCORER_VERSION
+    }
+
+    requests.clear()
+    with TmdbResolver(
+        "key", cache_path=cache_path, client=client, delay_seconds=0
+    ) as fresh:
+        assert fresh.resolve("Long ma jing shen", "2023") is None
+    assert requests == [], "current-version negative must be served from cache"
+    client.close()
+
+
 def test_has_audience_engagement_rejects_zero_vote_posterless_candidate():
     assert (
         _has_audience_engagement({"id": 1, "vote_count": 0, "poster_path": None})
@@ -561,7 +818,9 @@ def test_resolver_refetches_legacy_cache_records_missing_original_title(tmp_path
         cached["Les rivières pourpres\x002000"]["original_title"]
         == "Les rivières pourpres"
     )
-    assert cached["Unknown Movie\x002099"] is None
+    # Bare-None negatives predate version stamping; they are dropped at load
+    # so titles the newer scorer/rescue could now resolve get re-fetched.
+    assert "Unknown Movie\x002099" not in cached
 
     requests.clear()
     with TmdbResolver(

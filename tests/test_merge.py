@@ -328,7 +328,7 @@ def test_dedupe_tmdb_releases_keeps_ambiguous_unresolved_row():
     ]
 
 
-def test_dedupe_tmdb_releases_keeps_same_identity_with_distinct_bluray_urls():
+def test_dedupe_tmdb_releases_merges_same_identity_with_distinct_bluray_urls():
     first = make("Movie", "2000")
     first.tmdb_id = "1"
     first.bluray_url = "https://www.blu-ray.com/movies/Movie/1/"
@@ -338,7 +338,9 @@ def test_dedupe_tmdb_releases_keeps_same_identity_with_distinct_bluray_urls():
 
     deduped = dedupe_tmdb_releases([first, second])
 
-    assert deduped == [first, second]
+    assert len(deduped) == 1
+    assert deduped[0].movie_title == "Movie"
+    assert deduped[0].bluray_url == "https://www.blu-ray.com/movies/Movie/1/"
 
 
 def test_dedupe_tmdb_releases_still_collapses_different_title_aliases():
@@ -355,7 +357,10 @@ def test_dedupe_tmdb_releases_still_collapses_different_title_aliases():
     assert deduped[0].movie_title == "The Movie"
 
 
-def test_dedupe_tmdb_releases_keeps_physical_rows_in_mixed_alias_group():
+def test_dedupe_tmdb_releases_collapses_mixed_alias_group():
+    # Identical-identity rows merge first (same canonical key split across two
+    # disc pages), after which the remaining distinct-title alias folds as in
+    # test_dedupe_tmdb_releases_still_collapses_different_title_aliases.
     first = make("The Movie", "2000")
     first.tmdb_id = "1"
     first.bluray_url = "https://www.blu-ray.com/movies/The-Movie/1/"
@@ -368,7 +373,26 @@ def test_dedupe_tmdb_releases_keeps_physical_rows_in_mixed_alias_group():
 
     deduped = dedupe_tmdb_releases([first, second, localized])
 
-    assert deduped == [first, second, localized]
+    assert len(deduped) == 1
+    assert deduped[0].movie_title == "The Movie"
+
+
+def test_dedupe_tmdb_release_groups_merges_identical_title_rows_split_by_url():
+    first = make("Jaws", "1975-06-20")
+    first.tmdb_id = "578"
+    first.imdb_id = "tt0073195"
+    first.bluray_url = "https://www.blu-ray.com/movies/Jaws-4K-Blu-ray/387497/"
+    second = make("Jaws", "1975-06-20")
+    second.tmdb_id = "578"
+    second.imdb_id = "tt0073195"
+    second.bluray_url = "https://www.blu-ray.com/movies/Jaws-4K-Blu-ray/265299/"
+
+    groups = merge.dedupe_tmdb_release_groups([first, second])
+
+    assert len(groups) == 1
+    merged_release, source_indices = groups[0]
+    assert merged_release.movie_title == "Jaws"
+    assert source_indices == (0, 1)
 
 
 def test_dedupe_is_order_independent_for_strong_evidence():

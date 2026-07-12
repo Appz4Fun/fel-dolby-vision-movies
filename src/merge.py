@@ -185,11 +185,11 @@ def _dedupe_one_tmdb_group(
     resolved = [
         _merge_identity_group(bluray_groups[bluray_url]) for bluray_url in bluray_order
     ]
+    resolved = _merge_groups_sharing_canonical_key(resolved)
 
     # The legacy public deduper reaches this check directly. Reconciliation only
     # reaches it after the whole group passes the explicit AKA proof graph above.
-    # In both paths, repeated canonical identity or an edition descriptor keeps
-    # the physical rows separate.
+    # In both paths, an edition descriptor keeps the physical rows separate.
     if (
         len(resolved) > 1
         and len({canonical_key(item.release) for item in resolved}) == len(resolved)
@@ -222,17 +222,36 @@ def _dedupe_one_tmdb_group(
     return sorted(resolved, key=lambda item: item.first_index)
 
 
+def _merge_groups_sharing_canonical_key(
+    resolved: list[_ReleaseGroup],
+) -> list[_ReleaseGroup]:
+    """Collapse per-disc-URL groups whose rows share one canonical identity."""
+    # A film re-resolved to a different blu-ray.com page (multiple pressings
+    # of the same cut) still names the same release; only differently-titled
+    # rows can represent distinct physical editions. `resolved` arrives in
+    # first-occurrence order, so the earliest group always absorbs later ones.
+    merged: list[_ReleaseGroup] = []
+    index_by_key: dict[tuple[str, str], int] = {}
+    for item in resolved:
+        key = canonical_key(item.release)
+        target_index = index_by_key.get(key)
+        if target_index is None:
+            index_by_key[key] = len(merged)
+            merged.append(item)
+        else:
+            merged[target_index] = _merge_release_groups(merged[target_index], item)
+    return merged
+
+
 def _is_reconciliation_alias_group(
     releases: list[tuple[int, FelRelease]],
 ) -> bool:
     rows = [release for _, release in releases]
     years = {_year(release.release_date) for release in rows}
-    title_keys = {canonical_title_key(release.movie_title) for release in rows}
     imdb_ids = {release.imdb_id for release in rows}
     identity_is_compatible = (
         "" not in years
         and len(years) == 1
-        and len(title_keys) == len(rows)
         and "" not in imdb_ids
         and len(imdb_ids) == 1
         and not any(has_edition_descriptor(release.movie_title) for release in rows)
@@ -334,10 +353,30 @@ def _right_aka_side_names_title(text: str, title: str) -> bool:
     )
 
 
+# Orthography-only token spellings: regional variants plus spelled-out
+# numbers ("The Fantastic Four" vs "The Fantastic 4"). Number words map to
+# digits BEFORE the digit-run guard in _titles_are_spelling_variants, so
+# "Iron Man Two" vs "Iron Man 3" still compares as 2 vs 3 and never merges.
+_ORTHOGRAPHIC_TOKEN_REPLACEMENTS = {
+    "colour": "color",
+    "colours": "colors",
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "four": "4",
+    "five": "5",
+    "six": "6",
+    "seven": "7",
+    "eight": "8",
+    "nine": "9",
+    "ten": "10",
+}
+
+
 def _orthographic_title_key(title: str) -> str:
-    replacements = {"colour": "color", "colours": "colors"}
     return " ".join(
-        replacements.get(token, token) for token in canonical_title_key(title).split()
+        _ORTHOGRAPHIC_TOKEN_REPLACEMENTS.get(token, token)
+        for token in canonical_title_key(title).split()
     )
 
 

@@ -15,7 +15,12 @@ from tmdb import (
     TmdbResolver,
     load_tmdb_api_key,
 )
-from merge import TMDB_ORIGINAL_TITLE_KEY, TMDB_TITLE_KEY, canonical_title_key
+from merge import (
+    TMDB_ORIGINAL_TITLE_KEY,
+    TMDB_TITLE_KEY,
+    canonical_title_key,
+    has_edition_descriptor,
+)
 from models import UNKNOWN, FelRelease
 from normalize import normalize_fel_title
 
@@ -102,6 +107,13 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
     # it resolves to the real film and merges with the canonical row instead
     # of creating a duplicate.
     ("1917", "2020"): _LookupCandidate("1917", "2019"),
+    # Reddit FEL list romanizations / sequel aliases pinned to the canonical
+    # English titles so each row enriches to the same TMDB id as (and merges
+    # with) the canonical catalog entry.
+    ("train to busan 2", "2020"): _LookupCandidate("Peninsula", "2020"),
+    ("ryu to sobakasu no hime", "2021"): _LookupCandidate("Belle", "2021"),
+    ("long ma jing shen", "2023"): _LookupCandidate("Ride On", "2023"),
+    ("rio 70", "1969"): _LookupCandidate("The Girl from Rio", "1969"),
 }
 
 
@@ -283,6 +295,17 @@ def enrich_releases(
                 != release.movie_title
             ):
                 release.movie_title = movie_candidate.canonical_title or movie.title
+            elif movie.matched_alternative_title and not has_edition_descriptor(
+                release.movie_title
+            ):
+                # The row is titled by a TMDB alternative title (romanized
+                # native name, sequel alias); adopt the canonical TMDB title
+                # so reconciliation can merge it with the canonical catalog
+                # row. Edition-descriptor titles keep their source spelling:
+                # TMDB lists edition names among alternative titles, and
+                # renaming those would collapse a distinct physical edition
+                # into the base film.
+                release.movie_title = movie.title
             release.tmdb_id = movie.tmdb_id
             release.imdb_id = movie.imdb_id
             release.release_url = release_url_for(movie.tmdb_id, movie.imdb_id)

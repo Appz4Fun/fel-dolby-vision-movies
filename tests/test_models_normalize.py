@@ -91,6 +91,29 @@ def test_normalize_fel_title_preserves_known_numeric_titles():
     assert normalize_fel_title("365 Days") == "365 Days"
 
 
+def test_normalize_fel_title_strips_trailing_disambiguator_parentheticals():
+    # Wiki-style medium disambiguators never appear on the actual disc title
+    # and defeat both TMDB search and duplicate merging ("Hamilton (musical)"
+    # shipped as a second, unresolved Hamilton row).
+    assert normalize_fel_title("Hamilton (musical)") == "Hamilton"
+    assert normalize_fel_title("The Old Guard (film)") == "The Old Guard"
+    assert normalize_fel_title("Shogun (TV series)") == "Shogun"
+    assert normalize_fel_title("Dune (2021 film)") == "Dune"
+    assert normalize_fel_title("The Fugitive (Movie)") == "The Fugitive"
+
+
+def test_normalize_fel_title_preserves_meaningful_parentheticals():
+    assert normalize_fel_title("(500) Days of Summer") == "(500) Days of Summer"
+    assert (
+        normalize_fel_title("Only the Brave (No Way Out)")
+        == "Only the Brave (No Way Out)"
+    )
+    assert (
+        normalize_fel_title("Apocalypse Now (Redux Cut)")
+        == "Apocalypse Now (Redux Cut)"
+    )
+
+
 def test_normalize_fel_title_decodes_html_entities():
     assert normalize_fel_title("Fast &amp; Furious") == "Fast & Furious"
     assert normalize_fel_title("Hansel &amp; Gretel") == "Hansel & Gretel"

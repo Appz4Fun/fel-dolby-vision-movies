@@ -393,10 +393,110 @@ def test_single_typo_title_collapses_when_strong_ids_agree(typo_title: str):
     assert result.additions == []
 
 
+def test_same_title_year_distinct_urls_stays_separate_without_shared_id():
+    # When only one side carries strong ids, the unenriched incoming row may
+    # be a different same-titled film whose TMDB resolution failed (two
+    # "Belle" 2021 films exist); the differing disc URL stays an ambiguity
+    # signal and the row is appended rather than folded into the catalog row.
+    base = release(
+        "Belle",
+        "2021",
+        tmdb_id="776503",
+        imdb_id="tt13651628",
+        bluray_url="https://www.blu-ray.com/movies/Belle/1/",
+    )
+    unenriched = release(
+        "Belle",
+        "2021-12-03",
+        bluray_url="https://www.blu-ray.com/movies/Belle/2/",
+    )
+
+    result = reconcile_releases([base], [unenriched])
+
+    assert result.releases == [base, unenriched]
+    assert result.additions == [unenriched]
+    assert result.merged_count == 0
+
+
+def test_same_title_year_distinct_urls_merges_when_neither_side_has_ids():
+    # With no ids on either side the two rows are indistinguishable to
+    # readers, so the differing disc URL alone must not publish both.
+    base = release(
+        "Avatar",
+        "2009",
+        bluray_url="https://www.blu-ray.com/movies/Avatar/1/",
+    )
+    rescraped = release(
+        "Avatar",
+        "2009",
+        bluray_url="https://www.blu-ray.com/movies/Avatar/2/",
+    )
+
+    result = reconcile_releases([base], [rescraped])
+
+    assert len(result.releases) == 1
+    assert result.merged_count == 1
+
+
+def test_same_title_year_distinct_urls_merges_on_shared_imdb_id_alone():
+    base = release(
+        "Movie",
+        "2000",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Movie/1/",
+    )
+    second_disc = release(
+        "Movie",
+        "2000-01-01",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Movie/2/",
+    )
+
+    result = reconcile_releases([base], [second_disc])
+
+    assert len(result.releases) == 1
+    assert result.merged_count == 1
+
+
+def test_number_word_variant_titles_collapse_without_aka_evidence():
+    # Marketing spells the same film both ways ("The Fantastic 4" letterboxd
+    # row vs "The Fantastic Four" reddit row, one TMDB id); a spelled-out
+    # number is orthography, not a different release.
+    digits = release(
+        "The Fantastic 4: First Steps",
+        "2025-07-23",
+        tmdb_id="617126",
+        imdb_id="tt10676052",
+        bluray_url=(
+            "https://www.blu-ray.com/movies/"
+            "The-Fantastic-Four-First-Steps-4K-Blu-ray/397023/"
+        ),
+    )
+    words = release(
+        "The Fantastic Four: First Steps",
+        "2025-07-23",
+        tmdb_id="617126",
+        imdb_id="tt10676052",
+        bluray_url=(
+            "https://www.blu-ray.com/movies/"
+            "The-Fantastic-Four-First-Steps-4K-Blu-ray/397501/"
+        ),
+    )
+
+    result = reconcile_releases([digits], [words])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "The Fantastic 4: First Steps"
+    assert result.additions == []
+
+
 @pytest.mark.parametrize(
     ("first_title", "second_title"),
     [
         ("Iron Man 2", "Iron Man 3"),
+        # A spelled-out number must normalize to its digit before the
+        # digit-run guard, so word-vs-digit sequels stay distinct too.
+        ("Iron Man Two", "Iron Man 3"),
         ("28 Days Later", "28 Weeks Later"),
         ("Up", "Us"),
         # A whole appended word must never read as a typo: space-stripped
@@ -888,7 +988,10 @@ def test_distinct_known_year_edition_remains_an_addition():
     assert len(result.releases) == 2
 
 
-def test_same_title_year_with_distinct_bluray_url_remains_an_addition():
+def test_same_title_year_with_distinct_bluray_url_merges():
+    # A re-scrape of a film already in the catalog can resolve a different
+    # blu-ray.com page (multiple 4K pressings of the same cut), so a distinct
+    # disc URL alone must not spawn a second identically-titled row.
     base = release(
         "Movie",
         "2000",
@@ -904,10 +1007,12 @@ def test_same_title_year_with_distinct_bluray_url_remains_an_addition():
 
     result = reconcile_releases([base], [second_disc])
 
-    assert result.releases == [base, second_disc]
-    assert result.additions == [second_disc]
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Movie"
+    assert result.releases[0].bluray_url == "https://www.blu-ray.com/movies/Movie/1/"
+    assert result.additions == []
     assert result.review_items == []
-    assert result.merged_count == 0
+    assert result.merged_count == 1
 
 
 def test_distinct_yearless_edition_is_review_only():

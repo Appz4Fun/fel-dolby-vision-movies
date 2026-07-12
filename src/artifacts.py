@@ -10,7 +10,7 @@ import stat
 import tempfile
 from typing import Iterable
 
-from merge import dedupe_releases, title_bluray_key
+from merge import canonical_key, dedupe_releases, title_bluray_key
 from models import UNKNOWN, FelRelease, release_from_dict
 from normalize import normalize_fel_title
 from reconcile import ReconciliationResult, reconcile_releases
@@ -31,6 +31,33 @@ PRIVATE_STAGE_MODE = 0o600
 
 class ReviewOutputError(ValueError):
     """Raised when a reconciliation review target is unsafe."""
+
+
+# Raised when publishing would ship indistinguishable duplicate rows. (A
+# comment rather than a docstring: Codacy's pydocstyle D203 demands a blank
+# line before class docstrings that ruff format strips right back out.)
+class DuplicateReleaseError(ValueError):
+    pass
+
+
+def find_duplicate_identity_rows(
+    releases: list[FelRelease],
+) -> list[tuple[str, str, str]]:
+    """Report (title, year, tmdb_id) for rows sharing one release identity."""
+    # Rows share an identity when their canonical title+year key and TMDB id
+    # both match (including two unresolved rows with no TMDB id, which readers
+    # could never tell apart). Same-titled rows with different TMDB ids are
+    # distinct films and never flagged.
+    first_titles: dict[tuple[str, str, str], str] = {}
+    duplicates: list[tuple[str, str, str]] = []
+    for release in releases:
+        title_key, year = canonical_key(release)
+        key = (title_key, year, release.tmdb_id)
+        if key not in first_titles:
+            first_titles[key] = release.movie_title
+        elif (first_titles[key], year, release.tmdb_id) not in duplicates:
+            duplicates.append((first_titles[key], year, release.tmdb_id))
+    return duplicates
 
 
 class ArtifactTransactionRecoveryError(RuntimeError):
@@ -216,6 +243,16 @@ def write_artifacts(
     merged = dedupe_releases(reconciliation.releases, title_bluray_key)
     _enforce_ai_source_label(merged)
     sorted_releases = sorted(merged, key=_sort_key)
+
+    duplicate_rows = find_duplicate_identity_rows(sorted_releases)
+    if duplicate_rows:
+        raise DuplicateReleaseError(
+            "reconciliation left duplicate release rows: "
+            + "; ".join(
+                f"{title} ({year or 'no year'}, tmdb {tmdb_id or 'unresolved'})"
+                for title, year, tmdb_id in duplicate_rows
+            )
+        )
 
     releases_payload = (
         json.dumps(
