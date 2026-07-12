@@ -18,6 +18,7 @@ from ai_scrape import (
     ai_scrape_releases,
 )
 from compare import AIResponseFormatError, FoundCandidate
+from enrich import StaticTmdbResolver, enrich_releases
 from models import FelEvidence, FelRelease
 
 
@@ -309,6 +310,117 @@ def test_ai_extract_releases_converts_nonblank_candidates():
     assert releases[0].fel_evidence.evidence_type == "ai-extracted"
 
 
+def test_ai_extract_releases_dedupes_repeated_candidates():
+    drop_evidence = "Drop (2025) Profile 7 FEL"
+    heat_evidence = "Heat (1995) is confirmed Profile 7 FEL."
+
+    class RepeatingAIClient(FakeAIClient):
+        def extract_candidates(self, source_url: str, text: str):
+            candidate = FoundCandidate("Drop", "2025", source_url, drop_evidence, "ai")
+            candidates = [candidate, candidate]
+            if heat_evidence in text:
+                candidates.append(
+                    FoundCandidate("Heat", "1995", source_url, heat_evidence, "ai")
+                )
+            return candidates
+
+    releases = ai_extract_releases(
+        RepeatingAIClient(),
+        [
+            ("https://a.test/list", drop_evidence),
+            ("https://b.test/thread", f"{drop_evidence}\n{heat_evidence}"),
+        ],
+    )
+
+    assert [release.movie_title for release in releases] == ["Drop", "Heat"]
+    assert releases[0].fel_evidence.source_url == "https://a.test/list"
+    assert all(
+        release.fel_evidence.evidence_type == "ai-extracted" for release in releases
+    )
+
+
+@pytest.mark.parametrize("aka_candidate_first", [False, True])
+def test_ai_extract_releases_dedupe_is_order_independent_for_aka_evidence(
+    aka_candidate_first,
+):
+    """Regression check for a reviewed concern on the pre-enrichment dedupe.
+
+    Worry: if two same-title/year ai-extracted candidates are collapsed by
+    ai_extract_releases's dedupe before enrichment runs, and only one of them
+    carries an "AKA <other title>" quote that enrich._resolution_candidates
+    needs to resolve a foreign-title alias, then merge_releases keeping the
+    first-seen evidence on ties (merge.py's _prefer_evidence) could discard
+    the AKA quote depending on extraction order and silently break alias
+    resolution for that release.
+
+    In practice this cannot happen: compare.validate_ai_candidates rejects
+    any candidate whose evidence names a second title as free-standing text
+    ("cross-release-evidence", see test_compare.py), *before* the candidate
+    ever reaches _candidate_to_release/dedupe_releases. An "AKA ..." quote
+    only survives validation when the alias is baked into the extracted
+    title itself (e.g. title="Gok-Seong AKA The Wailing"), and canonical_key
+    includes the full title text, so such a candidate never shares a
+    canonical_key with -- and is therefore never merged with -- a plain
+    native-title duplicate that lacks the alias. This test pins that
+    end-to-end behavior: the AKA-bearing candidate is dropped by validation
+    regardless of extraction order, so exactly one (non-AKA) release survives
+    and downstream enrichment resolution is identical either way.
+    """
+    no_aka_evidence = "Gok-Seong (2016) Profile 7 FEL"
+    aka_evidence = "Gok-Seong AKA The Wailing (2016) Profile 7 FEL"
+    no_aka_candidate = FoundCandidate(
+        "Gok-Seong", "2016", "https://a.test", no_aka_evidence, "ai"
+    )
+    aka_candidate = FoundCandidate(
+        "Gok-Seong", "2016", "https://b.test", aka_evidence, "ai"
+    )
+    pages = [("https://a.test", no_aka_evidence), ("https://b.test", aka_evidence)]
+    mapping = {"https://a.test": [no_aka_candidate], "https://b.test": [aka_candidate]}
+    if aka_candidate_first:
+        pages = list(reversed(pages))
+
+    class MappedAIClient(FakeAIClient):
+        def extract_candidates(self, source_url: str, text: str):
+            return list(mapping[source_url])
+
+    releases = ai_extract_releases(MappedAIClient(), pages)
+
+    # The AKA candidate never survives compare.validate_ai_candidates, so only
+    # the plain candidate's release is left -- identically in both orders.
+    assert [release.fel_evidence.quote for release in releases] == [no_aka_evidence]
+
+    resolver = StaticTmdbResolver(
+        {
+            ("The Wailing", "2016"): {
+                "tmdb_id": "398978",
+                "title": "The Wailing",
+                "year": "2016",
+                "imdb_id": "tt5013056",
+            }
+        }
+    )
+    client = httpx.Client(
+        transport=httpx.MockTransport(
+            lambda request: httpx.Response(  # pragma: no cover - not reached
+                200,
+                json={
+                    "poster_path": "",
+                    "release_date": "",
+                    "production_companies": [],
+                },
+            )
+        )
+    )
+    summary = enrich_releases(releases, resolver, client=client, api_key="x")
+    client.close()
+
+    # Enrichment outcome (unresolved, since only the native title -- never the
+    # "The Wailing" alias -- reaches the resolver) is the same in both orders:
+    # order never determined whether the alias survived, validation did.
+    assert summary.resolved == 0
+    assert releases[0].tmdb_id == ""
+
+
 def test_ai_extract_releases_skips_sources_that_raise_http_errors():
     class FailingAIClient(FakeAIClient):
         def extract_candidates(self, source_url: str, text: str):
@@ -478,6 +590,62 @@ def test_ai_extraction_keeps_runtime_proxy_errors_retryable():
     assert _is_retryable_extraction_error(
         httpx.ProxyError("transient proxy outage", request=request)
     )
+
+
+def test_ai_extraction_keeps_service_unavailable_retryable():
+    assert _is_retryable_extraction_error(AIServiceUnavailableError())
+
+
+def test_ai_extract_releases_retries_transient_service_unavailable():
+    source_url = "https://forum.example.test/thread"
+
+    class FlakyAIClient(FakeAIClient):
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def extract_candidates(self, source_url: str, text: str):
+            self.calls += 1
+            if self.calls == 1:
+                raise AIServiceUnavailableError()
+            return [
+                FoundCandidate(
+                    "Alien",
+                    "1979",
+                    source_url,
+                    "Alien (1979) is confirmed Profile 7 FEL",
+                    "ai",
+                )
+            ]
+
+    client = FlakyAIClient()
+
+    releases = ai_extract_releases(
+        client, [(source_url, "Alien (1979) is confirmed Profile 7 FEL")]
+    )
+
+    assert client.calls == 2
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
+def test_ai_discover_sources_retries_transient_service_unavailable():
+    calls = 0
+
+    class FlakyDiscoveryClient(FakeAIClient):
+        def complete(self, system_prompt: str, user_prompt: str) -> str:
+            nonlocal calls
+            calls += 1
+            if calls == 1:
+                raise AIServiceUnavailableError()
+            return json.dumps(["https://forum.example.test/new-thread"])
+
+    discovered = ai_discover_sources(
+        FlakyDiscoveryClient(),
+        [],
+        resolver=lambda _hostname: ["93.184.216.34"],
+    )
+
+    assert calls == 2
+    assert discovered == ["https://forum.example.test/new-thread"]
 
 
 def test_ai_extract_releases_backs_off_between_retry_attempts(monkeypatch):

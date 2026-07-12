@@ -473,21 +473,24 @@ def _prefer_title(left: str, right: str) -> str:
     return left if len(left) >= len(right) else right
 
 
-def _prefer_evidence(left: FelEvidence, right: FelEvidence) -> FelEvidence:
+def _prefers_left_evidence(left: FelEvidence, right: FelEvidence) -> bool:
+    # Weak list-membership evidence (a bare "Title [Year]" entry, no technical
+    # detail) carries less information than even a generic AI-extracted quote,
+    # so strength is decided first: non-weak beats weak regardless of source.
     # AGENTS.md: ai-scrape must merge into existing data and never replace
-    # deterministic scraper results. When exactly one side is AI-extracted, keep
-    # the deterministic side regardless of its strength -- AI evidence is
-    # supplemental and must not overwrite the title/year-specific quote that ties
-    # the FEL claim to one release.
+    # deterministic scraper results. Among evidence of equal strength, AI must
+    # still never override a real deterministic quote -- AI evidence is
+    # supplemental and must not overwrite the title/year-specific quote that
+    # ties the FEL claim to one release.
+    left_weak = _is_weak_evidence(left.evidence_type)
+    right_weak = _is_weak_evidence(right.evidence_type)
+    if left_weak != right_weak:
+        return not left_weak
     left_ai = _is_ai_evidence(left.evidence_type)
     right_ai = _is_ai_evidence(right.evidence_type)
     if left_ai != right_ai:
-        return right if left_ai else left
-    left_weak = _is_weak_evidence(left.evidence_type)
-    right_weak = _is_weak_evidence(right.evidence_type)
-    if left_weak and not right_weak:
-        return right
-    return left
+        return not left_ai
+    return True
 
 
 def merge_releases(base: FelRelease, other: FelRelease) -> FelRelease:
@@ -502,15 +505,25 @@ def merge_releases(base: FelRelease, other: FelRelease) -> FelRelease:
             additional["source_urls"] = list(dict.fromkeys([*existing, *value]))
         elif key not in additional:
             additional[key] = value
+    # source_url is a property of fel_evidence, so source_label -- which
+    # describes what kind of page that URL is -- must be selected together
+    # with whichever side's evidence wins, not independently via its own
+    # "most known wins" rule. Otherwise the merged release can keep one
+    # side's URL/evidence with the *other* side's label, describing a
+    # provider the URL doesn't actually point to. Only fall back to the
+    # losing side's label when the winning side never set its own (e.g. the
+    # legacy forum HTML parser leaves source_label unset).
+    prefer_left = _prefers_left_evidence(base.fel_evidence, other.fel_evidence)
+    winner, loser = (base, other) if prefer_left else (other, base)
     return FelRelease(
         movie_title=_prefer_title(base.movie_title, other.movie_title),
-        fel_evidence=_prefer_evidence(base.fel_evidence, other.fel_evidence),
+        fel_evidence=winner.fel_evidence,
         release_date=_prefer_date(base.release_date, other.release_date),
         studio=_prefer_known(base.studio, other.studio),
         audio_formats=list(dict.fromkeys([*base.audio_formats, *other.audio_formats])),
         english_audio=_prefer_known(base.english_audio, other.english_audio),
         additional_characteristics=additional,
-        source_label=_prefer_known(base.source_label, other.source_label),
+        source_label=_prefer_known(winner.source_label, loser.source_label),
         collected_at=_prefer_known(base.collected_at, other.collected_at),
         fel_confirmed=base.fel_confirmed or other.fel_confirmed,
         tmdb_id=base.tmdb_id or other.tmdb_id,
