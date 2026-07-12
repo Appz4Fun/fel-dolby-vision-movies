@@ -401,19 +401,22 @@ def _prefer_title(left: str, right: str) -> str:
 
 
 def _prefer_evidence(left: FelEvidence, right: FelEvidence) -> FelEvidence:
+    # Weak list-membership evidence (a bare "Title [Year]" entry, no technical
+    # detail) carries less information than even a generic AI-extracted quote,
+    # so strength is decided first: non-weak beats weak regardless of source.
     # AGENTS.md: ai-scrape must merge into existing data and never replace
-    # deterministic scraper results. When exactly one side is AI-extracted, keep
-    # the deterministic side regardless of its strength -- AI evidence is
-    # supplemental and must not overwrite the title/year-specific quote that ties
-    # the FEL claim to one release.
+    # deterministic scraper results. Among evidence of equal strength, AI must
+    # still never override a real deterministic quote -- AI evidence is
+    # supplemental and must not overwrite the title/year-specific quote that
+    # ties the FEL claim to one release.
+    left_weak = _is_weak_evidence(left.evidence_type)
+    right_weak = _is_weak_evidence(right.evidence_type)
+    if left_weak != right_weak:
+        return right if left_weak else left
     left_ai = _is_ai_evidence(left.evidence_type)
     right_ai = _is_ai_evidence(right.evidence_type)
     if left_ai != right_ai:
         return right if left_ai else left
-    left_weak = _is_weak_evidence(left.evidence_type)
-    right_weak = _is_weak_evidence(right.evidence_type)
-    if left_weak and not right_weak:
-        return right
     return left
 
 

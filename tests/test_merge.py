@@ -126,6 +126,18 @@ def test_merge_prefers_real_evidence_over_weak_list_membership():
     assert merge_releases(fel, github).fel_evidence.evidence_type == "fel-list"
 
 
+def test_merge_prefers_ai_extracted_over_weak_list_membership():
+    # A bare list mention carries less information than even a generic
+    # ai-extracted quote, so it loses on strength before the "AI never
+    # overrides deterministic" rule ever applies. AI still loses to a real
+    # (non-weak) deterministic quote -- see
+    # test_merge_keeps_deterministic_evidence_over_ai_extracted.
+    list_only = make("Dune", "2021", evidence_type="reddit-list")
+    ai = make("Dune", "2021", evidence_type="ai-extracted")
+    assert merge_releases(list_only, ai).fel_evidence.evidence_type == "ai-extracted"
+    assert merge_releases(ai, list_only).fel_evidence.evidence_type == "ai-extracted"
+
+
 def test_merge_prefers_full_date_over_bare_year():
     year = make("Dune", "2021")
     full = make("Dune", "2021-10-22")
