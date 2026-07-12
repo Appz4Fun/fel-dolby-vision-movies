@@ -17,7 +17,7 @@ from ai_scrape import (
     ai_extract_releases,
     ai_scrape_releases,
 )
-from compare import AIResponseFormatError, FoundCandidate
+from compare import AIResponseFormatError, AIServiceUnavailableError, FoundCandidate
 from enrich import StaticTmdbResolver, enrich_releases
 from models import FelEvidence, FelRelease
 

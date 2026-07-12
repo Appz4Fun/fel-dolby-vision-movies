@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import httpx
+import pytest
 
 import enrich
 from bluray import BlurayDetails, StaticBlurayResolver
@@ -383,3 +384,81 @@ def test_enrich_releases_counts_bluray_failures(tmp_path):
     assert summary.bluray_matched == 0
     assert summary.bluray_failed == 1
     assert releases[0].bluray_url == ""
+
+
+def test_enrich_releases_records_tmdb_title_pair_for_foreign_language_film(tmp_path):
+    resolver = StaticTmdbResolver(
+        {
+            ("Les rivières pourpres", "2000"): {
+                "tmdb_id": "60670",
+                "title": "The Crimson Rivers",
+                "original_title": "Les rivières pourpres",
+                "year": "2000",
+                "imdb_id": "tt0228786",
+            }
+        }
+    )
+
+    def handler(request):
+        if request.url.path == "/3/movie/60670":
+            return httpx.Response(
+                200,
+                json={
+                    "poster_path": "",
+                    "release_date": "2000-09-27",
+                    "production_companies": [{"name": "Gaumont"}],
+                },
+            )
+        return httpx.Response(404)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    releases = [make("Les rivières pourpres", "2000")]
+
+    summary = enrich_releases(
+        releases, resolver, client=client, api_key="x", poster_dir=tmp_path
+    )
+    client.close()
+
+    assert summary.resolved == 1
+    assert releases[0].movie_title == "Les rivières pourpres"
+    assert releases[0].additional_characteristics["tmdb_title"] == "The Crimson Rivers"
+    assert (
+        releases[0].additional_characteristics["tmdb_original_title"]
+        == "Les rivières pourpres"
+    )
+
+
+@pytest.mark.parametrize(
+    "record",
+    [
+        {
+            "tmdb_id": "550",
+            "title": "Fight Club",
+            "original_title": "Fight Club",
+            "year": "1999",
+            "imdb_id": "tt0137523",
+        },
+        {
+            "tmdb_id": "550",
+            "title": "Fight Club",
+            "year": "1999",
+            "imdb_id": "tt0137523",
+        },
+    ],
+    ids=["same-original-title", "no-original-title"],
+)
+def test_enrich_releases_skips_tmdb_title_pair_without_distinct_original(
+    tmp_path, record
+):
+    resolver = StaticTmdbResolver({("Fight Club", "1999"): record})
+    client = httpx.Client(transport=httpx.MockTransport(_handler))
+    releases = [make("Fight Club", "1999")]
+
+    summary = enrich_releases(
+        releases, resolver, client=client, api_key="x", poster_dir=tmp_path
+    )
+    client.close()
+
+    assert summary.resolved == 1
+    assert "tmdb_title" not in releases[0].additional_characteristics
+    assert "tmdb_original_title" not in releases[0].additional_characteristics

@@ -29,8 +29,9 @@ def _is_ai_evidence(evidence_type: str) -> bool:
 # Title tokens that mark a genuinely distinct physical release sharing one TMDB
 # id (editions, cuts, season/series discs). These are a conservative stop signal,
 # not proof that descriptor-free rows are aliases; reconciliation separately
-# requires alias proof (explicit cross-title AKA evidence, or titles that are
-# mere spelling variants of each other) before it can collapse them.
+# requires alias proof (explicit cross-title AKA evidence, a recorded TMDB
+# canonical/original title pair, or titles that are mere spelling variants of
+# each other) before it can collapse them.
 _EDITION_DESCRIPTOR_RE = re.compile(
     r"\b(?:extended|collector|collectors|director|directors|theatrical|"
     r"remaster|remastered|restored|uncut|unrated|special\s+edition|anniversary|"
@@ -40,6 +41,11 @@ _EDITION_DESCRIPTOR_RE = re.compile(
 )
 _AKA_RE = re.compile(r"\baka\b", re.IGNORECASE)
 _AKA_LOCAL_BOUNDARY_RE = re.compile(r"[.!?;\n]+")
+
+# additional_characteristics keys recorded by enrichment for foreign-language
+# films: TMDB's canonical (usually English) title and the film's original title.
+TMDB_TITLE_KEY = "tmdb_title"
+TMDB_ORIGINAL_TITLE_KEY = "tmdb_original_title"
 
 
 def has_edition_descriptor(title: str) -> bool:
@@ -234,7 +240,7 @@ def _is_reconciliation_alias_group(
     if not identity_is_compatible:
         return False
 
-    edges = _explicit_aka_edges(rows)
+    edges = _explicit_aka_edges(rows) | _tmdb_title_alias_edges(rows)
     for left_index in range(len(rows)):
         for right_index in range(left_index + 1, len(rows)):
             if _titles_are_spelling_variants(
@@ -242,6 +248,40 @@ def _is_reconciliation_alias_group(
             ):
                 edges.add((left_index, right_index))
     return _graph_connects_all_rows(len(rows), edges)
+
+
+def _recorded_tmdb_title_pairs(rows: list[FelRelease]) -> set[frozenset[str]]:
+    """Distinct canonical/original title-key pairs recorded by enrichment."""
+    pairs: set[frozenset[str]] = set()
+    for row in rows:
+        characteristics = row.additional_characteristics
+        title_key = canonical_title_key(str(characteristics.get(TMDB_TITLE_KEY, "")))
+        original_key = canonical_title_key(
+            str(characteristics.get(TMDB_ORIGINAL_TITLE_KEY, ""))
+        )
+        if title_key and original_key and title_key != original_key:
+            pairs.add(frozenset((title_key, original_key)))
+    return pairs
+
+
+def _tmdb_title_alias_edges(rows: list[FelRelease]) -> set[tuple[int, int]]:
+    """Edges proven by enrichment's recorded TMDB canonical/original title pair.
+
+    When any row in the group carries both titles TMDB reports for the film,
+    the pair proves that one row titled by the original (native) title and one
+    titled by the canonical (English) title name the same film, even when no
+    scraped quote spells out an explicit "Native AKA English" alias.
+    """
+    alias_pairs = _recorded_tmdb_title_pairs(rows)
+    if not alias_pairs:
+        return set()
+    row_keys = [canonical_title_key(row.movie_title) for row in rows]
+    return {
+        (left_index, right_index)
+        for left_index in range(len(rows))
+        for right_index in range(left_index + 1, len(rows))
+        if frozenset((row_keys[left_index], row_keys[right_index])) in alias_pairs
+    }
 
 
 def _explicit_aka_edges(rows: list[FelRelease]) -> set[tuple[int, int]]:
