@@ -449,15 +449,15 @@ def test_alternative_title_rescue_order_filters_far_years_and_ranks_by_votes():
     near_big = {"id": 2, "release_date": "2022-01-01", "vote_count": 500}
     far = {"id": 3, "release_date": "1990-01-01", "vote_count": 9000}
     undated = {"id": 4, "release_date": "", "vote_count": 50}
-    near_tiny = {"id": 5, "release_date": "2021-01-01", "vote_count": 1}
 
     order = tmdb._alternative_title_rescue_order(
-        "2021", [near_small, near_big, far, undated, near_tiny]
+        "2021", [near_small, near_big, far, undated]
     )
 
-    # The far-year stranger is never checked, and only the three most-voted
-    # eligible candidates survive the rescue budget.
-    assert [candidate["id"] for candidate in order] == [2, 4, 1]
+    # The far-year stranger is never checked, and any correctly-dated
+    # candidate outranks an undated one regardless of votes, so a high-vote
+    # undated placeholder cannot bypass the missing-date penalty via rescue.
+    assert [candidate["id"] for candidate in order] == [2, 1, 4]
 
 
 def test_alternative_title_rescue_order_keeps_all_years_for_yearless_query():
@@ -468,16 +468,19 @@ def test_alternative_title_rescue_order_keeps_all_years_for_yearless_query():
     assert [candidate["id"] for candidate in order] == [3]
 
 
-def test_alternative_titles_match_normalizes_diacritics():
+def test_matching_alternative_title_normalizes_diacritics():
     records = [
         {"iso_3166_1": "JP", "title": "Ryū to Sobakasu no Hime", "type": "romaji"},
         {"iso_3166_1": "US", "title": "The Dragon and the Freckled Princess"},
         {"title": None},
     ]
 
-    assert tmdb._alternative_titles_match("ryu to sobakasu no hime", records) is True
-    assert tmdb._alternative_titles_match("something else", records) is False
-    assert tmdb._alternative_titles_match("", records) is False
+    assert (
+        tmdb._matching_alternative_title("ryu to sobakasu no hime", records)
+        == "Ryū to Sobakasu no Hime"
+    )
+    assert tmdb._matching_alternative_title("something else", records) == ""
+    assert tmdb._matching_alternative_title("", records) == ""
 
 
 def test_resolver_rescues_romanized_query_via_alternative_titles(
@@ -547,7 +550,16 @@ def test_resolver_rescues_romanized_query_via_alternative_titles(
     assert result.tmdb_id == "776503"
     assert result.title == "Belle"
     assert result.imdb_id == "tt13651628"
+    assert result.matched_alternative_title == "Ryū to Sobakasu no Hime"
     assert alt_title_requests == ["/3/movie/776503/alternative_titles"]
+
+    # The matched alternative title must survive the cache round-trip so
+    # enrichment can retitle the row deterministically on cached replays.
+    cached = json.loads((tmp_path / "cache.json").read_text(encoding="utf-8"))
+    assert (
+        cached["Ryu to sobakasu no hime\x002021"]["matched_alternative_title"]
+        == "Ryū to Sobakasu no Hime"
+    )
 
 
 def test_resolver_returns_none_when_alternative_titles_do_not_match(
@@ -581,8 +593,49 @@ def test_resolver_returns_none_when_alternative_titles_do_not_match(
     )
 
     assert resolver.resolve("Long ma jing shen", "2021") is None
+    # Negative decisions are version-stamped so a future scorer/rescue change
+    # re-fetches them instead of serving a stale "no match" forever.
     cached = json.loads((tmp_path / "cache.json").read_text(encoding="utf-8"))
-    assert cached["Long ma jing shen\x002021"] is None
+    assert cached["Long ma jing shen\x002021"] == {
+        "scorer_version": tmdb._SCORER_VERSION
+    }
+
+
+def test_resolver_refetches_bare_none_negative_cache_records(tmp_path):
+    """A pre-versioning negative record (bare null) must be re-fetched: the
+    'no match' decision may have been made before the alternative-title
+    rescue existed, so on persistent runner caches it would otherwise keep
+    a now-resolvable title unresolved forever. A negative decided under the
+    current version is still served from cache."""
+    cache_path = tmp_path / "tmdb_cache.json"
+    cache_path.write_text(
+        json.dumps({"Long ma jing shen\x002023": None}), encoding="utf-8"
+    )
+    requests: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requests.append(request.url.path)
+        return httpx.Response(200, json={"results": []})
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    with TmdbResolver(
+        "key", cache_path=cache_path, client=client, delay_seconds=0
+    ) as resolver:
+        assert resolver.resolve("Long ma jing shen", "2023") is None
+    assert requests, "bare-None negative must be re-fetched, not served stale"
+
+    cached = json.loads(cache_path.read_text(encoding="utf-8"))
+    assert cached["Long ma jing shen\x002023"] == {
+        "scorer_version": tmdb._SCORER_VERSION
+    }
+
+    requests.clear()
+    with TmdbResolver(
+        "key", cache_path=cache_path, client=client, delay_seconds=0
+    ) as fresh:
+        assert fresh.resolve("Long ma jing shen", "2023") is None
+    assert requests == [], "current-version negative must be served from cache"
+    client.close()
 
 
 def test_has_audience_engagement_rejects_zero_vote_posterless_candidate():
@@ -765,7 +818,9 @@ def test_resolver_refetches_legacy_cache_records_missing_original_title(tmp_path
         cached["Les rivières pourpres\x002000"]["original_title"]
         == "Les rivières pourpres"
     )
-    assert cached["Unknown Movie\x002099"] is None
+    # Bare-None negatives predate version stamping; they are dropped at load
+    # so titles the newer scorer/rescue could now resolve get re-fetched.
+    assert "Unknown Movie\x002099" not in cached
 
     requests.clear()
     with TmdbResolver(

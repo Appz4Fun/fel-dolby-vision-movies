@@ -15,7 +15,12 @@ from tmdb import (
     TmdbResolver,
     load_tmdb_api_key,
 )
-from merge import TMDB_ORIGINAL_TITLE_KEY, TMDB_TITLE_KEY, canonical_title_key
+from merge import (
+    TMDB_ORIGINAL_TITLE_KEY,
+    TMDB_TITLE_KEY,
+    canonical_title_key,
+    has_edition_descriptor,
+)
 from models import UNKNOWN, FelRelease
 from normalize import normalize_fel_title
 
@@ -290,6 +295,17 @@ def enrich_releases(
                 != release.movie_title
             ):
                 release.movie_title = movie_candidate.canonical_title or movie.title
+            elif movie.matched_alternative_title and not has_edition_descriptor(
+                release.movie_title
+            ):
+                # The row is titled by a TMDB alternative title (romanized
+                # native name, sequel alias); adopt the canonical TMDB title
+                # so reconciliation can merge it with the canonical catalog
+                # row. Edition-descriptor titles keep their source spelling:
+                # TMDB lists edition names among alternative titles, and
+                # renaming those would collapse a distinct physical edition
+                # into the base film.
+                release.movie_title = movie.title
             release.tmdb_id = movie.tmdb_id
             release.imdb_id = movie.imdb_id
             release.release_url = release_url_for(movie.tmdb_id, movie.imdb_id)

@@ -199,6 +199,74 @@ def test_enrich_releases_applies_bluray_details(tmp_path):
     assert summary.bluray_failed == 0
 
 
+def test_enrich_retitles_row_resolved_via_alternative_title(tmp_path):
+    # A row titled by a TMDB alternative title (romanized native name) that
+    # the resolver rescued must adopt the canonical TMDB title, otherwise
+    # reconciliation has no edge from the source spelling to the canonical
+    # catalog row and can append a same-TMDB duplicate.
+    resolver = StaticTmdbResolver(
+        {
+            ("Katayoku no Fake Title", "2021"): {
+                "tmdb_id": "776503",
+                "title": "Belle",
+                "year": "2021",
+                "imdb_id": "tt13651628",
+                "matched_alternative_title": "Katayoku no Fake Title",
+            }
+        }
+    )
+
+    def handler(request):
+        if request.url.path == "/3/movie/776503":
+            return httpx.Response(
+                200,
+                json={"poster_path": "", "release_date": "2021-07-16"},
+            )
+        return httpx.Response(404)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    releases = [make("Katayoku no Fake Title", "2021")]
+    enrich_releases(releases, resolver, client=client, api_key="x", poster_dir=tmp_path)
+    client.close()
+
+    assert releases[0].movie_title == "Belle"
+    assert releases[0].tmdb_id == "776503"
+
+
+def test_enrich_keeps_edition_title_despite_alternative_title_match(tmp_path):
+    # TMDB sometimes lists edition names among alternative titles; adopting
+    # the base film's canonical title would collapse a distinct physical
+    # edition row into the base film, so edition-descriptor titles keep
+    # their source spelling.
+    resolver = StaticTmdbResolver(
+        {
+            ("Avatar Special Edition", "2009"): {
+                "tmdb_id": "19995",
+                "title": "Avatar",
+                "year": "2009",
+                "imdb_id": "tt0499549",
+                "matched_alternative_title": "Avatar Special Edition",
+            }
+        }
+    )
+
+    def handler(request):
+        if request.url.path == "/3/movie/19995":
+            return httpx.Response(
+                200,
+                json={"poster_path": "", "release_date": "2009-12-16"},
+            )
+        return httpx.Response(404)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    releases = [make("Avatar Special Edition", "2009")]
+    enrich_releases(releases, resolver, client=client, api_key="x", poster_dir=tmp_path)
+    client.close()
+
+    assert releases[0].movie_title == "Avatar Special Edition"
+    assert releases[0].tmdb_id == "19995"
+
+
 def test_lookup_aliases_cover_known_fel_list_romanizations():
     # Titles the reddit FEL list spells by romanized/native/sequel-alias
     # names that TMDB's title+original_title scoring cannot resolve; each is

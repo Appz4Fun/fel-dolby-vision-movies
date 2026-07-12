@@ -26,6 +26,11 @@ class TmdbMovie:
     year: str
     imdb_id: str = ""
     original_title: str = ""
+    # Set when resolution succeeded only via the alternative-title rescue:
+    # the TMDB alternative title that matched the query. Enrichment uses it
+    # to retitle the source row to the canonical TMDB title so the row can
+    # merge with the canonical catalog entry.
+    matched_alternative_title: str = ""
 
     @classmethod
     def from_dict(cls, record: dict[str, str]) -> TmdbMovie:
@@ -35,6 +40,7 @@ class TmdbMovie:
             year=record["year"],
             imdb_id=record.get("imdb_id", ""),
             original_title=record.get("original_title", ""),
+            matched_alternative_title=record.get("matched_alternative_title", ""),
         )
 
 
@@ -98,8 +104,11 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             candidates = list(
                 {str(c.get("id", "")): c for c in candidates + fallback}.values()
             )
+        matched_alternative_title = ""
         if best is None:
-            best = self._rescue_by_alternative_title(title, year, candidates)
+            rescue = self._rescue_by_alternative_title(title, year, candidates)
+            if rescue is not None:
+                best, matched_alternative_title = rescue
         if best is None:
             return None
         tmdb_id = str(best.get("id", ""))
@@ -110,6 +119,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             year=_year_from_date(str(best.get("release_date") or "")) or year,
             imdb_id=str(external.get("imdb_id") or ""),
             original_title=str(best.get("original_title") or "").strip(),
+            matched_alternative_title=matched_alternative_title,
         )
 
     def _fetch_candidates(self, title: str, year: str) -> list[dict[str, Any]]:
@@ -128,14 +138,15 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
 
     def _rescue_by_alternative_title(
         self, title: str, year: str, candidates: list[dict[str, Any]]
-    ) -> dict[str, Any] | None:
+    ) -> tuple[dict[str, Any], str] | None:
         """Confirm low-scoring candidates against TMDB's alternative titles."""
         # Search finds films by alternative titles (romanized native names,
         # sequel aliases), but the scorer only sees `title`/`original_title`,
         # so a query like "Ryu to sobakasu no hime" rejects the very candidate
         # ("Belle") the search index matched for it. When nothing scores, an
         # exact alternative-title hit on a near-year, engaged candidate is
-        # accepted before giving up.
+        # accepted before giving up; the matched title is returned alongside
+        # the candidate so enrichment can retitle the source row canonically.
         query_key = _canonical_title_key(title)
         for candidate in _alternative_title_rescue_order(year, candidates):
             response = self.client.get(
@@ -144,8 +155,9 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             )
             response.raise_for_status()
             records = response.json().get("titles", [])
-            if _alternative_titles_match(query_key, records):
-                return candidate
+            matched = _matching_alternative_title(query_key, records)
+            if matched:
+                return candidate, matched
         return None
 
     def _external_ids(self, tmdb_id: str) -> dict[str, Any]:
@@ -192,19 +204,15 @@ _SCORER_VERSION = "3"
 
 
 def _is_legacy_cache_record(value: object) -> bool:
-    """Report whether a cache record predates original_title capture or the
-    current scorer version.
-
-    Such records cannot prove a foreign film's canonical/original title pair,
-    or were decided under different match weights, so they are dropped at
-    load time and re-fetched on demand rather than being served stale until
-    the cache file is deleted. Negative records (None) stay valid: a "no
-    match found" decision isn't wrong the way a mismatched TMDB id is, so
-    re-fetching them is a completeness nicety rather than a correctness fix.
-    """
-    return isinstance(value, dict) and (
-        "original_title" not in value or value.get("scorer_version") != _SCORER_VERSION
-    )
+    """Report whether a cache record predates the current scorer version."""
+    # A record decided under different match weights (or before a resolution
+    # feature like the alternative-title rescue existed) is dropped at load
+    # time and re-fetched on demand rather than being served stale until the
+    # cache file is deleted. That includes negatives: a bare-None "no match"
+    # record (the pre-versioning negative format) may name a title the
+    # current rescue can now resolve, so only negatives version-stamped by
+    # the current scorer (dicts without a tmdb_id) stay valid.
+    return not isinstance(value, dict) or value.get("scorer_version") != _SCORER_VERSION
 
 
 def load_tmdb_api_key(env_path: Path = Path(".env")) -> str:
@@ -366,15 +374,27 @@ def _alternative_title_rescue_order(
         if query_year and release_year and abs(int(release_year) - int(query_year)) > 1:
             continue
         eligible.append(candidate)
-    eligible.sort(key=_vote_count, reverse=True)
+    # Dated candidates outrank undated ones regardless of votes, so a
+    # high-vote undated placeholder cannot bypass the missing-date penalty
+    # by winning the rescue instead.
+    eligible.sort(
+        key=lambda candidate: (
+            bool(_year_from_date(str(candidate.get("release_date") or ""))),
+            _vote_count(candidate),
+        ),
+        reverse=True,
+    )
     return eligible[:_ALT_TITLE_RESCUE_LIMIT]
 
 
-def _alternative_titles_match(query_key: str, records: list[dict[str, Any]]) -> bool:
-    return bool(query_key) and any(
-        _canonical_title_key(str(record.get("title") or "")) == query_key
-        for record in records
-    )
+def _matching_alternative_title(query_key: str, records: list[dict[str, Any]]) -> str:
+    if not query_key:
+        return ""
+    for record in records:
+        title = str(record.get("title") or "")
+        if _canonical_title_key(title) == query_key:
+            return title
+    return ""
 
 
 def _title_score(left: str, right: str) -> int:
@@ -410,21 +430,24 @@ def _year_from_date(value: str) -> str:
 def _movie_from_cache_record(
     record: dict[str, str] | None,
 ) -> TmdbMovie | None:  # pragma: no cover
-    if record is None:
+    if record is None or not record.get("tmdb_id"):
         return None
     return TmdbMovie.from_dict(record)
 
 
 def _movie_to_cache_record(
     movie: TmdbMovie | None,
-) -> dict[str, str] | None:  # pragma: no cover
+) -> dict[str, str]:  # pragma: no cover
     if movie is None:
-        return None
+        # Version-stamped negative: refetched when the scorer version bumps,
+        # unlike the legacy bare-None format which cached "no match" forever.
+        return {"scorer_version": _SCORER_VERSION}
     return {
         "tmdb_id": movie.tmdb_id,
         "title": movie.title,
         "year": movie.year,
         "imdb_id": movie.imdb_id,
         "original_title": movie.original_title,
+        "matched_alternative_title": movie.matched_alternative_title,
         "scorer_version": _SCORER_VERSION,
     }

@@ -393,6 +393,71 @@ def test_single_typo_title_collapses_when_strong_ids_agree(typo_title: str):
     assert result.additions == []
 
 
+def test_same_title_year_distinct_urls_stays_separate_without_shared_id():
+    # When only one side carries strong ids, the unenriched incoming row may
+    # be a different same-titled film whose TMDB resolution failed (two
+    # "Belle" 2021 films exist); the differing disc URL stays an ambiguity
+    # signal and the row is appended rather than folded into the catalog row.
+    base = release(
+        "Belle",
+        "2021",
+        tmdb_id="776503",
+        imdb_id="tt13651628",
+        bluray_url="https://www.blu-ray.com/movies/Belle/1/",
+    )
+    unenriched = release(
+        "Belle",
+        "2021-12-03",
+        bluray_url="https://www.blu-ray.com/movies/Belle/2/",
+    )
+
+    result = reconcile_releases([base], [unenriched])
+
+    assert result.releases == [base, unenriched]
+    assert result.additions == [unenriched]
+    assert result.merged_count == 0
+
+
+def test_same_title_year_distinct_urls_merges_when_neither_side_has_ids():
+    # With no ids on either side the two rows are indistinguishable to
+    # readers, so the differing disc URL alone must not publish both.
+    base = release(
+        "Avatar",
+        "2009",
+        bluray_url="https://www.blu-ray.com/movies/Avatar/1/",
+    )
+    rescraped = release(
+        "Avatar",
+        "2009",
+        bluray_url="https://www.blu-ray.com/movies/Avatar/2/",
+    )
+
+    result = reconcile_releases([base], [rescraped])
+
+    assert len(result.releases) == 1
+    assert result.merged_count == 1
+
+
+def test_same_title_year_distinct_urls_merges_on_shared_imdb_id_alone():
+    base = release(
+        "Movie",
+        "2000",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Movie/1/",
+    )
+    second_disc = release(
+        "Movie",
+        "2000-01-01",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Movie/2/",
+    )
+
+    result = reconcile_releases([base], [second_disc])
+
+    assert len(result.releases) == 1
+    assert result.merged_count == 1
+
+
 def test_number_word_variant_titles_collapse_without_aka_evidence():
     # Marketing spells the same film both ways ("The Fantastic 4" letterboxd
     # row vs "The Fantastic Four" reddit row, one TMDB id); a spelled-out

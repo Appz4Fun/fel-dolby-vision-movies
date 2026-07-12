@@ -225,16 +225,41 @@ def _target_decision(
     target = catalog[index]
     if not _ids_are_consistent(candidate, target):
         return _review_decision("identity-conflict", catalog, [index])
-    # Distinct blu-ray.com pages mark distinct physical editions only when the
-    # rows are titled differently; the same canonical title+year re-resolved to
-    # another disc page (multiple pressings of one cut) is still the same row.
-    if _has_distinct_url(candidate, target) and canonical_key(
-        candidate
-    ) != canonical_key(target):
+    if _has_distinct_url(candidate, target) and not _same_release_despite_distinct_urls(
+        candidate, target
+    ):
         if _year(candidate):
             return _MatchDecision()
         return _review_decision("ambiguous-edition", catalog, [index])
     return _MatchDecision(index=index)
+
+
+def _same_release_despite_distinct_urls(
+    candidate: FelRelease, target: FelRelease
+) -> bool:
+    """Same canonical identity re-resolved to a different disc page."""
+    # Multiple pressings of one cut share the canonical title+year, so the
+    # URL difference is disc-page drift rather than a new edition -- but only
+    # when a shared strong id proves both rows name the same film, or when
+    # neither row has any id at all (two id-less same-title rows are
+    # indistinguishable to readers, so publishing both is meaningless).
+    # One-sided enrichment keeps the append path: the unresolved side may be
+    # a different same-titled film whose TMDB resolution failed.
+    if canonical_key(candidate) != canonical_key(target):
+        return False
+    if _shares_strong_id(candidate, target):
+        return True
+    return not _has_strong_id(candidate) and not _has_strong_id(target)
+
+
+def _shares_strong_id(left: FelRelease, right: FelRelease) -> bool:
+    return (bool(left.tmdb_id) and left.tmdb_id == right.tmdb_id) or (
+        bool(left.imdb_id) and left.imdb_id == right.imdb_id
+    )
+
+
+def _has_strong_id(release: FelRelease) -> bool:
+    return bool(release.tmdb_id or release.imdb_id)
 
 
 def _id_matches(
