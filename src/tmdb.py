@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 from dataclasses import dataclass
 from pathlib import Path
@@ -151,15 +152,30 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         )
 
 
+# Bumped whenever _best_tmdb_candidate's match weights change materially.
+# A positive cache record written under an older version was a decision
+# made with different (possibly incorrect) weights -- e.g. self-hosted
+# runners persist .cache/tmdb_fel_cleanup.json across workflow runs, so
+# without this a match this exact commit fixes (like "Sisu" resolving to
+# the unrelated "Scrapper") would keep being served from cache forever
+# instead of being re-scored under the corrected logic.
+_SCORER_VERSION = "2"
+
+
 def _is_legacy_cache_record(value: object) -> bool:
-    """Report whether a cache record predates original_title capture.
+    """Report whether a cache record predates original_title capture or the
+    current scorer version.
 
     Such records cannot prove a foreign film's canonical/original title pair,
-    so they are dropped at load time and re-fetched on demand rather than being
-    served stale until the cache file is deleted. Negative records (None) stay
-    valid: they never carry titles.
+    or were decided under different match weights, so they are dropped at
+    load time and re-fetched on demand rather than being served stale until
+    the cache file is deleted. Negative records (None) stay valid: a "no
+    match found" decision isn't wrong the way a mismatched TMDB id is, so
+    re-fetching them is a completeness nicety rather than a correctness fix.
     """
-    return isinstance(value, dict) and "original_title" not in value
+    return isinstance(value, dict) and (
+        "original_title" not in value or value.get("scorer_version") != _SCORER_VERSION
+    )
 
 
 def load_tmdb_api_key(env_path: Path = Path(".env")) -> str:
@@ -182,6 +198,34 @@ def load_tmdb_api_key(env_path: Path = Path(".env")) -> str:
     return api_key
 
 
+# A same-titled TMDB entry can share a query's release year by pure
+# coincidence (many titles -- "Sisu", "1917", "Hamilton" -- collide with
+# obscure shorts, documentaries, or parodies). At the original +80/-90
+# weights, that year coincidence alone was enough to clear the acceptance
+# threshold even with zero title relevance, or to outrank a real film whose
+# source-reported year legitimately differs from TMDB's primary release
+# year (festival vs. wide release, theatrical vs. home-video). Keeping the
+# bonus/penalty modest means year only ever refines among plausible title
+# matches -- see _engagement_bonus for how real-world popularity, not year,
+# now does the heavy lifting for disambiguating same-titled collisions.
+_YEAR_MATCH_BONUS = 45
+_YEAR_MISMATCH_PENALTY = -45
+# A candidate with no parseable release date at all isn't wrong the way a
+# mismatched year is, but it's also unconfirmed -- without some penalty it
+# can out-rank a candidate that actually proves it matches the query year,
+# purely by accumulating more votes (an undated duplicate/placeholder TMDB
+# entry vs. the correctly-dated real film).
+_YEAR_MISSING_PENALTY = -15
+
+# Only a candidate whose title is a strong, plausible match for the query
+# can earn credit for real-world popularity. A weak, coincidental overlap
+# (e.g. "1917" matching one of four tokens in "2020: A 1917 Parody") must
+# not be able to combine a year-coincidence bonus with even a handful of
+# votes to clear the acceptance threshold on its own -- that reintroduces
+# the exact false-positive class this scorer exists to prevent.
+_ENGAGEMENT_ELIGIBILITY_THRESHOLD = 70
+
+
 def _best_tmdb_candidate(
     query_title: str, query_year: str, candidates: list[dict[str, Any]]
 ) -> dict[str, Any] | None:
@@ -193,17 +237,22 @@ def _best_tmdb_candidate(
         release_year = _year_from_date(str(candidate.get("release_date") or ""))
         title_key = _canonical_title_key(title)
         original_key = _canonical_title_key(original_title)
-        score = max(
+        title_score = max(
             _title_score(query_key, title_key), _title_score(query_key, original_key)
         )
+        score = title_score
         if query_year and release_year == query_year:
-            score += 80
+            score += _YEAR_MATCH_BONUS
         elif query_year and release_year:
-            score -= 90
+            score += _YEAR_MISMATCH_PENALTY
+        elif query_year and not release_year:
+            score += _YEAR_MISSING_PENALTY
         if title_key == query_key:
             score += 20
         if original_key == query_key:
             score += 20
+        if title_score >= _ENGAGEMENT_ELIGIBILITY_THRESHOLD:
+            score += _engagement_bonus(candidate)
         popularity = _candidate_popularity(candidate)
         if best is None or (score, popularity) > (best[0], best[1]):
             best = (score, popularity, candidate)
@@ -220,6 +269,25 @@ def _candidate_popularity(candidate: dict[str, Any]) -> float:
         return float(str(value))
     except (TypeError, ValueError):
         return 0.0
+
+
+def _engagement_bonus(candidate: dict[str, Any]) -> int:
+    """Score bonus from real vote counts, log-scaled and capped at 50.
+
+    A title with thousands of votes is overwhelmingly more likely to be the
+    release audiences actually mean than a same-titled entry with a
+    handful, so this weights real engagement into the score directly
+    instead of only using it (via _candidate_popularity) as a last-resort
+    tiebreaker between otherwise-equal scores.
+    """
+    value = candidate.get("vote_count")
+    try:
+        vote_count = int(value) if value else 0
+    except (TypeError, ValueError, OverflowError):
+        vote_count = 0
+    if vote_count <= 0:
+        return 0
+    return min(50, round(12 * math.log10(vote_count + 1)))
 
 
 def _has_audience_engagement(candidate: dict[str, Any]) -> bool:
@@ -285,4 +353,5 @@ def _movie_to_cache_record(
         "year": movie.year,
         "imdb_id": movie.imdb_id,
         "original_title": movie.original_title,
+        "scorer_version": _SCORER_VERSION,
     }
