@@ -29,7 +29,9 @@ def _is_ai_evidence(evidence_type: str) -> bool:
 # Title tokens that mark a genuinely distinct physical release sharing one TMDB
 # id (editions, cuts, season/series discs). These are a conservative stop signal,
 # not proof that descriptor-free rows are aliases; reconciliation separately
-# requires explicit cross-title AKA evidence before it can collapse them.
+# requires alias proof (explicit cross-title AKA evidence, a recorded TMDB
+# canonical/original title pair, or titles that are mere spelling variants of
+# each other) before it can collapse them.
 _EDITION_DESCRIPTOR_RE = re.compile(
     r"\b(?:extended|collector|collectors|director|directors|theatrical|"
     r"remaster|remastered|restored|uncut|unrated|special\s+edition|anniversary|"
@@ -39,6 +41,11 @@ _EDITION_DESCRIPTOR_RE = re.compile(
 )
 _AKA_RE = re.compile(r"\baka\b", re.IGNORECASE)
 _AKA_LOCAL_BOUNDARY_RE = re.compile(r"[.!?;\n]+")
+
+# additional_characteristics keys recorded by enrichment for foreign-language
+# films: TMDB's canonical (usually English) title and the film's original title.
+TMDB_TITLE_KEY = "tmdb_title"
+TMDB_ORIGINAL_TITLE_KEY = "tmdb_original_title"
 
 
 def has_edition_descriptor(title: str) -> bool:
@@ -233,17 +240,48 @@ def _is_reconciliation_alias_group(
     if not identity_is_compatible:
         return False
 
-    explicit_edges = _explicit_aka_edges(rows)
-    if not explicit_edges:
-        return False
-
-    edges = set(explicit_edges)
-    orthographic_keys = [_orthographic_title_key(row.movie_title) for row in rows]
+    edges = _explicit_aka_edges(rows) | _tmdb_title_alias_edges(rows)
     for left_index in range(len(rows)):
         for right_index in range(left_index + 1, len(rows)):
-            if orthographic_keys[left_index] == orthographic_keys[right_index]:
+            if _titles_are_spelling_variants(
+                rows[left_index].movie_title, rows[right_index].movie_title
+            ):
                 edges.add((left_index, right_index))
     return _graph_connects_all_rows(len(rows), edges)
+
+
+def _recorded_tmdb_title_pairs(rows: list[FelRelease]) -> set[frozenset[str]]:
+    """Distinct canonical/original title-key pairs recorded by enrichment."""
+    pairs: set[frozenset[str]] = set()
+    for row in rows:
+        characteristics = row.additional_characteristics
+        title_key = canonical_title_key(str(characteristics.get(TMDB_TITLE_KEY, "")))
+        original_key = canonical_title_key(
+            str(characteristics.get(TMDB_ORIGINAL_TITLE_KEY, ""))
+        )
+        if title_key and original_key and title_key != original_key:
+            pairs.add(frozenset((title_key, original_key)))
+    return pairs
+
+
+def _tmdb_title_alias_edges(rows: list[FelRelease]) -> set[tuple[int, int]]:
+    """Edges proven by enrichment's recorded TMDB canonical/original title pair.
+
+    When any row in the group carries both titles TMDB reports for the film,
+    the pair proves that one row titled by the original (native) title and one
+    titled by the canonical (English) title name the same film, even when no
+    scraped quote spells out an explicit "Native AKA English" alias.
+    """
+    alias_pairs = _recorded_tmdb_title_pairs(rows)
+    if not alias_pairs:
+        return set()
+    row_keys = [canonical_title_key(row.movie_title) for row in rows]
+    return {
+        (left_index, right_index)
+        for left_index in range(len(rows))
+        for right_index in range(left_index + 1, len(rows))
+        if frozenset((row_keys[left_index], row_keys[right_index])) in alias_pairs
+    }
 
 
 def _explicit_aka_edges(rows: list[FelRelease]) -> set[tuple[int, int]]:
@@ -301,6 +339,81 @@ def _orthographic_title_key(title: str) -> str:
     return " ".join(
         replacements.get(token, token) for token in canonical_title_key(title).split()
     )
+
+
+_DIGIT_RUN_RE = re.compile(r"\d+")
+# Below this many letters a one-character edit rewrites too much of the title
+# ("Up" vs "Us") to be trusted as a typo, so short titles must match outright.
+_MIN_TYPO_TITLE_LENGTH = 5
+
+
+def _titles_are_spelling_variants(left_title: str, right_title: str) -> bool:
+    """True when two titles differ only by orthography or a single typo.
+
+    Callers must already hold identity corroboration (same TMDB id, same
+    non-empty IMDb id, same year, no edition descriptors); this predicate only
+    rejects edits that could still mark a distinct release: digit runs must
+    match exactly so sequels and numbered parts ("Iron Man 2" vs "Iron Man 3")
+    never count as typos, word counts must match so a whole extra word
+    ("Alien" vs "Alien X") never counts as a typo either, and very short
+    titles must match outright.
+    """
+    left_key = _orthographic_title_key(left_title)
+    right_key = _orthographic_title_key(right_title)
+    if left_key == right_key:
+        return True
+    if _DIGIT_RUN_RE.findall(left_key) != _DIGIT_RUN_RE.findall(right_key):
+        return False
+    left_compact = left_key.replace(" ", "")
+    right_compact = right_key.replace(" ", "")
+    if left_compact == right_compact:
+        # Same letters, different spacing only (e.g. a missing space) -- no
+        # word was added or removed, so word counts are allowed to differ.
+        return True
+    if len(left_key.split()) != len(right_key.split()):
+        return False
+    if min(len(left_compact), len(right_compact)) < _MIN_TYPO_TITLE_LENGTH:
+        return False
+    return _is_within_one_edit(left_compact, right_compact)
+
+
+def _is_within_one_edit(left: str, right: str) -> bool:
+    """True when exactly one substitution, indel, or adjacent swap apart.
+
+    Callers must already have excluded the equal-strings case (the only
+    caller, _titles_are_spelling_variants, returns early on that case).
+    """
+    if len(left) == len(right):
+        return _is_one_substitution_or_swap_apart(left, right)
+    return _is_one_indel_apart(left, right)
+
+
+def _is_one_substitution_or_swap_apart(left: str, right: str) -> bool:
+    """True when same-length strings differ by one substitution or swap."""
+    mismatches = [
+        index
+        for index, (left_char, right_char) in enumerate(zip(left, right))
+        if left_char != right_char
+    ]
+    if len(mismatches) == 1:
+        return True
+    return (
+        len(mismatches) == 2
+        and mismatches[1] == mismatches[0] + 1
+        and left[mismatches[0]] == right[mismatches[1]]
+        and left[mismatches[1]] == right[mismatches[0]]
+    )
+
+
+def _is_one_indel_apart(left: str, right: str) -> bool:
+    """True when strings one character apart in length differ by one insert."""
+    shorter, longer = sorted((left, right), key=len)
+    if len(longer) - len(shorter) != 1:
+        return False
+    for index in range(len(shorter)):
+        if shorter[index] != longer[index]:
+            return shorter[index:] == longer[index + 1 :]
+    return True
 
 
 def _graph_connects_all_rows(
@@ -400,21 +513,24 @@ def _prefer_title(left: str, right: str) -> str:
     return left if len(left) >= len(right) else right
 
 
-def _prefer_evidence(left: FelEvidence, right: FelEvidence) -> FelEvidence:
+def _prefers_left_evidence(left: FelEvidence, right: FelEvidence) -> bool:
+    # Weak list-membership evidence (a bare "Title [Year]" entry, no technical
+    # detail) carries less information than even a generic AI-extracted quote,
+    # so strength is decided first: non-weak beats weak regardless of source.
     # AGENTS.md: ai-scrape must merge into existing data and never replace
-    # deterministic scraper results. When exactly one side is AI-extracted, keep
-    # the deterministic side regardless of its strength -- AI evidence is
-    # supplemental and must not overwrite the title/year-specific quote that ties
-    # the FEL claim to one release.
+    # deterministic scraper results. Among evidence of equal strength, AI must
+    # still never override a real deterministic quote -- AI evidence is
+    # supplemental and must not overwrite the title/year-specific quote that
+    # ties the FEL claim to one release.
+    left_weak = _is_weak_evidence(left.evidence_type)
+    right_weak = _is_weak_evidence(right.evidence_type)
+    if left_weak != right_weak:
+        return not left_weak
     left_ai = _is_ai_evidence(left.evidence_type)
     right_ai = _is_ai_evidence(right.evidence_type)
     if left_ai != right_ai:
-        return right if left_ai else left
-    left_weak = _is_weak_evidence(left.evidence_type)
-    right_weak = _is_weak_evidence(right.evidence_type)
-    if left_weak and not right_weak:
-        return right
-    return left
+        return not left_ai
+    return True
 
 
 def merge_releases(base: FelRelease, other: FelRelease) -> FelRelease:
@@ -429,15 +545,25 @@ def merge_releases(base: FelRelease, other: FelRelease) -> FelRelease:
             additional["source_urls"] = list(dict.fromkeys([*existing, *value]))
         elif key not in additional:
             additional[key] = value
+    # source_url is a property of fel_evidence, so source_label -- which
+    # describes what kind of page that URL is -- must be selected together
+    # with whichever side's evidence wins, not independently via its own
+    # "most known wins" rule. Otherwise the merged release can keep one
+    # side's URL/evidence with the *other* side's label, describing a
+    # provider the URL doesn't actually point to. Only fall back to the
+    # losing side's label when the winning side never set its own (e.g. the
+    # legacy forum HTML parser leaves source_label unset).
+    prefer_left = _prefers_left_evidence(base.fel_evidence, other.fel_evidence)
+    winner, loser = (base, other) if prefer_left else (other, base)
     return FelRelease(
         movie_title=_prefer_title(base.movie_title, other.movie_title),
-        fel_evidence=_prefer_evidence(base.fel_evidence, other.fel_evidence),
+        fel_evidence=winner.fel_evidence,
         release_date=_prefer_date(base.release_date, other.release_date),
         studio=_prefer_known(base.studio, other.studio),
         audio_formats=list(dict.fromkeys([*base.audio_formats, *other.audio_formats])),
         english_audio=_prefer_known(base.english_audio, other.english_audio),
         additional_characteristics=additional,
-        source_label=_prefer_known(base.source_label, other.source_label),
+        source_label=_prefer_known(winner.source_label, loser.source_label),
         collected_at=_prefer_known(base.collected_at, other.collected_at),
         fel_confirmed=base.fel_confirmed or other.fel_confirmed,
         tmdb_id=base.tmdb_id or other.tmdb_id,

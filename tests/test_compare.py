@@ -2038,6 +2038,62 @@ def test_ai_client_rejects_stream_with_mismatched_terminal_failure_header():
         client.close()
 
 
+def _service_unavailable_body() -> str:
+    # Matches the real upstream shape observed in production: a bare
+    # keepalive comment line followed by one response.failed event.
+    return ": keepalive\n\nevent: response.failed\ndata: " + json.dumps(
+        {
+            "type": "response.failed",
+            "response": {
+                "status": "failed",
+                "error": {
+                    "message": "The model service is temporarily unavailable. "
+                    "Please try again shortly.",
+                    "type": "server_error",
+                    "code": "service_unavailable",
+                },
+            },
+        }
+    )
+
+
+def test_ai_client_raises_service_unavailable_for_transient_server_error():
+    body = _service_unavailable_body()
+
+    extract_client = _ai_client_for_body(body)
+    try:
+        with pytest.raises(compare.AIServiceUnavailableError):
+            extract_client.extract_candidates(_AI_SOURCE_URL, "source")
+    finally:
+        extract_client.close()
+
+    complete_client = _ai_client_for_body(body)
+    try:
+        with pytest.raises(compare.AIServiceUnavailableError):
+            complete_client.complete("system", "user")
+    finally:
+        complete_client.close()
+
+
+def test_ai_client_keeps_non_transient_failed_event_as_format_error():
+    body = ": keepalive\n\nevent: response.failed\ndata: " + json.dumps(
+        {
+            "type": "response.failed",
+            "response": {
+                "status": "failed",
+                "error": {"message": "bad request", "type": "invalid_request_error"},
+            },
+        }
+    )
+    client = _ai_client_for_body(body)
+
+    try:
+        with pytest.raises(compare.AIResponseFormatError):
+            client.complete("system", "user")
+    finally:
+        client.close()
+
+
 @pytest.mark.parametrize(
     "terminal_data",
     [

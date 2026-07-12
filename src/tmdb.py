@@ -23,6 +23,17 @@ class TmdbMovie:
     title: str
     year: str
     imdb_id: str = ""
+    original_title: str = ""
+
+    @classmethod
+    def from_dict(cls, record: dict[str, str]) -> TmdbMovie:
+        return cls(
+            tmdb_id=record["tmdb_id"],
+            title=record["title"],
+            year=record["year"],
+            imdb_id=record.get("imdb_id", ""),
+            original_title=record.get("original_title", ""),
+        )
 
 
 class MovieResolver(Protocol):
@@ -37,12 +48,7 @@ class StaticTmdbResolver:
         record = self.records.get((title, year))
         if record is None:
             return None
-        return TmdbMovie(
-            tmdb_id=record["tmdb_id"],
-            title=record["title"],
-            year=record["year"],
-            imdb_id=record.get("imdb_id", ""),
-        )
+        return TmdbMovie.from_dict(record)
 
 
 class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
@@ -94,6 +100,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             title=str(best.get("title") or best.get("name") or title).strip(),
             year=_year_from_date(str(best.get("release_date") or "")) or year,
             imdb_id=str(external.get("imdb_id") or ""),
+            original_title=str(best.get("original_title") or "").strip(),
         )
 
     def _search_candidates(self, title: str, year: str) -> dict[str, Any] | None:
@@ -108,6 +115,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         response = self.client.get(TMDB_SEARCH_URL, params=params)
         response.raise_for_status()
         candidates = response.json().get("results", [])
+        candidates = [c for c in candidates if _has_audience_engagement(c)]
         return _best_tmdb_candidate(title, year, candidates)
 
     def _external_ids(self, tmdb_id: str) -> dict[str, Any]:
@@ -132,6 +140,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         return {
             str(key): value if isinstance(value, dict) else None
             for key, value in data.items()
+            if not _is_legacy_cache_record(value)
         }
 
     def _write_cache(self) -> None:
@@ -140,6 +149,17 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             json.dumps(self.cache, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
+
+
+def _is_legacy_cache_record(value: object) -> bool:
+    """Report whether a cache record predates original_title capture.
+
+    Such records cannot prove a foreign film's canonical/original title pair,
+    so they are dropped at load time and re-fetched on demand rather than being
+    served stale until the cache file is deleted. Negative records (None) stay
+    valid: they never carry titles.
+    """
+    return isinstance(value, dict) and "original_title" not in value
 
 
 def load_tmdb_api_key(env_path: Path = Path(".env")) -> str:
@@ -202,6 +222,20 @@ def _candidate_popularity(candidate: dict[str, Any]) -> float:
         return 0.0
 
 
+def _has_audience_engagement(candidate: dict[str, Any]) -> bool:
+    """True if anyone has ever voted on or TMDB has poster art for this title.
+
+    TMDB's catalog includes a long tail of amateur/student shorts and other
+    never-released-to-market entries that can still win an exact title+year
+    text match purely by coincidence (many films share generic titles like
+    "Obsession" across decades). A candidate with zero votes and no poster
+    is far more likely to be one of those than a movie that actually
+    reached a physical/Blu-ray home-video market, so require at least one
+    of those signals before it is eligible to be scored as a match.
+    """
+    return bool(candidate.get("vote_count")) or bool(candidate.get("poster_path"))
+
+
 def _title_score(left: str, right: str) -> int:
     if not left or not right:
         return 0
@@ -237,12 +271,7 @@ def _movie_from_cache_record(
 ) -> TmdbMovie | None:  # pragma: no cover
     if record is None:
         return None
-    return TmdbMovie(
-        tmdb_id=record["tmdb_id"],
-        title=record["title"],
-        year=record["year"],
-        imdb_id=record.get("imdb_id", ""),
-    )
+    return TmdbMovie.from_dict(record)
 
 
 def _movie_to_cache_record(
@@ -255,4 +284,5 @@ def _movie_to_cache_record(
         "title": movie.title,
         "year": movie.year,
         "imdb_id": movie.imdb_id,
+        "original_title": movie.original_title,
     }

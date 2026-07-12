@@ -338,7 +338,7 @@ def test_alias_finalization_keeps_unproven_physical_variants(variant_title: str)
     assert result.additions == []
 
 
-def test_orthographic_similarity_alone_does_not_prove_an_alias():
+def test_spelling_variant_titles_collapse_without_aka_evidence():
     american = release(
         "Three Colors: Blue",
         "1993",
@@ -356,7 +356,77 @@ def test_orthographic_similarity_alone_does_not_prove_an_alias():
 
     result = reconcile_releases([american, british], [])
 
-    assert result.releases == [american, british]
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Three Colors: Blue"
+
+
+@pytest.mark.parametrize(
+    "typo_title",
+    [
+        "Gaurdians of the Galaxy",
+        "Guardiens of the Galaxy",
+        "Guardian of the Galaxy",
+        "Guardians of the Galaxyy",
+        "Guardians ofthe Galaxy",
+    ],
+)
+def test_single_typo_title_collapses_when_strong_ids_agree(typo_title: str):
+    correct = release(
+        "Guardians of the Galaxy",
+        "2014-08-01",
+        tmdb_id="118340",
+        imdb_id="tt2015381",
+        bluray_url="https://www.blu-ray.com/movies/Guardians-of-the-Galaxy/1/",
+    )
+    typo = release(
+        typo_title,
+        "2014-08-01",
+        tmdb_id="118340",
+        imdb_id="tt2015381",
+        bluray_url="https://www.blu-ray.com/movies/Gaurdians-of-the-Galaxy/2/",
+    )
+
+    result = reconcile_releases([correct], [typo])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Guardians of the Galaxy"
+    assert result.additions == []
+
+
+@pytest.mark.parametrize(
+    ("first_title", "second_title"),
+    [
+        ("Iron Man 2", "Iron Man 3"),
+        ("28 Days Later", "28 Weeks Later"),
+        ("Up", "Us"),
+        # A whole appended word must never read as a typo: space-stripped
+        # "alien" -> "alienx" is a single insertion, indistinguishable from a
+        # real one-letter typo unless word counts are compared too.
+        ("Alien", "Alien X"),
+    ],
+)
+def test_similar_but_distinct_titles_never_collapse_without_proof(
+    first_title: str,
+    second_title: str,
+):
+    first = release(
+        first_title,
+        "2010",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/First/1/",
+    )
+    second = release(
+        second_title,
+        "2010",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Second/2/",
+    )
+
+    result = reconcile_releases([first, second], [])
+
+    assert result.releases == [first, second]
 
 
 def test_explicit_aka_evidence_connects_real_three_colors_alias_group():
@@ -438,6 +508,67 @@ def test_ordinal_punctuation_and_accent_aka_evidence_proves_an_alias():
 
     assert len(result.releases) == 1
     assert result.releases[0].movie_title == "The Crimson Rivers"
+
+
+def test_tmdb_original_title_metadata_proves_foreign_alias_pair():
+    english = release(
+        "The Crimson Rivers",
+        "2000-09-27",
+        tmdb_id="60670",
+        imdb_id="tt0228786",
+        bluray_url="https://www.blu-ray.com/movies/The-Crimson-Rivers/1/",
+    )
+    french = release(
+        "Les rivières pourpres",
+        "2000-09-27",
+        tmdb_id="60670",
+        imdb_id="tt0228786",
+        bluray_url="https://www.blu-ray.com/movies/Les-Rivieres-Pourpres/2/",
+        quote="Les rivières pourpres (2000)",
+        additional_characteristics={
+            "tmdb_title": "The Crimson Rivers",
+            "tmdb_original_title": "Les rivières pourpres",
+        },
+    )
+
+    result = reconcile_releases([english], [french])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "The Crimson Rivers"
+    assert result.additions == []
+
+
+@pytest.mark.parametrize(
+    "characteristics",
+    [
+        {"tmdb_title": "Movie", "tmdb_original_title": "Movie"},
+        {"tmdb_title": "Movie", "tmdb_original_title": "Another Film"},
+        {"tmdb_original_title": "Le Film"},
+    ],
+    ids=["same-title-pair", "pair-names-other-film", "missing-canonical-title"],
+)
+def test_tmdb_title_metadata_must_name_both_rows_to_prove_an_alias(
+    characteristics: dict[str, str],
+):
+    movie = release(
+        "Movie",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Movie/1/",
+    )
+    localized = release(
+        "Le Film",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Le-Film/2/",
+        additional_characteristics=characteristics,
+    )
+
+    result = reconcile_releases([movie, localized], [])
+
+    assert result.releases == [movie, localized]
 
 
 def test_multi_aka_chain_connects_only_adjacent_named_titles():

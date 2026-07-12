@@ -50,6 +50,9 @@ SSE_TERMINAL_FAILURE_EVENTS = frozenset(
         "error",
     }
 )
+# response.failed error.type values that mean "the service told us to retry",
+# not "this request/response is permanently invalid".
+_TRANSIENT_AI_ERROR_TYPES = frozenset({"server_error"})
 AI_EXTRACTION_SYSTEM_PROMPT = (
     "Extract only confirmed Dolby Vision Profile 7 FEL movie entries. "
     "Return JSON only with items: title, year, evidence. "
@@ -81,6 +84,14 @@ class AIGlobalHTTPError(httpx.HTTPError):
         if status_code is not None:
             message += f" status={status_code}"
         super().__init__(message)
+
+
+class AIServiceUnavailableError(httpx.HTTPError):
+    """A transient upstream failure (e.g. an SSE response.failed server_error)
+    the caller should retry, distinct from a permanently malformed response."""
+
+    def __init__(self) -> None:
+        super().__init__("AI service is temporarily unavailable")
 
 
 def ai_http_status_code(exc: Exception) -> int | None:
@@ -224,6 +235,8 @@ class AIClient:  # pragma: no cover - exercised via live OpenAI-compatible API o
             ],
         }
         response_text = self._post_response(payload)
+        if _sse_transient_failure(response_text):
+            raise AIServiceUnavailableError()
         candidates, valid = _parse_ai_candidate_response_text(response_text, source_url)
         if not valid:
             raise AIResponseFormatError()
@@ -240,6 +253,8 @@ class AIClient:  # pragma: no cover - exercised via live OpenAI-compatible API o
             ],
         }
         response_text = self._post_response(payload)
+        if _sse_transient_failure(response_text):
+            raise AIServiceUnavailableError()
         text, valid = _parse_response_text(response_text)
         if not valid:
             raise AIResponseFormatError()
@@ -1086,6 +1101,29 @@ def _looks_like_sse(response_text: str) -> bool:  # pragma: no cover - SSE parse
         line.strip().startswith(("event:", "data:"))
         for line in io.StringIO(response_text)
     )
+
+
+def _sse_transient_failure(response_text: str) -> bool:  # pragma: no cover - SSE parser
+    """True if the stream terminated with a transient, retryable service error
+    (e.g. response.failed/server_error) rather than a permanently invalid one."""
+    if not _looks_like_sse(response_text):
+        return False
+    for current_event, data in _sse_records(response_text):
+        if current_event not in SSE_TERMINAL_FAILURE_EVENTS:
+            continue
+        try:
+            event = json.loads(data)
+        except (ValueError, RecursionError):
+            continue
+        if not isinstance(event, dict):
+            continue
+        response = event.get("response")
+        error = (
+            response.get("error") if isinstance(response, dict) else event.get("error")
+        )
+        if isinstance(error, dict) and error.get("type") in _TRANSIENT_AI_ERROR_TYPES:
+            return True
+    return False
 
 
 def _response_text_from_sse(response_text: str) -> str:  # pragma: no cover - SSE parser

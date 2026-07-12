@@ -11,9 +11,11 @@ import httpx
 from tmdb import (
     MovieResolver,
     StaticTmdbResolver,
+    TmdbMovie,
     TmdbResolver,
     load_tmdb_api_key,
 )
+from merge import TMDB_ORIGINAL_TITLE_KEY, TMDB_TITLE_KEY, canonical_title_key
 from models import UNKNOWN, FelRelease
 from normalize import normalize_fel_title
 
@@ -91,6 +93,15 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
     # Source-list misspelling ("Notting Hilll"); map to the real title so it
     # enriches to the same id as the canonical row instead of duplicating it.
     ("notting hilll", "1999"): _LookupCandidate("Notting Hill", "1999"),
+    # Some FEL list sources label "1917" by its home-video/rerelease year
+    # (2020, matching the US 4K Blu-ray) rather than TMDB's 2019 theatrical
+    # year. An unpinned year search misses the real film (whose TMDB primary
+    # release year is 2019) and can instead match an unrelated same-titled
+    # work that happens to have a 2020 release date (e.g. TMDB id 766967,
+    # "2020: A 1917 Parody", an amateur short film) -- pin the search year so
+    # it resolves to the real film and merges with the canonical row instead
+    # of creating a duplicate.
+    ("1917", "2020"): _LookupCandidate("1917", "2019"),
 }
 
 
@@ -128,6 +139,24 @@ def _resolution_candidates(release: FelRelease, year: str) -> list[_LookupCandid
                 seen.add(key)
                 candidates.append(candidate)
     return candidates
+
+
+def _record_tmdb_title_pair(release: FelRelease, movie: TmdbMovie) -> None:
+    """Record TMDB's canonical/original title pair for foreign-language films.
+
+    Reconciliation treats the recorded pair as deterministic proof that a row
+    titled by the film's original (native) title and a row titled by its
+    canonical (English) title are the same film, so sources that never spell
+    out a "Native AKA English" quote still collapse into one entry.
+    """
+    if not movie.original_title:
+        return
+    if canonical_title_key(movie.title) == canonical_title_key(movie.original_title):
+        return
+    release.additional_characteristics.setdefault(TMDB_TITLE_KEY, movie.title)
+    release.additional_characteristics.setdefault(
+        TMDB_ORIGINAL_TITLE_KEY, movie.original_title
+    )
 
 
 def release_url_for(tmdb_id: str, imdb_id: str) -> str:
@@ -257,6 +286,7 @@ def enrich_releases(
             release.tmdb_id = movie.tmdb_id
             release.imdb_id = movie.imdb_id
             release.release_url = release_url_for(movie.tmdb_id, movie.imdb_id)
+            _record_tmdb_title_pair(release, movie)
             try:
                 details = fetch_tmdb_details(client, api_key, movie.tmdb_id)
                 if details["studio"] and release.studio in ("", UNKNOWN):

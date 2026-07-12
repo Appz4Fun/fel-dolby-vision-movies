@@ -3072,7 +3072,8 @@
     "release_date": "2024-06-28",
     "studio": "Chapter 2",
     "audio_formats": [
-      "DTS-HD MA 5.1"
+      "DTS-HD MA 5.1",
+      "Dolby Atmos"
     ],
     "english_audio": "Yes",
     "additional_characteristics": {
@@ -3089,7 +3090,8 @@
     "bluray_url": "https://www.blu-ray.com/movies/The-Count-of-Monte-Cristo-4K-Blu-ray/399451/",
     "bluray_release_date": "2025-11-11",
     "hdr_formats": [
-      "Dolby Vision"
+      "Dolby Vision",
+      "HDR10"
     ],
     "audio_languages": [
       "French",
@@ -3102,39 +3104,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "Le comte de Monte-Cristo",
-    "fel_confirmed": true,
-    "release_date": "2024-06-28",
-    "studio": "Chapter 2",
-    "audio_formats": [
-      "Dolby Atmos"
-    ],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "github",
-    "tmdb_id": "1084736",
-    "imdb_id": "tt26446278",
-    "poster_path": "data/posters/1084736.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1084736",
-    "bluray_url": "https://www.blu-ray.com/movies/Le-Comte-de-Monte-Cristo-4K-Blu-ray/356803/",
-    "bluray_release_date": "2024-11-06",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Le comte de Monte-Cristo AKA The Count of Monte-Cristo [2024]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-26T13:26:51.555817+00:00"
   },
   {
     "movie_title": "A Quiet Place: Day One",
@@ -17580,44 +17549,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Avatar: Extended Collector's Edition",
-    "fel_confirmed": true,
-    "release_date": "2009-12-16",
-    "studio": "Dune Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 2.0",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
-    "source_label": "codex-ai",
-    "tmdb_id": "19995",
-    "imdb_id": "tt0499549",
-    "poster_path": "data/posters/19995.jpg",
-    "release_url": "https://www.themoviedb.org/movie/19995",
-    "bluray_url": "https://www.blu-ray.com/movies/Avatar-4K-Blu-ray/191856/",
-    "bluray_release_date": "2023-06-20",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish",
-      "Japanese"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
-      "quote": "row: Avatar.2009.Extended.Collector; source: BD FEL VS BL",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T02:58:05+00:00"
-  },
-  {
     "movie_title": "Avatar Extended Edition",
     "fel_confirmed": true,
     "release_date": "2009-12-16",
@@ -23532,39 +23463,6 @@
     "collected_at": "2026-05-23T00:01:49+00:00"
   },
   {
-    "movie_title": "Les rivières pourpres",
-    "fel_confirmed": true,
-    "release_date": "2000-09-27",
-    "studio": "Gaumont",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "github",
-    "tmdb_id": "60670",
-    "imdb_id": "tt0228786",
-    "poster_path": "data/posters/60670.jpg",
-    "release_url": "https://www.themoviedb.org/movie/60670",
-    "bluray_url": "https://www.blu-ray.com/movies/Les-Rivieres-Pourpres-4K-Blu-ray/383058/",
-    "bluray_release_date": "2025-05-01",
-    "hdr_formats": [
-      "Dolby Vision"
-    ],
-    "audio_languages": [
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Les rivières pourpres AKA The Crimson Rivers [2000]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-06-09T06:11:13.838236+00:00"
-  },
-  {
     "movie_title": "Almost Famous",
     "fel_confirmed": true,
     "release_date": "2000-09-15",
@@ -28446,7 +28344,8 @@
     "studio": "MK2 Films",
     "audio_formats": [
       "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
+      "DTS-HD MA 2.0",
+      "LPCM 2.0"
     ],
     "english_audio": "No",
     "additional_characteristics": {
@@ -28476,66 +28375,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "Trois couleurs: Rouge",
-    "fel_confirmed": true,
-    "release_date": "1994-05-12",
-    "studio": "MK2 Films",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "github",
-    "tmdb_id": "110",
-    "imdb_id": "tt0111495",
-    "poster_path": "data/posters/110.jpg",
-    "release_url": "https://www.themoviedb.org/movie/110",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Trois couleurs: Rouge AKA Three Colors: Red [1994]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-26T13:26:51.558445+00:00"
-  },
-  {
-    "movie_title": "Three Colours: Red",
-    "fel_confirmed": true,
-    "release_date": "1994-05-12",
-    "studio": "MK2 Films",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "LPCM 2.0"
-    ],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/9/",
-    "source_label": "letterboxd",
-    "tmdb_id": "110",
-    "imdb_id": "tt0111495",
-    "poster_path": "data/posters/110.jpg",
-    "release_url": "https://www.themoviedb.org/movie/110",
-    "bluray_url": "https://www.blu-ray.com/movies/Three-Colours-Red-4K-Blu-ray/330620/",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/9/",
-      "quote": "Three Colours: Red (1994)",
-      "evidence_type": "letterboxd-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-26T13:27:01.544472+00:00"
   },
   {
     "movie_title": "The Crow",
@@ -28629,7 +28468,8 @@
     "studio": "MK2 Films",
     "audio_formats": [
       "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
+      "DTS-HD MA 2.0",
+      "LPCM 2.0"
     ],
     "english_audio": "No",
     "additional_characteristics": {
@@ -28659,66 +28499,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "Trois couleurs: Blanc",
-    "fel_confirmed": true,
-    "release_date": "1994-01-26",
-    "studio": "MK2 Films",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "github",
-    "tmdb_id": "109",
-    "imdb_id": "tt0111507",
-    "poster_path": "data/posters/109.jpg",
-    "release_url": "https://www.themoviedb.org/movie/109",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Trois couleurs: Blanc AKA Three Colors: White [1994]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-26T13:26:51.558424+00:00"
-  },
-  {
-    "movie_title": "Three Colours: White",
-    "fel_confirmed": true,
-    "release_date": "1994-01-26",
-    "studio": "MK2 Films",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "LPCM 2.0"
-    ],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/9/",
-    "source_label": "letterboxd",
-    "tmdb_id": "109",
-    "imdb_id": "tt0111507",
-    "poster_path": "data/posters/109.jpg",
-    "release_url": "https://www.themoviedb.org/movie/109",
-    "bluray_url": "https://www.blu-ray.com/movies/Three-Colours-White-4K-Blu-ray/330619/",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/9/",
-      "quote": "Three Colours: White (1994)",
-      "evidence_type": "letterboxd-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-26T13:27:01.544481+00:00"
   },
   {
     "movie_title": "Tombstone",
@@ -29060,7 +28840,8 @@
     "studio": "MK2 Films",
     "audio_formats": [
       "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
+      "DTS-HD MA 2.0",
+      "LPCM 2.0"
     ],
     "english_audio": "No",
     "additional_characteristics": {
@@ -29090,66 +28871,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "Trois couleurs: Bleu",
-    "fel_confirmed": true,
-    "release_date": "1993-09-08",
-    "studio": "MK2 Films",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "github",
-    "tmdb_id": "108",
-    "imdb_id": "tt0108394",
-    "poster_path": "data/posters/108.jpg",
-    "release_url": "https://www.themoviedb.org/movie/108",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Trois couleurs: Bleu AKA Three Colors: Blue [1993]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-26T13:26:51.558435+00:00"
-  },
-  {
-    "movie_title": "Three Colours: Blue",
-    "fel_confirmed": true,
-    "release_date": "1993-09-08",
-    "studio": "MK2 Films",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "LPCM 2.0"
-    ],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/9/",
-    "source_label": "letterboxd",
-    "tmdb_id": "108",
-    "imdb_id": "tt0108394",
-    "poster_path": "data/posters/108.jpg",
-    "release_url": "https://www.themoviedb.org/movie/108",
-    "bluray_url": "https://www.blu-ray.com/movies/Three-Colours-Blue-4K-Blu-ray/330621/",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/9/",
-      "quote": "Three Colours: Blue (1993)",
-      "evidence_type": "letterboxd-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-26T13:27:01.544462+00:00"
   },
   {
     "movie_title": "Needful Things",
@@ -30755,7 +30476,8 @@
     "studio": "Sidéral Productions",
     "audio_formats": [
       "DTS-HD MA 5.1",
-      "LPCM 2.0"
+      "LPCM 2.0",
+      "DTS-HD MA 2.0"
     ],
     "english_audio": "Unknown",
     "additional_characteristics": {
@@ -30785,40 +30507,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-23T00:01:49+00:00"
-  },
-  {
-    "movie_title": "La double vie de Véronique",
-    "fel_confirmed": true,
-    "release_date": "1991-05-15",
-    "studio": "Sidéral Productions",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "github",
-    "tmdb_id": "1600",
-    "imdb_id": "tt0101765",
-    "poster_path": "data/posters/1600.jpg",
-    "release_url": "https://www.themoviedb.org/movie/1600",
-    "bluray_url": "https://www.blu-ray.com/movies/La-Double-vie-de-Veronique-4K-Blu-ray/295025/",
-    "bluray_release_date": "2021-12-07",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "French"
-    ],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "La double vie de Véronique AKA The Double Life of Veronique [1991]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-26T13:26:51.555666+00:00"
   },
   {
     "movie_title": "Delicatessen",
@@ -44181,35 +43869,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Les quatre cents coups",
-    "fel_confirmed": true,
-    "release_date": "1959-06-03",
-    "studio": "Les Films du Carrosse",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {},
-    "source_url": "https://github.com/iammarxg/FEL",
-    "source_label": "github",
-    "tmdb_id": "147",
-    "imdb_id": "tt0053198",
-    "poster_path": "data/posters/147.jpg",
-    "release_url": "https://www.themoviedb.org/movie/147",
-    "bluray_url": "https://www.blu-ray.com/movies/Les-Quatre-cents-coups-4K-Blu-ray/320185/",
-    "bluray_release_date": "2023-12-30",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://github.com/iammarxg/FEL",
-      "quote": "Les quatre cents coups AKA The 400 Blows [1959]",
-      "evidence_type": "github-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-26T13:26:51.555902+00:00"
   },
   {
     "movie_title": "Some Like It Hot",
