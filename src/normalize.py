@@ -73,6 +73,15 @@ def _looks_like_audio_label(value: str) -> bool:
     )
 
 
+# Wiki-style medium disambiguators ("Hamilton (musical)", "Dune (2021 film)")
+# never appear on the disc itself and defeat TMDB resolution, so they are
+# stripped. Only this closed set of medium words qualifies: arbitrary trailing
+# parentheticals ("Only the Brave (No Way Out)") are part of the real title.
+_TRAILING_DISAMBIGUATOR_RE = re.compile(
+    r"\s*\((?:(?:19|20)\d{2}\s+)?(?:musical|film|movie|tv\s+series|miniseries)\)\s*$",
+    re.IGNORECASE,
+)
+
 _FEL_TITLE_PREFIXES = ("L.E. ", "EDIT: ", "EDIT ", "--", "-")
 _BARE_LIST_ORDINAL_RE = re.compile(r"^\s*(?P<number>[1-9]\d{2})\s+(?P<title>[A-Z].*)")
 _NUMERIC_TITLE_PREFIXES = (
@@ -110,4 +119,5 @@ def normalize_fel_title(value: str) -> str:
                 changed = True
     if " AKA " in title:
         title = title.split(" AKA ", 1)[0].strip()
+    title = _TRAILING_DISAMBIGUATOR_RE.sub("", title)
     return normalize_title(title).strip(",- ").strip()
