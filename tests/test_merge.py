@@ -126,6 +126,99 @@ def test_merge_prefers_real_evidence_over_weak_list_membership():
     assert merge_releases(fel, github).fel_evidence.evidence_type == "fel-list"
 
 
+def test_merge_prefers_ai_extracted_over_weak_list_membership():
+    # A bare list mention carries less information than even a generic
+    # ai-extracted quote, so it loses on strength before the "AI never
+    # overrides deterministic" rule ever applies. AI still loses to a real
+    # (non-weak) deterministic quote -- see
+    # test_merge_keeps_deterministic_evidence_over_ai_extracted.
+    list_only = make("Dune", "2021", evidence_type="reddit-list")
+    ai = make("Dune", "2021", evidence_type="ai-extracted")
+    assert merge_releases(list_only, ai).fel_evidence.evidence_type == "ai-extracted"
+    assert merge_releases(ai, list_only).fel_evidence.evidence_type == "ai-extracted"
+
+
+def test_merge_couples_source_label_to_the_evidence_that_wins():
+    # Regression (Codacy PR #41): source_label is provenance for source_url,
+    # which is a property derived from fel_evidence -- so the label must be
+    # chosen together with whichever evidence wins, never independently.
+    # Before the fix, a weak reddit-list release merged with a stronger
+    # google-sheet-row release for the same title kept the URL/evidence from
+    # the sheet but the *label* from reddit, because source_label was chosen
+    # by "most known wins" while fel_evidence was chosen by "strongest wins",
+    # and those two rules could disagree about which side to trust.
+    # Deliberately uses a title unrelated to the reported "Obsession"/
+    # "Michael" entries to prove the fix is a general rule, not a special
+    # case for those rows.
+    weak_reddit = make(
+        "Some Unrelated Film",
+        "2024",
+        evidence_type="reddit-list",
+        source_label="reddit",
+        source_url="https://reddit.com/r/example/thread",
+    )
+    strong_sheet = make(
+        "Some Unrelated Film",
+        "2024",
+        evidence_type="google-sheet-row",
+        source_label="google-sheet",
+        source_url="https://docs.google.com/spreadsheets/d/xyz/edit",
+    )
+
+    forward = merge_releases(weak_reddit, strong_sheet)
+    assert forward.fel_evidence.source_url == strong_sheet.fel_evidence.source_url
+    assert forward.source_label == "google-sheet"
+
+    backward = merge_releases(strong_sheet, weak_reddit)
+    assert backward.fel_evidence.source_url == strong_sheet.fel_evidence.source_url
+    assert backward.source_label == "google-sheet"
+
+
+def test_merge_couples_source_label_for_any_label_pair():
+    # Same rule as above, exercised with a completely different pair of
+    # labels/evidence types (the FEL.txt migration list vs. a sheet row) to
+    # show the coupling is general and not keyed to "reddit" or
+    # "google-sheet" specifically.
+    weak_fel_txt = make(
+        "Another Unrelated Film",
+        "2019",
+        evidence_type="fel-list",
+        source_label="FEL.txt",
+        source_url="FEL.txt (curated Profile 7 FEL list)",
+    )
+    strong_sheet = make(
+        "Another Unrelated Film",
+        "2019",
+        evidence_type="google-sheet-row",
+        source_label="google-sheet",
+        source_url="https://docs.google.com/spreadsheets/d/abc/edit",
+    )
+
+    assert merge_releases(weak_fel_txt, strong_sheet).source_label == "google-sheet"
+    assert merge_releases(strong_sheet, weak_fel_txt).source_label == "google-sheet"
+
+
+def test_merge_label_falls_back_to_other_side_when_winner_is_unlabeled():
+    # If the side whose evidence wins never set its own source_label (e.g.
+    # the legacy forum HTML parser, which intentionally leaves it unset),
+    # merging still surfaces the other side's label rather than losing it.
+    # This preserves existing behavior for same-URL duplicate hits (a title
+    # scraped by both the generic forum parser and a curated list pointed at
+    # that same thread) and must keep working after coupling label to
+    # evidence above.
+    unlabeled_strong = make("Third Unrelated Film", "2018", evidence_type="list-item")
+    labeled_weak = make(
+        "Third Unrelated Film",
+        "2018",
+        evidence_type="forum-list",
+        source_label="blu-ray-forum",
+    )
+
+    merged = merge_releases(unlabeled_strong, labeled_weak)
+    assert merged.fel_evidence.source_url == unlabeled_strong.fel_evidence.source_url
+    assert merged.source_label == "blu-ray-forum"
+
+
 def test_merge_prefers_full_date_over_bare_year():
     year = make("Dune", "2021")
     full = make("Dune", "2021-10-22")

@@ -342,15 +342,16 @@ def test_enrich_pins_misspelled_title_to_canonical_via_alias(tmp_path: Path):
 def test_merge_keeps_deterministic_evidence_over_ai_extracted():
     # AGENTS.md: ai-scrape must merge into existing data and never replace
     # deterministic scraper results. The prior Past Lives row carried a
-    # title/year-specific fel-list quote; a refresh that adds a generic
-    # ai-extracted phrase from the same thread must not overwrite it (either
-    # merge order), so the published audit trail keeps the one-to-one FEL link.
+    # title/year-specific real quote (not a bare list mention); a refresh that
+    # adds a generic ai-extracted phrase from the same thread must not
+    # overwrite it (either merge order), so the published audit trail keeps
+    # the one-to-one FEL link.
     deterministic = _release(
         "Past Lives",
         "2023-06-02",
-        evidence_type="fel-list",
+        evidence_type="list-item",
         source_label="FEL.txt",
-        quote="Past Lives [2023]",
+        quote="Past Lives [2023] FEL - 6.85 Mb/s",
     )
     ai = _release(
         "Past Lives",
@@ -362,7 +363,7 @@ def test_merge_keeps_deterministic_evidence_over_ai_extracted():
     forward = dedupe_releases([deterministic, ai], canonical_key)[0]
     backward = dedupe_releases([ai, deterministic], canonical_key)[0]
 
-    assert forward.fel_evidence.evidence_type == "fel-list"
-    assert forward.fel_evidence.quote == "Past Lives [2023]"
-    assert backward.fel_evidence.evidence_type == "fel-list"
-    assert backward.fel_evidence.quote == "Past Lives [2023]"
+    assert forward.fel_evidence.evidence_type == "list-item"
+    assert forward.fel_evidence.quote == "Past Lives [2023] FEL - 6.85 Mb/s"
+    assert backward.fel_evidence.evidence_type == "list-item"
+    assert backward.fel_evidence.quote == "Past Lives [2023] FEL - 6.85 Mb/s"
