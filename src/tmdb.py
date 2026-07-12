@@ -183,6 +183,13 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         series_title = _series_title_from_season_descriptor(title)
         if not series_title:
             return None
+        candidates = self._fetch_tv_candidates(series_title)
+        best = _best_tmdb_candidate(series_title, year, candidates)
+        if best is None:
+            return None
+        return self._tv_movie_from_candidate(best, series_title, year)
+
+    def _fetch_tv_candidates(self, series_title: str) -> list[dict[str, Any]]:
         response = self.client.get(
             TMDB_TV_SEARCH_URL,
             params={
@@ -196,10 +203,11 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             _tv_candidate_as_movie(candidate)
             for candidate in response.json().get("results", [])
         ]
-        candidates = [c for c in candidates if _has_audience_engagement(c)]
-        best = _best_tmdb_candidate(series_title, year, candidates)
-        if best is None:
-            return None
+        return [c for c in candidates if _has_audience_engagement(c)]
+
+    def _tv_movie_from_candidate(
+        self, best: dict[str, Any], series_title: str, year: str
+    ) -> TmdbMovie:
         tmdb_id = str(best.get("id", ""))
         external = self._external_ids(tmdb_id, TMDB_TV_EXTERNAL_IDS_URL)
         return TmdbMovie(
