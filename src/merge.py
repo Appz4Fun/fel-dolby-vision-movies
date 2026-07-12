@@ -355,10 +355,30 @@ def _right_aka_side_names_title(text: str, title: str) -> bool:
     )
 
 
+# Orthography-only token spellings: regional variants plus spelled-out
+# numbers ("The Fantastic Four" vs "The Fantastic 4"). Number words map to
+# digits BEFORE the digit-run guard in _titles_are_spelling_variants, so
+# "Iron Man Two" vs "Iron Man 3" still compares as 2 vs 3 and never merges.
+_ORTHOGRAPHIC_TOKEN_REPLACEMENTS = {
+    "colour": "color",
+    "colours": "colors",
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "four": "4",
+    "five": "5",
+    "six": "6",
+    "seven": "7",
+    "eight": "8",
+    "nine": "9",
+    "ten": "10",
+}
+
+
 def _orthographic_title_key(title: str) -> str:
-    replacements = {"colour": "color", "colours": "colors"}
     return " ".join(
-        replacements.get(token, token) for token in canonical_title_key(title).split()
+        _ORTHOGRAPHIC_TOKEN_REPLACEMENTS.get(token, token)
+        for token in canonical_title_key(title).split()
     )
 
 

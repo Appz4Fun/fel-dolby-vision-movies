@@ -393,10 +393,45 @@ def test_single_typo_title_collapses_when_strong_ids_agree(typo_title: str):
     assert result.additions == []
 
 
+def test_number_word_variant_titles_collapse_without_aka_evidence():
+    # Marketing spells the same film both ways ("The Fantastic 4" letterboxd
+    # row vs "The Fantastic Four" reddit row, one TMDB id); a spelled-out
+    # number is orthography, not a different release.
+    digits = release(
+        "The Fantastic 4: First Steps",
+        "2025-07-23",
+        tmdb_id="617126",
+        imdb_id="tt10676052",
+        bluray_url=(
+            "https://www.blu-ray.com/movies/"
+            "The-Fantastic-Four-First-Steps-4K-Blu-ray/397023/"
+        ),
+    )
+    words = release(
+        "The Fantastic Four: First Steps",
+        "2025-07-23",
+        tmdb_id="617126",
+        imdb_id="tt10676052",
+        bluray_url=(
+            "https://www.blu-ray.com/movies/"
+            "The-Fantastic-Four-First-Steps-4K-Blu-ray/397501/"
+        ),
+    )
+
+    result = reconcile_releases([digits], [words])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "The Fantastic 4: First Steps"
+    assert result.additions == []
+
+
 @pytest.mark.parametrize(
     ("first_title", "second_title"),
     [
         ("Iron Man 2", "Iron Man 3"),
+        # A spelled-out number must normalize to its digit before the
+        # digit-run guard, so word-vs-digit sequels stay distinct too.
+        ("Iron Man Two", "Iron Man 3"),
         ("28 Days Later", "28 Weeks Later"),
         ("Up", "Us"),
         # A whole appended word must never read as a typo: space-stripped
