@@ -102,6 +102,13 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
     # it resolves to the real film and merges with the canonical row instead
     # of creating a duplicate.
     ("1917", "2020"): _LookupCandidate("1917", "2019"),
+    # Reddit FEL list romanizations / sequel aliases pinned to the canonical
+    # English titles so each row enriches to the same TMDB id as (and merges
+    # with) the canonical catalog entry.
+    ("train to busan 2", "2020"): _LookupCandidate("Peninsula", "2020"),
+    ("ryu to sobakasu no hime", "2021"): _LookupCandidate("Belle", "2021"),
+    ("long ma jing shen", "2023"): _LookupCandidate("Ride On", "2023"),
+    ("rio 70", "1969"): _LookupCandidate("The Girl from Rio", "1969"),
 }
 
 

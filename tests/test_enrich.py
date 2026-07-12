@@ -199,6 +199,22 @@ def test_enrich_releases_applies_bluray_details(tmp_path):
     assert summary.bluray_failed == 0
 
 
+def test_lookup_aliases_cover_known_fel_list_romanizations():
+    # Titles the reddit FEL list spells by romanized/native/sequel-alias
+    # names that TMDB's title+original_title scoring cannot resolve; each is
+    # pinned to the canonical English title so the row enriches to the same
+    # id as (and merges with) the canonical catalog entry.
+    cases = {
+        ("Train to Busan 2", "2020"): ("Peninsula", "2020"),
+        ("Ryu to sobakasu no hime", "2021"): ("Belle", "2021"),
+        ("Long ma jing shen", "2023"): ("Ride On", "2023"),
+        ("Rio 70", "1969"): ("The Girl from Rio", "1969"),
+    }
+    for (source_title, source_year), (title, year) in cases.items():
+        candidate = enrich._lookup_candidates(source_title, source_year)[0]
+        assert (candidate.title, candidate.year) == (title, year)
+
+
 def test_enrich_releases_uses_known_lookup_alias_for_tmdb_and_bluray(tmp_path):
     resolver = StaticTmdbResolver(
         {

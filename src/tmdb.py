@@ -15,6 +15,7 @@ import httpx
 
 TMDB_SEARCH_URL = "https://api.themoviedb.org/3/search/movie"
 TMDB_EXTERNAL_IDS_URL = "https://api.themoviedb.org/3/movie/{tmdb_id}/external_ids"
+TMDB_ALT_TITLES_URL = "https://api.themoviedb.org/3/movie/{tmdb_id}/alternative_titles"
 DEFAULT_CACHE_PATH = Path(".cache/tmdb_fel_cleanup.json")
 
 
@@ -89,9 +90,16 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         self.close()
 
     def _search(self, title: str, year: str) -> TmdbMovie | None:
-        best = self._search_candidates(title, year)
+        candidates = self._fetch_candidates(title, year)
+        best = _best_tmdb_candidate(title, year, candidates)
         if best is None and year:
-            best = self._search_candidates(title, "")
+            fallback = self._fetch_candidates(title, "")
+            best = _best_tmdb_candidate(title, "", fallback)
+            candidates = list(
+                {str(c.get("id", "")): c for c in candidates + fallback}.values()
+            )
+        if best is None:
+            best = self._rescue_by_alternative_title(title, year, candidates)
         if best is None:
             return None
         tmdb_id = str(best.get("id", ""))
@@ -104,7 +112,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             original_title=str(best.get("original_title") or "").strip(),
         )
 
-    def _search_candidates(self, title: str, year: str) -> dict[str, Any] | None:
+    def _fetch_candidates(self, title: str, year: str) -> list[dict[str, Any]]:
         params = {
             "api_key": self.api_key,
             "query": title,
@@ -116,8 +124,31 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         response = self.client.get(TMDB_SEARCH_URL, params=params)
         response.raise_for_status()
         candidates = response.json().get("results", [])
-        candidates = [c for c in candidates if _has_audience_engagement(c)]
-        return _best_tmdb_candidate(title, year, candidates)
+        return [c for c in candidates if _has_audience_engagement(c)]
+
+    def _rescue_by_alternative_title(
+        self, title: str, year: str, candidates: list[dict[str, Any]]
+    ) -> dict[str, Any] | None:
+        """Confirm low-scoring candidates against TMDB's alternative titles.
+
+        Search finds films by alternative titles (romanized native names,
+        sequel aliases), but the scorer only sees `title`/`original_title`,
+        so a query like "Ryu to sobakasu no hime" rejects the very candidate
+        ("Belle") the search index matched for it. When nothing scores, an
+        exact alternative-title hit on a near-year, engaged candidate is
+        accepted before giving up.
+        """
+        query_key = _canonical_title_key(title)
+        for candidate in _alternative_title_rescue_order(year, candidates):
+            response = self.client.get(
+                TMDB_ALT_TITLES_URL.format(tmdb_id=str(candidate.get("id", ""))),
+                params={"api_key": self.api_key},
+            )
+            response.raise_for_status()
+            records = response.json().get("titles", [])
+            if _alternative_titles_match(query_key, records):
+                return candidate
+        return None
 
     def _external_ids(self, tmdb_id: str) -> dict[str, Any]:
         if not tmdb_id:
@@ -315,6 +346,39 @@ def _has_audience_engagement(candidate: dict[str, Any]) -> bool:
     of those signals before it is eligible to be scored as a match.
     """
     return bool(candidate.get("vote_count")) or bool(candidate.get("poster_path"))
+
+
+# Each rescue lookup costs one API call, so only the few most-engaged
+# plausible candidates are confirmed before giving up.
+_ALT_TITLE_RESCUE_LIMIT = 3
+
+
+def _alternative_title_rescue_order(
+    query_year: str, candidates: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    """Candidates worth confirming against /alternative_titles, best first.
+
+    Only candidates whose known year sits within one year of the query
+    survive -- the rescue exists for exact alternative-title hits on the
+    film the source actually listed, and a far-off year marks a same-titled
+    stranger. Ranking by vote count checks the real film before obscure
+    hangers-on.
+    """
+    eligible = []
+    for candidate in candidates:
+        release_year = _year_from_date(str(candidate.get("release_date") or ""))
+        if query_year and release_year and abs(int(release_year) - int(query_year)) > 1:
+            continue
+        eligible.append(candidate)
+    eligible.sort(key=_vote_count, reverse=True)
+    return eligible[:_ALT_TITLE_RESCUE_LIMIT]
+
+
+def _alternative_titles_match(query_key: str, records: list[dict[str, Any]]) -> bool:
+    return bool(query_key) and any(
+        _canonical_title_key(str(record.get("title") or "")) == query_key
+        for record in records
+    )
 
 
 def _title_score(left: str, right: str) -> int:

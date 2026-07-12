@@ -444,6 +444,147 @@ def test_resolver_falls_back_past_a_zero_relevance_year_coincidence(
     assert search_year_params == [("2023", "2023"), (None, None)]
 
 
+def test_alternative_title_rescue_order_filters_far_years_and_ranks_by_votes():
+    near_small = {"id": 1, "release_date": "2021-07-16", "vote_count": 10}
+    near_big = {"id": 2, "release_date": "2022-01-01", "vote_count": 500}
+    far = {"id": 3, "release_date": "1990-01-01", "vote_count": 9000}
+    undated = {"id": 4, "release_date": "", "vote_count": 50}
+    near_tiny = {"id": 5, "release_date": "2021-01-01", "vote_count": 1}
+
+    order = tmdb._alternative_title_rescue_order(
+        "2021", [near_small, near_big, far, undated, near_tiny]
+    )
+
+    # The far-year stranger is never checked, and only the three most-voted
+    # eligible candidates survive the rescue budget.
+    assert [candidate["id"] for candidate in order] == [2, 4, 1]
+
+
+def test_alternative_title_rescue_order_keeps_all_years_for_yearless_query():
+    far = {"id": 3, "release_date": "1990-01-01", "vote_count": 9000}
+
+    order = tmdb._alternative_title_rescue_order("", [far])
+
+    assert [candidate["id"] for candidate in order] == [3]
+
+
+def test_alternative_titles_match_normalizes_diacritics():
+    records = [
+        {"iso_3166_1": "JP", "title": "Ryū to Sobakasu no Hime", "type": "romaji"},
+        {"iso_3166_1": "US", "title": "The Dragon and the Freckled Princess"},
+        {"title": None},
+    ]
+
+    assert tmdb._alternative_titles_match("ryu to sobakasu no hime", records) is True
+    assert tmdb._alternative_titles_match("something else", records) is False
+    assert tmdb._alternative_titles_match("", records) is False
+
+
+def test_resolver_rescues_romanized_query_via_alternative_titles(
+    monkeypatch, tmp_path: Path
+):
+    """A romanized native-title query ('Ryu to sobakasu no hime') finds the
+    right film through TMDB's search index, which matches alternative titles
+    -- but the scorer only sees the English display title ('Belle') and the
+    CJK original title, so every candidate it was handed scores below
+    acceptance. The resolver must then confirm near-year, engaged candidates
+    against /alternative_titles instead of giving up, and must not spend a
+    lookup on the far-year same-titled stranger."""
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+    alt_title_requests: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 99,
+                            "title": "Belle",
+                            "original_title": "Belle",
+                            "release_date": "1990-01-01",
+                            "vote_count": 5000,
+                            "poster_path": "/other.jpg",
+                        },
+                        {
+                            "id": 776503,
+                            "title": "Belle",
+                            "original_title": "竜とそばかすの姫",
+                            "release_date": "2021-07-16",
+                            "vote_count": 1200,
+                            "poster_path": "/belle.jpg",
+                        },
+                    ]
+                },
+            )
+        if request.url.path.endswith("/alternative_titles"):
+            alt_title_requests.append(request.url.path)
+            return httpx.Response(
+                200,
+                json={
+                    "titles": [
+                        {
+                            "iso_3166_1": "JP",
+                            "title": "Ryū to Sobakasu no Hime",
+                            "type": "romaji",
+                        }
+                    ]
+                },
+            )
+        if request.url.path.endswith("/external_ids"):
+            return httpx.Response(200, json={"imdb_id": "tt13651628"})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    result = resolver.resolve("Ryu to sobakasu no hime", "2021")
+
+    assert result is not None
+    assert result.tmdb_id == "776503"
+    assert result.title == "Belle"
+    assert result.imdb_id == "tt13651628"
+    assert alt_title_requests == ["/3/movie/776503/alternative_titles"]
+
+
+def test_resolver_returns_none_when_alternative_titles_do_not_match(
+    monkeypatch, tmp_path: Path
+):
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 42,
+                            "title": "Unrelated",
+                            "original_title": "Unrelated",
+                            "release_date": "2021-05-01",
+                            "vote_count": 80,
+                        }
+                    ]
+                },
+            )
+        if request.url.path.endswith("/alternative_titles"):
+            return httpx.Response(200, json={"titles": [{"title": "Still Unrelated"}]})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    assert resolver.resolve("Long ma jing shen", "2021") is None
+    cached = json.loads((tmp_path / "cache.json").read_text(encoding="utf-8"))
+    assert cached["Long ma jing shen\x002021"] is None
+
+
 def test_has_audience_engagement_rejects_zero_vote_posterless_candidate():
     assert (
         _has_audience_engagement({"id": 1, "vote_count": 0, "poster_path": None})
