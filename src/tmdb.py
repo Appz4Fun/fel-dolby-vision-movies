@@ -159,7 +159,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
 # without this a match this exact commit fixes (like "Sisu" resolving to
 # the unrelated "Scrapper") would keep being served from cache forever
 # instead of being re-scored under the corrected logic.
-_SCORER_VERSION = "2"
+_SCORER_VERSION = "3"
 
 
 def _is_legacy_cache_record(value: object) -> bool:
@@ -208,14 +208,21 @@ def load_tmdb_api_key(env_path: Path = Path(".env")) -> str:
 # bonus/penalty modest means year only ever refines among plausible title
 # matches -- see _engagement_bonus for how real-world popularity, not year,
 # now does the heavy lifting for disambiguating same-titled collisions.
+# The bonus additionally requires at least one real vote: a zero-vote
+# poster-only entry ("Obsession" 2025, a phantom same-titled record) must
+# not beat a heavily-voted film on year coincidence alone. A single year
+# of drift is scored as neutral rather than a mismatch, because
+# festival-vs-wide-release and theatrical-vs-home-video drift is routine
+# in the FEL source lists.
 _YEAR_MATCH_BONUS = 45
 _YEAR_MISMATCH_PENALTY = -45
-# A candidate with no parseable release date at all isn't wrong the way a
-# mismatched year is, but it's also unconfirmed -- without some penalty it
-# can out-rank a candidate that actually proves it matches the query year,
-# purely by accumulating more votes (an undated duplicate/placeholder TMDB
-# entry vs. the correctly-dated real film).
-_YEAR_MISSING_PENALTY = -15
+# A candidate with no parseable release date at all is unconfirmed in a way
+# no real vote pile can repair (films with genuine audiences have dates), so
+# the penalty must exceed the maximum engagement bonus (50). Otherwise an
+# undated duplicate/placeholder TMDB entry could out-rank the correctly-dated
+# real film purely by accumulating votes, now that a zero-vote dated match no
+# longer earns the year bonus to defend itself.
+_YEAR_MISSING_PENALTY = -55
 
 # Only a candidate whose title is a strong, plausible match for the query
 # can earn credit for real-world popularity. A weak, coincidental overlap
@@ -242,9 +249,11 @@ def _best_tmdb_candidate(
         )
         score = title_score
         if query_year and release_year == query_year:
-            score += _YEAR_MATCH_BONUS
+            if _vote_count(candidate) > 0:
+                score += _YEAR_MATCH_BONUS
         elif query_year and release_year:
-            score += _YEAR_MISMATCH_PENALTY
+            if abs(int(release_year) - int(query_year)) > 1:
+                score += _YEAR_MISMATCH_PENALTY
         elif query_year and not release_year:
             score += _YEAR_MISSING_PENALTY
         if title_key == query_key:
@@ -271,6 +280,14 @@ def _candidate_popularity(candidate: dict[str, Any]) -> float:
         return 0.0
 
 
+def _vote_count(candidate: dict[str, Any]) -> int:
+    value = candidate.get("vote_count")
+    try:
+        return int(value) if value else 0
+    except (TypeError, ValueError, OverflowError):
+        return 0
+
+
 def _engagement_bonus(candidate: dict[str, Any]) -> int:
     """Score bonus from real vote counts, log-scaled and capped at 50.
 
@@ -280,11 +297,7 @@ def _engagement_bonus(candidate: dict[str, Any]) -> int:
     instead of only using it (via _candidate_popularity) as a last-resort
     tiebreaker between otherwise-equal scores.
     """
-    value = candidate.get("vote_count")
-    try:
-        vote_count = int(value) if value else 0
-    except (TypeError, ValueError, OverflowError):
-        vote_count = 0
+    vote_count = _vote_count(candidate)
     if vote_count <= 0:
         return 0
     return min(50, round(12 * math.log10(vote_count + 1)))

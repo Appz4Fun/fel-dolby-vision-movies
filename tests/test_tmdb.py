@@ -83,6 +83,7 @@ def test_best_tmdb_candidate_uses_popularity_for_equal_alias_scores():
                 "title": "The Stranger",
                 "original_title": "Goksung (The Wailing)",
                 "release_date": "2016-09-23",
+                "vote_count": 40,
                 "popularity": 0.16,
             },
             {
@@ -90,6 +91,7 @@ def test_best_tmdb_candidate_uses_popularity_for_equal_alias_scores():
                 "title": "The Wailing",
                 "original_title": "Goksung (The Wailing)",
                 "release_date": "2016-05-12",
+                "vote_count": 40,
                 "popularity": 12.7,
             },
         ],
@@ -160,6 +162,67 @@ def test_best_tmdb_candidate_prefers_popular_exact_match_despite_year_mismatch()
 
     assert candidate is not None
     assert candidate["id"] == 530915
+
+
+def test_best_tmdb_candidate_prefers_voted_film_over_zero_vote_year_coincidence():
+    """Regression test: 'Obsession' [2025] (Reddit list year) matched an
+    obscure zero-vote same-titled entry whose TMDB year happened to equal
+    the query year, instead of the real film whose primary release drifted
+    to 2026 (festival premiere vs. wide release). A year coincidence only
+    counts for candidates with real votes, so engagement decides here."""
+    candidate = _best_tmdb_candidate(
+        "Obsession",
+        "2025",
+        [
+            {
+                "id": 1502633,
+                "title": "Obsession",
+                "original_title": "Obsession",
+                "release_date": "2025-03-13",
+                "vote_count": 0,
+                "poster_path": "/phantom.jpg",
+            },
+            {
+                "id": 1339713,
+                "title": "Obsession",
+                "original_title": "Obsession",
+                "release_date": "2026-05-15",
+                "vote_count": 300,
+            },
+        ],
+    )
+
+    assert candidate is not None
+    assert candidate["id"] == 1339713
+
+
+def test_best_tmdb_candidate_treats_one_year_drift_as_neutral():
+    """A single year of drift between the source-reported year and TMDB's
+    primary release year is routine (festival vs. wide release, theatrical
+    vs. home video), so it must not be penalized like a real mismatch."""
+    candidate = _best_tmdb_candidate(
+        "The Premiere",
+        "2021",
+        [
+            {
+                "id": 1,
+                "title": "The Premiere",
+                "original_title": "The Premiere",
+                "release_date": "2022-02-01",
+                "vote_count": 5,
+            },
+            {
+                "id": 2,
+                "title": "The Premiere",
+                "original_title": "The Premiere",
+                "release_date": "2024-06-01",
+                "vote_count": 3000,
+            },
+        ],
+    )
+
+    assert candidate is not None
+    assert candidate["id"] == 1
 
 
 def test_best_tmdb_candidate_rejects_weak_overlap_as_sole_candidate():
