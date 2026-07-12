@@ -277,6 +277,10 @@ def test_lookup_aliases_cover_known_fel_list_romanizations():
         ("Ryu to sobakasu no hime", "2021"): ("Belle", "2021"),
         ("Long ma jing shen", "2023"): ("Ride On", "2023"),
         ("Rio 70", "1969"): ("The Girl from Rio", "1969"),
+        # Reddit's "Obsession [2025]" labels the film by its festival year;
+        # TMDB dates it 2026 (wide release), and an unpinned 2025 search
+        # matches an unrelated same-titled French film instead.
+        ("Obsession", "2025"): ("Obsession", "2026"),
     }
     for (source_title, source_year), (title, year) in cases.items():
         candidate = enrich._lookup_candidates(source_title, source_year)[0]

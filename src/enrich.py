@@ -111,6 +111,11 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
     # English titles so each row enriches to the same TMDB id as (and merges
     # with) the canonical catalog entry.
     ("train to busan 2", "2020"): _LookupCandidate("Peninsula", "2020"),
+    # Reddit's "Obsession [2025]" labels the 2026-dated film by its festival
+    # year; an unpinned 2025 search matches an unrelated same-titled French
+    # film (TMDB 1502633) that happens to carry a 2025 release date, so pin
+    # the search year the same way the "1917" home-video mislabel is pinned.
+    ("obsession", "2025"): _LookupCandidate("Obsession", "2026"),
     ("ryu to sobakasu no hime", "2021"): _LookupCandidate("Belle", "2021"),
     ("long ma jing shen", "2023"): _LookupCandidate("Ride On", "2023"),
     ("rio 70", "1969"): _LookupCandidate("The Girl from Rio", "1969"),
