@@ -399,6 +399,10 @@ def test_single_typo_title_collapses_when_strong_ids_agree(typo_title: str):
         ("Iron Man 2", "Iron Man 3"),
         ("28 Days Later", "28 Weeks Later"),
         ("Up", "Us"),
+        # A whole appended word must never read as a typo: space-stripped
+        # "alien" -> "alienx" is a single insertion, indistinguishable from a
+        # real one-letter typo unless word counts are compared too.
+        ("Alien", "Alien X"),
     ],
 )
 def test_similar_but_distinct_titles_never_collapse_without_proof(

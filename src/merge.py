@@ -314,7 +314,9 @@ def _titles_are_spelling_variants(left_title: str, right_title: str) -> bool:
     non-empty IMDb id, same year, no edition descriptors); this predicate only
     rejects edits that could still mark a distinct release: digit runs must
     match exactly so sequels and numbered parts ("Iron Man 2" vs "Iron Man 3")
-    never count as typos, and very short titles must match outright.
+    never count as typos, word counts must match so a whole extra word
+    ("Alien" vs "Alien X") never counts as a typo either, and very short
+    titles must match outright.
     """
     left_key = _orthographic_title_key(left_title)
     right_key = _orthographic_title_key(right_title)
@@ -324,29 +326,47 @@ def _titles_are_spelling_variants(left_title: str, right_title: str) -> bool:
         return False
     left_compact = left_key.replace(" ", "")
     right_compact = right_key.replace(" ", "")
+    if left_compact == right_compact:
+        # Same letters, different spacing only (e.g. a missing space) -- no
+        # word was added or removed, so word counts are allowed to differ.
+        return True
+    if len(left_key.split()) != len(right_key.split()):
+        return False
     if min(len(left_compact), len(right_compact)) < _MIN_TYPO_TITLE_LENGTH:
         return False
     return _is_within_one_edit(left_compact, right_compact)
 
 
 def _is_within_one_edit(left: str, right: str) -> bool:
-    """True when at most one substitution, indel, or adjacent swap apart."""
-    if left == right:
-        return True
+    """True when exactly one substitution, indel, or adjacent swap apart.
+
+    Callers must already have excluded the equal-strings case (the only
+    caller, _titles_are_spelling_variants, returns early on that case).
+    """
     if len(left) == len(right):
-        mismatches = [
-            index
-            for index, (left_char, right_char) in enumerate(zip(left, right))
-            if left_char != right_char
-        ]
-        if len(mismatches) == 1:
-            return True
-        return (
-            len(mismatches) == 2
-            and mismatches[1] == mismatches[0] + 1
-            and left[mismatches[0]] == right[mismatches[1]]
-            and left[mismatches[1]] == right[mismatches[0]]
-        )
+        return _is_one_substitution_or_swap_apart(left, right)
+    return _is_one_indel_apart(left, right)
+
+
+def _is_one_substitution_or_swap_apart(left: str, right: str) -> bool:
+    """True when same-length strings differ by one substitution or swap."""
+    mismatches = [
+        index
+        for index, (left_char, right_char) in enumerate(zip(left, right))
+        if left_char != right_char
+    ]
+    if len(mismatches) == 1:
+        return True
+    return (
+        len(mismatches) == 2
+        and mismatches[1] == mismatches[0] + 1
+        and left[mismatches[0]] == right[mismatches[1]]
+        and left[mismatches[1]] == right[mismatches[0]]
+    )
+
+
+def _is_one_indel_apart(left: str, right: str) -> bool:
+    """True when strings one character apart in length differ by one insert."""
     shorter, longer = sorted((left, right), key=len)
     if len(longer) - len(shorter) != 1:
         return False
