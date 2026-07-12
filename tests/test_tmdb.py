@@ -241,6 +241,7 @@ def test_resolver_refetches_legacy_cache_records_missing_original_title(tmp_path
                             "title": "The Crimson Rivers",
                             "original_title": "Les rivières pourpres",
                             "release_date": "2000-09-27",
+                            "vote_count": 154,
                         }
                     ]
                 },
