@@ -272,9 +272,10 @@ DEVICE_TITLE_RE = re.compile(
     r"(?<![A-Za-z0-9])(?:"
     r"ugoos|zidoo|homatics|minix|reavon|magnetar|panasonic|amlogic|realtek|"
     r"mediatek|nvidia|chromecast|coreelec|madvr|hdfury|"
-    r"dune\s*hd|apple\s*tv|fire\s*(?:tv|stick)|android\s*tv|google\s*tv|"
-    r"shield\s*(?:tv|pro)|oppo\s+(?:udp|bdp)?[\s-]*\d{2,3}|"
-    r"s922x|rtd\s*1619|z9x|am6b?(?:\s+plus)?|uhd\d{4}"
+    r"dune[\s-]*hd|apple[\s-]*tv|fire[\s-]*(?:tv|stick)|android[\s-]*tv|"
+    r"google[\s-]*tv|shield[\s-]*(?:tv|pro)|"
+    r"oppo[\s-]*(?:udp|bdp)?[\s-]*\d{2,3}|"
+    r"s922x|rtd[\s-]*1619|z9x|am6b?(?:[\s-]+plus)?|uhd\d{4}"
     r")(?![A-Za-z0-9])",
     re.IGNORECASE,
 )

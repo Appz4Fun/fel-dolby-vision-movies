@@ -255,6 +255,27 @@ def test_validate_ai_candidates_rejects_playback_device_titles(title, evidence):
 
 
 @pytest.mark.parametrize(
+    "title,evidence",
+    [
+        ("Dune-HD Max Vision 4K", "Dune-HD Max Vision 4K Profile 7 FEL"),
+        ("Oppo-203", "Oppo-203 Profile 7 FEL"),
+        ("Shield-TV Pro", "Shield-TV Pro Profile 7 FEL"),
+        ("Fire-TV Stick 4K", "Fire-TV Stick 4K Profile 7 FEL"),
+        ("RTD-1619 Box", "RTD-1619 Box Profile 7 FEL"),
+    ],
+)
+def test_validate_ai_candidates_rejects_hyphenated_device_titles(title, evidence):
+    """Forum posts commonly hyphenate brand/model separators (e.g. 'Dune-HD')."""
+    candidate = compare.FoundCandidate(
+        title, "Unknown", "https://src.test", evidence, "ai"
+    )
+    diagnostics: list[str] = []
+
+    assert compare.validate_ai_candidates([candidate], evidence, diagnostics) == []
+    assert diagnostics == ["device-title"]
+
+
+@pytest.mark.parametrize(
     "title,year",
     [
         ("Dune", "2021"),
