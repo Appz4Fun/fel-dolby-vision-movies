@@ -299,6 +299,58 @@ def test_enrich_releases_uses_alias_year_when_source_year_is_not_tmdb_year(
     assert summary.resolved == 1
 
 
+def test_enrich_releases_uses_alias_year_for_1917_home_video_year_mislabel(
+    tmp_path,
+):
+    # FEL list sources sometimes label "1917" with its home-video/rerelease
+    # year (2020, matching the 4K Blu-ray release the FEL disc is drawn from)
+    # rather than its TMDB theatrical year (2019). A plain title+year search
+    # for ("1917", "2020") misses the real film on TMDB (whose primary release
+    # year is 2019) and can latch onto an unrelated same-titled work instead
+    # (e.g. TMDB id 766967, "2020: A 1917 Parody", an 18-minute fan short with
+    # a matching 2020 release year and near-zero title overlap otherwise). The
+    # alias pins the search to the correct TMDB year so the real film resolves.
+    resolver = StaticTmdbResolver(
+        {
+            ("1917", "2019"): {
+                "tmdb_id": "530915",
+                "title": "1917",
+                "year": "2019",
+                "imdb_id": "tt8579674",
+            }
+        }
+    )
+
+    def handler(request):
+        if request.url.path == "/3/movie/530915":
+            return httpx.Response(
+                200,
+                json={
+                    "poster_path": "",
+                    "release_date": "2019-12-25",
+                    "production_companies": [{"name": "DreamWorks Pictures"}],
+                },
+            )
+        return httpx.Response(404)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    releases = [make("1917", "2020")]
+    summary = enrich_releases(
+        releases,
+        resolver,
+        client=client,
+        api_key="x",
+        poster_dir=tmp_path,
+    )
+    client.close()
+
+    assert releases[0].movie_title == "1917"
+    assert releases[0].tmdb_id == "530915"
+    assert releases[0].imdb_id == "tt8579674"
+    assert releases[0].release_date == "2019-12-25"
+    assert summary.resolved == 1
+
+
 def test_enrich_releases_counts_bluray_failures(tmp_path):
     class FailingBlurayResolver:
         def resolve(self, title: str, year: str):
