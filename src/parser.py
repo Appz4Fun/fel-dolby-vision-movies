@@ -263,6 +263,33 @@ _BANNED_TITLE_WORDS = (
     "dolby vision",
     "device",
 )
+# Playback-hardware names (FEL-capable media players, set-top boxes, TVs,
+# chipsets, AV gear) that forum threads describe as "Profile 7 FEL" the same
+# way they describe discs; these are devices, never film titles.  Brand words
+# that collide with real film titles (e.g. "Dune", "Shield") only count as
+# hardware with model context.
+DEVICE_TITLE_RE = re.compile(
+    r"(?<![A-Za-z0-9])(?:"
+    r"ugoos|zidoo|homatics|minix|reavon|magnetar|panasonic|amlogic|realtek|"
+    r"mediatek|nvidia|chromecast|coreelec|madvr|hdfury|"
+    r"dune[\s-]*hd|apple[\s-]*tv|fire[\s-]*(?:tv|stick)|android[\s-]*tv|"
+    r"google[\s-]*tv|shield[\s-]*(?:tv|pro)|"
+    r"oppo[\s-]*(?:udp|bdp)?[\s-]*\d{2,3}|"
+    r"s922x|rtd[\s-]*1619|z9x|am6b?(?:[\s-]+plus)?|uhd\d{4}"
+    r")(?![A-Za-z0-9])",
+    re.IGNORECASE,
+)
+# Hardware category words shared with _BANNED_TITLE_WORDS; kept separate so
+# is_device_title never bans format jargon such as "profile" (a real film).
+_DEVICE_TITLE_WORDS = ("hardware", "player", "splitter", "device", "set-top")
+
+
+def is_device_title(value: str) -> bool:
+    """Return True when a candidate title names playback hardware, not a film."""
+    lowered = value.lower()
+    if any(word in lowered for word in _DEVICE_TITLE_WORDS):
+        return True
+    return bool(DEVICE_TITLE_RE.search(value))
 
 
 def parse_fel_releases(html: str, source_url: str) -> list[FelRelease]:
@@ -771,6 +798,8 @@ def _looks_like_title(value: str) -> bool:
         return False
     if any(word in lowered for word in _BANNED_TITLE_WORDS):
         return False  # pragma: no cover - banned-word title rejection
+    if is_device_title(value):
+        return False
     return any(character.isalnum() for character in value)
 
 
@@ -785,6 +814,8 @@ def _looks_like_list_item_title(
     if FORUM_TIMESTAMP_RE.search(value):
         return False
     if any(word in lowered for word in _BANNED_TITLE_WORDS):
+        return False
+    if is_device_title(value):
         return False
     return any(character.isalnum() for character in value)
 

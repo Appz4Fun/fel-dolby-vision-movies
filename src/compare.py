@@ -27,6 +27,7 @@ from parser import (
     has_leading_fel_denial,
     has_unnegated_mel,
     is_allowed_fel_clause_residue,
+    is_device_title,
 )
 import sources
 from models import FelRelease
@@ -60,7 +61,10 @@ AI_EXTRACTION_SYSTEM_PROMPT = (
     "line is '281 Nobody (2021)', return title 'Nobody'. "
     "Return the exact source excerpt containing the title and affirmative FEL marker. "
     "Year must be explicitly present in that same excerpt; use Unknown when absent and never infer. "
-    "Exclude MEL-only, generic REMUX, negated FEL, cross-release, or ambiguous entries."
+    "Exclude MEL-only, generic REMUX, negated FEL, cross-release, or ambiguous entries. "
+    "Titles must be films. Never return playback hardware - media players, "
+    "set-top boxes, TVs, chipsets, or AV equipment (for example Ugoos, Zidoo, "
+    "Dune HD) - even when a page calls the device Profile 7 FEL capable."
 )
 
 
@@ -703,6 +707,10 @@ def validate_ai_candidates(
         evidence = _normalized_source(candidate.evidence)
         evidence_casefold = evidence.casefold()
         title = _normalized_source(candidate.title)
+        if title and is_device_title(title):
+            if diagnostics is not None:
+                diagnostics.append("device-title")
+            continue
         contextual_evidence, bound_year = (
             _mask_bound_candidate(evidence, title, candidate.year)
             if title
