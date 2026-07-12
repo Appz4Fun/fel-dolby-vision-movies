@@ -592,6 +592,62 @@ def test_ai_extraction_keeps_runtime_proxy_errors_retryable():
     )
 
 
+def test_ai_extraction_keeps_service_unavailable_retryable():
+    assert _is_retryable_extraction_error(AIServiceUnavailableError())
+
+
+def test_ai_extract_releases_retries_transient_service_unavailable():
+    source_url = "https://forum.example.test/thread"
+
+    class FlakyAIClient(FakeAIClient):
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def extract_candidates(self, source_url: str, text: str):
+            self.calls += 1
+            if self.calls == 1:
+                raise AIServiceUnavailableError()
+            return [
+                FoundCandidate(
+                    "Alien",
+                    "1979",
+                    source_url,
+                    "Alien (1979) is confirmed Profile 7 FEL",
+                    "ai",
+                )
+            ]
+
+    client = FlakyAIClient()
+
+    releases = ai_extract_releases(
+        client, [(source_url, "Alien (1979) is confirmed Profile 7 FEL")]
+    )
+
+    assert client.calls == 2
+    assert [release.movie_title for release in releases] == ["Alien"]
+
+
+def test_ai_discover_sources_retries_transient_service_unavailable():
+    calls = 0
+
+    class FlakyDiscoveryClient(FakeAIClient):
+        def complete(self, system_prompt: str, user_prompt: str) -> str:
+            nonlocal calls
+            calls += 1
+            if calls == 1:
+                raise AIServiceUnavailableError()
+            return json.dumps(["https://forum.example.test/new-thread"])
+
+    discovered = ai_discover_sources(
+        FlakyDiscoveryClient(),
+        [],
+        resolver=lambda _hostname: ["93.184.216.34"],
+    )
+
+    assert calls == 2
+    assert discovered == ["https://forum.example.test/new-thread"]
+
+
 def test_ai_extract_releases_backs_off_between_retry_attempts(monkeypatch):
     import ai_scrape as ai_scrape_mod
 

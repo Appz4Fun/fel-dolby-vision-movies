@@ -167,5 +167,6 @@ def _build_sheet_release(
             quote=quote[:500],
             evidence_type="google-sheet-row",
         ),
+        source_label="google-sheet",
         collected_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
     )

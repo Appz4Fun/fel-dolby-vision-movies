@@ -108,6 +108,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         response = self.client.get(TMDB_SEARCH_URL, params=params)
         response.raise_for_status()
         candidates = response.json().get("results", [])
+        candidates = [c for c in candidates if _has_audience_engagement(c)]
         return _best_tmdb_candidate(title, year, candidates)
 
     def _external_ids(self, tmdb_id: str) -> dict[str, Any]:
@@ -200,6 +201,20 @@ def _candidate_popularity(candidate: dict[str, Any]) -> float:
         return float(str(value))
     except (TypeError, ValueError):
         return 0.0
+
+
+def _has_audience_engagement(candidate: dict[str, Any]) -> bool:
+    """True if anyone has ever voted on or TMDB has poster art for this title.
+
+    TMDB's catalog includes a long tail of amateur/student shorts and other
+    never-released-to-market entries that can still win an exact title+year
+    text match purely by coincidence (many films share generic titles like
+    "Obsession" across decades). A candidate with zero votes and no poster
+    is far more likely to be one of those than a movie that actually
+    reached a physical/Blu-ray home-video market, so require at least one
+    of those signals before it is eligible to be scored as a match.
+    """
+    return bool(candidate.get("vote_count")) or bool(candidate.get("poster_path"))
 
 
 def _title_score(left: str, right: str) -> int:

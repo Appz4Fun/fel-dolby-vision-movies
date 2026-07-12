@@ -8,12 +8,13 @@ AI-found releases are tagged ``evidence_type="ai-extracted"`` and merged into
 
 from __future__ import annotations
 
-from collections.abc import Iterable, Iterator
+from collections.abc import Callable, Iterable, Iterator
 from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
 import time
+from typing import TypeVar
 import urllib.parse
 
 import httpx
@@ -22,6 +23,7 @@ from compare import (
     AIClient,
     AIGlobalHTTPError,
     AIResponseFormatError,
+    AIServiceUnavailableError,
     AISettings,
     FoundCandidate,
     global_ai_http_error,
@@ -109,7 +111,9 @@ def ai_discover_sources(
 ) -> list[str]:
     """Ask the AI for FEL source URLs; return well-formed, not-yet-known ones."""
     try:
-        text = ai_client.complete(_DISCOVERY_SYSTEM, _DISCOVERY_USER)
+        text = _with_retries(
+            lambda: ai_client.complete(_DISCOVERY_SYSTEM, _DISCOVERY_USER)
+        )
     except AIResponseFormatError:
         raise
     except AIGlobalHTTPError:
@@ -196,13 +200,14 @@ def ai_extract_releases(
     return dedupe_releases(releases, canonical_key)
 
 
-def _extract_candidates_with_retries(
-    ai_client: AIClient, source_url: str, text: str
-) -> list[FoundCandidate]:
+_T = TypeVar("_T")
+
+
+def _with_retries(call: Callable[[], _T]) -> _T:
     last_error: Exception | None = None
     for attempt in range(AI_EXTRACTION_ATTEMPTS):
         try:
-            return ai_client.extract_candidates(source_url, text)
+            return call()
         except (httpx.HTTPError, httpx.InvalidURL) as exc:
             last_error = exc
             if not _is_retryable_extraction_error(exc):
@@ -213,7 +218,15 @@ def _extract_candidates_with_retries(
     raise last_error
 
 
+def _extract_candidates_with_retries(
+    ai_client: AIClient, source_url: str, text: str
+) -> list[FoundCandidate]:
+    return _with_retries(lambda: ai_client.extract_candidates(source_url, text))
+
+
 def _is_retryable_extraction_error(exc: Exception) -> bool:
+    if isinstance(exc, AIServiceUnavailableError):
+        return True
     if isinstance(exc, AIResponseFormatError) or global_ai_http_error(exc):
         return False
     if isinstance(exc, httpx.HTTPStatusError):
