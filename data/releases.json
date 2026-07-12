@@ -17580,44 +17580,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Avatar: Extended Collector's Edition",
-    "fel_confirmed": true,
-    "release_date": "2009-12-16",
-    "studio": "Dune Entertainment",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 2.0",
-      "DD 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
-    "source_label": "codex-ai",
-    "tmdb_id": "19995",
-    "imdb_id": "tt0499549",
-    "poster_path": "data/posters/19995.jpg",
-    "release_url": "https://www.themoviedb.org/movie/19995",
-    "bluray_url": "https://www.blu-ray.com/movies/Avatar-4K-Blu-ray/191856/",
-    "bluray_release_date": "2023-06-20",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish",
-      "Japanese"
-    ],
-    "fel_evidence": {
-      "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
-      "quote": "row: Avatar.2009.Extended.Collector; source: BD FEL VS BL",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T02:58:05+00:00"
-  },
-  {
     "movie_title": "Avatar Extended Edition",
     "fel_confirmed": true,
     "release_date": "2009-12-16",
