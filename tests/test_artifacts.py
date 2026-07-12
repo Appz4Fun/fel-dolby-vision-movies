@@ -1861,6 +1861,53 @@ def test_write_artifacts_merges_same_title_year_different_bluray_urls(
     ]
 
 
+def test_write_artifacts_rejects_surviving_duplicate_identity_rows(
+    tmp_path: Path,
+):
+    # A dup pair where one row lacks an IMDb id evades the alias-group merge
+    # net (it requires matching non-empty IMDb ids on every row), so the
+    # publish gate must fail loudly rather than ship two identical entries.
+    first = release("Jaws", "1975-06-20")
+    first.tmdb_id = "578"
+    first.imdb_id = "tt0073195"
+    first.bluray_url = "https://www.blu-ray.com/movies/Jaws-4K-Blu-ray/387497/"
+    second = release("Jaws", "1975-06-20")
+    second.tmdb_id = "578"
+    second.bluray_url = "https://www.blu-ray.com/movies/Jaws-4K-Blu-ray/265299/"
+    data_path = tmp_path / "data" / "releases.json"
+    data_path.parent.mkdir(parents=True)
+    data_path.write_text(
+        json.dumps([first.to_dict(), second.to_dict()]), encoding="utf-8"
+    )
+
+    with pytest.raises(artifacts.DuplicateReleaseError, match="Jaws"):
+        write_artifacts([], output_dir=tmp_path)
+
+    # The failed publish must leave the existing dataset untouched.
+    assert len(json.loads(data_path.read_text(encoding="utf-8"))) == 2
+
+
+def test_find_duplicate_identity_rows_flags_indistinguishable_pairs():
+    unresolved_one = release("Rio 70", "1969")
+    unresolved_two = release("Rio 70", "1969")
+    unresolved_two.bluray_url = "https://www.blu-ray.com/movies/Rio-70/1/"
+
+    duplicates = artifacts.find_duplicate_identity_rows(
+        [unresolved_one, unresolved_two]
+    )
+
+    assert duplicates == [("Rio 70", "1969", "")]
+
+
+def test_find_duplicate_identity_rows_allows_same_title_different_films():
+    hosoda = release("Belle", "2021")
+    hosoda.tmdb_id = "776503"
+    british = release("Belle", "2021")
+    british.tmdb_id = "654321"
+
+    assert artifacts.find_duplicate_identity_rows([hosoda, british]) == []
+
+
 def test_write_artifacts_merges_same_tmdb_when_existing_lacks_bluray(
     tmp_path: Path,
 ):
