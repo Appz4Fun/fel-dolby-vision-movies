@@ -14,7 +14,9 @@ import httpx
 
 
 TMDB_SEARCH_URL = "https://api.themoviedb.org/3/search/movie"
+TMDB_TV_SEARCH_URL = "https://api.themoviedb.org/3/search/tv"
 TMDB_EXTERNAL_IDS_URL = "https://api.themoviedb.org/3/movie/{tmdb_id}/external_ids"
+TMDB_TV_EXTERNAL_IDS_URL = "https://api.themoviedb.org/3/tv/{tmdb_id}/external_ids"
 TMDB_ALT_TITLES_URL = "https://api.themoviedb.org/3/movie/{tmdb_id}/alternative_titles"
 DEFAULT_CACHE_PATH = Path(".cache/tmdb_fel_cleanup.json")
 
@@ -31,6 +33,10 @@ class TmdbMovie:
     # to retitle the source row to the canonical TMDB title so the row can
     # merge with the canonical catalog entry.
     matched_alternative_title: str = ""
+    # "movie" or "tv". TMDB movie and TV ids are separate namespaces, so
+    # enrichment must know which one an id belongs to before building page
+    # URLs or calling detail endpoints.
+    media_type: str = "movie"
 
     @classmethod
     def from_dict(cls, record: dict[str, str]) -> TmdbMovie:
@@ -41,6 +47,7 @@ class TmdbMovie:
             imdb_id=record.get("imdb_id", ""),
             original_title=record.get("original_title", ""),
             matched_alternative_title=record.get("matched_alternative_title", ""),
+            media_type=record.get("media_type", "movie"),
         )
 
 
@@ -110,7 +117,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             if rescue is not None:
                 best, matched_alternative_title = rescue
         if best is None:
-            return None
+            return self._search_tv(title, year)
         tmdb_id = str(best.get("id", ""))
         external = self._external_ids(tmdb_id)
         return TmdbMovie(
@@ -160,11 +167,57 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
                 return candidate, matched
         return None
 
-    def _external_ids(self, tmdb_id: str) -> dict[str, Any]:
+    def _search_tv(self, title: str, year: str) -> TmdbMovie | None:
+        """Resolve a TV-season title against /3/search/tv as a last resort."""
+        # Reddit FEL lists carry TV season discs ("Ahsoka: The Complete
+        # First Season") that movie search can never match. Only titles
+        # bearing a season descriptor take this path, and only after every
+        # movie-side fallback failed, so a movie title can never drift onto
+        # a same-named series. The search is deliberately not pinned with
+        # first_air_date_year: a season disc's year is the season's, not the
+        # series premiere's (Mandalorian S3 is 2023, first_air_date 2019),
+        # so pinning would exclude the right series from the result set. The
+        # scorer still sees the query year -- an exact-name match absorbs
+        # the drift penalty, while the year-match bonus disambiguates
+        # same-named original/reboot series pairs.
+        series_title = _series_title_from_season_descriptor(title)
+        if not series_title:
+            return None
+        response = self.client.get(
+            TMDB_TV_SEARCH_URL,
+            params={
+                "api_key": self.api_key,
+                "query": series_title,
+                "include_adult": "false",
+            },
+        )
+        response.raise_for_status()
+        candidates = [
+            _tv_candidate_as_movie(candidate)
+            for candidate in response.json().get("results", [])
+        ]
+        candidates = [c for c in candidates if _has_audience_engagement(c)]
+        best = _best_tmdb_candidate(series_title, year, candidates)
+        if best is None:
+            return None
+        tmdb_id = str(best.get("id", ""))
+        external = self._external_ids(tmdb_id, TMDB_TV_EXTERNAL_IDS_URL)
+        return TmdbMovie(
+            tmdb_id=tmdb_id,
+            title=str(best.get("title") or series_title).strip(),
+            year=_year_from_date(str(best.get("release_date") or "")) or year,
+            imdb_id=str(external.get("imdb_id") or ""),
+            original_title=str(best.get("original_title") or "").strip(),
+            media_type="tv",
+        )
+
+    def _external_ids(
+        self, tmdb_id: str, url_template: str = TMDB_EXTERNAL_IDS_URL
+    ) -> dict[str, Any]:
         if not tmdb_id:
             return {}
         response = self.client.get(
-            TMDB_EXTERNAL_IDS_URL.format(tmdb_id=tmdb_id),
+            url_template.format(tmdb_id=tmdb_id),
             params={"api_key": self.api_key},
         )
         response.raise_for_status()
@@ -193,14 +246,43 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         )
 
 
-# Bumped whenever _best_tmdb_candidate's match weights change materially.
+# TV season discs on the reddit lists name the series plus a season
+# descriptor ("Ahsoka: The Complete First Season", "Andor: Season 2"). The
+# descriptor is stripped before querying /3/search/tv; a title that is
+# nothing but a descriptor leaves no series name worth searching for.
+_SEASON_DESCRIPTOR_RE = re.compile(
+    r"\s*[:\-–—]?\s*(?:the\s+complete\s+\w+\s+season|season\s+\d+)\s*$",
+    re.IGNORECASE,
+)
+
+
+def _series_title_from_season_descriptor(title: str) -> str:
+    """Series name with the trailing season descriptor removed, or ""."""
+    if not _SEASON_DESCRIPTOR_RE.search(title or ""):
+        return ""
+    return _SEASON_DESCRIPTOR_RE.sub("", title).strip()
+
+
+def _tv_candidate_as_movie(candidate: dict[str, Any]) -> dict[str, Any]:
+    """Map a /3/search/tv result onto the movie-shaped keys the scorer reads."""
+    mapped = dict(candidate)
+    mapped["title"] = candidate.get("name") or ""
+    mapped["original_title"] = candidate.get("original_name") or ""
+    mapped["release_date"] = candidate.get("first_air_date") or ""
+    return mapped
+
+
+# Bumped whenever _best_tmdb_candidate's match weights change materially
+# or a new resolution capability ships (alternative-title rescue, TV-season
+# fallback): season-title negatives cached before /3/search/tv was consulted
+# must be re-fetched, not served stale forever from persistent runner caches.
 # A positive cache record written under an older version was a decision
 # made with different (possibly incorrect) weights -- e.g. self-hosted
 # runners persist .cache/tmdb_fel_cleanup.json across workflow runs, so
 # without this a match this exact commit fixes (like "Sisu" resolving to
 # the unrelated "Scrapper") would keep being served from cache forever
 # instead of being re-scored under the corrected logic.
-_SCORER_VERSION = "3"
+_SCORER_VERSION = "4"
 
 
 def _is_legacy_cache_record(value: object) -> bool:
@@ -449,5 +531,6 @@ def _movie_to_cache_record(
         "imdb_id": movie.imdb_id,
         "original_title": movie.original_title,
         "matched_alternative_title": movie.matched_alternative_title,
+        "media_type": movie.media_type,
         "scorer_version": _SCORER_VERSION,
     }

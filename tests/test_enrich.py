@@ -27,6 +27,21 @@ def test_release_url_for_prefers_tmdb_then_imdb():
     assert release_url_for("", "") == ""
 
 
+def test_release_url_for_emits_tv_page_for_tv_matches():
+    assert (
+        release_url_for("1399", "tt0944947", "tv")
+        == "https://www.themoviedb.org/tv/1399"
+    )
+    assert (
+        release_url_for("550", "tt0137523", "movie")
+        == "https://www.themoviedb.org/movie/550"
+    )
+    assert (
+        release_url_for("", "tt0944947", "tv")
+        == "https://www.imdb.com/title/tt0944947/"
+    )
+
+
 def _handler(request: httpx.Request) -> httpx.Response:
     if request.url.path == "/3/movie/550":
         return httpx.Response(
@@ -74,6 +89,64 @@ def test_enrich_releases_sets_ids_poster_and_release_url(tmp_path: Path):
     assert summary.resolved == 1
     assert summary.unresolved == 1
     assert summary.posters_downloaded == 1
+
+
+def test_enrich_releases_uses_tv_endpoints_for_tv_matches(tmp_path: Path):
+    """A TV-season row must be enriched entirely through TV endpoints: a
+    /tv/ release URL, details from /3/tv/{id} (never /3/movie/{id} -- TMDB
+    movie and TV ids are separate namespaces, so the movie endpoint could
+    return a real but unrelated film), a network as the studio, and a
+    poster filename that cannot collide with a same-id movie poster."""
+    resolver = StaticTmdbResolver(
+        {
+            ("Ahsoka: The Complete First Season", "2023"): {
+                "tmdb_id": "114461",
+                "title": "Ahsoka",
+                "year": "2023",
+                "imdb_id": "tt13622776",
+                "media_type": "tv",
+            }
+        }
+    )
+    paths: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        paths.append(request.url.path)
+        if request.url.path == "/3/tv/114461":
+            return httpx.Response(
+                200,
+                json={
+                    "poster_path": "/ahsoka.jpg",
+                    "first_air_date": "2023-08-22",
+                    "networks": [{"name": "Disney+"}],
+                    "production_companies": [{"name": "Lucasfilm Ltd."}],
+                },
+            )
+        if request.url.path.startswith("/t/p/w185"):
+            return httpx.Response(200, content=b"\xff\xd8\xff-tv-poster")
+        return httpx.Response(404)
+
+    releases = [make("Ahsoka: The Complete First Season", "2023")]
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+
+    summary = enrich_releases(
+        releases, resolver, client=client, api_key="x", poster_dir=tmp_path
+    )
+    client.close()
+
+    row = releases[0]
+    # The row keeps its per-season title; retitling it to the series name
+    # would let reconciliation collapse distinct season discs into one row.
+    assert row.movie_title == "Ahsoka: The Complete First Season"
+    assert row.tmdb_id == "114461"
+    assert row.imdb_id == "tt13622776"
+    assert row.release_url == "https://www.themoviedb.org/tv/114461"
+    assert row.studio == "Disney+"
+    assert row.release_date == "2023-08-22"
+    assert row.poster_path == str(tmp_path / "tv-114461.jpg")
+    assert (tmp_path / "tv-114461.jpg").read_bytes() == b"\xff\xd8\xff-tv-poster"
+    assert summary.resolved == 1
+    assert not any(path.startswith("/3/movie/") for path in paths)
 
 
 def test_enrich_releases_tolerates_poster_download_failure(tmp_path, monkeypatch):

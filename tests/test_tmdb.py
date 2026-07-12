@@ -744,6 +744,316 @@ def test_resolver_accepts_title_year_match_with_at_least_one_vote(
     assert result.imdb_id == "tt9999999"
 
 
+def test_series_title_from_season_descriptor_strips_season_suffixes():
+    assert (
+        tmdb._series_title_from_season_descriptor("Ahsoka: The Complete First Season")
+        == "Ahsoka"
+    )
+    assert (
+        tmdb._series_title_from_season_descriptor(
+            "The Mandalorian: The Complete Third Season"
+        )
+        == "The Mandalorian"
+    )
+    assert (
+        tmdb._series_title_from_season_descriptor(
+            "Game of Thrones: The Complete Eighth Season"
+        )
+        == "Game of Thrones"
+    )
+    assert tmdb._series_title_from_season_descriptor("Andor: Season 2") == "Andor"
+
+
+def test_series_title_from_season_descriptor_rejects_non_season_titles():
+    assert tmdb._series_title_from_season_descriptor("Oppenheimer") == ""
+    # A bare descriptor leaves no series name worth searching for.
+    assert tmdb._series_title_from_season_descriptor("Season 5") == ""
+    assert tmdb._series_title_from_season_descriptor("") == ""
+
+
+def test_tv_candidate_as_movie_maps_tv_fields_onto_movie_keys():
+    mapped = tmdb._tv_candidate_as_movie(
+        {
+            "id": 114461,
+            "name": "Ahsoka",
+            "original_name": "Ahsoka",
+            "first_air_date": "2023-08-22",
+            "vote_count": 1200,
+        }
+    )
+
+    assert mapped["id"] == 114461
+    assert mapped["title"] == "Ahsoka"
+    assert mapped["original_title"] == "Ahsoka"
+    assert mapped["release_date"] == "2023-08-22"
+
+
+def test_resolver_falls_back_to_tv_search_for_season_titles(
+    monkeypatch, tmp_path: Path
+):
+    """A reddit-list TV season row ("Ahsoka: The Complete First Season") can
+    never match /3/search/movie, so after the movie flow comes up empty the
+    resolver must query /3/search/tv with the season descriptor stripped,
+    take IMDb ids from /3/tv/{id}/external_ids, and mark the result as TV so
+    enrichment can emit a /tv/ release URL."""
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+    tv_queries: list[str | None] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(200, json={"results": []})
+        if request.url.path == "/3/search/tv":
+            tv_queries.append(request.url.params.get("query"))
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 114461,
+                            "name": "Ahsoka",
+                            "original_name": "Ahsoka",
+                            "first_air_date": "2023-08-22",
+                            "vote_count": 1200,
+                            "poster_path": "/ahsoka.jpg",
+                        }
+                    ]
+                },
+            )
+        if request.url.path == "/3/tv/114461/external_ids":
+            return httpx.Response(200, json={"imdb_id": "tt13622776"})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    result = resolver.resolve("Ahsoka: The Complete First Season", "2023")
+
+    assert result is not None
+    assert result.tmdb_id == "114461"
+    assert result.title == "Ahsoka"
+    assert result.year == "2023"
+    assert result.imdb_id == "tt13622776"
+    assert result.media_type == "tv"
+    assert tv_queries == ["Ahsoka"]
+
+    # media_type must survive the cache round-trip so cached replays still
+    # enrich the row with a /tv/ release URL instead of a movie page.
+    cached = json.loads((tmp_path / "cache.json").read_text(encoding="utf-8"))
+    record = cached["Ahsoka: The Complete First Season\x002023"]
+    assert record["media_type"] == "tv"
+
+
+def test_resolver_tv_fallback_tolerates_season_vs_premiere_year_drift(
+    monkeypatch, tmp_path: Path
+):
+    """'The Mandalorian: The Complete Third Season' [2023] must resolve to a
+    series whose first_air_date is 2019: a season disc's year is the
+    season's, not the premiere's. The TV search must therefore never pin
+    first_air_date_year (that would exclude the right series from the result
+    set entirely), and the scorer's year-drift penalty must be absorbable by
+    an exact-name, well-engaged match."""
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(200, json={"results": []})
+        if request.url.path == "/3/search/tv":
+            if request.url.params.get("first_air_date_year"):
+                return httpx.Response(200, json={"results": []})
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 82856,
+                            "name": "The Mandalorian",
+                            "original_name": "The Mandalorian",
+                            "first_air_date": "2019-11-12",
+                            "vote_count": 5000,
+                            "poster_path": "/mando.jpg",
+                        }
+                    ]
+                },
+            )
+        if request.url.path == "/3/tv/82856/external_ids":
+            return httpx.Response(200, json={"imdb_id": "tt8111088"})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    result = resolver.resolve("The Mandalorian: The Complete Third Season", "2023")
+
+    assert result is not None
+    assert result.tmdb_id == "82856"
+    assert result.media_type == "tv"
+
+
+def test_resolver_tv_fallback_prefers_year_matching_series_on_name_collision(
+    monkeypatch, tmp_path: Path
+):
+    """Two same-named series (an original and its reboot) can only be told
+    apart by year, so the TV fallback must keep scoring with the query year
+    instead of dropping it: for a first-season disc the disc year matches
+    the reboot's premiere, and ignoring year would let the older, more-voted
+    original win on engagement alone."""
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(200, json={"results": []})
+        if request.url.path == "/3/search/tv":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 1,
+                            "name": "Reboot Show",
+                            "original_name": "Reboot Show",
+                            "first_air_date": "1959-10-02",
+                            "vote_count": 2000,
+                            "poster_path": "/original.jpg",
+                        },
+                        {
+                            "id": 2,
+                            "name": "Reboot Show",
+                            "original_name": "Reboot Show",
+                            "first_air_date": "2019-04-01",
+                            "vote_count": 500,
+                            "poster_path": "/reboot.jpg",
+                        },
+                    ]
+                },
+            )
+        if request.url.path == "/3/tv/2/external_ids":
+            return httpx.Response(200, json={"imdb_id": "tt2583620"})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    result = resolver.resolve("Reboot Show: The Complete First Season", "2019")
+
+    assert result is not None
+    assert result.tmdb_id == "2"
+
+
+def test_resolver_does_not_tv_search_titles_without_season_descriptor(
+    monkeypatch, tmp_path: Path
+):
+    """The TV fallback exists only for season-disc rows; an unresolvable
+    movie title must keep resolving to None without spending a /3/search/tv
+    request that could mismatch a same-named series."""
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+    paths: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        paths.append(request.url.path)
+        return httpx.Response(200, json={"results": []})
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    assert resolver.resolve("Some Unreleased Film", "2023") is None
+    assert "/3/search/tv" not in paths
+
+
+def test_resolver_tv_fallback_rejects_unengaged_same_named_series(
+    monkeypatch, tmp_path: Path
+):
+    """A zero-vote, posterless TV entry is subject to the same audience-
+    engagement gate as movie candidates; a season title must stay unresolved
+    rather than match TV catalog noise."""
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(200, json={"results": []})
+        if request.url.path == "/3/search/tv":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 7,
+                            "name": "Ahsoka",
+                            "original_name": "Ahsoka",
+                            "first_air_date": "2023-08-22",
+                            "vote_count": 0,
+                            "poster_path": None,
+                        }
+                    ]
+                },
+            )
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    assert resolver.resolve("Ahsoka: The Complete First Season", "2023") is None
+
+
+def test_resolver_refetches_pre_tv_fallback_negative_cache_records(tmp_path):
+    """A season-title negative decided before the TV fallback existed must be
+    re-fetched, not served forever from a persistent (self-hosted runner)
+    cache: the title is resolvable now that /3/search/tv is consulted."""
+    cache_path = tmp_path / "tmdb_cache.json"
+    cache_path.write_text(
+        json.dumps(
+            {"Ahsoka: The Complete First Season\x002023": {"scorer_version": "3"}}
+        ),
+        encoding="utf-8",
+    )
+    requests: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requests.append(request.url.path)
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(200, json={"results": []})
+        if request.url.path == "/3/search/tv":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 114461,
+                            "name": "Ahsoka",
+                            "original_name": "Ahsoka",
+                            "first_air_date": "2023-08-22",
+                            "vote_count": 1200,
+                            "poster_path": "/ahsoka.jpg",
+                        }
+                    ]
+                },
+            )
+        if request.url.path == "/3/tv/114461/external_ids":
+            return httpx.Response(200, json={"imdb_id": "tt13622776"})
+        return httpx.Response(404)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    with TmdbResolver(
+        "key", cache_path=cache_path, client=client, delay_seconds=0
+    ) as resolver:
+        movie = resolver.resolve("Ahsoka: The Complete First Season", "2023")
+
+    assert requests, "pre-TV-fallback negative must be re-fetched, not served stale"
+    assert movie is not None
+    assert movie.tmdb_id == "114461"
+    assert movie.media_type == "tv"
+    client.close()
+
+
 def test_load_tmdb_api_key_reads_dotenv_without_printing_secret(tmp_path: Path):
     env_path = tmp_path / ".env"
     env_path.write_text("TMDB_API_KEY=secret-tmdb-key\n", encoding="utf-8")
