@@ -440,6 +440,67 @@ def test_ordinal_punctuation_and_accent_aka_evidence_proves_an_alias():
     assert result.releases[0].movie_title == "The Crimson Rivers"
 
 
+def test_tmdb_original_title_metadata_proves_foreign_alias_pair():
+    english = release(
+        "The Crimson Rivers",
+        "2000-09-27",
+        tmdb_id="60670",
+        imdb_id="tt0228786",
+        bluray_url="https://www.blu-ray.com/movies/The-Crimson-Rivers/1/",
+    )
+    french = release(
+        "Les rivières pourpres",
+        "2000-09-27",
+        tmdb_id="60670",
+        imdb_id="tt0228786",
+        bluray_url="https://www.blu-ray.com/movies/Les-Rivieres-Pourpres/2/",
+        quote="Les rivières pourpres (2000)",
+        additional_characteristics={
+            "tmdb_title": "The Crimson Rivers",
+            "tmdb_original_title": "Les rivières pourpres",
+        },
+    )
+
+    result = reconcile_releases([english], [french])
+
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "The Crimson Rivers"
+    assert result.additions == []
+
+
+@pytest.mark.parametrize(
+    "characteristics",
+    [
+        {"tmdb_title": "Movie", "tmdb_original_title": "Movie"},
+        {"tmdb_title": "Movie", "tmdb_original_title": "Another Film"},
+        {"tmdb_original_title": "Le Film"},
+    ],
+    ids=["same-title-pair", "pair-names-other-film", "missing-canonical-title"],
+)
+def test_tmdb_title_metadata_must_name_both_rows_to_prove_an_alias(
+    characteristics: dict[str, str],
+):
+    movie = release(
+        "Movie",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Movie/1/",
+    )
+    localized = release(
+        "Le Film",
+        "2000",
+        tmdb_id="1",
+        imdb_id="tt0000001",
+        bluray_url="https://www.blu-ray.com/movies/Le-Film/2/",
+        additional_characteristics=characteristics,
+    )
+
+    result = reconcile_releases([movie, localized], [])
+
+    assert result.releases == [movie, localized]
+
+
 def test_multi_aka_chain_connects_only_adjacent_named_titles():
     first = release(
         "Film A",
