@@ -1,4 +1,11 @@
 ---
+# tests/** is excluded from static analysis globally: pytest requires bare
+# assert statements, which Bandit (B101), Prospector's embedded bandit, and
+# Opengrep's assert rule all flag as high-severity in any engine that scans
+# the tree. Tests remain covered by ruff (just lint) and pytest at 100%
+# coverage in the repo's own CI.
+exclude_paths:
+  - "tests/**"
 engines:
   bandit:
     exclude_paths:

@@ -33,20 +33,21 @@ class ReviewOutputError(ValueError):
     """Raised when a reconciliation review target is unsafe."""
 
 
+# Raised when publishing would ship indistinguishable duplicate rows. (A
+# comment rather than a docstring: Codacy's pydocstyle D203 demands a blank
+# line before class docstrings that ruff format strips right back out.)
 class DuplicateReleaseError(ValueError):
-    """Raised when publishing would ship indistinguishable duplicate rows."""
+    pass
 
 
 def find_duplicate_identity_rows(
     releases: list[FelRelease],
 ) -> list[tuple[str, str, str]]:
-    """Report (title, year, tmdb_id) for rows sharing one release identity.
-
-    Rows share an identity when their canonical title+year key and TMDB id
-    both match (including two unresolved rows with no TMDB id, which readers
-    could never tell apart). Same-titled rows with different TMDB ids are
-    distinct films and never flagged.
-    """
+    """Report (title, year, tmdb_id) for rows sharing one release identity."""
+    # Rows share an identity when their canonical title+year key and TMDB id
+    # both match (including two unresolved rows with no TMDB id, which readers
+    # could never tell apart). Same-titled rows with different TMDB ids are
+    # distinct films and never flagged.
     first_titles: dict[tuple[str, str, str], str] = {}
     duplicates: list[tuple[str, str, str]] = []
     for release in releases:

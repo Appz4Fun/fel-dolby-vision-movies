@@ -225,13 +225,11 @@ def _dedupe_one_tmdb_group(
 def _merge_groups_sharing_canonical_key(
     resolved: list[_ReleaseGroup],
 ) -> list[_ReleaseGroup]:
-    """Collapse per-disc-URL groups whose rows share one canonical identity.
-
-    A film re-resolved to a different blu-ray.com page (multiple pressings of
-    the same cut) still names the same release; only differently-titled rows
-    can represent distinct physical editions. `resolved` arrives in
-    first-occurrence order, so the earliest group always absorbs later ones.
-    """
+    """Collapse per-disc-URL groups whose rows share one canonical identity."""
+    # A film re-resolved to a different blu-ray.com page (multiple pressings
+    # of the same cut) still names the same release; only differently-titled
+    # rows can represent distinct physical editions. `resolved` arrives in
+    # first-occurrence order, so the earliest group always absorbs later ones.
     merged: list[_ReleaseGroup] = []
     index_by_key: dict[tuple[str, str], int] = {}
     for item in resolved:

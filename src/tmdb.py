@@ -129,15 +129,13 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
     def _rescue_by_alternative_title(
         self, title: str, year: str, candidates: list[dict[str, Any]]
     ) -> dict[str, Any] | None:
-        """Confirm low-scoring candidates against TMDB's alternative titles.
-
-        Search finds films by alternative titles (romanized native names,
-        sequel aliases), but the scorer only sees `title`/`original_title`,
-        so a query like "Ryu to sobakasu no hime" rejects the very candidate
-        ("Belle") the search index matched for it. When nothing scores, an
-        exact alternative-title hit on a near-year, engaged candidate is
-        accepted before giving up.
-        """
+        """Confirm low-scoring candidates against TMDB's alternative titles."""
+        # Search finds films by alternative titles (romanized native names,
+        # sequel aliases), but the scorer only sees `title`/`original_title`,
+        # so a query like "Ryu to sobakasu no hime" rejects the very candidate
+        # ("Belle") the search index matched for it. When nothing scores, an
+        # exact alternative-title hit on a near-year, engaged candidate is
+        # accepted before giving up.
         query_key = _canonical_title_key(title)
         for candidate in _alternative_title_rescue_order(year, candidates):
             response = self.client.get(
@@ -356,14 +354,12 @@ _ALT_TITLE_RESCUE_LIMIT = 3
 def _alternative_title_rescue_order(
     query_year: str, candidates: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
-    """Candidates worth confirming against /alternative_titles, best first.
-
-    Only candidates whose known year sits within one year of the query
-    survive -- the rescue exists for exact alternative-title hits on the
-    film the source actually listed, and a far-off year marks a same-titled
-    stranger. Ranking by vote count checks the real film before obscure
-    hangers-on.
-    """
+    """Candidates worth confirming against /alternative_titles, best first."""
+    # Only candidates whose known year sits within one year of the query
+    # survive -- the rescue exists for exact alternative-title hits on the
+    # film the source actually listed, and a far-off year marks a same-titled
+    # stranger. Ranking by vote count checks the real film before obscure
+    # hangers-on.
     eligible = []
     for candidate in candidates:
         release_year = _year_from_date(str(candidate.get("release_date") or ""))
