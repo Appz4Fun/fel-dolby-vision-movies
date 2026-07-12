@@ -225,7 +225,12 @@ def _target_decision(
     target = catalog[index]
     if not _ids_are_consistent(candidate, target):
         return _review_decision("identity-conflict", catalog, [index])
-    if _has_distinct_url(candidate, target):
+    # Distinct blu-ray.com pages mark distinct physical editions only when the
+    # rows are titled differently; the same canonical title+year re-resolved to
+    # another disc page (multiple pressings of one cut) is still the same row.
+    if _has_distinct_url(candidate, target) and canonical_key(
+        candidate
+    ) != canonical_key(target):
         if _year(candidate):
             return _MatchDecision()
         return _review_decision("ambiguous-edition", catalog, [index])

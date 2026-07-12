@@ -1842,9 +1842,12 @@ def test_write_artifacts_preserves_same_tmdb_distinct_bluray_releases(
     }
 
 
-def test_write_artifacts_keeps_same_title_year_different_bluray_urls(
+def test_write_artifacts_merges_same_title_year_different_bluray_urls(
     tmp_path: Path,
 ):
+    # The disc URL comes from an unstable blu-ray.com search, so an
+    # identically-titled row pointing at another pressing's page is the same
+    # release and must not publish as a duplicate entry.
     first = release("Avatar", "2009")
     first.bluray_url = "https://www.blu-ray.com/movies/Avatar/1/"
     second = release("Avatar", "2009")
@@ -1853,10 +1856,9 @@ def test_write_artifacts_keeps_same_title_year_different_bluray_urls(
     write_artifacts([first, second], output_dir=tmp_path)
 
     data = json.loads((tmp_path / "data/releases.json").read_text(encoding="utf-8"))
-    assert {item["bluray_url"] for item in data} == {
-        first.bluray_url,
-        second.bluray_url,
-    }
+    assert [(item["movie_title"], item["bluray_url"]) for item in data] == [
+        ("Avatar", first.bluray_url)
+    ]
 
 
 def test_write_artifacts_merges_same_tmdb_when_existing_lacks_bluray(

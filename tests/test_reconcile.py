@@ -888,7 +888,10 @@ def test_distinct_known_year_edition_remains_an_addition():
     assert len(result.releases) == 2
 
 
-def test_same_title_year_with_distinct_bluray_url_remains_an_addition():
+def test_same_title_year_with_distinct_bluray_url_merges():
+    # A re-scrape of a film already in the catalog can resolve a different
+    # blu-ray.com page (multiple 4K pressings of the same cut), so a distinct
+    # disc URL alone must not spawn a second identically-titled row.
     base = release(
         "Movie",
         "2000",
@@ -904,10 +907,12 @@ def test_same_title_year_with_distinct_bluray_url_remains_an_addition():
 
     result = reconcile_releases([base], [second_disc])
 
-    assert result.releases == [base, second_disc]
-    assert result.additions == [second_disc]
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Movie"
+    assert result.releases[0].bluray_url == "https://www.blu-ray.com/movies/Movie/1/"
+    assert result.additions == []
     assert result.review_items == []
-    assert result.merged_count == 0
+    assert result.merged_count == 1
 
 
 def test_distinct_yearless_edition_is_review_only():
