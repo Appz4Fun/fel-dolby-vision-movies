@@ -135,3 +135,20 @@ Valid Movie 2020,BD FEL,usable row
     assert [(release.movie_title, release.release_date) for release in releases] == [
         ("Valid Movie", "2020")
     ]
+
+
+def test_parse_google_sheet_releases_labels_rows_as_google_sheet():
+    # Regression: row-based sheet parsing built FelEvidence with
+    # evidence_type="google-sheet-row" but never set source_label, so it
+    # silently defaulted to "Unknown" instead of "google-sheet" -- unlike the
+    # sibling parse_always_fel_sheet(), which already labels its releases
+    # correctly. A release whose own label is "Unknown" lets merge_releases'
+    # provenance fallback pull in a *different* source's label later,
+    # producing a source_label that names the wrong provider for this URL.
+    csv_text = """Title,DV Source
+Specific Movie 2020,BD FEL
+"""
+
+    releases = parse_google_sheet_releases(csv_text, "https://docs.example.test/sheet")
+
+    assert releases[0].source_label == "google-sheet"
