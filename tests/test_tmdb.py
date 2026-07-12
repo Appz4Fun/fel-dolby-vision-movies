@@ -1,9 +1,13 @@
 from pathlib import Path
 
+import httpx
 import pytest
 
+import tmdb
 from tmdb import (
+    TmdbResolver,
     _best_tmdb_candidate,
+    _has_audience_engagement,
     load_tmdb_api_key,
 )
 
@@ -82,6 +86,112 @@ def test_best_tmdb_candidate_uses_popularity_for_equal_alias_scores():
 
     assert candidate is not None
     assert candidate["id"] == 293670
+
+
+def test_has_audience_engagement_rejects_zero_vote_posterless_candidate():
+    assert (
+        _has_audience_engagement({"id": 1, "vote_count": 0, "poster_path": None})
+        is False
+    )
+    assert _has_audience_engagement({"id": 1}) is False
+
+
+def test_has_audience_engagement_accepts_any_votes_or_poster():
+    assert (
+        _has_audience_engagement({"id": 1, "vote_count": 3, "poster_path": None})
+        is True
+    )
+    assert (
+        _has_audience_engagement(
+            {"id": 1, "vote_count": 0, "poster_path": "/poster.jpg"}
+        )
+        is True
+    )
+
+
+def test_resolver_rejects_title_year_match_with_no_audience_engagement(
+    monkeypatch, tmp_path: Path
+):
+    """Regression test for a title-only, imdb-less FEL sighting mismatching.
+
+    A bare "Obsession [2025]" reddit-list mention previously resolved to
+    TMDB id 1436161: an 18-minute, $1,000-budget short film with zero votes
+    and no poster that happens to share both the exact title and release
+    year of the query. Such a candidate is far too obscure to plausibly be
+    the subject of a Dolby Vision FEL Blu-ray release, so the resolver must
+    not confidently match it just because the text and year line up.
+    """
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            if request.url.params.get("year") == "2025":
+                return httpx.Response(
+                    200,
+                    json={
+                        "results": [
+                            {
+                                "id": 1436161,
+                                "title": "Obsession",
+                                "original_title": "Obsession",
+                                "release_date": "2025-03-28",
+                                "popularity": 0.6,
+                                "vote_count": 0,
+                                "poster_path": None,
+                            }
+                        ]
+                    },
+                )
+            return httpx.Response(200, json={"results": []})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    result = resolver.resolve("Obsession", "2025")
+
+    assert result is None
+
+
+def test_resolver_accepts_title_year_match_with_at_least_one_vote(
+    monkeypatch, tmp_path: Path
+):
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 42,
+                            "title": "Obsession",
+                            "original_title": "Obsession",
+                            "release_date": "2025-03-28",
+                            "popularity": 1.2,
+                            "vote_count": 3,
+                            "poster_path": None,
+                        }
+                    ]
+                },
+            )
+        if request.url.path.endswith("/external_ids"):
+            return httpx.Response(200, json={"imdb_id": "tt9999999"})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    result = resolver.resolve("Obsession", "2025")
+
+    assert result is not None
+    assert result.tmdb_id == "42"
+    assert result.imdb_id == "tt9999999"
 
 
 def test_load_tmdb_api_key_reads_dotenv_without_printing_secret(tmp_path: Path):
