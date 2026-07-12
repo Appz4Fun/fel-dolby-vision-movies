@@ -1050,6 +1050,8 @@ def _candidates_from_payload(
         title_value = item.get("title")
         year_value = item.get("year", "Unknown")
         evidence_value = item.get("evidence", "")
+        if isinstance(year_value, int) and not isinstance(year_value, bool):
+            year_value = str(year_value)
         if not all(
             isinstance(value, str)
             for value in (title_value, year_value, evidence_value)
