@@ -39,8 +39,10 @@ __all__ = [
 ]
 
 TMDB_DETAIL_URL = "https://api.themoviedb.org/3/movie/{tmdb_id}"
+TMDB_TV_DETAIL_URL = "https://api.themoviedb.org/3/tv/{tmdb_id}"
 TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w185"
 TMDB_MOVIE_PAGE = "https://www.themoviedb.org/movie/{tmdb_id}"
+TMDB_TV_PAGE = "https://www.themoviedb.org/tv/{tmdb_id}"
 IMDB_TITLE_PAGE = "https://www.imdb.com/title/{imdb_id}/"
 DEFAULT_POSTER_DIR = Path("data/posters")
 
@@ -176,9 +178,10 @@ def _record_tmdb_title_pair(release: FelRelease, movie: TmdbMovie) -> None:
     )
 
 
-def release_url_for(tmdb_id: str, imdb_id: str) -> str:
+def release_url_for(tmdb_id: str, imdb_id: str, media_type: str = "movie") -> str:
     if tmdb_id:
-        return TMDB_MOVIE_PAGE.format(tmdb_id=tmdb_id)
+        page = TMDB_TV_PAGE if media_type == "tv" else TMDB_MOVIE_PAGE
+        return page.format(tmdb_id=tmdb_id)
     if imdb_id:
         return IMDB_TITLE_PAGE.format(imdb_id=imdb_id)
     return ""
@@ -232,20 +235,30 @@ def _get_with_retry(client: httpx.Client, url: str, **kwargs: object) -> httpx.R
 
 
 def fetch_tmdb_details(
-    client: httpx.Client, api_key: str, tmdb_id: str
+    client: httpx.Client, api_key: str, tmdb_id: str, media_type: str = "movie"
 ) -> dict[str, str]:
+    # TMDB movie and TV ids are separate namespaces: fetching /3/movie/{id}
+    # for a TV id would not 404 but could return a real, unrelated film, so
+    # TV matches must hit the TV detail endpoint.
+    detail_url = TMDB_TV_DETAIL_URL if media_type == "tv" else TMDB_DETAIL_URL
     response = _get_with_retry(
-        client, TMDB_DETAIL_URL.format(tmdb_id=tmdb_id), params={"api_key": api_key}
+        client, detail_url.format(tmdb_id=tmdb_id), params={"api_key": api_key}
     )
     data = response.json()
     companies = data.get("production_companies") or []
+    if media_type == "tv":
+        # The broadcaster is what disc packaging (and the catalog) treats as
+        # the studio for series releases -- "HBO", not the production shop.
+        companies = data.get("networks") or companies
     studio = ""
     if companies and companies[0].get("name"):
         studio = str(companies[0]["name"])
     return {
         "poster_path": str(data.get("poster_path") or ""),
         "studio": studio,
-        "release_date": str(data.get("release_date") or ""),
+        "release_date": str(
+            data.get("release_date") or data.get("first_air_date") or ""
+        ),
     }
 
 
@@ -313,10 +326,14 @@ def enrich_releases(
                 release.movie_title = movie.title
             release.tmdb_id = movie.tmdb_id
             release.imdb_id = movie.imdb_id
-            release.release_url = release_url_for(movie.tmdb_id, movie.imdb_id)
+            release.release_url = release_url_for(
+                movie.tmdb_id, movie.imdb_id, movie.media_type
+            )
             _record_tmdb_title_pair(release, movie)
             try:
-                details = fetch_tmdb_details(client, api_key, movie.tmdb_id)
+                details = fetch_tmdb_details(
+                    client, api_key, movie.tmdb_id, movie.media_type
+                )
                 if details["studio"] and release.studio in ("", UNKNOWN):
                     release.studio = details["studio"]
                 # Only adopt TMDB's full date when its year matches the year that
@@ -330,7 +347,15 @@ def enrich_releases(
                 ):
                     release.release_date = details["release_date"]
                 if details["poster_path"]:
-                    dest = poster_dir / f"{movie.tmdb_id}.jpg"
+                    # TV ids live in their own namespace, so a bare
+                    # "{tmdb_id}.jpg" could collide with a same-numbered
+                    # movie's poster.
+                    stem = (
+                        f"tv-{movie.tmdb_id}"
+                        if movie.media_type == "tv"
+                        else movie.tmdb_id
+                    )
+                    dest = poster_dir / f"{stem}.jpg"
                     if download_poster(client, details["poster_path"], dest):
                         downloaded += 1
                     release.poster_path = str(dest)

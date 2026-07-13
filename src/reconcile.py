@@ -9,7 +9,9 @@ from merge import (
     canonical_title_key,
     canonical_url_key,
     dedupe_tmdb_release_groups,
+    has_season_descriptor,
     merge_releases,
+    season_identity,
 )
 from models import FelRelease
 
@@ -137,7 +139,7 @@ def _match_by_strong_signals(
         for index, release in enumerate(catalog)
         if candidate_url and canonical_url_key(release.bluray_url) == candidate_url
     ]
-    tmdb_matches = _id_matches(candidate.tmdb_id, "tmdb_id", catalog)
+    tmdb_matches = _tmdb_id_matches(candidate, catalog)
     imdb_matches = _id_matches(candidate.imdb_id, "imdb_id", catalog)
     signal_matches = [
         matches for matches in (url_matches, tmdb_matches, imdb_matches) if matches
@@ -160,6 +162,14 @@ def _match_by_strong_signals(
     ]
     if not consistent_matches:
         return _review_decision("identity-conflict", catalog, target_matches)
+    consistent_matches = _without_series_id_conflicts(
+        candidate, catalog, consistent_matches
+    )
+    if not consistent_matches:
+        # Every id hit is a different season of the same series (a catalog
+        # already holding several seasons matches them all); the new season
+        # is fresh evidence to append, not an ambiguity to review.
+        return _MatchDecision()
     if len(consistent_matches) == 1:
         return _target_decision(candidate, catalog, consistent_matches[0])
 
@@ -225,6 +235,10 @@ def _target_decision(
     target = catalog[index]
     if not _ids_are_consistent(candidate, target):
         return _review_decision("identity-conflict", catalog, [index])
+    # Season-conflict targets never reach here: _match_by_strong_signals
+    # filters them out via _without_series_id_conflicts, and every other
+    # caller matches on equal titles or a shared disc URL, where
+    # _series_id_edition_conflict is False by construction.
     if _has_distinct_url(candidate, target) and not _same_release_despite_distinct_urls(
         candidate, target
     ):
@@ -232,6 +246,50 @@ def _target_decision(
             return _MatchDecision()
         return _review_decision("ambiguous-edition", catalog, [index])
     return _MatchDecision(index=index)
+
+
+def _series_id_edition_conflict(candidate: FelRelease, target: FelRelease) -> bool:
+    """Report whether shared strong ids prove only a shared series, not a disc."""
+    # Every season disc of a show resolves to the same series-level TMDB and
+    # IMDb ids, so a strong-id hit between two rows that both carry season
+    # descriptors but name different seasons ("The Complete First Season"
+    # vs "The Complete Second Season") is not evidence of the same physical
+    # release -- folding them would silently swallow a new season into an
+    # older one. Only *season* labels count: movie-edition wording ("Part
+    # One" vs "Part 1") shares release-level ids, and blocking those would
+    # leave duplicate rows for one film. A shared blu-ray.com page overrides
+    # the stop signal: one disc page is one release no matter how the source
+    # spelled the descriptor.
+    candidate_url = canonical_url_key(candidate.bluray_url)
+    if candidate_url and candidate_url == canonical_url_key(target.bluray_url):
+        return False
+    if canonical_title_key(candidate.movie_title) == canonical_title_key(
+        target.movie_title
+    ):
+        return False
+    if not (
+        has_season_descriptor(candidate.movie_title)
+        and has_season_descriptor(target.movie_title)
+    ):
+        return False
+    # Two spellings of one season ("The Complete First Season" vs
+    # "Season 1") or of one complete-series box name the same physical
+    # release and may fold; an unparseable label ("The Complete Final
+    # Season", a "Seasons 1-3" range) stays a conservative conflict.
+    left_identity = season_identity(candidate.movie_title)
+    right_identity = season_identity(target.movie_title)
+    return left_identity is None or left_identity != right_identity
+
+
+def _without_series_id_conflicts(
+    candidate: FelRelease, catalog: list[FelRelease], matches: list[int]
+) -> list[int]:
+    """Drop id hits that only prove a shared series (other seasons' rows)."""
+    return [
+        index
+        for index in matches
+        if not _series_id_edition_conflict(candidate, catalog[index])
+    ]
 
 
 def _same_release_despite_distinct_urls(
@@ -276,6 +334,45 @@ def _id_matches(
     ]
 
 
+def _tmdb_id_matches(candidate: FelRelease, catalog: list[FelRelease]) -> list[int]:
+    """TMDB id matches within one media namespace."""
+    return [
+        index
+        for index in _id_matches(candidate.tmdb_id, "tmdb_id", catalog)
+        if not _same_tmdb_id_different_media(candidate, catalog[index])
+    ]
+
+
+def _same_tmdb_id_different_media(left: FelRelease, right: FelRelease) -> bool:
+    # TMDB movie and TV ids are independent sequences, so a /movie/ row and
+    # a /tv/ row sharing one numeric id name two unrelated works, never one
+    # identity -- even when title and year coincide too.
+    if not left.tmdb_id or left.tmdb_id != right.tmdb_id:
+        return False
+    return _effective_tmdb_kind(left) != _effective_tmdb_kind(right)
+
+
+_TMDB_TV_URL_MARKER = "themoviedb.org/tv/"
+_TMDB_MOVIE_URL_MARKER = "themoviedb.org/movie/"
+
+
+def _tmdb_media_kind(release: FelRelease) -> str:
+    url = release.release_url or ""
+    if _TMDB_TV_URL_MARKER in url:
+        return "tv"
+    if _TMDB_MOVIE_URL_MARKER in url:
+        return "movie"
+    return ""
+
+
+def _effective_tmdb_kind(release: FelRelease) -> str:
+    # Rows created before TV support existed (or added by hand) may lack a
+    # TMDB release URL, but every TV row enrichment creates carries /tv/ --
+    # so a row of unknown kind is a movie-era row, and a URL-less row must
+    # never bare-id-match a TV row (CodeRabbit's legacy-row scenario).
+    return _tmdb_media_kind(release) or "movie"
+
+
 def _match_sets_are_connected(match_sets: list[list[int]]) -> bool:
     component = set(match_sets[0])
     pending = [set(matches) for matches in match_sets[1:]]
@@ -290,6 +387,8 @@ def _match_sets_are_connected(match_sets: list[list[int]]) -> bool:
 
 
 def _ids_are_consistent(left: FelRelease, right: FelRelease) -> bool:
+    if _same_tmdb_id_different_media(left, right):
+        return False
     return all(
         not left_value or not right_value or left_value == right_value
         for left_value, right_value in (

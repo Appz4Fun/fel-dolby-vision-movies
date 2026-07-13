@@ -190,13 +190,21 @@ def fetch_list_imdb_ids(
 
 _IMDB_ID_RE = re.compile(r"^tt\d+$")
 
+# TV season rows carry the *series* IMDb id (a show id). This sync mirrors
+# the catalog through Trakt's movie-only endpoints, so posting a show id
+# under "movies" can never match: Trakt reports it not-found and the diff
+# would re-add it on every scheduled run forever. TV rows are identified by
+# the /tv/ release URL enrichment writes for them.
+_TV_RELEASE_URL_MARKER = "themoviedb.org/tv/"
+
 
 def extract_imdb_ids(releases: Iterable[dict]) -> tuple[list[str], list[str]]:
     valid: list[str] = []
     skipped: list[str] = []
     for release in releases:
         imdb_id = release.get("imdb_id")
-        if isinstance(imdb_id, str) and _IMDB_ID_RE.match(imdb_id):
+        is_tv = _TV_RELEASE_URL_MARKER in str(release.get("release_url") or "")
+        if not is_tv and isinstance(imdb_id, str) and _IMDB_ID_RE.match(imdb_id):
             valid.append(imdb_id)
         else:
             skipped.append(str(release.get("movie_title", "<unknown>")))

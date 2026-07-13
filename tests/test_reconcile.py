@@ -1136,3 +1136,238 @@ def test_reconcile_releases_does_not_mutate_caller_lists():
 
     assert existing == [base]
     assert incoming == [candidate]
+
+
+def test_new_season_with_shared_series_ids_stays_a_separate_row():
+    """Every season disc of a show resolves to the same series-level TMDB and
+    IMDb ids, so a strong-id hit between two differently-titled season rows
+    proves the *series*, not the disc. A newly scraped later season (no
+    blu-ray URL yet, as is typical for a fresh release) must be appended as
+    its own row, not folded into the only existing season of the show."""
+    first_season = release(
+        "Ahsoka: The Complete First Season",
+        "2023",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+        bluray_url="https://www.blu-ray.com/movies/Ahsoka-S1-4K-Blu-ray/1/",
+    )
+    second_season = release(
+        "Ahsoka: The Complete Second Season",
+        "2026",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+    )
+
+    result = reconcile_releases([first_season], [second_season])
+
+    assert result.releases == [first_season, second_season]
+    assert result.additions == [second_season]
+    assert result.merged_count == 0
+
+
+def test_retitled_season_row_with_same_disc_url_still_merges():
+    """A shared blu-ray.com page proves one physical disc regardless of how
+    the source spelled the season descriptor, so the series-id stop signal
+    must not keep URL-proven retitles apart."""
+    base = release(
+        "Ahsoka: The Complete First Season",
+        "2023",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+        bluray_url="https://www.blu-ray.com/movies/Ahsoka-S1-4K-Blu-ray/1/",
+    )
+    retitled = release(
+        "Ahsoka: Season 1",
+        "2023",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+        bluray_url="https://www.blu-ray.com/movies/Ahsoka-S1-4K-Blu-ray/1/",
+    )
+
+    result = reconcile_releases([base], [retitled])
+
+    assert result.merged_count == 1
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Ahsoka: The Complete First Season"
+
+
+def test_part_number_spelling_variant_with_shared_ids_still_merges():
+    """Movie-edition descriptor words ("Part One" vs "Part 1") must not trip
+    the series-id stop signal: only season/series descriptors mark rows whose
+    shared TMDB/IMDb ids prove a series rather than one release."""
+    base = release(
+        "Mission: Impossible - Dead Reckoning Part One",
+        "2023",
+        tmdb_id="575264",
+        imdb_id="tt9603212",
+        bluray_url="https://www.blu-ray.com/movies/MI-DR-4K-Blu-ray/1/",
+    )
+    variant = release(
+        "Mission: Impossible - Dead Reckoning Part 1",
+        "2023",
+        tmdb_id="575264",
+        imdb_id="tt9603212",
+    )
+
+    result = reconcile_releases([base], [variant])
+
+    assert result.merged_count == 1
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == (
+        "Mission: Impossible - Dead Reckoning Part One"
+    )
+
+
+def test_tv_series_id_does_not_match_same_numbered_movie_id():
+    """TMDB movie and TV ids are separate namespaces, so a bare numeric
+    tmdb_id match between a /movie/ row and a /tv/ row is a coincidence,
+    not an identity signal: the TV season row must be appended, never
+    folded into the same-numbered movie."""
+    movie = release(
+        "Some Unrelated Film",
+        "1974",
+        tmdb_id="1399",
+        release_url="https://www.themoviedb.org/movie/1399",
+    )
+    tv_season = release(
+        "Game of Thrones: The Complete First Season",
+        "2011",
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+        release_url="https://www.themoviedb.org/tv/1399",
+    )
+
+    result = reconcile_releases([movie], [tv_season])
+
+    assert result.releases == [movie, tv_season]
+    assert result.additions == [tv_season]
+    assert result.merged_count == 0
+
+
+def test_same_season_title_variants_merge_without_disc_urls():
+    """Two spellings of the *same* season ("The Complete First Season" vs
+    "Season 1") with shared series ids name one physical release, so the
+    series-id stop signal must let them fold even before Blu-ray enrichment
+    provides a shared disc URL."""
+    base = release(
+        "Ahsoka: The Complete First Season",
+        "2023",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+    )
+    variant = release(
+        "Ahsoka: Season 1",
+        "2023",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+    )
+
+    result = reconcile_releases([base], [variant])
+
+    assert result.merged_count == 1
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Ahsoka: The Complete First Season"
+
+
+def test_new_season_appends_when_catalog_has_multiple_seasons():
+    """A GoT-style catalog already holds several seasons sharing one series
+    id; a freshly scraped later season (no Blu-ray URL yet) hits every one
+    of them as a strong-id match. That multi-match must not be routed to
+    ambiguous-edition review -- the season stop signal applies first and the
+    new season is appended as its own row."""
+    first = release(
+        "Game of Thrones: The Complete First Season",
+        "2011",
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+        bluray_url="https://www.blu-ray.com/movies/GoT-S1-4K-Blu-ray/1/",
+    )
+    second = release(
+        "Game of Thrones: The Complete Second Season",
+        "2012",
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+        bluray_url="https://www.blu-ray.com/movies/GoT-S2-4K-Blu-ray/2/",
+    )
+    third = release(
+        "Game of Thrones: The Complete Third Season",
+        "2013",
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+    )
+
+    result = reconcile_releases([first, second], [third])
+
+    assert result.releases == [first, second, third]
+    assert result.additions == [third]
+    assert result.merged_count == 0
+    assert result.review_items == []
+
+
+def test_tv_row_never_folds_into_urlless_row_with_same_numeric_id():
+    """A row whose media kind is unknown (no TMDB release URL) cannot prove
+    identity by bare number: TMDB movie and TV ids are separate sequences,
+    so a /tv/ candidate must not fold into a URL-less row that happens to
+    carry the same numeric id. Same-film rows still fold via title+year."""
+    legacy = release("Some Unrelated Film", "1974", tmdb_id="1399")
+    tv_season = release(
+        "Game of Thrones: The Complete First Season",
+        "2011",
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+        release_url="https://www.themoviedb.org/tv/1399",
+    )
+
+    result = reconcile_releases([legacy], [tv_season])
+
+    assert result.releases == [legacy, tv_season]
+    assert result.additions == [tv_season]
+    assert result.merged_count == 0
+
+
+def test_same_title_year_cross_namespace_ids_go_to_review():
+    """Even when a /movie/ row and a /tv/ row share the title, year, and a
+    coincidental numeric TMDB id, they name two different works: the
+    consistency check must flag the pair for review instead of merging."""
+    movie = release(
+        "Heat",
+        "1995",
+        tmdb_id="949",
+        release_url="https://www.themoviedb.org/movie/949",
+    )
+    tv = release(
+        "Heat",
+        "1995",
+        tmdb_id="949",
+        release_url="https://www.themoviedb.org/tv/949",
+    )
+
+    result = reconcile_releases([movie], [tv])
+
+    assert result.merged_count == 0
+    assert len(result.review_items) == 1
+    assert result.review_items[0].reason == "identity-conflict"
+
+
+def test_complete_series_spelling_variants_merge_without_disc_urls():
+    """ "Complete Series" and "The Complete Series" name the same box, so two
+    such rows with shared series ids must fold like any other same-season
+    spelling variant instead of publishing a duplicate row."""
+    base = release(
+        "Chernobyl: The Complete Series",
+        "2019",
+        tmdb_id="87108",
+        imdb_id="tt7366338",
+    )
+    variant = release(
+        "Chernobyl: Complete Series",
+        "2019",
+        tmdb_id="87108",
+        imdb_id="tt7366338",
+    )
+
+    result = reconcile_releases([base], [variant])
+
+    assert result.merged_count == 1
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Chernobyl: The Complete Series"
