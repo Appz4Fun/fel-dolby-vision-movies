@@ -2180,7 +2180,7 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Ng poon",
+    "movie_title": "The Prosecutor",
     "fel_confirmed": true,
     "release_date": "2024-12-08",
     "studio": "Mandarin Motion Pictures",
@@ -14905,7 +14905,7 @@
     "collected_at": "2026-05-23T00:08:02+00:00"
   },
   {
-    "movie_title": "Divergente",
+    "movie_title": "Divergent",
     "fel_confirmed": true,
     "release_date": "2014-03-14",
     "studio": "Summit Entertainment",
@@ -17238,8 +17238,8 @@
   {
     "movie_title": "The Grey",
     "fel_confirmed": true,
-    "release_date": "2011-01-31",
-    "studio": "Unknown",
+    "release_date": "2012-01-26",
+    "studio": "Open Road Films",
     "audio_formats": [
       "DTS-HD MA 5.1",
       "DTS-HD MA 2.0"
@@ -17248,11 +17248,11 @@
     "additional_characteristics": {},
     "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/4/",
     "source_label": "letterboxd",
-    "tmdb_id": "120881",
+    "tmdb_id": "75174",
     "media_type": "movie",
-    "imdb_id": "tt1808076",
-    "poster_path": "data/posters/120881.jpg",
-    "release_url": "https://www.themoviedb.org/movie/120881",
+    "imdb_id": "tt1601913",
+    "poster_path": "data/posters/75174.jpg",
+    "release_url": "https://www.themoviedb.org/movie/75174",
     "bluray_url": "https://www.blu-ray.com/movies/The-Grey-4K-Blu-ray/397991/",
     "bluray_release_date": "2025-12-09",
     "hdr_formats": [
@@ -38316,7 +38316,7 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Kaseki no kouya",
+    "movie_title": "Fossilized Wilderness",
     "fel_confirmed": true,
     "release_date": "1982-04-17",
     "studio": "KADOKAWA",
