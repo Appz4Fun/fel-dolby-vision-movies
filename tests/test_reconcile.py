@@ -1136,3 +1136,56 @@ def test_reconcile_releases_does_not_mutate_caller_lists():
 
     assert existing == [base]
     assert incoming == [candidate]
+
+
+def test_new_season_with_shared_series_ids_stays_a_separate_row():
+    """Every season disc of a show resolves to the same series-level TMDB and
+    IMDb ids, so a strong-id hit between two differently-titled season rows
+    proves the *series*, not the disc. A newly scraped later season (no
+    blu-ray URL yet, as is typical for a fresh release) must be appended as
+    its own row, not folded into the only existing season of the show."""
+    first_season = release(
+        "Ahsoka: The Complete First Season",
+        "2023",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+        bluray_url="https://www.blu-ray.com/movies/Ahsoka-S1-4K-Blu-ray/1/",
+    )
+    second_season = release(
+        "Ahsoka: The Complete Second Season",
+        "2026",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+    )
+
+    result = reconcile_releases([first_season], [second_season])
+
+    assert result.releases == [first_season, second_season]
+    assert result.additions == [second_season]
+    assert result.merged_count == 0
+
+
+def test_retitled_season_row_with_same_disc_url_still_merges():
+    """A shared blu-ray.com page proves one physical disc regardless of how
+    the source spelled the season descriptor, so the series-id stop signal
+    must not keep URL-proven retitles apart."""
+    base = release(
+        "Ahsoka: The Complete First Season",
+        "2023",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+        bluray_url="https://www.blu-ray.com/movies/Ahsoka-S1-4K-Blu-ray/1/",
+    )
+    retitled = release(
+        "Ahsoka: Season 1",
+        "2023",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+        bluray_url="https://www.blu-ray.com/movies/Ahsoka-S1-4K-Blu-ray/1/",
+    )
+
+    result = reconcile_releases([base], [retitled])
+
+    assert result.merged_count == 1
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Ahsoka: The Complete First Season"

@@ -9,6 +9,7 @@ from merge import (
     canonical_title_key,
     canonical_url_key,
     dedupe_tmdb_release_groups,
+    has_edition_descriptor,
     merge_releases,
 )
 from models import FelRelease
@@ -225,6 +226,8 @@ def _target_decision(
     target = catalog[index]
     if not _ids_are_consistent(candidate, target):
         return _review_decision("identity-conflict", catalog, [index])
+    if _series_id_edition_conflict(candidate, target):
+        return _MatchDecision()
     if _has_distinct_url(candidate, target) and not _same_release_despite_distinct_urls(
         candidate, target
     ):
@@ -232,6 +235,29 @@ def _target_decision(
             return _MatchDecision()
         return _review_decision("ambiguous-edition", catalog, [index])
     return _MatchDecision(index=index)
+
+
+def _series_id_edition_conflict(candidate: FelRelease, target: FelRelease) -> bool:
+    """Shared ids between differently-titled edition rows prove the series.
+
+    Every season disc of a show resolves to the same series-level TMDB and
+    IMDb ids, so a strong-id hit between two rows that both carry edition
+    descriptors but name different editions ("The Complete First Season" vs
+    "The Complete Second Season") is not evidence of the same physical
+    release -- folding them would silently swallow a new season into an
+    older one. A shared blu-ray.com page overrides the stop signal: one disc
+    page is one release no matter how the source spelled the descriptor.
+    """
+    candidate_url = canonical_url_key(candidate.bluray_url)
+    if candidate_url and candidate_url == canonical_url_key(target.bluray_url):
+        return False
+    if canonical_title_key(candidate.movie_title) == canonical_title_key(
+        target.movie_title
+    ):
+        return False
+    return has_edition_descriptor(candidate.movie_title) and has_edition_descriptor(
+        target.movie_title
+    )
 
 
 def _same_release_despite_distinct_urls(

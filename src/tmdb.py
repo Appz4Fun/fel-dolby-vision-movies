@@ -176,15 +176,20 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         # a same-named series. The search is deliberately not pinned with
         # first_air_date_year: a season disc's year is the season's, not the
         # series premiere's (Mandalorian S3 is 2023, first_air_date 2019),
-        # so pinning would exclude the right series from the result set. The
-        # scorer still sees the query year -- an exact-name match absorbs
-        # the drift penalty, while the year-match bonus disambiguates
-        # same-named original/reboot series pairs.
+        # so pinning would exclude the right series from the result set.
+        # Only a *first*-season disc's year approximates a premiere year, so
+        # only first seasons keep the year in scoring, where the year-match
+        # bonus disambiguates same-named original/reboot series pairs. For
+        # later seasons the row year says nothing about any premiere -- a
+        # premiere-year coincidence must not hand the disc to a same-named
+        # reboot over the far-more-engaged right series, so they score
+        # yearless and engagement decides.
         series_title = _series_title_from_season_descriptor(title)
         if not series_title:
             return None
         candidates = self._fetch_tv_candidates(series_title)
-        best = _best_tmdb_candidate(series_title, year, candidates)
+        query_year = year if _is_first_season_title(title) else ""
+        best = _best_tmdb_candidate(series_title, query_year, candidates)
         if best is None:
             return None
         return self._tv_movie_from_candidate(best, series_title, year)
@@ -259,9 +264,12 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
 # descriptor is stripped before querying /3/search/tv; a title that is
 # nothing but a descriptor leaves no series name worth searching for.
 _SEASON_DESCRIPTOR_RE = re.compile(
-    r"\s*[:\-–—]?\s*(?:the\s+complete\s+\w+\s+season|season\s+\d+)\s*$",
+    r"\s*[:\-–—]?\s*"
+    r"(?:the\s+complete\s+(?P<ordinal>\w+)\s+season|season\s+(?P<number>\d+))\s*$",
     re.IGNORECASE,
 )
+
+_FIRST_SEASON_TOKENS = frozenset({"first", "1st", "1"})
 
 
 def _series_title_from_season_descriptor(title: str) -> str:
@@ -269,6 +277,15 @@ def _series_title_from_season_descriptor(title: str) -> str:
     if not _SEASON_DESCRIPTOR_RE.search(title or ""):
         return ""
     return _SEASON_DESCRIPTOR_RE.sub("", title).strip()
+
+
+def _is_first_season_title(title: str) -> bool:
+    """True only when the season descriptor names the first season."""
+    match = _SEASON_DESCRIPTOR_RE.search(title or "")
+    if match is None:
+        return False
+    token = (match.group("ordinal") or match.group("number") or "").casefold()
+    return token in _FIRST_SEASON_TOKENS
 
 
 def _tv_candidate_as_movie(candidate: dict[str, Any]) -> dict[str, Any]:

@@ -771,6 +771,17 @@ def test_series_title_from_season_descriptor_rejects_non_season_titles():
     assert tmdb._series_title_from_season_descriptor("") == ""
 
 
+def test_is_first_season_title_detects_only_first_seasons():
+    assert tmdb._is_first_season_title("Ahsoka: The Complete First Season") is True
+    assert tmdb._is_first_season_title("Andor: Season 1") is True
+    assert (
+        tmdb._is_first_season_title("The Mandalorian: The Complete Third Season")
+        is False
+    )
+    assert tmdb._is_first_season_title("Andor: Season 2") is False
+    assert tmdb._is_first_season_title("Oppenheimer") is False
+
+
 def test_tv_candidate_as_movie_maps_tv_fields_onto_movie_keys():
     mapped = tmdb._tv_candidate_as_movie(
         {
@@ -943,6 +954,58 @@ def test_resolver_tv_fallback_prefers_year_matching_series_on_name_collision(
 
     assert result is not None
     assert result.tmdb_id == "2"
+
+
+def test_resolver_tv_fallback_ignores_year_for_later_season_titles(
+    monkeypatch, tmp_path: Path
+):
+    """For a later-season disc the row year says nothing about any series
+    premiere ("Season 5" of a 1959 original airs decades after 1959), so a
+    premiere-year coincidence must not hand the disc to a same-named reboot
+    over the far-more-engaged original: later seasons score yearless and let
+    engagement decide, exactly like every other popularity-decided collision."""
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(200, json={"results": []})
+        if request.url.path == "/3/search/tv":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 1,
+                            "name": "Reboot Show",
+                            "original_name": "Reboot Show",
+                            "first_air_date": "1959-10-02",
+                            "vote_count": 2000,
+                            "poster_path": "/original.jpg",
+                        },
+                        {
+                            "id": 2,
+                            "name": "Reboot Show",
+                            "original_name": "Reboot Show",
+                            "first_air_date": "2019-04-01",
+                            "vote_count": 500,
+                            "poster_path": "/reboot.jpg",
+                        },
+                    ]
+                },
+            )
+        if request.url.path == "/3/tv/1/external_ids":
+            return httpx.Response(200, json={"imdb_id": "tt0052520"})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    result = resolver.resolve("Reboot Show: The Complete Fifth Season", "2019")
+
+    assert result is not None
+    assert result.tmdb_id == "1"
 
 
 def test_resolver_does_not_tv_search_titles_without_season_descriptor(

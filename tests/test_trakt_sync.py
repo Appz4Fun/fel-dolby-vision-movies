@@ -825,3 +825,28 @@ def test_fetch_list_imdb_ids_fails_closed_at_max_pages(monkeypatch):
 
     # Loop must stop at the cap — no extra requests beyond MAX_LIST_FETCH_PAGES.
     assert requested_pages == ["1", "2", "3"]
+
+
+def test_extract_imdb_ids_skips_tv_series_rows():
+    """A TV season row carries the *series* IMDb id (a show id). The Trakt
+    sync mirrors the catalog through movie-only endpoints, so posting a show
+    id under "movies" can never match -- Trakt reports it not-found and the
+    diff would re-add it on every scheduled run forever. TV rows are
+    identified by their /tv/ release URL and skipped."""
+    releases = [
+        {
+            "movie_title": "Fight Club",
+            "imdb_id": "tt0137523",
+            "release_url": "https://www.themoviedb.org/movie/550",
+        },
+        {
+            "movie_title": "Game of Thrones: The Complete Eighth Season",
+            "imdb_id": "tt0944947",
+            "release_url": "https://www.themoviedb.org/tv/1399",
+        },
+    ]
+
+    valid, skipped = trakt_sync.extract_imdb_ids(releases)
+
+    assert valid == ["tt0137523"]
+    assert skipped == ["Game of Thrones: The Complete Eighth Season"]
