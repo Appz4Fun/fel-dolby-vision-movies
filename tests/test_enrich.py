@@ -379,6 +379,13 @@ def test_lookup_aliases_cover_known_fel_list_romanizations():
         # year while TMDB dates it 1983; the 1982 search once matched the
         # Italian comedy "Vigili e vigilesse" (TMDB 306529) instead.
         ("Vigilante", "1982"): ("Vigilante", "1983"),
+        # Letterboxd's "The Grey (2011)" labels the film by its festival year
+        # while TMDB dates it 2012; the 2011 search matched the five-vote
+        # "Documenting the Grey Man" (TMDB 120881) instead.
+        ("The Grey", "2011"): ("The Grey", "2012"),
+        # The google sheet titles Divergent in Spanish; an unpinned search
+        # matches an unrelated same-titled documentary (TMDB 1190479).
+        ("Divergente", "2014"): ("Divergent", "2014"),
     }
     for (source_title, source_year), (title, year) in cases.items():
         candidate = enrich._lookup_candidates(source_title, source_year)[0]

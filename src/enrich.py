@@ -130,6 +130,13 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
     ("brick", "2005"): _LookupCandidate("Brick", "2006"),
     ("the witch", "2015"): _LookupCandidate("The Witch", "2016"),
     ("vigilante", "1982"): _LookupCandidate("Vigilante", "1983"),
+    # Letterboxd's "The Grey (2011)" -> "Documenting the Grey Man" (TMDB
+    # 120881, five votes); the real film's TMDB primary release year is 2012.
+    ("the grey", "2011"): _LookupCandidate("The Grey", "2012"),
+    # The google sheet titles Divergent in Spanish ("Divergente 2014"); an
+    # unpinned search matches an unrelated same-titled documentary (TMDB
+    # 1190479) instead of the film the catalog already carries (TMDB 157350).
+    ("divergente", "2014"): _LookupCandidate("Divergent", "2014"),
     # FEL.txt spells the same Brick disc "Brick Vision (2005)", which an
     # unpinned search resolves to the zero-vote short of that exact name
     # (TMDB 345308) instead of the film the disc actually is.
