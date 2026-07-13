@@ -77,12 +77,12 @@ updating the symlink.
   `imdb_id`, `poster_path`, `release_url`, `bluray_url`,
   `bluray_release_date`, `hdr_formats`, and `audio_languages`.
 - `tmdb_id` is only meaningful together with `media_type` ("movie" or
-  "tv"): TMDB (The Movie Database) movie and TV ids are independent
-  numeric sequences, so identity comparisons use the namespaced pair
-  (see `FelRelease.tmdb_identity`) rather than the bare numeric id.
-  Comparing bare ids is safe only when both rows are already known to
-  share one namespace. Rows without a `media_type` predate TV support
-  and load as movies.
+  "tv"): TMDB (The Movie Database) assigns movie and television ids
+  from independent numeric sequences, so identity comparisons use the
+  namespaced pair (see `FelRelease.tmdb_identity`) rather than the bare
+  numeric id. Comparing bare ids is safe only when both rows are
+  already known to share one namespace. Rows without a `media_type`
+  predate television support and load as movies.
 - Sort published release tables by release date, newest first.
 - Exclude release groups from user-facing outputs unless a later spec
   explicitly adds them.
