@@ -335,7 +335,10 @@ def _tv_candidate_as_movie(candidate: dict[str, Any]) -> dict[str, Any]:
 # without this a match this exact commit fixes (like "Sisu" resolving to
 # the unrelated "Scrapper") would keep being served from cache forever
 # instead of being re-scored under the corrected logic.
-_SCORER_VERSION = "4"
+# v5: season titles became TV-only (v4 could still resolve them through
+# the movie-first path) and compact/word-number/complete-series descriptors
+# were added, so v4 records are stale under the current semantics.
+_SCORER_VERSION = "5"
 
 
 def _is_legacy_cache_record(value: object) -> bool:

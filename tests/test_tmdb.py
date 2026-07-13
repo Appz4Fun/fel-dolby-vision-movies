@@ -1355,3 +1355,63 @@ def test_resolver_refetches_cache_records_from_a_stale_scorer_version(tmp_path):
     cached = json.loads(cache_path.read_text(encoding="utf-8"))
     assert cached["Sisu\x002023"]["scorer_version"] == tmdb._SCORER_VERSION
     client.close()
+
+
+def test_resolver_refetches_v4_records_predating_tv_only_resolution(tmp_path):
+    """Scorer v4 was stamped before season titles became TV-only (they could
+    still resolve through the movie-first path) and before compact/word/
+    complete-series descriptors were parsed, so v4 records -- like a film id
+    cached for "Andor: Season 2" -- must be re-fetched, not served from a
+    persistent runner cache under the new semantics."""
+    cache_path = tmp_path / "tmdb_cache.json"
+    cache_path.write_text(
+        json.dumps(
+            {
+                "Andor: Season 2\x002022": {
+                    "tmdb_id": "901",
+                    "title": "Andor",
+                    "year": "2022",
+                    "imdb_id": "tt0000901",
+                    "original_title": "Andor",
+                    "media_type": "movie",
+                    "scorer_version": "4",
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    requests: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requests.append(request.url.path)
+        if request.url.path == "/3/search/tv":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 83867,
+                            "name": "Andor",
+                            "original_name": "Andor",
+                            "first_air_date": "2022-09-21",
+                            "vote_count": 900,
+                            "poster_path": "/andor.jpg",
+                        }
+                    ]
+                },
+            )
+        if request.url.path == "/3/tv/83867/external_ids":
+            return httpx.Response(200, json={"imdb_id": "tt9253284"})
+        return httpx.Response(404)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    with TmdbResolver(
+        "key", cache_path=cache_path, client=client, delay_seconds=0
+    ) as resolver:
+        movie = resolver.resolve("Andor: Season 2", "2022")
+
+    assert requests, "v4 record must be re-fetched under post-v4 semantics"
+    assert movie is not None
+    assert movie.tmdb_id == "83867"
+    assert movie.media_type == "tv"
+    client.close()

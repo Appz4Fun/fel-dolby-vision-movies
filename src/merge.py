@@ -68,15 +68,19 @@ _SEASON_LABEL_RE = re.compile(
     rf"|complete\s+series)\b",
     re.IGNORECASE,
 )
-# The negative lookahead keeps multi-season ranges ("Seasons 1-3") from
-# parsing as season 1: a range names a box set, not one season, so its
-# number stays None and id-sharing rows keep the conservative stop signal.
+# The negative lookahead keeps multi-season ranges -- digit ("Seasons
+# 1-3") or word-number ("Seasons One-Three") endpoints alike -- from
+# parsing as their first season: a range names a box set, not one season,
+# so its number stays None and id-sharing rows keep the conservative stop
+# signal.
 _SEASON_NUMBER_RE = re.compile(
     rf"\b(?:the\s+complete\s+(?P<ordinal>\w+)\s+seasons?"
-    rf"|seasons?\s+(?P<number>\d+|{_SEASON_NUMBER_WORDS})(?!\s*[-–—&]\s*\d)"
+    rf"|seasons?\s+(?P<number>\d+|{_SEASON_NUMBER_WORDS})"
+    rf"(?!\s*[-–—&]\s*(?:\d|(?:{_SEASON_NUMBER_WORDS})\b))"
     rf"|s0*(?P<compact>[1-9]\d*))\b",
     re.IGNORECASE,
 )
+_COMPLETE_SERIES_RE = re.compile(r"\b(?:the\s+)?complete\s+series\b", re.IGNORECASE)
 _SEASON_WORD_NUMBERS = {
     "first": 1,
     "second": 2,
@@ -120,6 +124,21 @@ def season_number(title: str) -> int | None:
     if ordinal_digits:
         return int(ordinal_digits.group(1))
     return _SEASON_WORD_NUMBERS.get(token)
+
+
+def season_identity(title: str) -> str | None:
+    """Comparable identity of a season label: "1", "2", ... or "series".
+
+    "Complete Series" and "The Complete Series" name the same box, so both
+    map to "series" rather than splitting on spelling. Unnumbered labels
+    ("The Complete Final Season") and multi-season ranges stay None.
+    """
+    number = season_number(title)
+    if number is not None:
+        return str(number)
+    if _COMPLETE_SERIES_RE.search(title or ""):
+        return "series"
+    return None
 
 
 def canonical_title_key(value: str) -> str:

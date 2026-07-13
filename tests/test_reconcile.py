@@ -1347,3 +1347,27 @@ def test_same_title_year_cross_namespace_ids_go_to_review():
     assert result.merged_count == 0
     assert len(result.review_items) == 1
     assert result.review_items[0].reason == "identity-conflict"
+
+
+def test_complete_series_spelling_variants_merge_without_disc_urls():
+    """ "Complete Series" and "The Complete Series" name the same box, so two
+    such rows with shared series ids must fold like any other same-season
+    spelling variant instead of publishing a duplicate row."""
+    base = release(
+        "Chernobyl: The Complete Series",
+        "2019",
+        tmdb_id="87108",
+        imdb_id="tt7366338",
+    )
+    variant = release(
+        "Chernobyl: Complete Series",
+        "2019",
+        tmdb_id="87108",
+        imdb_id="tt7366338",
+    )
+
+    result = reconcile_releases([base], [variant])
+
+    assert result.merged_count == 1
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Chernobyl: The Complete Series"

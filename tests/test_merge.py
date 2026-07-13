@@ -465,3 +465,23 @@ def test_has_season_descriptor_requires_a_season_label():
         merge.has_season_descriptor("Mission: Impossible - Dead Reckoning Part One")
         is False
     )
+
+
+def test_season_number_treats_word_number_ranges_as_ranges():
+    """A word-number range names a box set, not one season, exactly like a
+    digit range: parsing "Seasons One-Three" as season 1 would let the box
+    fold into a separate "Season One" row on shared series ids."""
+    assert merge.season_number("Show: Seasons One-Three") is None
+    assert merge.season_number("Show: Seasons One & Two") is None
+
+
+def test_season_identity_gives_complete_series_boxes_a_comparable_label():
+    assert merge.season_identity("Chernobyl: The Complete Series") == "series"
+    assert merge.season_identity("Chernobyl: Complete Series") == "series"
+    assert merge.season_identity("Andor: Season 2") == "2"
+    assert merge.season_identity("Ahsoka: The Complete First Season") == "1"
+    # Unnumbered and range labels stay None so id-sharing rows keep the
+    # conservative stop signal.
+    assert merge.season_identity("Attack on Titan: The Complete Final Season") is None
+    assert merge.season_identity("Show: Seasons 1-3") is None
+    assert merge.season_identity("Oppenheimer") is None

@@ -11,7 +11,7 @@ from merge import (
     dedupe_tmdb_release_groups,
     has_season_descriptor,
     merge_releases,
-    season_number,
+    season_identity,
 )
 from models import FelRelease
 
@@ -273,12 +273,12 @@ def _series_id_edition_conflict(candidate: FelRelease, target: FelRelease) -> bo
     ):
         return False
     # Two spellings of one season ("The Complete First Season" vs
-    # "Season 1") name the same physical release and may fold; an
-    # unparseable number ("The Complete Final Season", a "Seasons 1-3"
-    # range) stays a conservative conflict.
-    left_number = season_number(candidate.movie_title)
-    right_number = season_number(target.movie_title)
-    return left_number is None or left_number != right_number
+    # "Season 1") or of one complete-series box name the same physical
+    # release and may fold; an unparseable label ("The Complete Final
+    # Season", a "Seasons 1-3" range) stays a conservative conflict.
+    left_identity = season_identity(candidate.movie_title)
+    right_identity = season_identity(target.movie_title)
+    return left_identity is None or left_identity != right_identity
 
 
 def _without_series_id_conflicts(
