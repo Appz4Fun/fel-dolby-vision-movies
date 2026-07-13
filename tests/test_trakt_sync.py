@@ -832,21 +832,28 @@ def test_extract_imdb_ids_skips_tv_series_rows():
     sync mirrors the catalog through movie-only endpoints, so posting a show
     id under "movies" can never match -- Trakt reports it not-found and the
     diff would re-add it on every scheduled run forever. TV rows are
-    identified by their /tv/ release URL and skipped."""
+    identified by the persisted media_type field and skipped; no release
+    URL sniffing is involved, and legacy rows without the field stay
+    eligible movie rows."""
     releases = [
         {
             "movie_title": "Fight Club",
             "imdb_id": "tt0137523",
+            "media_type": "movie",
             "release_url": "https://www.themoviedb.org/movie/550",
         },
         {
             "movie_title": "Game of Thrones: The Complete Eighth Season",
             "imdb_id": "tt0944947",
-            "release_url": "https://www.themoviedb.org/tv/1399",
+            "media_type": "tv",
+        },
+        {
+            "movie_title": "Legacy Row Without Media Type",
+            "imdb_id": "tt0068646",
         },
     ]
 
     valid, skipped = trakt_sync.extract_imdb_ids(releases)
 
-    assert valid == ["tt0137523"]
+    assert valid == ["tt0137523", "tt0068646"]
     assert skipped == ["Game of Thrones: The Complete Eighth Season"]

@@ -43,20 +43,22 @@ class DuplicateReleaseError(ValueError):
 def find_duplicate_identity_rows(
     releases: list[FelRelease],
 ) -> list[tuple[str, str, str]]:
-    """Report (title, year, tmdb_id) for rows sharing one release identity."""
-    # Rows share an identity when their canonical title+year key and TMDB id
-    # both match (including two unresolved rows with no TMDB id, which readers
-    # could never tell apart). Same-titled rows with different TMDB ids are
-    # distinct films and never flagged.
+    """Report (title, year, tmdb identity) for rows sharing one identity."""
+    # Rows share an identity when their canonical title+year key and
+    # namespaced TMDB identity both match (including two unresolved rows
+    # with no TMDB id, which readers could never tell apart). Same-titled
+    # rows with different TMDB identities are distinct works and never
+    # flagged -- a movie and a TV series sharing one numeric id included,
+    # since TMDB movie and TV ids are independent sequences.
     first_titles: dict[tuple[str, str, str], str] = {}
     duplicates: list[tuple[str, str, str]] = []
     for release in releases:
         title_key, year = canonical_key(release)
-        key = (title_key, year, release.tmdb_id)
+        key = (title_key, year, release.tmdb_identity)
         if key not in first_titles:
             first_titles[key] = release.movie_title
-        elif (first_titles[key], year, release.tmdb_id) not in duplicates:
-            duplicates.append((first_titles[key], year, release.tmdb_id))
+        elif (first_titles[key], year, release.tmdb_identity) not in duplicates:
+            duplicates.append((first_titles[key], year, release.tmdb_identity))
     return duplicates
 
 
@@ -249,8 +251,8 @@ def write_artifacts(
         raise DuplicateReleaseError(
             "reconciliation left duplicate release rows: "
             + "; ".join(
-                f"{title} ({year or 'no year'}, tmdb {tmdb_id or 'unresolved'})"
-                for title, year, tmdb_id in duplicate_rows
+                f"{title} ({year or 'no year'}, tmdb {identity or 'unresolved'})"
+                for title, year, identity in duplicate_rows
             )
         )
 

@@ -162,3 +162,21 @@ def test_dashboard_escapes_release_text_and_split_link_labels(tmp_path: Path):
     assert '["TMDB"' in html
     assert '<a href="https://blu-ray.test/Alien" rel="noreferrer">BR</a>' in html
     assert '<a href="https://tmdb.test/movie/1" rel="noreferrer">TMDB</a>' in html
+
+
+def test_dashboard_publishes_media_type_in_public_payload(tmp_path: Path):
+    """dist/releases.json is the machine-readable public output; consumers
+    need the persisted media namespace to interpret tmdb_id (TMDB movie and
+    TV ids are independent sequences)."""
+    got = release("Game of Thrones: The Complete First Season", "2011")
+    got.tmdb_id = "1399"
+    got.media_type = "tv"
+    movie = release("Heat", "1995")
+    movie.tmdb_id = "949"
+
+    build_dashboard([got, movie], output_dir=tmp_path / "dist")
+
+    data = json.loads((tmp_path / "dist/releases.json").read_text(encoding="utf-8"))
+    by_title = {item["movie_title"]: item for item in data}
+    assert by_title["Game of Thrones: The Complete First Season"]["media_type"] == "tv"
+    assert by_title["Heat"]["media_type"] == "movie"

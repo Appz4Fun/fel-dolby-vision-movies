@@ -176,11 +176,14 @@ def title_bluray_key(release: FelRelease) -> tuple[str, str]:
 
 
 def tmdb_key(release: FelRelease) -> tuple[str, str]:
+    # Keyed by the namespaced tmdb_identity ("movie/949" vs "tv/949"), never
+    # the bare numeric id: TMDB movie and TV ids are independent sequences,
+    # so a bare id would collapse two unrelated works into one identity.
     if release.tmdb_id:
         bluray_url = canonical_url_key(release.bluray_url)
         if bluray_url:
-            return ("tmdb-bluray", f"{release.tmdb_id}\0{bluray_url}")
-        return ("tmdb", release.tmdb_id)
+            return ("tmdb-bluray", f"{release.tmdb_identity}\0{bluray_url}")
+        return ("tmdb", release.tmdb_identity)
     return canonical_key(release)
 
 
@@ -217,7 +220,7 @@ def _dedupe_tmdb_release_groups(
     no_tmdb_index = 0
     for index, release in enumerate(releases):
         if release.tmdb_id:
-            key = ("tmdb", release.tmdb_id)
+            key = ("tmdb", release.tmdb_identity)
         else:
             key = ("no-tmdb", str(no_tmdb_index))
             no_tmdb_index += 1
@@ -693,6 +696,11 @@ def merge_releases(base: FelRelease, other: FelRelease) -> FelRelease:
         collected_at=_prefer_known(base.collected_at, other.collected_at),
         fel_confirmed=base.fel_confirmed or other.fel_confirmed,
         tmdb_id=base.tmdb_id or other.tmdb_id,
+        # media_type qualifies tmdb_id, so it travels with whichever side
+        # supplied the id that survives the merge above.
+        media_type=(
+            base.media_type if base.tmdb_id or not other.tmdb_id else other.media_type
+        ),
         imdb_id=base.imdb_id or other.imdb_id,
         poster_path=base.poster_path or other.poster_path,
         release_url=base.release_url or other.release_url,

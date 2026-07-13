@@ -139,6 +139,10 @@ def test_enrich_releases_uses_tv_endpoints_for_tv_matches(tmp_path: Path):
     # would let reconciliation collapse distinct season discs into one row.
     assert row.movie_title == "Ahsoka: The Complete First Season"
     assert row.tmdb_id == "114461"
+    # The media type must be persisted on the row itself: merge identity
+    # keys, reconciliation, and the Trakt sync all read the field, never
+    # the release URL.
+    assert row.media_type == "tv"
     assert row.imdb_id == "tt13622776"
     assert row.release_url == "https://www.themoviedb.org/tv/114461"
     assert row.studio == "Disney+"
