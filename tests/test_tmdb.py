@@ -771,6 +771,17 @@ def test_series_title_from_season_descriptor_strips_season_suffixes():
     assert tmdb._series_title_from_season_descriptor("Andor: S2") == "Andor"
     # Word-number spellings appear in catalog evidence ("Season one").
     assert tmdb._series_title_from_season_descriptor("Loki: Season One") == "Loki"
+    # Complete-series and multi-season range discs are series-level TV
+    # labels too (merge.has_season_descriptor already treats them so).
+    assert (
+        tmdb._series_title_from_season_descriptor("Chernobyl: The Complete Series")
+        == "Chernobyl"
+    )
+    assert (
+        tmdb._series_title_from_season_descriptor("Band of Brothers: Complete Series")
+        == "Band of Brothers"
+    )
+    assert tmdb._series_title_from_season_descriptor("Show: Seasons 1-3") == "Show"
 
 
 def test_series_title_from_season_descriptor_rejects_non_season_titles():
@@ -794,6 +805,10 @@ def test_is_first_season_title_detects_only_first_seasons():
     assert tmdb._is_first_season_title("Andor: Season 2") is False
     assert tmdb._is_first_season_title("Loki: Season Two") is False
     assert tmdb._is_first_season_title("Game of Thrones S02") is False
+    # A range or complete-series disc is not a first-season disc, so its
+    # year must not act as a premiere-year discriminator.
+    assert tmdb._is_first_season_title("Show: Seasons 1-3") is False
+    assert tmdb._is_first_season_title("Chernobyl: The Complete Series") is False
     assert tmdb._is_first_season_title("Oppenheimer") is False
 
 

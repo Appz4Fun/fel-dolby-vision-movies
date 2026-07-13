@@ -281,8 +281,10 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
 _SEASON_NUMBER_WORDS = "one|two|three|four|five|six|seven|eight|nine|ten"
 _SEASON_DESCRIPTOR_RE = re.compile(
     rf"\s*[:\-–—]?\s*\b"
-    rf"(?:the\s+complete\s+(?P<ordinal>\w+)\s+season"
-    rf"|season\s+(?P<number>\d+|{_SEASON_NUMBER_WORDS})"
+    rf"(?:the\s+complete\s+(?P<ordinal>\w+)\s+seasons?"
+    rf"|seasons?\s+(?P<number>\d+|{_SEASON_NUMBER_WORDS})"
+    rf"(?P<range>\s*[-–—&]\s*(?:\d+|{_SEASON_NUMBER_WORDS}))?"
+    rf"|(?:the\s+)?complete\s+series"
     rf"|s0*(?P<compact>[1-9]\d*))\s*$",
     re.IGNORECASE,
 )
@@ -301,6 +303,10 @@ def _is_first_season_title(title: str) -> bool:
     """True only when the season descriptor names the first season."""
     match = _SEASON_DESCRIPTOR_RE.search(title or "")
     if match is None:
+        return False
+    # A multi-season range ("Seasons 1-3") or a complete-series box is not
+    # a first-season disc, so its year says nothing about a premiere.
+    if match.group("range"):
         return False
     token = (
         match.group("ordinal") or match.group("number") or match.group("compact") or ""

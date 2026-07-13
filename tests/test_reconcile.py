@@ -1302,3 +1302,48 @@ def test_new_season_appends_when_catalog_has_multiple_seasons():
     assert result.additions == [third]
     assert result.merged_count == 0
     assert result.review_items == []
+
+
+def test_tv_row_never_folds_into_urlless_row_with_same_numeric_id():
+    """A row whose media kind is unknown (no TMDB release URL) cannot prove
+    identity by bare number: TMDB movie and TV ids are separate sequences,
+    so a /tv/ candidate must not fold into a URL-less row that happens to
+    carry the same numeric id. Same-film rows still fold via title+year."""
+    legacy = release("Some Unrelated Film", "1974", tmdb_id="1399")
+    tv_season = release(
+        "Game of Thrones: The Complete First Season",
+        "2011",
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+        release_url="https://www.themoviedb.org/tv/1399",
+    )
+
+    result = reconcile_releases([legacy], [tv_season])
+
+    assert result.releases == [legacy, tv_season]
+    assert result.additions == [tv_season]
+    assert result.merged_count == 0
+
+
+def test_same_title_year_cross_namespace_ids_go_to_review():
+    """Even when a /movie/ row and a /tv/ row share the title, year, and a
+    coincidental numeric TMDB id, they name two different works: the
+    consistency check must flag the pair for review instead of merging."""
+    movie = release(
+        "Heat",
+        "1995",
+        tmdb_id="949",
+        release_url="https://www.themoviedb.org/movie/949",
+    )
+    tv = release(
+        "Heat",
+        "1995",
+        tmdb_id="949",
+        release_url="https://www.themoviedb.org/tv/949",
+    )
+
+    result = reconcile_releases([movie], [tv])
+
+    assert result.merged_count == 0
+    assert len(result.review_items) == 1
+    assert result.review_items[0].reason == "identity-conflict"

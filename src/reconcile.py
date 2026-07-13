@@ -335,7 +335,7 @@ def _id_matches(
 
 
 def _tmdb_id_matches(candidate: FelRelease, catalog: list[FelRelease]) -> list[int]:
-    """TMDB id matches, excluding cross-namespace numeric coincidences."""
+    """TMDB id matches within one media namespace."""
     return [
         index
         for index in _id_matches(candidate.tmdb_id, "tmdb_id", catalog)
@@ -345,12 +345,11 @@ def _tmdb_id_matches(candidate: FelRelease, catalog: list[FelRelease]) -> list[i
 
 def _same_tmdb_id_different_media(left: FelRelease, right: FelRelease) -> bool:
     # TMDB movie and TV ids are independent sequences, so a /movie/ row and
-    # a /tv/ row sharing one numeric id name two unrelated works, not one
-    # identity. The media kind is read from the release URL enrichment
-    # writes; rows without a TMDB release URL stay comparable as before.
-    left_kind = _tmdb_media_kind(left)
-    right_kind = _tmdb_media_kind(right)
-    return bool(left_kind) and bool(right_kind) and left_kind != right_kind
+    # a /tv/ row sharing one numeric id name two unrelated works, never one
+    # identity -- even when title and year coincide too.
+    if not left.tmdb_id or left.tmdb_id != right.tmdb_id:
+        return False
+    return _effective_tmdb_kind(left) != _effective_tmdb_kind(right)
 
 
 _TMDB_TV_URL_MARKER = "themoviedb.org/tv/"
@@ -364,6 +363,14 @@ def _tmdb_media_kind(release: FelRelease) -> str:
     if _TMDB_MOVIE_URL_MARKER in url:
         return "movie"
     return ""
+
+
+def _effective_tmdb_kind(release: FelRelease) -> str:
+    # Rows created before TV support existed (or added by hand) may lack a
+    # TMDB release URL, but every TV row enrichment creates carries /tv/ --
+    # so a row of unknown kind is a movie-era row, and a URL-less row must
+    # never bare-id-match a TV row (CodeRabbit's legacy-row scenario).
+    return _tmdb_media_kind(release) or "movie"
 
 
 def _match_sets_are_connected(match_sets: list[list[int]]) -> bool:
@@ -380,6 +387,8 @@ def _match_sets_are_connected(match_sets: list[list[int]]) -> bool:
 
 
 def _ids_are_consistent(left: FelRelease, right: FelRelease) -> bool:
+    if _same_tmdb_id_different_media(left, right):
+        return False
     return all(
         not left_value or not right_value or left_value == right_value
         for left_value, right_value in (
