@@ -118,6 +118,26 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
     # film (TMDB 1502633) that happens to carry a 2025 release date, so pin
     # the search year the same way the "1917" home-video mislabel is pinned.
     ("obsession", "2025"): _LookupCandidate("Obsession", "2026"),
+    # More festival/production-year mislabels pinned like "Obsession" above:
+    # the labeled year predates TMDB's primary release year, so an unpinned
+    # search misses the real film and matches a low-vote same-titled work
+    # carrying the labeled year (Talk to Me -> Russian TMDB 1035088, Brick ->
+    # "Yellow Brick Road" TMDB 291115, The Witch -> Russian TMDB 526667,
+    # Vigilante -> Italian comedy "Vigili e vigilesse" TMDB 306529). "The
+    # Witch" mirrors the existing "The VVitch" pin for the blu-ray forum's
+    # plain spelling.
+    ("talk to me", "2022"): _LookupCandidate("Talk to Me", "2023"),
+    ("brick", "2005"): _LookupCandidate("Brick", "2006"),
+    ("the witch", "2015"): _LookupCandidate("The Witch", "2016"),
+    ("vigilante", "1982"): _LookupCandidate("Vigilante", "1983"),
+    # FEL.txt spells the same Brick disc "Brick Vision (2005)", which an
+    # unpinned search resolves to the zero-vote short of that exact name
+    # (TMDB 345308) instead of the film the disc actually is.
+    ("brick vision", "2005"): _LookupCandidate("Brick", "2006"),
+    # Reddit's "Monster Problems AKA Love and Monsters [2020]" leads with the
+    # working title, which exactly matches an unrelated 2015 short (TMDB
+    # 364400); pin it to the canonical title like the sequel aliases above.
+    ("monster problems", "2020"): _LookupCandidate("Love and Monsters", "2020"),
     ("ryu to sobakasu no hime", "2021"): _LookupCandidate("Belle", "2021"),
     ("long ma jing shen", "2023"): _LookupCandidate("Ride On", "2023"),
     ("rio 70", "1969"): _LookupCandidate("The Girl from Rio", "1969"),

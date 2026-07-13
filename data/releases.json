@@ -20819,10 +20819,10 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Brick Vision",
+    "movie_title": "Brick",
     "fel_confirmed": true,
-    "release_date": "2005-06-17",
-    "studio": "Phonophilm Productions",
+    "release_date": "2006-03-31",
+    "studio": "Bergman Lustig Productions",
     "audio_formats": [
       "DTS-HD MA 5.1",
       "DTS-HD MA 2.0"
@@ -20831,11 +20831,11 @@
     "additional_characteristics": {},
     "source_url": "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
     "source_label": "FEL.txt",
-    "tmdb_id": "345308",
+    "tmdb_id": "9270",
     "media_type": "movie",
-    "imdb_id": "tt0892042",
-    "poster_path": "data/posters/345308.jpg",
-    "release_url": "https://www.themoviedb.org/movie/345308",
+    "imdb_id": "tt0393109",
+    "poster_path": "data/posters/9270.jpg",
+    "release_url": "https://www.themoviedb.org/movie/9270",
     "bluray_url": "https://www.blu-ray.com/movies/Brick-4K-Blu-ray/323009/",
     "bluray_release_date": "2024-10-15",
     "hdr_formats": [
@@ -38440,10 +38440,10 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "Vigili e vigilesse",
+    "movie_title": "Vigilante",
     "fel_confirmed": true,
-    "release_date": "1982-03-18",
-    "studio": "New Kim Cinematografica S.r.l.",
+    "release_date": "1983-01-04",
+    "studio": "Magnum Motion Pictures Inc.",
     "audio_formats": [
       "Dolby TrueHD/Atmos 7.1",
       "DTS-HD MA 5.1",
@@ -38456,11 +38456,11 @@
     },
     "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
     "source_label": "raw_fel.txt",
-    "tmdb_id": "306529",
+    "tmdb_id": "23587",
     "media_type": "movie",
-    "imdb_id": "tt0216361",
-    "poster_path": "data/posters/306529.jpg",
-    "release_url": "https://www.themoviedb.org/movie/306529",
+    "imdb_id": "tt0084867",
+    "poster_path": "data/posters/23587.jpg",
+    "release_url": "https://www.themoviedb.org/movie/23587",
     "bluray_url": "https://www.blu-ray.com/movies/Vigilante-4K-Blu-ray/274101/",
     "bluray_release_date": "2020-12-15",
     "hdr_formats": [
