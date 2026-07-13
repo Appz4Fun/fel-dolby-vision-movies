@@ -127,12 +127,10 @@ def season_number(title: str) -> int | None:
 
 
 def season_identity(title: str) -> str | None:
-    """Comparable identity of a season label: "1", "2", ... or "series".
-
-    "Complete Series" and "The Complete Series" name the same box, so both
-    map to "series" rather than splitting on spelling. Unnumbered labels
-    ("The Complete Final Season") and multi-season ranges stay None.
-    """
+    """Comparable identity of a season label: "1", "2", ... or "series"."""
+    # "Complete Series" and "The Complete Series" name the same box, so both
+    # map to "series" rather than splitting on spelling. Unnumbered labels
+    # ("The Complete Final Season") and multi-season ranges stay None.
     number = season_number(title)
     if number is not None:
         return str(number)
