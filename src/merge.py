@@ -56,17 +56,70 @@ def has_edition_descriptor(title: str) -> bool:
 # whose rows share *series-level* TMDB/IMDb ids across physically distinct
 # discs. Requires a season number/ordinal (or "complete series") so movie
 # titles that merely contain the word "season" ("Season of the Witch")
-# don't count.
+# don't count. has_season_descriptor answers "is this a season/series
+# disc at all" (broad: includes unnumbered labels like "The Complete
+# Final Season"); season_number extracts a comparable number when one is
+# actually named.
+_SEASON_NUMBER_WORDS = "one|two|three|four|five|six|seven|eight|nine|ten"
 _SEASON_LABEL_RE = re.compile(
-    r"\b(?:the\s+complete\s+\w+\s+seasons?|seasons?\s+\d+|s0*[1-9]\d*|"
-    r"complete\s+series)\b",
+    rf"\b(?:the\s+complete\s+\w+\s+seasons?"
+    rf"|seasons?\s+(?:\d+|{_SEASON_NUMBER_WORDS})"
+    rf"|s0*[1-9]\d*"
+    rf"|complete\s+series)\b",
     re.IGNORECASE,
 )
+# The negative lookahead keeps multi-season ranges ("Seasons 1-3") from
+# parsing as season 1: a range names a box set, not one season, so its
+# number stays None and id-sharing rows keep the conservative stop signal.
+_SEASON_NUMBER_RE = re.compile(
+    rf"\b(?:the\s+complete\s+(?P<ordinal>\w+)\s+seasons?"
+    rf"|seasons?\s+(?P<number>\d+|{_SEASON_NUMBER_WORDS})(?!\s*[-–—&]\s*\d)"
+    rf"|s0*(?P<compact>[1-9]\d*))\b",
+    re.IGNORECASE,
+)
+_SEASON_WORD_NUMBERS = {
+    "first": 1,
+    "second": 2,
+    "third": 3,
+    "fourth": 4,
+    "fifth": 5,
+    "sixth": 6,
+    "seventh": 7,
+    "eighth": 8,
+    "ninth": 9,
+    "tenth": 10,
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10,
+}
 
 
 def has_season_descriptor(title: str) -> bool:
     """True for titles naming a TV season/series disc."""
     return bool(_SEASON_LABEL_RE.search(title or ""))
+
+
+def season_number(title: str) -> int | None:
+    """Season number named by a title's season label, or None."""
+    match = _SEASON_NUMBER_RE.search(title or "")
+    if match is None:
+        return None
+    token = (
+        match.group("ordinal") or match.group("number") or match.group("compact") or ""
+    ).casefold()
+    if token.isdigit():
+        return int(token)
+    ordinal_digits = re.fullmatch(r"(\d+)(?:st|nd|rd|th)", token)
+    if ordinal_digits:
+        return int(ordinal_digits.group(1))
+    return _SEASON_WORD_NUMBERS.get(token)
 
 
 def canonical_title_key(value: str) -> str:

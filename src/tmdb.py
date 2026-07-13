@@ -273,19 +273,21 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
 
 # TV season discs on the reddit lists name the series plus a season
 # descriptor ("Ahsoka: The Complete First Season", "Andor: Season 2",
-# compact "Game of Thrones S01"). The descriptor is stripped before
+# compact "Game of Thrones S01", word-number "Loki: Season One" -- that
+# spelling appears in catalog evidence). The descriptor is stripped before
 # querying /3/search/tv; a title that is nothing but a descriptor leaves
 # no series name worth searching for. The \b keeps embedded look-alikes
 # ("Preseason 2", "Marvels01") from counting as descriptors.
+_SEASON_NUMBER_WORDS = "one|two|three|four|five|six|seven|eight|nine|ten"
 _SEASON_DESCRIPTOR_RE = re.compile(
-    r"\s*[:\-–—]?\s*\b"
-    r"(?:the\s+complete\s+(?P<ordinal>\w+)\s+season"
-    r"|season\s+(?P<number>\d+)"
-    r"|s0*(?P<compact>[1-9]\d*))\s*$",
+    rf"\s*[:\-–—]?\s*\b"
+    rf"(?:the\s+complete\s+(?P<ordinal>\w+)\s+season"
+    rf"|season\s+(?P<number>\d+|{_SEASON_NUMBER_WORDS})"
+    rf"|s0*(?P<compact>[1-9]\d*))\s*$",
     re.IGNORECASE,
 )
 
-_FIRST_SEASON_TOKENS = frozenset({"first", "1st"})
+_FIRST_SEASON_TOKENS = frozenset({"first", "1st", "one"})
 
 
 def _series_title_from_season_descriptor(title: str) -> str:

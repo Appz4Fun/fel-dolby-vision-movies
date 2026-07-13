@@ -769,6 +769,8 @@ def test_series_title_from_season_descriptor_strips_season_suffixes():
         == "Game of Thrones"
     )
     assert tmdb._series_title_from_season_descriptor("Andor: S2") == "Andor"
+    # Word-number spellings appear in catalog evidence ("Season one").
+    assert tmdb._series_title_from_season_descriptor("Loki: Season One") == "Loki"
 
 
 def test_series_title_from_season_descriptor_rejects_non_season_titles():
@@ -788,7 +790,9 @@ def test_is_first_season_title_detects_only_first_seasons():
         tmdb._is_first_season_title("The Mandalorian: The Complete Third Season")
         is False
     )
+    assert tmdb._is_first_season_title("Loki: Season One") is True
     assert tmdb._is_first_season_title("Andor: Season 2") is False
+    assert tmdb._is_first_season_title("Loki: Season Two") is False
     assert tmdb._is_first_season_title("Game of Thrones S02") is False
     assert tmdb._is_first_season_title("Oppenheimer") is False
 

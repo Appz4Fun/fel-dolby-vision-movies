@@ -11,6 +11,7 @@ from merge import (
     dedupe_tmdb_release_groups,
     has_season_descriptor,
     merge_releases,
+    season_number,
 )
 from models import FelRelease
 
@@ -161,6 +162,14 @@ def _match_by_strong_signals(
     ]
     if not consistent_matches:
         return _review_decision("identity-conflict", catalog, target_matches)
+    consistent_matches = _without_series_id_conflicts(
+        candidate, catalog, consistent_matches
+    )
+    if not consistent_matches:
+        # Every id hit is a different season of the same series (a catalog
+        # already holding several seasons matches them all); the new season
+        # is fresh evidence to append, not an ambiguity to review.
+        return _MatchDecision()
     if len(consistent_matches) == 1:
         return _target_decision(candidate, catalog, consistent_matches[0])
 
@@ -226,8 +235,10 @@ def _target_decision(
     target = catalog[index]
     if not _ids_are_consistent(candidate, target):
         return _review_decision("identity-conflict", catalog, [index])
-    if _series_id_edition_conflict(candidate, target):
-        return _MatchDecision()
+    # Season-conflict targets never reach here: _match_by_strong_signals
+    # filters them out via _without_series_id_conflicts, and every other
+    # caller matches on equal titles or a shared disc URL, where
+    # _series_id_edition_conflict is False by construction.
     if _has_distinct_url(candidate, target) and not _same_release_despite_distinct_urls(
         candidate, target
     ):
@@ -256,9 +267,29 @@ def _series_id_edition_conflict(candidate: FelRelease, target: FelRelease) -> bo
         target.movie_title
     ):
         return False
-    return has_season_descriptor(candidate.movie_title) and has_season_descriptor(
-        target.movie_title
-    )
+    if not (
+        has_season_descriptor(candidate.movie_title)
+        and has_season_descriptor(target.movie_title)
+    ):
+        return False
+    # Two spellings of one season ("The Complete First Season" vs
+    # "Season 1") name the same physical release and may fold; an
+    # unparseable number ("The Complete Final Season", a "Seasons 1-3"
+    # range) stays a conservative conflict.
+    left_number = season_number(candidate.movie_title)
+    right_number = season_number(target.movie_title)
+    return left_number is None or left_number != right_number
+
+
+def _without_series_id_conflicts(
+    candidate: FelRelease, catalog: list[FelRelease], matches: list[int]
+) -> list[int]:
+    """Drop id hits that only prove a shared series (other seasons' rows)."""
+    return [
+        index
+        for index in matches
+        if not _series_id_edition_conflict(candidate, catalog[index])
+    ]
 
 
 def _same_release_despite_distinct_urls(

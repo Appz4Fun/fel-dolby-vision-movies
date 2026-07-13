@@ -1242,3 +1242,63 @@ def test_tv_series_id_does_not_match_same_numbered_movie_id():
     assert result.releases == [movie, tv_season]
     assert result.additions == [tv_season]
     assert result.merged_count == 0
+
+
+def test_same_season_title_variants_merge_without_disc_urls():
+    """Two spellings of the *same* season ("The Complete First Season" vs
+    "Season 1") with shared series ids name one physical release, so the
+    series-id stop signal must let them fold even before Blu-ray enrichment
+    provides a shared disc URL."""
+    base = release(
+        "Ahsoka: The Complete First Season",
+        "2023",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+    )
+    variant = release(
+        "Ahsoka: Season 1",
+        "2023",
+        tmdb_id="114461",
+        imdb_id="tt13622776",
+    )
+
+    result = reconcile_releases([base], [variant])
+
+    assert result.merged_count == 1
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == "Ahsoka: The Complete First Season"
+
+
+def test_new_season_appends_when_catalog_has_multiple_seasons():
+    """A GoT-style catalog already holds several seasons sharing one series
+    id; a freshly scraped later season (no Blu-ray URL yet) hits every one
+    of them as a strong-id match. That multi-match must not be routed to
+    ambiguous-edition review -- the season stop signal applies first and the
+    new season is appended as its own row."""
+    first = release(
+        "Game of Thrones: The Complete First Season",
+        "2011",
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+        bluray_url="https://www.blu-ray.com/movies/GoT-S1-4K-Blu-ray/1/",
+    )
+    second = release(
+        "Game of Thrones: The Complete Second Season",
+        "2012",
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+        bluray_url="https://www.blu-ray.com/movies/GoT-S2-4K-Blu-ray/2/",
+    )
+    third = release(
+        "Game of Thrones: The Complete Third Season",
+        "2013",
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+    )
+
+    result = reconcile_releases([first, second], [third])
+
+    assert result.releases == [first, second, third]
+    assert result.additions == [third]
+    assert result.merged_count == 0
+    assert result.review_items == []

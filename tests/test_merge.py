@@ -439,3 +439,29 @@ def test_dedupe_tmdb_merges_multiple_unresolved_rows_without_urls():
     second.tmdb_id = "3"
     deduped = dedupe_tmdb_releases([first, second])
     assert len(deduped) == 1
+
+
+def test_season_number_parses_ordinals_digits_and_words():
+    assert merge.season_number("Game of Thrones: The Complete Eighth Season") == 8
+    assert merge.season_number("Show: The Complete 8th Season") == 8
+    assert merge.season_number("Andor: Season 2") == 2
+    assert merge.season_number("Loki: Season One") == 1
+    assert merge.season_number("Game of Thrones S03") == 3
+    # "Final" names a season without numbering it; unparseable stays None so
+    # id-sharing rows keep the conservative stop signal.
+    assert merge.season_number("Attack on Titan: The Complete Final Season") is None
+    assert merge.season_number("Oppenheimer") is None
+
+
+def test_has_season_descriptor_requires_a_season_label():
+    assert merge.has_season_descriptor("Ahsoka: The Complete First Season") is True
+    assert merge.has_season_descriptor("Loki: Season One") is True
+    assert merge.has_season_descriptor("Game of Thrones S01") is True
+    assert merge.has_season_descriptor("Band of Brothers: Complete Series") is True
+    # The bare word "season" inside a film title is not a season label.
+    assert merge.has_season_descriptor("Season of the Witch") is False
+    # Movie-edition wording shares release-level ids and must not count.
+    assert (
+        merge.has_season_descriptor("Mission: Impossible - Dead Reckoning Part One")
+        is False
+    )
