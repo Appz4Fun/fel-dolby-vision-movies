@@ -9,7 +9,7 @@ from merge import (
     canonical_title_key,
     canonical_url_key,
     dedupe_tmdb_release_groups,
-    has_edition_descriptor,
+    has_season_descriptor,
     merge_releases,
 )
 from models import FelRelease
@@ -138,7 +138,7 @@ def _match_by_strong_signals(
         for index, release in enumerate(catalog)
         if candidate_url and canonical_url_key(release.bluray_url) == candidate_url
     ]
-    tmdb_matches = _id_matches(candidate.tmdb_id, "tmdb_id", catalog)
+    tmdb_matches = _tmdb_id_matches(candidate, catalog)
     imdb_matches = _id_matches(candidate.imdb_id, "imdb_id", catalog)
     signal_matches = [
         matches for matches in (url_matches, tmdb_matches, imdb_matches) if matches
@@ -240,13 +240,15 @@ def _target_decision(
 def _series_id_edition_conflict(candidate: FelRelease, target: FelRelease) -> bool:
     """Report whether shared strong ids prove only a shared series, not a disc."""
     # Every season disc of a show resolves to the same series-level TMDB and
-    # IMDb ids, so a strong-id hit between two rows that both carry edition
-    # descriptors but name different editions ("The Complete First Season"
+    # IMDb ids, so a strong-id hit between two rows that both carry season
+    # descriptors but name different seasons ("The Complete First Season"
     # vs "The Complete Second Season") is not evidence of the same physical
     # release -- folding them would silently swallow a new season into an
-    # older one. A shared blu-ray.com page overrides the stop signal: one
-    # disc page is one release no matter how the source spelled the
-    # descriptor.
+    # older one. Only *season* labels count: movie-edition wording ("Part
+    # One" vs "Part 1") shares release-level ids, and blocking those would
+    # leave duplicate rows for one film. A shared blu-ray.com page overrides
+    # the stop signal: one disc page is one release no matter how the source
+    # spelled the descriptor.
     candidate_url = canonical_url_key(candidate.bluray_url)
     if candidate_url and candidate_url == canonical_url_key(target.bluray_url):
         return False
@@ -254,7 +256,7 @@ def _series_id_edition_conflict(candidate: FelRelease, target: FelRelease) -> bo
         target.movie_title
     ):
         return False
-    return has_edition_descriptor(candidate.movie_title) and has_edition_descriptor(
+    return has_season_descriptor(candidate.movie_title) and has_season_descriptor(
         target.movie_title
     )
 
@@ -299,6 +301,38 @@ def _id_matches(
         for index, release in enumerate(catalog)
         if getattr(release, field) == value
     ]
+
+
+def _tmdb_id_matches(candidate: FelRelease, catalog: list[FelRelease]) -> list[int]:
+    """TMDB id matches, excluding cross-namespace numeric coincidences."""
+    return [
+        index
+        for index in _id_matches(candidate.tmdb_id, "tmdb_id", catalog)
+        if not _same_tmdb_id_different_media(candidate, catalog[index])
+    ]
+
+
+def _same_tmdb_id_different_media(left: FelRelease, right: FelRelease) -> bool:
+    # TMDB movie and TV ids are independent sequences, so a /movie/ row and
+    # a /tv/ row sharing one numeric id name two unrelated works, not one
+    # identity. The media kind is read from the release URL enrichment
+    # writes; rows without a TMDB release URL stay comparable as before.
+    left_kind = _tmdb_media_kind(left)
+    right_kind = _tmdb_media_kind(right)
+    return bool(left_kind) and bool(right_kind) and left_kind != right_kind
+
+
+_TMDB_TV_URL_MARKER = "themoviedb.org/tv/"
+_TMDB_MOVIE_URL_MARKER = "themoviedb.org/movie/"
+
+
+def _tmdb_media_kind(release: FelRelease) -> str:
+    url = release.release_url or ""
+    if _TMDB_TV_URL_MARKER in url:
+        return "tv"
+    if _TMDB_MOVIE_URL_MARKER in url:
+        return "movie"
+    return ""
 
 
 def _match_sets_are_connected(match_sets: list[list[int]]) -> bool:

@@ -52,6 +52,23 @@ def has_edition_descriptor(title: str) -> bool:
     return bool(_EDITION_DESCRIPTOR_RE.search(title or ""))
 
 
+# Season/series labels specifically -- the subset of edition descriptors
+# whose rows share *series-level* TMDB/IMDb ids across physically distinct
+# discs. Requires a season number/ordinal (or "complete series") so movie
+# titles that merely contain the word "season" ("Season of the Witch")
+# don't count.
+_SEASON_LABEL_RE = re.compile(
+    r"\b(?:the\s+complete\s+\w+\s+seasons?|seasons?\s+\d+|s0*[1-9]\d*|"
+    r"complete\s+series)\b",
+    re.IGNORECASE,
+)
+
+
+def has_season_descriptor(title: str) -> bool:
+    """True for titles naming a TV season/series disc."""
+    return bool(_SEASON_LABEL_RE.search(title or ""))
+
+
 def canonical_title_key(value: str) -> str:
     normalized = unicodedata.normalize("NFKD", value)
     normalized = "".join(c for c in normalized if not unicodedata.combining(c))

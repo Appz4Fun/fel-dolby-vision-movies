@@ -86,7 +86,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         if cache_key in self.cache:
             return _movie_from_cache_record(self.cache[cache_key])
 
-        result = self._search(title, year)
+        result = self._resolve_uncached(title, year)
         self.cache[cache_key] = _movie_to_cache_record(result)
         self._write_cache()
         time.sleep(self.delay_seconds)
@@ -101,6 +101,17 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
 
     def __exit__(self, exc_type: object, exc_value: object, traceback: object) -> None:
         self.close()
+
+    def _resolve_uncached(self, title: str, year: str) -> TmdbMovie | None:
+        # A season-descriptor title names a series disc, never a film, and
+        # the movie scorer is unsafe for it: a same-named film's weak
+        # base-title overlap plus the year-match bonus can clear acceptance
+        # ("Andor: Season 2" vs a film named "Andor" scores 23 + 45 = 68,
+        # over the 65 threshold). Season titles therefore resolve against
+        # TV only; every other title takes the movie flow.
+        if _series_title_from_season_descriptor(title):
+            return self._search_tv(title, year)
+        return self._search(title, year)
 
     def _search(self, title: str, year: str) -> TmdbMovie | None:
         candidates = self._fetch_candidates(title, year)
@@ -117,7 +128,7 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
             if rescue is not None:
                 best, matched_alternative_title = rescue
         if best is None:
-            return self._search_tv(title, year)
+            return None
         tmdb_id = str(best.get("id", ""))
         external = self._external_ids(tmdb_id)
         return TmdbMovie(
@@ -168,15 +179,16 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
         return None
 
     def _search_tv(self, title: str, year: str) -> TmdbMovie | None:
-        """Resolve a TV-season title against /3/search/tv as a last resort."""
+        """Resolve a TV-season title against /3/search/tv."""
         # Reddit FEL lists carry TV season discs ("Ahsoka: The Complete
         # First Season") that movie search can never match. Only titles
-        # bearing a season descriptor take this path, and only after every
-        # movie-side fallback failed, so a movie title can never drift onto
-        # a same-named series. The search is deliberately not pinned with
-        # first_air_date_year: a season disc's year is the season's, not the
-        # series premiere's (Mandalorian S3 is 2023, first_air_date 2019),
-        # so pinning would exclude the right series from the result set.
+        # bearing a season descriptor take this path, so a movie title can
+        # never drift onto a same-named series. The search is deliberately
+        # not pinned with
+        # first_air_date_year: a season disc's year is the
+        # season's, not the series premiere's (Mandalorian S3 is 2023,
+        # first_air_date 2019), so pinning would exclude the right series
+        # from the result set.
         # Only a *first*-season disc's year approximates a premiere year, so
         # only first seasons keep the year in scoring, where the year-match
         # bonus disambiguates same-named original/reboot series pairs. For
@@ -260,16 +272,20 @@ class TmdbResolver:  # pragma: no cover - exercised via live TMDB calls only
 
 
 # TV season discs on the reddit lists name the series plus a season
-# descriptor ("Ahsoka: The Complete First Season", "Andor: Season 2"). The
-# descriptor is stripped before querying /3/search/tv; a title that is
-# nothing but a descriptor leaves no series name worth searching for.
+# descriptor ("Ahsoka: The Complete First Season", "Andor: Season 2",
+# compact "Game of Thrones S01"). The descriptor is stripped before
+# querying /3/search/tv; a title that is nothing but a descriptor leaves
+# no series name worth searching for. The \b keeps embedded look-alikes
+# ("Preseason 2", "Marvels01") from counting as descriptors.
 _SEASON_DESCRIPTOR_RE = re.compile(
-    r"\s*[:\-–—]?\s*"
-    r"(?:the\s+complete\s+(?P<ordinal>\w+)\s+season|season\s+(?P<number>\d+))\s*$",
+    r"\s*[:\-–—]?\s*\b"
+    r"(?:the\s+complete\s+(?P<ordinal>\w+)\s+season"
+    r"|season\s+(?P<number>\d+)"
+    r"|s0*(?P<compact>[1-9]\d*))\s*$",
     re.IGNORECASE,
 )
 
-_FIRST_SEASON_TOKENS = frozenset({"first", "1st", "1"})
+_FIRST_SEASON_TOKENS = frozenset({"first", "1st"})
 
 
 def _series_title_from_season_descriptor(title: str) -> str:
@@ -284,7 +300,11 @@ def _is_first_season_title(title: str) -> bool:
     match = _SEASON_DESCRIPTOR_RE.search(title or "")
     if match is None:
         return False
-    token = (match.group("ordinal") or match.group("number") or "").casefold()
+    token = (
+        match.group("ordinal") or match.group("number") or match.group("compact") or ""
+    ).casefold()
+    if token.isdigit():
+        return int(token) == 1
     return token in _FIRST_SEASON_TOKENS
 
 

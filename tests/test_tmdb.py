@@ -762,6 +762,13 @@ def test_series_title_from_season_descriptor_strips_season_suffixes():
         == "Game of Thrones"
     )
     assert tmdb._series_title_from_season_descriptor("Andor: Season 2") == "Andor"
+    # Compact labels, a form merge.py already treats as an edition
+    # descriptor, must reach the TV fallback too.
+    assert (
+        tmdb._series_title_from_season_descriptor("Game of Thrones S01")
+        == "Game of Thrones"
+    )
+    assert tmdb._series_title_from_season_descriptor("Andor: S2") == "Andor"
 
 
 def test_series_title_from_season_descriptor_rejects_non_season_titles():
@@ -769,16 +776,20 @@ def test_series_title_from_season_descriptor_rejects_non_season_titles():
     # A bare descriptor leaves no series name worth searching for.
     assert tmdb._series_title_from_season_descriptor("Season 5") == ""
     assert tmdb._series_title_from_season_descriptor("") == ""
+    # An embedded season-like substring is not a descriptor.
+    assert tmdb._series_title_from_season_descriptor("Marvels01") == ""
 
 
 def test_is_first_season_title_detects_only_first_seasons():
     assert tmdb._is_first_season_title("Ahsoka: The Complete First Season") is True
     assert tmdb._is_first_season_title("Andor: Season 1") is True
+    assert tmdb._is_first_season_title("Game of Thrones S01") is True
     assert (
         tmdb._is_first_season_title("The Mandalorian: The Complete Third Season")
         is False
     )
     assert tmdb._is_first_season_title("Andor: Season 2") is False
+    assert tmdb._is_first_season_title("Game of Thrones S02") is False
     assert tmdb._is_first_season_title("Oppenheimer") is False
 
 
@@ -799,14 +810,12 @@ def test_tv_candidate_as_movie_maps_tv_fields_onto_movie_keys():
     assert mapped["release_date"] == "2023-08-22"
 
 
-def test_resolver_falls_back_to_tv_search_for_season_titles(
-    monkeypatch, tmp_path: Path
-):
-    """A reddit-list TV season row ("Ahsoka: The Complete First Season") can
-    never match /3/search/movie, so after the movie flow comes up empty the
-    resolver must query /3/search/tv with the season descriptor stripped,
-    take IMDb ids from /3/tv/{id}/external_ids, and mark the result as TV so
-    enrichment can emit a /tv/ release URL."""
+def test_resolver_resolves_season_titles_via_tv_search(monkeypatch, tmp_path: Path):
+    """A reddit-list TV season row ("Ahsoka: The Complete First Season") is a
+    series disc by construction, so the resolver must query /3/search/tv
+    with the season descriptor stripped, take IMDb ids from
+    /3/tv/{id}/external_ids, and mark the result as TV so enrichment can
+    emit a /tv/ release URL."""
     monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
     tv_queries: list[str | None] = []
 
@@ -954,6 +963,68 @@ def test_resolver_tv_fallback_prefers_year_matching_series_on_name_collision(
 
     assert result is not None
     assert result.tmdb_id == "2"
+
+
+def test_resolver_consults_tv_before_weak_movie_hits_for_season_titles(
+    monkeypatch, tmp_path: Path
+):
+    """A short season title ("Andor: Season 2") shares its base token with a
+    same-named film, and weak overlap (23) plus the year-match bonus (45)
+    clears the movie acceptance threshold (65) -- so if TV were only a
+    fallback, the movie path would steal the row and never consult
+    /3/search/tv. Season-descriptor titles must resolve against TV first."""
+    monkeypatch.setattr(tmdb.time, "sleep", lambda *_: None)
+    paths: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        paths.append(request.url.path)
+        if request.url.path == "/3/search/movie":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 901,
+                            "title": "Andor",
+                            "original_title": "Andor",
+                            "release_date": "2022-06-01",
+                            "vote_count": 120,
+                            "poster_path": "/film.jpg",
+                        }
+                    ]
+                },
+            )
+        if request.url.path == "/3/search/tv":
+            return httpx.Response(
+                200,
+                json={
+                    "results": [
+                        {
+                            "id": 83867,
+                            "name": "Andor",
+                            "original_name": "Andor",
+                            "first_air_date": "2022-09-21",
+                            "vote_count": 900,
+                            "poster_path": "/andor.jpg",
+                        }
+                    ]
+                },
+            )
+        if request.url.path == "/3/tv/83867/external_ids":
+            return httpx.Response(200, json={"imdb_id": "tt9253284"})
+        return httpx.Response(404)  # pragma: no cover - unreached in this test
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    resolver = TmdbResolver(
+        api_key="x", cache_path=tmp_path / "cache.json", client=client
+    )
+
+    result = resolver.resolve("Andor: Season 2", "2022")
+
+    assert result is not None
+    assert result.tmdb_id == "83867"
+    assert result.media_type == "tv"
+    assert "/3/search/movie" not in paths
 
 
 def test_resolver_tv_fallback_ignores_year_for_later_season_titles(

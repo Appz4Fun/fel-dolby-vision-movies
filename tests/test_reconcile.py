@@ -1189,3 +1189,56 @@ def test_retitled_season_row_with_same_disc_url_still_merges():
     assert result.merged_count == 1
     assert len(result.releases) == 1
     assert result.releases[0].movie_title == "Ahsoka: The Complete First Season"
+
+
+def test_part_number_spelling_variant_with_shared_ids_still_merges():
+    """Movie-edition descriptor words ("Part One" vs "Part 1") must not trip
+    the series-id stop signal: only season/series descriptors mark rows whose
+    shared TMDB/IMDb ids prove a series rather than one release."""
+    base = release(
+        "Mission: Impossible - Dead Reckoning Part One",
+        "2023",
+        tmdb_id="575264",
+        imdb_id="tt9603212",
+        bluray_url="https://www.blu-ray.com/movies/MI-DR-4K-Blu-ray/1/",
+    )
+    variant = release(
+        "Mission: Impossible - Dead Reckoning Part 1",
+        "2023",
+        tmdb_id="575264",
+        imdb_id="tt9603212",
+    )
+
+    result = reconcile_releases([base], [variant])
+
+    assert result.merged_count == 1
+    assert len(result.releases) == 1
+    assert result.releases[0].movie_title == (
+        "Mission: Impossible - Dead Reckoning Part One"
+    )
+
+
+def test_tv_series_id_does_not_match_same_numbered_movie_id():
+    """TMDB movie and TV ids are separate namespaces, so a bare numeric
+    tmdb_id match between a /movie/ row and a /tv/ row is a coincidence,
+    not an identity signal: the TV season row must be appended, never
+    folded into the same-numbered movie."""
+    movie = release(
+        "Some Unrelated Film",
+        "1974",
+        tmdb_id="1399",
+        release_url="https://www.themoviedb.org/movie/1399",
+    )
+    tv_season = release(
+        "Game of Thrones: The Complete First Season",
+        "2011",
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+        release_url="https://www.themoviedb.org/tv/1399",
+    )
+
+    result = reconcile_releases([movie], [tv_season])
+
+    assert result.releases == [movie, tv_season]
+    assert result.additions == [tv_season]
+    assert result.merged_count == 0
