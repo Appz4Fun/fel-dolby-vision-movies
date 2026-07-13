@@ -238,16 +238,15 @@ def _target_decision(
 
 
 def _series_id_edition_conflict(candidate: FelRelease, target: FelRelease) -> bool:
-    """Shared ids between differently-titled edition rows prove the series.
-
-    Every season disc of a show resolves to the same series-level TMDB and
-    IMDb ids, so a strong-id hit between two rows that both carry edition
-    descriptors but name different editions ("The Complete First Season" vs
-    "The Complete Second Season") is not evidence of the same physical
-    release -- folding them would silently swallow a new season into an
-    older one. A shared blu-ray.com page overrides the stop signal: one disc
-    page is one release no matter how the source spelled the descriptor.
-    """
+    """Report whether shared strong ids prove only a shared series, not a disc."""
+    # Every season disc of a show resolves to the same series-level TMDB and
+    # IMDb ids, so a strong-id hit between two rows that both carry edition
+    # descriptors but name different editions ("The Complete First Season"
+    # vs "The Complete Second Season") is not evidence of the same physical
+    # release -- folding them would silently swallow a new season into an
+    # older one. A shared blu-ray.com page overrides the stop signal: one
+    # disc page is one release no matter how the source spelled the
+    # descriptor.
     candidate_url = canonical_url_key(candidate.bluray_url)
     if candidate_url and candidate_url == canonical_url_key(target.bluray_url):
         return False
