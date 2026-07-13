@@ -358,6 +358,27 @@ def test_lookup_aliases_cover_known_fel_list_romanizations():
         # TMDB dates it 2026 (wide release), and an unpinned 2025 search
         # matches an unrelated same-titled French film instead.
         ("Obsession", "2025"): ("Obsession", "2026"),
+        # Festival-year mislabels: reddit's [2022] Talk to Me is the A24 film
+        # TMDB dates 2023, and reddit's [2005] Brick is the Rian Johnson film
+        # TMDB dates 2006; unpinned searches match low-vote same-titled films
+        # that happen to carry the labeled year.
+        ("Talk to Me", "2022"): ("Talk to Me", "2023"),
+        ("Brick", "2005"): ("Brick", "2006"),
+        # FEL.txt spells the same Brick disc "Brick Vision (2005)", which an
+        # unpinned search resolves to a zero-vote short of that exact name.
+        ("Brick Vision", "2005"): ("Brick", "2006"),
+        # The blu-ray forum list spells Eggers' film "The Witch (2015)"
+        # (festival year); only the "The VVitch" spelling was pinned, so the
+        # 2015 search matched an unrelated Russian film instead.
+        ("The Witch", "2015"): ("The Witch", "2016"),
+        # Reddit's leading title is the "Monster Problems" working title; an
+        # unpinned search matches the unrelated 2015 short of that name
+        # instead of the film's canonical title.
+        ("Monster Problems", "2020"): ("Love and Monsters", "2020"),
+        # The blu-ray forum labels Lustig's Vigilante by its 1982 production
+        # year while TMDB dates it 1983; the 1982 search once matched the
+        # Italian comedy "Vigili e vigilesse" (TMDB 306529) instead.
+        ("Vigilante", "1982"): ("Vigilante", "1983"),
     }
     for (source_title, source_year), (title, year) in cases.items():
         candidate = enrich._lookup_candidates(source_title, source_year)[0]
