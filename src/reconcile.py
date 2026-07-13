@@ -311,7 +311,7 @@ def _same_release_despite_distinct_urls(
 
 
 def _shares_strong_id(left: FelRelease, right: FelRelease) -> bool:
-    return (bool(left.tmdb_id) and left.tmdb_id == right.tmdb_id) or (
+    return (bool(left.tmdb_id) and left.tmdb_identity == right.tmdb_identity) or (
         bool(left.imdb_id) and left.imdb_id == right.imdb_id
     )
 
@@ -344,33 +344,15 @@ def _tmdb_id_matches(candidate: FelRelease, catalog: list[FelRelease]) -> list[i
 
 
 def _same_tmdb_id_different_media(left: FelRelease, right: FelRelease) -> bool:
-    # TMDB movie and TV ids are independent sequences, so a /movie/ row and
-    # a /tv/ row sharing one numeric id name two unrelated works, never one
-    # identity -- even when title and year coincide too.
+    # TMDB movie and TV ids are independent sequences, so a movie row and a
+    # TV row sharing one numeric id name two unrelated works, never one
+    # identity -- even when title and year coincide too. The persisted
+    # media_type field is authoritative: rows written before media typing
+    # existed load as movies (release_from_dict's default), so a legacy row
+    # can never bare-id-match a TV row.
     if not left.tmdb_id or left.tmdb_id != right.tmdb_id:
         return False
-    return _effective_tmdb_kind(left) != _effective_tmdb_kind(right)
-
-
-_TMDB_TV_URL_MARKER = "themoviedb.org/tv/"
-_TMDB_MOVIE_URL_MARKER = "themoviedb.org/movie/"
-
-
-def _tmdb_media_kind(release: FelRelease) -> str:
-    url = release.release_url or ""
-    if _TMDB_TV_URL_MARKER in url:
-        return "tv"
-    if _TMDB_MOVIE_URL_MARKER in url:
-        return "movie"
-    return ""
-
-
-def _effective_tmdb_kind(release: FelRelease) -> str:
-    # Rows created before TV support existed (or added by hand) may lack a
-    # TMDB release URL, but every TV row enrichment creates carries /tv/ --
-    # so a row of unknown kind is a movie-era row, and a URL-less row must
-    # never bare-id-match a TV row (CodeRabbit's legacy-row scenario).
-    return _tmdb_media_kind(release) or "movie"
+    return left.media_type != right.media_type
 
 
 def _match_sets_are_connected(match_sets: list[list[int]]) -> bool:

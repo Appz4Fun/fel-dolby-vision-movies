@@ -247,10 +247,15 @@ def test_merge_prefers_title_with_fewer_dots():
     assert merge_releases(spaced, dotted).movie_title == "The Northman"
 
 
-def test_tmdb_key_uses_tmdb_id_when_present_else_canonical():
+def test_tmdb_key_uses_namespaced_tmdb_identity_when_present_else_canonical():
     resolved = make("Dune", "2021")
     resolved.tmdb_id = "438631"
-    assert tmdb_key(resolved) == ("tmdb", "438631")
+    assert tmdb_key(resolved) == ("tmdb", "movie/438631")
+
+    series = make("Game of Thrones: The Complete First Season", "2011")
+    series.tmdb_id = "1399"
+    series.media_type = "tv"
+    assert tmdb_key(series) == ("tmdb", "tv/1399")
 
     unresolved = make("Dune", "2021")
     assert tmdb_key(unresolved) == canonical_key(unresolved)
@@ -263,7 +268,7 @@ def test_tmdb_key_includes_bluray_url_when_present():
 
     assert tmdb_key(resolved) == (
         "tmdb-bluray",
-        "438631\0https://www.blu-ray.com/movies/Dune-4K-Blu-ray/1",
+        "movie/438631\0https://www.blu-ray.com/movies/Dune-4K-Blu-ray/1",
     )
 
 
@@ -485,3 +490,27 @@ def test_season_identity_gives_complete_series_boxes_a_comparable_label():
     assert merge.season_identity("Attack on Titan: The Complete Final Season") is None
     assert merge.season_identity("Show: Seasons 1-3") is None
     assert merge.season_identity("Oppenheimer") is None
+
+
+def test_dedupe_tmdb_keeps_cross_media_rows_with_same_numeric_id_separate():
+    """A movie and a TV series sharing one numeric tmdb_id are two unrelated
+    works (TMDB movie and TV ids are independent sequences), so TMDB-keyed
+    deduplication must never group them -- even when title and year also
+    coincide."""
+    movie = make("Heat", "1995", tmdb_id="949")
+    tv = make("Heat", "1995", tmdb_id="949", media_type="tv")
+
+    assert dedupe_tmdb_releases([movie, tv]) == [movie, tv]
+
+
+def test_merge_releases_media_type_follows_winning_tmdb_id():
+    # media_type qualifies tmdb_id, so it must travel with whichever side
+    # supplied the id that survives the merge.
+    unresolved = make("Ahsoka: The Complete First Season", "2023")
+    tv = make(
+        "Ahsoka: The Complete First Season", "2023", tmdb_id="114461", media_type="tv"
+    )
+
+    assert merge_releases(unresolved, tv).media_type == "tv"
+    assert merge_releases(tv, unresolved).media_type == "tv"
+    assert merge_releases(unresolved, make("Plain", "2023")).media_type == "movie"

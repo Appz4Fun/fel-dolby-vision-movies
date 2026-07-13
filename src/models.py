@@ -28,6 +28,10 @@ class FelRelease:
     collected_at: str = UNKNOWN
     fel_confirmed: bool = True
     tmdb_id: str = ""
+    # "movie" or "tv". TMDB movie and TV ids are independent numeric
+    # sequences, so a bare tmdb_id only names a work together with its
+    # media type; rows written before media typing existed are movies.
+    media_type: str = "movie"
     imdb_id: str = ""
     poster_path: str = ""
     release_url: str = ""
@@ -39,6 +43,13 @@ class FelRelease:
     @property
     def source_url(self) -> str:
         return self.fel_evidence.source_url
+
+    @property
+    def tmdb_identity(self) -> str:
+        """Namespaced TMDB identity ("movie/603", "tv/1399"); "" unresolved."""
+        if not self.tmdb_id:
+            return ""
+        return f"{self.media_type}/{self.tmdb_id}"
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -52,6 +63,7 @@ class FelRelease:
             "source_url": self.source_url,
             "source_label": self.source_label,
             "tmdb_id": self.tmdb_id,
+            "media_type": self.media_type,
             "imdb_id": self.imdb_id,
             "poster_path": self.poster_path,
             "release_url": self.release_url,
@@ -88,6 +100,7 @@ def release_from_dict(data: dict[str, Any]) -> FelRelease:
         collected_at=data.get("collected_at", UNKNOWN),
         fel_confirmed=data.get("fel_confirmed", True),
         tmdb_id=data.get("tmdb_id", ""),
+        media_type=data.get("media_type") or "movie",
         imdb_id=data.get("imdb_id", ""),
         poster_path=data.get("poster_path", ""),
         release_url=data.get("release_url", ""),

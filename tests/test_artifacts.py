@@ -1908,6 +1908,29 @@ def test_find_duplicate_identity_rows_allows_same_title_different_films():
     assert artifacts.find_duplicate_identity_rows([hosoda, british]) == []
 
 
+def test_find_duplicate_identity_rows_reports_namespaced_tmdb_identity():
+    # TMDB movie and TV ids are independent sequences: a movie and a TV row
+    # sharing title, year, and a coincidental numeric id are two different
+    # works, never a duplicate pair. Real duplicates within one namespace
+    # are reported by their namespaced identity so the publish-gate error
+    # names the work unambiguously.
+    movie = release("Heat", "1995")
+    movie.tmdb_id = "949"
+    tv = release("Heat", "1995")
+    tv.tmdb_id = "949"
+    tv.media_type = "tv"
+
+    assert artifacts.find_duplicate_identity_rows([movie, tv]) == []
+
+    tv_twin = release("Heat", "1995")
+    tv_twin.tmdb_id = "949"
+    tv_twin.media_type = "tv"
+
+    assert artifacts.find_duplicate_identity_rows([tv, tv_twin]) == [
+        ("Heat", "1995", "tv/949")
+    ]
+
+
 def test_write_artifacts_merges_same_tmdb_when_existing_lacks_bluray(
     tmp_path: Path,
 ):

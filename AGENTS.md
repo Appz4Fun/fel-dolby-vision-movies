@@ -73,9 +73,14 @@ updating the symlink.
 - `data/posters/` contains committed poster assets. `dist/index.html`,
   `dist/releases.json`, and `dist/posters/` are generated deployment artifacts;
   `dist/` stays ignored locally.
-- Preserve enrichment fields in release data: `tmdb_id`, `imdb_id`,
-  `poster_path`, `release_url`, `bluray_url`, `bluray_release_date`,
-  `hdr_formats`, and `audio_languages`.
+- Preserve enrichment fields in release data: `tmdb_id`, `media_type`,
+  `imdb_id`, `poster_path`, `release_url`, `bluray_url`,
+  `bluray_release_date`, `hdr_formats`, and `audio_languages`.
+- `tmdb_id` is only meaningful together with `media_type` ("movie" or
+  "tv"): TMDB movie and TV ids are independent numeric sequences, so
+  identity comparisons must use the namespaced pair (see
+  `FelRelease.tmdb_identity`), never the bare numeric id. Rows without a
+  `media_type` predate TV support and load as movies.
 - Sort published release tables by release date, newest first.
 - Exclude release groups from user-facing outputs unless a later spec
   explicitly adds them.

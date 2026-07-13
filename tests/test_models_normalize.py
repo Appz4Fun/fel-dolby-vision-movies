@@ -143,3 +143,70 @@ def test_felrelease_round_trips_bluray_fields():
     assert restored.audio_languages == ["English", "French"]
     assert restored.bluray_url == original.bluray_url
     assert restored.bluray_release_date == "2025-02-18"
+
+
+def test_felrelease_media_type_defaults_to_movie():
+    evidence = FelEvidence(
+        source_url="https://example.test/thread",
+        quote="The Matrix is Profile 7 FEL",
+        evidence_type="sentence",
+    )
+    release = FelRelease(movie_title="The Matrix", fel_evidence=evidence)
+    assert release.media_type == "movie"
+
+
+def test_felrelease_round_trips_media_type():
+    original = FelRelease(
+        movie_title="Game of Thrones: The Complete First Season",
+        release_date="2011",
+        fel_evidence=FelEvidence(
+            source_url="https://example.test/got",
+            quote="GoT S1 is FEL",
+            evidence_type="fel-list",
+        ),
+        tmdb_id="1399",
+        imdb_id="tt0944947",
+        media_type="tv",
+    )
+
+    data = original.to_dict()
+    assert data["media_type"] == "tv"
+
+    restored = release_from_dict(data)
+    assert restored.media_type == "tv"
+
+
+def test_release_from_dict_defaults_absent_media_type_to_movie():
+    # Rows serialized before media typing existed carry no media_type key
+    # (and must never carry an empty one); both shapes load as movie rows,
+    # matching the movie-era assumption those rows were written under.
+    base = {
+        "movie_title": "Heat",
+        "fel_evidence": {
+            "source_url": "https://example.test/heat",
+            "quote": "Heat is FEL",
+            "evidence_type": "fel-list",
+        },
+    }
+    assert release_from_dict(base).media_type == "movie"
+    assert release_from_dict({**base, "media_type": ""}).media_type == "movie"
+
+
+def test_tmdb_identity_namespaces_ids_by_media_type():
+    evidence = FelEvidence(
+        source_url="https://example.test/x",
+        quote="x",
+        evidence_type="fel-list",
+    )
+    unresolved = FelRelease(movie_title="X", fel_evidence=evidence)
+    movie = FelRelease(
+        movie_title="X", fel_evidence=evidence, tmdb_id="1399", media_type="movie"
+    )
+    tv = FelRelease(
+        movie_title="X", fel_evidence=evidence, tmdb_id="1399", media_type="tv"
+    )
+
+    assert unresolved.tmdb_identity == ""
+    assert movie.tmdb_identity == "movie/1399"
+    assert tv.tmdb_identity == "tv/1399"
+    assert movie.tmdb_identity != tv.tmdb_identity

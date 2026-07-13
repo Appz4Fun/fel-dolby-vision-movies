@@ -325,6 +325,10 @@ def enrich_releases(
                 # into the base film.
                 release.movie_title = movie.title
             release.tmdb_id = movie.tmdb_id
+            # Persisted alongside tmdb_id: the bare numeric id only names a
+            # work together with its media namespace, and merge/reconcile
+            # identity keys and the Trakt sync all read the stored field.
+            release.media_type = movie.media_type
             release.imdb_id = movie.imdb_id
             release.release_url = release_url_for(
                 movie.tmdb_id, movie.imdb_id, movie.media_type
