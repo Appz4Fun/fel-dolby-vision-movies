@@ -344,6 +344,117 @@ def test_enrich_keeps_edition_title_despite_alternative_title_match(tmp_path):
     assert releases[0].tmdb_id == "19995"
 
 
+def _static_details_client(tmdb_id, release_date):
+    def handler(request):
+        if request.url.path == f"/3/movie/{tmdb_id}":
+            return httpx.Response(
+                200,
+                json={"poster_path": "", "release_date": release_date},
+            )
+        return httpx.Response(404)
+
+    return httpx.Client(transport=httpx.MockTransport(handler))
+
+
+def test_enrich_retitles_row_whose_spelling_matches_neither_tmdb_title(tmp_path):
+    # TMDB search can score a romanized query directly (no alternative-title
+    # rescue runs), leaving the row titled by a third spelling that matches
+    # neither the canonical nor the original TMDB title -- here the non-latin
+    # original strips to the garbage key "diary", so the recorded
+    # canonical/original pair cannot supply a reconciliation edge either, and
+    # a later English-titled candidate would publish a duplicate row (#55's
+    # "Kaseki no kouya" beside "Fossilized Wilderness"). Adopt the canonical
+    # title so the spellings connect directly.
+    resolver = StaticTmdbResolver(
+        {
+            ("Umimachi Diary", "2015"): {
+                "tmdb_id": "315846",
+                "title": "Our Little Sister",
+                "year": "2015",
+                "imdb_id": "tt3756788",
+                "original_title": "海街diary",
+            }
+        }
+    )
+    client = _static_details_client("315846", "2015-06-13")
+    releases = [make("Umimachi Diary", "2015")]
+    enrich_releases(releases, resolver, client=client, api_key="x", poster_dir=tmp_path)
+    client.close()
+
+    assert releases[0].movie_title == "Our Little Sister"
+    assert releases[0].tmdb_id == "315846"
+
+
+def test_enrich_keeps_row_titled_by_the_original_spelling(tmp_path):
+    # A row titled by the film's (latin) original title connects through the
+    # recorded canonical/original pair, which is reconciliation's edge
+    # between the two spellings, so native-titled rows keep their source
+    # spelling (the catalog convention).
+    resolver = StaticTmdbResolver(
+        {
+            ("O Agente Secreto", "2025"): {
+                "tmdb_id": "1220564",
+                "title": "The Secret Agent",
+                "year": "2025",
+                "imdb_id": "tt31710303",
+                "original_title": "O Agente Secreto",
+            }
+        }
+    )
+    client = _static_details_client("1220564", "2025-07-23")
+    releases = [make("O Agente Secreto", "2025")]
+    enrich_releases(releases, resolver, client=client, api_key="x", poster_dir=tmp_path)
+    client.close()
+
+    assert releases[0].movie_title == "O Agente Secreto"
+    assert releases[0].additional_characteristics["tmdb_title"] == "The Secret Agent"
+
+
+def test_enrich_keeps_edition_title_when_original_title_is_non_latin(tmp_path):
+    # Edition-descriptor rows keep their source spelling for the same reason
+    # the alternative-title rescue skips them: renaming would collapse a
+    # distinct physical edition into the base film.
+    resolver = StaticTmdbResolver(
+        {
+            ("Umimachi Diary Steelbook", "2015"): {
+                "tmdb_id": "315846",
+                "title": "Our Little Sister",
+                "year": "2015",
+                "imdb_id": "tt3756788",
+                "original_title": "海街diary",
+            }
+        }
+    )
+    client = _static_details_client("315846", "2015-06-13")
+    releases = [make("Umimachi Diary Steelbook", "2015")]
+    enrich_releases(releases, resolver, client=client, api_key="x", poster_dir=tmp_path)
+    client.close()
+
+    assert releases[0].movie_title == "Umimachi Diary Steelbook"
+
+
+def test_enrich_keeps_source_title_when_canonical_title_is_also_non_latin(tmp_path):
+    # When TMDB's canonical title strips to an empty key too, retitling
+    # cannot create a connectable spelling; the source spelling stays.
+    resolver = StaticTmdbResolver(
+        {
+            ("Mo tong jiang shi", "2019"): {
+                "tmdb_id": "615453",
+                "title": "哪吒之魔童降世",
+                "year": "2019",
+                "imdb_id": "tt10627720",
+                "original_title": "哪吒之魔童降世",
+            }
+        }
+    )
+    client = _static_details_client("615453", "2019-07-26")
+    releases = [make("Mo tong jiang shi", "2019")]
+    enrich_releases(releases, resolver, client=client, api_key="x", poster_dir=tmp_path)
+    client.close()
+
+    assert releases[0].movie_title == "Mo tong jiang shi"
+
+
 def test_lookup_aliases_cover_known_fel_list_romanizations():
     # Titles the reddit FEL list spells by romanized/native/sequel-alias
     # names that TMDB's title+original_title scoring cannot resolve; each is

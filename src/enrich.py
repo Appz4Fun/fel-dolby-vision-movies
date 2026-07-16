@@ -197,6 +197,28 @@ def _resolution_candidates(release: FelRelease, year: str) -> list[_LookupCandid
     return candidates
 
 
+def _title_connects_to_no_tmdb_spelling(release: FelRelease, movie: TmdbMovie) -> bool:
+    """True when the row's spelling can never title-connect to the film."""
+    # Reconciliation connects same-identity rows through title keys:
+    # directly, when the row is titled by the film's canonical TMDB title,
+    # or through the recorded canonical/original pair, when the row is
+    # titled by the original spelling and both pair keys survive
+    # canonical_title_key (a non-latin original strips to an empty or
+    # garbage key and the pair is discarded). A row titled by any third
+    # spelling has no edge to a future candidate for the same film, so
+    # keeping it risks publishing a duplicate row.
+    canonical_key = canonical_title_key(movie.title)
+    if not canonical_key or has_edition_descriptor(release.movie_title):
+        # A non-latin canonical title cannot supply a connectable spelling,
+        # and retitling an edition-descriptor row would collapse a distinct
+        # physical edition into the base film.
+        return False
+    row_key = canonical_title_key(release.movie_title)
+    if row_key == canonical_key:
+        return False
+    return not row_key or row_key != canonical_title_key(movie.original_title)
+
+
 def _record_tmdb_title_pair(release: FelRelease, movie: TmdbMovie) -> None:
     """Record TMDB's canonical/original title pair for foreign-language films.
 
@@ -360,6 +382,16 @@ def enrich_releases(
                 # TMDB lists edition names among alternative titles, and
                 # renaming those would collapse a distinct physical edition
                 # into the base film.
+                release.movie_title = movie.title
+            elif _title_connects_to_no_tmdb_spelling(release, movie):
+                # The row is titled by a third spelling that matches neither
+                # of the titles TMDB reports (typically a romanization of a
+                # non-latin original title that search scored directly, so no
+                # alternative-title rescue ran). Reconciliation has no edge
+                # from such a spelling to a later candidate titled
+                # canonically, which would publish a duplicate row ("Kaseki
+                # no kouya" beside "Fossilized Wilderness"); adopt the
+                # canonical TMDB title so the titles connect directly.
                 release.movie_title = movie.title
             release.tmdb_id = movie.tmdb_id
             # Persisted alongside tmdb_id: the bare numeric id only names a
