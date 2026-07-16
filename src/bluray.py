@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import html
 import json
 from pathlib import Path
@@ -118,7 +118,13 @@ _DIRECT_4K_URL_RE = re.compile(
     r"^https://www\.blu-ray\.com/movies/([^/?#]+)-4K-Blu-ray/\d+/?$"
 )
 _YEAR_IN_TITLE_RE = re.compile(r"\((\d{4})\)")
+_BLOCK_BODY_RE = re.compile(r"error\d+")
 DEFAULT_BLURAY_CACHE = Path(".cache/bluray.json")
+# A cached miss only proves the title was unmatched when it was recorded --
+# the disc may not have existed yet, or the site was serving degraded pages
+# -- so misses are retried after this window. Hits never expire.
+_MISS_TTL = timedelta(days=7)
+_MISS_CACHED_AT_KEY = "miss_cached_at"
 BLURAY_USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
@@ -146,8 +152,29 @@ def _parse_release_date(text: str) -> str:
         return ""
 
 
+# Raised when blu-ray.com answers with an anti-bot block body instead of a
+# page; subclassing httpx.HTTPError keeps enrichment's existing failure
+# handling (count bluray_failed, cache nothing) in charge of it.
+class BlurayBlockedError(httpx.HTTPError):
+    pass
+
+
+def _raise_if_blocked(html_text: str) -> None:
+    """Raise BlurayBlockedError when the body is a bare block token."""
+    # Under rate limiting, blu-ray.com returns HTTP 200 with a body like
+    # "error42". Parsing that as a page finds no results, which resolve()
+    # would record as a permanent miss for a title the site does carry --
+    # poisoning the cache. Surfacing it as an httpx error instead means
+    # enrichment counts a bluray_failed lookup and nothing is cached.
+    if _BLOCK_BODY_RE.fullmatch(html_text.strip()):
+        raise BlurayBlockedError(
+            f"blu-ray.com served a block page: {html_text.strip()!r}"
+        )
+
+
 def fetch_bluray_details(client: httpx.Client, url: str) -> BlurayDetails:
     html_text = _get_with_retry(client, url).text
+    _raise_if_blocked(html_text)
 
     hdr_match = _HDR_RE.search(html_text)
     hdr_formats = parse_hdr(hdr_match.group(1)) if hdr_match else []
@@ -206,6 +233,7 @@ def _search_bluray_keyword(
     if direct_url is not None:
         return direct_url
     html_text = response.text
+    _raise_if_blocked(html_text)
     want_titles = {canonical_title_key(title) for title in match_titles}
     want_year = int(year[:4]) if year[:4].isdigit() else None
 
@@ -249,7 +277,9 @@ class StaticBlurayResolver:
 
 def _details_to_record(details: BlurayDetails | None) -> dict[str, object] | None:
     if details is None:
-        return None  # pragma: no cover - unresolved blu-ray match
+        # Timestamped so the miss can be retried after _MISS_TTL instead of
+        # sticking forever (legacy caches stored a bare null here).
+        return {_MISS_CACHED_AT_KEY: datetime.now(timezone.utc).isoformat()}
     return {
         "url": details.url,
         "bluray_release_date": details.bluray_release_date,
@@ -260,8 +290,8 @@ def _details_to_record(details: BlurayDetails | None) -> dict[str, object] | Non
 
 
 def _details_from_record(record: dict[str, object] | None) -> BlurayDetails | None:
-    if record is None:
-        return None  # pragma: no cover - cached None-result
+    if record is None or _MISS_CACHED_AT_KEY in record:
+        return None
     return BlurayDetails(
         url=str(record.get("url") or ""),
         bluray_release_date=str(record.get("bluray_release_date") or ""),
@@ -269,6 +299,22 @@ def _details_from_record(record: dict[str, object] | None) -> BlurayDetails | No
         audio_languages=list(record.get("audio_languages") or []),
         hdr_formats=list(record.get("hdr_formats") or []),
     )
+
+
+def _cache_record_expired(record: dict[str, object] | None) -> bool:
+    """True when a cached miss is stale (or legacy) and must be retried."""
+    # Hits never expire. Legacy caches recorded misses as bare nulls with no
+    # timestamp; treating those as already expired retries them immediately,
+    # which also heals caches poisoned by pre-guard block pages.
+    if record is None:
+        return True
+    if _MISS_CACHED_AT_KEY not in record:
+        return False
+    try:
+        cached_at = datetime.fromisoformat(str(record[_MISS_CACHED_AT_KEY]))
+        return datetime.now(timezone.utc) - cached_at > _MISS_TTL
+    except (ValueError, TypeError):
+        return True
 
 
 class BlurayResolver:
@@ -289,7 +335,7 @@ class BlurayResolver:
 
     def resolve(self, title: str, year: str) -> BlurayDetails | None:
         key = f"{title}\0{year}"
-        if key in self.cache:
+        if key in self.cache and not _cache_record_expired(self.cache[key]):
             return _details_from_record(self.cache[key])
         details: BlurayDetails | None = None
         url = search_bluray(self.client, title, year)
