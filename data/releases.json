@@ -78,8 +78,10 @@
     "fel_confirmed": true,
     "release_date": "2026-04-10",
     "studio": "Broken Open Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {},
     "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
     "source_label": "reddit",
@@ -88,10 +90,16 @@
     "imdb_id": "tt7708226",
     "poster_path": "data/posters/1292415.jpg",
     "release_url": "https://www.themoviedb.org/movie/1292415",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
+    "bluray_url": "https://www.blu-ray.com/movies/Beast-4K-Blu-ray/409513/",
+    "bluray_release_date": "2026-06-25",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "German"
+    ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Beast [2026]",
@@ -750,8 +758,10 @@
     "fel_confirmed": true,
     "release_date": "2025-11-06",
     "studio": "Bluestone Entertainment",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -765,13 +775,15 @@
     "imdb_id": "tt29567915",
     "poster_path": "data/posters/1214931.jpg",
     "release_url": "https://www.themoviedb.org/movie/1214931",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Nuremberg-4K-Blu-ray/402243/",
+    "bluray_release_date": "2026-02-05",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Nuremberg (2025) listed as Profile 7 FEL",
@@ -1849,7 +1861,10 @@
     "fel_confirmed": true,
     "release_date": "2025-06-06",
     "studio": "Movistar Plus+",
-    "audio_formats": [],
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "LPCM 2.0"
+    ],
     "english_audio": "Unknown",
     "additional_characteristics": {},
     "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -1859,10 +1874,15 @@
     "imdb_id": "tt32298285",
     "poster_path": "data/posters/1151272.jpg",
     "release_url": "https://www.themoviedb.org/movie/1151272",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
+    "bluray_url": "https://www.blu-ray.com/movies/Sirat-4K-Blu-ray/407445/",
+    "bluray_release_date": "2026-05-25",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "Spanish"
+    ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Sirât [2025]",
@@ -5352,8 +5372,11 @@
     "fel_confirmed": true,
     "release_date": "2023-08-23",
     "studio": "The Picture Company",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://github.com/iammarxg/FEL",
@@ -5369,13 +5392,16 @@
     "imdb_id": "tt6906292",
     "poster_path": "data/posters/762430.jpg",
     "release_url": "https://www.themoviedb.org/movie/762430",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Retribution-4K-Blu-ray/345844/",
+    "bluray_release_date": "2024-02-01",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "German"
+    ],
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Retribution (2023) listed as Profile 7 FEL",
@@ -7034,8 +7060,12 @@
     "fel_confirmed": true,
     "release_date": "2022-09-28",
     "studio": "Phantom Four",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS 5.1",
+      "DTS 2.0"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -7049,13 +7079,16 @@
     "imdb_id": "tt0887261",
     "poster_path": "data/posters/338947.jpg",
     "release_url": "https://www.themoviedb.org/movie/338947",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Hellraiser-4K-Blu-ray/381661/",
+    "bluray_release_date": "2025-12-11",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "German"
+    ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=377093&page=8",
       "quote": "Hellraiser (2022) listed as Profile 7 FEL",
@@ -7673,8 +7706,10 @@
     "fel_confirmed": true,
     "release_date": "2022-05-20",
     "studio": "A24",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -7688,13 +7723,16 @@
     "imdb_id": "tt13841850",
     "poster_path": "data/posters/780609.jpg",
     "release_url": "https://www.themoviedb.org/movie/780609",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Men-4K-Blu-ray/320654/",
+    "bluray_release_date": "2022-10-27",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "German",
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Men (2022) listed as Profile 7 FEL",
@@ -15428,8 +15466,10 @@
     "fel_confirmed": true,
     "release_date": "2015-08-13",
     "studio": "Wigram Productions",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://github.com/iammarxg/FEL"
@@ -15442,13 +15482,15 @@
     "imdb_id": "tt1638355",
     "poster_path": "data/posters/203801.jpg",
     "release_url": "https://www.themoviedb.org/movie/203801",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Man-from-UNCLE-4K-Blu-ray/360195/",
+    "bluray_release_date": "2024-07-30",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Listed as #340 on iammarxg/FEL README: 'The Man from U.N.C.L.E. (2015)'. Also present on letterboxd mikimajk P7-FEL list (page 6).",
@@ -15462,8 +15504,12 @@
     "fel_confirmed": true,
     "release_date": "2015-08-05",
     "studio": "20th Century Fox",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 7.1",
+      "DD 5.1",
+      "DTS 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -15477,13 +15523,19 @@
     "imdb_id": "tt1502712",
     "poster_path": "data/posters/166424.jpg",
     "release_url": "https://www.themoviedb.org/movie/166424",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Fantastic-4-4K-Blu-ray/145681/",
+    "bluray_release_date": "2016-02-14",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "Spanish",
+      "French",
+      "Italian",
+      "Japanese"
+    ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=387630&page=13",
       "quote": "Fantastic Four (2015) listed as Profile 7 FEL",
@@ -15852,8 +15904,12 @@
     "fel_confirmed": true,
     "release_date": "2014-11-24",
     "studio": "StudioCanal",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1",
+      "LPCM 2.0"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://github.com/iammarxg/FEL",
@@ -15869,13 +15925,15 @@
     "imdb_id": "tt1109624",
     "poster_path": "data/posters/116149.jpg",
     "release_url": "https://www.themoviedb.org/movie/116149",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Paddington-4K-Blu-ray/375400/",
+    "bluray_release_date": "2025-05-26",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/1WiD-lECLFdOhCTW8_o9z92_-frsT-CSgo9xPuCcEpmQ/edit?usp=sharing",
       "quote": "Paddington (2014) listed as Profile 7 FEL",
@@ -17137,8 +17195,11 @@
     "fel_confirmed": true,
     "release_date": "2013-03-27",
     "studio": "Paramount Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD 7.1",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "enhancement_bitrate_mbps": "5.99"
     },
@@ -17149,13 +17210,23 @@
     "imdb_id": "tt1583421",
     "poster_path": "data/posters/72559.jpg",
     "release_url": "https://www.themoviedb.org/movie/72559",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/GI-Joe-Retaliation-4K-Blu-ray/205267/",
+    "bluray_release_date": "2021-07-20",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "German",
+      "Spanish",
+      "French",
+      "French (Canada)",
+      "Italian",
+      "Japanese",
+      "Portuguese",
+      "Russian"
+    ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
       "quote": "G.I. Joe: Retaliation (2013) FEL - 5.99 Mb/s",
@@ -17619,8 +17690,10 @@
     "fel_confirmed": true,
     "release_date": "2012-09-07",
     "studio": "Rena Film",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "enhancement_bitrate_mbps": "14.04",
       "source_urls": [
@@ -17639,13 +17712,16 @@
     "imdb_id": "tt1343727",
     "poster_path": "data/posters/49049.jpg",
     "release_url": "https://www.themoviedb.org/movie/49049",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Dredd-4K-Blu-ray/321459/",
+    "bluray_release_date": "2022-07-06",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "Italian",
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
       "quote": "Dredd (2012) FEL - 14.04 Mb/s",
@@ -18735,8 +18811,10 @@
     "fel_confirmed": true,
     "release_date": "2011-01-13",
     "studio": "CBS Films",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {},
     "source_url": "https://github.com/iammarxg/FEL",
     "source_label": "github",
@@ -18745,10 +18823,16 @@
     "imdb_id": "tt0472399",
     "poster_path": "data/posters/27582.jpg",
     "release_url": "https://www.themoviedb.org/movie/27582",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
+    "bluray_url": "https://www.blu-ray.com/movies/The-Mechanic-4K-Blu-ray/341402/",
+    "bluray_release_date": "2023-10-20",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "German",
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "The Mechanic [2011]",
@@ -19433,8 +19517,13 @@
     "fel_confirmed": true,
     "release_date": "2009-12-16",
     "studio": "Dune Entertainment",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {},
     "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
     "source_label": "discourse",
@@ -19443,10 +19532,18 @@
     "imdb_id": "tt0499549",
     "poster_path": "data/posters/19995.jpg",
     "release_url": "https://www.themoviedb.org/movie/19995",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [],
-    "audio_languages": [],
+    "bluray_url": "https://www.blu-ray.com/movies/Avatar-4K-Blu-ray/349437/",
+    "bluray_release_date": "2023-12-19",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish",
+      "German"
+    ],
     "fel_evidence": {
       "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
       "quote": "Avatar Extended Edition (2009)",
@@ -19664,8 +19761,11 @@
     "fel_confirmed": true,
     "release_date": "2009-08-03",
     "studio": "Paramount Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "enhancement_bitrate_mbps": "5.56"
     },
@@ -19676,13 +19776,23 @@
     "imdb_id": "tt1046173",
     "poster_path": "data/posters/14869.jpg",
     "release_url": "https://www.themoviedb.org/movie/14869",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/GI-Joe-The-Rise-of-Cobra-4K-Blu-ray/205268/",
+    "bluray_release_date": "2021-07-20",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "German",
+      "Spanish",
+      "French",
+      "Italian",
+      "Japanese",
+      "Mandarin",
+      "Portuguese",
+      "Russian"
+    ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
       "quote": "G.I. Joe: The Rise of Cobra (2009) FEL - 5.56 Mb/s",
@@ -21282,8 +21392,10 @@
     "fel_confirmed": true,
     "release_date": "2007-03-10",
     "studio": "IDT Entertainment",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://github.com/iammarxg/FEL",
@@ -21299,13 +21411,15 @@
     "imdb_id": "tt0817910",
     "poster_path": "data/posters/13204.jpg",
     "release_url": "https://www.themoviedb.org/movie/13204",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Hellboy-Animated-Blood-and-Iron-4K-Blu-ray/270824/",
+    "bluray_release_date": "2019-04-02",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Hellboy Animated: Blood and Iron (2007) listed as Profile 7 FEL",
@@ -25447,8 +25561,11 @@
     "fel_confirmed": true,
     "release_date": "2000-11-17",
     "studio": "Universal Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS:X 7.1",
+      "DTS 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -25462,13 +25579,19 @@
     "imdb_id": "tt0170016",
     "poster_path": "data/posters/8871.jpg",
     "release_url": "https://www.themoviedb.org/movie/8871",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Dr-Seuss-How-the-Grinch-Stole-Christmas-4K-Blu-ray/186508/",
+    "bluray_release_date": "2017-10-17",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "Portuguese",
+      "French (Canada)",
+      "Japanese",
+      "Spanish"
+    ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "How the Grinch Stole Christmas (2000) listed as Profile 7 FEL",
@@ -25810,7 +25933,10 @@
     "fel_confirmed": true,
     "release_date": "2000-06-16",
     "studio": "Altavista Films",
-    "audio_formats": [],
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
     "english_audio": "Unknown",
     "additional_characteristics": {
       "source_urls": [
@@ -25825,13 +25951,16 @@
     "imdb_id": "tt0245712",
     "poster_path": "data/posters/55.jpg",
     "release_url": "https://www.themoviedb.org/movie/55",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Amours-chiennes-4K-Blu-ray/399140/",
+    "bluray_release_date": "2025-11-14",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "Spanish",
+      "French"
+    ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Amores Perros (2000) listed as Profile 7 FEL",
@@ -27447,8 +27576,11 @@
     "fel_confirmed": true,
     "release_date": "1998-08-05",
     "studio": "Dimension Films",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://forum.blu-ray.com/showthread.php?t=327042&page=59",
@@ -27463,13 +27595,15 @@
     "imdb_id": "tt0120694",
     "poster_path": "data/posters/11675.jpg",
     "release_url": "https://www.themoviedb.org/movie/11675",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Halloween-H20-Twenty-Years-Later-4K-Blu-ray/318438/",
+    "bluray_release_date": "2022-10-04",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
       "quote": "Halloween H20: 20 Years Later (1998) listed as Profile 7 FEL",
@@ -28925,8 +29059,11 @@
     "fel_confirmed": true,
     "release_date": "1996-08-09",
     "studio": "Paramount Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DD 5.1"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {},
     "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
     "source_label": "codex-ai",
@@ -28935,13 +29072,18 @@
     "imdb_id": "tt0116225",
     "poster_path": "data/posters/10061.jpg",
     "release_url": "https://www.themoviedb.org/movie/10061",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Escape-from-LA-4K-Blu-ray/306760/",
+    "bluray_release_date": "2022-02-22",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "French",
+      "German",
+      "Spanish"
+    ],
     "fel_evidence": {
       "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
       "quote": "Listed on 'List of Dolby Vision P7-FEL Films' as 'Escape from L.A. [1996]'.",
@@ -35682,8 +35824,10 @@
     "fel_confirmed": true,
     "release_date": "1989-02-17",
     "studio": "DEG",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {},
     "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
     "source_label": "codex-ai",
@@ -35692,13 +35836,17 @@
     "imdb_id": "tt0096928",
     "poster_path": "data/posters/1648.jpg",
     "release_url": "https://www.themoviedb.org/movie/1648",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Bill-and-Teds-Excellent-Adventure-4K-Blu-ray/272343/",
+    "bluray_release_date": "2020-08-10",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "French",
+      "German"
+    ],
     "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=1226038728#gid=1226038728",
       "quote": "source: BD FEL VS BL",
@@ -38689,8 +38837,11 @@
     "fel_confirmed": true,
     "release_date": "1985-11-01",
     "studio": "SLM Production Group",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
@@ -38703,13 +38854,15 @@
     "imdb_id": "tt0090180",
     "poster_path": "data/posters/9846.jpg",
     "release_url": "https://www.themoviedb.org/movie/9846",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/To-Live-and-Die-in-LA-4K-Blu-ray/296068/",
+    "bluray_release_date": "2023-07-18",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md",
       "quote": "Listed as entry #551 in iammarxg/FEL README: 'To Live and Die in L.A. [1985]'.",
@@ -40727,8 +40880,8 @@
     "imdb_id": "tt0089691",
     "poster_path": "data/posters/52970.jpg",
     "release_url": "https://www.themoviedb.org/movie/52970",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Ninja-Wars-4K-Blu-ray/346796/",
+    "bluray_release_date": "2023-04-28",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
@@ -41570,8 +41723,11 @@
     "fel_confirmed": true,
     "release_date": "1981-10-15",
     "studio": "Renaissance Pictures",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "enhancement_bitrate_mbps": "7.49",
       "source_urls": [
@@ -41596,7 +41752,13 @@
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "French",
+      "German",
+      "Italian",
+      "Spanish"
+    ],
     "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
       "quote": "Evil Dead (1981) | BD-FEL | L1 | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Catch.Me.If.You.Can.2002 | 0 | itunes | plot | cmv4.0 bloc can be transferred to the P7 RPU (workflow 2-3)",
@@ -42150,8 +42312,11 @@
     "fel_confirmed": true,
     "release_date": "1981-05-01",
     "studio": "Georgetown Productions",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "Dolby TrueHD 5.1",
+      "DD 2.0 Mono"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://github.com/iammarxg/FEL",
@@ -42167,13 +42332,18 @@
     "imdb_id": "tt0082418",
     "poster_path": "data/posters/9725.jpg",
     "release_url": "https://www.themoviedb.org/movie/9725",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Friday-the-13th-Part-II-4K-Blu-ray/367046/",
+    "bluray_release_date": "2026-02-03",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English",
+      "German",
+      "French",
+      "Italian"
+    ],
     "fel_evidence": {
       "source_url": "https://docs.google.com/spreadsheets/d/15i0a84uiBtWiHZ5CXZZ7wygLFXwYOd84/edit?gid=828864432#gid=828864432",
       "quote": "Friday.the.13th.Part.2.1981 | BD-FEL | HDR COMP | Can only be played on a FEL device and can't be converted to P8 without baking FEL into BL | Contagion.2011 | (+16 T0/B0) | MAX | HDR COMP | nits",
@@ -43029,8 +43199,14 @@
     "fel_confirmed": true,
     "release_date": "1979-09-17",
     "studio": "KADOKAWA",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DD 4.0",
+      "DD 2.0 Mono",
+      "DD 2.0",
+      "DD 5.1",
+      "Dolby Atmos"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/"
@@ -43045,13 +43221,16 @@
     "imdb_id": "tt0083050",
     "poster_path": "data/posters/73990.jpg",
     "release_url": "https://www.themoviedb.org/movie/73990",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/I-Want-To-4K-Blu-ray/322410/",
+    "bluray_release_date": "2022-10-28",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "Japanese",
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/4/",
       "quote": "\"G.I. Samurai\" — appears in the curated 'List of Dolby Vision P7-FEL Films' on Letterboxd (page 4).",
@@ -45023,8 +45202,10 @@
     "fel_confirmed": true,
     "release_date": "1974-08-29",
     "studio": "Impact Films",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/"
@@ -45037,13 +45218,15 @@
     "imdb_id": "tt0068457",
     "poster_path": "data/posters/38996.jpg",
     "release_url": "https://www.themoviedb.org/movie/38996",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Deathdream-4K-Blu-ray/336168/",
+    "bluray_release_date": "2024-05-21",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/page/3/",
       "quote": "Dead of Night",
@@ -45679,7 +45862,9 @@
     "fel_confirmed": true,
     "release_date": "1973-03-07",
     "studio": "Cinétel",
-    "audio_formats": [],
+    "audio_formats": [
+      "DTS-HD MA 2.0 Mono"
+    ],
     "english_audio": "Unknown",
     "additional_characteristics": {
       "source_urls": [
@@ -45694,13 +45879,16 @@
     "imdb_id": "tt0068883",
     "poster_path": "data/posters/3478.jpg",
     "release_url": "https://www.themoviedb.org/movie/3478",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Ludwig-ou-Le-Crepuscule-des-Dieux-4K-Blu-ray/324779/",
+    "bluray_release_date": "2022-12-07",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "Italian",
+      "French"
+    ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Ludwig (1973) listed as Profile 7 FEL",
@@ -46830,8 +47018,10 @@
     "fel_confirmed": true,
     "release_date": "1969-04-03",
     "studio": "Etablissement Sargon",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA Mono"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
@@ -46845,13 +47035,15 @@
     "imdb_id": "tt0062870",
     "poster_path": "data/posters/72309.jpg",
     "release_url": "https://www.themoviedb.org/movie/72309",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Marquis-de-Sades-Justine-4K-Blu-ray/325162/",
+    "bluray_release_date": "2023-02-21",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
       "quote": "Marquis de Sade: Justine (1969) listed as Profile 7 FEL",
@@ -48454,8 +48646,11 @@
     "fel_confirmed": true,
     "release_date": "1957-05-30",
     "studio": "Wallis-Hazen Inc.",
-    "audio_formats": [],
-    "english_audio": "Unknown",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
     "additional_characteristics": {
       "source_urls": [
         "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523"
@@ -48468,13 +48663,15 @@
     "imdb_id": "tt0050468",
     "poster_path": "data/posters/22201.jpg",
     "release_url": "https://www.themoviedb.org/movie/22201",
-    "bluray_url": "",
-    "bluray_release_date": "",
+    "bluray_url": "https://www.blu-ray.com/movies/Gunfight-at-the-OK-Corral-4K-Blu-ray/348528/",
+    "bluray_release_date": "2024-02-27",
     "hdr_formats": [
       "Dolby Vision",
       "HDR10"
     ],
-    "audio_languages": [],
+    "audio_languages": [
+      "English"
+    ],
     "fel_evidence": {
       "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
       "quote": "Gunfight at the O.K. Corral (1957) listed as Profile 7 FEL",
