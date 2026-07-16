@@ -8917,51 +8917,6 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
-    "movie_title": "Game of Thrones: The Complete Eighth Season",
-    "fel_confirmed": true,
-    "release_date": "2019",
-    "studio": "HBO",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1",
-      "DD 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "4.08"
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "Unknown",
-    "tmdb_id": "1399",
-    "media_type": "tv",
-    "imdb_id": "tt0944947",
-    "poster_path": "data/posters/got-1399.jpg",
-    "release_url": "https://www.themoviedb.org/tv/1399",
-    "bluray_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Eighth-Season-4K-Blu-ray/265135/",
-    "bluray_release_date": "2020-02-11",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "German",
-      "Italian",
-      "Portuguese",
-      "Hungarian",
-      "Polish",
-      "Russian",
-      "Spanish"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Game of Thrones: The Complete Eighth Season (2019) FEL - 4.08 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:36:04+00:00"
-  },
-  {
     "movie_title": "1917",
     "fel_confirmed": true,
     "release_date": "2019-12-25",
@@ -10264,6 +10219,51 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
+    "movie_title": "Game of Thrones: The Complete Eighth Season",
+    "fel_confirmed": true,
+    "release_date": "2019",
+    "studio": "HBO",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "DD 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "enhancement_bitrate_mbps": "4.08"
+    },
+    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+    "source_label": "Unknown",
+    "tmdb_id": "1399",
+    "media_type": "tv",
+    "imdb_id": "tt0944947",
+    "poster_path": "data/posters/got-1399.jpg",
+    "release_url": "https://www.themoviedb.org/tv/1399",
+    "bluray_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-Eighth-Season-4K-Blu-ray/265135/",
+    "bluray_release_date": "2020-02-11",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "German",
+      "Italian",
+      "Portuguese",
+      "Hungarian",
+      "Polish",
+      "Russian",
+      "Spanish"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+      "quote": "Game of Thrones: The Complete Eighth Season (2019) FEL - 4.08 Mb/s",
+      "evidence_type": "list-item",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:36:04+00:00"
+  },
+  {
     "movie_title": "Mary Queen of Scots",
     "fel_confirmed": true,
     "release_date": "2018-12-07",
@@ -11457,6 +11457,44 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
+    "movie_title": "The Captain",
+    "fel_confirmed": true,
+    "release_date": "2018-03-15",
+    "studio": "Filmgalerie 451",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {
+      "source_urls": [
+        "https://github.com/iammarxg/FEL",
+        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
+        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
+      ]
+    },
+    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+    "source_label": "github",
+    "tmdb_id": "475094",
+    "media_type": "movie",
+    "imdb_id": "tt6763252",
+    "poster_path": "data/posters/475094.jpg",
+    "release_url": "https://www.themoviedb.org/movie/475094",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
+      "quote": "Source page titled \"List of Dolby Vision P7-FEL Films\" includes list item \"Der Hauptmann AKA The Captain [2017]\".",
+      "evidence_type": "ai-extracted",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
     "movie_title": "Death Wish",
     "fel_confirmed": true,
     "release_date": "2018-03-01",
@@ -12092,44 +12130,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:37:17+00:00"
-  },
-  {
-    "movie_title": "The Captain",
-    "fel_confirmed": true,
-    "release_date": "2018-03-15",
-    "studio": "Filmgalerie 451",
-    "audio_formats": [],
-    "english_audio": "Unknown",
-    "additional_characteristics": {
-      "source_urls": [
-        "https://github.com/iammarxg/FEL",
-        "https://old.reddit.com/r/CoreELEC/comments/1jamlw6/list_of_dolby_vision_p7fel_films/",
-        "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
-        "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-        "https://raw.githubusercontent.com/iammarxg/FEL/master/README.md"
-      ]
-    },
-    "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-    "source_label": "github",
-    "tmdb_id": "475094",
-    "media_type": "movie",
-    "imdb_id": "tt6763252",
-    "poster_path": "data/posters/475094.jpg",
-    "release_url": "https://www.themoviedb.org/movie/475094",
-    "bluray_url": "",
-    "bluray_release_date": "",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [],
-    "fel_evidence": {
-      "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
-      "quote": "Source page titled \"List of Dolby Vision P7-FEL Films\" includes list item \"Der Hauptmann AKA The Captain [2017]\".",
-      "evidence_type": "ai-extracted",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
     "movie_title": "The Hitman's Bodyguard",
@@ -16605,6 +16605,41 @@
     "collected_at": "2026-05-22T23:06:02+00:00"
   },
   {
+    "movie_title": "The Grey",
+    "fel_confirmed": true,
+    "release_date": "2012-01-26",
+    "studio": "Open Road Films",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/4/",
+    "source_label": "letterboxd",
+    "tmdb_id": "75174",
+    "media_type": "movie",
+    "imdb_id": "tt1601913",
+    "poster_path": "data/posters/75174.jpg",
+    "release_url": "https://www.themoviedb.org/movie/75174",
+    "bluray_url": "https://www.blu-ray.com/movies/The-Grey-4K-Blu-ray/397991/",
+    "bluray_release_date": "2025-12-09",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/4/",
+      "quote": "The Grey (2011)",
+      "evidence_type": "letterboxd-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-26T13:26:56.588876+00:00"
+  },
+  {
     "movie_title": "Man on a Ledge",
     "fel_confirmed": true,
     "release_date": "2012-01-13",
@@ -16645,55 +16680,6 @@
     "fel_evidence": {
       "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
       "quote": "Man on a Ledge (2012) FEL - 7.54 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:36:04+00:00"
-  },
-  {
-    "movie_title": "Game of Thrones: The Complete First Season",
-    "fel_confirmed": true,
-    "release_date": "2011",
-    "studio": "HBO",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DD 5.1",
-      "DD 2.0",
-      "DTS 2.0",
-      "DTS 5.1"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "3.48"
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "Unknown",
-    "tmdb_id": "1399",
-    "media_type": "tv",
-    "imdb_id": "tt0944947",
-    "poster_path": "data/posters/got-1399.jpg",
-    "release_url": "https://www.themoviedb.org/tv/1399",
-    "bluray_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-First-Season-4K-Blu-ray/202472/",
-    "bluray_release_date": "2018-06-05",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Spanish",
-      "German",
-      "Italian",
-      "Portuguese",
-      "Czech",
-      "Hungarian",
-      "Polish",
-      "Russian"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Game of Thrones: The Complete First Season (2011) FEL - 3.48 Mb/s",
       "evidence_type": "list-item",
       "location": "Unknown"
     },
@@ -17236,41 +17222,6 @@
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
   },
   {
-    "movie_title": "The Grey",
-    "fel_confirmed": true,
-    "release_date": "2012-01-26",
-    "studio": "Open Road Films",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/4/",
-    "source_label": "letterboxd",
-    "tmdb_id": "75174",
-    "media_type": "movie",
-    "imdb_id": "tt1601913",
-    "poster_path": "data/posters/75174.jpg",
-    "release_url": "https://www.themoviedb.org/movie/75174",
-    "bluray_url": "https://www.blu-ray.com/movies/The-Grey-4K-Blu-ray/397991/",
-    "bluray_release_date": "2025-12-09",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://letterboxd.com/mikimajk/list/list-of-dolby-vision-p7-fel-films/detail/page/4/",
-      "quote": "The Grey (2011)",
-      "evidence_type": "letterboxd-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-26T13:26:56.588876+00:00"
-  },
-  {
     "movie_title": "The Mechanic",
     "fel_confirmed": true,
     "release_date": "2011-01-13",
@@ -17296,6 +17247,55 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-26T13:26:51.556270+00:00"
+  },
+  {
+    "movie_title": "Game of Thrones: The Complete First Season",
+    "fel_confirmed": true,
+    "release_date": "2011",
+    "studio": "HBO",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DD 5.1",
+      "DD 2.0",
+      "DTS 2.0",
+      "DTS 5.1"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "enhancement_bitrate_mbps": "3.48"
+    },
+    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+    "source_label": "Unknown",
+    "tmdb_id": "1399",
+    "media_type": "tv",
+    "imdb_id": "tt0944947",
+    "poster_path": "data/posters/got-1399.jpg",
+    "release_url": "https://www.themoviedb.org/tv/1399",
+    "bluray_url": "https://www.blu-ray.com/movies/Game-of-Thrones-The-Complete-First-Season-4K-Blu-ray/202472/",
+    "bluray_release_date": "2018-06-05",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Spanish",
+      "German",
+      "Italian",
+      "Portuguese",
+      "Czech",
+      "Hungarian",
+      "Polish",
+      "Russian"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+      "quote": "Game of Thrones: The Complete First Season (2011) FEL - 3.48 Mb/s",
+      "evidence_type": "list-item",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:36:04+00:00"
   },
   {
     "movie_title": "TRON: Legacy",
@@ -20224,6 +20224,41 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
+    "movie_title": "Brick",
+    "fel_confirmed": true,
+    "release_date": "2006-03-31",
+    "studio": "Bergman Lustig Productions",
+    "audio_formats": [
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {},
+    "source_url": "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
+    "source_label": "FEL.txt",
+    "tmdb_id": "9270",
+    "media_type": "movie",
+    "imdb_id": "tt0393109",
+    "poster_path": "data/posters/9270.jpg",
+    "release_url": "https://www.themoviedb.org/movie/9270",
+    "bluray_url": "https://www.blu-ray.com/movies/Brick-4K-Blu-ray/323009/",
+    "bluray_release_date": "2024-10-15",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
+      "quote": "Brick Vision (2005) listed as Profile 7 FEL",
+      "evidence_type": "fel-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-21T22:38:03.153713+00:00"
+  },
+  {
     "movie_title": "Aeon Flux",
     "fel_confirmed": true,
     "release_date": "2005-11-30",
@@ -20813,41 +20848,6 @@
     "fel_evidence": {
       "source_url": "https://github.com/iammarxg/FEL",
       "quote": "Land of the Dead (2005) listed as Profile 7 FEL",
-      "evidence_type": "fel-list",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Brick",
-    "fel_confirmed": true,
-    "release_date": "2006-03-31",
-    "studio": "Bergman Lustig Productions",
-    "audio_formats": [
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {},
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
-    "source_label": "FEL.txt",
-    "tmdb_id": "9270",
-    "media_type": "movie",
-    "imdb_id": "tt0393109",
-    "poster_path": "data/posters/9270.jpg",
-    "release_url": "https://www.themoviedb.org/movie/9270",
-    "bluray_url": "https://www.blu-ray.com/movies/Brick-4K-Blu-ray/323009/",
-    "bluray_release_date": "2024-10-15",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=327042&page=49",
-      "quote": "Brick Vision (2005) listed as Profile 7 FEL",
       "evidence_type": "fel-list",
       "location": "Unknown"
     },
@@ -37846,6 +37846,48 @@
     "collected_at": "2026-05-22T12:53:14+00:00"
   },
   {
+    "movie_title": "Vigilante",
+    "fel_confirmed": true,
+    "release_date": "1983-01-04",
+    "studio": "Magnum Motion Pictures Inc.",
+    "audio_formats": [
+      "Dolby TrueHD/Atmos 7.1",
+      "DTS-HD MA 5.1",
+      "DTS-HD MA 2.0",
+      "DD 2.0"
+    ],
+    "english_audio": "Yes",
+    "additional_characteristics": {
+      "enhancement_bitrate_mbps": "6.73"
+    },
+    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+    "source_label": "raw_fel.txt",
+    "tmdb_id": "23587",
+    "media_type": "movie",
+    "imdb_id": "tt0084867",
+    "poster_path": "data/posters/23587.jpg",
+    "release_url": "https://www.themoviedb.org/movie/23587",
+    "bluray_url": "https://www.blu-ray.com/movies/Vigilante-4K-Blu-ray/274101/",
+    "bluray_release_date": "2020-12-15",
+    "hdr_formats": [
+      "Dolby Vision",
+      "HDR10"
+    ],
+    "audio_languages": [
+      "English",
+      "French",
+      "Italian",
+      "German"
+    ],
+    "fel_evidence": {
+      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
+      "quote": "Vigilante (1982) FEL - 6.73 Mb/s",
+      "evidence_type": "list-item",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-05-22T12:36:04+00:00"
+  },
+  {
     "movie_title": "Ninja Wars",
     "fel_confirmed": true,
     "release_date": "1982-12-18",
@@ -38438,48 +38480,6 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-21T22:38:03.153713+00:00"
-  },
-  {
-    "movie_title": "Vigilante",
-    "fel_confirmed": true,
-    "release_date": "1983-01-04",
-    "studio": "Magnum Motion Pictures Inc.",
-    "audio_formats": [
-      "Dolby TrueHD/Atmos 7.1",
-      "DTS-HD MA 5.1",
-      "DTS-HD MA 2.0",
-      "DD 2.0"
-    ],
-    "english_audio": "Yes",
-    "additional_characteristics": {
-      "enhancement_bitrate_mbps": "6.73"
-    },
-    "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-    "source_label": "raw_fel.txt",
-    "tmdb_id": "23587",
-    "media_type": "movie",
-    "imdb_id": "tt0084867",
-    "poster_path": "data/posters/23587.jpg",
-    "release_url": "https://www.themoviedb.org/movie/23587",
-    "bluray_url": "https://www.blu-ray.com/movies/Vigilante-4K-Blu-ray/274101/",
-    "bluray_release_date": "2020-12-15",
-    "hdr_formats": [
-      "Dolby Vision",
-      "HDR10"
-    ],
-    "audio_languages": [
-      "English",
-      "French",
-      "Italian",
-      "German"
-    ],
-    "fel_evidence": {
-      "source_url": "https://forum.blu-ray.com/showthread.php?t=276448",
-      "quote": "Vigilante (1982) FEL - 6.73 Mb/s",
-      "evidence_type": "list-item",
-      "location": "Unknown"
-    },
-    "collected_at": "2026-05-22T12:36:04+00:00"
   },
   {
     "movie_title": "The New York Ripper",
