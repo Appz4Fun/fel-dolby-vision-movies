@@ -85,7 +85,12 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
         _LookupCandidate("Pat Garrett & Billy the Kid", "1973")
     ),
     ("resident evil", ""): _LookupCandidate("Resident Evil", "2002"),
-    ("the captain", "2017"): _LookupCandidate("Der Hauptmann", "2017"),
+    # Schwentke's film premiered at TIFF in September 2017 (the year FEL
+    # lists label it by) but TMDB's primary release year is 2018, so a
+    # 2017-scoped search never sees the real film (TMDB 475094) and the
+    # yearless fallback matches the 1971 "Der Hauptmann" (TMDB 508015)
+    # exactly by original title instead.
+    ("the captain", "2017"): _LookupCandidate("Der Hauptmann", "2018"),
     ("the last emperor criterion collection", "1987"): _LookupCandidate(
         "The Last Emperor", "1987"
     ),
@@ -137,6 +142,11 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
     # unpinned search matches an unrelated same-titled documentary (TMDB
     # 1190479) instead of the film the catalog already carries (TMDB 157350).
     ("divergente", "2014"): _LookupCandidate("Divergent", "2014"),
+    # FEL lists spell Schwentke's film "Der Hauptmann AKA The Captain
+    # [2017]" by its TIFF festival year while TMDB dates it 2018; the
+    # unpinned lookup lands on the 1971 film of the same original title
+    # (TMDB 508015), mirroring the "The Captain" pin above.
+    ("der hauptmann", "2017"): _LookupCandidate("Der Hauptmann", "2018"),
     # FEL.txt spells the same Brick disc "Brick Vision (2005)", which an
     # unpinned search resolves to the zero-vote short of that exact name
     # (TMDB 345308) instead of the film the disc actually is.
