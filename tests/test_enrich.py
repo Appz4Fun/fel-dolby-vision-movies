@@ -385,6 +385,32 @@ def test_enrich_retitles_row_whose_spelling_matches_neither_tmdb_title(tmp_path)
     assert releases[0].tmdb_id == "315846"
 
 
+def test_enrich_retitles_native_der_hauptmann_row_to_the_captain(tmp_path):
+    # The pin's lookup title is the native spelling, so a source row already
+    # titled "Der Hauptmann" matches the resolved candidate exactly and
+    # skips the candidate-title rename; the pin's canonical title forces the
+    # rename so source-only runs publish "The Captain" like the corrected
+    # catalog row instead of keeping the native spelling.
+    resolver = StaticTmdbResolver(
+        {
+            ("Der Hauptmann", "2018"): {
+                "tmdb_id": "475094",
+                "title": "The Captain",
+                "year": "2018",
+                "imdb_id": "tt6763252",
+                "original_title": "Der Hauptmann",
+            }
+        }
+    )
+    client = _static_details_client("475094", "2018-03-15")
+    releases = [make("Der Hauptmann", "2017")]
+    enrich_releases(releases, resolver, client=client, api_key="x", poster_dir=tmp_path)
+    client.close()
+
+    assert releases[0].movie_title == "The Captain"
+    assert releases[0].tmdb_id == "475094"
+
+
 def test_enrich_keeps_row_titled_by_the_original_spelling(tmp_path):
     # A row titled by the film's (latin) original title connects through the
     # recorded canonical/original pair, which is reconciliation's edge

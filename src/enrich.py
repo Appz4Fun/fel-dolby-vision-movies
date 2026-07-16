@@ -89,8 +89,9 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
     # lists label it by) but TMDB's primary release year is 2018, so a
     # 2017-scoped search never sees the real film (TMDB 475094) and the
     # yearless fallback matches the 1971 "Der Hauptmann" (TMDB 508015)
-    # exactly by original title instead.
-    ("the captain", "2017"): _LookupCandidate("Der Hauptmann", "2018"),
+    # exactly by original title instead. The canonical title forces the
+    # rename even when the source row already spells the lookup title.
+    ("the captain", "2017"): _LookupCandidate("Der Hauptmann", "2018", "The Captain"),
     ("the last emperor criterion collection", "1987"): _LookupCandidate(
         "The Last Emperor", "1987"
     ),
@@ -145,8 +146,11 @@ _LOOKUP_ALIASES: dict[tuple[str, str], _LookupCandidate] = {
     # FEL lists spell Schwentke's film "Der Hauptmann AKA The Captain
     # [2017]" by its TIFF festival year while TMDB dates it 2018; the
     # unpinned lookup lands on the 1971 film of the same original title
-    # (TMDB 508015), mirroring the "The Captain" pin above.
-    ("der hauptmann", "2017"): _LookupCandidate("Der Hauptmann", "2018"),
+    # (TMDB 508015), mirroring the "The Captain" pin above. Without the
+    # canonical title, a source row already titled "Der Hauptmann" matches
+    # the lookup title exactly and would keep the native spelling instead
+    # of normalizing to the catalog row's "The Captain".
+    ("der hauptmann", "2017"): _LookupCandidate("Der Hauptmann", "2018", "The Captain"),
     # FEL.txt spells the same Brick disc "Brick Vision (2005)", which an
     # unpinned search resolves to the zero-vote short of that exact name
     # (TMDB 345308) instead of the film the disc actually is.
