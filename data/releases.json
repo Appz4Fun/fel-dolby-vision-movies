@@ -12094,9 +12094,9 @@
     "collected_at": "2026-05-22T12:37:17+00:00"
   },
   {
-    "movie_title": "Der Hauptmann",
+    "movie_title": "The Captain",
     "fel_confirmed": true,
-    "release_date": "2017-09-09",
+    "release_date": "2018-03-15",
     "studio": "Filmgalerie 451",
     "audio_formats": [],
     "english_audio": "Unknown",
@@ -12111,11 +12111,11 @@
     },
     "source_url": "https://web.archive.org/web/20250308162437/https://discourse.coreelec.org/t/list-of-dolby-vision-p7-fel-films/52523",
     "source_label": "github",
-    "tmdb_id": "508015",
+    "tmdb_id": "475094",
     "media_type": "movie",
-    "imdb_id": "tt1685499",
-    "poster_path": "",
-    "release_url": "https://www.themoviedb.org/movie/508015",
+    "imdb_id": "tt6763252",
+    "poster_path": "data/posters/475094.jpg",
+    "release_url": "https://www.themoviedb.org/movie/475094",
     "bluray_url": "",
     "bluray_release_date": "",
     "hdr_formats": [

@@ -386,6 +386,12 @@ def test_lookup_aliases_cover_known_fel_list_romanizations():
         # The google sheet titles Divergent in Spanish; an unpinned search
         # matches an unrelated same-titled documentary (TMDB 1190479).
         ("Divergente", "2014"): ("Divergent", "2014"),
+        # FEL lists label Schwentke's film by its 2017 TIFF festival year
+        # while TMDB dates it 2018; unpinned, both the native and English
+        # spellings resolved to the 1971 "Der Hauptmann" (TMDB 508015)
+        # instead of the real film (TMDB 475094).
+        ("Der Hauptmann", "2017"): ("Der Hauptmann", "2018"),
+        ("The Captain", "2017"): ("Der Hauptmann", "2018"),
     }
     for (source_title, source_year), (title, year) in cases.items():
         candidate = enrich._lookup_candidates(source_title, source_year)[0]
