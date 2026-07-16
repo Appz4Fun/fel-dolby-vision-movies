@@ -286,11 +286,16 @@ def _details_to_record(details: BlurayDetails | None) -> dict[str, object] | Non
         "audio_formats": details.audio_formats,
         "audio_languages": details.audio_languages,
         "hdr_formats": details.hdr_formats,
+        # Lets spec-incomplete hits (announced discs whose Audio is still
+        # "TBA" on the page) be refreshed after the same TTL as misses.
+        _MISS_CACHED_AT_KEY: datetime.now(timezone.utc).isoformat(),
     }
 
 
 def _details_from_record(record: dict[str, object] | None) -> BlurayDetails | None:
-    if record is None or _MISS_CACHED_AT_KEY in record:
+    # Hit records are distinguished by their "url"; both misses and hits may
+    # carry the retry timestamp.
+    if record is None or "url" not in record:
         return None
     return BlurayDetails(
         url=str(record.get("url") or ""),
@@ -302,14 +307,19 @@ def _details_from_record(record: dict[str, object] | None) -> BlurayDetails | No
 
 
 def _cache_record_expired(record: dict[str, object] | None) -> bool:
-    """True when a cached miss is stale (or legacy) and must be retried."""
-    # Hits never expire. Legacy caches recorded misses as bare nulls with no
+    """True when a cached record is stale (or legacy) and must be retried."""
+    # Hits with published audio specs never expire. Misses and
+    # spec-incomplete hits (a disc page whose Audio section is still "TBA")
+    # are retried after _MISS_TTL: the disc may appear, or its specs may be
+    # published, later. Legacy caches recorded misses as bare nulls with no
     # timestamp; treating those as already expired retries them immediately,
     # which also heals caches poisoned by pre-guard block pages.
     if record is None:
         return True
-    if _MISS_CACHED_AT_KEY not in record:
+    if "url" in record and record.get("audio_formats"):
         return False
+    if _MISS_CACHED_AT_KEY not in record:
+        return True
     try:
         cached_at = datetime.fromisoformat(str(record[_MISS_CACHED_AT_KEY]))
         return datetime.now(timezone.utc) - cached_at > _MISS_TTL

@@ -312,3 +312,65 @@ def test_bluray_resolver_retries_legacy_and_expired_misses(tmp_path: Path):
             assert resolver.resolve(title, year) is None
             assert len(calls) > calls_before
             assert resolver.cache[f"{title}\x00{year}"]["miss_cached_at"] != stale
+
+
+def test_bluray_resolver_refreshes_stale_spec_incomplete_hits(tmp_path: Path):
+    # A disc page whose Audio section was still "TBA" when cached must be
+    # re-fetched after the TTL so published specs can replace the empty
+    # fields; a hit with real audio never expires.
+    calls = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        if "/search/" in request.url.path:
+            return httpx.Response(200, text=_SEARCH_HTML)
+        return httpx.Response(200, text=_DISC_HTML)
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    cache = tmp_path / "bluray.json"
+    stale = (datetime.now(timezone.utc) - timedelta(days=30)).isoformat()
+    fresh = datetime.now(timezone.utc).isoformat()
+    cache.write_text(
+        json.dumps(
+            {
+                "The Northman\x002022": {
+                    "url": "https://www.blu-ray.com/movies/The-Northman-4K-Blu-ray/312528/",
+                    "bluray_release_date": "",
+                    "audio_formats": [],
+                    "audio_languages": [],
+                    "hdr_formats": [],
+                    "miss_cached_at": stale,
+                },
+                "Fresh TBA\x002026": {
+                    "url": "https://www.blu-ray.com/movies/Fresh-TBA-4K-Blu-ray/1/",
+                    "bluray_release_date": "",
+                    "audio_formats": [],
+                    "audio_languages": [],
+                    "hdr_formats": [],
+                    "miss_cached_at": fresh,
+                },
+                # Legacy spec-incomplete hit: cached before records carried
+                # the retry timestamp; refreshed immediately.
+                "Legacy TBA\x002020": {
+                    "url": "https://www.blu-ray.com/movies/Legacy-TBA-4K-Blu-ray/2/",
+                    "bluray_release_date": "",
+                    "audio_formats": [],
+                    "audio_languages": [],
+                    "hdr_formats": [],
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    with BlurayResolver(client=client, cache_path=cache) as resolver:
+        refreshed = resolver.resolve("The Northman", "2022")
+        assert refreshed is not None
+        assert refreshed.audio_formats  # re-fetched page now carries specs
+        calls_before = len(calls)
+        # A fresh spec-incomplete hit is served from cache without refetching.
+        served = resolver.resolve("Fresh TBA", "2026")
+        assert served is not None and served.audio_formats == []
+        assert len(calls) == calls_before
+        # The legacy timestamp-less TBA hit is re-queried right away.
+        resolver.resolve("Legacy TBA", "2020")
+        assert len(calls) > calls_before
