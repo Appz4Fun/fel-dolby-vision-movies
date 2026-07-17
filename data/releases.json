@@ -32567,6 +32567,33 @@
     "collected_at": "2026-05-22T12:36:04+00:00"
   },
   {
+    "movie_title": "Unlawful Entry",
+    "fel_confirmed": true,
+    "release_date": "1992-06-26",
+    "studio": "Largo Entertainment",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "17494",
+    "media_type": "movie",
+    "imdb_id": "tt0105699",
+    "poster_path": "data/posters/17494.jpg",
+    "release_url": "https://www.themoviedb.org/movie/17494",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "L.E. Unlawful Entry (1992)",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-07-17T11:43:49.496191+00:00"
+  },
+  {
     "movie_title": "Patriot Games",
     "fel_confirmed": true,
     "release_date": "1992-06-04",
