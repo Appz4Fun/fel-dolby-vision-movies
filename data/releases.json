@@ -32591,7 +32591,7 @@
       "evidence_type": "reddit-list",
       "location": "Unknown"
     },
-    "collected_at": "2026-07-20T12:27:34.339699+00:00"
+    "collected_at": "2026-07-21T20:56:51.256690+00:00"
   },
   {
     "movie_title": "Patriot Games",
@@ -48378,6 +48378,33 @@
       "location": "Unknown"
     },
     "collected_at": "2026-05-22T12:53:14+00:00"
+  },
+  {
+    "movie_title": "Pillow Talk",
+    "fel_confirmed": true,
+    "release_date": "1959-10-07",
+    "studio": "Arwin Productions",
+    "audio_formats": [],
+    "english_audio": "Unknown",
+    "additional_characteristics": {},
+    "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+    "source_label": "reddit",
+    "tmdb_id": "4952",
+    "media_type": "movie",
+    "imdb_id": "tt0053172",
+    "poster_path": "data/posters/4952.jpg",
+    "release_url": "https://www.themoviedb.org/movie/4952",
+    "bluray_url": "",
+    "bluray_release_date": "",
+    "hdr_formats": [],
+    "audio_languages": [],
+    "fel_evidence": {
+      "source_url": "https://old.reddit.com/r/CoreElecOS/comments/1j3lgw2/list_of_dolby_vision_p7fel_films/",
+      "quote": "Pillow Talk (1959)",
+      "evidence_type": "reddit-list",
+      "location": "Unknown"
+    },
+    "collected_at": "2026-07-21T20:56:51.256690+00:00"
   },
   {
     "movie_title": "The 400 Blows",
